@@ -1,0 +1,9 @@
+/* 日间模式下的透明效果 */
+#recent-posts .recent-post-item {
+  background: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* 深色模式下的透明效果 */
+[data-theme="dark"] #recent-posts .recent-post-item {
+  background: rgba(18, 18, 18, 0.7) !important;
+}
