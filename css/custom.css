@@ -16,31 +16,43 @@ code, pre, .highlight {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
 }
 
-/* ==================== 紧凑布局（解决空落落问题） ==================== */
+/* ==================== 加强紧凑布局（解决空落落） ==================== */
 .main-inner {
-  padding-top: 14px !important;
-  padding-bottom: 14px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
 }
 
 .post-block {
-  margin-bottom: 14px !important;
-  padding: 15px 18px !important;
+  margin-bottom: 12px !important;
+  padding: 14px 16px !important;
 }
 
 .post-body {
-  line-height: 1.58 !important;
-  font-size: 15.2px !important;
+  line-height: 1.55 !important;
+  font-size: 15px !important;
 }
 
+/* 归档列表更紧凑 */
 .archive .post {
-  margin-bottom: 3px !important;
-  padding: 3px 0 !important;
+  margin-bottom: 2px !important;
+  padding: 2px 0 !important;
 }
 
+.archive .post-header {
+  margin-bottom: 2px !important;
+}
+
+/* 侧边栏更紧凑 */
 .sidebar {
-  padding: 12px 10px !important;
+  padding: 10px 8px !important;
 }
 
 .sidebar .sidebar-item {
-  margin-bottom: 10px !important;
+  margin-bottom: 8px !important;
+}
+
+/* 标题间距优化 */
+h1, h2, h3 {
+  margin-top: 0.85em !important;
+  margin-bottom: 0.4em !important;
 }
