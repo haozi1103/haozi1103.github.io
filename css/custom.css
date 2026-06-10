@@ -1,0 +1,46 @@
+/* ==================== 加载 Noto Sans SC（国内镜像） ==================== */
+@import url('https://cdn.jsdmirror.com/npm/@fontsource/noto-sans-sc@5.0.0/index.css');
+
+/* ==================== 强制字体 ==================== */
+body,
+.post-body,
+.sidebar,
+h1, h2, h3, h4, h5,
+.post-title,
+.post-meta {
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* 代码字体 */
+code, pre, .highlight {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+}
+
+/* ==================== 紧凑布局（解决空落落问题） ==================== */
+.main-inner {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+}
+
+.post-block {
+  margin-bottom: 14px !important;
+  padding: 15px 18px !important;
+}
+
+.post-body {
+  line-height: 1.58 !important;
+  font-size: 15.2px !important;
+}
+
+.archive .post {
+  margin-bottom: 3px !important;
+  padding: 3px 0 !important;
+}
+
+.sidebar {
+  padding: 12px 10px !important;
+}
+
+.sidebar .sidebar-item {
+  margin-bottom: 10px !important;
+}

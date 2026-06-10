@@ -1,152 +1,1534 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>禹皓的BLOG</title><meta name="author" content="haozi"><meta name="copyright" content="haozi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#848484"><meta name="description" content="今日事 今日毕">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":260,"widgets":["catalog"]},"copycode":true,"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="今日事 今日毕">
 <meta property="og:type" content="website">
 <meta property="og:title" content="禹皓的BLOG">
 <meta property="og:url" content="http://haozi.space/page/2/index.html">
 <meta property="og:site_name" content="禹皓的BLOG">
 <meta property="og:description" content="今日事 今日毕">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310164915396.png">
 <meta property="article:author" content="haozi">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310164915396.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/images/favicon.ico"><link rel="canonical" href="http://haozi.space/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
 
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
+<link rel="canonical" href="http://haozi.space/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>禹皓的BLOG</title>
   
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#454545')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#848484')
-        }
-      }
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
 
-      const theme = saveToLocal.get('theme')
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">禹皓的BLOG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
     
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">数字化设计 为考试而生</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:19" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:19+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-26 22:36:15" itemprop="dateModified" datetime="2026-03-26T22:36:15+08:00">2026-03-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>就像小米 为发烧而生</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/03/22/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
         
       
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
+    </div>
+
     
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/" class="post-title-link" itemprop="url">使用GitHub仓库+PicGo+CDN服务搭建个人博客图床</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:19" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:19+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-04-03 15:02:36" itemprop="dateModified" datetime="2026-04-03T15:02:36+08:00">2026-04-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>使用 GitHub 仓库 + PicGo + CDN 服务搭建个人博客图床</h1>
+<h2 id="引言">引言</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png" alt="image-20260305212844692"></p>
+<p>在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理上传，再通过 CDN 服务加速访问，搭建了一个长期可用、方便管理的个人博客图床。</p>
+<h2 id="需要的工具">需要的工具</h2>
+<p>需要准备的工具和资源如下</p>
+<ol>
+<li>GitHub 账号以及一个新的仓库，例如 img-bed</li>
+<li>PicGo</li>
+<li>CDN 服务，例如 jsDelivr 或其他支持 GitHub 仓库加速的服务</li>
+<li>Typora(日常写博客使用的软件，用于检验图床是否生效)</li>
+</ol>
+<h2 id="GitHub-仓库搭建">GitHub 仓库搭建</h2>
+<ol>
+<li>
+<p>登录 GitHub，创建一个新仓库，建议名称为 img-bed</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305200944050.png" alt="image-20260305200944050"></p>
+</li>
+<li>
+<p>将仓库设置为 Public，仓库建议使用公开仓库，方便 CDN 访问</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201149616.png" alt="image-20260305201149616"></p>
+<p>这样就是创建成功，就可以了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201409082.png" alt="image-20260305201409082"></p>
+</li>
+</ol>
+<h2 id="PicGo-下载与配置">PicGo 下载与配置</h2>
+<h3 id="前置操作">前置操作</h3>
+<ol>
+<li>
+<p>安装 PicGo 应用并启动</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201552890.png" alt="image-20260305201552890"></p>
+<p>可能遇到的问题：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260307095315759.png" alt="image-20260307095315759"></p>
+</li>
+<li>
+<p>配置仓库信息：仓库名、分支、上传路径</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201654797.png" alt="image-20260305201654797"></p>
+<p>点击添加图床</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201748322.png" alt="image-20260305201748322"></p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202156876.png" alt="image-20260305202156876"></p>
+<h3 id="设定存储路径">设定存储路径</h3>
+<p>建议在仓库中创建 img 文件夹专门存放图片（可以用年份来区分，比如我是2026年上传的，就可以命名为img2026）</p>
+<p>仓库结构示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img-bed</span><br><span class="line"> └ img2026</span><br><span class="line">     ├ example1.png</span><br><span class="line">     ├ example2.jpg</span><br></pre></td></tr></table></figure>
+<h3 id="token的获取">token的获取</h3>
+<p>打开以下链接：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
+<p>进行以下操作</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202811377.png" alt="image-20260305202811377"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202942889.png" alt="image-20260305202942889"></p>
+<p>记得打开repo</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203033192.png" alt="image-20260305203033192"></p>
+<p>之后会生成一个token，复制进PicGo配置即可</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203223281.png" alt="image-20260305203223281"></p>
+<h3 id="自定义域名（CDN服务）">自定义域名（CDN服务）</h3>
+<p>如果不使用CDN服务的话，你就可能这样</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203624484.png" alt="image-20260305203624484"></p>
+<p>为了加速访问和解决跨域问题，可以使用 jsDelivr 这样的服务,操作很简单</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把一坨 https://cdn.jsdmirror.com/gh/用户名/仓库名@分支 复制进PicGo即可</span><br></pre></td></tr></table></figure>
+<h3 id="上传">上传</h3>
+<p>上传操作超级简单，不难</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305204522411.png" alt="image-20260305204522411"></p>
+<p>例如你上传了 pic1.png，你的剪贴板会有这一串信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/pic1.png</span><br></pre></td></tr></table></figure>
+<p>用这个url链接复制进浏览器，看看能不能打开访问你上传的图片，能的话就说明配置成功了。恭喜你已经快成功了</p>
+<h2 id="集成到Typora">集成到Typora</h2>
+<h3 id="Typora的下载">Typora的下载</h3>
+<p><a target="_blank" rel="noopener" href="https://cloud.189.cn/t/fqE3Af6nq6vi">https://cloud.189.cn/t/fqE3Af6nq6vi</a> （访问码：jkk9）</p>
+<p>分享了链接，不用自己去破解</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205655868.png" alt="image-20260305205655868"></p>
+<h3 id="Typora配置图床服务">Typora配置图床服务</h3>
+<p>进去设置-偏好设置-图像-进行以下操作：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205944672.png" alt="image-20260305205944672"></p>
+<p>显示以下画面就是成功啦！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/tc7.png" alt="tc7"></p>
+<p>使用截图软件先截图，ctrl+c进入你的博客文章里面去，直接上传的感觉，太爽！</p>
+<p>好啦，可以去玩了，这个功能好好玩的，嘿嘿</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210510004.png" alt="image-20260305210510004"></p>
+<h2 id="头脑风暴">头脑风暴</h2>
+<h3 id="自定义子域名">自定义子域名</h3>
+<ul>
+<li>将自己的域名，例如 <a target="_blank" rel="noopener" href="http://img.mydomain.com">img.mydomain.com</a>，直接绑定到 CDN 地址，</li>
+</ul>
+<h3 id="博客的相册功能">博客的相册功能</h3>
+<ul>
+<li>很久没用的博客相册功能可以用上了</li>
+</ul>
+<h3 id="多设备上传到github图床">多设备上传到github图床</h3>
+<p>比如你有一个笔记本电脑，也想要通过picgo来上传图片，只需要按照教程来（仓库如果已经建了img-bed就不需要建一个新的），在笔记本电脑上下载PicGo，按照步骤进行PicGo配置，获取一个新的token授权，typora的设置也如出一辙。</p>
+<h2 id="总结">总结</h2>
+<p>本文介绍了一个稳定可控的个人博客图床搭建方案，使用 GitHub 仓库存储图片，PicGo 管理上传，CDN 加速访问，实现跨域友好、快速加载、长期可维护。</p>
+<p>笔者在使用ai的过程中，一开始ai告诉我的方案是picgo+github+cloudfare方案，但是捣鼓了很久都没有搞出来，其中有一步我按照他说的来配置，是这样的：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210400758.png" alt="image-20260305210400758"></p>
+<p>搞了很久，我都怀疑是这里出了问题，可是ai是这样的，你不去怀疑他，他死活不知道自己错了这里，直到我指出他这里可能有问题，他跟我说，这是不能用的！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210837538.png" alt="image-20260305210837538"></p>
+<p>算是把这一步推倒重来了，气死我了！</p>
+<p>AI 可以帮你生成脚本和优化步骤，但是会出现很致命的错误，不能代替的，是你的思考。操作细节仍需我们去把控。</p>
+<p>以后可以去做的：</p>
+<p>1.让ai互相挑刺，这样可以保证不要被ai的一面之词蒙蔽，要做一个擦亮眼睛的皇上，ai只不过是帮你出谋划策的太监。</p>
+<p>2.ai要用，但是不要滥用，像这样技术类的方案，google可以搜到很成熟的案例，这样可以少走很多弯路。</p>
+<p>3.不要高估ai的分析判断能力，有时候它自己都不知道自己在说什么，不要盲目相信ai</p>
+<p>4.对ai的提问要具体，当问题描述清楚时，AI 往往可以成为一个效率很高的技术助手</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.提供完整背景</span><br><span class="line">如何配置图床-&gt;我正在使用 GitHub 仓库作为图床，仓库名为 img-bed，使用 PicGo 上传图片，通过 jsDelivr 作为 CDN，现在访问图片时返回 404，这种情况可能是什么原因</span><br><span class="line"></span><br><span class="line">2.提供具体的路径或代码</span><br><span class="line">网页404-&gt;我访问的地址是</span><br><span class="line">https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img/tc2.png</span><br><span class="line">但是浏览器返回 404 GitHub 仓库路径是img-bed/img/tc2.png</span><br><span class="line"></span><br><span class="line">3.描述已经尝试过的步骤</span><br><span class="line"></span><br><span class="line">4.一次只问一个核心问题</span><br></pre></td></tr></table></figure>
+<p>使用ai是一门学问，用的好是好，用的不好，却是无益的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/" class="post-title-link" itemprop="url">机械制造工程学 为考试而生</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:18" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:18+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-26 18:39:02" itemprop="dateModified" datetime="2026-03-26T18:39:02+08:00">2026-03-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>就像小米 为发烧而生</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/03/22/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">机电控制 为考试而生</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:18" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:18+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-24 20:02:02" itemprop="dateModified" datetime="2026-03-24T20:02:02+08:00">2026-03-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>就像小米 为发烧而生</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/03/22/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E6%8A%A4%E5%9F%8E%E6%B2%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/%E6%8A%A4%E5%9F%8E%E6%B2%B3/" class="post-title-link" itemprop="url">护城河有什么用？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:18" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:18+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-15 21:21:50" itemprop="dateModified" datetime="2026-03-15T21:21:50+08:00">2026-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">知识</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315212130095.png" alt="image-20260315212130095"></p>
+<h1>概念</h1>
+<p>我们来看看wikipedia怎么说的吧：</p>
+<p><strong>护城河</strong>，亦作<strong>城壕</strong>或<strong>城濠</strong>，是古时由人工挖凿，环绕整座<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E6%B1%A0">城</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AE%AE%E5%9F%8E">宫城</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%BA%E9%99%A2">寺院</a>等主要建筑的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B2%B3">河</a>，具有防御作用，可防止敌人或<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8B%95%E7%89%A9">动物</a>入侵。</p>
+<p>世界各国在古代已有开凿护城河。在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86">中国大陆</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%97%E4%BA%AC%E5%B8%82">北京</a>的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%95%85%E5%AE%AE">紫禁城</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%87%BA%E7%81%A3">台湾</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%AB%B9%E5%A1%B9%E5%9F%8E">新竹古城</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B7%A6%E7%87%9F%E8%88%8A%E5%9F%8E">左营旧城</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%84%84%E8%BC%89%E9%87%91%E5%9F%8E">亿载金城</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC">日本</a>的古城如<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9D%BE%E6%9C%AC%E5%9F%8E">松本城</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%88%B6">江户</a>（今<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC">东京</a>）的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%9A%87%E5%B1%85">皇居</a>、以至<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AD%90%E6%B4%B2">欧洲</a>各国的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E5%A0%A1">城堡</a>及皇宫等等地方都建有护城河。欧洲不少城堡在护城河上建有可升起的木<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A9%8B">桥</a>，以方便出入，亦可防止敌人进入。特别情况下，会选择湖泊作为城濠。如明初修建<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E5%9F%8E%E5%A2%99">南京城墙</a>时，放弃<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%87%91%E5%B7%9D%E6%B2%B3_(%E5%8D%97%E4%BA%AC)">金川河</a>，选择<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%8E%84%E6%AD%A6%E6%B9%96">玄武湖</a>。</p>
+<p>当然，这只是实际意义上的护城河，还有抽象意义上的护城河，巴菲特用生动的比喻描述了这一概念：“<strong>奇妙的、由很深、很危险的护城河环绕的城堡。城堡的主人是一个诚实而高雅的人。城堡最主要的力量源泉是主人天才的大脑；护城河永久地充当着那些试图袭击城堡的敌人的障碍</strong>。”</p>
+<h1>护城河怎么发挥作用？</h1>
+<p>那么，护城河具体是如何发挥作用的？让我们通过两个真实的企业案例来理解:</p>
+<p><strong>可口可乐</strong>：护城河核心是<strong>无与伦比的品牌认知</strong> + <strong>轻资产生态模式</strong>。</p>
+<p>消费者对口感形成心理忠诚，全球碳酸饮料市场份额46%，快餐与影院渠道覆盖率极高。公司只专注浓缩液生产与品牌，全球225家装瓶伙伴负责灌装分销，母公司掌控定价、包装与战术。这种模式带来60%+毛利率、连续60年股利增长。竞争者难以复制其全球品牌影响力和装瓶网络。</p>
+<p><strong>山姆会员商店</strong>：护城河建立在<strong>极致供应链精选</strong> + <strong>会员生态</strong>。</p>
+<p>SKU仅3500-5000个，每类只选1-2最佳单品，通过买断独家、自有品牌Member’s Mark（占比30%+）、规模采购实现品质与低价。会员数从2018年300万增至2024年近900万，续卡率86%，年费收入超23亿。消费者为“确定性”（随便选也高性价比）买单。但近期选品泛化、质量问题动摇信任，山姆通过全球直采（如独家孔泰奶酪、树顶到卖场榴莲）、“先仓后店”前置仓+电商（占比超50%）持续加宽护城河，2025Q2净销售额仍增长30.1%。</p>
+<p><strong>共性逻辑</strong>：</p>
+<ol>
+<li>创造定价权（高毛利或会员费）；</li>
+<li>提高进入壁垒（难以快速复制）；</li>
+<li>必须每年加宽（巴菲特强调：护城河不断拓宽，企业才能长期优秀）。</li>
+</ol>
+<p>在快速变化的时代，个人也需护城河来获得安全感与主动权。它让你不可替代，专注创造而非焦虑竞争。</p>
+<p>麦克利兰“冰山模型”揭示构成：</p>
+<ul>
+<li><strong>上层</strong>（显性）：知识与技能（如编程、英语）。</li>
+<li><strong>中层</strong>：能力（如沟通、结构化思维、情绪管理）。</li>
+<li><strong>底层</strong>（最稳固）：价值观、性格特质、动机，决定你独特优势与能做成什么。</li>
+</ul>
+<p>构建路径：从底层发掘优势 → 积累知识技能 → 形成难以撼动的核心竞争力。</p>
+<p>所以我们应该：</p>
+<ol>
+<li>
+<p><strong>发掘优势</strong> —— 德鲁克“回馈分析法”：每次重要决定前记录预期结果，9-12个月后对比实际，持续执行即可发现真正长处（也可回顾过去成功案例）。</p>
+</li>
+<li>
+<p><strong>优势与社会需求匹配</strong>：单纯擅长不够，必须问：这个优势如何创造价值？如何满足市场/趋势需求？如何与个人目标统一？三者交汇处才是护城河落脚点。</p>
+</li>
+<li>
+<p><strong>纵横积累模型</strong>：</p>
+<ul>
+<li><strong>横向</strong>：深耕当下价值创造（为客户/组织提供的核心输出），专注细节、持续1%优化。</li>
+<li><strong>纵向</strong>：为横面服务而积累相关知识/能力（直接相关优先，逐步扩展能力圈）。所有学习都围绕“能为他人创造的价值”展开，避免盲目杂学。</li>
+</ul>
+</li>
+<li>
+<p><strong>持续加宽</strong>（像企业一样）：</p>
+<ul>
+<li>终身学习，避免知识过时（如柯达胶卷被颠覆）。</li>
+<li>构建组合优势：单一元素难胜，排列组合形成独特性。</li>
+<li>建立反馈闭环：定期检视、根据环境调整方向。</li>
+</ul>
+</li>
+</ol>
+<h1>总结</h1>
+<p>护城河的终极意义在于<strong>创造的自由</strong>：企业无需时时防御，可专注为顾客创造更大价值；个人无需焦虑淘汰，可专注发挥独特优势。可口可乐与山姆的护城河皆经数十年沉淀，个人亦然。从今天开始，用回馈分析发掘长处，将优势对接社会需求，纵横积累、持续加宽——当你站起身回望，那条属于自己的宽阔护城河，将成为最值得骄傲的资产。</p>
+<h1>这才是文章的开始</h1>
+<p>是吧，文章写得很好，但并没有什么用，因为就是没有用啊，全是ai写出来的，辞藻华丽，逻辑很顺，但是似乎跟我真的没有什么关系啊。这也是ai的弊端，ai可以帮你写，但其实他自己也不是很理解这个概念，他也不知道你自己想要的是什么，不能代替你思考。</p>
+<p>所以写一篇文章、读一篇文章不要只是感动自己，改变自己才是最真的，自己理解才是重点。</p>
+<p>用我自己的话来说，护城河就是一个人（或一家企业）在这个世界里能够安全立足、别人暂时取代不了的那个“东西”。它从来不是单一的技能或天赋，而是一套多维度能力的组合拳——当几个看似普通的点叠加在一起，就形成了别人很难抄的独特壁垒。</p>
+<p>拿企业举例，可口可乐的护城河不是单纯的饮料好喝，而是“品牌认知度极高 + 轻资产模式”的组合：它只掌控最核心的配方和品牌，把生产、灌装、分销这些中低端环节外包给全球225家区域伙伴，自己专注定价权和生态掌控。这套模式让竞争者望尘莫及，毛利率常年60%以上，连续60年涨股息。山姆会员店则是另一套组合：极致精选SKU（3500–5000个，每类只挑1–2个最好）+ 自有品牌+ 会员付费买“确定性”+ 全球直采冷链。这种“少而精 + 会员锁仓”的模式，也让模仿者短期内跟不上。</p>
+<p>放到个人身上，我觉得道理是一样的。如果我只是一个会写代码的普通程序员，但社交能力弱、表达不行、动机也不强，那我的竞争力就很单薄，随时可能被更全面的人取代。但如果我把编程技能 + 良好的沟通表达 + 懂一点业务逻辑 + 强烈的成就动机 + 靠谱的性格叠加起来，这个组合就很难被快速复制——这就是我的护城河。</p>
+<p>作为大三学生，我现在的护城河其实还很浅，甚至可以说还没真正挖起来。主要有两个明显短板：</p>
+<ol>
+<li><strong>知识和技能还停在表面</strong>：学过的东西不少，但都浅尝辄止，没有真正做成过有分量的项目，也没有形成体系。</li>
+<li><strong>动机非常薄弱</strong>：我还没搞清楚自己到底想成为什么样的人、想为什么而努力。每天上课、刷题、像在完成任务，而不是在为某个清晰的方向积累。</li>
+</ol>
+<p>意识到这些后，我开始试着把“护城河”这个概念真正融入日常生活，而不是停留在想一想就结束的阶段。我给自己定了一些小而具体的行动：</p>
+<ul>
+<li>每天花10分钟写“动机日志”：今天什么事让我有点兴奋？什么事情让我很沮丧、无法集中注意力？为什么？慢慢找底层驱动力。</li>
+<li>每周挑一个技能做“项目驱动练习”：不是只看教程，而是逼自己输出一个小东西（比如建一个模型、设计一个产品），哪怕很粗糙。</li>
+<li>主动把技能“交叉”：比如写技术类博客，锻炼自己的表达能力的同时提升自己的技术素养、帮朋友解决实际问题，刻意练沟通等。</li>
+<li>记得复盘：列出当前的能力清单，问自己“这些点怎么组合才能让我更独特？”同时对比预期和实际结果，调整方向。</li>
+</ul>
+<p>护城河不是一夜之间建成的。可口可乐用了上百年，山姆也迭代了近30年。我现在才大三，时间是我最大的优势。也许几年后回头看，现在这些小小的刻意练习，就是那条河的起点。</p>
+<p>我希望未来的自己，能站在一条不算太宽但足够深的护城河边上，对着世界说： “来吧，我在这里，有我自己的位置。”</p>
+<p>你要如何设计自己的人生，这件事完全取决于你自己。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/" class="post-title-link" itemprop="url">复利究竟有什么魔力？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:18" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:18+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-30 19:47:02" itemprop="dateModified" datetime="2026-03-30T19:47:02+08:00">2026-03-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">知识</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310220618481.png" alt="image-20260310220618481"></p>
+<h1>复利是什么</h1>
+<p>我们来看看wikipedia怎么说的吧：</p>
+<p><strong>复利率法</strong>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E5%A4%8D%E5%88%A9#cite_note-1">1]</a>（英文：compound interest），是一种计算<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%88%A9%E6%81%AF">利息</a>的方法。按照这种方法，利息除了会根据<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9C%AC%E9%87%91">本金</a>计算外，新得到的利息同样可以生息，因此俗称“利滚利”、“驴打滚”或“利叠利”。只要计算利息的周期越密，财富增长越快，而随着年期越长，复利效应亦会越为明显。</p>
+<p>说人话，我的理解就是：你投资产生的收益，你要忍住不要直接花掉，而是要连本带利继续投资，这样的话，即使你的收益率不高，但是财富依然会有比较可观的增值。</p>
+<h1>复利怎么运作</h1>
+<p>复利和单利的区别在于，收益的那一部分钱是可以进行再投资的</p>
+<ul>
+<li>单利：假设你每年投入10000元，年利率是10%，那么十年以后的收益是10X10000X10%=10000元</li>
+<li>复利：同样的条件下，你的十年收益是 10000X(1+10%)^10-10000=15937元</li>
+</ul>
+<p>相比下来，整整多了5937元！</p>
+<p>诶你有可能会说，这也太少了吧，十年，整整十年我才赚了5937元，累死累活，挣个毛线啊…</p>
+<p>说得对，复利的魅力，在这个举的例子里面体现的还不够好。</p>
+<p>你想想，如果你把里面的投入本金换成10000万（也就是1亿元），你想想你多赚了多少，不出意外的话，复利比单利多了接近六千万吧</p>
+<p>我们不妨把视线放长一点，假设我们是一个很老练的投资人，能够保持年利率10%下去30年，我们再算一算这笔账：</p>
+<ul>
+<li>单利：30年收益是30000元</li>
+<li>复利：30年收益是10000X(1+10%)^30-10000=164494元</li>
+</ul>
+<p>可以窥见的是，随着时间愈长，雪球滚得越大，这是美丽的“雪球效应”</p>
+<p>以上还是基于年复利率的前提下，你想想，如果是月复利率、日负利率，是不是不用30年就能大赚一笔？</p>
+<p>总结一下，影响复利效应的关键因素</p>
+<ul>
+<li>投资期限长短：资金滚得越多，复利效应就越明显</li>
+<li>收益率的高低：自然是越高越好</li>
+<li>本金大小：本金越多，自然赚的越多</li>
+<li>再投资频率：年复利、月复利、日负利，再投资频率越高，复利效益就越明显</li>
+</ul>
+<h1>天使和魔鬼</h1>
+<h2 id="复利能让你变得很富有">复利能让你变得很富有</h2>
+<p>以<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%A6%8F%E5%B8%83%E6%96%AF%E9%A6%99%E6%B8%AF%E5%AF%8C%E8%B1%AA%E6%A6%9C">香港首富</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9D%8E%E5%98%89%E8%AA%A0">李嘉诚</a>为例，1950年以7,000美元成立<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%95%B7%E6%B1%9F%E5%A1%91%E8%86%A0%E5%BB%A0">长江塑胶厂</a>，在2006年拥有约188亿美元身家计算，撇开其他因素，他的财富在57年增长268.6万倍</p>
+<h2 id="也能让你被薅得很穷">也能让你被薅得很穷</h2>
+<p>高利贷就是很好的例子，现时世界各国普遍都有对放债人所收取的利息有最高限制，一般都以30%年息为上限，在此以上的都被视为进行<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%AB%98%E5%88%A9%E8%B2%B8">高利贷</a>活动而加以取缔。而现时<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BF%A1%E7%94%A8%E5%8D%A1">信用卡</a>欠账的年息往往高于20%甚至30%</p>
+<h1>延伸</h1>
+<p>对于投资的初学者来说，复利是一个很好的认识投资的工具，他让我们意识到投资世界的魔力，复利是核心的财富增值工具。</p>
+<p>可以从以下几个方面去运用好这个工具：</p>
+<ol>
+<li>
+<p>拒绝借高利贷等一切涉及复利的吃人的东西</p>
+</li>
+<li>
+<p>不要追求过高的投资回报率，往往稳定的投资回报率更加重要</p>
+</li>
+<li>
+<p>复利最青睐的就是时间，年轻的时候投入的一笔钱，如果可以保证稳定可观的回报率，在时间的见证下也能积累一笔很可观的财富</p>
+</li>
+<li>
+<p>买一些优质的投资项目，能够保证复利有长期的时间可以去发挥作用而不会突然崩塌</p>
+<p>这一点和《穷查理宝典》里的“我们偏向于把大量的钱投在我们不用在另作决策的地方”不谋而合</p>
+</li>
+<li>
+<p>尤其注意的是，复利的基础是你的本金，所以，当你的收益已经到达一定数目的时候，我们就可以留出自己的本金，保证自己不至于在钱桌上全盘皆输</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">传感与测试技术 为考试而生</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:18" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:18+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-25 21:47:31" itemprop="dateModified" datetime="2026-03-25T21:47:31+08:00">2026-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>就像小米 为发烧而生</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/03/22/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">UG NX12怎么去安装？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:18" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:18+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-24 20:16:58" itemprop="dateModified" datetime="2026-03-24T20:16:58+08:00">2026-03-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318140642944.png" alt="image-20260318140642944"></p>
+<h1>需要的文件：</h1>
+<p><a target="_blank" rel="noopener" href="https://www.123865.com/s/bBy8vd-gYwXv">123网盘UG12.0链接</a></p>
+<p>[天翼云盘UG12.0链接](<a target="_blank" rel="noopener" href="https://cloud.189.cn/t/ArMFziyqmEre">https://cloud.189.cn/t/ArMFziyqmEre</a> （访问码：gn1q）)</p>
+<h1>安装步骤图文：</h1>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/%E5%86%85%E5%AE%B9.png" alt="preview image"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/1.png" alt="preview image"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/2.png" alt="preview image"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/3.png" alt=""></p>
+<p><img src="https://usercontent.tju.pt/4.png?file_id=a234b3cb3b0c209bd76c5c5c46225c3ea540b5b4ccd6565d8d0a2fd42330175a" alt="preview image"></p>
+<h1>视频教程</h1>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1rh411m7u6/?vd_source=be5a0b6c58eb0ef9b1da5603d170bc44">UG-NX12.0软件安装</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/pt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/pt/" class="post-title-link" itemprop="url">怎么去优雅的转pt种？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:18" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:18+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-04-03 14:55:00" itemprop="dateModified" datetime="2026-04-03T14:55:00+08:00">2026-04-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944">规则</p>
+<h2 id="北洋园pt自查">北洋园pt自查</h2>
+<h3 id="电影">电影</h3>
+<ul>
+<li>
+<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
+</li>
+<li>
+<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
+</li>
+</ul>
+<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
+<ul>
+<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
+</ul>
+<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
+<ul>
+<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
+</ul>
+<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
+<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
+<ul>
+<li>
+<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
+</li>
+<li>
+<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
+</li>
+<li>
+<p>[ ] 我确定站内没有更好的源</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
+</li>
+</ul>
+<h2 id="btschool自查">btschool自查</h2>
+<ul>
+<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
+<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
+</ul>
+<h1>发种</h1>
+<h2 id="手动发种">手动发种</h2>
+<h3 id="代码操作">代码操作</h3>
+<p><strong>引用内容</strong></p>
+<p>[quote]我是引用内容[/quote]</p>
+<p><strong>媒体信息隐藏显示</strong></p>
+<p>[hide=Mediainfo/媒体信息]</p>
+<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
+<p>[/hide]</p>
+<p><strong>图片显示</strong></p>
+<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
+<h3 id="不同站点">不同站点</h3>
+<h4 id="北洋园pt">北洋园pt</h4>
+<p><strong>基本步骤是：</strong></p>
+<ol>
+<li>从其他站点下载你想要转的资源</li>
+<li>填写发布页面（用引用id简单一点）</li>
+<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
+</ol>
+<p><strong>填写发布页面：</strong></p>
+<p>在上面那一行里面，点击候选</p>
+<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
+<p>如果要用引用种子id的话，这样去找：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
+<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
+<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
+<p>提交成功以后你会跳转到一个界面，显示：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
+<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
+<p>进入utorrent，选择添加种子文件</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
+<p>显示这样就是做种成功了</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
+<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
+<h4 id="btschool-52pt">btschool/52pt</h4>
+<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
+<p>新发现的<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
+<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
+<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
+<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
+<h4 id="mt-ttg">mt/ttg</h4>
+<p>这两个都是大站，估摸着发种不会那么简单</p>
+<h2 id="自动发种">自动发种</h2>
+<p>pt站点的自动转种推荐使用<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
+<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
+<h3 id="安装步骤">安装步骤</h3>
+<ol>
+<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
+<li>访问脚本页面<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
+</ol>
+<h3 id="使用流程">使用流程</h3>
+<ol>
+<li>
+<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
+</li>
+<li>
+<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
+<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
+</li>
+</ol>
+<h3 id="遇到的问题">遇到的问题</h3>
+<ol>
+<li>
+<p>如果发现转过去的图片无法显示怎么办？</p>
+<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a target="_blank" rel="noopener" href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
+</li>
+</ol>
+<h3 id="写在最后">写在最后</h3>
+<ul>
+<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
+<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
+<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
+<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/22/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/" class="post-title-link" itemprop="url">iPhone14promax 有必要升到ios26吗？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-22 21:21:18" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:18+08:00">2026-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-12 19:14:53" itemprop="dateModified" datetime="2026-03-12T19:14:53+08:00">2026-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%80%9D%E8%80%83/" itemprop="url" rel="index"><span itemprop="name">思考</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310143708973.png" alt="image-20260310143708973"></p>
+<h1>写在前面</h1>
+<p>iPhone一直还停留在ios 18.7，很久没有自动更新过系统。、</p>
+<p>iPad已经更新到了ipad os26.3，前段时间iPhone和iPad使用接力功能发现很不好用，就想着是不是可能是系统跨度大的问题。</p>
+<p>iPhone要不要更新到ios 26.3？一直很犹豫，所以就写了这篇文章。</p>
+<h1>一些对比</h1>
+<p>最大的特点就是liquid glass的ui设计，整体的ui都变得圆润化，ui变成毛玻璃格式。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130236369.png" alt="image-20260310130236369"></p>
+<p>在视频里发现：ios26.3的电池最大容量是86%，ios18.7的电池最大容量是100%，这有点吓人，<strong>更新系统难道会让我的电池最大容量下降很多吗？</strong></p>
+<p>其实换个角度想想，右边的这个手机，不正好是我现在自己手机的电池最大容量吗？他既然可以很好的运行ios26，那我也不可以吗？哈哈哈</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130543136.png" alt="image-20260310130543136"></p>
+<p>从视频很明显还能看出，ios26系统会更加的流畅，退出软件不会有ios18的那种顿挫感，而且进入app，可以明显分辨出ios26会更快一点。</p>
+<p>除此之外，还有快捷指令方面的更新：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134747714.png" alt="image-20260310134747714"></p>
+<p>音乐会有中文翻译了：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134830898.png" alt="image-20260310134830898"></p>
+<p>提醒事项会介入ai：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134935291.png" alt="image-20260310134935291"></p>
+<p>其实有一个很好的功能加入了，就是apple intelligence，但是奈何iPhone14promax的芯片不支持apple intelligence，这是比较可惜的一点。</p>
+<h1>基本情况</h1>
+<p>Google了一下：更新系统让电池最大容量下降？发现类似的例子不是很多，有倒是有：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310132154327.png" alt="image-20260310132154327">、</p>
+<p>问了下gpt，他是这样说的：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133316889.png" alt="image-20260310133316889" style="zoom:150%;" />
+<p>查了查自己的电池最大容量是86%，电池情况是这样的：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133257792.png" alt="image-20260310133257792"></p>
+<p>从gpt得知，接近1000次的充电循环次数还有这样的电池健康，使用习惯是比较好的，电池体质是比较好的，哈，那想必我也不用担心更新后电池会崩掉，会出现问题。</p>
+<p>更何况，现在的手机续航就已经很废了…</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133915037.png" alt="image-20260310133915037"></p>
+<p>那什么时候推荐换电池呢？请看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">當 iPhone電池健康度降到多少該考慮更換呢？一般來說，</span><br><span class="line"></span><br><span class="line">80%以上：電池健康度在80%以上都屬正常範圍。</span><br><span class="line">60%－80%：在此範圍時，可以開始考慮更換。</span><br><span class="line">低於60%：電池健康度iPhone小於60%則建議盡快更換電池，避免影響手機的正常使用。</span><br><span class="line">低於40%：iPhone電池健康不到40%的話，建議立即更換，以防出現更嚴重的問題！</span><br></pre></td></tr></table></figure>
+<h1>结论</h1>
+<p>对于我个人而言，还是决定更新ios26.3.1，原因如下：</p>
+<ul>
+<li>和iPad能够更好的兼容，接力功能可以更好的实现</li>
+<li>更流畅的操作体验</li>
+<li>ai在iPhone原生app里面的接入，可以一试</li>
+<li>音乐app有翻译歌词了，可以一试的功能</li>
+<li>图标的可以统一liquid glass化，挺好看的</li>
+<li>26.3.1已经修复了前面版本的一些bug的，是比较稳定的版本</li>
+</ul>
+<p>可能存在的雷点：</p>
+<ul>
+<li>电池续航会有明显的下降</li>
+<li>手机可能会异常发烫</li>
+</ul>
+<p>显然嘛，对于我来说，利大于弊。</p>
+<h1>升级以后的体验</h1>
+<p>我觉得可以啊！流畅的可以，而且电池最大容量一点没掉啊，好强的电池嘿嘿。</p>
+<p>但是接力功能感觉依旧很难受，估计是你是用的方法不太对。</p>
+<p>是的，之前之所以无法使用接力打开app功能，是因为没有打开相应app的iCloud同步功能。就比如说，你在iPad上编辑的备忘录想要在iPhone上打开，你就需要进入设置界面打开备忘录的iCloud同步，这样就行了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
       }
     }
-    detectApple()
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
   
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: {"appId":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hitsPerPage":6,"languages":{"input_placeholder":"搜索文章","hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，耗时 ${time} 毫秒"}},
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
-  copy: {
-    success: '复制成功',
-    error: '复制失败',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: {"limitCount":150,"languages":{"author":"作者: haozi","link":"链接: ","source":"来源: 禹皓的BLOG","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: '加载更多'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: true,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '禹皓的BLOG',
-  isHighlightShrink: false,
-  isToc: false,
-  pageType: 'home'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #F0F0F0;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310164915396.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-brain"></i><span> 知识库</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-book"></i><span> 知识</span></a></li><li><a class="site-page child" href="/categories/%E6%96%B9%E6%B3%95/"><i class="fa-fw fas fa-lightbulb"></i><span> 方法</span></a></li><li><a class="site-page child" href="/categories/%E9%A1%B9%E7%9B%AE/"><i class="fa-fw fas fa-code"></i><span> 项目</span></a></li><li><a class="site-page child" href="/categories/%E6%80%9D%E8%80%83/"><i class="fa-fw fas fa-pen"></i><span> 思考</span></a></li><li><a class="site-page child" href="/categories/%E8%80%83%E8%AF%95/"><i class="fa-fw fas fa-graduation-cap"></i><span> 考试</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310165725267.png" alt="Logo"><span class="site-name">禹皓的BLOG</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-brain"></i><span> 知识库</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-book"></i><span> 知识</span></a></li><li><a class="site-page child" href="/categories/%E6%96%B9%E6%B3%95/"><i class="fa-fw fas fa-lightbulb"></i><span> 方法</span></a></li><li><a class="site-page child" href="/categories/%E9%A1%B9%E7%9B%AE/"><i class="fa-fw fas fa-code"></i><span> 项目</span></a></li><li><a class="site-page child" href="/categories/%E6%80%9D%E8%80%83/"><i class="fa-fw fas fa-pen"></i><span> 思考</span></a></li><li><a class="site-page child" href="/categories/%E8%80%83%E8%AF%95/"><i class="fa-fw fas fa-graduation-cap"></i><span> 考试</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">禹皓的BLOG</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc masonry" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" title="数字化设计 为考试而生"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314194845629.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字化设计 为考试而生"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" title="数字化设计 为考试而生">数字化设计 为考试而生</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:19.013Z" title="发表于 2026-03-22 21:21:19">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%80%83%E8%AF%95/">考试</a></span></div><div class="content">就像小米 为发烧而生</div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/" title="使用GitHub仓库+PicGo+CDN服务搭建个人博客图床"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用GitHub仓库+PicGo+CDN服务搭建个人博客图床"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/" title="使用GitHub仓库+PicGo+CDN服务搭建个人博客图床">使用GitHub仓库+PicGo+CDN服务搭建个人博客图床</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:19.002Z" title="发表于 2026-03-22 21:21:19">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%B9%E6%B3%95/">方法</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/" title="机械制造工程学 为考试而生"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310172943186.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="机械制造工程学 为考试而生"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/" title="机械制造工程学 为考试而生">机械制造工程学 为考试而生</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:18.997Z" title="发表于 2026-03-22 21:21:18">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%80%83%E8%AF%95/">考试</a></span></div><div class="content">就像小米 为发烧而生</div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/" title="机电控制 为考试而生"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260312191936511.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="机电控制 为考试而生"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/" title="机电控制 为考试而生">机电控制 为考试而生</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:18.983Z" title="发表于 2026-03-22 21:21:18">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%80%83%E8%AF%95/">考试</a></span></div><div class="content">就像小米 为发烧而生</div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/%E6%8A%A4%E5%9F%8E%E6%B2%B3/" title="护城河有什么用？"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315212130095.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="护城河有什么用？"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/%E6%8A%A4%E5%9F%8E%E6%B2%B3/" title="护城河有什么用？">护城河有什么用？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:18.978Z" title="发表于 2026-03-22 21:21:18">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/" title="复利究竟有什么魔力？"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310220618481.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="复利究竟有什么魔力？"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/" title="复利究竟有什么魔力？">复利究竟有什么魔力？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:18.972Z" title="发表于 2026-03-22 21:21:18">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/" title="传感与测试技术 为考试而生"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314200044992.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="传感与测试技术 为考试而生"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/" title="传感与测试技术 为考试而生">传感与测试技术 为考试而生</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:18.968Z" title="发表于 2026-03-22 21:21:18">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%80%83%E8%AF%95/">考试</a></span></div><div class="content">就像小米 为发烧而生</div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/" title="UG NX12怎么去安装？"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318140642944.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UG NX12怎么去安装？"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/" title="UG NX12怎么去安装？">UG NX12怎么去安装？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:18.965Z" title="发表于 2026-03-22 21:21:18">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%B9%E6%B3%95/">方法</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/pt/" title="怎么去优雅的转pt种？"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="怎么去优雅的转pt种？"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/pt/" title="怎么去优雅的转pt种？">怎么去优雅的转pt种？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:18.959Z" title="发表于 2026-03-22 21:21:18">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%B9%E6%B3%95/">方法</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/22/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/" title="iPhone14promax 有必要升到ios26吗？"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310143708973.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="iPhone14promax 有必要升到ios26吗？"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/22/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/" title="iPhone14promax 有必要升到ios26吗？">iPhone14promax 有必要升到ios26吗？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-22T13:21:18.946Z" title="发表于 2026-03-22 21:21:18">2026-03-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%80%9D%E8%80%83/">思考</a></span></div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310164915396.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">haozi</div><div class="author-info-description">今日事 今日毕</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/haozi1103"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/haozi1103" target="_blank" title="Github"><i class="fab fa-github" style="color: #79B2F9;"></i></a><a class="social-icon" href="mailto:403414503@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #79B2F9;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/" title="机电系统项目是怎么实践的？"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317173257528.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="机电系统项目是怎么实践的？"/></a><div class="content"><a class="title" href="/2026/04/03/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/" title="机电系统项目是怎么实践的？">机电系统项目是怎么实践的？</a><time datetime="2026-04-03T07:11:51.127Z" title="发表于 2026-04-03 15:11:51">2026-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/" title="matlab表面建模项目是怎么做好的？"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314195329042.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="matlab表面建模项目是怎么做好的？"/></a><div class="content"><a class="title" href="/2026/04/03/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/" title="matlab表面建模项目是怎么做好的？">matlab表面建模项目是怎么做好的？</a><time datetime="2026-04-03T07:11:51.117Z" title="发表于 2026-04-03 15:11:51">2026-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/" title="jellyfin如何设置优雅的刮削？"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403145425463.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="jellyfin如何设置优雅的刮削？"/></a><div class="content"><a class="title" href="/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/" title="jellyfin如何设置优雅的刮削？">jellyfin如何设置优雅的刮削？</a><time datetime="2026-04-03T06:56:36.474Z" title="发表于 2026-04-03 14:56:36">2026-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/" title="耗子的奶昔方案设计记录"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328224552025.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="耗子的奶昔方案设计记录"/></a><div class="content"><a class="title" href="/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/" title="耗子的奶昔方案设计记录">耗子的奶昔方案设计记录</a><time datetime="2026-04-03T06:56:36.474Z" title="发表于 2026-04-03 14:56:36">2026-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/" title="耗子的生活俳句"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327194952695.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="耗子的生活俳句"/></a><div class="content"><a class="title" href="/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/" title="耗子的生活俳句">耗子的生活俳句</a><time datetime="2026-04-03T06:56:36.463Z" title="发表于 2026-04-03 14:56:36">2026-04-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
-            <a class="card-more-btn" href="/categories/" title="查看更多">
-      <i class="fas fa-angle-right"></i></a>
-          </div>
-          <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/"><span class="card-category-list-name">影视</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%80%9D%E8%80%83/"><span class="card-category-list-name">思考</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%96%B9%E6%B3%95/"><span class="card-category-list-name">方法</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/"><span class="card-category-list-name">游戏</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/"><span class="card-category-list-name">生活哲学</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%9F%A5%E8%AF%86/"><span class="card-category-list-name">知识</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%80%83%E8%AF%95/"><span class="card-category-list-name">考试</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%98%85%E8%AF%BB/"><span class="card-category-list-name">阅读</span><span class="card-category-list-count">2</span></a></li>
-          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/pt/" style="font-size: 1.1em; color: #999">pt</a> <a href="/tags/Notability/" style="font-size: 1.1em; color: #999">Notability</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/CAM/" style="font-size: 1.1em; color: #999">CAM</a> <a href="/tags/Cloudflare/" style="font-size: 1.1em; color: #999">Cloudflare</a> <a href="/tags/iPhone/" style="font-size: 1.1em; color: #999">iPhone</a> <a href="/tags/%E4%BF%B3%E5%8F%A5/" style="font-size: 1.1em; color: #999">俳句</a> <a href="/tags/GitHub/" style="font-size: 1.1em; color: #999">GitHub</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" style="font-size: 1.1em; color: #999">数字化设计</a> <a href="/tags/UG/" style="font-size: 1.5em; color: #99a9bf">UG</a> <a href="/tags/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/" style="font-size: 1.1em; color: #999">智能加工装备设计</a> <a href="/tags/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/" style="font-size: 1.1em; color: #999">机械制造工程学</a> <a href="/tags/Alist/" style="font-size: 1.5em; color: #99a9bf">Alist</a> <a href="/tags/PicGo/" style="font-size: 1.1em; color: #999">PicGo</a> <a href="/tags/Jellyfin/" style="font-size: 1.1em; color: #999">Jellyfin</a> <a href="/tags/%E5%A5%B6%E6%98%94/" style="font-size: 1.1em; color: #999">奶昔</a> <a href="/tags/cnc/" style="font-size: 1.1em; color: #999">cnc</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 1.1em; color: #999">成长</a> <a href="/tags/%E6%8A%95%E8%B5%84%E6%9C%AF%E8%AF%AD/" style="font-size: 1.1em; color: #999">投资术语</a> <a href="/tags/%E6%95%B0%E6%8E%A7/" style="font-size: 1.1em; color: #999">数控</a> <a href="/tags/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">传感与测试技术</a> <a href="/tags/%E4%BC%81%E4%B8%9A/" style="font-size: 1.1em; color: #999">企业</a> <a href="/tags/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/" style="font-size: 1.1em; color: #999">机电控制</a> <a href="/tags/matlab/" style="font-size: 1.1em; color: #999">matlab</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 1.1em; color: #999">科技</a> <a href="/tags/windows/" style="font-size: 1.1em; color: #999">windows</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" style="font-size: 1.1em; color: #999">知识库</a></div></div></div></div></main><footer id="footer" style="background-image: url(https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307184638399.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By haozi</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div><div class="footer_custom_text">Hi, welcome to my <a href="http://haozi.space/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">今日事 今日毕</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://gemini.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

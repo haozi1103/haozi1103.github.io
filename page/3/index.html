@@ -1,152 +1,2026 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>禹皓的BLOG</title><meta name="author" content="haozi"><meta name="copyright" content="haozi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#848484"><meta name="description" content="今日事 今日毕">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":260,"widgets":["catalog"]},"copycode":true,"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="今日事 今日毕">
 <meta property="og:type" content="website">
 <meta property="og:title" content="禹皓的BLOG">
 <meta property="og:url" content="http://haozi.space/page/3/index.html">
 <meta property="og:site_name" content="禹皓的BLOG">
 <meta property="og:description" content="今日事 今日毕">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310164915396.png">
 <meta property="article:author" content="haozi">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310164915396.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/images/favicon.ico"><link rel="canonical" href="http://haozi.space/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
 
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
+<link rel="canonical" href="http://haozi.space/page/3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>禹皓的BLOG</title>
   
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#454545')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#848484')
-        }
-      }
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
 
-      const theme = saveToLocal.get('theme')
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">禹皓的BLOG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
     
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/18/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/18/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/" class="post-title-link" itemprop="url">UG NX12如何进行数控仿真？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-18 22:13:37" itemprop="dateCreated datePublished" datetime="2026-03-18T22:13:37+08:00">2026-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-27 17:47:03" itemprop="dateModified" datetime="2026-03-27T17:47:03+08:00">2026-03-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" alt="ugnx1">数控车床</h1>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221511401.png" alt="image-20260318221511286"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221633130.png" alt="image-20260318221633079"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318223143227.png" alt="image-20260318223143171"></p>
+<p>非切削参数里面修改<strong>逼近、退刀点</strong></p>
+<p>切削参数里面设置<strong>切削余量</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224403913.png" alt="image-20260318224403844"></p>
+<p>显示T0101的方法：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318230934810.png" alt="image-20260318230934759"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224620067.png" alt="image-20260318224620007"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224638708.png" alt="image-20260318224638679"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">**我不能 100% 保证刀片“绝对不会崩”**（任何切断操作都有风险，尤其是你这个 Ø220 mm 切到 Ø60 mm 的大切深），但**用我下面调整后的参数 + 正确刀具，崩刀概率会降到非常低**（实际工厂里 95% 以上都不会崩）。</span><br><span class="line"></span><br><span class="line">我根据你的工件尺寸（大直径铝件）和 NX 12 的 Parting 操作，专门给你**最保守、最安全的参数**（比我之前推荐的还更保守）。</span><br><span class="line"></span><br><span class="line">### 1. 必须换一把“长 + 强”切断刀（这是防崩基础）</span><br><span class="line">- 刀片宽度：**3 mm**（不要用 4 mm，窄一点刚性更好）</span><br><span class="line">- 刀杆总长（Shank Length）：**至少 70–80 mm**（你之前那把太短了）</span><br><span class="line">- 刀片要求：**带断屑槽 + 涂层**（推荐 Kennametal N123 或 Sandvik CoroCut，铝专用等级）</span><br><span class="line">- NX 12 操作：在 Parting 操作里新建刀具 → Turning Tool → Parting Tool → 把长度改成 80 mm</span><br><span class="line"></span><br><span class="line">### 2. 最安全的 Parting 参数设置（直接复制）</span><br><span class="line">双击你的 PART_OFF 操作后，按下面填（这是防崩最关键的 3 个地方）：</span><br><span class="line"></span><br><span class="line">**Cut Parameters（切削参数）标签页**</span><br><span class="line">- Multiple Passes：**必须勾选**</span><br><span class="line">- Depth per Pass（每层切深）：**0.8 ~ 1.0 mm**（我现在给你降到 1 mm 以内，比之前更保守）</span><br><span class="line">- Stock（最终余量）：**0.3 mm**</span><br><span class="line">- Feed（进给）：**0.05 ~ 0.07 mm/rev**（非常慢，防止崩刃）</span><br><span class="line">- Speed（转速）：**1500 ~ 1800 rpm**（铝件不要太快）</span><br><span class="line"></span><br><span class="line">**Non-Cutting Moves（非切削移动）标签页**</span><br><span class="line">- Approach（进刀）：**Ramp**（斜进刀）</span><br><span class="line">- Retract（退刀）：</span><br><span class="line">  - Retract Distance：**X +12 mm**（先把刀从槽里拉出来）</span><br><span class="line">  - **必须先退 X，再退 Z**</span><br><span class="line">- Clearance Plane：**Z +100 mm**（抬得更高一点）</span><br><span class="line"></span><br><span class="line">**额外防崩开关**：</span><br><span class="line">- 在 Cut Parameters 里勾选 **Use Fixed Cycle** → 选 **G75**（自动 peck 退刀断屑，最防崩！）</span><br><span class="line"></span><br><span class="line">### 3. 额外两招几乎零崩刀（强烈建议做）</span><br><span class="line">**招式1（最推荐）**：先车一个**退刀槽**</span><br><span class="line">- 在切断位置前方 3 mm 处，先做一个 Groove Turning 操作：</span><br><span class="line">  - 宽度 5 mm，深度 3 mm</span><br><span class="line">- 然后再做 Parting 操作，刀具直接进到这个槽里切，崩刀风险几乎为 0。</span><br><span class="line"></span><br><span class="line">**招式2**：中心前减速</span><br><span class="line">- 在切到直径 Ø80 mm 左右时，手动把进给降到 **0.03 mm/rev**（接近中心时切削力最大，最容易崩）</span><br><span class="line"></span><br><span class="line">### 4. 实际操作前的最后检查（必须做！）</span><br><span class="line">1. 生成刀路后 → 右键 **Verify → Machine Simulation**</span><br><span class="line">2. 勾选 Holder Collision + Fixture Collision</span><br><span class="line">3. 播放完整仿真：</span><br><span class="line">   - 看刀片是否一直保持 0.8–1.0 mm 每层切</span><br><span class="line">   - 看退刀是否“先拉 X 再抬 Z”</span><br><span class="line">   - 如果全程无红色报警 → 基本安全</span><br><span class="line"></span><br><span class="line">### 总结一句话</span><br><span class="line">**用上面参数（每层 ≤1.0 mm + 先退 X + G75 + 长刀杆），刀片崩的概率极低**（我教过的学生用这个方法切 Ø200+ 铝件都没崩过）。</span><br><span class="line"></span><br><span class="line">**现在你直接做**：</span><br><span class="line">1. 把切深改成 **0.8–1.0 mm**</span><br><span class="line">2. 进给改成 **0.05–0.07 mm/rev**</span><br><span class="line">3. 新建一把 80 mm 长的切断刀</span><br><span class="line">4. 勾选 G75 + 生成刀路</span><br><span class="line">5. 仿真一次</span><br><span class="line"></span><br><span class="line">做完**仿真截图**发我（尤其是刀路播放到中心位置的时候），我帮你最后看一眼是否安全。  </span><br><span class="line">或者你现在就把当前 Depth per Pass 和 Feed 值告诉我，我再给你精确数字。</span><br><span class="line"></span><br><span class="line">放心，按这个保守参数走，刀片不会轻易崩的！  </span><br><span class="line">继续操作，有问题随时截图问我。</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260319213946556.png" alt="image-20260319213946453"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260320134843281.png" alt="image-20260320134843073"></p>
+<p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
+<p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
+<p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/08/%E3%80%8A%E5%8F%8D%E4%BA%BA%E7%B1%BB%E6%9A%B4%E8%A1%8C%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/08/%E3%80%8A%E5%8F%8D%E4%BA%BA%E7%B1%BB%E6%9A%B4%E8%A1%8C%E3%80%8B/" class="post-title-link" itemprop="url">《反人类暴行》</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-08 19:47:39" itemprop="dateCreated datePublished" datetime="2026-03-08T19:47:39+08:00">2026-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-15 19:49:13" itemprop="dateModified" datetime="2026-03-15T19:49:13+08:00">2026-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BD%B1%E8%A7%86/" itemprop="url" rel="index"><span itemprop="name">影视</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>第一集</h1>
+<p>第一集给我的最大感受是，这个电视剧的镜头很有质感，光影很细节。</p>
+<p>佟长富真的是常宇演的吗？感觉神似但是又不像，很神奇</p>
+<p>反人类暴行，到底怎么去表现呢？第一集感觉只是一个引子，二条的死只是开端。二条身上带着的，一定是某种致命的病毒，日本人干了什么好事？</p>
+<p>还有一个疑问，长富的妹妹是什么身份？</p>
+<p>“他们把二条挖出来吃了”，这句话一出来，真是，人在那时候，活得不像一条狗。</p>
+<p>片尾的历史真实录音让人听起来很难受：他们把注射了细菌的瓜给中国人吃，中国人吃了怎么样了？</p>
+<p>“全部感染！”</p>
+<h1>第二集</h1>
+<p>这集把荒川良平引出来了，和前面长富的剧情接上了，从荒川良平的眼中，我看到的只有恐惧和慌乱，似乎体力还不太行，做着做着实验就到过去了，他和那群作恶多端的日本军官格格不入。</p>
+<p>印象很深的一句话：“比敌人更可怕的，也许只是一个得不到治疗的伤口”</p>
+<h1>第八集</h1>
+<p>川口聪这是黑化了啊，之前还觉得他是个有良知的日本人，这集咋还去抢银行了呢。</p>
+<p>感觉是被舞子的死逼疯了。</p>
+<p>王道乐土 五族协和这句口号之下的牺牲品。</p>
+<p>我想要逃，却怎么也逃不出监牢的环抱。荒川良平</p>
+<h1>第九集</h1>
+<p>进入探秘篇，这集活体解剖很是血腥</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/08/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/08/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">GTX1660调试欧卡2画质mod的感触</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-08 13:21:49" itemprop="dateCreated datePublished" datetime="2026-03-08T13:21:49+08:00">2026-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-09 17:40:56" itemprop="dateModified" datetime="2026-03-09T17:40:56+08:00">2026-03-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%B8%E6%88%8F/" itemprop="url" rel="index"><span itemprop="name">游戏</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135715820.png" alt="image-20260308135656767"></p>
+<h1>前期排查</h1>
+<p>今天在折腾欧卡2的画质。和很多玩家一样，一开始就是一个思路：把能开的都开到最高。包括Nvidia app里面推荐的设置都是都是全开最高，我的gtx1660还怕一个12年的老游戏？</p>
+<p>很久之前，我就已经在本地下载了画质类的mod，像 JBX 3、PNG、Realistic Rain、Tree Improved 4K ，今天一时兴起，想玩一下很久没有碰的欧卡2，想着调一下画质，发现，无论是加入PNG，还是JBX 3，一进游戏画质是变好看的，但是帧率低的可怜，估计只有10帧左右，体验极差,这我还玩个寂寞啊…，还好，多亏了我之前看的乐观学书籍，没问题归结为长期性的、无法解决的，不然我估计不会去寻找新的解决方法，而是在寝室怪罪自己这无能的显卡了（泪目）。</p>
+<p>自己想了一下，问题可能有很多处：</p>
+<p>1.下载的PNG/JBX3画质mod毕竟不是官方的，可能存在问题？</p>
+<p>2.画质类mod之间可能存在一定的冲突，可能存在不兼容？</p>
+<p>3.最近显卡出了点毛病？</p>
+<p>对于1，找了半天发现，原来这些画质类的mod都是要付费的。算了，mod来源不明就这样吧，也挺好，毕竟mod都是免费的，哈哈哈（笑）</p>
+<p>对于2，我尝试把Realistic Rain、Tree Improved 4K这些比较吃显卡性能的mod都删掉，再次重新进游戏，发现然而并没有什么用，画质依旧10帧（哭了）</p>
+<p>对于3，显卡出了毛病吗？没有啊，昨天晚上打吃鸡还好好的呢，睡了一晚，显卡就废了难道？不可能不可能，绝对不可能</p>
+<p>还能怎么办，问问GPT老祖，死马当活马医呗，这句话，一语道破天机</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134317948.jpeg" alt="IMG_7800" style="zoom:33%;" />
+<p>GPT说：</p>
+<ul>
+<li>1080P + 100% = 正常渲染</li>
+<li>200% ≈ 接近 4K</li>
+<li><strong>300% 已经接近 6K 渲染</strong></li>
+</ul>
+<p>后来检查了一下设置才发现，缩放确实是开到了 300% ，但我想着，这有什么关系？我之前开300%不是照样玩的很顺？</p>
+<p>但并没有意识到的是，之前的300%是没有打PNG/JBX3这种大型画质mod</p>
+<p>死马当活马医，改一改缩放率呗，试一试总是好的咯</p>
+<h1>调整之后</h1>
+<p>把思路改成<strong>适合自己配置 &gt; 盲目堆画质</strong>，之后，发现打开了新世界的大门</p>
+<p>主要改动：</p>
+<ul>
+<li>
+<p>缩放：300% → <strong>100%</strong>（260309：缩放其实调整到200%都是可以的，100%还是有点太便宜显卡了）</p>
+</li>
+<li>
+<p>设置旁边有 菱形的，在不影响太多观感的前提下，能开多低开多低</p>
+</li>
+<li>
+<p>一些轻量MOD（灯光、雨滴、内饰、地图）尽量不去动他</p>
+</li>
+<li>
+<p>260309：抗锯齿可以选择 自适应清晰度，选择了SMAA,SMAA+TAA,自适应清晰度 后发现，</p>
+<p>自适应清晰度很真实，在静止的时候很清楚，运动的时候会有一定的运动模糊</p>
+</li>
+</ul>
+<p>帧率立刻稳定了很多，高速基本很顺，稳定在55帧左右，城市也不会明显卡顿。</p>
+<p>这里贴一下当时的设置：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134910393.png" alt="scs1" style="zoom:50%;" />
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134923740.png" alt="scs2" style="zoom: 50%;" />
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134951931.png" alt="scs3" style="zoom:50%;" />
+<p>使用的画质mod排序（rain效果类放在最前面，似乎才会有效果）：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135036856.png" alt="scs4"></p>
+<p>开了PNG之后：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135954275.jpg" alt="20260308125727_1" style="zoom:33%;" />
+<p>没开PNG:</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308140035237.jpg" alt="20260304154756_1" style="zoom:33%;" />
+<p>效果不错吧，哈哈</p>
+<h1>简单的感受</h1>
+<p>很多网上的“画质教程”其实默认的是高端显卡配置。如果照搬，很容易变成：</p>
+<p>画质提升一点，帧率下降很多。</p>
+<p>欧卡这种游戏，我更在意的是光照以及地面的纹理，把地面的纹理、天气质量调好一点，再配合 100% 缩放，观感已经很好了。有时候少装几个MOD、降低一点设置，反而更舒服。</p>
+<p>别人说好不一定好，适合你的才是最好的。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/07/Cloudfare+Tunnel%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/07/Cloudfare+Tunnel%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">使用Cloudflare Tunnel实现内网穿透访问Alist</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-07 20:26:10" itemprop="dateCreated datePublished" datetime="2026-03-07T20:26:10+08:00">2026-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-10 15:06:40" itemprop="dateModified" datetime="2026-03-10T15:06:40+08:00">2026-03-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308101314643.png" alt="image-20260307204327371"></p>
+<h1>写在前面</h1>
+<p>最开始只是想让自己的电脑能够被远程访问，后来逐渐开始把一些服务放在本地运行，比如下载工具、文件管理工具等。其中一个很好用的工具就是 AList，它可以把本地磁盘或者各种网盘统一挂载，通过网页来管理文件。</p>
+<p>问题是 AList 默认只运行在本地，例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:5244</span><br></pre></td></tr></table></figure>
+<p>如果不在电脑旁边，就无法访问。发现可以用 Cloudflare Tunnel 来实现远程访问 AList，怕自己忘了怎么配置的了，就记录下整个配置过程。</p>
+<h1>整体架构</h1>
+<p>整体结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">本地电脑</span><br><span class="line">AList 服务</span><br><span class="line">localhost:5244</span><br><span class="line">↓</span><br><span class="line">cloudflared</span><br><span class="line">↓</span><br><span class="line">Cloudflare Tunnel</span><br><span class="line">↓</span><br><span class="line">域名访问</span><br><span class="line">alist.haozi.space</span><br></pre></td></tr></table></figure>
+<p>访问 alist.haozi.space 时，Cloudflare 会通过 Tunnel 转发请求到本地电脑的 5244 端口。这样就实现了远程访问。</p>
+<h1>准备工作</h1>
+<p>在开始之前需要准备以下内容</p>
+<p>一个 Cloudflare 账号</p>
+<p>一个已经接入 Cloudflare 的域名</p>
+<p>一台电脑</p>
+<p>已经运行的 AList 服务</p>
+<p>AList 默认端口是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5244</span><br></pre></td></tr></table></figure>
+<p>本地访问地址为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:5244</span><br></pre></td></tr></table></figure>
+<p>在配置 Tunnel 之前，需要确保本地访问是正常的。</p>
+<p><strong>可以通过登陆127.0.0.1:5244来检验本地访问是否正常</strong></p>
+<h1>开始搭建</h1>
+<p>Cloudflare Tunnel 需要通过 cloudflared 程序来运行。</p>
+<p>可以从 Cloudflare 官方下载 Windows 版本</p>
+<p><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/">https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/</a></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308140747806.png" alt="image-20260306125950289"></p>
+<p>下载完成后，将程序放在一个固定目录，例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F:\cloudflared</span><br></pre></td></tr></table></figure>
+<p>然后在终端中运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared --version</span><br></pre></td></tr></table></figure>
+<p>如果可以看到版本号，说明安装成功。</p>
+<h2 id="登录-Cloudflare">登录 Cloudflare</h2>
+<p>为了让本地程序能够创建 Tunnel，需要先登录 Cloudflare。</p>
+<p>执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel login</span><br></pre></td></tr></table></figure>
+<p>记得在哪个盘里面，就要在哪里开始cmd操作（如果你之前跟我一样下载在F盘，就要在F盘进行cmd操作，以此类推）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141535776.png" alt="image-20260308141535725"></p>
+<p>浏览器会自动打开 Cloudflare 登录页面。登录后选择需要绑定的域名。完成后本地会生成一个认证文件：<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141752734.png" alt="image-20260306131456755">网页会显示以下界面：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141719378.png" alt="image-20260306131132603"></p>
+<h2 id="创建-Tunnel">创建 Tunnel</h2>
+<p>接下来创建一个新的 Tunnel。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel create alist-tunnel</span><br></pre></td></tr></table></figure>
+<p>其中 alist-tunnel 是 Tunnel 名称，可以自己修改。</p>
+<p>执行成功后会生成Tunnel ID,credentials 文件</p>
+<h2 id="创建配置文件">创建配置文件</h2>
+<p>接下来需要创建配置文件 config.yml。</p>
+<p>示例配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tunnel: Tunnel_ID</span><br><span class="line">credentials-file: C:\Users\用户名\.cloudflared\Tunnel_ID.json</span><br><span class="line"></span><br><span class="line">ingress:</span><br><span class="line">  - hostname: alist.yourdomain</span><br><span class="line">    service: http://localhost:5244</span><br><span class="line">  - service: http_status:404</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141903486.png" alt="image-20260308141903442"></p>
+<p>Tunnel_ID是 C:\Users\用户名.cloudflared 文件夹里面json文件的名称</p>
+<p>访问 alist.yourdomain 时转发到本地 localhost:5244，如果访问其他地址,返回 404</p>
+<h2 id="DNS">DNS</h2>
+<p>进入 Cloudflare 的 DNS 管理页面。添加一条记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类型 CNAME</span><br><span class="line">名称 alist</span><br><span class="line">目标 Tunnel_ID.cfargotunnel.com</span><br></pre></td></tr></table></figure>
+<p>这样配置的话，访问 alist.yourdomain,就会进入 Cloudflare Tunnel。</p>
+<h2 id="启动-Tunnel">启动 Tunnel</h2>
+<p>配置完成后启动 Tunnel</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel run alist-tunnel</span><br></pre></td></tr></table></figure>
+<p>如果一切正常，就可以在浏览器中访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://alist.yourdomain</span><br></pre></td></tr></table></figure>
+<p>页面会直接打开 AList</p>
+<h1>问题记录</h1>
+<p>在配置过程中可能遇到一些问题。</p>
+<p>排查顺序一般是</p>
+<ol>
+<li>
+<p>先确认 AList 本地是否可以访问</p>
+</li>
+<li>
+<p>再确认 cloudflared 是否在运行，如何检验是否生效？</p>
+<p>如下，终端输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /d F:\cloudflare</span><br><span class="line">cloudflared tunnel list</span><br></pre></td></tr></table></figure>
+<p>显示了connections就是有效的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310145620762.png" alt="image-20260306142146235"></p>
+</li>
+<li>
+<p>确认 Cloudflare DNS 是否正确，这一步需要去cloudflare管理界面排查</p>
+</li>
+</ol>
+<p>alist如果挂载的是天翼云盘，发现上传可能出现显示 invalid session key</p>
+<p>解决方法：去alist界面设置一下上传方式为 旧版，解决问题</p>
+<h1>后续扩展</h1>
+<h2 id="Alist-开机启动">Alist 开机启动</h2>
+<p>在桌面建一个VBS文件</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306134649623.png" alt="image-20260306134649623"></p>
+<p>在里面添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.run &quot;F:\alist-windows-amd64\alist.exe server&quot;, vbHide</span><br></pre></td></tr></table></figure>
+<p>把这个vbs文件拖到alist.exe所在的文件夹里面</p>
+<p>并且右键创建快捷方式</p>
+<p>win+R输入 shell:startup</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
+<p>把快捷指令拖进去就可以了</p>
+<h2 id="Cloudflare开机启动">Cloudflare开机启动</h2>
+<p>手动启动</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135343494.png" alt="image-20260306135343494"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel run alist</span><br></pre></td></tr></table></figure>
+<p><strong>自动启动设置</strong></p>
+<p>在桌面建一个VBS文件，命名为 start-alist-tunnel.vbs</p>
+<p>在里面添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.Run &quot;cmd /c F:\cloudflare\cloudflared tunnel run alist&quot;,0</span><br></pre></td></tr></table></figure>
+<p>win+R输入 shell:startup</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
+<p>把vbs拖进去就可以了</p>
+<h2 id="更多域名">更多域名</h2>
+<p>例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist.haozi.space</span><br><span class="line">img.haozi.space</span><br><span class="line">qb.haozi.space</span><br></pre></td></tr></table></figure>
+<p>每个子域名对应不同的本地服务。这样一台普通电脑就可以逐渐变成一个小型家庭服务器。</p>
+<p>操作很简单，在配置文件里面加上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- hostname: qb.haozi.space</span><br><span class="line">  service: http://localhost:8081</span><br></pre></td></tr></table></figure>
+<p>config.yml变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tunnel: 你的tunnel-id</span><br><span class="line">credentials-file: C:\Users\你的用户名\.cloudflared\你的tunnel-id.json</span><br><span class="line"></span><br><span class="line">ingress:</span><br><span class="line">  - hostname: qb.haozi.space</span><br><span class="line">    service: http://localhost:8081</span><br><span class="line">  - hostname: alist.haozi.space</span><br><span class="line">    service: http://localhost:5244</span><br><span class="line">  - service: http_status:404</span><br></pre></td></tr></table></figure>
+<p>之后进行DNS配置即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Type: CNAME</span><br><span class="line">Name: qb</span><br><span class="line">Target: &lt;你的tunnel-id&gt;.cfargotunnel.com</span><br><span class="line">Proxy: 开启（橙色云）</span><br></pre></td></tr></table></figure>
+<h1>回顾</h1>
+<p>回顾整个过程，其实一开始只是想解决一个很小的问题，如何远程访问自己的电脑。但在解决问题的过程中，又接触到了Cloudflare Tunnel、AList、域名管理、内网服务暴露</p>
+<p>技术学习往往就是这样，从一个实际需求出发，一步一步扩展。</p>
+<p>也许过一段时间再回来看，会发现自己已经学会了很多当时觉得复杂的东西。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/" class="post-title-link" itemprop="url">彩虹之后，我在想人间</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-05 19:41:29" itemprop="dateCreated datePublished" datetime="2026-03-05T19:41:29+08:00">2026-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-24 20:14:28" itemprop="dateModified" datetime="2026-03-24T20:14:28+08:00">2026-03-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BD%B1%E8%A7%86/" itemprop="url" rel="index"><span itemprop="name">影视</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>看完《倩女幽魂》之后的碎碎念</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
         
       
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
+    </div>
+
     
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/03/%E4%B8%80%E4%BA%9B%E5%BE%88%E6%9C%89%E6%84%9F%E8%A7%A6%E7%9A%84%E8%AF%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/03/%E4%B8%80%E4%BA%9B%E5%BE%88%E6%9C%89%E6%84%9F%E8%A7%A6%E7%9A%84%E8%AF%9D/" class="post-title-link" itemprop="url">一些很有感触的话</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-03 23:35:08" itemprop="dateCreated datePublished" datetime="2026-03-03T23:35:08+08:00">2026-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-10 14:23:37" itemprop="dateModified" datetime="2026-03-10T14:23:37+08:00">2026-03-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>我只想知道将来我会死在什么地方，这样我就不会去那儿了。-《穷查理宝典》</p>
+<p>我的剑留给能够挥舞它的人。-《天路历程》</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307103832314.PNG" alt="IMG_7760" style="zoom: 33%;" />
+<p>但如果你确实在生活中与那些有杰出思想的已逝的故人成为朋友，那么我认为你会过上更好的生活，得到更好的教育。-《穷查理宝典》</p>
+<p>查理，你要是借了别人的车，别忘了加满油再还给人家。-《穷查理宝典》</p>
+<p>找出你最擅长的事情，然后持之以恒、乐此不疲地去把它做好。-查理.芒格</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307104016228.PNG" alt="IMG_7790" style="zoom:33%;" />
+<p>凡事往简单处想，往认真处行。-查理.芒格</p>
+<p>聪明的飞行员即使才华再过人，经验再丰富，也绝不会不使用检查清单。-查理.芒格</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/03/Notability+Alist+%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/03/03/Notability+Alist+%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD/" class="post-title-link" itemprop="url">Notability+Alist+天翼云盘 实现笔记自动备份</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-03 21:48:13" itemprop="dateCreated datePublished" datetime="2026-03-03T21:48:13+08:00">2026-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-09 20:09:38" itemprop="dateModified" datetime="2026-03-09T20:09:38+08:00">2026-03-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="背景">背景</h2>
+<p>Notability 是我日常使用的笔记工具，但它的 iCloud 同步局限性比较大。iCloud免费空间太少，只有5GB。为了更灵活地管理和长期保存笔记，<strong>我选择了 AList 挂载天翼云盘，再通过 Notability 的 WebDAV 自动备份功能，实现笔记的自动同步</strong></p>
+<h2 id="准备工作">准备工作</h2>
+<p>Notability：支持 WebDAV 自动备份</p>
+<p>AList：轻量文件列表程序，可挂载多种存储后端</p>
+<p>天翼云盘：作为最终存储空间</p>
+<p>本地电脑：运行 AList，提供 WebDAV 服务</p>
+<p>步骤一：在本地电脑部署 AList</p>
+<ol>
+<li>
+<p>下载 AList</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/AlistGo/alist">https://github.com/AlistGo/alist</a></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/pe997Sx"><img src="https://s41.ax1x.com/2026/03/03/pe997Sx.png" alt="pe997Sx.png"></a></p>
+<p>注意windows电脑下载的是amd64，而不是arm64（已经被坑过一次了哈哈）</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/pe99OmD"><img src="https://s41.ax1x.com/2026/03/03/pe99OmD.png" alt="pe99OmD.png"></a></p>
+</li>
+<li>
+<p>解压alist 程序压缩包，找到你解压出的文件包的位置，输入cmd，按照下图指示操作</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/pe9CSfI"><img src="https://s41.ax1x.com/2026/03/03/pe9CSfI.md.png" alt="pe9CSfI.md.png"></a></p>
+<p>cmd终端输入alist server即可启动alist客户端</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/pe9CC1P"><img src="https://s41.ax1x.com/2026/03/03/pe9CC1P.md.png" alt="pe9CC1P.md.png"></a></p>
+</li>
+<li>
+<p>打开浏览器访问 <a target="_blank" rel="noopener" href="http://localhost:5244">http://localhost:5244</a></p>
+<p>登录后台管理界面，初始密码在上图中是有的,具体是在&quot;initial password is&quot;后面</p>
+</li>
+</ol>
+<p>步骤二：挂载天翼云盘</p>
+<ol>
+<li>
+<p>在后台选择 存储 → 添加存储。</p>
+</li>
+<li>
+<p>类型选择 天翼云盘。</p>
+</li>
+<li>
+<p>填写参数：用户名：天翼云盘手机号<br>
+密码：登录密码<br>
+根文件夹 ID：在天翼云盘网页端打开某个文件夹，URL 最后的数字就是 ID<br>
+Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie</p>
+</li>
+<li>
+<p>保存后，AList 前端即可访问天翼云盘文件。</p>
+</li>
+</ol>
+<p>这里的操作不再赘述，alist官方的操作文档喂饭级别的教程很不错了</p>
+<p><a target="_blank" rel="noopener" href="https://alistgo.com/zh/guide/drivers/189.html">https://alistgo.com/zh/guide/drivers/189.html</a></p>
+<p>步骤三：配置 Notability 自动备份</p>
+<ol>
+<li>
+<p>打开 Notability → 设置 → 自动备份。</p>
+</li>
+<li>
+<p>选择 WebDAV。</p>
+</li>
+<li>
+<p>填写信息：服务器地址：http://&lt;你的电脑IP&gt;:5244/dav/天翼云盘<br>
+用户名/密码：AList 初始化账号密码（如果你更改过密码的话，输入更改后的密码）</p>
+<p>电脑ip使用ipconfig获取，/天翼云盘 必须有，同理，如果你挂载的是百度网盘，相应的路径要更改为 /百度网盘</p>
+</li>
+<li>
+<p>保存后，Notability 会自动将笔记备份到天翼云盘。</p>
+<p>（可选，不强求）步骤四：下载Raidrive，本地查看自动备份文件</p>
+<ol>
+<li>
+<p>安装好raidrive之后</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/pe9CDBD"><img src="https://s41.ax1x.com/2026/03/03/pe9CDBD.md.png" alt="pe9CDBD.md.png"></a></p>
+</li>
+<li>
+<p>打开自己的文件管理器，看看本地是不是多出来一个webdav的网络位置，如果有的话就是成功了，可以实时看自己本地的文件了</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>通过 Notability 内置 WebDAV → AList → 天翼云盘，我实现了一个自动化、轻量化的笔记备份方案，不再需要手动导出，笔记实时备份。</p>
+<p>注意事项：确保电脑运行 AList 程序，<strong>alist的cmd不要手痒关掉</strong>，否则 WebDAV 服务不可用</p>
+<p>后续备份：同样，可以把文件拷一份到移动硬盘中，遵循3-2-1备份原则</p>
+<p>方案可扩展，AList 还能挂载其他云盘</p>
+<p>如果电脑ip地址更改了需要修改webdav地址的,需要实时进行电脑ip地址的获取，后续可以考虑内网穿透实现直接远程访问的方案</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/01/24/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/01/24/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">耗子的记录日志</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-01-24 09:22:35" itemprop="dateCreated datePublished" datetime="2026-01-24T09:22:35+08:00">2026-01-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-14 19:56:18" itemprop="dateModified" datetime="2026-03-14T19:56:18+08:00">2026-03-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">生活哲学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>状态记录</h1>
+<h2 id="260124">260124</h2>
+<p>good：</p>
+<p>主动学习发布torrent、草莓选择新知识并积极运用</p>
+<p>完成每日目标的80%</p>
+<p>有氧运动50min</p>
+<p>阅读30min</p>
+<p>bad：</p>
+<p>在导航的时候，盲从导航，以至到家旁都不知</p>
+<p>饮水不达标（每日1500ml？）</p>
+<p>控制自己的想法能力弱，c是不好的习惯</p>
+<h2 id="260125">260125</h2>
+<p>good:</p>
+<p>珍惜妈妈劳动成果</p>
+<p>饮水达标</p>
+<p>吃饭、上厕所不看手机</p>
+<p>响应久坐提醒</p>
+<p>护眼冥想</p>
+<p>牢记备份</p>
+<p>bad:</p>
+<p>持续不间断访问pt站，浪费时间</p>
+<h2 id="260126">260126</h2>
+<p>good</p>
+<p>复盘打台球失利的原因</p>
+<p>bad</p>
+<p>遭遇失利后，情绪不稳定</p>
+<p>容易自我内耗</p>
+<h2 id="260129">260129</h2>
+<p>good</p>
+<p>失利以后不气馁，积极解决问题</p>
+<p>学习新软件有决心</p>
+<p>bad</p>
+<h2 id="260201">260201</h2>
+<p>good</p>
+<p>bad</p>
+<p>输球很难受，一直纠结一个事情不放，不够乐观</p>
+<h2 id="260209">260209</h2>
+<p>A打台球输了两局，很被动</p>
+<p>B这台球厅怎么这么臭，影响我的发挥了，而且旁边的都是一些社会闲散人，一股子社会的气息影响了我的发挥；旁边的cc还在吵我，搅得我不得安宁，真的不是一个适合运动的环境，下次换一家店把…</p>
+<p>C心态没有受很大的影响，后面连扳三局，心态一直很平稳</p>
+<p>A打台球被dad打爆了，而且身边的男人还在一直看着我打球</p>
+<p>Bwc我太菜了，技术也太菜了吧，自己最近是干了些什么啊，准度都没有了。而且自己打的那么菜，都让旁边的人笑话了，我真的不适合台球，更准确的说是干不成功事情的…</p>
+<p>C心态直接崩塌了，打球就一直心不在焉了，都想弃杆而去，当然，越输越惨了。</p>
+<h1>个人习惯</h1>
+<h2 id="好习惯">好习惯</h2>
+<p>投篮前搓球</p>
+<p>将球置于胸口高度起球</p>
+<p>投篮之前先停顿，瞄准一下框</p>
+<p>双腿下蹲，利用全身力气投篮</p>
+<p>投篮时压腕</p>
+<p>每天刷短视频在30min以下</p>
+<p>每天阅读致用类书籍30min</p>
+<p>遇到问题，积极解决不逃避</p>
+<p>积极记录饮食、摄入热量</p>
+<p>随时记录知识到ppt，实现可持续发展</p>
+<p>每天提升自我价值</p>
+<p>冥想</p>
+<p>复盘</p>
+<p>积极运用理论知识实践</p>
+<p>ABCDE积极心态应对生活</p>
+<p>每日饮水达标</p>
+<h2 id="坏习惯">坏习惯</h2>
+<p>熬夜，接近零点睡觉</p>
+<p>心猿意马</p>
+<p>操作重要信息时不备份</p>
+<p>控制自己想法的能力弱</p>
+<p>盲从导航、不认路</p>
+<p>久坐不起</p>
+<p>强目的性消磨时间（如访问pt站）</p>
+<p>投篮时左手肘外翻很严重</p>
+<p>看待问题不积极，易进死胡同</p>
+<h1>目标类</h1>
+<h2 id="每日目标">每日目标</h2>
+<h3 id="260124-2">260124</h3>
+<ul>
+<li>
+<p>[x] 将之前的每日记录文档处理一下，让网站变得清爽：</p>
+<p>1.keil c51添加封面</p>
+<p>2.生活记录思考需要什么封面</p>
+</li>
+<li>
+<p>[x] 学习Python 10、11章，并使用ai费曼学习法检验学习成果</p>
+</li>
+<li>
+<p>[x] 发布一个torrent种子</p>
+</li>
+</ul>
+<h3 id="260125-2">260125</h3>
+<ul>
+<li>
+<p>[x] 运动&gt;=30min</p>
+</li>
+<li>
+<p>[x] 阅读&gt;=30min，运用思考30min</p>
+</li>
+<li>
+<p>[x] 记录饮食</p>
+</li>
+<li>
+<p>[x] 了解并运用ai费曼学习法，运用学习python10、11章</p>
+</li>
+<li>
+<p>[x] （附加）思考如何更改网页更好看、更实用，寻找优秀butterfly案例</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/pZ2W8mV"><img src="https://s41.ax1x.com/2026/01/25/pZ2W8mV.md.png" alt="pZ2W8mV.png" border="0" /></a></p>
+</li>
+</ul>
+<h3 id="260126-2">260126</h3>
+<ul>
+<li>[x] 阅读</li>
+<li>[x] 运动</li>
+<li>[x] 记录饮食</li>
+<li>[x] python alien项目开发</li>
+<li>[x] 饮水达标</li>
+</ul>
+<h3 id="260127">260127</h3>
+<ul>
+<li>[x] read</li>
+<li>[x] drink</li>
+<li>[x] exercise</li>
+<li>[x] 台球游戏检验学习成果 1h</li>
+<li>[x] chapter 12 python alien项目</li>
+<li>[x] autocad、solidworks页面优化</li>
+<li>[x] （附加）产品建模</li>
+<li>[ ] （附加）博客网站优化</li>
+</ul>
+<h3 id="260128">260128</h3>
+<ul>
+<li>[x] read</li>
+<li>[x] drink</li>
+<li>[x] exercise</li>
+<li>[x] 台球学习</li>
+<li>[x] python 12.8-13.3学习</li>
+<li>[ ] 思考如何使用cad/sw进行目标物件的建模，反求？</li>
+<li>[x] （附加）分析个人球鞋需要</li>
+<li>[x] （附加）寻找值得阅读的名人传记、历史书籍、成长类书籍</li>
+</ul>
+<h3 id="260129-2">260129</h3>
+<ul>
+<li>[x] read 30min</li>
+<li>[x] drink 1500ml</li>
+<li>[x] exercise 30min</li>
+<li>[ ] matlab 1h</li>
+<li>[x] hifiti 50首悬赏</li>
+<li>[x] （附加）思考如何使用cad/sw进行目标物件的建模</li>
+<li>[x] （附加）想想给家人带一些什么礼物哈</li>
+</ul>
+<h3 id="260130">260130</h3>
+<ul>
+<li>[x] hifiti NMIXX上传歌曲悬赏</li>
+<li>[x] leecode 03xf 代码随想录 up</li>
+<li>[ ] 看python30min</li>
+<li>[x] matlab 1h</li>
+<li>[x] readAD</li>
+<li>[x] drink</li>
+<li>[x] sw产品建模</li>
+<li>[x] cad出图完善</li>
+<li>[ ] （长期）gui加入歌词下载功能、gui批量下载功能、韩语不显示修复、apple music加入、专辑下载</li>
+</ul>
+<h3 id="260131">260131</h3>
+<ul>
+<li>[x] sw产品建模+出图</li>
+<li>[x] sw导出工程图到cad尝试</li>
+<li>[x] read</li>
+<li>[x] drink</li>
+<li>[x] 学习台球30min</li>
+<li>[x] AD PCB板绘制（b站学习）1h 等价==matlab</li>
+<li>[x] hifini赚钱 min100yuan</li>
+</ul>
+<h3 id="260201-2">260201</h3>
+<ul>
+<li>[x] hifiti 赚钱 min 100yuan</li>
+<li>[ ] matlab 1h</li>
+<li>[x] read</li>
+<li>[x] drink</li>
+<li>[x] sw 曲面部分操作 1h</li>
+<li>[ ] pcb板图绘制 30min</li>
+<li>[x] 学习台球30min</li>
+<li>[ ] （长期）gui加入歌词下载功能、gui批量下载功能、韩语不显示修复、apple music加入、专辑下载、内嵌封面歌词</li>
+</ul>
+<h3 id="260202">260202</h3>
+<ul>
+<li>[x] AD软件使用学习 30min</li>
+<li>[x] read</li>
+<li>[x] drink</li>
+<li>[ ] matlab 1h</li>
+<li>[x] sw 学习1h</li>
+<li>[x] HIFITI 100yuan</li>
+</ul>
+<h3 id="260203">260203</h3>
+<ul>
+<li>[x] 完成AD电路元件的排列、布线 min 1h</li>
+<li>[ ] matlab阅读相关书籍30min</li>
+<li>[x] 清扫头装配体零件建模 min 1h</li>
+<li>[x] read min 30min</li>
+<li>[x] drink</li>
+<li>[x] 寻找编程类相关游戏并下载相关资源</li>
+<li>[ ] （长期）gui加入歌词下载功能、gui批量下载功能、韩语不显示修复、apple music加入、专辑下载、内嵌封面歌词</li>
+<li>[x] （附加）hifiti 10首歌曲发布</li>
+</ul>
+<h3 id="260204">260204</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] 完成拖把头建模、装配</li>
+<li>[x] AD飞线完全清除</li>
+<li>[x] read and practice</li>
+<li>[x] drink</li>
+<li>[x] 运动</li>
+<li>[ ] 挑选礼物</li>
+<li>[ ] matlab阅读相关书籍30min</li>
+<li>[x] hifiti min 100yuan</li>
+</ul>
+<h3 id="260205">260205</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] sw思考海绵效果怎么建模、手枪建模开头</li>
+<li>[x] AD电路板铺铜</li>
+<li>[x] read and practice</li>
+<li>[x] drink</li>
+<li>[ ] matlab 1h</li>
+<li>[x] （附加）挑选新年礼物</li>
+<li>[x] （附加）hifiti min 50 yuan</li>
+</ul>
+<h3 id="260206">260206</h3>
+<ul>
+<li>[x] read and practice</li>
+<li>[x] drink</li>
+<li>[x] drive 200km</li>
+<li>[x] 创建日度任务清单</li>
+</ul>
+<h3 id="260207">260207</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] read and practice</li>
+<li>[x] drink</li>
+<li>[x] 完成手枪 min 一部分建模</li>
+<li>[x] 运动 min 30min</li>
+<li>[ ] matlab 30min</li>
+</ul>
+<h3 id="260208">260208</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] read and practice</li>
+<li>[x] drink</li>
+<li>[x] 完成手枪枪柄建模</li>
+<li>[x] 运动 min 30min</li>
+<li>[ ] matlab 1h</li>
+<li>[ ] hifiti 10首歌曲发布</li>
+</ul>
+<h3 id="260209-2">260209</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] read and practice</li>
+<li>[x] drink</li>
+<li>[x] 完成手枪枪柄建模</li>
+<li>[ ] matlab 30min</li>
+<li>[x] 线下同学社交</li>
+<li>[x] 带娃上班</li>
+</ul>
+<h3 id="260210">260210</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] read and practice</li>
+<li>[x] drink</li>
+<li>[x] sw 建模 min 30min</li>
+<li>[x] 带娃上班</li>
+<li>[x] 购买寿宴物品</li>
+</ul>
+<h3 id="260212">260212</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] read and practice</li>
+<li>[x] drink</li>
+<li>[x] sw 建模 min 30min</li>
+<li>[x] 置办寿宴物品</li>
+<li>[ ] 在tjupt下载一个至少100G的2xfree资源，上传到btschool</li>
+<li>[x] 在btschool搜索一个电影类资源上传到tjupt（以后不需要限制审核上传）</li>
+</ul>
+<h3 id="260213">260213</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] read and practice</li>
+<li>[x] drink</li>
+<li>[x] sw 建模 min 30min</li>
+<li>[x] 在tjupt下载总共100G的资源，上传到btschool</li>
+</ul>
+<h3 id="260214">260214</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] read</li>
+<li>[x] drink</li>
+<li>[ ] AD 单片机原理图模仿绘制</li>
+<li>[ ] matlab min 2h</li>
+<li>[x] sw建模min 30min</li>
+<li>[x] catia建一个物品 min 30min</li>
+<li>[x] 解决yghc pt下载火苗问题</li>
+</ul>
+<h3 id="260215">260215</h3>
+<ul>
+<li>[x] 创建日度任务清单</li>
+<li>[x] read</li>
+<li>[x] drink</li>
+<li>[x] sw建模 min 1h</li>
+<li>[x] rss订阅成功下载</li>
+<li>[ ] matlab min 1h</li>
+</ul>
+<h3 id="260216">260216</h3>
+<ul>
+<li>[x] 过年</li>
+<li>[x] 开开心心就好啦</li>
+</ul>
+<h3 id="260217">260217</h3>
+<ul>
+<li>[ ] read</li>
+<li>[x] drink</li>
+<li>[x] 整理E盘</li>
+</ul>
+<h3 id="260224">260224</h3>
+<ul>
+<li>[x] read</li>
+<li>[x] drink</li>
+<li>[ ] 记录个人饮食</li>
+<li>[x] mt上传量 搞定</li>
+<li>[x] 整理老爷爷100岁生日 图片视频资料</li>
+</ul>
+<h3 id="260225">260225</h3>
+<ul>
+<li>[x] 制作视频</li>
+</ul>
+<h3 id="260301">260301</h3>
+<ul>
+<li>[x] 明确上课教室，调整开学心态 紧迫 重要</li>
+<li>[ ] 学习matlab 1h 重要 紧迫</li>
+<li>[ ] 学习python 1h 重要 紧迫</li>
+<li>[x] 清理电脑硬盘，清除冗余文件 两个电脑硬盘空间整理 重要不紧迫</li>
+<li>[x] read 重要紧迫</li>
+<li>[x] drink 重要紧迫</li>
+<li>[x] 台式机显示不清楚问题解决 重要 不紧迫</li>
+</ul>
+<h3 id="260302">260302</h3>
+<ul>
+<li>[x] 搞定ttg做种 45时魔</li>
+<li>[x] drink</li>
+<li>[x] read</li>
+<li>[x] 设定学期目标</li>
+<li>[x] 跑步</li>
+</ul>
+<h2 id="每月目标">每月目标</h2>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/pepltnH"><img src="https://s41.ax1x.com/2026/03/02/pepltnH.md.jpg" alt="pepltnH.md.jpg"></a></p>
+<h2 id="每年目标">每年目标</h2>
+<p>保研成功</p>
+<p>参加1次半程马拉松</p>
+<h2 id="长期目标">长期目标</h2>
+<p>在北上深买一套房</p>
+<p>爸妈的房子重新装修</p>
+<p>配备一个自己的私人图书馆</p>
+<h1>身体健康</h1>
+<h2 id="饮食和运动">饮食和运动</h2>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>运动时间</th>
+<th>类型</th>
+<th>体重(kg)</th>
+<th>///</th>
+<th>月份</th>
+<th>有氧运动天数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>260125</td>
+<td>47min</td>
+<td>羽球</td>
+<td>56.6</td>
+<td></td>
+<td>1月</td>
+<td></td>
+</tr>
+<tr>
+<td>260126</td>
+<td>2h</td>
+<td>台球</td>
+<td>56.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>260127</td>
+<td>1h</td>
+<td>台球</td>
+<td>56.1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>260130</td>
+<td>1h</td>
+<td>羽球</td>
+<td>56.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>260131</td>
+<td>1h30m</td>
+<td>台球</td>
+<td>56.5</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>260201</td>
+<td>58m</td>
+<td>羽球</td>
+<td>56.5</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>260203</td>
+<td>1h</td>
+<td>羽球</td>
+<td>56.4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1>展望</h1>
+<h2 id="五年后的镜中人">五年后的镜中人</h2>
+<p>2031.1.25</p>
+<p>展信安</p>
+<p>午后倾斜进来的光，照在身上暖暖的。</p>
+<p>现在是2031年1月25日的早上十点半，想想2026，已经是五年前了，那时的你还在读书，读着机械工程的专业，我没记错的话，那时你应该是大三吧，依稀还记得，你那时很担心自己能不能保研成功，因为你的成绩处于一个很尴尬的位次，刚好卡在了保研的边缘线上，大三上你学的那叫一个起劲，几乎都没有怎么去玩游戏，寝室就是你学习的地方，爱情公寓就是你的下饭剧，想想那时候其实也过的快活。现在看来，其实这件事不过是沧海一粟，在人生的发展里，毕竟“车到山前必有路”，不论当时是成功还是失败了，那都只是一个单独的事件，悄悄告诉你，我现在过的很滋润，嘿嘿。</p>
+<p>想想当年，研究生毕业以后，刚刚到大城市打拼求职的我，遇到了不少的困难和挫折，这里就不再赘述，总之现在的生活成果是好的嘛，爸妈的身体都很好，我经常带他们去体检，当然，我自己也养成了定期体检的好习惯，现在的工作不错，做着的是机械工程师的工作，月薪2w左右，一年下来能存个10w，每天的工作作息很规律，早上七点左右上班打卡，晚上六七点钟左右下班，当然，偶尔加班是避免不了的，周末都有自己的安排而且我的工作是向上的，是可以一步步往上爬的。</p>
+<p>身体状况不错，刚刚跑完一个半程马拉松的比赛，一分四十的成绩，相比大学那会儿没有退步哈，经常定期去看牙医，定期去体检，身体也没有什么大毛病，但是不同的是，你现在有了轮廓分明的腹肌，体重，嗯，是65kg，相比大学那会儿，涨的不是肥肉，都是肌肉啊，哈哈。</p>
+<p>买车？什么，你说买车，我还没有这个打算，主要是我现在没有这个刚需，工作的地方离租的房子还很近，不远，不远。</p>
+<p>房子嘛，是租的，六十平米的小窝，却并不便宜，单价五六万一平，但是房子是租的，地段还不错，平常购物啥的很方便，离工作的地方也近。</p>
+<p>自我提升，是在进行的；自己的书房，是有的。马拉松，是跑过了的。每次一有闲暇时间，我就会约着朋友去运动，篮球羽毛球台球，球球涉猎（但不精通哈），偶尔也会自己一个人跑步训练，每次看着自己一墙的球鞋，就有一种心里很得意的感觉。</p>
+<p>运动的装备也在升级，运动手表1000多一个，功能齐全的嘞。我的二手凯迪拉克ct5，虽然很耗油，但是我的老伙伴开起来很给力，经常带着我的一家出去兜风、踏青。</p>
+<p>拿起自己的iPhone，现在看看自己的存款，嘶，没想到了，直逼one million，不敢想不敢想，五年前的你，敢想到这个啊，哈哈哈，这还得感谢五年前看到的那本书，具体是那本书，自己去想去吧。这一切少不了理财规划、股票的功劳。</p>
+<p>快到春节啦，我最近在计划着和她一起去旅行。</p>
+<p>此刻，人生小满胜大全。</p>
+<p>对了，忘了跟你说她了，她是一个可爱的女朋友，嘿嘿，她和我一样，985高校毕业，在大城市打拼，像一个温柔的姐姐一样，陪伴我度过在城市打拼的日日夜夜，她热情，总是会不厌其烦的问我一些生活中的问题，而我也总是积极回应她，她交的朋友都是积极向上、很有目的追求的人，年龄虽然不大，但是心里却比我成熟的多。</p>
+<h2 id="心愿和梦想">心愿和梦想</h2>
+<p>（5年期）</p>
+<ol>
+<li>找到一份工作，月薪2w</li>
+<li>定期维护好朋友关系</li>
+<li>有一间自己的个人书房</li>
+<li>自己、家人身体健康</li>
+<li>积极学习，自我提升</li>
+<li>至少跑过一次马拉松</li>
+<li>有女朋友</li>
+</ol>
+<h1>娱乐记录</h1>
+<h2 id="电影">电影</h2>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>电影</th>
+<th>评分(max:10.0)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>260126</td>
+<td>《八美图》</td>
+<td>9.0</td>
+</tr>
+<tr>
+<td>260202</td>
+<td>《恶意》</td>
+<td>7.0</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="剧">剧</h2>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>剧</th>
+<th>类型</th>
+<th>评分(max:10.0)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>260123</td>
+<td>《命悬一生》</td>
+<td>悬疑、犯罪</td>
+<td>10.0（强推）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2025/09/23/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/09/23/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">KEIL C51的使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-23 21:43:09" itemprop="dateCreated datePublished" datetime="2025-09-23T21:43:09+08:00">2025-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-10 14:20:28" itemprop="dateModified" datetime="2026-03-10T14:20:28+08:00">2026-03-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>键位</h1>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>键位</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>键盘</td>
+<td>tab</td>
+<td>缩进，使得代码可读性增强</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+home</td>
+<td>跳转到开头</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+end</td>
+<td>跳转到结尾</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>configuration</td>
+<td>调整字体样式</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>build translate rebuild</td>
+<td>类似于编译（？）</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>output</td>
+<td>需要输出isp可以编译的文件，需要调整这个</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1>注意事项</h1>
+<p>while循环后面的括号不能为空，要让他循环可以在里面写上&quot;1&quot;</p>
+<p>#include &lt;intrins.h&gt;	//“nop” need this</p>
+<p>对于发光二极管，1111 1110而不是0000 0001的时候，一个灯亮，只有当输入数字为0的时候，灯才会亮，你可以理解为只有为0的时候才有电位差，二极管才会发光</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2025/09/17/C51-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="今日事 今日毕">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="禹皓的BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/09/17/C51-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">C51的学习历程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-17 23:46:06" itemprop="dateCreated datePublished" datetime="2025-09-17T23:46:06+08:00">2025-09-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-10 14:21:48" itemprop="dateModified" datetime="2026-03-10T14:21:48+08:00">2026-03-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">生活哲学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>250917</h1>
+<p>今天没干什么大事，就是仅仅从百度网盘上下载了很多的文件（甚至不知道有没有下载完全）<br>
+吐槽一下百度网盘的资源，真的烦死。</p>
+<p>今天还没有安装任何软件，对于单片机的认识也仅仅只有“难”只一个字。</p>
+<p>慢慢去实践探索吧。</p>
+<p>多干，干中学，记住老师的这句话。</p>
+<p><strong>我有预感这句话会改变你的生活。</strong></p>
+<h1>250918</h1>
+<p>安装了软件KEIL 5和stc-isp</p>
+<p>没遇到什么大问题</p>
+<h1>250920</h1>
+<p>单片机和计算机相比，是一个袖珍版计算机。</p>
+<p>但是成本低、体积小、结构简单，学习使用单片机是连接计算机原理和结构的最佳选择。</p>
+<p>8051单片机内核，所以叫51单片机</p>
+<p>RAM类似于电脑内存，会丢失</p>
+<p>ROM类似于电脑存储</p>
+<p>以为过程会有点难，没想到其实开始很简单</p>
+<p>首先，需要USB线把电脑和单片机连接起来</p>
+<p>win11电脑系统不需要额外安装驱动，可以直接使用</p>
+<p>遇到的一个问题：<strong>显示正在检测目标单片机</strong></p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pV4tY0U"><img src="https://s21.ax1x.com/2025/09/20/pV4tY0U.md.png" alt="pV4tY0U.png" border="0" /></a></p>
+<p>可以从以下角度来排查一下：</p>
+<ol>
+<li>
+<p>芯片型号要选对</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pV4trX6"><img src="https://s21.ax1x.com/2025/09/20/pV4trX6.png" alt="pV4trX6.png" border="0" /></a></p>
+</li>
+<li>
+<p>冷启动(reset)</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pV4trX6"><img src="https://s21.ax1x.com/2025/09/20/pV4trX6.png" alt="pV4trX6.png" border="0" /></a></p>
+</li>
+<li>
+<p>COM串口不要选错</p>
+<p>查看步骤：</p>
+<p>1.点击win徽标键</p>
+<p>2.搜索“设备管理器”</p>
+<p>3.获取端口信息（可以读出是COM7）</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pV4tWhd"><img src="https://s21.ax1x.com/2025/09/20/pV4tWhd.md.png" alt="pV4tWhd.png" border="0" /></a></p>
+<p>4.在stc-isp中选择COM7串口</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pV4th9A"><img src="https://s21.ax1x.com/2025/09/20/pV4th9A.md.png" alt="pV4th9A.png" border="0" /></a></p>
+</li>
+<li>
+<p>RX TX帽子盖上</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pV4trX6"><img src="https://s21.ax1x.com/2025/09/20/pV4trX6.png" alt="pV4trX6.png" border="0" /></a></p>
+</li>
+</ol>
+<p>点亮LED的一瞬间还是很有成就感的。</p>
+<p>但是点亮的是四个而不是一个，后天可以调试一下程序。</p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Xiaoman_Senior/article/details/141751710">https://blog.csdn.net/Xiaoman_Senior/article/details/141751710</a></p>
+<h1>250923</h1>
+<p>今天搞定了LED的控制亮暗、流水灯、闪烁这三个实验。</p>
+<p>实验成功的一瞬间，其实心里还是很开心的！</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
       }
     }
-    detectApple()
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
   
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: {"appId":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hitsPerPage":6,"languages":{"input_placeholder":"搜索文章","hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，耗时 ${time} 毫秒"}},
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
-  copy: {
-    success: '复制成功',
-    error: '复制失败',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: {"limitCount":150,"languages":{"author":"作者: haozi","link":"链接: ","source":"来源: 禹皓的BLOG","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: '加载更多'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: true,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '禹皓的BLOG',
-  isHighlightShrink: false,
-  isToc: false,
-  pageType: 'home'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #F0F0F0;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310164915396.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-brain"></i><span> 知识库</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-book"></i><span> 知识</span></a></li><li><a class="site-page child" href="/categories/%E6%96%B9%E6%B3%95/"><i class="fa-fw fas fa-lightbulb"></i><span> 方法</span></a></li><li><a class="site-page child" href="/categories/%E9%A1%B9%E7%9B%AE/"><i class="fa-fw fas fa-code"></i><span> 项目</span></a></li><li><a class="site-page child" href="/categories/%E6%80%9D%E8%80%83/"><i class="fa-fw fas fa-pen"></i><span> 思考</span></a></li><li><a class="site-page child" href="/categories/%E8%80%83%E8%AF%95/"><i class="fa-fw fas fa-graduation-cap"></i><span> 考试</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310165725267.png" alt="Logo"><span class="site-name">禹皓的BLOG</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-brain"></i><span> 知识库</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-book"></i><span> 知识</span></a></li><li><a class="site-page child" href="/categories/%E6%96%B9%E6%B3%95/"><i class="fa-fw fas fa-lightbulb"></i><span> 方法</span></a></li><li><a class="site-page child" href="/categories/%E9%A1%B9%E7%9B%AE/"><i class="fa-fw fas fa-code"></i><span> 项目</span></a></li><li><a class="site-page child" href="/categories/%E6%80%9D%E8%80%83/"><i class="fa-fw fas fa-pen"></i><span> 思考</span></a></li><li><a class="site-page child" href="/categories/%E8%80%83%E8%AF%95/"><i class="fa-fw fas fa-graduation-cap"></i><span> 考试</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">禹皓的BLOG</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc masonry" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/18/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/" title="UG NX12如何进行数控仿真？"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UG NX12如何进行数控仿真？"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/18/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/" title="UG NX12如何进行数控仿真？">UG NX12如何进行数控仿真？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-18T14:13:37.878Z" title="发表于 2026-03-18 22:13:37">2026-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%B9%E6%B3%95/">方法</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/08/%E3%80%8A%E5%8F%8D%E4%BA%BA%E7%B1%BB%E6%9A%B4%E8%A1%8C%E3%80%8B/" title="《反人类暴行》"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310143107665.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="《反人类暴行》"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/08/%E3%80%8A%E5%8F%8D%E4%BA%BA%E7%B1%BB%E6%9A%B4%E8%A1%8C%E3%80%8B/" title="《反人类暴行》">《反人类暴行》</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-08T11:47:39.112Z" title="发表于 2026-03-08 19:47:39">2026-03-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/08/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/" title="GTX1660调试欧卡2画质mod的感触"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135656885.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GTX1660调试欧卡2画质mod的感触"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/08/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/" title="GTX1660调试欧卡2画质mod的感触">GTX1660调试欧卡2画质mod的感触</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-08T05:21:49.812Z" title="发表于 2026-03-08 13:21:49">2026-03-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/07/Cloudfare+Tunnel%E9%85%8D%E7%BD%AE/" title="使用Cloudflare Tunnel实现内网穿透访问Alist"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307204327371.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用Cloudflare Tunnel实现内网穿透访问Alist"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/07/Cloudfare+Tunnel%E9%85%8D%E7%BD%AE/" title="使用Cloudflare Tunnel实现内网穿透访问Alist">使用Cloudflare Tunnel实现内网穿透访问Alist</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T12:26:10.611Z" title="发表于 2026-03-07 20:26:10">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%B9%E6%B3%95/">方法</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/" title="彩虹之后，我在想人间"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305230525129.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="彩虹之后，我在想人间"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/" title="彩虹之后，我在想人间">彩虹之后，我在想人间</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-05T11:41:29.176Z" title="发表于 2026-03-05 19:41:29">2026-03-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a></span></div><div class="content">看完《倩女幽魂》之后的碎碎念</div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/03/%E4%B8%80%E4%BA%9B%E5%BE%88%E6%9C%89%E6%84%9F%E8%A7%A6%E7%9A%84%E8%AF%9D/" title="一些很有感触的话"><img class="post-bg" src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307105102724.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一些很有感触的话"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/03/%E4%B8%80%E4%BA%9B%E5%BE%88%E6%9C%89%E6%84%9F%E8%A7%A6%E7%9A%84%E8%AF%9D/" title="一些很有感触的话">一些很有感触的话</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-03T15:35:08.326Z" title="发表于 2026-03-03 23:35:08">2026-03-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/03/03/Notability+Alist+%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD/" title="Notability+Alist+天翼云盘 实现笔记自动备份"><img class="post-bg" src="https://s41.ax1x.com/2026/03/03/pe9Pkgx.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Notability+Alist+天翼云盘 实现笔记自动备份"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/03/03/Notability+Alist+%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD/" title="Notability+Alist+天翼云盘 实现笔记自动备份">Notability+Alist+天翼云盘 实现笔记自动备份</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-03T13:48:13.976Z" title="发表于 2026-03-03 21:48:13">2026-03-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%B9%E6%B3%95/">方法</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2026/01/24/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/" title="耗子的记录日志"><img class="post-bg" src="https://s41.ax1x.com/2026/01/24/pZgqucD.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="耗子的记录日志"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/01/24/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/" title="耗子的记录日志">耗子的记录日志</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-24T01:22:35.107Z" title="发表于 2026-01-24 09:22:35">2026-01-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/">生活哲学</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2025/09/23/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" title="KEIL C51的使用"><img class="post-bg" src="https://s41.ax1x.com/2026/01/24/pZgqm9K.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="KEIL C51的使用"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/09/23/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" title="KEIL C51的使用">KEIL C51的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-09-23T13:43:09.877Z" title="发表于 2025-09-23 21:43:09">2025-09-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%B9%E6%B3%95/">方法</a></span></div></div></div><div class="recent-post-item"><div class="post_cover"><a href="/2025/09/17/C51-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="C51的学习历程"><img class="post-bg" src="https://s41.ax1x.com/2026/01/24/pZgqm9K.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C51的学习历程"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/09/17/C51-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="C51的学习历程">C51的学习历程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-09-17T15:46:06.082Z" title="发表于 2025-09-17 23:46:06">2025-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/">生活哲学</a></span></div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310164915396.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">haozi</div><div class="author-info-description">今日事 今日毕</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/haozi1103"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/haozi1103" target="_blank" title="Github"><i class="fab fa-github" style="color: #79B2F9;"></i></a><a class="social-icon" href="mailto:403414503@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #79B2F9;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/" title="机电系统项目是怎么实践的？"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317173257528.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="机电系统项目是怎么实践的？"/></a><div class="content"><a class="title" href="/2026/04/03/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/" title="机电系统项目是怎么实践的？">机电系统项目是怎么实践的？</a><time datetime="2026-04-03T07:11:51.127Z" title="发表于 2026-04-03 15:11:51">2026-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/" title="matlab表面建模项目是怎么做好的？"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314195329042.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="matlab表面建模项目是怎么做好的？"/></a><div class="content"><a class="title" href="/2026/04/03/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/" title="matlab表面建模项目是怎么做好的？">matlab表面建模项目是怎么做好的？</a><time datetime="2026-04-03T07:11:51.117Z" title="发表于 2026-04-03 15:11:51">2026-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/" title="jellyfin如何设置优雅的刮削？"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403145425463.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="jellyfin如何设置优雅的刮削？"/></a><div class="content"><a class="title" href="/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/" title="jellyfin如何设置优雅的刮削？">jellyfin如何设置优雅的刮削？</a><time datetime="2026-04-03T06:56:36.474Z" title="发表于 2026-04-03 14:56:36">2026-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/" title="耗子的奶昔方案设计记录"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328224552025.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="耗子的奶昔方案设计记录"/></a><div class="content"><a class="title" href="/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/" title="耗子的奶昔方案设计记录">耗子的奶昔方案设计记录</a><time datetime="2026-04-03T06:56:36.474Z" title="发表于 2026-04-03 14:56:36">2026-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/" title="耗子的生活俳句"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327194952695.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="耗子的生活俳句"/></a><div class="content"><a class="title" href="/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/" title="耗子的生活俳句">耗子的生活俳句</a><time datetime="2026-04-03T06:56:36.463Z" title="发表于 2026-04-03 14:56:36">2026-04-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
-            <a class="card-more-btn" href="/categories/" title="查看更多">
-      <i class="fas fa-angle-right"></i></a>
-          </div>
-          <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/"><span class="card-category-list-name">影视</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%80%9D%E8%80%83/"><span class="card-category-list-name">思考</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%96%B9%E6%B3%95/"><span class="card-category-list-name">方法</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/"><span class="card-category-list-name">游戏</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/"><span class="card-category-list-name">生活哲学</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%9F%A5%E8%AF%86/"><span class="card-category-list-name">知识</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%80%83%E8%AF%95/"><span class="card-category-list-name">考试</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%98%85%E8%AF%BB/"><span class="card-category-list-name">阅读</span><span class="card-category-list-count">2</span></a></li>
-          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/pt/" style="font-size: 1.1em; color: #999">pt</a> <a href="/tags/Notability/" style="font-size: 1.1em; color: #999">Notability</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/CAM/" style="font-size: 1.1em; color: #999">CAM</a> <a href="/tags/Cloudflare/" style="font-size: 1.1em; color: #999">Cloudflare</a> <a href="/tags/iPhone/" style="font-size: 1.1em; color: #999">iPhone</a> <a href="/tags/%E4%BF%B3%E5%8F%A5/" style="font-size: 1.1em; color: #999">俳句</a> <a href="/tags/GitHub/" style="font-size: 1.1em; color: #999">GitHub</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" style="font-size: 1.1em; color: #999">数字化设计</a> <a href="/tags/UG/" style="font-size: 1.5em; color: #99a9bf">UG</a> <a href="/tags/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/" style="font-size: 1.1em; color: #999">智能加工装备设计</a> <a href="/tags/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/" style="font-size: 1.1em; color: #999">机械制造工程学</a> <a href="/tags/Alist/" style="font-size: 1.5em; color: #99a9bf">Alist</a> <a href="/tags/PicGo/" style="font-size: 1.1em; color: #999">PicGo</a> <a href="/tags/Jellyfin/" style="font-size: 1.1em; color: #999">Jellyfin</a> <a href="/tags/%E5%A5%B6%E6%98%94/" style="font-size: 1.1em; color: #999">奶昔</a> <a href="/tags/cnc/" style="font-size: 1.1em; color: #999">cnc</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 1.1em; color: #999">成长</a> <a href="/tags/%E6%8A%95%E8%B5%84%E6%9C%AF%E8%AF%AD/" style="font-size: 1.1em; color: #999">投资术语</a> <a href="/tags/%E6%95%B0%E6%8E%A7/" style="font-size: 1.1em; color: #999">数控</a> <a href="/tags/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">传感与测试技术</a> <a href="/tags/%E4%BC%81%E4%B8%9A/" style="font-size: 1.1em; color: #999">企业</a> <a href="/tags/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/" style="font-size: 1.1em; color: #999">机电控制</a> <a href="/tags/matlab/" style="font-size: 1.1em; color: #999">matlab</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 1.1em; color: #999">科技</a> <a href="/tags/windows/" style="font-size: 1.1em; color: #999">windows</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" style="font-size: 1.1em; color: #999">知识库</a></div></div></div></div></main><footer id="footer" style="background-image: url(https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307184638399.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By haozi</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div><div class="footer_custom_text">Hi, welcome to my <a href="http://haozi.space/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">今日事 今日毕</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://gemini.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
