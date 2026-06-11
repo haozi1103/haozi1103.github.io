@@ -9,23 +9,25 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":260,"widgets":["catalog"]},"copycode":true,"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="今日事 今日毕">
+  <meta name="description" content="Good morning, and in case I don&#39;t see you, good afternoon, good evening, and good night!">
 <meta property="og:type" content="website">
-<meta property="og:title" content="禹皓的BLOG">
+<meta property="og:title" content="Haozi&#39;s Blog">
 <meta property="og:url" content="http://haozi.space/index.html">
-<meta property="og:site_name" content="禹皓的BLOG">
-<meta property="og:description" content="今日事 今日毕">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="Good morning, and in case I don&#39;t see you, good afternoon, good evening, and good night!">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="haozi">
 <meta name="twitter:card" content="summary">
@@ -42,8 +44,23 @@
     lang   : 'zh-CN'
   };
 </script>
+<!-- HarmonyOS Sans SC Font -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
+<style>
+  /* Fallback: If LXGW WenKai is used, override font-family */
+  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
+  /*
+  @font-face {
+    font-family: 'HarmonyOS Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
+  }
+  */
+</style>
 
-  <title>禹皓的BLOG</title>
+  <title>Haozi's Blog</title>
   
 
 
@@ -94,13 +111,14 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">禹皓的BLOG</h1>
+      <h1 class="site-title">Haozi's Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -120,16 +138,58 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -143,21 +203,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/04/03/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
+      <meta itemprop="name" content="Haozi's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/03/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/" class="post-title-link" itemprop="url">机电系统项目是怎么实践的？</a>
+            <a href="/2026/06/11/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/" class="post-title-link" itemprop="url">使用GitHub仓库+PicGo+CDN服务搭建个人博客图床</a>
         </h2>
 
         <div class="post-meta">
@@ -166,16 +226,310 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2026-04-03 15:11:51" itemprop="dateCreated datePublished" datetime="2026-04-03T15:11:51+08:00">2026-04-03</time>
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：15:04:51" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-06-10 17:47:55" itemprop="dateModified" datetime="2026-06-10T17:47:55+08:00">2026-06-10</time>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
               </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>使用 GitHub 仓库 + PicGo + CDN 服务搭建个人博客图床</h1>
+<h2 id="引言">引言</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png" alt="image-20260305212844692"></p>
+<p>在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理上传，再通过 CDN 服务加速访问，搭建了一个长期可用、方便管理的个人博客图床。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/11/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E8%80%97%E5%AD%90%E7%9A%84%E7%94%9F%E6%B4%BB%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/11/%E8%80%97%E5%AD%90%E7%9A%84%E7%94%9F%E6%B4%BB%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">耗子的生活模型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：15:04:41" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">生活哲学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1>财务</h1>
+<p>每周空出一天时间来进行购物评估，包括日用杂货、以及我们所需要的东西</p>
+<p>买东西之前问自己几个问题:1.你一周能用几次？2.功能是不是太多了？3.你真的缺这个商品吗？4.买这个东西是为了什么？5.如果真的买回来我会不会把他扔到壁橱里不用？6.如果我缺了这样东西我还能坚持多久？</p>
+<p>对于大额购物(&gt;=10%个人现有资金流)延迟购物至少2个星期</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/11/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">耗子的记录日志</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：16:01:33" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">生活哲学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>耗子的记录日志</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/11/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/11/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/" class="post-title-link" itemprop="url">耗子的生活俳句</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：16:02:08" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">生活哲学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327194952695.png" alt="image-20260327194952695"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/11/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/11/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/" class="post-title-link" itemprop="url">机电系统项目是怎么实践的？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：15:11:29" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
+            </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -201,7 +555,7 @@
 <p>作为组长，自然会有更多要更多做的。能力越大，责任越大嘛。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/04/03/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/#more" rel="contents">
+              <a class="btn" href="/2026/06/11/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -225,21 +579,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/04/03/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
+      <meta itemprop="name" content="Haozi's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/03/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">matlab表面建模项目是怎么做好的？</a>
+            <a href="/2026/06/11/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">机电控制 为考试而生</a>
         </h2>
 
         <div class="post-meta">
@@ -250,7 +604,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-04-03 15:11:51 / 修改时间：15:09:16" itemprop="dateCreated datePublished" datetime="2026-04-03T15:11:51+08:00">2026-04-03</time>
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：16:01:40" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,11 +612,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
+                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
                 </span>
             </span>
 
           
+            <div class="post-description">就像小米 为发烧而生</div>
 
         </div>
       </header>
@@ -273,310 +628,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314195329042.png" alt="image-20260314195329042"></p>
-<h1>260314</h1>
-<p>不知道写什么了，写几个字凑凑数吧，不然显得太敷衍了</p>
-<h1>260315</h1>
-<p>先看看matlab能干什么吧，问了下grok，叫他生成一个篮球，就生成下面这个了：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315205604304.png" alt="image-20260315205604304"></p>
-<p>我觉得这种体现不了画图的过程，就让他画一个有网格的篮球，我不需要上色，下面这是效果：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315205521643.png" alt="image-20260315205521643"></p>
-<p>ai写的代码我没看，不过感觉大部分逻辑都是比较简单的，所以代码就会很长，不过用ai来建一些简单的物体还是可行的。</p>
-<p>让ai之间互相评估打架，在这个项目里面应该会有很大的作用，我是这样感觉的哈。</p>
-<h1>260316</h1>
-<p>用matlab来画图最大的感受是：他是用细小间隔的分段点来近似一个连续的区间的，你分段分的越小，自然图像就看起来越连续，就看不出那些网格了。</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">clear;clc;close all;</span><br><span class="line">un=<span class="number">100</span>; wn=<span class="number">4</span>;</span><br><span class="line">u=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">1</span>,un)&#x27;; w=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">1</span>,wn)&#x27;;</span><br><span class="line">Sx=<span class="built_in">zeros</span>([un,wn]); Sy=<span class="built_in">zeros</span>([un,wn]); Sz=<span class="built_in">zeros</span>([un,wn]);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:un</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:wn</span><br><span class="line">        Pux=<span class="built_in">sin</span>(u(<span class="built_in">i</span>)*<span class="number">2</span>*<span class="built_in">pi</span>+<span class="built_in">pi</span>/<span class="number">2</span>); Qux=<span class="number">2</span>*<span class="built_in">sin</span>(u(<span class="built_in">i</span>)*<span class="number">2</span>*<span class="built_in">pi</span>);</span><br><span class="line">        Sx(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">1</span>-w(<span class="built_in">j</span>))*Pux+w(<span class="built_in">j</span>)*Qux;</span><br><span class="line">        Puy=<span class="built_in">cos</span>(u(<span class="built_in">i</span>)*<span class="number">2</span>*<span class="built_in">pi</span>+<span class="built_in">pi</span>/<span class="number">2</span>); Quy=<span class="number">2</span>*<span class="built_in">cos</span>(u(<span class="built_in">i</span>)*<span class="number">2</span>*<span class="built_in">pi</span>);</span><br><span class="line">        Sy(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">1</span>-w(<span class="built_in">j</span>))*Puy+w(<span class="built_in">j</span>)*Quy;</span><br><span class="line">        Puz=<span class="number">0</span>; Quz=<span class="number">1</span>;</span><br><span class="line">        Sz(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">1</span>-w(<span class="built_in">j</span>))*Puz+w(<span class="built_in">j</span>)*Quz;        </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">131</span>);</span><br><span class="line">surf(u,w,Sx&#x27;,<span class="string">&#x27;edgecolor&#x27;</span>,<span class="string">&#x27;k&#x27;</span>,<span class="string">&#x27;facealpha&#x27;</span>,<span class="number">0.5</span>); xlabel(<span class="string">&#x27;u&#x27;</span>);ylabel(<span class="string">&#x27;w&#x27;</span>); </span><br><span class="line">subplot(<span class="number">132</span>);</span><br><span class="line">surf(Sx,Sy,Sz,<span class="string">&#x27;edgecolor&#x27;</span>,<span class="string">&#x27;k&#x27;</span>,<span class="string">&#x27;facealpha&#x27;</span>,<span class="number">0.5</span>); xlabel(<span class="string">&#x27;x&#x27;</span>);ylabel(<span class="string">&#x27;y&#x27;</span>);</span><br><span class="line">subplot(<span class="number">133</span>);</span><br><span class="line">surf(Sx&#x27;,Sy&#x27;,Sz&#x27;,<span class="string">&#x27;edgecolor&#x27;</span>,<span class="string">&#x27;k&#x27;</span>,<span class="string">&#x27;facealpha&#x27;</span>,<span class="number">0.5</span>); xlabel(<span class="string">&#x27;x&#x27;</span>);ylabel(<span class="string">&#x27;y&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p>我有一个很大的问题，就是surf()里面的Sx,Sy,Sz我发现转置和不转置画出来的图像是没有什么区别的，那我为什么还要进行转置啊？？？</p>
-<p>其实就是没有什么区别（有区别就怪了）</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">假设我们有下面三个 <span class="number">3</span> × <span class="number">3</span> 矩阵（为了简单，用很小的网格）：</span><br><span class="line">X = [ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span></span><br><span class="line">      <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span></span><br><span class="line">      <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span> ]</span><br><span class="line"></span><br><span class="line">Y = [ <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span></span><br><span class="line">      <span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span></span><br><span class="line">      <span class="number">2</span>  <span class="number">2</span>  <span class="number">2</span> ]</span><br><span class="line"></span><br><span class="line">Z = [ <span class="number">0</span>  <span class="number">1</span>  <span class="number">0</span></span><br><span class="line">      <span class="number">1</span>  <span class="number">3</span>  <span class="number">1</span></span><br><span class="line">      <span class="number">0</span>  <span class="number">1</span>  <span class="number">0</span> ]</span><br><span class="line">你就可以理解为有九个点的坐标告诉你了：</span><br><span class="line">对应的点坐标：</span><br><span class="line">(X(<span class="number">1</span>,<span class="number">1</span>),Y(<span class="number">1</span>,<span class="number">1</span>),Z(<span class="number">1</span>,<span class="number">1</span>)) = (<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">(X(<span class="number">1</span>,<span class="number">2</span>),Y(<span class="number">1</span>,<span class="number">2</span>),Z(<span class="number">1</span>,<span class="number">2</span>)) = (<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line">(X(<span class="number">1</span>,<span class="number">3</span>),Y(<span class="number">1</span>,<span class="number">3</span>),Z(<span class="number">1</span>,<span class="number">3</span>)) = (<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">……</span><br><span class="line">(X(<span class="number">3</span>,<span class="number">3</span>),Y(<span class="number">3</span>,<span class="number">3</span>),Z(<span class="number">3</span>,<span class="number">3</span>)) = (<span class="number">2</span>,<span class="number">2</span>,<span class="number">0</span>)</span><br><span class="line">即使你转置了其实也还是这些点在进行连线并且填充这些小方格</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316200108341.png" alt="image-20260316200108341"></p>
-<p>还有，为什么surf(u,w,Sx’,‘edgecolor’,‘k’,‘facealpha’,0.5); xlabel(‘u’);ylabel(‘w’)里面Sx非得转置不可，不转置就会报错呢？</p>
-<p>因为surf指令有一个原则：</p>
-<ol>
-<li>X和Y是向量，Z是矩阵，要满足：</li>
-</ol>
-<ul>
-<li>
-<p>length(X) == size(Z, 2)   （X 的长度 = Z 的列数）</p>
-</li>
-<li>
-<p>length(Y) == size(Z, 1)   （Y 的长度 = Z 的行数）</p>
-<p>至于为什么是这样的，哎，其实我不懂啊…</p>
-<p>10X1 7X1 7X10是对的</p>
-<p>10X1 7X1 10X7是错的</p>
-</li>
-</ul>
-<ol start="2">
-<li>
-<p>surf(X, Y, Z) 三个都是矩阵，且尺寸相同</p>
-<p>解释见上面（嘿嘿偷个懒偷个懒）：</p>
-</li>
-</ol>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">**Bezier曲面的Matlab实现**</span><br><span class="line">clear;clc;close all;</span><br><span class="line">m=<span class="number">3</span>; pxx=[<span class="number">0</span> <span class="number">2</span> <span class="number">4</span> <span class="number">6</span>]; pyy=[<span class="number">6</span> <span class="number">4</span> <span class="number">2</span> <span class="number">0</span>];</span><br><span class="line">[px,py]=<span class="built_in">meshgrid</span>(pxx,pyy);</span><br><span class="line">pz=[<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>;</span><br><span class="line">    <span class="number">0.5</span> <span class="number">1.5</span> <span class="number">1.5</span> <span class="number">0.5</span>;</span><br><span class="line">    <span class="number">0.5</span> <span class="number">1.5</span> <span class="number">1.5</span> <span class="number">0.5</span>;</span><br><span class="line">    <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>];</span><br><span class="line">px([<span class="number">1</span>,<span class="number">4</span>],<span class="number">1</span>)=<span class="number">0</span>;py([<span class="number">1</span>,<span class="number">4</span>],<span class="number">1</span>)=<span class="number">3</span>;pz([<span class="number">1</span>,<span class="number">4</span>],<span class="number">1</span>)=<span class="number">0</span>;</span><br><span class="line"><span class="comment">%-----绘制控制点----------</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot3</span>(<span class="built_in">reshape</span>(px,[(m+<span class="number">1</span>)^<span class="number">2</span>,<span class="number">1</span>]),<span class="built_in">reshape</span>(py,[(m+<span class="number">1</span>)^<span class="number">2</span>,<span class="number">1</span>]),...</span><br><span class="line">    <span class="built_in">reshape</span>(pz,[(m+<span class="number">1</span>)^<span class="number">2</span>,<span class="number">1</span>]),<span class="string">&#x27;rs&#x27;</span>,<span class="string">&#x27;markerfacecolor&#x27;</span>,<span class="string">&#x27;r&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">mesh(px,py,pz,<span class="string">&#x27;linewidth&#x27;</span>,<span class="number">1.5</span>,<span class="string">&#x27;edgecolor&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;facealpha&#x27;</span>,<span class="number">0</span>);</span><br><span class="line"><span class="comment">%----绘制Bezier曲面------</span></span><br><span class="line">u=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">1</span>,<span class="number">30</span>)&#x27;;</span><br><span class="line">w=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">1</span>,<span class="number">30</span>)&#x27;;</span><br><span class="line">Bu=<span class="built_in">zeros</span>([<span class="number">30</span>,m+<span class="number">1</span>]);</span><br><span class="line">Bw=<span class="built_in">zeros</span>([<span class="number">30</span>,m+<span class="number">1</span>]);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">0</span>:m</span><br><span class="line">    Bu(:,<span class="built_in">i</span>+<span class="number">1</span>)=prod(<span class="built_in">i</span>+<span class="number">1</span>:m)/prod(<span class="number">1</span>:m-<span class="built_in">i</span>)*u.^<span class="built_in">i</span>.*(<span class="number">1</span>-u).^(m-<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">0</span>:m</span><br><span class="line">    Bw(:,<span class="built_in">i</span>+<span class="number">1</span>)=prod(<span class="built_in">i</span>+<span class="number">1</span>:m)/prod(<span class="number">1</span>:m-<span class="built_in">i</span>)*w.^<span class="built_in">i</span>.*(<span class="number">1</span>-w).^(m-<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">Sx=Bu*px*Bw&#x27;; Sy=Bu*py*Bw&#x27;; Sz=Bu*pz*Bw&#x27;;</span><br><span class="line">surf(Sx,Sy,Sz,<span class="string">&#x27;linestyle&#x27;</span>,<span class="string">&#x27;-&#x27;</span>);colormap(<span class="string">&quot;sky&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>看不动了看不动了，先贴着，留着明天进步吧。</p>
-<h1>260319</h1>
-<p>之所以感觉有点难搞是因为你没有练习，<strong>可以试着建立一下小鱼的简单表面建模</strong>，采用三次贝塞尔曲面进行拼接练习一下</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260319195537559.png" alt="image-20260319195537559" style="zoom:150%;" />
-<h1>260324</h1>
-<p>书接上回260319的曲面绘制代码，我们来一行一行细说</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clear; clc; close all;</span><br></pre></td></tr></table></figure>
-<p>这“三件套”必不可少，因为我们要清除之前的变量赋值、清空命令窗口，关闭打开的图形窗口，养成这个习惯只有好处没有坏处</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m = 3;n = 3;</span><br></pre></td></tr></table></figure>
-<p>干什么：设置了贝塞尔曲面的阶数为3（有个问题啊，mn是可以不同的吗？）</p>
-<p>数学意义：说明有(m+1)x(n+1)个控制点，也就是(3+1)x(3+1)=16个控制点，阶数越高，曲面越灵活但计算量越大</p>
-<p>启发：如果发现曲面很复杂无法通过三次贝塞尔曲面来进行绘制，我们可以采用四阶甚至五阶贝塞尔曲面来绘制</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pxx = [<span class="number">0</span> <span class="number">2</span> <span class="number">4</span> <span class="number">6</span>];</span><br><span class="line">pyy = [<span class="number">6</span> <span class="number">4</span> <span class="number">2</span> <span class="number">0</span>];</span><br><span class="line">[px, py] = <span class="built_in">meshgrid</span>(pxx, pyy);</span><br></pre></td></tr></table></figure>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324210508024.png" alt="image-20260324210508024" style="zoom:150%;" />
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324210916564.png" alt="image-20260324210916564"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324210934976.png" alt="image-20260324210934976"></p>
-<p>干什么：pxx、pyy定义 x 方向和 y 方向控制点的坐标序列，使用meshgrid生成一个4X4矩阵，现在 px(i,j) 和 py(i,j) 就是第 i 行、第 j 列控制点的 (x,y) 坐标了，就是下面这十六个点：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324211545730.png" alt="image-20260324211545730"></p>
-<p>有什么用：这是生成参数曲面控制点网格的标准写法，以后要自己建模时是会用到的</p>
-<p>思考：标准写法？我一定是0246,不能是0123吗？</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pz = [<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>;</span><br><span class="line">      <span class="number">0.5</span> <span class="number">1.5</span> <span class="number">1.5</span> <span class="number">0.5</span>;</span><br><span class="line">      <span class="number">0.5</span> <span class="number">1.5</span> <span class="number">1.5</span> <span class="number">0.5</span>;</span><br><span class="line">      <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>];</span><br></pre></td></tr></table></figure>
-<p>干什么：手动定义 4×4 的 z 坐标矩阵，给每个控制点一个高度</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324212907726.png" alt="image-20260324212907726"></p>
-<p>有什么用：其实我们已经可以推测出大概的形状了，就是16个控制点的坐标已经确定了，Bézier 曲面的 z 值由控制点决定，这就是你“设计”曲面形状的地方</p>
-<p>思考：那这样的话控制点的xy都是固定的了，但是我们实际的大作业控制点肯定不能是xy固定的啊，所以我是不是可以理解为：我们的pxpy都是要手动去输入的？</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">px(<span class="number">4</span>,<span class="number">1</span>)=<span class="number">3</span>;py(<span class="number">4</span>,<span class="number">1</span>)=<span class="number">3</span>;pz(<span class="number">4</span>,<span class="number">1</span>)=<span class="number">0</span>;</span><br><span class="line">px(<span class="number">4</span>,<span class="number">4</span>)=<span class="number">3</span>;py(<span class="number">4</span>,<span class="number">4</span>)=<span class="number">3</span>;pz(<span class="number">4</span>,<span class="number">4</span>)=<span class="number">0</span>;</span><br><span class="line">px(<span class="number">1</span>,<span class="number">1</span>)=<span class="number">3</span>;py(<span class="number">1</span>,<span class="number">1</span>)=<span class="number">3</span>;pz(<span class="number">1</span>,<span class="number">1</span>)=<span class="number">0</span>;</span><br><span class="line">px(<span class="number">1</span>,<span class="number">4</span>)=<span class="number">3</span>;py(<span class="number">1</span>,<span class="number">4</span>)=<span class="number">3</span>;pz(<span class="number">1</span>,<span class="number">4</span>)=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-<p>干什么：这一步很好的回答了你的问题，这就是更改控制点的坐标的，所以，你可以自己任意去定义控制点啦，想想就有无限的可能性</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324213057099.png" alt="image-20260324213057099"></p>
-<p>有什么用：用处大了去了，我们可以调整边界点，对控制点可以说是随便定义了</p>
-<p>思考：大作业里应该会经常这么干！两个不同的曲面进行拼接，就一定少不了控制点的重定义，因为要让控制点进行重合！所以在做项目之前就应该先想好控制点的位置，后续再微调，一旦项目成形了改点很难啊</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>干什么：打开第 1 个图形窗口（后面所有图都画在这里）</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">plot3</span>(<span class="built_in">reshape</span>(px,[<span class="built_in">numel</span>(px),<span class="number">1</span>]),<span class="built_in">reshape</span>(py,[<span class="built_in">numel</span>(py),<span class="number">1</span>]),<span class="built_in">reshape</span>(pz,[<span class="built_in">numel</span>(pz),<span class="number">1</span>]),<span class="string">&#x27;rs&#x27;</span>,<span class="string">&#x27;markerfacecolor&#x27;</span>,<span class="string">&#x27;r&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p>干什么：把 4×4 矩阵展平成 16×1 的列向量，用 plot3 画出 16 个红色实心方块（控制点），‘rs’ = red square，‘markerfacecolor’,‘r’ 让方块内部也填充红色</p>
-<p>px、py被<strong>扁</strong>成这样了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324214951658.png" alt="image-20260324214951658"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324215228261.png" alt="image-20260324215228261"></p>
-<p>有什么用：把控制点的坐标显示出来了，可视化设计，可以显得自己的设计更加装逼一点，这是真的哈哈哈哈</p>
-<p>思考：控制点的颜色代码都是什么？常见颜色的代码是啥样的？</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324221729564.png" alt="image-20260324221729564"></p>
-<p>还有，我想用圆形来表示控制点呢？六边形呢？</p>
-<p>为什么要进行这个操作呢？不扁可以吗？</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">hold</span> on;</span><br></pre></td></tr></table></figure>
-<p>干什么：告诉 MATLAB“不要清空画布，继续在上面叠加图形”</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mesh(px,py,pz,<span class="string">&#x27;edgecolor&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;facealpha&#x27;</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<p>干什么：用蓝色线条画出控制点之间的连线网格（像一张“网”）</p>
-<p>注意：‘facealpha’,0 让网格面完全透明，只显示边线，把他改成0.5,你会发现一个新宇宙哈哈哈</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Sx,Sy,Sz] = PSBezierMxN(px, py, pz, m, n);</span><br></pre></td></tr></table></figure>
-<p>干什么：调用你自己写的函数 PSBezierMxN，计算 Bézier 曲面上的所有点坐标<br>
-<strong>输入参数</strong>：</p>
-<ul>
-<li>
-<p>px, py, pz：4×4 的控制点坐标矩阵（你前面已经手动改过四个角了）</p>
-</li>
-<li>
-<p>m=3, n=3：u 方向和 w 方向的阶数（都是三次）</p>
-</li>
-</ul>
-<p><strong>输出</strong>：</p>
-<ul>
-<li>Sx, Sy, Sz：计算好的曲面点坐标，每个是 <strong>200×200</strong> 的矩阵（因为函数里 Rm=Rn=200）</li>
-</ul>
-<p>对大作业的意义：把“计算曲面”这部分封装成函数后，后面你想画多少个不同的 Bézier 曲面，<strong>只要改控制点再调用一次这个函数就行</strong>，非常干净</p>
-<p>函数如下：</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[Sx,Sy,Sz,Rm,Rn]</span>=<span class="title">PSBezierMxN</span><span class="params">(px,py,pz,m,n)</span></span></span><br><span class="line">    Rm=<span class="number">200</span>; Rn=<span class="number">200</span>;</span><br><span class="line">    u=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">1</span>,Rm)&#x27;;</span><br><span class="line">    w=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">1</span>,Rn)&#x27;;</span><br><span class="line">    Bu=<span class="built_in">zeros</span>([Rm,m+<span class="number">1</span>]);</span><br><span class="line">    Bw=<span class="built_in">zeros</span>([Rn,n+<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">0</span>:m</span><br><span class="line">        Bu(:,<span class="built_in">i</span>+<span class="number">1</span>)=prod(<span class="built_in">i</span>+<span class="number">1</span>:m)/prod(<span class="number">1</span>:m-<span class="built_in">i</span>)*u.^<span class="built_in">i</span>.*(<span class="number">1</span>-u).^(m-<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">0</span>:n</span><br><span class="line">        Bw(:,<span class="built_in">i</span>+<span class="number">1</span>)=prod(<span class="built_in">i</span>+<span class="number">1</span>:n)/prod(<span class="number">1</span>:n-<span class="built_in">i</span>)*w.^<span class="built_in">i</span>.*(<span class="number">1</span>-w).^(n-<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    Sx=Bu*px*Bw&#x27;;</span><br><span class="line">    Sy=Bu*py*Bw&#x27;;</span><br><span class="line">    Sz=Bu*pz*Bw&#x27;;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">surf(Sx, Sy, Sz, <span class="string">&#x27;linestyle&#x27;</span>, <span class="string">&#x27;none&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p>干什么：用 surf 命令把刚才计算出的 <strong>200×200</strong> 个点画成一个曲面，‘linestyle’,‘none’：表示不画网格线，只画曲面本身。这样曲面没有线条干扰（适合做大作业展示）</p>
-<p>思考：如果想看到曲面上的网格线，可以把 ‘none’ 改成 ‘-’ 或 ‘:’</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">colormap(jet);</span><br></pre></td></tr></table></figure>
-<p>干什么：给曲面设置颜色映射方案</p>
-<p>思考：我想要一种色系的颜色映射方案呢？每一种方案的效果图有没有呢？</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">light(<span class="string">&#x27;Position&#x27;</span>,[<span class="number">-1</span> <span class="number">0</span> <span class="number">0</span>], <span class="string">&#x27;Style&#x27;</span>, <span class="string">&#x27;local&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p>干什么：在三维空间中添加一盏“灯”，让曲面产生明暗效果（立体感）</p>
-<p>思考：似乎可以通过光源的不断转换，来让大作业更有质感，模拟光照</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">box off;</span><br></pre></td></tr></table></figure>
-<p>干什么：把图形四周的“盒子”边框去掉（只剩下坐标轴）</p>
-<p>思考：其实这一步我都不是很理解，去不去掉好像没啥区别，先放在这里吧</p>
-<p><strong>来吧，看看ai生成的好东西：</strong></p>
-<p>啤酒瓶：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/bottle_cap.png" alt="bottle_cap"></p>
-<p>山：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/mountain.png" alt="mountain"></p>
-<p>降落伞：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/Parachute.png" alt="Parachute"></p>
-<p>机翼：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/plane_wing.png" alt="plane_wing"></p>
-<p>钱包：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/wallet.png" alt="wallet"></p>
-<p>（这个钱包我是真的没绷住啊哈哈哈）</p>
-<h1>260326</h1>
-<p>今天学习一下曲面的拼接哈😄，基本思想如下：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326231103644.png" alt="image-20260326231103644"></p>
-<p>一个简单的曲面拼接实验，说实话其实并不会很难</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/c1continuity.png" alt="c1continuity"></p>
-<p>有点晚了，好困啊，先睡了，明天再搞吧，感觉真的要搞豌豆射手的话，嘴那一部分可以使用旋转命令进行，身子那一部分可以使用扫掠命令去搞，叶片底部那里可以用三次贝塞尔曲面/孔斯曲面进行绘制，大概的思路就是这样的啦，再加一个向日葵🌻，射手可以搞寒冰射手、火焰射手，再搞个僵尸🧟‍♀️我觉得就可以了</p>
-<h1>260330</h1>
-<p>眼睛干涩的厉害，不想看屏幕…</p>
-<p>第一个问题，就是我怎么把每一片面片连接在一起，难不成要把一大堆面片都放在一个脚本里面？还是每一个部分分开建面片，最后进行一个聚合呢？</p>
-<p>看了一下，一个模型基本上都是在一个.m文件里面去实现的</p>
-<p>第二个问题，我怎么去找我想要的控制点坐标呢？</p>
-<p>第三个问题，我怎么去知道自己需要的面片是什么类型呢？贝塞尔三次曲面？孔斯曲面？扫掠曲面？旋转曲面？</p>
-<p>我看基本上采用的应该是贝塞尔三次曲面</p>
-<p>哇去，学姐他们写的代码真的是，长，实在是长，有很多函数，而且主函数也很长，九百多行…</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260330212406597.png" alt="image-20260330212406597"></p>
-<p><strong>调用我自己编写的函数，只要放在同一个文件夹就可以</strong></p>
-<p>搞懂了一部分：</p>
-<p>豌豆射手上半头</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/wandoushooter_head.png" alt="wandoushooter_head"></p>
-<p>豌豆射手下半头（更改z值为负 对称得到的）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/wandoushooter_head_2.png" alt="wandoushooter_head_2"></p>
-<p>茎秆（不过怎么看怎么不对劲）其实挺对的，因为y的一格是0.005,其实很小，茎秆是很细的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/wandoushooter_jinggan.png" alt="wandoushooter_jinggan"></p>
-<p>不过我想着代码里面应该会有对称的部分，但是今天暂时没有找到，好奇怪啊，这茎秆不是只画了一半吗哈哈哈，明天看看，说不定就有想法了</p>
-<p>这里贴一张建模的效果图哈</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260330224129976.png" alt="image-20260330224129976"></p>
-<h1>260331</h1>
-<p>有几个问题，第一个，就是为什么上下豌豆的头会出现没有完全连上的情况</p>
-<p>这一步，看好了，关键就在这一步，主要是如果不这样调整的话就会出现这个问题，缝合的曲面不光顺了，说明需要不断地调整才能做好</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331160615685.png" alt="image-20260331160615685"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331160714086.png" alt="image-20260331160714086"></p>
-<p>第二个，后脑勺面片如何去缝合的，形成了不仅仅是一个矩形面片而是一个椭圆形面片（有点超乎我的想象了）</p>
-<p>好吧其实不是你想不出来，而是本来就这样，其实，本质还是一个椭圆形面片，只不过叠加起来你看不太出来这是两块罢了哈哈哈</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331162129014.png" alt="image-20260331162129014"></p>
-<p>第三个，怪异的茎秆，感觉从代码来看完全就不是这个效果啊…</p>
-<p>感觉可以粗一点，不然杆子实在是太细了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331181459089.png" alt="image-20260331181459089"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331181515487.png" alt="image-20260331181515487"></p>
-<p>ctrl+r注释</p>
-<p>茎秆部分发现有点太长了，缩短一点</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331183632549.png" alt="image-20260331183632549"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331183729477.png" alt="image-20260331183729477"></p>
-<p>发现叶子太贴近了，可以改的分散一点</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331183956394.png" alt="image-20260331183956394"></p>
-<p>效果还是不错的，茎秆有粗度的变化，叶子显得分散</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331185640796.png" alt="image-20260331185640796"><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331185729424.png" alt="image-20260331185729424"></p>
-<p>创建了三个函数，分别是绕xyz轴旋转的函数，这样我们后续使用就可以直接调用了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331192432748.png" alt="image-20260331192432748"></p>
-<p>这两个名字一定是要一样的，不然识别不了函数的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331193116524.png" alt="image-20260331193116524"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331205518406.png" alt="image-20260331205518406"></p>
-<p>笑死了，做出了一个舞娘豌豆射手，很风骚有没有</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331220752588.png" alt="image-20260331220752588"></p>
-<p>由于坐标倒了，所以我们使用这个指令 flipud(B17_x(:,4)) 进行矩阵的翻转，问题得到解决，侧面面片成功获得（原来是扭在一起的）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331222318283.png" alt="image-20260331222318283"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331222204007.png" alt="image-20260331222204007"></p>
-<h1>260401</h1>
-<p>发现者这一部分曲面存在一定的干涉，后续可以优化一下</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260331222318283.png" alt=""></p>
-<p>发现把划横线地方的flipud删除掉就好了，为啥呢？</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260401104000937.png" alt="image-20260401104000937"></p>
-<p>今天把后面的叶片耳朵给做了，还贴了一些好看的贴图，把茎秆优化了一下，感觉效果很不错的，很厉害！</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/wandoushooter_all_1.png" alt="wandoushooter_all_1"></p>
-<h1>260402</h1>
-<p>今天打算做好豌豆射出来的球，并且把小僵尸的建模思考搞清楚</p>
-<p>这里发现豌豆的嘴巴可以加厚一圈，这样豌豆射手会更加真实一点</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260402184347108.png" alt=""></p>
-<p>发现豌豆怎么这么大，居然比射手的嘴巴还大，笑死我了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260402184824678.png" alt="image-20260402184824678"></p>
-<p>感觉效果还可以哈</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260402185605236.png" alt="image-20260402185605236"></p>
-<p>今天问了下grok，项目是这样实现的</p>
-<table>
-<thead>
-<tr>
-<th>文件名</th>
-<th>作用</th>
-<th>详细说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>main.m</strong></td>
-<td><strong>整个程序的主入口</strong>（最重要）</td>
-<td>负责读取所有 <code>.obj</code> 模型、转换贝塞尔曲面、设置动画逻辑、调用 <code>visualizePart</code> 绘制僵尸和豌豆射手、控制动画循环</td>
-</tr>
-<tr>
-<td><strong>Peashooter_dynamic.m</strong></td>
-<td>豌豆射手动态摇头动画</td>
-<td>用你之前写的 Bézier 曲面控制点生成豌豆射手头部 + 叶子 + 茎，并实现左右摇头动画</td>
-</tr>
-<tr>
-<td><strong>Peashooter_static.m</strong></td>
-<td>豌豆射手静态展示</td>
-<td>只显示静态的豌豆射手（不摇头）</td>
-</tr>
-<tr>
-<td><strong>convertQuadToBezier.m</strong></td>
-<td><strong>四边形转 Bézier 曲面</strong></td>
-<td>把僵尸模型的四边形面片转换为 4×4 控制点的 Bézier 曲面片（核心曲面重建函数）</td>
-</tr>
-<tr>
-<td><strong>convertTriToBezier.m</strong></td>
-<td><strong>三角形转 Bézier 曲面</strong></td>
-<td>把僵尸模型的三角形面片转换为 Bézier 三角形曲面（10个控制点）</td>
-</tr>
-<tr>
-<td><strong>Bezier.m</strong></td>
-<td><strong>计算 Bézier 曲面上的点</strong></td>
-<td>给定 4×4 控制点，用矩阵方式计算出实际曲面上的插值点（21×21网格）</td>
-</tr>
-<tr>
-<td><strong>discretizeBezier.m</strong></td>
-<td>Bézier 曲面离散化（生成网格）</td>
-<td>把 Bézier 控制点离散成可以画的顶点和四边形面片</td>
-</tr>
-<tr>
-<td><strong>discretizeBezierTri.m</strong></td>
-<td>三角形 Bézier 离散化</td>
-<td>处理三角形 Bézier 曲面的离散</td>
-</tr>
-<tr>
-<td><strong>genEdgePoints.m</strong> / <strong>genBezierEdgePoints.m</strong></td>
-<td>生成边上的控制点</td>
-<td>为相邻面片的共享边生成中间控制点，保证拼接处 G¹ 连续</td>
-</tr>
-<tr>
-<td><strong>genInnerPoints.m</strong></td>
-<td>生成曲面内部控制点</td>
-<td>根据四个角点生成内部 2×2 控制点</td>
-</tr>
-<tr>
-<td><strong>readQuadObj.m</strong></td>
-<td>读取 <code>.obj</code> 文件</td>
-<td>读取僵尸的顶点、面片（支持四边形和三角形）</td>
-</tr>
-<tr>
-<td><strong>RotateX.m / RotateY.m / RotateZ.m</strong></td>
-<td>旋转矩阵函数</td>
-<td>提供绕 X/Y/Z 轴旋转的功能</td>
-</tr>
-<tr>
-<td><strong>Symmetry.m</strong></td>
-<td>轴对称函数</td>
-<td>提供关于 X/Y/Z 轴的镜像翻转</td>
-</tr>
-<tr>
-<td><strong>create_and_move_ball.m</strong></td>
-<td>生成并移动豌豆球</td>
-<td>画一个绿色球并让它沿 X 轴移动（发射动画）</td>
-</tr>
-<tr>
-<td><strong>hat_move.m / move_hat.m</strong></td>
-<td>帽子移动函数</td>
-<td>用于帽子掉落或移动的动画（未在主程序中使用）</td>
-</tr>
-<tr>
-<td><strong>draw_all_zombies.m</strong></td>
-<td>批量绘制僵尸（未使用）</td>
-<td>尝试用 batch 方式渲染多个僵尸（目前未启用）</td>
-</tr>
-<tr>
-<td><strong>身体.obj / 左手.obj / 右手.obj / 左腿.obj / 右腿.obj / 头.obj</strong></td>
-<td>僵尸模型文件</td>
-<td>Blender 导出的僵尸各部位几何模型</td>
-</tr>
-</tbody>
-</table>
-<p>发现僵尸的表面建模很是困难，所以选择改变方式来进行建模，探索到的一个方式是使用obj文件导入matlab，进行一系列的函数编写，读取僵尸的顶点、面片等，并把面片更改为贝塞尔曲面即可</p>
-<p>当程序读到 f 10//1 1//4 7//3 8//2 这行时：</p>
-<blockquote>
-<p>它把这行拆分成 4 个部分，提取出每个部分的<strong>第一个数字</strong>（顶点索引），得到 [10, 1, 7, 8]，然后存入 quad_faces 矩阵，表示这是一个由第10、1、7、8号顶点组成的四边形。</p>
-</blockquote>
-<p>这篇文章我觉得应该是有帮助的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260402195034483.png" alt="image-20260402195034483"></p>
-<p>写了这个代码，可以提取obj里面的顶点数据和面片数据</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260402202020934.png" alt="image-20260402202020934"></p>
-
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260312191936511.png" alt="image-20260312191936511"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/11/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -595,21 +655,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
+      <meta itemprop="name" content="Haozi's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/" class="post-title-link" itemprop="url">jellyfin如何设置优雅的刮削？</a>
+            <a href="/2026/06/11/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/" class="post-title-link" itemprop="url">机械制造工程学 为考试而生</a>
         </h2>
 
         <div class="post-meta">
@@ -620,7 +680,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-04-03 14:56:36 / 修改时间：14:54:46" itemprop="dateCreated datePublished" datetime="2026-04-03T14:56:36+08:00">2026-04-03</time>
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：16:01:48" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -628,11 +688,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
                 </span>
             </span>
 
           
+            <div class="post-description">就像小米 为发烧而生</div>
 
         </div>
       </header>
@@ -643,69 +704,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403145425463.png" alt="image-20260403145425463"></p>
-<h1>MetaShark</h1>
-<p>需要的工具：</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/cxfksword/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库1</a></p>
-<p><a target="_blank" rel="noopener" href="http://gitee.com/cwhzy/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库2</a></p>
-<p>添加存储库</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123438052.png" alt="image-20260329123438052"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123458168.png" alt="image-20260329123458168"></p>
-<p>安装metashark插件</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327223744061.png" alt="image-20260327223744061"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327223812350.png" alt="image-20260327223812350"></p>
-<p>选择一个资料库，点击管理媒体库</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123548948.png" alt="image-20260329123548948"></p>
-<p>更改元数据加载器、图片下载器为metashark</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224115477.png" alt="image-20260327224115477"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224128867.png" alt="image-20260327224128867"></p>
-<p>如果之前已经有元数据，我们需要刷新一下元数据，覆盖掉原来的元数据</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224440699.png" alt="image-20260327224440699"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224500621.png" alt="image-20260327224500621"></p>
-<p>对于不满意的封面和元数据，还可以手动去调整，找到刮削不满意的电影，选择刮削元数据</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123936663.png" alt="image-20260329123936663"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329124012225.png" alt="image-20260329124012225"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329124032265.png" alt="image-20260329124032265"></p>
-<p><strong>插件效果还是不错的</strong></p>
-<p>会显示简介、演员头像、中文标题的，比原来的好了不少</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224647909.png" alt="image-20260327224647909"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328114650032.png" alt="image-20260328114650032"></p>
-<h1>Metatube</h1>
-<p>这个刮削插件主要是针对一些番号类资源的</p>
-<p>在安装的过程中，发现无法通过url安装，但是我们还可以通过手动拖dll进行安装</p>
-<p>先从github下载</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329122734246.png" alt="image-20260329122734246"></p>
-<p>解压出ddl文件</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329122756076.png" alt="image-20260329122756076"></p>
-<p>打开everything，搜索jellyfin，找到jellyfin的插件plugins文件夹，并且右键，打开路径</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329122918477.png" alt="image-20260329122918477"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123055978.png" alt="image-20260329123055978"></p>
-<p>重启jellyfin，发现插件是安装上了的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329124611492.png" alt="image-20260329124611492"></p>
-<p>到这里还没有结束配置，刮削源有地域限制，而且还得部署服务器后端，官网有很多教程，很多<a target="_blank" rel="noopener" href="https://metatube-community.github.io/wiki/server-deployment/">后端部署方案</a>可以去参考</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329125831393.png" alt="image-20260329125831393"></p>
-<p><strong>我采取的后端配置：</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329142154958.png" alt="image-20260329142154958"></p>
-<p>exe名称要更改一下，从metatube-server-windows-amd64.exe改为metatube-server.exe</p>
-<p>不然会出现这个问题</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> F:\metatube&gt; .\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db</span><br><span class="line">./metatube<span class="literal">-server</span> : 无法将“./metatube<span class="literal">-server</span>”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如</span><br><span class="line">果包括路径，请确保路径正确，然后再试一次。</span><br><span class="line">所在位置 行:<span class="number">1</span> 字符: <span class="number">1</span></span><br><span class="line">./metatube<span class="literal">-server</span></span><br><span class="line">    + CategoryInfo : ObjectNotFound: (./metatube<span class="literal">-server</span>:String) [], CommandNotFoundException</span><br><span class="line">    + FullyQualifiedErrorId : CommandNotFoundException出现了这个问题</span><br></pre></td></tr></table></figure>
-<p>这样更改以后，浏览器打开127.0.0.1:8080，如果显示404，说明端口大概率是被占用了，可以通过以下命令更改端口</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db <span class="literal">--port</span> <span class="number">8100</span></span><br></pre></td></tr></table></figure>
-<p>然后访问127.0.0.1:8100，显示这样说明后端服务器就搭建好了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329144330787.png" alt="image-20260329144330787"></p>
-<p>如果想要翻译标题和概要，去插件设计里面修改即可</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329151505248.png" alt="image-20260329151505248"></p>
-<h1>JavSP</h1>
-<p>发现会出现 要求出口ip为日本节点，怎么去解决呢？</p>
-<p><strong>找到配置文件中的这一段</strong></p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[CrawlerSelect]</span></span><br><span class="line"><span class="attr">normal</span> = airav,avsox,javbus,javdb,javlib,jav321,mgstage,prestige</span><br><span class="line"><span class="attr">fc2</span> = fc2,avsox,javdb,javmenu,fc2ppvdb</span><br><span class="line"><span class="attr">cid</span> = fanza</span><br><span class="line"><span class="attr">getchu</span> = dl_getchu</span><br><span class="line"><span class="attr">gyutto</span> = gyutto</span><br></pre></td></tr></table></figure>
-<p>删除 <code>mgstage</code> 和 <code>prestige</code>，改成</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">normal</span> = avsox,javbus,javdb,javlib,jav321</span><br></pre></td></tr></table></figure>
-<p>因为<code>mgstage</code> 和 <code>prestige</code> 是日本官方或半官方源，强制要求日本 IP，我的网络节点无法满足，所以必须移除</p>
-<p>除此之外，还需要一个国外的节点（使用的是v2ray）</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 是否启用代理</span></span><br><span class="line"><span class="attr">use_proxy</span> = <span class="literal">yes</span>（这里改为<span class="literal">yes</span>）</span><br><span class="line"><span class="comment"># 设置代理服务器地址，支持 http, socks5/socks5h 代理。示例格式如下：</span></span><br><span class="line"><span class="attr">proxy</span> = socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br></pre></td></tr></table></figure>
-<p>修改后，JavSP 应该能正常工作了</p>
-
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310172943186.png" alt="image-20260310172943186"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/11/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -724,21 +731,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
+      <meta itemprop="name" content="Haozi's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/" class="post-title-link" itemprop="url">耗子的奶昔方案设计记录</a>
+            <a href="/2026/06/11/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/" class="post-title-link" itemprop="url">智能装备设计项目是怎么一步步成型的？</a>
         </h2>
 
         <div class="post-meta">
@@ -749,375 +756,8 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-04-03 14:56:36 / 修改时间：15:00:24" itemprop="dateCreated datePublished" datetime="2026-04-03T14:56:36+08:00">2026-04-03</time>
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：16:02:30" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
             </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">生活哲学</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328224552025.png" alt="image-20260328224552025"></p>
-<h1>香蕉、芒果、西梅奶昔</h1>
-<p>一根香蕉、一个芒果（其实是半个）、三个西梅（其实只切了两个😄）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7986.jpeg" alt="IMG_7986"></p>
-<p>水果躺板板咯，切得有点凌乱哈</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7987.jpeg" alt="IMG_7987"></p>
-<p>榨汁杯里面的，是安慕希草莓酸奶150ml</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7988.jpeg" alt="IMG_7988"></p>
-<p>大概榨汁榨了2min左右，出来的奶昔是这样的</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7989.jpeg" alt="IMG_7989" style="zoom: 25%;" />
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7990.jpeg" alt="IMG_7990" style="zoom:25%;" />
-<p>感觉味道还是不错的，仔细喝喝，可以喝出来西梅的颗粒，芒果的味道没咋感觉到，不过颜色上有一些体现（变得很黄），香蕉的味道有点太重了，还有就是酸奶实在是太浓了，感觉本来就很浓的酸奶，加上一大堆的颗粒，浓的有点不像样的，不像是饮料，像是浓粥了哈哈</p>
-<p>以后做奶昔，可以试着：</p>
-<ol>
-<li>尽量用稀一点的牛奶，酸奶太浓稠了</li>
-<li>搅拌机要保证有足够的电量来榨，榨到一半没电了会很崩溃的</li>
-<li>像香蕉这种气味极重的水果，不要放的过量，因为这样会让你根本吃不到其他水果的味道</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/" class="post-title-link" itemprop="url">耗子的生活俳句</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-04-03 14:56:36" itemprop="dateCreated datePublished" datetime="2026-04-03T14:56:36+08:00">2026-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-30 20:55:56" itemprop="dateModified" datetime="2026-03-30T20:55:56+08:00">2026-03-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">生活哲学</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327194952695.png" alt="image-20260327194952695"></p>
-<h1>《月夜感寝室》</h1>
-<p>赤橘金霞美</p>
-<p>珞珈樱花拿铁甜</p>
-<p>快意心中生</p>
-<h1>《叭叭叫》</h1>
-<p>室友叭叭叫</p>
-<p>吾桌凌乱心烦躁</p>
-<p>心中苦恼恼</p>
-<h1>《咕叽咕叽》</h1>
-<p>咕叽咕叽咕</p>
-<p>咕叽咕叽咕叽咕</p>
-<p>咕叽咕叽咕</p>
-<h1>《状态》</h1>
-<p>涩涩干眼睛</p>
-<p>手机拿着刷不停</p>
-<p>久坐不要起</p>
-<h1>《谈硬盘》</h1>
-<p>硬盘焦虑大</p>
-<p>心想来个几万G</p>
-<p>其实都不看</p>
-<h1>《眼睛》</h1>
-<p>用她看世界</p>
-<p>一吞一吐好迷人</p>
-<p>两个大葡萄</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/" class="post-title-link" itemprop="url">怎么使用ptqt进行ui界面的开发？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-03-28 15:25:27" itemprop="dateCreated datePublished" datetime="2026-03-28T15:25:27+08:00">2026-03-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-04-03 15:19:13" itemprop="dateModified" datetime="2026-04-03T15:19:13+08:00">2026-04-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260403151904697.png" alt="image-20260403151904606"></p>
-<h1>Python qt简介</h1>
-<p>pyside2包装的是Qt5库，pyside6包装的是Qt6库</p>
-<p>PyQt5包装的是Qt5库，PyQt6包装的是Qt6库</p>
-<p>pyside2/pyside6是Qt的亲儿子，而pyqt5/pyqt6是义子</p>
-<p>Qt库是用C++语言开发的，是因为python使用的人实在是太多了，所以python就从C++搬过来这个库了</p>
-<h1>一个好玩的案例</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app = QApplication()</span><br></pre></td></tr></table></figure>
-<p>放在主窗口的控件，要能全部显示在界面上，必须加上下面这行代码，不然你会看不到自己的控件去哪儿了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.show()</span><br></pre></td></tr></table></figure>
-<p>最后一定有一句这个，让程序进入死循环（可以试试去掉这一句会有什么变化）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="built_in">exec</span>() <span class="comment"># 这是pyside6的代码； pyside2 是 app.exec_()</span></span><br></pre></td></tr></table></figure>
-<h1>遇到的问题和解决方法</h1>
-<p>我的Python 3.12 无法正常安装 PySide2（至少在2026.3.28号是不可行的），<strong>所以我选择 PySide6</strong></p>
-<p>一般来说，在python终端输入以下命令就可以安装库</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyside6</span><br></pre></td></tr></table></figure>
-<p>但是国内下载速度很慢，如果上述指令不行，我们可以采用镜像源下载</p>
-<p>（-i表示从后面的镜像源下载安装pyside6）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyside6 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
-<p><strong>一些常用的镜像源</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">清华大学TUNA镜像源： https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">阿里云镜像源： http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">中国科学技术大学镜像源： https://mirrors.ustc.edu.cn/pypi/simple/</span><br><span class="line">华为云镜像源： https://repo.huaweicloud.com/repository/pypi/simple/</span><br><span class="line">腾讯云镜像源：https://mirrors.cloud.tencent.com/pypi/simple/</span><br></pre></td></tr></table></figure>
-<p>显示以下内容就是安装好了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260328173851329.png" alt="image-20260328173851246"></p>
-<h1>参考文章</h1>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/pip-cn-mirror.html">pip常用镜像源-博客园</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/03/22/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/" class="post-title-link" itemprop="url">c盘怎么去清理？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-03-22 21:21:19" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:19+08:00">2026-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-27 17:36:45" itemprop="dateModified" datetime="2026-03-27T17:36:45+08:00">2026-03-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327173351384.png" alt="image-20260327173351162"></p>
-<h1>清理缓存文件</h1>
-<p>这一步网上有很多教程，可以去搜搜</p>
-<h1>wx文件管理</h1>
-<p>可以转移一下微信文件位置，不要放在c盘目录下</p>
-<h1>spaceniffer</h1>
-<p>使用spaceniffer看电脑文件分布，决定删除什么文件。在尽量不要删除系统文件的前提下，删掉我们自己下载的东西</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/03/22/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/" class="post-title-link" itemprop="url">智能装备设计项目是怎么一步步成型的？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-03-22 21:21:19" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:19+08:00">2026-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-23 17:25:32" itemprop="dateModified" datetime="2026-03-23T17:25:32+08:00">2026-03-23</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1140,85 +780,9 @@
 
       
           <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318200351242.png" alt=""></p>
-<h1>项目要做什么</h1>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318200021618.png" alt="image-20260318200021618"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/03/22/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">智能加工装备设计 为考试而生</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-03-22 21:21:19" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:19+08:00">2026-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-30 20:51:00" itemprop="dateModified" datetime="2026-03-30T20:51:00+08:00">2026-03-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>就像小米 为发烧而生</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/03/22/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/">
+              <a class="btn" href="/2026/06/11/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1242,21 +806,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/%E6%80%8E%E4%B9%88%E5%8E%BB%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="今日事 今日毕">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="禹皓的BLOG">
+      <meta itemprop="name" content="Haozi's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/03/22/%E6%80%8E%E4%B9%88%E5%8E%BB%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9F/" class="post-title-link" itemprop="url">怎么去搭建一个适合自己的知识库？</a>
+            <a href="/2026/06/11/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">数字化设计 为考试而生</a>
         </h2>
 
         <div class="post-meta">
@@ -1265,27 +829,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2026-03-22 21:21:19" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:19+08:00">2026-03-22</time>
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：16:02:11" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-23 20:52:12" itemprop="dateModified" datetime="2026-03-23T20:52:12+08:00">2026-03-23</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
                 </span>
             </span>
 
           
+            <div class="post-description">就像小米 为发烧而生</div>
 
         </div>
       </header>
@@ -1296,79 +855,91 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310144243809.png" alt="image-20260310144243809"></p>
-<h1>写在前面</h1>
-<p>一直想着搭建一个自己的知识库，想着学习的知识不只是输入，不只是为了单纯的应付考试，因为这样我觉得就完全失去了学习的意义，这样的学习显得那么的索然无味和单调。</p>
-<p>那么问题来了，怎么去搭建一个属于自己的知识库呢？</p>
-<h1>要解决的问题</h1>
-<p>结合和ai的对话和自己的思考，得出可以从以下几个方面来进行搭建，知识库的目的是：<strong>既保证知识对自己个人能力有提升，也同时打牢考试的地基。</strong></p>
-<h1>如何去解决</h1>
-<ol>
-<li>
-<p>知识：这一部分主要放“是什么”，总之，只要是你不懂的，很高深的概念都可以放在里面，分为</p>
-<ul>
-<li>概念 Wikipedia上搜一搜</li>
-<li>解释</li>
-<li>案例</li>
-<li>延伸</li>
-</ul>
-<p>标题可以写“某某知识到底是什么”、“某某知识有什么实际价值？”</p>
-</li>
-<li>
-<p>方法：涉及到解决具体问题的具体方法，这里的结构可以是：</p>
-<ul>
-<li>要解决的问题</li>
-<li>怎么去解决问题</li>
-<li>问题解决方案的思考和拓展</li>
-</ul>
-<p>标题可以是“什么什么方案”、“使用什么什么干了什么事情”</p>
-</li>
-<li>
-<p>项目是一个更为宏大的概念，通常会解决一系列的问题，涉及到很多方面的知识</p>
-<p>结构可以是：</p>
-<ul>
-<li>
-<p>为什么要做这个项目</p>
-</li>
-<li>
-<p>项目运用了哪些方法（对上一级的承接）</p>
-</li>
-<li>
-<p>实现的过程记录</p>
-</li>
-<li>
-<p>项目的复盘和反思（这一步重要）</p>
-</li>
-</ul>
-</li>
-<li>
-<p>思考：可以是有关于学习方法的思考，可以是对时代问题的反思，可以是对于个人的总结，总之很自由这部分，天马行空的都行。</p>
-</li>
-<li>
-<p>考试：这一部分目的很简单，就是为了考试！考试！考试！</p>
-<p>结构很公式化：</p>
-<ul>
-<li>知识点</li>
-<li>题型</li>
-<li>如何解题</li>
-<li>一堆题练习</li>
-</ul>
-<p>怎么说呢，中国的学生，最乐意做的就是这一部分，最擅长的，也是这一部分。</p>
-</li>
-</ol>
-<h1>思考</h1>
-<p>其实这篇文章就是一次对于知识库搭建里“方法”理论的实践，知识库的搭建理论是需要不断去丰富的，我们可以在后面的使用中去不断发现问题，不断优化方法。</p>
-<p>这样，才能搭建最适合我们自己的知识库。</p>
-<h1>一些SOP</h1>
-<ul>
-<li>[x] 文章的封面格式使用1200x600的统一格式</li>
-<li>[x] 封面主体图片位于中心偏下</li>
-<li>[x] 我相信，自己从这篇知识库博客里面学习到了前所未闻的东西</li>
-<li>[x] 我相信，自己可以将这一篇博客中的知识融会贯通而不是仅仅为了应付考试</li>
-<li>[x] 我相信，这一篇博客可以让我变得更优秀</li>
-<li>[x] 我很明确自己写这篇文章的目的</li>
-</ul>
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314194845629.png" alt="image-20260314194845629"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/11/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/11/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">智能加工装备设计 为考试而生</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：16:02:25" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">就像小米 为发烧而生</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260311155619007.png" alt="image-20260311155619007"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/11/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1445,37 +1016,43 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">haozi</p>
-  <div class="site-description" itemprop="description">今日事 今日毕</div>
+  <div class="site-description" itemprop="description">Good morning, and in case I don't see you, good afternoon, good evening, and good night!</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
+          
         <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
+          
         <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
       </div>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
 
     </div>
   </aside>
@@ -1493,17 +1070,37 @@
 
 <div class="copyright">
   
-  &copy; 2024 – 
+  &copy; 
   <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">haozi</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://gemini.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.gemini</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -1526,7 +1123,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/pisces.js"></script>
+<script src="/js/schemes/muse.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -1539,6 +1136,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -1554,5 +1155,343 @@
 
   
 
+  
+<!-- Terminal Pet - ASCII Cat -->
+<div id="pet-toggle" class="pet-toggle" title="Click to open terminal pet">
+  <span class="pet-toggle-icon">>_</span>
+  <span class="pet-toggle-label">Pet</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet" style="display:none;">
+  <div class="terminal-header">
+    <span class="terminal-dot red"></span>
+    <span class="terminal-dot yellow"></span>
+    <span class="terminal-dot green"></span>
+    <span class="terminal-title">haozi's blog~</span>
+    <span class="terminal-close" id="pet-close">&times;</span>
+  </div>
+  <div class="terminal-body">
+    <pre id="pet-ascii" class="pet-ascii"></pre>
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #2d2d2d;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  opacity: 0.85;
+}
+.pet-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px #7e8027;
+}
+.pet-toggle-icon {
+  color: #7e8027;
+  font-family: 'Consolas', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+}
+.pet-toggle-label {
+  color: #888;
+  font-size: 8px;
+  margin-top: 2px;
+}
+
+/* Terminal Pet Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 260px;
+  background: #2d2d2d;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  z-index: 9999;
+  font-family: 'Consolas', 'Courier New', monospace;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0.95;
+}
+.terminal-pet:hover {
+  opacity: 1;
+  box-shadow: 0 2px 5px #7e8027;
+}
+.terminal-header {
+  background: #2d2d2d;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: move;
+  user-select: none;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+.terminal-title {
+  color: #aaa;
+  font-size: 11px;
+  margin-left: 8px;
+  flex: 1;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #888;
+  background: #e81123;
+}
+.terminal-body {
+  padding: 12px 14px 10px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pet-ascii {
+  color: #7e8027;
+  font-size: 11px;
+  line-height: 1.2;
+  margin: 0;
+  white-space: pre;
+  text-align: center;
+  transition: color 0.3s;
+  animation: catBreathe 3s ease-in-out infinite;
+}
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #ddd;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes catBreathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.02); }
+}
+/* Dark mode */
+.dark .terminal-pet,
+.dark .pet-toggle {
+  background: #1a1a1a;
+}
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 200px;
+    right: 10px;
+  }
+  .pet-toggle {
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .pet-toggle-icon {
+    font-size: 13px;
+  }
+  .pet-toggle-label {
+    font-size: 7px;
+  }
+  .pet-ascii {
+    font-size: 9px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var catFrames = [
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( -.- ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)']
+  ];
+
+  var messages = [
+    '> Welcome to the blog!',
+    '> Meow, nice to meet you!',
+    '> Just vibing here...',
+    '> Deploying purr-duction...',
+    '> git commit -m "feed cat"',
+    '> printf("meow\\n");',
+    '> 404: Treats not found',
+    '> while(true) { nap(); }',
+    '> sudo rm -rf belly_rub',
+    '> Cat > Dog // true',
+    '> Loading cuteness... 100%',
+    '> echo "Hello World!"',
+    '> Compiling... nyaaa~'
+  ];
+
+  var currentFrame = 0;
+  var currentMsg = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var header = container.querySelector('.terminal-header');
+  var isOpen = false;
+
+  function updateCat() {
+    if (!isOpen) return;
+    petEl.textContent = catFrames[currentFrame].join('\n');
+    currentFrame = (currentFrame + 1) % catFrames.length;
+  }
+
+  function typewriterEffect(text, el, speed) {
+    speed = speed || 50;
+    el.textContent = '';
+    var i = 0;
+    var interval = setInterval(function() {
+      if (i < text.length) {
+        el.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, speed);
+  }
+
+  function changeMessage() {
+    if (!isOpen) return;
+    currentMsg = (currentMsg + 1) % messages.length;
+    typewriterEffect(messages[currentMsg], msgEl, 40);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    updateCat();
+    typewriterEffect(messages[0], msgEl, 40);
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+  }
+
+  // Toggle button click
+  toggleBtn.addEventListener('click', openPet);
+
+  // Close button
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+
+  // Animation loops (only run when open)
+  setInterval(updateCat, 1000);
+  setInterval(changeMessage, 4000);
+
+  // Drag functionality
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  // Clear localStorage to reset pet state on page load
+  try {
+    localStorage.removeItem('terminal-pet-hidden');
+  } catch(e) {}
+
+  header.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+
+  // Touch support
+  header.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    var touch = e.touches[0];
+    dragOffsetX = touch.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = touch.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    var touch = e.touches[0];
+    var x = touch.clientX - dragOffsetX;
+    var y = touch.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  }, { passive: true });
+  document.addEventListener('touchend', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+})();
+</script>
 </body>
 </html>

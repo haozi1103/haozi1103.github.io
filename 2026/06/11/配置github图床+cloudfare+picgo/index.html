@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="使用 GitHub 仓库 + PicGo + CDN 服务搭建个人博客图床 引言  在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用GitHub仓库+PicGo+CDN服务搭建个人博客图床">
+<meta property="og:url" content="http://haozi.space/2026/06/11/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="使用 GitHub 仓库 + PicGo + CDN 服务搭建个人博客图床 引言  在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305200944050.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201149616.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201409082.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201552890.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260307095315759.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201654797.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201748322.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202156876.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202811377.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202942889.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203033192.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203223281.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203624484.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305204522411.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205655868.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205944672.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/tc7.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210510004.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210400758.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210837538.png">
+<meta property="article:published_time" content="2026-06-11T07:01:15.583Z">
+<meta property="article:modified_time" content="2026-06-11T07:04:51.687Z">
+<meta property="article:author" content="haozi">
+<meta property="article:tag" content="PicGo">
+<meta property="article:tag" content="GitHub">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png">
+
+<link rel="canonical" href="http://haozi.space/2026/06/11/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- HarmonyOS Sans SC Font -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
+<style>
+  /* Fallback: If LXGW WenKai is used, override font-family */
+  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
+  /*
+  @font-face {
+    font-family: 'HarmonyOS Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
+  }
+  */
+</style>
+
+  <title>使用GitHub仓库+PicGo+CDN服务搭建个人博客图床 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用GitHub仓库+PicGo+CDN服务搭建个人博客图床
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：15:04:51" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">方法</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>使用 GitHub 仓库 + PicGo + CDN 服务搭建个人博客图床</h1>
+<h2 id="引言">引言</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png" alt="image-20260305212844692"></p>
+<p>在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理上传，再通过 CDN 服务加速访问，搭建了一个长期可用、方便管理的个人博客图床。</p>
+<span id="more"></span>
+<h2 id="需要的工具">需要的工具</h2>
+<p>需要准备的工具和资源如下</p>
+<ol>
+<li>GitHub 账号以及一个新的仓库，例如 img-bed</li>
+<li>PicGo</li>
+<li>CDN 服务，例如 jsDelivr 或其他支持 GitHub 仓库加速的服务</li>
+<li>Typora(日常写博客使用的软件，用于检验图床是否生效)</li>
+</ol>
+<h2 id="GitHub-仓库搭建">GitHub 仓库搭建</h2>
+<ol>
+<li>
+<p>登录 GitHub，创建一个新仓库，建议名称为 img-bed</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305200944050.png" alt="image-20260305200944050"></p>
+</li>
+<li>
+<p>将仓库设置为 Public，仓库建议使用公开仓库，方便 CDN 访问</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201149616.png" alt="image-20260305201149616"></p>
+<p>这样就是创建成功，就可以了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201409082.png" alt="image-20260305201409082"></p>
+</li>
+</ol>
+<h2 id="PicGo-下载与配置">PicGo 下载与配置</h2>
+<h3 id="前置操作">前置操作</h3>
+<ol>
+<li>
+<p>安装 PicGo 应用并启动</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201552890.png" alt="image-20260305201552890"></p>
+<p>可能遇到的问题：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260307095315759.png" alt="image-20260307095315759"></p>
+</li>
+<li>
+<p>配置仓库信息：仓库名、分支、上传路径</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201654797.png" alt="image-20260305201654797"></p>
+<p>点击添加图床</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201748322.png" alt="image-20260305201748322"></p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202156876.png" alt="image-20260305202156876"></p>
+<h3 id="设定存储路径">设定存储路径</h3>
+<p>建议在仓库中创建 img 文件夹专门存放图片（可以用年份来区分，比如我是2026年上传的，就可以命名为img2026）</p>
+<p>仓库结构示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img-bed</span><br><span class="line"> └ img2026</span><br><span class="line">     ├ example1.png</span><br><span class="line">     ├ example2.jpg</span><br></pre></td></tr></table></figure>
+<h3 id="token的获取">token的获取</h3>
+<p>打开以下链接：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
+<p>进行以下操作</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202811377.png" alt="image-20260305202811377"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202942889.png" alt="image-20260305202942889"></p>
+<p>记得打开repo</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203033192.png" alt="image-20260305203033192"></p>
+<p>之后会生成一个token，复制进PicGo配置即可</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203223281.png" alt="image-20260305203223281"></p>
+<h3 id="自定义域名（CDN服务）">自定义域名（CDN服务）</h3>
+<p>如果不使用CDN服务的话，你就可能这样</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203624484.png" alt="image-20260305203624484"></p>
+<p>为了加速访问和解决跨域问题，可以使用 jsDelivr 这样的服务,操作很简单</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把一坨 https://cdn.jsdmirror.com/gh/用户名/仓库名@分支 复制进PicGo即可</span><br></pre></td></tr></table></figure>
+<h3 id="上传">上传</h3>
+<p>上传操作超级简单，不难</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305204522411.png" alt="image-20260305204522411"></p>
+<p>例如你上传了 pic1.png，你的剪贴板会有这一串信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/pic1.png</span><br></pre></td></tr></table></figure>
+<p>用这个url链接复制进浏览器，看看能不能打开访问你上传的图片，能的话就说明配置成功了。恭喜你已经快成功了</p>
+<h2 id="集成到Typora">集成到Typora</h2>
+<h3 id="Typora的下载">Typora的下载</h3>
+<p><a target="_blank" rel="noopener" href="https://cloud.189.cn/t/fqE3Af6nq6vi">https://cloud.189.cn/t/fqE3Af6nq6vi</a> （访问码：jkk9）</p>
+<p>分享了链接，不用自己去破解</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205655868.png" alt="image-20260305205655868"></p>
+<h3 id="Typora配置图床服务">Typora配置图床服务</h3>
+<p>进去设置-偏好设置-图像-进行以下操作：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205944672.png" alt="image-20260305205944672"></p>
+<p>显示以下画面就是成功啦！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/tc7.png" alt="tc7"></p>
+<p>使用截图软件先截图，ctrl+c进入你的博客文章里面去，直接上传的感觉，太爽！</p>
+<p>好啦，可以去玩了，这个功能好好玩的，嘿嘿</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210510004.png" alt="image-20260305210510004"></p>
+<h2 id="头脑风暴">头脑风暴</h2>
+<h3 id="自定义子域名">自定义子域名</h3>
+<ul>
+<li>将自己的域名，例如 <a target="_blank" rel="noopener" href="http://img.mydomain.com">img.mydomain.com</a>，直接绑定到 CDN 地址，</li>
+</ul>
+<h3 id="博客的相册功能">博客的相册功能</h3>
+<ul>
+<li>很久没用的博客相册功能可以用上了</li>
+</ul>
+<h3 id="多设备上传到github图床">多设备上传到github图床</h3>
+<p>比如你有一个笔记本电脑，也想要通过picgo来上传图片，只需要按照教程来（仓库如果已经建了img-bed就不需要建一个新的），在笔记本电脑上下载PicGo，按照步骤进行PicGo配置，获取一个新的token授权，typora的设置也如出一辙。</p>
+<h2 id="总结">总结</h2>
+<p>本文介绍了一个稳定可控的个人博客图床搭建方案，使用 GitHub 仓库存储图片，PicGo 管理上传，CDN 加速访问，实现跨域友好、快速加载、长期可维护。</p>
+<p>笔者在使用ai的过程中，一开始ai告诉我的方案是picgo+github+cloudfare方案，但是捣鼓了很久都没有搞出来，其中有一步我按照他说的来配置，是这样的：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210400758.png" alt="image-20260305210400758"></p>
+<p>搞了很久，我都怀疑是这里出了问题，可是ai是这样的，你不去怀疑他，他死活不知道自己错了这里，直到我指出他这里可能有问题，他跟我说，这是不能用的！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210837538.png" alt="image-20260305210837538"></p>
+<p>算是把这一步推倒重来了，气死我了！</p>
+<p>AI 可以帮你生成脚本和优化步骤，但是会出现很致命的错误，不能代替的，是你的思考。操作细节仍需我们去把控。</p>
+<p>以后可以去做的：</p>
+<p>1.让ai互相挑刺，这样可以保证不要被ai的一面之词蒙蔽，要做一个擦亮眼睛的皇上，ai只不过是帮你出谋划策的太监。</p>
+<p>2.ai要用，但是不要滥用，像这样技术类的方案，google可以搜到很成熟的案例，这样可以少走很多弯路。</p>
+<p>3.不要高估ai的分析判断能力，有时候它自己都不知道自己在说什么，不要盲目相信ai</p>
+<p>4.对ai的提问要具体，当问题描述清楚时，AI 往往可以成为一个效率很高的技术助手</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.提供完整背景</span><br><span class="line">如何配置图床-&gt;我正在使用 GitHub 仓库作为图床，仓库名为 img-bed，使用 PicGo 上传图片，通过 jsDelivr 作为 CDN，现在访问图片时返回 404，这种情况可能是什么原因</span><br><span class="line"></span><br><span class="line">2.提供具体的路径或代码</span><br><span class="line">网页404-&gt;我访问的地址是</span><br><span class="line">https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img/tc2.png</span><br><span class="line">但是浏览器返回 404 GitHub 仓库路径是img-bed/img/tc2.png</span><br><span class="line"></span><br><span class="line">3.描述已经尝试过的步骤</span><br><span class="line"></span><br><span class="line">4.一次只问一个核心问题</span><br></pre></td></tr></table></figure>
+<p>使用ai是一门学问，用的好是好，用的不好，却是无益的</p>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 2rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="gruvbox"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PicGo/" rel="tag"># PicGo</a>
+              <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/06/11/%E8%80%97%E5%AD%90%E7%9A%84%E7%94%9F%E6%B4%BB%E6%A8%A1%E5%9E%8B/" rel="prev" title="耗子的生活模型">
+      <i class="fa fa-chevron-left"></i> 耗子的生活模型
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">使用 GitHub 仓库 + PicGo + CDN 服务搭建个人博客图床</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.</span> <span class="nav-text">需要的工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub-%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA"><span class="nav-number">1.3.</span> <span class="nav-text">GitHub 仓库搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PicGo-%E4%B8%8B%E8%BD%BD%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">PicGo 下载与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.1.</span> <span class="nav-text">前置操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E5%AE%9A%E5%AD%98%E5%82%A8%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.2.</span> <span class="nav-text">设定存储路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#token%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="nav-number">1.4.3.</span> <span class="nav-text">token的获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%EF%BC%88CDN%E6%9C%8D%E5%8A%A1%EF%BC%89"><span class="nav-number">1.4.4.</span> <span class="nav-text">自定义域名（CDN服务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.4.5.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E5%88%B0Typora"><span class="nav-number">1.5.</span> <span class="nav-text">集成到Typora</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Typora%E7%9A%84%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.5.1.</span> <span class="nav-text">Typora的下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Typora%E9%85%8D%E7%BD%AE%E5%9B%BE%E5%BA%8A%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.5.2.</span> <span class="nav-text">Typora配置图床服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4"><span class="nav-number">1.6.</span> <span class="nav-text">头脑风暴</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%90%E5%9F%9F%E5%90%8D"><span class="nav-number">1.6.1.</span> <span class="nav-text">自定义子域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%9B%B8%E5%86%8C%E5%8A%9F%E8%83%BD"><span class="nav-number">1.6.2.</span> <span class="nav-text">博客的相册功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%AE%BE%E5%A4%87%E4%B8%8A%E4%BC%A0%E5%88%B0github%E5%9B%BE%E5%BA%8A"><span class="nav-number">1.6.3.</span> <span class="nav-text">多设备上传到github图床</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">Good morning, and in case I don't see you, good afternoon, good evening, and good night!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - ASCII Cat -->
+<div id="pet-toggle" class="pet-toggle" title="Click to open terminal pet">
+  <span class="pet-toggle-icon">>_</span>
+  <span class="pet-toggle-label">Pet</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet" style="display:none;">
+  <div class="terminal-header">
+    <span class="terminal-dot red"></span>
+    <span class="terminal-dot yellow"></span>
+    <span class="terminal-dot green"></span>
+    <span class="terminal-title">haozi's blog~</span>
+    <span class="terminal-close" id="pet-close">&times;</span>
+  </div>
+  <div class="terminal-body">
+    <pre id="pet-ascii" class="pet-ascii"></pre>
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #2d2d2d;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  opacity: 0.85;
+}
+.pet-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px #7e8027;
+}
+.pet-toggle-icon {
+  color: #7e8027;
+  font-family: 'Consolas', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+}
+.pet-toggle-label {
+  color: #888;
+  font-size: 8px;
+  margin-top: 2px;
+}
+
+/* Terminal Pet Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 260px;
+  background: #2d2d2d;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  z-index: 9999;
+  font-family: 'Consolas', 'Courier New', monospace;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0.95;
+}
+.terminal-pet:hover {
+  opacity: 1;
+  box-shadow: 0 2px 5px #7e8027;
+}
+.terminal-header {
+  background: #2d2d2d;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: move;
+  user-select: none;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+.terminal-title {
+  color: #aaa;
+  font-size: 11px;
+  margin-left: 8px;
+  flex: 1;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #888;
+  background: #e81123;
+}
+.terminal-body {
+  padding: 12px 14px 10px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pet-ascii {
+  color: #7e8027;
+  font-size: 11px;
+  line-height: 1.2;
+  margin: 0;
+  white-space: pre;
+  text-align: center;
+  transition: color 0.3s;
+  animation: catBreathe 3s ease-in-out infinite;
+}
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #ddd;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes catBreathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.02); }
+}
+/* Dark mode */
+.dark .terminal-pet,
+.dark .pet-toggle {
+  background: #1a1a1a;
+}
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 200px;
+    right: 10px;
+  }
+  .pet-toggle {
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .pet-toggle-icon {
+    font-size: 13px;
+  }
+  .pet-toggle-label {
+    font-size: 7px;
+  }
+  .pet-ascii {
+    font-size: 9px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var catFrames = [
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( -.- ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)']
+  ];
+
+  var messages = [
+    '> Welcome to the blog!',
+    '> Meow, nice to meet you!',
+    '> Just vibing here...',
+    '> Deploying purr-duction...',
+    '> git commit -m "feed cat"',
+    '> printf("meow\\n");',
+    '> 404: Treats not found',
+    '> while(true) { nap(); }',
+    '> sudo rm -rf belly_rub',
+    '> Cat > Dog // true',
+    '> Loading cuteness... 100%',
+    '> echo "Hello World!"',
+    '> Compiling... nyaaa~'
+  ];
+
+  var currentFrame = 0;
+  var currentMsg = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var header = container.querySelector('.terminal-header');
+  var isOpen = false;
+
+  function updateCat() {
+    if (!isOpen) return;
+    petEl.textContent = catFrames[currentFrame].join('\n');
+    currentFrame = (currentFrame + 1) % catFrames.length;
+  }
+
+  function typewriterEffect(text, el, speed) {
+    speed = speed || 50;
+    el.textContent = '';
+    var i = 0;
+    var interval = setInterval(function() {
+      if (i < text.length) {
+        el.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, speed);
+  }
+
+  function changeMessage() {
+    if (!isOpen) return;
+    currentMsg = (currentMsg + 1) % messages.length;
+    typewriterEffect(messages[currentMsg], msgEl, 40);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    updateCat();
+    typewriterEffect(messages[0], msgEl, 40);
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+  }
+
+  // Toggle button click
+  toggleBtn.addEventListener('click', openPet);
+
+  // Close button
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+
+  // Animation loops (only run when open)
+  setInterval(updateCat, 1000);
+  setInterval(changeMessage, 4000);
+
+  // Drag functionality
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  // Clear localStorage to reset pet state on page load
+  try {
+    localStorage.removeItem('terminal-pet-hidden');
+  } catch(e) {}
+
+  header.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+
+  // Touch support
+  header.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    var touch = e.touches[0];
+    dragOffsetX = touch.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = touch.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    var touch = e.touches[0];
+    var x = touch.clientX - dragOffsetX;
+    var y = touch.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  }, { passive: true });
+  document.addEventListener('touchend', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+})();
+</script>
+</body>
+</html>

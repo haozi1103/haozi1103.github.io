@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="就像小米 为发烧而生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能加工装备设计 为考试而生">
+<meta property="og:url" content="http://haozi.space/2026/06/11/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="就像小米 为发烧而生">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260311155619007.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7828.jpeg">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7829.jpeg">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260311170806972.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7825.jpeg">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316113242870.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316113311501.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316113546270.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7867.jpeg">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316120335670.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316120454239.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316162609300.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318201001884.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323173350829.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323202210470.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323202649169.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203118281.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203534518.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203227087.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203557829.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203606669.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203810682.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203932027.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204436117.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204529082.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204604709.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204616824.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204626192.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204648848.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325154618787.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325154626511.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325154704114.png">
+<meta property="og:image" content="c:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260325155542506.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325161033540.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325160731776.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325160535494.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325161922806.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325161913859.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325162459258.png">
+<meta property="article:published_time" content="2026-06-11T07:01:15.528Z">
+<meta property="article:modified_time" content="2026-06-11T08:02:25.094Z">
+<meta property="article:author" content="haozi">
+<meta property="article:tag" content="智能加工装备设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260311155619007.png">
+
+<link rel="canonical" href="http://haozi.space/2026/06/11/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- HarmonyOS Sans SC Font -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
+<style>
+  /* Fallback: If LXGW WenKai is used, override font-family */
+  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
+  /*
+  @font-face {
+    font-family: 'HarmonyOS Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
+  }
+  */
+</style>
+
+  <title>智能加工装备设计 为考试而生 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          智能加工装备设计 为考试而生
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-11 15:01:15 / 修改时间：16:02:25" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">考试</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">就像小米 为发烧而生</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260311155619007.png" alt="image-20260311155619007"></p>
+<span id="more"></span>
+<h1>第二章 金属切削机床设计</h1>
+<h2 id="基本要求和理论">基本要求和理论</h2>
+<h2 id="机床总体设计">机床总体设计</h2>
+<h2 id="主传动系统设计">主传动系统设计</h2>
+<ul>
+<li>
+<p><strong>主传动系</strong>由动力源（如电动机）、变速装置及执行件，以及开停、换向和制动机构等部分组成。</p>
+</li>
+<li>
+<p>主传动系统的不同分类：</p>
+<ul>
+<li>
+<p>按驱动主传动的电动机分为：交流电动机驱动和直流电动机驱动</p>
+</li>
+<li>
+<p>按传动装置类型分为：机械传动、液压传动、电气传动及其组合</p>
+</li>
+<li>
+<p>按变速的连续性分为：<strong>分级变速传动</strong>和无级变速传动</p>
+<ul>
+<li>
+<p>分级变速传动方式有滑移齿轮变速、 交换齿轮变速和离合器（如摩擦式、 牙嵌式、 齿轮式离合器） 变速</p>
+<ul>
+<li>
+<p><strong>那么，我们怎么去设计分级变速主传动系统呢？（重点)</strong></p>
+<p>基本的内容和步骤如下：根据已经确定的主变速传动系统的<strong>运动参数</strong>，拟订<strong>转速图、结构式</strong>，合理分配各变速组中传动副的<strong>传动比</strong>，确定<strong>齿轮齿数</strong>，确定<strong>计算转速</strong>，绘制分级变速<strong>传动系统图</strong></p>
+<p>来，我们一个个解释：</p>
+<ol>
+<li>
+<p><strong>传动系统图</strong>：指的是用图形符号表示的动力源与执行件、不同执行件之间的传动关系，也称为传动链。下图中，轴1和2之间是三级齿轮变速传动，因为有3个传动副存在，同理，轴2和3之间是二级变速传动，3、4之间是二级变速传动</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7828.jpeg" alt="IMG_7828" style="zoom: 33%;" />
+</li>
+<li>
+<p><strong>转速图</strong></p>
+<p>转速图由一些互相平行和垂直的格线组成，距离相等的一组竖线表示各轴，距离相等的一组横线表示各级转速，是<strong>对数坐标</strong>，每一格之间表示的转速之比是等比级数的公比φ（下图的例子里φ=sqrt(2))</p>
+<p><strong>转速点</strong>指的是该轴所具有的转速</p>
+<p><strong>传动线</strong>指的是格线间转速点的连线，可以从传动线的变化趋势看出传动比u的大小：</p>
+<p>传动线是水平的-u=1</p>
+<p>上升的-u&gt;1</p>
+<p>下降的-u&lt;1</p>
+<p>下降的越陡-u越小</p>
+<p>上升的越快-u越大</p>
+<p><strong>级数</strong>：3x2x2=12级，可以理解为有12档的转速</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7829.jpeg" alt="IMG_7829" style="zoom:33%;" />
+</li>
+<li>
+<p><strong>结构式</strong></p>
+<p>在本例中，结构式表示为：12=3~1~x2~3~x2~6~，12表示主轴的转速级数为12级，3、2、2分别表示不同<strong>变速组</strong>的转动副的个数，1、3、6表示不同变速组的级比指数</p>
+<p>级比：可以理解为是当前变速组不同级数的转速的比值，用φ^Xi^表示</p>
+<p>级比指数：就是上面那个式子里的X~i~</p>
+<p>要使得主轴转速为连续的等比数列，必须有一个变速组的级比指数为1（在图中的体现是，垂直方向只差一格），这个组叫<strong>基本组</strong>，除此之外，还有第一扩大组和第二扩大组</p>
+<p>结构式一般可以写作：Z=P~a~X~a~ x P~b~X~b~ X … X P~i~X~i~(P~i~指的是变速组里面的转动副个数)</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260311170806972.png" alt="image-20260311170806972"  />
+</li>
+<li>
+<p><strong>变速组的变速范围 极限传动比</strong></p>
+<p>变速组的变速范围可以写作R~i~=φ^（Pi-1）*Xi^，一般只需要检查最后一个扩大组即可</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>分级变速主传动系统设计的一般原则（重点)</strong></p>
+<p>前缓后急这一点还不是很理解，其他几点为什么，也不是很理解</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7825.jpeg" alt="IMG_7825"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>无级变速传动有机械摩擦无级变速器、 液压无级变速器和电气无级变速器</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>主传动系统的几种特殊设计</p>
+<ul>
+<li>
+<p>具有多速电机的设计：你可以理解为电机有不同的转速，这样自然就可以实现运转过程中的变速，但是缺点也很明显，就是当电机在高速时，没有完全发挥其能力。原因是：为了使用方便，主轴在一切转速下电动机功率都定为7.5kw，这就导致高速的情况下主轴输出的转矩很低，如果负载需要更大的转矩，电机就带不动了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316113242870.png" alt="image-20260316113242870"></p>
+</li>
+<li>
+<p>交换齿轮：顾名思义，交换主从动齿轮的位置，实现传动比的互换，缺点是：如果传动装置装在变速箱外，很难润滑；如果传动装置装在变速箱内，很难去更换</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316113311501.png" alt="image-20260316113311501"></p>
+</li>
+<li>
+<p>公用齿轮：你可以理解为第三方齿轮，两个齿轮中间插了一个齿轮，这个齿轮既是第一变速组的从动齿轮，同时也是第二变速组的主动齿轮，相当于把齿轮合二为一了，减少了齿轮的个数，同时也保证一根轴不需要那么多齿轮在上面，自然也就缩短了轴向距离。但是公用齿轮寿命短，受的弯曲应力是对称循环应力，<strong>所以在保证模数不变的情况下，选用较大的齿轮作为公共齿轮</strong>（<strong>模数m不变</strong> → 齿数z越大，分度圆直径d= m×z越大）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316113546270.png" alt="image-20260316113546270"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>扩大传动系变速范围的方法</p>
+<ul>
+<li>
+<p>增加变速组</p>
+<p>需要注意的是，变速范围R~n~针对的是单一的变速组，而不是整个传动系统的，我们只需要保证每一个变速组的R~n~小于8即可</p>
+<p>（2X2-1），开枝散叶来看，每一个母点本来是要生4个子点的，但是有两个子点都是重合的，所以就要减去一个了</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7867.jpeg" alt="IMG_7867" style="zoom:33%;" />
+</li>
+<li>
+<p>采用背轮机构</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316120335670.png" alt="image-20260316120335670"></p>
+</li>
+<li>
+<p>采用双公比传动结构：可以理解为把中段的转速变得更密集，低、高段的转速就松散一点（因为用的少嘛）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316120454239.png" alt="image-20260316120454239"></p>
+</li>
+<li>
+<p>采用分支传动：就是在原来串联系统的基础上，增加了并联的分支，扩大了变速范围</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260316162609300.png" alt="image-20260316162609300" style="zoom:50%;" />
+</li>
+</ul>
+</li>
+<li>
+<p>齿轮齿数的确定</p>
+<ul>
+<li>
+<p>齿数和不应过大，一般推荐齿数和 S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span>≤ 100-120</p>
+</li>
+<li>
+<p>为了保证最小齿轮不产生根切以及主传动具有较好的运动平稳性， 对于标准圆柱齿轮， 一般取最小齿轮齿数 Z<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">_{min}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4617em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>≥18-20;</p>
+<p>受结构限制的最小齿数的齿轮应能可靠地装到轴上或套装。 齿轮和轴为键连接时， 则应保证齿根圆至键槽顶面的距离大于两个模数， 即应该满足：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mi>m</mi><msub><mi>Z</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>−</mo><mn>2.5</mn><mi>m</mi></mrow><mn>2</mn></mfrac><mo>−</mo><mi>T</mi><mo>≥</mo><mn>2</mn><mi>m</mi><mspace linebreak="newline"></mspace><msub><mi>Z</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>≥</mo><mfrac><mrow><mn>2</mn><mi>T</mi></mrow><mi>m</mi></mfrac><mo>+</mo><mn>6.5</mn><mspace linebreak="newline"></mspace><mtext>其中</mtext><mi>m</mi><mtext>是齿轮模数，</mtext><msub><mi>Z</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mtext>是齿轮的最小齿数，</mtext><mi>T</mi><mtext>是键槽到齿轮轴线的高度</mtext></mrow><annotation encoding="application/x-tex">\frac{mZ_{min}-2.5m}{2}-T\geq2m\\ 
+Z_{min}\geq\frac{2T}{m}+6.5\\
+其中m是齿轮模数，Z_{min}是齿轮的最小齿数，T是键槽到齿轮轴线的高度
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2.5</span><span class="mord mathnormal">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mord mathnormal">m</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">m</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">6.5</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">其中</span><span class="mord mathnormal">m</span><span class="mord cjk_fallback">是齿轮模数，</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">是齿轮的最小齿数，</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord cjk_fallback">是键槽到齿轮轴线的高度</span></span></span></span></span></p>
+</li>
+<li>
+<p>传动比要求， 分配各齿轮副齿数应符合转速图上的传动比要求。 实际传动比（ 齿轮齿数之比） 与理论传动比（ 转速图给定） 之间允许有误差， 但是不能过大。由于分配齿轮齿数所造成主轴转速的相对误差， 一般不能超过</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msub><mi>n</mi><mtext>理</mtext></msub><mo>−</mo><msub><mi>n</mi><mtext>实</mtext></msub></mrow><msub><mi>n</mi><mtext>理</mtext></msub></mfrac><mo>&lt;</mo><mo>±</mo><mn>10</mn><mtext>（</mtext><mi>ϕ</mi><mo>−</mo><mn>1</mn><mtext>）</mtext><mi mathvariant="normal">%</mi><mspace linebreak="newline"></mspace><mi>ϕ</mi><mtext>是公比，</mtext><msub><mi>n</mi><mtext>理</mtext></msub><mtext>是理想的主轴转速，</mtext><msub><mi>n</mi><mtext>实</mtext></msub><mtext>是齿轮传动实现的实际主轴转速</mtext></mrow><annotation encoding="application/x-tex">\frac{n_理-n_实}{n_理}&lt;\pm10（\phi-1）\%\\
+\phi是公比，n_理是理想的主轴转速，n_实是齿轮传动实现的实际主轴转速
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0963em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">理</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">理</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">实</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">±</span><span class="mord">10</span><span class="mord cjk_fallback">（</span><span class="mord mathnormal">ϕ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em;"></span><span class="mord">1</span><span class="mord cjk_fallback">）</span><span class="mord">%</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">ϕ</span><span class="mord cjk_fallback">是公比，</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">理</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">是理想的主轴转速，</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">实</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">是齿轮传动实现的实际主轴转速</span></span></span></span></span></p>
+</li>
+</ul>
+</li>
+<li>
+<p>确定计算转速</p>
+<ul>
+<li>不同的运动方式
+<ul>
+<li>主运动为直线运动的机床，属于<strong>恒转矩传动</strong></li>
+<li>主运动为旋转运动的机床，旋转运动的变速机构，输出转矩与转速成反比，基本是<strong>恒功率</strong>的</li>
+</ul>
+</li>
+<li><strong>计算转速</strong>：主轴或各传动件传递全部功率的最低转速<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>​</li>
+</ul>
+</li>
+</ul>
+<h2 id="进给传动系设计">进给传动系设计</h2>
+<ul>
+<li>
+<p>主传动和进给传动有什么区别？</p>
+<p>可以这样理解，主传动管的是刀具转动的多快，进给传动管的是刀具怎么去切工件，刀具怎么去动、工件怎么去动，刀具怎么去精细的切工件</p>
+</li>
+<li>
+<p>基本要求</p>
+<p><strong>足够的静刚度和动刚度、动态性能好、抗振性好、调速范围宽、传动精度和定位精度高、结构简单</strong></p>
+</li>
+<li>
+<p>组成部分</p>
+<p>由<strong>动力源、变速机构、换向机构、运动分配机构、过载保险机构、运动转换机构和执行件</strong>等组成</p>
+<p>动力源可以采取单独电动机；也可以和主传动共用一个动力源，便于保证主传动和进给传动之间的严格传动比关系，<strong>适用于有内联系传动链的机床</strong></p>
+<p>变速机构：用来改变进给量的大小</p>
+<p>换向机构：进给电动机换向和齿轮换向</p>
+<p>运动分配机构：用来转换传动路线，常采用离合器</p>
+<p>过载保险机构：作用是在过载时自动断开进给运动，过载排除后自动接通</p>
+<p>运动转换机构：用来变换运动的类型如回转运动变直线运动</p>
+</li>
+<li>
+<p>分类</p>
+<p><strong>机械进给传动、伺服进给传动、直接进给传动</strong></p>
+<p>机械进给传动是变速部分和传动部分均采用机械方式</p>
+<p>伺服进给传动指的是进给变速采用的是伺服电动机或步进电动机，变速是无级变速，而传动部分采用机械方式</p>
+<p>直接进给传动也称为零传动进给传动系统，采用直线电动机直接传动，彻底消除中间机械传动环节，是比较贵的，也是最精密的</p>
+<ul>
+<li>
+<p>机械进给传动设计特点</p>
+<p>1）进给传动是恒转矩传动</p>
+<p>2）进给传动系中各传动件的计算转速是其最高转速</p>
+<p>3）进给传动的转速图为前疏后密结构，与主传动系（前密后疏）相反</p>
+<p>4）进给传动的变速范围大</p>
+</li>
+<li>
+<p>伺服进给传动设计特点</p>
+<ul>
+<li>
+<p>分为开环伺服驱动系统、闭环伺服系统、半闭环伺服系统</p>
+</li>
+<li>
+<p>进给驱动部件的类型和特点</p>
+<p>1）步进电动机：没有累积误差，制造成本低。缺点是效率较低，发热大，有时会失步</p>
+<p>2）直流伺服电动机：转动惯量小，响应时间快、缺点是额定转矩小</p>
+<p>3）交流伺服电动机：可靠性好，体积小，重量轻，动态响应好</p>
+<p>4）直流伺服电动机：无接触直接驱动，可靠性高，体积小，传动刚度高，响应快，可得到瞬时高的加/减速度</p>
+</li>
+<li>
+<p>伺服进给传动设计里的<strong>机械结构设计</strong></p>
+<ul>
+<li>
+<p>要求运动部件动作灵敏、低惯性、定位精度好、阻尼比适宜、以及传动机构不能有反向间隙</p>
+</li>
+<li>
+<p><strong>最佳降速比确定（这里有公式，不知道要不要记）</strong></p>
+</li>
+<li>
+<p>齿轮传动间隙的消除：刚性调整法、柔性调整法</p>
+</li>
+<li>
+<p>滚珠丝杠及其支承</p>
+</li>
+<li>
+<p>丝杠的拉压刚度计算</p>
+</li>
+<li>
+<p>滚珠丝杠的预拉伸：提高抗拉刚度、补偿丝杠的热变形</p>
+<p>1）使丝杠在最大轴向载荷作用下，在受力方向上仍能保持受拉状态，预拉伸力应大于最大工作载荷的0.35倍</p>
+<p>2）丝杠的预拉伸量应能补偿丝杠的热变形</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>直接进给传动设计特点</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="支承件设计">支承件设计</h2>
+<ul>
+<li>
+<p>机床的支承件是指<strong>床身、立柱、横梁、底座等大件</strong>，相互固定联接成机床的基础和框架</p>
+</li>
+<li>
+<p>主要功能：保证机床各零部件之间的相互位置和相互运动精度，并保证机床有足够的静刚度、抗振性、热稳定性和耐用度</p>
+</li>
+<li>
+<p>主要承受：重力、切削力、摩擦力、传动力</p>
+</li>
+<li>
+<p>支承件的材料</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318201001884.png" alt="image-20260318201001884"></p>
+</li>
+</ul>
+<h1>第三章 机床部件设计</h1>
+<h2 id="主轴设计">主轴设计</h2>
+<ul>
+<li>
+<p>主轴部件是机床最重要部件之一。它由主轴、支承轴承、传动件、密封件及定位元件等组成，用来<strong>传递扭矩、承受工作载荷</strong></p>
+</li>
+<li>
+<p>主轴部件的基本要求</p>
+<ul>
+<li>
+<p>回转精度</p>
+<p>装配后，在<strong>无载荷、低速转动条件</strong>下，在安装工件或刀具的主轴部位的<strong>径向和轴向跳动</strong>。旋转精度取决于<strong>主轴、轴承、箱体孔等的制造、装配</strong></p>
+<p>径向跳动、轴向窜动均可以影响回转精度</p>
+</li>
+<li>
+<p>刚度:主轴部件的刚度指在<strong>外载荷</strong>作用下<strong>抵抗变形的能力</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323173350829.png" alt="image-20260323173350829"></p>
+<p><strong>注意</strong>，单位是N/<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">μ</span></span></span></span>​m</p>
+<p><strong>静刚度</strong>：主轴部件在静载荷作用下抵抗变形的能力</p>
+<p><strong>动刚度</strong>：主轴部件在交变载荷作用下抵抗变形的能力</p>
+<p>主轴部件的刚度受主轴的尺寸和形状，如主轴的惯性矩、悬伸量和支撑跨度等。支撑轴承的类型、数量、预紧和配置形式，传动件的布置方式，主轴部件的制造精度和装配质量也对刚度存在影响</p>
+</li>
+<li>
+<p>抗振性：机床工作时主轴部件抵抗振动、保持主轴平稳运转的能力</p>
+<p>产生振动的原因：主轴部件受到静态力的作用，也受到<strong>冲击力和交变力</strong>的作用</p>
+<p>影响抗振性的主要因素：主轴部件的静刚度、质量分布以及阻尼</p>
+<p>主轴振动直接影响工件的<strong>表面加工质量</strong>和刀具的<strong>使用寿命</strong></p>
+<p>如何避免：<strong>低阶固有频率应当远高于激振频率</strong>，使其不容易发生共振</p>
+</li>
+<li>
+<p>热稳定性：主轴部件运动时，各相对运动处的摩擦，切削区的切削热等使主轴组件的温度升高，造成形状、尺寸及位置变化</p>
+<p>热变形会引起：主轴伸长、<strong>轴承间隙变化</strong>，轴心位置变化、<strong>润滑油温升导致粘度降低</strong>，影响主轴部件的工作性能，<strong>降低加工精度</strong></p>
+</li>
+<li>
+<p>精度保持性：主轴长期<strong>保持</strong>其<strong>原始制造精度</strong>的能力</p>
+<p>影响耐磨性的主要原因是<strong>磨损</strong>，例如主轴轴承、主轴轴颈表面、装夹工件或刀具的定位表面的磨损</p>
+<p>影响耐磨性的主要因素：主轴和轴承的材料和热处理、轴承类型及润滑方式</p>
+<p>降低磨损的主要措施：<strong>提高表面硬度</strong></p>
+<p>精度保持性<strong>影响机床使用寿命内的加工精度和工作稳定性</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>主轴部件的传动方式</p>
+<ul>
+<li>
+<p>齿轮传动</p>
+<p>优点：能够传递较大的扭矩，能适应变转速、变载荷工作</p>
+<p>缺点：线速度不能过高，通常小于12~15m/s</p>
+</li>
+<li>
+<p>带传动</p>
+<p>优点：结构简单、制造容易、成本低，特别适用于中心距较大的两轴间传动</p>
+<p>缺点带传动在过载中会打滑，能起到过载保护作用。缺点是有滑动，不能用在速比要求准确的场合</p>
+<p><strong>不过有特例，同步带的传动比是准确的！但是制造工艺复杂，安装条件要求高</strong></p>
+</li>
+<li>
+<p>电机直接驱动</p>
+<p>采取<strong>异步电动机</strong>，之所以叫异步电动机，是因为它里面的转子的速度和旋转磁场的速度是不一样的，是“异步”的</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>n</mi><mn>0</mn></msub><mo>=</mo><mfrac><mrow><mn>60</mn><mi>f</mi></mrow><mi>p</mi></mfrac></mrow><annotation encoding="application/x-tex">n_0= \frac{60f}{p}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">p</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">60</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+</li>
+</ul>
+<center>n0称为旋转磁场的转速，是同步转速<center> 
+   <center>转子的实际转速n永远小于n0，两者的差值称为转差<center> 
+**为什么要有转差？**
+  因为转子上的电流是靠切割旋转磁场的磁力线产生的。如果转子转速等于磁场转速，就没有相对切割，转子中就没有感应电流，也就没有电磁力来驱动转子了。所以必须有转差，电机才能产生转矩
+<p>优点：大大<strong>简化了结构</strong>，有效地<strong>提高了主轴部件的刚度</strong>，降低了噪声和振动；有<strong>较宽的调速范围</strong>；有较大的驱动功率和扭矩</p>
+<p>缺点：成本高、可维护性很差</p>
+</li>
+<li>
+<p>主轴部件结构设计</p>
+<ul>
+<li>
+<p>包括：支承—-支承数目、支承方式；传动件----传动件布置；主轴----主轴参数、构造、材料、热处理</p>
+<ul>
+<li>
+<p>主轴部件支承数目</p>
+<p>多数机床主轴采用前、后两个支承，也有三个支承的，三个支承中可以前、后支承为主要支承，中间支承为辅助支承；也可以前、中支承为主要支承，后支承为辅助支承，且后者应用较多</p>
+</li>
+</ul>
+</li>
+<li>
+<p>推力轴承位置配置形式</p>
+<ul>
+<li>
+<p>推力轴承配置形式影响主轴的轴向刚度和主轴热变形方向及大小</p>
+</li>
+<li>
+<p>配置形式：前端配置、后端配置、两端配置、中间配置</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323202210470.png" alt="image-20260323202210470"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>主轴传动件位置的合理布置</p>
+<ul>
+<li>
+<p>传动件布置原则：传动力引起的主轴弯曲变形最小。引起主轴前端在影响加工精度的敏感方向上的位移小</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323202649169.png" alt="image-20260323202649169"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>主轴主要结构参数的确定</p>
+<p>主轴主要结构参数包括：</p>
+<p><strong>（1）主轴前轴直径D1</strong></p>
+<p><strong>（2）主轴内孔直径d</strong></p>
+<p><strong>（3）主轴前端悬伸量a</strong></p>
+<p><strong>（4）主轴主要支承间跨距L</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203118281.png" alt="image-20260323203118281"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203534518.png" alt="image-20260323203534518"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203227087.png" alt="image-20260323203227087"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203557829.png" alt="image-20260323203557829"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203606669.png" alt="image-20260323203606669"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203810682.png" alt="image-20260323203810682"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323203932027.png" alt="image-20260323203932027"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204436117.png" alt="image-20260323204436117"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204529082.png" alt="image-20260323204529082"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204604709.png" alt="image-20260323204604709"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204616824.png" alt="image-20260323204616824"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204626192.png" alt="image-20260323204626192"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260323204648848.png" alt="image-20260323204648848"></p>
+</li>
+<li>
+<p>主轴</p>
+<p>其实我对这分类很迷惑，为什么这里又跳出来一个“主轴”？</p>
+<ul>
+<li>
+<p>主轴的构造</p>
+<p>主轴的构造和形状主要取决于主轴上所安装的刀具、夹具、传动件、轴承等零件的类型、数量、位置和安装定位方法</p>
+</li>
+<li>
+<p>主轴的材料和热处理</p>
+<p>普通机床主轴可选用中碳钢（如45钢），调质处理后，在主轴端部、锥孔、定心轴颈或定心锥面等部位进行局部高频淬硬，以提高其耐磨性</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325154618787.png" alt="image-20260325154618787"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325154626511.png" alt="image-20260325154626511"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325154704114.png" alt="image-20260325154704114"></p>
+<p>主轴永远追求“表面硬、心部韧”的矛盾统一，40cr前的数字表示含碳量的万分量，40cr表示含碳量为0.4%。以此类推</p>
+</li>
+<li>
+<p>主轴的技术要求</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>主轴滚动轴承</p>
+<ul>
+<li>
+<p>轴承是主轴部件的重要组成部件</p>
+</li>
+<li>
+<p>要求：<strong>旋转精度高，刚度高、承载能力强、极限转速高、适应变速范围大</strong>、摩擦小、噪声小、抗振性好、使用寿命长、使用维护方便等</p>
+</li>
+<li>
+<p>主轴常用滚动轴承</p>
+<p>5）推力轴承：仅能承受轴向力</p>
+<p>6）陶瓷滚动轴承：材料是Si<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>​N<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>4</mn></msub></mrow><annotation encoding="application/x-tex">_4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>​<br>
+<img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260325155542506.png" alt="image-20260325155542506"></p>
+</li>
+<li>
+<p>主轴轴承选择原则</p>
+<ul>
+<li>
+<p>主轴轴承选择和配置取决于：承受载荷的大小、方向及其性质、转速大小、精度高低等</p>
+</li>
+<li>
+<p>由于主轴直径大，导致轴承直径大，它的疲劳寿命总是远大于规定值。因此，承载能力和疲劳寿命不是选择轴承的主要依据</p>
+</li>
+<li>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325161033540.png" alt="image-20260325161033540"></p>
+</li>
+<li>
+<p>三种类型：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325160731776.png" alt="image-20260325160731776"></p>
+</li>
+<li>
+<p>前轴承的<strong>精度</strong>要选得高一点，一般比后轴承高一级</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325160535494.png" alt="image-20260325160535494"></p>
+</li>
+<li>
+<p>主轴滚动轴承的预紧</p>
+<ul>
+<li>
+<p>指的是：把轴承调整到不仅完全消除间隙，而且产生一定的过盈量（称为负间隙）</p>
+</li>
+<li>
+<p>预紧是提高主轴部件回转精度、刚度和抗振性的重要手段</p>
+</li>
+<li>
+<p>有轴向和径向两种</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325161922806.png" alt="image-20260325161922806"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325161913859.png" alt="image-20260325161913859"></p>
+</li>
+<li>
+<p>预紧量不能过大，会导致预紧以后发热量增大，降低轴承寿命</p>
+</li>
+</ul>
+</li>
+<li>
+<p>主轴滚动轴承的润滑</p>
+<ul>
+<li>
+<p>作用：减少摩擦、降低温升</p>
+</li>
+<li>
+<p>类型：脂润滑和油润滑</p>
+<ul>
+<li>
+<p>脂润滑</p>
+<p>粘附力强、密封简单</p>
+<p>不需要经常添加和更换，维护方便</p>
+<p>一般的润滑脂摩擦阻力比润滑油大</p>
+<p>润滑脂使用于速度低、温度低、不需要冷却的场合，例如钻床、立铣</p>
+</li>
+<li>
+<p>油润滑</p>
+<p>适用于速度快、温度高的场合</p>
+<p>分为：油浴、滴油、循环润滑、油雾润滑、油气润滑和喷射润滑</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325162459258.png" alt="image-20260325162459258"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>轴承的密封</p>
+<ul>
+<li>
+<p>防止润滑油外流，以免增加耗油量，影响外观，污染环境；防止灰尘、金属屑等进入轴承</p>
+</li>
+<li>
+<p>类型</p>
+<p>1）接触式</p>
+<p>2）非接触式</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="导轨设计">导轨设计</h2>
+<ul>
+<li>
+<p>导轨有什么用？</p>
+<p>承受载荷、导向</p>
+</li>
+<li>
+<p>有什么类型？</p>
+<p>1）按运动性质</p>
+<p>直线导轨、回转导轨</p>
+<p>回转导轨还可以分为回转角度&gt;360°的旋转导轨和回转角度&lt;360°的弧形导轨</p>
+<p>2）按摩擦性质</p>
+<p>滑动导轨、静压导轨、动压导轨、滚动导轨</p>
+<ul>
+<li>
+<p>滑动导轨</p>
+<ul>
+<li>
+<p>直线滑动导轨的截面形状选择</p>
+<p>矩形：承载大，导向性较差</p>
+<p>三角形：α角越小，导向性越好，但是同时摩擦力会越大，有对称/不对称之分</p>
+<p>燕尾形：可以承受较大的倾覆力矩，但是刚度较差</p>
+<p>圆柱形：磨损以后很难调整和补偿间隙，一般用于承受轴向载荷</p>
+</li>
+<li>
+<p>回转滑动导轨的截面形状选择（这一部分其实不是很懂，那些图画的啥都。。。）</p>
+<p>平面环形导轨</p>
+<p>锥面环形导轨：轴向力+径向力</p>
+<p>双锥面导轨：轴向力+径向力+一定的倾覆力矩，但是制造研磨比较困难</p>
+</li>
+<li>
+<p>导轨的组合形式</p>
+<p>双三角形</p>
+<p>双矩形</p>
+<p>矩形+三角形</p>
+<p>矩形+燕尾形</p>
+</li>
+<li>
+<p>导轨间隙调整</p>
+<p>如果间隙过大，经影响运动精度和平稳性；间隙过小，运动阻力大，导轨的磨损加快</p>
+<ul>
+<li>
+<p>怎么调整？</p>
+<p>1）压板</p>
+<p>2）镶条（说实话，不懂这个）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>导轨的卸荷</p>
+<ul>
+<li>
+<p>目的：减轻支承导轨的负荷</p>
+</li>
+<li>
+<p>分类</p>
+<p>机械卸荷、液压卸荷、气压卸荷</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>滚动导轨</p>
+<ul>
+<li>
+<p>分类</p>
+<p>按滚动体类型：滚珠、滚柱、滚针</p>
+<p>按循环方式：非循环式、循环式</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>3）按结构形式</p>
+<p>开式导轨、闭式导轨</p>
+<p><strong>开式导轨不能承受倾覆力矩，而闭式导轨可以承受倾覆力矩</strong></p>
+</li>
+<li>
+<p><strong>提高导轨精度和耐磨性的措施</strong></p>
+<ul>
+<li>合理选择导轨的材料和热处理方法</li>
+<li>合理的导轨预紧</li>
+<li>良好的导轨润滑和防护</li>
+<li>减少导轨的磨损</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 2rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="gruvbox"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/" rel="tag"># 智能加工装备设计</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/06/11/%E6%8A%A4%E5%9F%8E%E6%B2%B3/" rel="prev" title="护城河有什么用？">
+      <i class="fa fa-chevron-left"></i> 护城河有什么用？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/06/11/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" rel="next" title="数字化设计 为考试而生">
+      数字化设计 为考试而生 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">第二章 金属切削机床设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%A6%81%E6%B1%82%E5%92%8C%E7%90%86%E8%AE%BA"><span class="nav-number">1.1.</span> <span class="nav-text">基本要求和理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E5%BA%8A%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">机床总体设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E4%BC%A0%E5%8A%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">主传动系统设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%BB%99%E4%BC%A0%E5%8A%A8%E7%B3%BB%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.4.</span> <span class="nav-text">进给传动系设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%89%BF%E4%BB%B6%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.5.</span> <span class="nav-text">支承件设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">第三章 机床部件设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%BD%B4%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">主轴设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%BD%A8%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.2.</span> <span class="nav-text">导轨设计</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">Good morning, and in case I don't see you, good afternoon, good evening, and good night!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - ASCII Cat -->
+<div id="pet-toggle" class="pet-toggle" title="Click to open terminal pet">
+  <span class="pet-toggle-icon">>_</span>
+  <span class="pet-toggle-label">Pet</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet" style="display:none;">
+  <div class="terminal-header">
+    <span class="terminal-dot red"></span>
+    <span class="terminal-dot yellow"></span>
+    <span class="terminal-dot green"></span>
+    <span class="terminal-title">haozi's blog~</span>
+    <span class="terminal-close" id="pet-close">&times;</span>
+  </div>
+  <div class="terminal-body">
+    <pre id="pet-ascii" class="pet-ascii"></pre>
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #2d2d2d;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  opacity: 0.85;
+}
+.pet-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px #7e8027;
+}
+.pet-toggle-icon {
+  color: #7e8027;
+  font-family: 'Consolas', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+}
+.pet-toggle-label {
+  color: #888;
+  font-size: 8px;
+  margin-top: 2px;
+}
+
+/* Terminal Pet Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 260px;
+  background: #2d2d2d;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  z-index: 9999;
+  font-family: 'Consolas', 'Courier New', monospace;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0.95;
+}
+.terminal-pet:hover {
+  opacity: 1;
+  box-shadow: 0 2px 5px #7e8027;
+}
+.terminal-header {
+  background: #2d2d2d;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: move;
+  user-select: none;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+.terminal-title {
+  color: #aaa;
+  font-size: 11px;
+  margin-left: 8px;
+  flex: 1;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #888;
+  background: #e81123;
+}
+.terminal-body {
+  padding: 12px 14px 10px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pet-ascii {
+  color: #7e8027;
+  font-size: 11px;
+  line-height: 1.2;
+  margin: 0;
+  white-space: pre;
+  text-align: center;
+  transition: color 0.3s;
+  animation: catBreathe 3s ease-in-out infinite;
+}
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #ddd;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes catBreathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.02); }
+}
+/* Dark mode */
+.dark .terminal-pet,
+.dark .pet-toggle {
+  background: #1a1a1a;
+}
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 200px;
+    right: 10px;
+  }
+  .pet-toggle {
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .pet-toggle-icon {
+    font-size: 13px;
+  }
+  .pet-toggle-label {
+    font-size: 7px;
+  }
+  .pet-ascii {
+    font-size: 9px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var catFrames = [
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( -.- ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)']
+  ];
+
+  var messages = [
+    '> Welcome to the blog!',
+    '> Meow, nice to meet you!',
+    '> Just vibing here...',
+    '> Deploying purr-duction...',
+    '> git commit -m "feed cat"',
+    '> printf("meow\\n");',
+    '> 404: Treats not found',
+    '> while(true) { nap(); }',
+    '> sudo rm -rf belly_rub',
+    '> Cat > Dog // true',
+    '> Loading cuteness... 100%',
+    '> echo "Hello World!"',
+    '> Compiling... nyaaa~'
+  ];
+
+  var currentFrame = 0;
+  var currentMsg = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var header = container.querySelector('.terminal-header');
+  var isOpen = false;
+
+  function updateCat() {
+    if (!isOpen) return;
+    petEl.textContent = catFrames[currentFrame].join('\n');
+    currentFrame = (currentFrame + 1) % catFrames.length;
+  }
+
+  function typewriterEffect(text, el, speed) {
+    speed = speed || 50;
+    el.textContent = '';
+    var i = 0;
+    var interval = setInterval(function() {
+      if (i < text.length) {
+        el.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, speed);
+  }
+
+  function changeMessage() {
+    if (!isOpen) return;
+    currentMsg = (currentMsg + 1) % messages.length;
+    typewriterEffect(messages[currentMsg], msgEl, 40);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    updateCat();
+    typewriterEffect(messages[0], msgEl, 40);
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+  }
+
+  // Toggle button click
+  toggleBtn.addEventListener('click', openPet);
+
+  // Close button
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+
+  // Animation loops (only run when open)
+  setInterval(updateCat, 1000);
+  setInterval(changeMessage, 4000);
+
+  // Drag functionality
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  // Clear localStorage to reset pet state on page load
+  try {
+    localStorage.removeItem('terminal-pet-hidden');
+  } catch(e) {}
+
+  header.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+
+  // Touch support
+  header.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    var touch = e.touches[0];
+    dragOffsetX = touch.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = touch.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    var touch = e.touches[0];
+    var x = touch.clientX - dragOffsetX;
+    var y = touch.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  }, { passive: true });
+  document.addEventListener('touchend', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+})();
+</script>
+</body>
+</html>
