@@ -1,0 +1,562 @@
+/* =====================================
+   Quiz Learning System — GitHub Dark Style
+   ===================================== */
+
+:root {
+  --gh-bg: #0d1117;
+  --gh-border: #30363d;
+  --gh-border-light: #21262d;
+  --gh-text: #c9d1d9;
+  --gh-text-secondary: #8b949e;
+  --gh-text-muted: #484f58;
+  --gh-accent: #58a6ff;
+  --gh-accent-hover: #79c0ff;
+  --gh-success: #3fb950;
+  --gh-danger: #f85149;
+  --gh-warning: #d29922;
+  --gh-canvas: #161b22;
+  --gh-card-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --gh-card-shadow-hover: 0 4px 12px rgba(0,0,0,0.5);
+  --gh-radius: 6px;
+  --gh-radius-lg: 12px;
+  --gh-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', Helvetica, Arial, sans-serif;
+  --gh-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --gh-input-bg: #0d1117;
+  --gh-drop-border: #30363d;
+  --gh-drop-hover-bg: #161b22;
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--gh-font);
+  background: var(--gh-bg);
+  color: var(--gh-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--gh-accent); text-decoration: none; }
+a:hover { color: var(--gh-accent-hover); text-decoration: underline; }
+
+/* ===== Layout ===== */
+.gh-container {
+  max-width: 1012px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* ===== Header ===== */
+.gh-header {
+  border-bottom: 1px solid var(--gh-border-light);
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.gh-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gh-header h1 .emoji { font-size: 28px; }
+.gh-header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ===== Buttons ===== */
+.gh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 20px;
+  border: 1px solid var(--gh-border);
+  border-radius: var(--gh-radius);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: #21262d;
+  color: var(--gh-text);
+  white-space: nowrap;
+}
+.gh-btn:hover {
+  background: #30363d;
+  text-decoration: none;
+}
+.gh-btn-primary {
+  background: #238636;
+  color: #fff;
+  border-color: rgba(240,246,252,0.1);
+}
+.gh-btn-primary:hover {
+  background: #2ea043;
+}
+.gh-btn-danger {
+  color: var(--gh-danger);
+  border-color: var(--gh-danger);
+}
+.gh-btn-danger:hover {
+  background: var(--gh-danger);
+  color: #fff;
+}
+.gh-btn-sm {
+  padding: 3px 10px;
+  font-size: 12px;
+}
+.gh-btn-lg {
+  padding: 10px 20px;
+  font-size: 15px;
+}
+
+/* ===== Stats Bar ===== */
+.gh-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.gh-stat-card {
+  background: var(--gh-canvas);
+  border: 1px solid var(--gh-border-light);
+  border-radius: var(--gh-radius);
+  padding: 16px;
+  text-align: center;
+  transition: box-shadow 0.15s ease;
+}
+.gh-stat-card:hover {
+  box-shadow: var(--gh-card-shadow);
+}
+.gh-stat-number {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--gh-text);
+}
+.gh-stat-label {
+  font-size: 12px;
+  color: var(--gh-text-secondary);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* ===== Two-column layout ===== */
+.gh-two-col {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .gh-two-col { grid-template-columns: 1fr; }
+}
+
+/* ===== Card ===== */
+.gh-card {
+  border: 1px solid var(--gh-border-light);
+  border-radius: var(--gh-radius);
+  background: var(--gh-canvas);
+}
+.gh-card-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gh-border-light);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--gh-canvas);
+  border-radius: var(--gh-radius) var(--gh-radius) 0 0;
+}
+.gh-card-body {
+  padding: 16px;
+}
+
+/* ===== Repo-style Cards ===== */
+.gh-repo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gh-repo-card {
+  border: 1px solid var(--gh-border-light);
+  border-radius: var(--gh-radius);
+  padding: 16px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.gh-repo-card:hover {
+  box-shadow: var(--gh-card-shadow-hover);
+  border-color: var(--gh-border);
+}
+.gh-repo-card.custom {
+  border-left: 3px solid var(--gh-warning);
+}
+.gh-repo-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gh-accent);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gh-repo-title:hover { text-decoration: underline; }
+.gh-repo-desc {
+  font-size: 13px;
+  color: var(--gh-text-secondary);
+  margin-bottom: 12px;
+}
+.gh-repo-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--gh-text-secondary);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.gh-repo-meta .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.gh-repo-meta .lang { display: flex; align-items: center; gap: 4px; }
+
+/* ===== Badge ===== */
+.gh-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.gh-badge.custom {
+  background: rgba(210,153,34,0.2);
+  color: var(--gh-warning);
+}
+
+/* ===== Contribution Heatmap ===== */
+.gh-heatmap-wrap {
+  overflow-x: auto;
+}
+.gh-heatmap {
+  display: flex;
+  gap: 3px;
+}
+.gh-heatmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.gh-heatmap-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: #161b22;
+  transition: all 0.1s ease;
+  position: relative;
+}
+.gh-heatmap-cell:hover {
+  outline: 1px solid rgba(255,255,255,0.2);
+  outline-offset: -1px;
+}
+.gh-heatmap-cell[data-level="0"] { background: #161b22; }
+.gh-heatmap-cell[data-level="1"] { background: #0e4429; }
+.gh-heatmap-cell[data-level="2"] { background: #006d32; }
+.gh-heatmap-cell[data-level="3"] { background: #26a641; }
+.gh-heatmap-cell[data-level="4"] { background: #39d353; }
+
+.gh-heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  justify-content: flex-end;
+  font-size: 11px;
+  color: var(--gh-text-muted);
+}
+.gh-heatmap-legend .cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.gh-heatmap-month-labels {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 4px;
+  font-size: 10px;
+  color: var(--gh-text-muted);
+  padding-left: 0;
+}
+.gh-heatmap-month-labels span {
+  width: 12px;
+  text-align: center;
+}
+
+/* ===== Wrong list ===== */
+.gh-wrong-list { list-style: none; }
+.gh-wrong-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gh-border-light);
+  font-size: 13px;
+}
+.gh-wrong-item:last-child { border-bottom: none; }
+.gh-wrong-item .q { color: var(--gh-text); }
+.gh-wrong-item .meta {
+  font-size: 11px;
+  color: var(--gh-text-secondary);
+  margin-top: 2px;
+}
+.gh-empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--gh-text-muted);
+  font-size: 14px;
+}
+.gh-empty-state .emoji { font-size: 32px; display: block; margin-bottom: 8px; }
+
+/* ===== Drop Zone ===== */
+.gh-drop-zone {
+  margin-top: 12px;
+  border: 2px dashed var(--gh-drop-border);
+  border-radius: var(--gh-radius);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--gh-text-muted);
+  font-size: 13px;
+}
+.gh-drop-zone:hover,
+.gh-drop-zone.dragover {
+  border-color: var(--gh-accent);
+  background: var(--gh-drop-hover-bg);
+  color: var(--gh-text-secondary);
+}
+.gh-drop-zone .icon { font-size: 28px; display: block; margin-bottom: 8px; }
+.gh-drop-zone .hint { font-size: 12px; margin-top: 4px; }
+.gh-drop-zone input[type="file"] { display: none; }
+
+/* ===== Inline icon button ===== */
+.gh-btn-icon {
+  background: none;
+  border: none;
+  color: var(--gh-text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 4px;
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+.gh-btn-icon:hover { color: var(--gh-danger); }
+
+/* =====================================
+   Quiz Page Styles
+   ===================================== */
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gh-border-light);
+  margin-bottom: 24px;
+}
+.quiz-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.quiz-header-left h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ===== Mode indicator ===== */
+.gh-mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.gh-mode-badge.normal {
+  background: rgba(88,166,255,0.15);
+  color: var(--gh-accent);
+}
+.gh-mode-badge.review {
+  background: rgba(210,153,34,0.2);
+  color: var(--gh-warning);
+}
+
+/* ===== Progress bar ===== */
+.gh-progress {
+  width: 100%;
+  height: 8px;
+  background: #21262d;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.gh-progress-bar {
+  height: 100%;
+  background: var(--gh-accent);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* ===== Question card ===== */
+.gh-question-card {
+  border: 1px solid var(--gh-border);
+  border-radius: var(--gh-radius-lg);
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: var(--gh-card-shadow);
+  background: var(--gh-canvas);
+}
+.gh-question-number {
+  font-size: 12px;
+  color: var(--gh-text-secondary);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.gh-question-text {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* ===== Options ===== */
+.gh-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gh-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--gh-border-light);
+  border-radius: var(--gh-radius);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 15px;
+  background: var(--gh-bg);
+}
+.gh-option:hover {
+  border-color: var(--gh-accent);
+  background: var(--gh-canvas);
+}
+.gh-option .letter {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gh-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gh-text-secondary);
+  flex-shrink: 0;
+}
+.gh-option.selected {
+  border-color: var(--gh-accent);
+  background: rgba(88,166,255,0.15);
+}
+.gh-option.selected .letter {
+  background: var(--gh-accent);
+  color: #fff;
+}
+.gh-option.correct {
+  border-color: var(--gh-success);
+  background: rgba(63,185,80,0.15);
+}
+.gh-option.correct .letter {
+  background: var(--gh-success);
+  color: #fff;
+}
+.gh-option.wrong {
+  border-color: var(--gh-danger);
+  background: rgba(248,81,73,0.15);
+}
+.gh-option.wrong .letter {
+  background: var(--gh-danger);
+  color: #fff;
+}
+.gh-option.disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+/* ===== Feedback ===== */
+.gh-feedback {
+  padding: 12px 16px;
+  border-radius: var(--gh-radius);
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  display: none;
+}
+.gh-feedback.show { display: block; }
+.gh-feedback.correct {
+  background: rgba(63,185,80,0.15);
+  border: 1px solid rgba(63,185,80,0.3);
+  color: var(--gh-success);
+}
+.gh-feedback.wrong {
+  background: rgba(248,81,73,0.15);
+  border: 1px solid rgba(248,81,73,0.3);
+  color: var(--gh-danger);
+}
+
+/* ===== Quiz footer ===== */
+.gh-quiz-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+/* ===== Review completion ===== */
+.gh-review-done {
+  text-align: center;
+  padding: 48px 16px;
+}
+.gh-review-done .emoji { font-size: 48px; display: block; margin-bottom: 16px; }
+.gh-review-done h2 { font-size: 24px; margin-bottom: 8px; }
+.gh-review-done p { color: var(--gh-text-secondary); margin-bottom: 16px; }
+
+/* ===== Utility ===== */
+.gh-text-muted { color: var(--gh-text-secondary); }
+.gh-mt-8  { margin-top: 8px; }
+.gh-mt-16 { margin-top: 16px; }
+.gh-mt-24 { margin-top: 24px; }
+.gh-mb-8  { margin-bottom: 8px; }
+.gh-mb-16 { margin-bottom: 16px; }
+.gh-text-center { text-align: center; }
+.gh-flex { display: flex; }
+.gh-flex-center { display: flex; align-items: center; gap: 8px; }
+.gh-gap-8 { gap: 8px; }

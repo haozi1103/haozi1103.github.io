@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "函数 f(x) = x² 的导数是什么？",
+    "options": ["2x", "x²", "2", "x"],
+    "answer": 0
+  },
+  {
+    "id": 2,
+    "question": "∫ 2x dx 的结果是？",
+    "options": ["x² + C", "x²", "2x + C", "x² + 2x + C"],
+    "answer": 0
+  },
+  {
+    "id": 3,
+    "question": "矩阵乘法满足交换律吗？",
+    "options": ["一般情况不满足", "一定满足", "方阵一定满足", "对角矩阵不满足"],
+    "answer": 0
+  },
+  {
+    "id": 4,
+    "question": "sin²θ + cos²θ = ?",
+    "options": ["0", "1", "-1", "sin 2θ"],
+    "answer": 1
+  },
+  {
+    "id": 5,
+    "question": "e 的近似值是多少？",
+    "options": ["2.718", "3.141", "1.618", "0.693"],
+    "answer": 0
+  },
+  {
+    "id": 6,
+    "question": "函数 f(x) = ln(x) 的定义域是？",
+    "options": ["x > 0", "x ≥ 0", "全体实数", "x ≠ 0"],
+    "answer": 0
+  },
+  {
+    "id": 7,
+    "question": "以下哪个是常微分方程？",
+    "options": ["dy/dx = y", "∂u/∂x + ∂u/∂y = 0", "∇²u = 0", "∂u/∂t = ∂²u/∂x²"],
+    "answer": 0
+  },
+  {
+    "id": 8,
+    "question": "极限 lim(x→0) sin(x)/x = ?",
+    "options": ["1", "0", "∞", "不存在"],
+    "answer": 0
+  },
+  {
+    "id": 9,
+    "question": "3 × 3 单位矩阵的秩是？",
+    "options": ["3", "1", "0", "9"],
+    "answer": 0
+  },
+  {
+    "id": 10,
+    "question": "复数 i² = ?",
+    "options": ["-1", "1", "i", "-i"],
+    "answer": 0
+  }
+]

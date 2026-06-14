@@ -350,37 +350,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </tags>
   </entry>
   <entry>
-    <title>UG NX12如何进行数控仿真？</title>
-    <url>/2026/06/11/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/</url>
-    <content><![CDATA[<p>UG NX12如何进行数控仿真？<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" alt="ugnx1"></p>
- <span id="more"></span>
-<p>数控车床</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221511401.png" alt="image-20260318221511286"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221633130.png" alt="image-20260318221633079"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318223143227.png" alt="image-20260318223143171"></p>
-<p>非切削参数里面修改<strong>逼近、退刀点</strong></p>
-<p>切削参数里面设置<strong>切削余量</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224403913.png" alt="image-20260318224403844"></p>
-<p>显示T0101的方法：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318230934810.png" alt="image-20260318230934759"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224620067.png" alt="image-20260318224620007"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224638708.png" alt="image-20260318224638679"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**我不能 100% 保证刀片“绝对不会崩”**（任何切断操作都有风险，尤其是你这个 Ø220 mm 切到 Ø60 mm 的大切深），但**用我下面调整后的参数 + 正确刀具，崩刀概率会降到非常低**（实际工厂里 95% 以上都不会崩）。</span><br><span class="line"></span><br><span class="line">我根据你的工件尺寸（大直径铝件）和 NX 12 的 Parting 操作，专门给你**最保守、最安全的参数**（比我之前推荐的还更保守）。</span><br><span class="line"></span><br><span class="line">### 1. 必须换一把“长 + 强”切断刀（这是防崩基础）</span><br><span class="line">- 刀片宽度：**3 mm**（不要用 4 mm，窄一点刚性更好）</span><br><span class="line">- 刀杆总长（Shank Length）：**至少 70–80 mm**（你之前那把太短了）</span><br><span class="line">- 刀片要求：**带断屑槽 + 涂层**（推荐 Kennametal N123 或 Sandvik CoroCut，铝专用等级）</span><br><span class="line">- NX 12 操作：在 Parting 操作里新建刀具 → Turning Tool → Parting Tool → 把长度改成 80 mm</span><br><span class="line"></span><br><span class="line">### 2. 最安全的 Parting 参数设置（直接复制）</span><br><span class="line">双击你的 PART_OFF 操作后，按下面填（这是防崩最关键的 3 个地方）：</span><br><span class="line"></span><br><span class="line">**Cut Parameters（切削参数）标签页**</span><br><span class="line">- Multiple Passes：**必须勾选**</span><br><span class="line">- Depth per Pass（每层切深）：**0.8 ~ 1.0 mm**（我现在给你降到 1 mm 以内，比之前更保守）</span><br><span class="line">- Stock（最终余量）：**0.3 mm**</span><br><span class="line">- Feed（进给）：**0.05 ~ 0.07 mm/rev**（非常慢，防止崩刃）</span><br><span class="line">- Speed（转速）：**1500 ~ 1800 rpm**（铝件不要太快）</span><br><span class="line"></span><br><span class="line">**Non-Cutting Moves（非切削移动）标签页**</span><br><span class="line">- Approach（进刀）：**Ramp**（斜进刀）</span><br><span class="line">- Retract（退刀）：</span><br><span class="line">  - Retract Distance：**X +12 mm**（先把刀从槽里拉出来）</span><br><span class="line">  - **必须先退 X，再退 Z**</span><br><span class="line">- Clearance Plane：**Z +100 mm**（抬得更高一点）</span><br><span class="line"></span><br><span class="line">**额外防崩开关**：</span><br><span class="line">- 在 Cut Parameters 里勾选 **Use Fixed Cycle** → 选 **G75**（自动 peck 退刀断屑，最防崩！）</span><br><span class="line"></span><br><span class="line">### 3. 额外两招几乎零崩刀（强烈建议做）</span><br><span class="line">**招式1（最推荐）**：先车一个**退刀槽**</span><br><span class="line">- 在切断位置前方 3 mm 处，先做一个 Groove Turning 操作：</span><br><span class="line">  - 宽度 5 mm，深度 3 mm</span><br><span class="line">- 然后再做 Parting 操作，刀具直接进到这个槽里切，崩刀风险几乎为 0。</span><br><span class="line"></span><br><span class="line">**招式2**：中心前减速</span><br><span class="line">- 在切到直径 Ø80 mm 左右时，手动把进给降到 **0.03 mm/rev**（接近中心时切削力最大，最容易崩）</span><br><span class="line"></span><br><span class="line">### 4. 实际操作前的最后检查（必须做！）</span><br><span class="line">1. 生成刀路后 → 右键 **Verify → Machine Simulation**</span><br><span class="line">2. 勾选 Holder Collision + Fixture Collision</span><br><span class="line">3. 播放完整仿真：</span><br><span class="line">   - 看刀片是否一直保持 0.8–1.0 mm 每层切</span><br><span class="line">   - 看退刀是否“先拉 X 再抬 Z”</span><br><span class="line">   - 如果全程无红色报警 → 基本安全</span><br><span class="line"></span><br><span class="line">### 总结一句话</span><br><span class="line">**用上面参数（每层 ≤1.0 mm + 先退 X + G75 + 长刀杆），刀片崩的概率极低**（我教过的学生用这个方法切 Ø200+ 铝件都没崩过）。</span><br><span class="line"></span><br><span class="line">**现在你直接做**：</span><br><span class="line">1. 把切深改成 **0.8–1.0 mm**</span><br><span class="line">2. 进给改成 **0.05–0.07 mm/rev**</span><br><span class="line">3. 新建一把 80 mm 长的切断刀</span><br><span class="line">4. 勾选 G75 + 生成刀路</span><br><span class="line">5. 仿真一次</span><br><span class="line"></span><br><span class="line">做完**仿真截图**发我（尤其是刀路播放到中心位置的时候），我帮你最后看一眼是否安全。  </span><br><span class="line">或者你现在就把当前 Depth per Pass 和 Feed 值告诉我，我再给你精确数字。</span><br><span class="line"></span><br><span class="line">放心，按这个保守参数走，刀片不会轻易崩的！  </span><br><span class="line">继续操作，有问题随时截图问我。</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260319213946556.png" alt="image-20260319213946453"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260320134843281.png" alt="image-20260320134843073"></p>
-<p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
-<p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
-<p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
-]]></content>
-      <categories>
-        <category>方法</category>
-      </categories>
-      <tags>
-        <tag>UG</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora怎么用的顺手？</title>
     <url>/2025/08/19/Typora%E6%80%8E%E4%B9%88%E7%94%A8%E7%9A%84%E9%A1%BA%E6%89%8B%EF%BC%9F/</url>
     <content><![CDATA[<p>工欲善其事，必先利其器嘛。想要好一个软件，得用顺眼了，用方便了</p>
@@ -550,6 +519,37 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       <categories>
         <category>方法</category>
       </categories>
+  </entry>
+  <entry>
+    <title>UG NX12如何进行数控仿真？</title>
+    <url>/2026/06/11/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/</url>
+    <content><![CDATA[<p>UG NX12如何进行数控仿真？<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" alt="ugnx1"></p>
+ <span id="more"></span>
+<p>数控车床</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221511401.png" alt="image-20260318221511286"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221633130.png" alt="image-20260318221633079"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318223143227.png" alt="image-20260318223143171"></p>
+<p>非切削参数里面修改<strong>逼近、退刀点</strong></p>
+<p>切削参数里面设置<strong>切削余量</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224403913.png" alt="image-20260318224403844"></p>
+<p>显示T0101的方法：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318230934810.png" alt="image-20260318230934759"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224620067.png" alt="image-20260318224620007"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224638708.png" alt="image-20260318224638679"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**我不能 100% 保证刀片“绝对不会崩”**（任何切断操作都有风险，尤其是你这个 Ø220 mm 切到 Ø60 mm 的大切深），但**用我下面调整后的参数 + 正确刀具，崩刀概率会降到非常低**（实际工厂里 95% 以上都不会崩）。</span><br><span class="line"></span><br><span class="line">我根据你的工件尺寸（大直径铝件）和 NX 12 的 Parting 操作，专门给你**最保守、最安全的参数**（比我之前推荐的还更保守）。</span><br><span class="line"></span><br><span class="line">### 1. 必须换一把“长 + 强”切断刀（这是防崩基础）</span><br><span class="line">- 刀片宽度：**3 mm**（不要用 4 mm，窄一点刚性更好）</span><br><span class="line">- 刀杆总长（Shank Length）：**至少 70–80 mm**（你之前那把太短了）</span><br><span class="line">- 刀片要求：**带断屑槽 + 涂层**（推荐 Kennametal N123 或 Sandvik CoroCut，铝专用等级）</span><br><span class="line">- NX 12 操作：在 Parting 操作里新建刀具 → Turning Tool → Parting Tool → 把长度改成 80 mm</span><br><span class="line"></span><br><span class="line">### 2. 最安全的 Parting 参数设置（直接复制）</span><br><span class="line">双击你的 PART_OFF 操作后，按下面填（这是防崩最关键的 3 个地方）：</span><br><span class="line"></span><br><span class="line">**Cut Parameters（切削参数）标签页**</span><br><span class="line">- Multiple Passes：**必须勾选**</span><br><span class="line">- Depth per Pass（每层切深）：**0.8 ~ 1.0 mm**（我现在给你降到 1 mm 以内，比之前更保守）</span><br><span class="line">- Stock（最终余量）：**0.3 mm**</span><br><span class="line">- Feed（进给）：**0.05 ~ 0.07 mm/rev**（非常慢，防止崩刃）</span><br><span class="line">- Speed（转速）：**1500 ~ 1800 rpm**（铝件不要太快）</span><br><span class="line"></span><br><span class="line">**Non-Cutting Moves（非切削移动）标签页**</span><br><span class="line">- Approach（进刀）：**Ramp**（斜进刀）</span><br><span class="line">- Retract（退刀）：</span><br><span class="line">  - Retract Distance：**X +12 mm**（先把刀从槽里拉出来）</span><br><span class="line">  - **必须先退 X，再退 Z**</span><br><span class="line">- Clearance Plane：**Z +100 mm**（抬得更高一点）</span><br><span class="line"></span><br><span class="line">**额外防崩开关**：</span><br><span class="line">- 在 Cut Parameters 里勾选 **Use Fixed Cycle** → 选 **G75**（自动 peck 退刀断屑，最防崩！）</span><br><span class="line"></span><br><span class="line">### 3. 额外两招几乎零崩刀（强烈建议做）</span><br><span class="line">**招式1（最推荐）**：先车一个**退刀槽**</span><br><span class="line">- 在切断位置前方 3 mm 处，先做一个 Groove Turning 操作：</span><br><span class="line">  - 宽度 5 mm，深度 3 mm</span><br><span class="line">- 然后再做 Parting 操作，刀具直接进到这个槽里切，崩刀风险几乎为 0。</span><br><span class="line"></span><br><span class="line">**招式2**：中心前减速</span><br><span class="line">- 在切到直径 Ø80 mm 左右时，手动把进给降到 **0.03 mm/rev**（接近中心时切削力最大，最容易崩）</span><br><span class="line"></span><br><span class="line">### 4. 实际操作前的最后检查（必须做！）</span><br><span class="line">1. 生成刀路后 → 右键 **Verify → Machine Simulation**</span><br><span class="line">2. 勾选 Holder Collision + Fixture Collision</span><br><span class="line">3. 播放完整仿真：</span><br><span class="line">   - 看刀片是否一直保持 0.8–1.0 mm 每层切</span><br><span class="line">   - 看退刀是否“先拉 X 再抬 Z”</span><br><span class="line">   - 如果全程无红色报警 → 基本安全</span><br><span class="line"></span><br><span class="line">### 总结一句话</span><br><span class="line">**用上面参数（每层 ≤1.0 mm + 先退 X + G75 + 长刀杆），刀片崩的概率极低**（我教过的学生用这个方法切 Ø200+ 铝件都没崩过）。</span><br><span class="line"></span><br><span class="line">**现在你直接做**：</span><br><span class="line">1. 把切深改成 **0.8–1.0 mm**</span><br><span class="line">2. 进给改成 **0.05–0.07 mm/rev**</span><br><span class="line">3. 新建一把 80 mm 长的切断刀</span><br><span class="line">4. 勾选 G75 + 生成刀路</span><br><span class="line">5. 仿真一次</span><br><span class="line"></span><br><span class="line">做完**仿真截图**发我（尤其是刀路播放到中心位置的时候），我帮你最后看一眼是否安全。  </span><br><span class="line">或者你现在就把当前 Depth per Pass 和 Feed 值告诉我，我再给你精确数字。</span><br><span class="line"></span><br><span class="line">放心，按这个保守参数走，刀片不会轻易崩的！  </span><br><span class="line">继续操作，有问题随时截图问我。</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260319213946556.png" alt="image-20260319213946453"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260320134843281.png" alt="image-20260320134843073"></p>
+<p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
+<p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
+<p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
+]]></content>
+      <categories>
+        <category>方法</category>
+      </categories>
+      <tags>
+        <tag>UG</tag>
+      </tags>
   </entry>
   <entry>
     <title>UG NX12怎么去安装？</title>
@@ -878,6 +878,22 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </tags>
   </entry>
   <entry>
+    <title>《Soul》</title>
+    <url>/2026/06/11/%E3%80%8ASoul%E3%80%8B/</url>
+    <content><![CDATA[<p>创作的灵感有点枯竭，得去豆瓣上看一看别人是怎么看的。</p>
+<span id="more"></span>
+<h2 id="22">22</h2>
+<p>22，教会了gardner怎么去爱，怎么去悲，怎么去活。</p>
+<h2 id="活在当下">活在当下</h2>
+<p>抚摸每一阵风的轻盈，驻足每一片沿途的风景，珍惜眼前的人和事情，为树叶飘落而悲，为世间冷暖而泣…</p>
+<p>正如苏轼的《赤壁赋》：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">惟江上之清风，与山间之明月</span><br><span class="line">耳得之而为声，目遇之而成色</span><br><span class="line">取之无禁，用之不竭</span><br><span class="line">是造物者之无尽藏也。</span><br><span class="line">而吾与子之所共适</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>影视</category>
+      </categories>
+  </entry>
+  <entry>
     <title>matlab表面建模项目是怎么做好的？</title>
     <url>/2026/06/11/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<p>matlab表面建模项目是怎么做好的？</p>
@@ -1194,22 +1210,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </tags>
   </entry>
   <entry>
-    <title>《Soul》</title>
-    <url>/2026/06/11/%E3%80%8ASoul%E3%80%8B/</url>
-    <content><![CDATA[<p>创作的灵感有点枯竭，得去豆瓣上看一看别人是怎么看的。</p>
-<span id="more"></span>
-<h2 id="22">22</h2>
-<p>22，教会了gardner怎么去爱，怎么去悲，怎么去活。</p>
-<h2 id="活在当下">活在当下</h2>
-<p>抚摸每一阵风的轻盈，驻足每一片沿途的风景，珍惜眼前的人和事情，为树叶飘落而悲，为世间冷暖而泣…</p>
-<p>正如苏轼的《赤壁赋》：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">惟江上之清风，与山间之明月</span><br><span class="line">耳得之而为声，目遇之而成色</span><br><span class="line">取之无禁，用之不竭</span><br><span class="line">是造物者之无尽藏也。</span><br><span class="line">而吾与子之所共适</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>影视</category>
-      </categories>
-  </entry>
-  <entry>
     <title>彩虹之后，我在想人间</title>
     <url>/2026/06/11/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/qnyh1.png" alt=""></p>
@@ -1373,26 +1373,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </categories>
   </entry>
   <entry>
-    <title>《生死疲劳》</title>
-    <url>/2026/06/11/%E3%80%8A%E7%94%9F%E6%AD%BB%E7%96%B2%E5%8A%B3%E3%80%8B/</url>
-    <content><![CDATA[<p>看完这本《生死疲劳》，前前后后花了大几个月的时间，一直在拖延，一直没有时间看完这本著作。</p>
-<span id="more"></span>
-<p>看b站推荐，这本书语言幽默诙谐，值得一看。</p>
-<p>看完这厚厚的567页，起初觉得很无趣，很艰难，读到一半的时候就很想放弃了，，就这样一直磨啊磨啊，磨到2025年9月1日，刚看完就来写这篇感想，不得惊叹于莫言老先生的笔法高超，看到我还有点想再看一遍，总感觉自己前面看的很粗糙很不细致。</p>
-<p>还想再走一遍从上个世纪50年代到2000年这一条路，还想再看一眼当年的他们，而不是现在这种悲惨的境地。</p>
-<p>贴一张任务关系图</p>
-<p><a href="https://imgse.com/i/pVcXY7D"><img src="https://s21.ax1x.com/2025/09/01/pVcXY7D.md.jpg" alt="pVcXY7D.jpg" border="0" /></a></p>
-<p>小说末尾的话，让我久久不能忘怀：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">到了蓝千岁五周岁生日那天，他把我的朋友叫到面前</span><br><span class="line">摆开一副朗读长篇小说的架势，对我的朋友说：</span><br><span class="line">“我的故事，从一九五零年一月一日那天讲起......”</span><br></pre></td></tr></table></figure>
-<p>小说的开头：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">我的故事，从一九五零年一月一日讲起......</span><br></pre></td></tr></table></figure>
-<p>这是何等完美的闭环和结尾啊…</p>
-]]></content>
-      <categories>
-        <category>阅读</category>
-      </categories>
-  </entry>
-  <entry>
     <title>《消失的女孩》：Amy复仇记</title>
     <url>/2025/08/21/%E3%80%8A%E6%B6%88%E5%A4%B1%E7%9A%84%E5%A5%B3%E5%AD%A9%E3%80%8B/</url>
     <content><![CDATA[<p>不要忘记，Amazing Amy其实从来都没有真实存在过</p>
@@ -1458,6 +1438,26 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 ]]></content>
       <categories>
         <category>影视</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>《生死疲劳》</title>
+    <url>/2026/06/11/%E3%80%8A%E7%94%9F%E6%AD%BB%E7%96%B2%E5%8A%B3%E3%80%8B/</url>
+    <content><![CDATA[<p>看完这本《生死疲劳》，前前后后花了大几个月的时间，一直在拖延，一直没有时间看完这本著作。</p>
+<span id="more"></span>
+<p>看b站推荐，这本书语言幽默诙谐，值得一看。</p>
+<p>看完这厚厚的567页，起初觉得很无趣，很艰难，读到一半的时候就很想放弃了，，就这样一直磨啊磨啊，磨到2025年9月1日，刚看完就来写这篇感想，不得惊叹于莫言老先生的笔法高超，看到我还有点想再看一遍，总感觉自己前面看的很粗糙很不细致。</p>
+<p>还想再走一遍从上个世纪50年代到2000年这一条路，还想再看一眼当年的他们，而不是现在这种悲惨的境地。</p>
+<p>贴一张任务关系图</p>
+<p><a href="https://imgse.com/i/pVcXY7D"><img src="https://s21.ax1x.com/2025/09/01/pVcXY7D.md.jpg" alt="pVcXY7D.jpg" border="0" /></a></p>
+<p>小说末尾的话，让我久久不能忘怀：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">到了蓝千岁五周岁生日那天，他把我的朋友叫到面前</span><br><span class="line">摆开一副朗读长篇小说的架势，对我的朋友说：</span><br><span class="line">“我的故事，从一九五零年一月一日那天讲起......”</span><br></pre></td></tr></table></figure>
+<p>小说的开头：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">我的故事，从一九五零年一月一日讲起......</span><br></pre></td></tr></table></figure>
+<p>这是何等完美的闭环和结尾啊…</p>
+]]></content>
+      <categories>
+        <category>阅读</category>
       </categories>
   </entry>
   <entry>
@@ -1832,6 +1832,146 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </categories>
   </entry>
   <entry>
+    <title>传感与测试技术 为考试而生</title>
+    <url>/2026/06/11/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314200044992.png" alt="image-20260314200044992"></p>
+<span id="more"></span>
+<p>不知道写什么了，写几个字凑凑数吧，不然显得太敷衍了</p>
+<p>拖延了好久，都甚至没有开始写学习文档，这门课真的好惨…甚至不知道为啥，就是不想去学啊，真的很奇怪啊</p>
+<p>归根结底，是没有找到锚点，找到可以去抓住学习的点，欸，这一点，今天找到了，学姐的备考复习文档里面就有很多好东西啊哈哈哈，感觉希望又大大的了</p>
+<p>你看哈 这门课叫传感与测试技术<br>
+不管是传感还是测试 围绕的都是信号这个东西 测试也是测信号 传感器他是检测一些物理量然后给他转换成信号的</p>
+<p>所以第一章 就是带你认识信号到底是啥 它分为哪些？我们又怎样数学的去描述这个听起来很抽象的东西</p>
+<p>在知道了这是个什么东西也知道了怎么用一个公式去表示他之后 我们就可以用数学的方式去分析还有处理了 这就是第二章 告诉我们一个在看到一个信号的数学表示的时候 大概能了解到他的一些信息 或者两个信号之间的关系 以及怎样去处理一些不太好的收集到的信号</p>
+<p>然后 在拿到一个信号了 我们现在会分析了 也会处理了 处理完我们是不是就该测试了 第四章就是介绍测试系统的 分析一个测试系统的性能</p>
+<p>第四章 传感器 他就把一些物理量转换成电信号 这里就有很多分类了 比如根据物理量去分 有温度传感器 位移传感器 根据电信号去分 有电容电感等等</p>
+<p>第五章 因为传感器输出的原始电信号他可能很微弱或者有噪声啥的 这是对他的调理</p>
+<h1>第一章 信号及其描述</h1>
+<h1>第二章 信号的分析和处理</h1>
+<h1>第三章 测试系统的特性</h1>
+<h1>第四章 常用传感器</h1>
+<ul>
+<li>
+<p>传感器的分类</p>
+<ul>
+<li>
+<p>按照被测物理量：</p>
+<p>位移传感器、流量传感器、温度传感器、力传感器、加速度传感器等</p>
+</li>
+<li>
+<p>按构成原理：</p>
+<p>物性型</p>
+<ul>
+<li>压阻式传感器、水银温度计</li>
+</ul>
+<p>结构型</p>
+<ul>
+<li>电容式、电感式传感器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>传感器的选用</p>
+<p><strong>先做什么：</strong></p>
+<ul>
+<li>初步确定传感器类型</li>
+<li>分析环境干扰</li>
+<li>根据测试范围大小进一步细化传感器类型</li>
+<li>确定测量方式：接触/非接触？</li>
+<li>传感器的体积以及安装方式</li>
+<li>价格</li>
+</ul>
+<p><strong>后做什么：</strong></p>
+<ul>
+<li>灵敏度：可能会放大噪声，所以要求传感器有较大的信噪比</li>
+<li>线性范围：在这个范围以内，输出和输入成线性关系</li>
+<li>响应特性：尽量保持不失真，延迟时间越短越好</li>
+<li>稳定性：经过长期使用以后，其输出特性不发生变化的性能</li>
+<li>精度：表示传感器的输出和被测量的对应程度</li>
+</ul>
+</li>
+<li>
+<p>一些具体的传感器</p>
+<ul>
+<li>
+<p>电阻式传感器</p>
+<ul>
+<li>
+<p>电阻应变式传感器</p>
+<ul>
+<li>
+<p>基本原理：位移、应力、应变-&gt;应变-&gt;电阻变化</p>
+</li>
+<li>
+<p>核心元件：电阻应变片</p>
+</li>
+<li>
+<p>工作原理：电阻应变效应</p>
+</li>
+<li>
+<p>电阻应变效应：指金属导体在外力作用下发生机械变形时，其电阻值随着所受机械变形（伸长或缩短）的变化而发生变化的现象</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325212151455.png" alt="image-20260325212151455"></p>
+<p>通常S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>​=1.7~3.6</p>
+<p>一般用502胶粘应变片而不用胶布</p>
+</li>
+</ul>
+</li>
+<li>
+<p>压阻式传感器</p>
+<ul>
+<li>
+<p>压阻效应：半导体材料受到应力作用时，其电阻率会发生变化，这种现象为压阻效应</p>
+</li>
+<li>
+<p>半导体应变片<strong>对比</strong>金属应变片</p>
+<p><strong>优点：</strong></p>
+<p>①灵敏度非常高，有时传感器的输出不需要放大可直接用于测量；</p>
+<p>②分辨率高，例如测量压力时可测出10 ~ 20 Pa的微压；</p>
+<p>③测量元件的有效面积可做得很小，故频率响应高；</p>
+<p><strong>缺点：</strong></p>
+<p>温度误差大，故需要温度补偿或在恒温条件下使用。</p>
+</li>
+<li>
+<p>灵敏度</p>
+<p>S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>=<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mi>L</mi></msub></mrow><annotation encoding="application/x-tex">_L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4783em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>E，一般在50-100之间（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mi>L</mi></msub></mrow><annotation encoding="application/x-tex">_L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4783em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>​是半导体材料的压阻系数，E是半导体材料的弹性模量），灵敏度比电阻应变式传感器好</p>
+</li>
+</ul>
+</li>
+<li>
+<p>电感传感器</p>
+<ul>
+<li>自感式传感器</li>
+<li>互感式传感器</li>
+</ul>
+</li>
+<li>
+<p>电容传感器</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325213418916.png" alt=""></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214023161.png" alt="image-20260325214023161"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214033208.png" alt="image-20260325214033208"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214100447.png" alt="image-20260325214100447"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214119080.png" alt="image-20260325214119080"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214153430.png" alt="image-20260325214153430"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214201995.png" alt="image-20260325214201995"></p>
+</li>
+<li>
+<p>压电式传感器</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>考试</category>
+      </categories>
+      <tags>
+        <tag>传感与测试技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一些很有感触的话</title>
     <url>/2026/06/11/%E4%B8%80%E4%BA%9B%E5%BE%88%E6%9C%89%E6%84%9F%E8%A7%A6%E7%9A%84%E8%AF%9D/</url>
     <content><![CDATA[<span id="more"></span>
@@ -1848,6 +1988,36 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       <categories>
         <category>阅读</category>
       </categories>
+  </entry>
+  <entry>
+    <title>耗子的奶昔方案设计记录</title>
+    <url>/2026/06/11/%E5%81%9A%E5%A5%B6%E6%98%94/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328224552025.png" alt="image-20260328224552025"></p>
+<span id="more"></span>
+<h1>香蕉、芒果、西梅奶昔</h1>
+<p>一根香蕉、一个芒果（其实是半个）、三个西梅（其实只切了两个😄）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7986.jpeg" alt="IMG_7986"></p>
+<p>水果躺板板咯，切得有点凌乱哈</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7987.jpeg" alt="IMG_7987"></p>
+<p>榨汁杯里面的，是安慕希草莓酸奶150ml</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7988.jpeg" alt="IMG_7988"></p>
+<p>大概榨汁榨了2min左右，出来的奶昔是这样的</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7989.jpeg" alt="IMG_7989" style="zoom: 25%;" />
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7990.jpeg" alt="IMG_7990" style="zoom:25%;" />
+<p>感觉味道还是不错的，仔细喝喝，可以喝出来西梅的颗粒，芒果的味道没咋感觉到，不过颜色上有一些体现（变得很黄），香蕉的味道有点太重了，还有就是酸奶实在是太浓了，感觉本来就很浓的酸奶，加上一大堆的颗粒，浓的有点不像样的，不像是饮料，像是浓粥了哈哈</p>
+<p>以后做奶昔，可以试着：</p>
+<ol>
+<li>尽量用稀一点的牛奶，酸奶太浓稠了</li>
+<li>搅拌机要保证有足够的电量来榨，榨到一半没电了会很崩溃的</li>
+<li>像香蕉这种气味极重的水果，不要放的过量，因为这样会让你根本吃不到其他水果的味道</li>
+</ol>
+]]></content>
+      <categories>
+        <category>生活哲学</category>
+      </categories>
+      <tags>
+        <tag>奶昔</tag>
+      </tags>
   </entry>
   <entry>
     <title>GTX1660调试欧卡2画质mod的感触</title>
@@ -2067,36 +2237,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </tags>
   </entry>
   <entry>
-    <title>耗子的奶昔方案设计记录</title>
-    <url>/2026/06/11/%E5%81%9A%E5%A5%B6%E6%98%94/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328224552025.png" alt="image-20260328224552025"></p>
-<span id="more"></span>
-<h1>香蕉、芒果、西梅奶昔</h1>
-<p>一根香蕉、一个芒果（其实是半个）、三个西梅（其实只切了两个😄）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7986.jpeg" alt="IMG_7986"></p>
-<p>水果躺板板咯，切得有点凌乱哈</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7987.jpeg" alt="IMG_7987"></p>
-<p>榨汁杯里面的，是安慕希草莓酸奶150ml</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7988.jpeg" alt="IMG_7988"></p>
-<p>大概榨汁榨了2min左右，出来的奶昔是这样的</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7989.jpeg" alt="IMG_7989" style="zoom: 25%;" />
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7990.jpeg" alt="IMG_7990" style="zoom:25%;" />
-<p>感觉味道还是不错的，仔细喝喝，可以喝出来西梅的颗粒，芒果的味道没咋感觉到，不过颜色上有一些体现（变得很黄），香蕉的味道有点太重了，还有就是酸奶实在是太浓了，感觉本来就很浓的酸奶，加上一大堆的颗粒，浓的有点不像样的，不像是饮料，像是浓粥了哈哈</p>
-<p>以后做奶昔，可以试着：</p>
-<ol>
-<li>尽量用稀一点的牛奶，酸奶太浓稠了</li>
-<li>搅拌机要保证有足够的电量来榨，榨到一半没电了会很崩溃的</li>
-<li>像香蕉这种气味极重的水果，不要放的过量，因为这样会让你根本吃不到其他水果的味道</li>
-</ol>
-]]></content>
-      <categories>
-        <category>生活哲学</category>
-      </categories>
-      <tags>
-        <tag>奶昔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>怎么使用ptqt进行ui界面的开发？</title>
     <url>/2026/06/11/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/</url>
     <content><![CDATA[<span id="more"></span>
@@ -2131,146 +2271,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </categories>
       <tags>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>传感与测试技术 为考试而生</title>
-    <url>/2026/06/11/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314200044992.png" alt="image-20260314200044992"></p>
-<span id="more"></span>
-<p>不知道写什么了，写几个字凑凑数吧，不然显得太敷衍了</p>
-<p>拖延了好久，都甚至没有开始写学习文档，这门课真的好惨…甚至不知道为啥，就是不想去学啊，真的很奇怪啊</p>
-<p>归根结底，是没有找到锚点，找到可以去抓住学习的点，欸，这一点，今天找到了，学姐的备考复习文档里面就有很多好东西啊哈哈哈，感觉希望又大大的了</p>
-<p>你看哈 这门课叫传感与测试技术<br>
-不管是传感还是测试 围绕的都是信号这个东西 测试也是测信号 传感器他是检测一些物理量然后给他转换成信号的</p>
-<p>所以第一章 就是带你认识信号到底是啥 它分为哪些？我们又怎样数学的去描述这个听起来很抽象的东西</p>
-<p>在知道了这是个什么东西也知道了怎么用一个公式去表示他之后 我们就可以用数学的方式去分析还有处理了 这就是第二章 告诉我们一个在看到一个信号的数学表示的时候 大概能了解到他的一些信息 或者两个信号之间的关系 以及怎样去处理一些不太好的收集到的信号</p>
-<p>然后 在拿到一个信号了 我们现在会分析了 也会处理了 处理完我们是不是就该测试了 第四章就是介绍测试系统的 分析一个测试系统的性能</p>
-<p>第四章 传感器 他就把一些物理量转换成电信号 这里就有很多分类了 比如根据物理量去分 有温度传感器 位移传感器 根据电信号去分 有电容电感等等</p>
-<p>第五章 因为传感器输出的原始电信号他可能很微弱或者有噪声啥的 这是对他的调理</p>
-<h1>第一章 信号及其描述</h1>
-<h1>第二章 信号的分析和处理</h1>
-<h1>第三章 测试系统的特性</h1>
-<h1>第四章 常用传感器</h1>
-<ul>
-<li>
-<p>传感器的分类</p>
-<ul>
-<li>
-<p>按照被测物理量：</p>
-<p>位移传感器、流量传感器、温度传感器、力传感器、加速度传感器等</p>
-</li>
-<li>
-<p>按构成原理：</p>
-<p>物性型</p>
-<ul>
-<li>压阻式传感器、水银温度计</li>
-</ul>
-<p>结构型</p>
-<ul>
-<li>电容式、电感式传感器</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>传感器的选用</p>
-<p><strong>先做什么：</strong></p>
-<ul>
-<li>初步确定传感器类型</li>
-<li>分析环境干扰</li>
-<li>根据测试范围大小进一步细化传感器类型</li>
-<li>确定测量方式：接触/非接触？</li>
-<li>传感器的体积以及安装方式</li>
-<li>价格</li>
-</ul>
-<p><strong>后做什么：</strong></p>
-<ul>
-<li>灵敏度：可能会放大噪声，所以要求传感器有较大的信噪比</li>
-<li>线性范围：在这个范围以内，输出和输入成线性关系</li>
-<li>响应特性：尽量保持不失真，延迟时间越短越好</li>
-<li>稳定性：经过长期使用以后，其输出特性不发生变化的性能</li>
-<li>精度：表示传感器的输出和被测量的对应程度</li>
-</ul>
-</li>
-<li>
-<p>一些具体的传感器</p>
-<ul>
-<li>
-<p>电阻式传感器</p>
-<ul>
-<li>
-<p>电阻应变式传感器</p>
-<ul>
-<li>
-<p>基本原理：位移、应力、应变-&gt;应变-&gt;电阻变化</p>
-</li>
-<li>
-<p>核心元件：电阻应变片</p>
-</li>
-<li>
-<p>工作原理：电阻应变效应</p>
-</li>
-<li>
-<p>电阻应变效应：指金属导体在外力作用下发生机械变形时，其电阻值随着所受机械变形（伸长或缩短）的变化而发生变化的现象</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325212151455.png" alt="image-20260325212151455"></p>
-<p>通常S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>​=1.7~3.6</p>
-<p>一般用502胶粘应变片而不用胶布</p>
-</li>
-</ul>
-</li>
-<li>
-<p>压阻式传感器</p>
-<ul>
-<li>
-<p>压阻效应：半导体材料受到应力作用时，其电阻率会发生变化，这种现象为压阻效应</p>
-</li>
-<li>
-<p>半导体应变片<strong>对比</strong>金属应变片</p>
-<p><strong>优点：</strong></p>
-<p>①灵敏度非常高，有时传感器的输出不需要放大可直接用于测量；</p>
-<p>②分辨率高，例如测量压力时可测出10 ~ 20 Pa的微压；</p>
-<p>③测量元件的有效面积可做得很小，故频率响应高；</p>
-<p><strong>缺点：</strong></p>
-<p>温度误差大，故需要温度补偿或在恒温条件下使用。</p>
-</li>
-<li>
-<p>灵敏度</p>
-<p>S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>=<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mi>L</mi></msub></mrow><annotation encoding="application/x-tex">_L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4783em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>E，一般在50-100之间（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mi>L</mi></msub></mrow><annotation encoding="application/x-tex">_L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4783em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>​是半导体材料的压阻系数，E是半导体材料的弹性模量），灵敏度比电阻应变式传感器好</p>
-</li>
-</ul>
-</li>
-<li>
-<p>电感传感器</p>
-<ul>
-<li>自感式传感器</li>
-<li>互感式传感器</li>
-</ul>
-</li>
-<li>
-<p>电容传感器</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325213418916.png" alt=""></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214023161.png" alt="image-20260325214023161"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214033208.png" alt="image-20260325214033208"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214100447.png" alt="image-20260325214100447"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214119080.png" alt="image-20260325214119080"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214153430.png" alt="image-20260325214153430"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214201995.png" alt="image-20260325214201995"></p>
-</li>
-<li>
-<p>压电式传感器</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>考试</category>
-      </categories>
-      <tags>
-        <tag>传感与测试技术</tag>
       </tags>
   </entry>
   <entry>
@@ -3293,248 +3293,6 @@ Z_{min}\geq\frac{2T}{m}+6.5\\
       </tags>
   </entry>
   <entry>
-    <title>机电控制 为考试而生</title>
-    <url>/2026/06/11/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260312191936511.png" alt="image-20260312191936511"></p>
-<span id="more"></span>
-<h1>考试内容</h1>
-<p>题型：</p>
-<ol>
-<li>
-<p>选择题 20分 20题</p>
-</li>
-<li>
-<p>简答题 32分 8题</p>
-</li>
-<li>
-<p>编程题 13分 1题 考察铣削，书上方形中间有圆环的指令一定要学会，根据提示补程序，如：建立刀补、写起终点、写程序代号、左刀补/右刀补</p>
-</li>
-<li>
-<p>插补运算 15分 1题</p>
-</li>
-<li>
-<p>计算题 20分（15+5） 2题</p>
-<p>实践和平时研讨占40%，考试占60%</p>
-<p>有大作业，制作一个多自由度机电装置产品</p>
-</li>
-</ol>
-<h1>第二章 机电系统编程基础</h1>
-<ul>
-<li>
-<p>常用指令</p>
-<ul>
-<li>
-<p>一般格式：程序名+程序段+程序结束</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1567.jpg" alt="IMG_1567" style="zoom:33%;" />
-<ul>
-<li>
-<p>程序名：O1000 不要写成01000，可以理解为程序段的身份证号</p>
-</li>
-<li>
-<p>程序段：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1568.jpg" alt="IMG_1568" style="zoom: 50%;" />
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1569.jpg" alt="IMG_1569" style="zoom: 50%;" />
-<img src="C:/Users/haozi/Downloads/LANDrop/IMG_1570.jpg" style="zoom:50%;" />
-<p>常用的G代码指令解释：</p>
-<ul>
-<li>
-<p>G00（快速移动，不切啥东西）<strong>刀具的运动轨迹不一定是直线</strong></p>
-</li>
-<li>
-<p>G01/G02/G03/G04（直线切削/顺圆切/逆圆切/timeout）需要指定进给速度F</p>
-<p>注意，这些切的指令<strong>默认我们已经知道的是起点坐标</strong>，所以我们只要给出终点坐标、圆心相对于起点的坐标就可以了</p>
-<p><strong>圆弧角度大于180度时R值为负</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317202241220.png" alt="image-20260317202241220"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317202557425.png" alt="image-20260317202557425"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">G17 G02 X0 Y40 I0 J-40 F100;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>G17、G18、G19平面选择指令（XY平面、XZ平面、YZ平面）</p>
-</li>
-<li>
-<p>G28/G29/G30，G28 U0 W0是返回第一参考点，G30 U0 W0去第二参考点，U V W是不可以少的，不然指令会执行错误</p>
-</li>
-<li>
-<p>G41/G42/<strong>G40</strong>/G43/G44/G49（左补偿/右补偿/<strong>刀具补偿取消</strong>）实际上刀具是有半径值的，补偿相当于让刀具自己去思考、自己去调整，以消除刀具的半径在切削过程中的影响</p>
-</li>
-<li>
-<p>G90/G91/G92（绝对坐标/相对坐标/工件坐标系指定）</p>
-<p><strong>注意：G92是非模态代码，仅在那一行程序段以内有效</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317203033195.png" alt="image-20260317203033195"></p>
-<p>常用的M代码指令解释：</p>
-</li>
-<li>
-<p>只有开关 ON 时才暂停；如果开关 OFF，机床会完全忽略 M01，直接跳过继续跑后面的代码</p>
-</li>
-<li>
-<p>无论机床面板上的“Optional Stop”开关是 ON 还是 OFF，一执行到 M00 就立刻暂停</p>
-</li>
-<li>
-<p>M02可以理解为削弱版的M30，他不像M30会返回开始点</p>
-</li>
-<li>
-<p>M30可以理解为复位</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317204438098.png" alt="image-20260317204438098"></p>
-<p>常用的FST代码指令解释：</p>
-</li>
-</ul>
-</li>
-<li>
-<p>程序结束：N110 M30 在数控程序中，只要看到 <strong>M30</strong>，无论前面是 N100、N200 还是 N999，都代表整个程序的终点</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>数控编程中的工艺处理</p>
-<ul>
-<li>
-<p>典型零件的数控加工工艺分析</p>
-<p>1）加工方法：回转体轴类零件，轮廓表面有圆弧曲线，适合数控车床加工</p>
-<p>2）定位和夹紧：以φ85mm外圆及右中心孔为定位基准，用三爪自定心卡盘夹持φ85mm外圆，用机床尾座顶尖顶住右中心孔</p>
-<p>3）选择刀具和对刀：根据加工要求，需要3把刀具，车外圆，切槽，车螺纹。试切对刀，并测量出各刀具的相关数据，输入到系统参数里</p>
-<p>4）切削用量选择：</p>
-<p>工件材料为45钢，主轴转速500-750rpm，外圆进给速度F=100～200mm/min，</p>
-<p>M48X1.5螺纹深度约1.6mm，分4次循环加工完成</p>
-<p>5）加工路线：</p>
-<p>自右向左，1号刀精加工（倒角—车螺纹外圆—车圆锥—车圆锥左端圆柱—车台</p>
-<p>阶—倒角—车80mm外圆—车圆弧—车80mm外圆—换2号刀切槽—换3号刀车螺纹）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317194025582.png" alt="image-20260317194025582"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">O0003；</span><br><span class="line">N01 G50 X200.0 Z350.0；工件坐标系设定</span><br><span class="line">N02 G30 U0 W0 T0101；→ 刀具从当前位置直接快速去第二参考点（换刀安全位置），然后换1号刀（T0101：刀具 1 + 补偿 1）（u、v、w对应x、y、z）</span><br><span class="line">N03 S630 M03；</span><br><span class="line">N10 G00X48.0 Z295.0M08；</span><br><span class="line">N11 G01 G98 Z230.0 F300；</span><br><span class="line">N12 X50.0；</span><br><span class="line">N13 X62.0W-60.0；</span><br><span class="line">N14 Z155.0；</span><br><span class="line">N15 X78.0；</span><br><span class="line">N16 X80.0W-1.0；</span><br><span class="line">N17 W-19.0；</span><br><span class="line">N18 G02U0W-60.0R70.0；</span><br><span class="line">N19 G01Z65.0；</span><br><span class="line">N20 X85.0；</span><br><span class="line">精加工</span><br><span class="line">N30 G00 X41.8 Z292.0 M08；</span><br><span class="line">N40 G01 X47.8 Z289.0 F150；</span><br><span class="line">N50 Z230.0；</span><br><span class="line">N60 X50.0；</span><br><span class="line">N70 X62.0 W-60.0；</span><br><span class="line">N80 Z155.0；</span><br><span class="line">N90 X78.0；</span><br><span class="line">N100X80.0W-1.0；</span><br><span class="line">N110 W-19.0；</span><br><span class="line">N120 G02 W-60.0 R70；</span><br><span class="line">N130 G01 Z65.0；</span><br><span class="line">N140 X90.0；</span><br><span class="line">N150 G00 X200.0 Z350.0 T0100 M09；</span><br><span class="line">换刀、切槽</span><br><span class="line">N160 G30 U0 W0 T0202；</span><br><span class="line">N170 S315 M03；</span><br><span class="line">N180 G00 X51.0 Z230. M08；</span><br><span class="line">N190 G01 X45.0 F0.16；</span><br><span class="line">N200 G04 U5.0 ；</span><br><span class="line">N210 G00 X51.0；</span><br><span class="line">N220 X200.0 Z350.0 T0200 M09；</span><br><span class="line">换刀、车螺纹</span><br><span class="line">N230 G30 U0 W0 T0303； 换3号刀</span><br><span class="line">N240 S200 M03；</span><br><span class="line">N250 G00 X62.0 Z296.0 M08； 快速接近车螺纹进给刀起点</span><br><span class="line">N260 G92 G99 X47.54 Z231.5 F1.5；4次螺纹切削循环，螺距为1.5mm</span><br><span class="line">N270 X46.94；</span><br><span class="line">N280 X46.54；</span><br><span class="line">N290 X46.38；总共 4 刀，逐步切深，避免一刀切太多崩刀</span><br><span class="line">N300 G00 X200.0 Z350.0 T0300 M09；</span><br><span class="line">N310 M05；</span><br><span class="line">N320 M30；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>聪明的你可能发现了，好奇怪，和里面的G92/G99和你上面贴的那张图好像不是一个作用诶？问得好，<strong>你可以理解为有三个不同的体系</strong>，里面都有G92/G99指令，张三的G92和李四的G92，两个不一样的崽子，你说能一样吗？</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317205718350.png" alt="image-20260317205718350"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h1>第三章 机械系统部件设计</h1>
-<ul>
-<li>
-<p>机械系统部件的设计要求：<strong>稳快准三字诀</strong>（稳定性、响应快、较高的定位精度）</p>
-</li>
-<li>
-<p>如何实现稳快准？</p>
-<ul>
-<li>采用低摩擦阻力的传动部件和导向支承部件（气动就是一个很好的例子）</li>
-<li>缩短传动链，提高传动与支承刚度</li>
-<li>选用最佳传动比，以达到提高系统分辨率、减少等效到执行元件输出轴上的等效转动惯量，尽可能提高加速能力</li>
-<li>缩小反向死区误差，如采取消除传动间隙、减少支承变形的措施</li>
-<li>改进支承及架体的结构设计以提高刚性、减少振动、降低噪声（同向加工？）</li>
-</ul>
-</li>
-<li>
-<p>传动部件的选择和设计</p>
-<ul>
-<li>
-<p>谐波齿轮传动</p>
-<ul>
-<li>
-<p>三大件：波发生器、柔轮、刚轮</p>
-<p><a href="https://www.bilibili.com/video/BV1Zo4y197Xc/?vd_source=f15209b32029e916ee473fe943d494ca">谐波齿轮传动原理、结构与应用特点</a></p>
-<p>它是依靠柔性齿轮产生的可控变形引起齿间的相对错齿来传递动力和运动的</p>
-<p>谐波齿轮传动的波形发生器相当于行星轮系的转臂，柔轮相当于行星轮，刚轮则相当于中心轮</p>
-<p>当刚轮固定时，则柔轮的回转方向与波形发生器的回转方向相反。当柔轮固定时，则刚轮的回转方向与波形发生器的回转方向相同</p>
-</li>
-</ul>
-</li>
-<li>
-<p>齿轮传动间隙的调整方法</p>
-<ul>
-<li>
-<p>偏心调整法</p>
-<p>如果偏心量为e，则间隙调整范围就是-e到+e（可以向两个方向微调），但侧隙不能自动补偿</p>
-<p>使用偏心套</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324193733039.png" alt="image-20260324193733039"></p>
-</li>
-<li>
-<p>轴向垫片调整法</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324193957358.png" alt="image-20260324193957358"></p>
-</li>
-<li>
-<p>双片薄齿轮错齿调整法</p>
-</li>
-</ul>
-</li>
-<li>
-<p>挠性传动部件</p>
-</li>
-<li>
-<p>间歇传动部件</p>
-<ul>
-<li>
-<p>棘轮传动、槽轮传动、蜗形凸轮传动等</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194215990.png" alt="image-20260324194215990"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>导向支撑部件的选择和设计</p>
-<ul>
-<li>
-<p>作用：支承和限制运动部件按给定的运动要求和规定的运动方向运动</p>
-</li>
-<li>
-<p>分类、各类特点：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194306971.png" alt="image-20260324194306971"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194828229.png" alt="image-20260324194828229"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194848458.png" alt="image-20260324194848458"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194907038.png" alt="image-20260324194907038"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195026940.png" alt="image-20260324195026940"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195050237.png" alt="image-20260324195050237"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195119578.png" alt="image-20260324195119578"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195141939.png" alt="image-20260324195141939"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195156939.png" alt="image-20260324195156939"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195332451.png" alt="image-20260324195332451"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195342254.png" alt="image-20260324195342254"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195357437.png" alt="image-20260324195357437"></p>
-</li>
-<li>
-<p>基本要求：机电一体化系统对导轨的基本要求是<strong>导向精度高、刚性好、运动轻便平稳、耐磨性好、温度变化影响小以及结构工艺性好</strong>等</p>
-<ul>
-<li>
-<p><strong>导向精度</strong>是指动导轨按给定方向作直线运动的准确程度</p>
-<p>导向精度的高低，主要取决于：</p>
-<p>导轨的结构类型</p>
-<p>导轨的几何精度和接触精度</p>
-<p>导轨的配合间隙、油膜厚度和油膜刚度</p>
-<p>导轨和基础件的刚度和热变形等</p>
-</li>
-<li>
-<p><strong>导轨的刚度</strong>就是抵抗载荷的能力</p>
-<p>抵抗恒定载荷的能力称为<strong>静刚度</strong></p>
-<p>抵抗交变载荷的能力称为<strong>动刚度</strong></p>
-</li>
-<li>
-<p>精度的<strong>保持性</strong></p>
-<p>目前多采用多层金属薄板伸缩式防护罩进行防护</p>
-</li>
-<li>
-<p>运动的灵活性和低速运动的平稳性</p>
-<p>其主要原因是摩擦系数随运动速度的变化和传动系统刚性不足</p>
-<ul>
-<li>导轨的爬行现象机理</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>机电一体化系统的机座或机架</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>考试</category>
-      </categories>
-      <tags>
-        <tag>机电控制</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>机械制造工程学 为考试而生</title>
     <url>/2026/06/11/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310172943186.png" alt="image-20260310172943186"></p>
@@ -4014,6 +3772,248 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
       <tags>
         <tag>数控</tag>
         <tag>CAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机电控制 为考试而生</title>
+    <url>/2026/06/11/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260312191936511.png" alt="image-20260312191936511"></p>
+<span id="more"></span>
+<h1>考试内容</h1>
+<p>题型：</p>
+<ol>
+<li>
+<p>选择题 20分 20题</p>
+</li>
+<li>
+<p>简答题 32分 8题</p>
+</li>
+<li>
+<p>编程题 13分 1题 考察铣削，书上方形中间有圆环的指令一定要学会，根据提示补程序，如：建立刀补、写起终点、写程序代号、左刀补/右刀补</p>
+</li>
+<li>
+<p>插补运算 15分 1题</p>
+</li>
+<li>
+<p>计算题 20分（15+5） 2题</p>
+<p>实践和平时研讨占40%，考试占60%</p>
+<p>有大作业，制作一个多自由度机电装置产品</p>
+</li>
+</ol>
+<h1>第二章 机电系统编程基础</h1>
+<ul>
+<li>
+<p>常用指令</p>
+<ul>
+<li>
+<p>一般格式：程序名+程序段+程序结束</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1567.jpg" alt="IMG_1567" style="zoom:33%;" />
+<ul>
+<li>
+<p>程序名：O1000 不要写成01000，可以理解为程序段的身份证号</p>
+</li>
+<li>
+<p>程序段：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1568.jpg" alt="IMG_1568" style="zoom: 50%;" />
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1569.jpg" alt="IMG_1569" style="zoom: 50%;" />
+<img src="C:/Users/haozi/Downloads/LANDrop/IMG_1570.jpg" style="zoom:50%;" />
+<p>常用的G代码指令解释：</p>
+<ul>
+<li>
+<p>G00（快速移动，不切啥东西）<strong>刀具的运动轨迹不一定是直线</strong></p>
+</li>
+<li>
+<p>G01/G02/G03/G04（直线切削/顺圆切/逆圆切/timeout）需要指定进给速度F</p>
+<p>注意，这些切的指令<strong>默认我们已经知道的是起点坐标</strong>，所以我们只要给出终点坐标、圆心相对于起点的坐标就可以了</p>
+<p><strong>圆弧角度大于180度时R值为负</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317202241220.png" alt="image-20260317202241220"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317202557425.png" alt="image-20260317202557425"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">G17 G02 X0 Y40 I0 J-40 F100;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>G17、G18、G19平面选择指令（XY平面、XZ平面、YZ平面）</p>
+</li>
+<li>
+<p>G28/G29/G30，G28 U0 W0是返回第一参考点，G30 U0 W0去第二参考点，U V W是不可以少的，不然指令会执行错误</p>
+</li>
+<li>
+<p>G41/G42/<strong>G40</strong>/G43/G44/G49（左补偿/右补偿/<strong>刀具补偿取消</strong>）实际上刀具是有半径值的，补偿相当于让刀具自己去思考、自己去调整，以消除刀具的半径在切削过程中的影响</p>
+</li>
+<li>
+<p>G90/G91/G92（绝对坐标/相对坐标/工件坐标系指定）</p>
+<p><strong>注意：G92是非模态代码，仅在那一行程序段以内有效</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317203033195.png" alt="image-20260317203033195"></p>
+<p>常用的M代码指令解释：</p>
+</li>
+<li>
+<p>只有开关 ON 时才暂停；如果开关 OFF，机床会完全忽略 M01，直接跳过继续跑后面的代码</p>
+</li>
+<li>
+<p>无论机床面板上的“Optional Stop”开关是 ON 还是 OFF，一执行到 M00 就立刻暂停</p>
+</li>
+<li>
+<p>M02可以理解为削弱版的M30，他不像M30会返回开始点</p>
+</li>
+<li>
+<p>M30可以理解为复位</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317204438098.png" alt="image-20260317204438098"></p>
+<p>常用的FST代码指令解释：</p>
+</li>
+</ul>
+</li>
+<li>
+<p>程序结束：N110 M30 在数控程序中，只要看到 <strong>M30</strong>，无论前面是 N100、N200 还是 N999，都代表整个程序的终点</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>数控编程中的工艺处理</p>
+<ul>
+<li>
+<p>典型零件的数控加工工艺分析</p>
+<p>1）加工方法：回转体轴类零件，轮廓表面有圆弧曲线，适合数控车床加工</p>
+<p>2）定位和夹紧：以φ85mm外圆及右中心孔为定位基准，用三爪自定心卡盘夹持φ85mm外圆，用机床尾座顶尖顶住右中心孔</p>
+<p>3）选择刀具和对刀：根据加工要求，需要3把刀具，车外圆，切槽，车螺纹。试切对刀，并测量出各刀具的相关数据，输入到系统参数里</p>
+<p>4）切削用量选择：</p>
+<p>工件材料为45钢，主轴转速500-750rpm，外圆进给速度F=100～200mm/min，</p>
+<p>M48X1.5螺纹深度约1.6mm，分4次循环加工完成</p>
+<p>5）加工路线：</p>
+<p>自右向左，1号刀精加工（倒角—车螺纹外圆—车圆锥—车圆锥左端圆柱—车台</p>
+<p>阶—倒角—车80mm外圆—车圆弧—车80mm外圆—换2号刀切槽—换3号刀车螺纹）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317194025582.png" alt="image-20260317194025582"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">O0003；</span><br><span class="line">N01 G50 X200.0 Z350.0；工件坐标系设定</span><br><span class="line">N02 G30 U0 W0 T0101；→ 刀具从当前位置直接快速去第二参考点（换刀安全位置），然后换1号刀（T0101：刀具 1 + 补偿 1）（u、v、w对应x、y、z）</span><br><span class="line">N03 S630 M03；</span><br><span class="line">N10 G00X48.0 Z295.0M08；</span><br><span class="line">N11 G01 G98 Z230.0 F300；</span><br><span class="line">N12 X50.0；</span><br><span class="line">N13 X62.0W-60.0；</span><br><span class="line">N14 Z155.0；</span><br><span class="line">N15 X78.0；</span><br><span class="line">N16 X80.0W-1.0；</span><br><span class="line">N17 W-19.0；</span><br><span class="line">N18 G02U0W-60.0R70.0；</span><br><span class="line">N19 G01Z65.0；</span><br><span class="line">N20 X85.0；</span><br><span class="line">精加工</span><br><span class="line">N30 G00 X41.8 Z292.0 M08；</span><br><span class="line">N40 G01 X47.8 Z289.0 F150；</span><br><span class="line">N50 Z230.0；</span><br><span class="line">N60 X50.0；</span><br><span class="line">N70 X62.0 W-60.0；</span><br><span class="line">N80 Z155.0；</span><br><span class="line">N90 X78.0；</span><br><span class="line">N100X80.0W-1.0；</span><br><span class="line">N110 W-19.0；</span><br><span class="line">N120 G02 W-60.0 R70；</span><br><span class="line">N130 G01 Z65.0；</span><br><span class="line">N140 X90.0；</span><br><span class="line">N150 G00 X200.0 Z350.0 T0100 M09；</span><br><span class="line">换刀、切槽</span><br><span class="line">N160 G30 U0 W0 T0202；</span><br><span class="line">N170 S315 M03；</span><br><span class="line">N180 G00 X51.0 Z230. M08；</span><br><span class="line">N190 G01 X45.0 F0.16；</span><br><span class="line">N200 G04 U5.0 ；</span><br><span class="line">N210 G00 X51.0；</span><br><span class="line">N220 X200.0 Z350.0 T0200 M09；</span><br><span class="line">换刀、车螺纹</span><br><span class="line">N230 G30 U0 W0 T0303； 换3号刀</span><br><span class="line">N240 S200 M03；</span><br><span class="line">N250 G00 X62.0 Z296.0 M08； 快速接近车螺纹进给刀起点</span><br><span class="line">N260 G92 G99 X47.54 Z231.5 F1.5；4次螺纹切削循环，螺距为1.5mm</span><br><span class="line">N270 X46.94；</span><br><span class="line">N280 X46.54；</span><br><span class="line">N290 X46.38；总共 4 刀，逐步切深，避免一刀切太多崩刀</span><br><span class="line">N300 G00 X200.0 Z350.0 T0300 M09；</span><br><span class="line">N310 M05；</span><br><span class="line">N320 M30；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>聪明的你可能发现了，好奇怪，和里面的G92/G99和你上面贴的那张图好像不是一个作用诶？问得好，<strong>你可以理解为有三个不同的体系</strong>，里面都有G92/G99指令，张三的G92和李四的G92，两个不一样的崽子，你说能一样吗？</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317205718350.png" alt="image-20260317205718350"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1>第三章 机械系统部件设计</h1>
+<ul>
+<li>
+<p>机械系统部件的设计要求：<strong>稳快准三字诀</strong>（稳定性、响应快、较高的定位精度）</p>
+</li>
+<li>
+<p>如何实现稳快准？</p>
+<ul>
+<li>采用低摩擦阻力的传动部件和导向支承部件（气动就是一个很好的例子）</li>
+<li>缩短传动链，提高传动与支承刚度</li>
+<li>选用最佳传动比，以达到提高系统分辨率、减少等效到执行元件输出轴上的等效转动惯量，尽可能提高加速能力</li>
+<li>缩小反向死区误差，如采取消除传动间隙、减少支承变形的措施</li>
+<li>改进支承及架体的结构设计以提高刚性、减少振动、降低噪声（同向加工？）</li>
+</ul>
+</li>
+<li>
+<p>传动部件的选择和设计</p>
+<ul>
+<li>
+<p>谐波齿轮传动</p>
+<ul>
+<li>
+<p>三大件：波发生器、柔轮、刚轮</p>
+<p><a href="https://www.bilibili.com/video/BV1Zo4y197Xc/?vd_source=f15209b32029e916ee473fe943d494ca">谐波齿轮传动原理、结构与应用特点</a></p>
+<p>它是依靠柔性齿轮产生的可控变形引起齿间的相对错齿来传递动力和运动的</p>
+<p>谐波齿轮传动的波形发生器相当于行星轮系的转臂，柔轮相当于行星轮，刚轮则相当于中心轮</p>
+<p>当刚轮固定时，则柔轮的回转方向与波形发生器的回转方向相反。当柔轮固定时，则刚轮的回转方向与波形发生器的回转方向相同</p>
+</li>
+</ul>
+</li>
+<li>
+<p>齿轮传动间隙的调整方法</p>
+<ul>
+<li>
+<p>偏心调整法</p>
+<p>如果偏心量为e，则间隙调整范围就是-e到+e（可以向两个方向微调），但侧隙不能自动补偿</p>
+<p>使用偏心套</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324193733039.png" alt="image-20260324193733039"></p>
+</li>
+<li>
+<p>轴向垫片调整法</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324193957358.png" alt="image-20260324193957358"></p>
+</li>
+<li>
+<p>双片薄齿轮错齿调整法</p>
+</li>
+</ul>
+</li>
+<li>
+<p>挠性传动部件</p>
+</li>
+<li>
+<p>间歇传动部件</p>
+<ul>
+<li>
+<p>棘轮传动、槽轮传动、蜗形凸轮传动等</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194215990.png" alt="image-20260324194215990"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>导向支撑部件的选择和设计</p>
+<ul>
+<li>
+<p>作用：支承和限制运动部件按给定的运动要求和规定的运动方向运动</p>
+</li>
+<li>
+<p>分类、各类特点：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194306971.png" alt="image-20260324194306971"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194828229.png" alt="image-20260324194828229"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194848458.png" alt="image-20260324194848458"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194907038.png" alt="image-20260324194907038"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195026940.png" alt="image-20260324195026940"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195050237.png" alt="image-20260324195050237"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195119578.png" alt="image-20260324195119578"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195141939.png" alt="image-20260324195141939"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195156939.png" alt="image-20260324195156939"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195332451.png" alt="image-20260324195332451"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195342254.png" alt="image-20260324195342254"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195357437.png" alt="image-20260324195357437"></p>
+</li>
+<li>
+<p>基本要求：机电一体化系统对导轨的基本要求是<strong>导向精度高、刚性好、运动轻便平稳、耐磨性好、温度变化影响小以及结构工艺性好</strong>等</p>
+<ul>
+<li>
+<p><strong>导向精度</strong>是指动导轨按给定方向作直线运动的准确程度</p>
+<p>导向精度的高低，主要取决于：</p>
+<p>导轨的结构类型</p>
+<p>导轨的几何精度和接触精度</p>
+<p>导轨的配合间隙、油膜厚度和油膜刚度</p>
+<p>导轨和基础件的刚度和热变形等</p>
+</li>
+<li>
+<p><strong>导轨的刚度</strong>就是抵抗载荷的能力</p>
+<p>抵抗恒定载荷的能力称为<strong>静刚度</strong></p>
+<p>抵抗交变载荷的能力称为<strong>动刚度</strong></p>
+</li>
+<li>
+<p>精度的<strong>保持性</strong></p>
+<p>目前多采用多层金属薄板伸缩式防护罩进行防护</p>
+</li>
+<li>
+<p>运动的灵活性和低速运动的平稳性</p>
+<p>其主要原因是摩擦系数随运动速度的变化和传动系统刚性不足</p>
+<ul>
+<li>导轨的爬行现象机理</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>机电一体化系统的机座或机架</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>考试</category>
+      </categories>
+      <tags>
+        <tag>机电控制</tag>
       </tags>
   </entry>
   <entry>

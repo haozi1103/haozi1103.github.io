@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>刷题 — Quiz System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="gh-container">
+
+    <!-- ===== Header ===== -->
+    <div class="quiz-header">
+      <div class="quiz-header-left">
+        <a href="index.html" class="gh-btn gh-btn-sm">← 面板</a>
+        <h2 id="quiz-title">加载中...</h2>
+        <span class="gh-mode-badge normal" id="mode-badge">📝 练习模式</span>
+      </div>
+      <div>
+        <button class="gh-btn gh-btn-sm" id="btn-review" title="从错题池中复习">🧠 复习错题</button>
+        <button class="gh-btn gh-btn-sm" id="btn-reset">🔄 重置</button>
+      </div>
+    </div>
+
+    <!-- ===== Progress ===== -->
+    <div class="gh-progress" id="progress-bar">
+      <div class="gh-progress-bar" id="progress-fill" style="width:0%"></div>
+    </div>
+
+    <!-- ===== Review completion (hidden by default) ===== -->
+    <div id="review-done" class="gh-review-done" style="display:none;">
+      <span class="emoji">🎉</span>
+      <h2>复习完成！</h2>
+      <p id="review-summary">所有错题已复习完毕。</p>
+      <button class="gh-btn gh-btn-primary gh-btn-lg" onclick="location.reload()">继续练习</button>
+    </div>
+
+    <!-- ===== Question Card ===== -->
+    <div id="question-area">
+      <div class="gh-question-card">
+        <div class="gh-question-number" id="q-number">第 0 / 0 题</div>
+        <div class="gh-question-text" id="q-text">加载题目中...</div>
+        <div class="gh-options" id="q-options">
+          <!-- Options rendered by JS -->
+        </div>
+        <div class="gh-feedback" id="q-feedback"></div>
+      </div>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <div class="gh-quiz-footer">
+      <div>
+        <span class="gh-text-muted" id="footer-stats">正确: 0 | 错误: 0</span>
+      </div>
+      <div class="gh-flex-center">
+        <button class="gh-btn" id="btn-prev" disabled>← 上一题</button>
+        <button class="gh-btn gh-btn-primary" id="btn-next" disabled>下一题 →</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+  (function() {
+    'use strict';
+
+    // =====================================
+    // 状态
+    // =====================================
+    const urlParams = new URLSearchParams(window.location.search);
+    const libName = urlParams.get('lib') || 'math';
+
+    let questions = [];         // 当前题目列表
+    let currentIndex = 0;       // 当前题号
+    let correctCount = 0;
+    let wrongCount = 0;
+    let mode = 'normal';        // 'normal' | 'review'
+    let answered = false;       // 当前题是否已答
+    let reviewedIds = new Set();// 复习模式中已处理的题
+
+    // DOM 引用
+    const $ = id => document.getElementById(id);
+    const quizTitle   = $('quiz-title');
+    const modeBadge   = $('mode-badge');
+    const qNumber     = $('q-number');
+    const qText       = $('q-text');
+    const qOptions    = $('q-options');
+    const qFeedback   = $('q-feedback');
+    const progressFill = $('progress-fill');
+    const btnPrev     = $('btn-prev');
+    const btnNext     = $('btn-next');
+    const btnReview   = $('btn-review');
+    const btnReset    = $('btn-reset');
+    const footerStats = $('footer-stats');
+    const questionArea = $('question-area');
+    const reviewDone  = $('review-done');
+    const reviewSummary = $('review-summary');
+
+    // =====================================
+    // 初始化
+    // =====================================
+    async function init() {
+      const libInfo = QuizEngine.getLibraryInfo(libName);
+      document.title = `${libInfo.title} — Quiz System`;
+      quizTitle.textContent = libInfo.title;
+
+      // 加载题库
+      const lib = await QuizEngine.loadLibrary(libName);
+      if (!lib || lib.length === 0) {
+        qText.textContent = '❌ 题库加载失败，请检查 data/' + libName + '.json 是否存在。';
+        return;
+      }
+      questions = QuizEngine.shuffleArray([...lib]);
+      currentIndex = 0;
+      correctCount = 0;
+      wrongCount = 0;
+      showQuestion();
+      updateFooterStats();
+    }
+
+    // =====================================
+    // 显示题目
+    // =====================================
+    function showQuestion() {
+      if (questions.length === 0) return;
+      if (currentIndex >= questions.length) {
+        // 所有题已完成
+        showCompletion();
+        return;
+      }
+
+      const q = questions[currentIndex];
+      qNumber.textContent = `第 ${currentIndex + 1} / ${questions.length} 题`;
+      qText.textContent = q.question;
+      answered = false;
+      qFeedback.className = 'gh-feedback';
+      qFeedback.style.display = 'none';
+
+      // 渲染选项
+      const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+      qOptions.innerHTML = '';
+      q.options.forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'gh-option';
+        div.innerHTML = `<span class="letter">${letters[i] || i}</span><span>${escapeHtml(opt)}</span>`;
+        div.dataset.index = i;
+        div.addEventListener('click', () => handleOptionClick(i, q));
+        qOptions.appendChild(div);
+      });
+
+      // 更新进度
+      const answered_count = correctCount + wrongCount;
+      const progress = questions.length > 0
+        ? Math.round((answered_count / questions.length) * 100)
+        : 0;
+      progressFill.style.width = progress + '%';
+
+      // 更新按钮状态
+      btnPrev.disabled = currentIndex === 0;
+      btnNext.disabled = true;
+      updateFooterStats();
+    }
+
+    // =====================================
+    // 处理选项点击
+    // =====================================
+    function handleOptionClick(selectedIndex, q) {
+      if (answered) return;
+      answered = true;
+
+      const options = qOptions.querySelectorAll('.gh-option');
+      const isCorrect = selectedIndex === q.answer;
+
+      // 标记正确选项
+      options[q.answer].classList.add('correct');
+
+      if (isCorrect) {
+        correctCount++;
+        qFeedback.className = 'gh-feedback show correct';
+        qFeedback.textContent = '✅ 回答正确！';
+      } else {
+        wrongCount++;
+        options[selectedIndex].classList.add('wrong');
+        qFeedback.className = 'gh-feedback show wrong';
+        qFeedback.textContent = `❌ 回答错误。正确答案是 ${String.fromCharCode(65 + q.answer)}`;
+
+        // 记录错题
+        if (mode === 'normal') {
+          QuizEngine.addWrongQuestion(libName, q);
+        }
+      }
+
+      // 如果是复习模式，答对就移出错题池
+      if (mode === 'review' && isCorrect) {
+        QuizEngine.removeWrongQuestion(libName, q.id);
+        reviewedIds.add(q.id);
+      }
+      // 复习模式答错保留在错题池
+
+      // 禁用所有选项
+      options.forEach(opt => opt.classList.add('disabled'));
+
+      // 记录学习
+      QuizEngine.recordStudy(libName);
+
+      // 启用下一题
+      btnNext.disabled = false;
+      updateFooterStats();
+    }
+
+    // =====================================
+    // 下一题 / 上一题
+    // =====================================
+    btnNext.addEventListener('click', () => {
+      if (btnNext.disabled) return;
+      currentIndex++;
+      if (currentIndex >= questions.length) {
+        showCompletion();
+      } else {
+        showQuestion();
+      }
+    });
+
+    btnPrev.addEventListener('click', () => {
+      if (btnPrev.disabled) return;
+      if (currentIndex > 0) {
+        currentIndex--;
+        showQuestion();
+      }
+    });
+
+    // =====================================
+    // 完成界面
+    // =====================================
+    function showCompletion() {
+      questionArea.style.display = 'none';
+      reviewDone.style.display = 'block';
+
+      const total = correctCount + wrongCount;
+      const accuracy = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+      const wrongPool = QuizEngine.getWrongQuestions(libName).length;
+
+      let summary = `共完成 ${total} 题，正确 ${correctCount} 题（${accuracy}%）`;
+      if (wrongPool > 0) {
+        summary += `，仍有 ${wrongPool} 道错题待复习。`;
+      } else {
+        summary += `，🎉 错题已全部清除！`;
+      }
+      reviewSummary.textContent = summary;
+    }
+
+    // =====================================
+    // 复习模式
+    // =====================================
+    btnReview.addEventListener('click', () => {
+      const wrongPool = QuizEngine.getWrongQuestions(libName);
+      if (wrongPool.length === 0) {
+        alert('🎉 当前没有错题需要复习！');
+        return;
+      }
+
+      mode = 'review';
+      modeBadge.className = 'gh-mode-badge review';
+      modeBadge.textContent = '🧠 复习模式';
+
+      questions = QuizEngine.shuffleArray([...wrongPool]);
+      currentIndex = 0;
+      correctCount = 0;
+      wrongCount = 0;
+      reviewedIds = new Set();
+      questionArea.style.display = 'block';
+      reviewDone.style.display = 'none';
+      showQuestion();
+      updateFooterStats();
+    });
+
+    // =====================================
+    // 重置
+    // =====================================
+    btnReset.addEventListener('click', () => {
+      if (!confirm('重置当前题库进度？（不会清除错题记录）')) return;
+
+      // 重新加载原始题库
+      QuizEngine.loadLibrary(libName).then(lib => {
+        if (!lib) return;
+        questions = QuizEngine.shuffleArray([...lib]);
+        currentIndex = 0;
+        correctCount = 0;
+        wrongCount = 0;
+        mode = 'normal';
+        modeBadge.className = 'gh-mode-badge normal';
+        modeBadge.textContent = '📝 练习模式';
+        questionArea.style.display = 'block';
+        reviewDone.style.display = 'none';
+        showQuestion();
+        updateFooterStats();
+      });
+    });
+
+    // =====================================
+    // 工具
+    // =====================================
+    function updateFooterStats() {
+      footerStats.textContent = `正确: ${correctCount} | 错误: ${wrongCount} | 模式: ${mode === 'normal' ? '练习' : '复习'}`;
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // =====================================
+    // 启动
+    // =====================================
+    init();
+  })();
+  </script>
+</body>
+</html>
