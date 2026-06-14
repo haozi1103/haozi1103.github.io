@@ -1,66 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>KEIL C51的使用</title>
-    <url>/2026/06/11/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1>键位</h1>
-<table>
-<thead>
-<tr>
-<th>位置</th>
-<th>键位</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>键盘</td>
-<td>tab</td>
-<td>缩进，使得代码可读性增强</td>
-</tr>
-<tr>
-<td>键盘</td>
-<td>ctrl+home</td>
-<td>跳转到开头</td>
-</tr>
-<tr>
-<td>键盘</td>
-<td>ctrl+end</td>
-<td>跳转到结尾</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>configuration</td>
-<td>调整字体样式</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>build translate rebuild</td>
-<td>类似于编译（？）</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>output</td>
-<td>需要输出isp可以编译的文件，需要调整这个</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h1>注意事项</h1>
-<p>while循环后面的括号不能为空，要让他循环可以在里面写上&quot;1&quot;</p>
-<p>#include &lt;intrins.h&gt;	//“nop” need this</p>
-<p>对于发光二极管，1111 1110而不是0000 0001的时候，一个灯亮，只有当输入数字为0的时候，灯才会亮，你可以理解为只有为0的时候才有电位差，二极管才会发光</p>
-]]></content>
-      <categories>
-        <category>方法</category>
-      </categories>
-  </entry>
-  <entry>
     <title>C51的学习历程</title>
     <url>/2026/06/11/C51-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>C51的学习历程</p>
@@ -121,6 +61,66 @@
 ]]></content>
       <categories>
         <category>生活哲学</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>KEIL C51的使用</title>
+    <url>/2026/06/11/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<span id="more"></span>
+<h1>键位</h1>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>键位</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>键盘</td>
+<td>tab</td>
+<td>缩进，使得代码可读性增强</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+home</td>
+<td>跳转到开头</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+end</td>
+<td>跳转到结尾</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>configuration</td>
+<td>调整字体样式</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>build translate rebuild</td>
+<td>类似于编译（？）</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>output</td>
+<td>需要输出isp可以编译的文件，需要调整这个</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1>注意事项</h1>
+<p>while循环后面的括号不能为空，要让他循环可以在里面写上&quot;1&quot;</p>
+<p>#include &lt;intrins.h&gt;	//“nop” need this</p>
+<p>对于发光二极管，1111 1110而不是0000 0001的时候，一个灯亮，只有当输入数字为0的时候，灯才会亮，你可以理解为只有为0的时候才有电位差，二极管才会发光</p>
+]]></content>
+      <categories>
+        <category>方法</category>
       </categories>
   </entry>
   <entry>
@@ -253,6 +253,100 @@
       <tags>
         <tag>Cloudflare</tag>
         <tag>Alist</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Notability+Alist+天翼云盘 实现笔记自动备份</title>
+    <url>/2026/06/11/Notability+Alist+%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD/</url>
+    <content><![CDATA[<p>Notability+Alist+天翼云盘实现笔记的自动备份</p>
+<span id="more"></span>
+<h2 id="背景">背景</h2>
+<p>Notability 是我日常使用的笔记工具，但它的 iCloud 同步局限性比较大。iCloud免费空间太少，只有5GB。为了更灵活地管理和长期保存笔记，<strong>我选择了 AList 挂载天翼云盘，再通过 Notability 的 WebDAV 自动备份功能，实现笔记的自动同步</strong></p>
+<h2 id="准备工作">准备工作</h2>
+<p>Notability：支持 WebDAV 自动备份</p>
+<p>AList：轻量文件列表程序，可挂载多种存储后端</p>
+<p>天翼云盘：作为最终存储空间</p>
+<p>本地电脑：运行 AList，提供 WebDAV 服务</p>
+<p>步骤一：在本地电脑部署 AList</p>
+<ol>
+<li>
+<p>下载 AList</p>
+<p><a href="https://github.com/AlistGo/alist">https://github.com/AlistGo/alist</a></p>
+<p><a href="https://imgchr.com/i/pe997Sx"><img src="https://s41.ax1x.com/2026/03/03/pe997Sx.png" alt="pe997Sx.png"></a></p>
+<p>注意windows电脑下载的是amd64，而不是arm64（已经被坑过一次了哈哈）</p>
+<p><a href="https://imgchr.com/i/pe99OmD"><img src="https://s41.ax1x.com/2026/03/03/pe99OmD.png" alt="pe99OmD.png"></a></p>
+</li>
+<li>
+<p>解压alist 程序压缩包，找到你解压出的文件包的位置，输入cmd，按照下图指示操作</p>
+<p><a href="https://imgchr.com/i/pe9CSfI"><img src="https://s41.ax1x.com/2026/03/03/pe9CSfI.md.png" alt="pe9CSfI.md.png"></a></p>
+<p>cmd终端输入alist server即可启动alist客户端</p>
+<p><a href="https://imgchr.com/i/pe9CC1P"><img src="https://s41.ax1x.com/2026/03/03/pe9CC1P.md.png" alt="pe9CC1P.md.png"></a></p>
+</li>
+<li>
+<p>打开浏览器访问 <a href="http://localhost:5244">http://localhost:5244</a></p>
+<p>登录后台管理界面，初始密码在上图中是有的,具体是在&quot;initial password is&quot;后面</p>
+</li>
+</ol>
+<p>步骤二：挂载天翼云盘</p>
+<ol>
+<li>
+<p>在后台选择 存储 → 添加存储。</p>
+</li>
+<li>
+<p>类型选择 天翼云盘。</p>
+</li>
+<li>
+<p>填写参数：用户名：天翼云盘手机号<br>
+密码：登录密码<br>
+根文件夹 ID：在天翼云盘网页端打开某个文件夹，URL 最后的数字就是 ID<br>
+Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie</p>
+</li>
+<li>
+<p>保存后，AList 前端即可访问天翼云盘文件。</p>
+</li>
+</ol>
+<p>这里的操作不再赘述，alist官方的操作文档喂饭级别的教程很不错了</p>
+<p><a href="https://alistgo.com/zh/guide/drivers/189.html">https://alistgo.com/zh/guide/drivers/189.html</a></p>
+<p>步骤三：配置 Notability 自动备份</p>
+<ol>
+<li>
+<p>打开 Notability → 设置 → 自动备份。</p>
+</li>
+<li>
+<p>选择 WebDAV。</p>
+</li>
+<li>
+<p>填写信息：服务器地址：http://&lt;你的电脑IP&gt;:5244/dav/天翼云盘<br>
+用户名/密码：AList 初始化账号密码（如果你更改过密码的话，输入更改后的密码）</p>
+<p>电脑ip使用ipconfig获取，/天翼云盘 必须有，同理，如果你挂载的是百度网盘，相应的路径要更改为 /百度网盘</p>
+</li>
+<li>
+<p>保存后，Notability 会自动将笔记备份到天翼云盘。</p>
+<p>（可选，不强求）步骤四：下载Raidrive，本地查看自动备份文件</p>
+<ol>
+<li>
+<p>安装好raidrive之后</p>
+<p><a href="https://imgchr.com/i/pe9CDBD"><img src="https://s41.ax1x.com/2026/03/03/pe9CDBD.md.png" alt="pe9CDBD.md.png"></a></p>
+</li>
+<li>
+<p>打开自己的文件管理器，看看本地是不是多出来一个webdav的网络位置，如果有的话就是成功了，可以实时看自己本地的文件了</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>通过 Notability 内置 WebDAV → AList → 天翼云盘，我实现了一个自动化、轻量化的笔记备份方案，不再需要手动导出，笔记实时备份。</p>
+<p>注意事项：确保电脑运行 AList 程序，<strong>alist的cmd不要手痒关掉</strong>，否则 WebDAV 服务不可用</p>
+<p>后续备份：同样，可以把文件拷一份到移动硬盘中，遵循3-2-1备份原则</p>
+<p>方案可扩展，AList 还能挂载其他云盘</p>
+<p>如果电脑ip地址更改了需要修改webdav地址的,需要实时进行电脑ip地址的获取，后续可以考虑内网穿透实现直接远程访问的方案</p>
+]]></content>
+      <categories>
+        <category>方法</category>
+      </categories>
+      <tags>
+        <tag>Alist</tag>
+        <tag>Notability</tag>
       </tags>
   </entry>
   <entry>
@@ -425,100 +519,6 @@
       <categories>
         <category>方法</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Notability+Alist+天翼云盘 实现笔记自动备份</title>
-    <url>/2026/06/11/Notability+Alist+%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD/</url>
-    <content><![CDATA[<p>Notability+Alist+天翼云盘实现笔记的自动备份</p>
-<span id="more"></span>
-<h2 id="背景">背景</h2>
-<p>Notability 是我日常使用的笔记工具，但它的 iCloud 同步局限性比较大。iCloud免费空间太少，只有5GB。为了更灵活地管理和长期保存笔记，<strong>我选择了 AList 挂载天翼云盘，再通过 Notability 的 WebDAV 自动备份功能，实现笔记的自动同步</strong></p>
-<h2 id="准备工作">准备工作</h2>
-<p>Notability：支持 WebDAV 自动备份</p>
-<p>AList：轻量文件列表程序，可挂载多种存储后端</p>
-<p>天翼云盘：作为最终存储空间</p>
-<p>本地电脑：运行 AList，提供 WebDAV 服务</p>
-<p>步骤一：在本地电脑部署 AList</p>
-<ol>
-<li>
-<p>下载 AList</p>
-<p><a href="https://github.com/AlistGo/alist">https://github.com/AlistGo/alist</a></p>
-<p><a href="https://imgchr.com/i/pe997Sx"><img src="https://s41.ax1x.com/2026/03/03/pe997Sx.png" alt="pe997Sx.png"></a></p>
-<p>注意windows电脑下载的是amd64，而不是arm64（已经被坑过一次了哈哈）</p>
-<p><a href="https://imgchr.com/i/pe99OmD"><img src="https://s41.ax1x.com/2026/03/03/pe99OmD.png" alt="pe99OmD.png"></a></p>
-</li>
-<li>
-<p>解压alist 程序压缩包，找到你解压出的文件包的位置，输入cmd，按照下图指示操作</p>
-<p><a href="https://imgchr.com/i/pe9CSfI"><img src="https://s41.ax1x.com/2026/03/03/pe9CSfI.md.png" alt="pe9CSfI.md.png"></a></p>
-<p>cmd终端输入alist server即可启动alist客户端</p>
-<p><a href="https://imgchr.com/i/pe9CC1P"><img src="https://s41.ax1x.com/2026/03/03/pe9CC1P.md.png" alt="pe9CC1P.md.png"></a></p>
-</li>
-<li>
-<p>打开浏览器访问 <a href="http://localhost:5244">http://localhost:5244</a></p>
-<p>登录后台管理界面，初始密码在上图中是有的,具体是在&quot;initial password is&quot;后面</p>
-</li>
-</ol>
-<p>步骤二：挂载天翼云盘</p>
-<ol>
-<li>
-<p>在后台选择 存储 → 添加存储。</p>
-</li>
-<li>
-<p>类型选择 天翼云盘。</p>
-</li>
-<li>
-<p>填写参数：用户名：天翼云盘手机号<br>
-密码：登录密码<br>
-根文件夹 ID：在天翼云盘网页端打开某个文件夹，URL 最后的数字就是 ID<br>
-Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie</p>
-</li>
-<li>
-<p>保存后，AList 前端即可访问天翼云盘文件。</p>
-</li>
-</ol>
-<p>这里的操作不再赘述，alist官方的操作文档喂饭级别的教程很不错了</p>
-<p><a href="https://alistgo.com/zh/guide/drivers/189.html">https://alistgo.com/zh/guide/drivers/189.html</a></p>
-<p>步骤三：配置 Notability 自动备份</p>
-<ol>
-<li>
-<p>打开 Notability → 设置 → 自动备份。</p>
-</li>
-<li>
-<p>选择 WebDAV。</p>
-</li>
-<li>
-<p>填写信息：服务器地址：http://&lt;你的电脑IP&gt;:5244/dav/天翼云盘<br>
-用户名/密码：AList 初始化账号密码（如果你更改过密码的话，输入更改后的密码）</p>
-<p>电脑ip使用ipconfig获取，/天翼云盘 必须有，同理，如果你挂载的是百度网盘，相应的路径要更改为 /百度网盘</p>
-</li>
-<li>
-<p>保存后，Notability 会自动将笔记备份到天翼云盘。</p>
-<p>（可选，不强求）步骤四：下载Raidrive，本地查看自动备份文件</p>
-<ol>
-<li>
-<p>安装好raidrive之后</p>
-<p><a href="https://imgchr.com/i/pe9CDBD"><img src="https://s41.ax1x.com/2026/03/03/pe9CDBD.md.png" alt="pe9CDBD.md.png"></a></p>
-</li>
-<li>
-<p>打开自己的文件管理器，看看本地是不是多出来一个webdav的网络位置，如果有的话就是成功了，可以实时看自己本地的文件了</p>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="总结">总结</h2>
-<p>通过 Notability 内置 WebDAV → AList → 天翼云盘，我实现了一个自动化、轻量化的笔记备份方案，不再需要手动导出，笔记实时备份。</p>
-<p>注意事项：确保电脑运行 AList 程序，<strong>alist的cmd不要手痒关掉</strong>，否则 WebDAV 服务不可用</p>
-<p>后续备份：同样，可以把文件拷一份到移动硬盘中，遵循3-2-1备份原则</p>
-<p>方案可扩展，AList 还能挂载其他云盘</p>
-<p>如果电脑ip地址更改了需要修改webdav地址的,需要实时进行电脑ip地址的获取，后续可以考虑内网穿透实现直接远程访问的方案</p>
-]]></content>
-      <categories>
-        <category>方法</category>
-      </categories>
-      <tags>
-        <tag>Alist</tag>
-        <tag>Notability</tag>
-      </tags>
   </entry>
   <entry>
     <title>UG NX12如何进行数控仿真？</title>
@@ -733,148 +733,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </categories>
       <tags>
         <tag>Jellyfin</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>怎么去优雅的转pt种？</title>
-    <url>/2026/06/11/pt/</url>
-    <content><![CDATA[<p>怎么去优雅的转pt种？</p>
-<span id="more"></span>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944"></p>
-<h1>规则</h1>
-<h2 id="北洋园pt自查">北洋园pt自查</h2>
-<h3 id="电影">电影</h3>
-<ul>
-<li>
-<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
-</li>
-<li>
-<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
-</li>
-</ul>
-<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
-<ul>
-<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
-</ul>
-<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
-<ul>
-<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
-</ul>
-<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
-<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
-<ul>
-<li>
-<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
-</li>
-<li>
-<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
-</li>
-<li>
-<p>[ ] 我确定站内没有更好的源</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
-</li>
-</ul>
-<h2 id="btschool自查">btschool自查</h2>
-<ul>
-<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
-<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
-</ul>
-<h1>发种</h1>
-<h2 id="手动发种">手动发种</h2>
-<h3 id="代码操作">代码操作</h3>
-<p><strong>引用内容</strong></p>
-<p>[quote]我是引用内容[/quote]</p>
-<p><strong>媒体信息隐藏显示</strong></p>
-<p>[hide=Mediainfo/媒体信息]</p>
-<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
-<p>[/hide]</p>
-<p><strong>图片显示</strong></p>
-<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
-<h3 id="不同站点">不同站点</h3>
-<h4 id="北洋园pt">北洋园pt</h4>
-<p><strong>基本步骤是：</strong></p>
-<ol>
-<li>从其他站点下载你想要转的资源</li>
-<li>填写发布页面（用引用id简单一点）</li>
-<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
-</ol>
-<p><strong>填写发布页面：</strong></p>
-<p>在上面那一行里面，点击候选</p>
-<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
-<p>如果要用引用种子id的话，这样去找：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
-<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
-<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
-<p>提交成功以后你会跳转到一个界面，显示：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
-<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
-<p>进入utorrent，选择添加种子文件</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
-<p>显示这样就是做种成功了</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
-<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
-<h4 id="btschool-52pt">btschool/52pt</h4>
-<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
-<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
-<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
-<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
-<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
-<h4 id="mt-ttg">mt/ttg</h4>
-<p>这两个都是大站，估摸着发种不会那么简单</p>
-<h2 id="自动发种">自动发种</h2>
-<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
-<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
-<h3 id="安装步骤">安装步骤</h3>
-<ol>
-<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
-<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
-</ol>
-<h3 id="使用流程">使用流程</h3>
-<ol>
-<li>
-<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
-</li>
-<li>
-<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
-<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
-</li>
-<li>
-<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
-</li>
-<li>
-<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
-</li>
-</ol>
-<h3 id="遇到的问题">遇到的问题</h3>
-<ol>
-<li>
-<p>如果发现转过去的图片无法显示怎么办？</p>
-<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
-</li>
-</ol>
-<h3 id="写在最后">写在最后</h3>
-<ul>
-<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
-<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
-<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
-<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
-</ul>
-]]></content>
-      <categories>
-        <category>方法</category>
-      </categories>
-      <tags>
-        <tag>pt</tag>
       </tags>
   </entry>
   <entry>
@@ -1208,6 +1066,148 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       <categories>
         <category>影视</category>
       </categories>
+  </entry>
+  <entry>
+    <title>怎么去优雅的转pt种？</title>
+    <url>/2026/06/11/pt/</url>
+    <content><![CDATA[<p>怎么去优雅的转pt种？</p>
+<span id="more"></span>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944"></p>
+<h1>规则</h1>
+<h2 id="北洋园pt自查">北洋园pt自查</h2>
+<h3 id="电影">电影</h3>
+<ul>
+<li>
+<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
+</li>
+<li>
+<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
+</li>
+</ul>
+<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
+<ul>
+<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
+</ul>
+<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
+<ul>
+<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
+</ul>
+<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
+<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
+<ul>
+<li>
+<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
+</li>
+<li>
+<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
+</li>
+<li>
+<p>[ ] 我确定站内没有更好的源</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
+</li>
+</ul>
+<h2 id="btschool自查">btschool自查</h2>
+<ul>
+<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
+<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
+</ul>
+<h1>发种</h1>
+<h2 id="手动发种">手动发种</h2>
+<h3 id="代码操作">代码操作</h3>
+<p><strong>引用内容</strong></p>
+<p>[quote]我是引用内容[/quote]</p>
+<p><strong>媒体信息隐藏显示</strong></p>
+<p>[hide=Mediainfo/媒体信息]</p>
+<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
+<p>[/hide]</p>
+<p><strong>图片显示</strong></p>
+<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
+<h3 id="不同站点">不同站点</h3>
+<h4 id="北洋园pt">北洋园pt</h4>
+<p><strong>基本步骤是：</strong></p>
+<ol>
+<li>从其他站点下载你想要转的资源</li>
+<li>填写发布页面（用引用id简单一点）</li>
+<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
+</ol>
+<p><strong>填写发布页面：</strong></p>
+<p>在上面那一行里面，点击候选</p>
+<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
+<p>如果要用引用种子id的话，这样去找：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
+<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
+<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
+<p>提交成功以后你会跳转到一个界面，显示：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
+<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
+<p>进入utorrent，选择添加种子文件</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
+<p>显示这样就是做种成功了</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
+<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
+<h4 id="btschool-52pt">btschool/52pt</h4>
+<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
+<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
+<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
+<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
+<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
+<h4 id="mt-ttg">mt/ttg</h4>
+<p>这两个都是大站，估摸着发种不会那么简单</p>
+<h2 id="自动发种">自动发种</h2>
+<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
+<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
+<h3 id="安装步骤">安装步骤</h3>
+<ol>
+<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
+<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
+</ol>
+<h3 id="使用流程">使用流程</h3>
+<ol>
+<li>
+<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
+</li>
+<li>
+<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
+<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
+</li>
+</ol>
+<h3 id="遇到的问题">遇到的问题</h3>
+<ol>
+<li>
+<p>如果发现转过去的图片无法显示怎么办？</p>
+<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
+</li>
+</ol>
+<h3 id="写在最后">写在最后</h3>
+<ul>
+<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
+<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
+<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
+<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
+</ul>
+]]></content>
+      <categories>
+        <category>方法</category>
+      </categories>
+      <tags>
+        <tag>pt</tag>
+      </tags>
   </entry>
   <entry>
     <title>彩虹之后，我在想人间</title>
@@ -2190,90 +2190,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </tags>
   </entry>
   <entry>
-    <title>怎么去搭建一个适合自己的知识库？</title>
-    <url>/2026/06/11/%E6%80%8E%E4%B9%88%E5%8E%BB%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9F/</url>
-    <content><![CDATA[<span id="more"></span>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310144243809.png" alt="image-20260310144243809"></p>
-<h1>写在前面</h1>
-<p>一直想着搭建一个自己的知识库，想着学习的知识不只是输入，不只是为了单纯的应付考试，因为这样我觉得就完全失去了学习的意义，这样的学习显得那么的索然无味和单调。</p>
-<p>那么问题来了，怎么去搭建一个属于自己的知识库呢？</p>
-<h1>要解决的问题</h1>
-<p>结合和ai的对话和自己的思考，得出可以从以下几个方面来进行搭建，知识库的目的是：<strong>既保证知识对自己个人能力有提升，也同时打牢考试的地基。</strong></p>
-<h1>如何去解决</h1>
-<ol>
-<li>
-<p>知识：这一部分主要放“是什么”，总之，只要是你不懂的，很高深的概念都可以放在里面，分为</p>
-<ul>
-<li>概念 Wikipedia上搜一搜</li>
-<li>解释</li>
-<li>案例</li>
-<li>延伸</li>
-</ul>
-<p>标题可以写“某某知识到底是什么”、“某某知识有什么实际价值？”</p>
-</li>
-<li>
-<p>方法：涉及到解决具体问题的具体方法，这里的结构可以是：</p>
-<ul>
-<li>要解决的问题</li>
-<li>怎么去解决问题</li>
-<li>问题解决方案的思考和拓展</li>
-</ul>
-<p>标题可以是“什么什么方案”、“使用什么什么干了什么事情”</p>
-</li>
-<li>
-<p>项目是一个更为宏大的概念，通常会解决一系列的问题，涉及到很多方面的知识</p>
-<p>结构可以是：</p>
-<ul>
-<li>
-<p>为什么要做这个项目</p>
-</li>
-<li>
-<p>项目运用了哪些方法（对上一级的承接）</p>
-</li>
-<li>
-<p>实现的过程记录</p>
-</li>
-<li>
-<p>项目的复盘和反思（这一步重要）</p>
-</li>
-</ul>
-</li>
-<li>
-<p>思考：可以是有关于学习方法的思考，可以是对时代问题的反思，可以是对于个人的总结，总之很自由这部分，天马行空的都行。</p>
-</li>
-<li>
-<p>考试：这一部分目的很简单，就是为了考试！考试！考试！</p>
-<p>结构很公式化：</p>
-<ul>
-<li>知识点</li>
-<li>题型</li>
-<li>如何解题</li>
-<li>一堆题练习</li>
-</ul>
-<p>怎么说呢，中国的学生，最乐意做的就是这一部分，最擅长的，也是这一部分。</p>
-</li>
-</ol>
-<h1>思考</h1>
-<p>其实这篇文章就是一次对于知识库搭建里“方法”理论的实践，知识库的搭建理论是需要不断去丰富的，我们可以在后面的使用中去不断发现问题，不断优化方法。</p>
-<p>这样，才能搭建最适合我们自己的知识库。</p>
-<h1>一些SOP</h1>
-<ul>
-<li>[x] 文章的封面格式使用1200x600的统一格式</li>
-<li>[x] 封面主体图片位于中心偏下</li>
-<li>[x] 我相信，自己从这篇知识库博客里面学习到了前所未闻的东西</li>
-<li>[x] 我相信，自己可以将这一篇博客中的知识融会贯通而不是仅仅为了应付考试</li>
-<li>[x] 我相信，这一篇博客可以让我变得更优秀</li>
-<li>[x] 我很明确自己写这篇文章的目的</li>
-</ul>
-]]></content>
-      <categories>
-        <category>方法</category>
-      </categories>
-      <tags>
-        <tag>知识库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>护城河有什么用？</title>
     <url>/2026/06/11/%E6%8A%A4%E5%9F%8E%E6%B2%B3/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315212130095.png" alt="image-20260315212130095"></p>
@@ -2357,6 +2273,90 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       <tags>
         <tag>企业</tag>
         <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>怎么去搭建一个适合自己的知识库？</title>
+    <url>/2026/06/11/%E6%80%8E%E4%B9%88%E5%8E%BB%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9F/</url>
+    <content><![CDATA[<span id="more"></span>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310144243809.png" alt="image-20260310144243809"></p>
+<h1>写在前面</h1>
+<p>一直想着搭建一个自己的知识库，想着学习的知识不只是输入，不只是为了单纯的应付考试，因为这样我觉得就完全失去了学习的意义，这样的学习显得那么的索然无味和单调。</p>
+<p>那么问题来了，怎么去搭建一个属于自己的知识库呢？</p>
+<h1>要解决的问题</h1>
+<p>结合和ai的对话和自己的思考，得出可以从以下几个方面来进行搭建，知识库的目的是：<strong>既保证知识对自己个人能力有提升，也同时打牢考试的地基。</strong></p>
+<h1>如何去解决</h1>
+<ol>
+<li>
+<p>知识：这一部分主要放“是什么”，总之，只要是你不懂的，很高深的概念都可以放在里面，分为</p>
+<ul>
+<li>概念 Wikipedia上搜一搜</li>
+<li>解释</li>
+<li>案例</li>
+<li>延伸</li>
+</ul>
+<p>标题可以写“某某知识到底是什么”、“某某知识有什么实际价值？”</p>
+</li>
+<li>
+<p>方法：涉及到解决具体问题的具体方法，这里的结构可以是：</p>
+<ul>
+<li>要解决的问题</li>
+<li>怎么去解决问题</li>
+<li>问题解决方案的思考和拓展</li>
+</ul>
+<p>标题可以是“什么什么方案”、“使用什么什么干了什么事情”</p>
+</li>
+<li>
+<p>项目是一个更为宏大的概念，通常会解决一系列的问题，涉及到很多方面的知识</p>
+<p>结构可以是：</p>
+<ul>
+<li>
+<p>为什么要做这个项目</p>
+</li>
+<li>
+<p>项目运用了哪些方法（对上一级的承接）</p>
+</li>
+<li>
+<p>实现的过程记录</p>
+</li>
+<li>
+<p>项目的复盘和反思（这一步重要）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>思考：可以是有关于学习方法的思考，可以是对时代问题的反思，可以是对于个人的总结，总之很自由这部分，天马行空的都行。</p>
+</li>
+<li>
+<p>考试：这一部分目的很简单，就是为了考试！考试！考试！</p>
+<p>结构很公式化：</p>
+<ul>
+<li>知识点</li>
+<li>题型</li>
+<li>如何解题</li>
+<li>一堆题练习</li>
+</ul>
+<p>怎么说呢，中国的学生，最乐意做的就是这一部分，最擅长的，也是这一部分。</p>
+</li>
+</ol>
+<h1>思考</h1>
+<p>其实这篇文章就是一次对于知识库搭建里“方法”理论的实践，知识库的搭建理论是需要不断去丰富的，我们可以在后面的使用中去不断发现问题，不断优化方法。</p>
+<p>这样，才能搭建最适合我们自己的知识库。</p>
+<h1>一些SOP</h1>
+<ul>
+<li>[x] 文章的封面格式使用1200x600的统一格式</li>
+<li>[x] 封面主体图片位于中心偏下</li>
+<li>[x] 我相信，自己从这篇知识库博客里面学习到了前所未闻的东西</li>
+<li>[x] 我相信，自己可以将这一篇博客中的知识融会贯通而不是仅仅为了应付考试</li>
+<li>[x] 我相信，这一篇博客可以让我变得更优秀</li>
+<li>[x] 我很明确自己写这篇文章的目的</li>
+</ul>
+]]></content>
+      <categories>
+        <category>方法</category>
+      </categories>
+      <tags>
+        <tag>知识库</tag>
       </tags>
   </entry>
   <entry>
