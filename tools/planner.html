@@ -24,10 +24,6 @@
       }
     }
   </script>
-  <!-- Firebase JS SDK (Compat version for reliable single-file integration) -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <!-- Font Configuration -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,21 +129,22 @@
           </span>
           <div class="flex items-center space-x-1.5">
             <span id="syncIndicatorDot" class="w-2 h-2 rounded-full bg-zinc-300 animate-pulse"></span>
-            <span id="syncIndicatorText" class="text-[11px] font-medium text-zinc-400">正在初始化</span>
+            <span id="syncIndicatorText" class="text-[11px] font-medium text-zinc-400">本地存储模式</span>
           </div>
         </div>
-        <div class="flex items-center justify-between mt-3 bg-white dark:bg-zinc-900 rounded-lg p-2 border border-zinc-100 dark:border-zinc-800 shadow-sm">
+        <div class="flex items-center justify-between mt-3 bg-white dark:bg-zinc-900 rounded-lg p-2.5 border border-zinc-100 dark:border-zinc-800 shadow-sm text-xs">
           <div class="overflow-hidden mr-2">
-            <p class="text-[10px] text-zinc-400 uppercase font-bold tracking-wider">专属同步码</p>
-            <p id="syncCodeDisplay" class="text-xs font-mono font-bold text-zinc-700 dark:text-zinc-300 truncate">加载中...</p>
+            <p class="text-[10px] text-zinc-400 uppercase font-bold tracking-wider">GitHub 状态</p>
+            <p id="githubRepoDisplay" class="font-mono font-semibold text-zinc-700 dark:text-zinc-300 truncate">未配置同步端</p>
           </div>
-          <button onclick="copySyncCode()" class="px-2.5 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 rounded text-xs font-medium transition flex-shrink-0">
-            复制
+          <button id="githubSyncBtn" onclick="syncToGithub()" class="px-2.5 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 rounded text-xs font-medium transition flex-shrink-0">
+            立即同步
           </button>
         </div>
         <div class="mt-3">
-          <button onclick="openSyncModal()" class="w-full text-center py-1.5 bg-brand-500 hover:bg-brand-600 text-white rounded-lg text-xs font-medium transition shadow-sm shadow-brand-500/10">
-            设置多端同步
+          <button onclick="openSyncModal()" class="w-full text-center py-1.5 bg-brand-500 hover:bg-brand-600 text-white rounded-lg text-xs font-medium transition shadow-sm shadow-brand-500/10 flex items-center justify-center gap-1">
+            <i data-lucide="settings" class="w-3.5 h-3.5"></i>
+            <span>设置多端同步与 AI 密钥</span>
           </button>
         </div>
       </div>
@@ -184,7 +181,7 @@
               <textarea id="profileHabits" oninput="saveProfileDebounce()" placeholder="例如：每天上午复习专业课；下午抽半小时修改博客；晚上跑步健身。" class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-2 outline-none text-xs focus:ring-1 focus:ring-brand-500 resize-none h-16 leading-relaxed"></textarea>
             </div>
             <div class="text-[10px] text-zinc-400 dark:text-zinc-500">
-              * 此配置会加密保存至您的云同步端，用于辅助 AI 生成"今日战斗计划"。
+              提示：此配置将通过 GitHub 安全同步，用于辅助 AI 安排日程计划。
             </div>
           </div>
         </div>
@@ -529,57 +526,80 @@
     </div>
   </div>
 
-  <!-- Dialog MODAL: Sync Configuration -->
-  <div id="syncModal" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-md overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-2xl transition-all scale-95 opacity-0 transform" id="syncModalContent">
-      <div class="p-5 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
-        <h3 class="text-base font-bold text-zinc-800 dark:text-zinc-100">配置多端实时同步</h3>
+  <!-- Dialog MODAL: Sync Configuration (GitHub + AI) -->
+  <div id="syncModal" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-lg overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-2xl transition-all scale-95 opacity-0 transform max-h-[90vh] flex flex-col" id="syncModalContent">
+      <div class="p-5 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center flex-shrink-0">
+        <h3 class="text-base font-bold text-zinc-800 dark:text-zinc-100">配置多端同步与 AI 大模型密钥</h3>
         <button onclick="closeSyncModal()" class="p-1 rounded-lg text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div class="p-5 space-y-5">
-        <!-- Explainer -->
-        <div class="text-xs text-zinc-500 dark:text-zinc-400 space-y-2 bg-zinc-50 dark:bg-zinc-950 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
-          <p class="font-bold text-zinc-700 dark:text-zinc-300 mb-1">如何进行多端（iOS 与 Windows）同步？</p>
-          <ol class="list-decimal list-inside space-y-1 text-zinc-600 dark:text-zinc-400">
-            <li>在当前设备复制下方的 **专属同步码**。</li>
-            <li>在另一台设备的本软件中，在此窗口的下方输入框粘贴此码。</li>
-            <li>点击"连接同步"，系统将立刻合并并共享两端计划。</li>
-          </ol>
-        </div>
-
-        <!-- Current Sync Code -->
-        <div>
-          <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">当前设备同步码 (Sync Code)</label>
-          <div class="flex items-center space-x-2">
-            <div id="syncModalCodeDisplay" class="flex-1 px-4 py-3 bg-zinc-100 dark:bg-zinc-950 rounded-xl font-mono text-base font-bold text-zinc-700 dark:text-zinc-300 text-center tracking-widest border border-zinc-200/50 dark:border-zinc-800">
-              PLAN-XXXXXX
+      <form onsubmit="saveSettingsFromForm(event)" class="p-5 space-y-6 overflow-y-auto custom-scrollbar flex-1">
+        <!-- Section 1: GitHub Settings -->
+        <div class="space-y-4">
+          <h4 class="text-xs font-bold text-brand-500 uppercase tracking-wider flex items-center gap-1.5 border-b pb-2 border-zinc-100 dark:border-zinc-800">
+            <i data-lucide="github" class="w-4 h-4"></i> GitHub 去中心化云同步配置
+          </h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">GitHub 用户名</label>
+              <input type="text" id="githubUsernameInput" placeholder="输入用户名" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
             </div>
-            <button onclick="copySyncCode()" class="px-4 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-sm font-semibold transition shadow-sm">
-              复制
-            </button>
+            <div>
+              <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">仓库名称 (Repository)</label>
+              <input type="text" id="githubRepoInput" placeholder="例如: planner-data" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">同步文件名</label>
+              <input type="text" id="githubPathInput" placeholder="默认: zen_planner_sync.json" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">个人访问令牌 (Personal Access Token)</label>
+              <input type="password" id="githubTokenInput" placeholder="ghp_ 开头的密钥" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+            </div>
           </div>
         </div>
 
-        <!-- Divider -->
-        <div class="relative flex items-center justify-center">
-          <div class="absolute w-full border-t border-zinc-100 dark:border-zinc-800"></div>
-          <span class="relative bg-white dark:bg-zinc-900 px-3 text-xs text-zinc-400 uppercase font-bold tracking-wider">连接已有同步码</span>
-        </div>
-
-        <!-- Input New Sync Code -->
-        <div>
-          <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5 font-bold text-brand-500">输入另一台设备的同步码</label>
-          <div class="flex space-x-2">
-            <input type="text" id="importSyncCodeInput" placeholder="输入 PLAN-XXXXXX 格式代码" class="flex-1 px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent font-mono text-sm uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
-            <button onclick="importSyncCode()" class="px-4 py-3 bg-zinc-800 hover:bg-zinc-900 dark:bg-zinc-100 dark:hover:bg-zinc-50 text-white dark:text-zinc-900 rounded-xl text-sm font-semibold transition">
-              连接并同步
-            </button>
+        <!-- Section 2: AI Settings -->
+        <div class="space-y-4">
+          <h4 class="text-xs font-bold text-brand-500 uppercase tracking-wider flex items-center gap-1.5 border-b pb-2 border-zinc-100 dark:border-zinc-800">
+            <i data-lucide="cpu" class="w-4 h-4"></i> AI 规划副脑大模型配置
+          </h4>
+          <div>
+            <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">选择 AI 提供商</label>
+            <select id="aiProviderSelect" onchange="handleAIProviderChange()" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+              <option value="deepseek">DeepSeek 官方大模型</option>
+              <option value="mimo">小米 MiMo (标准 API 调用)</option>
+              <option value="gemini">Google Gemini 智算中心</option>
+              <option value="custom">自定义兼容 OpenAI 的节点</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">AI API Key (密钥)</label>
+            <input type="password" id="aiApiKeyInput" placeholder="输入对应 API 服务的 Key" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">API 请求节点 (Custom Endpoint)</label>
+              <input type="text" id="aiEndpointInput" placeholder="例如: https://api.deepseek.com/v1" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-xs focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">模型名称 (Model ID)</label>
+              <input type="text" id="aiModelInput" placeholder="例如: deepseek-chat" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-xs focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+            </div>
           </div>
         </div>
-      </div>
+
+        <!-- Form Action -->
+        <div class="flex space-x-3 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+          <button type="button" onclick="closeSyncModal()" class="w-1/2 text-center py-2.5 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl text-sm font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition">取消</button>
+          <button type="submit" class="w-1/2 text-center py-2.5 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-sm font-semibold transition shadow-md shadow-brand-500/10">保存配置并尝试同步</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -594,40 +614,22 @@
   <!-- Interactive JavaScript Logic -->
   <script>
     // System Config Fallback Support
-    const mockFirebaseConfig = {
-      apiKey: "",
-      authDomain: "mock-domain.firebaseapp.com",
-      projectId: "mock-project",
-      storageBucket: "mock-project.appspot.com",
-      messagingSenderId: "1234567890",
-      appId: "1:1234567890:web:mock123"
-    };
-
-    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : mockFirebaseConfig;
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'personal-planner-app';
-    
-    // Gemini API Setup
-    const apiKey = "";
+    const appId = 'personal-planner-app';
 
     // Application state
     const state = {
       tasks: [],
-      notes: {}, // Mapping of date -> notes text
-      selectedDate: '', // Format: YYYY-MM-DD
+      notes: {},
+      selectedDate: '',
       selectedCategoryFilter: 'all',
       isDarkMode: false,
       syncCode: '',
       isCloudActive: false,
       currentRightTab: 'scratchpad',
       aiChatHistory: [],
-      
-      // Personal Profile for Gemini AI Context
       profileGoals: '',
       profileHabits: '',
-      
-      // Temporary holder for the AI Combat Plan generated for the day
       currentBattlePlan: null,
-
       categories: {
         'Work': { label: '工作项目', icon: 'briefcase', color: 'indigo' },
         'Personal': { label: '个人生活', icon: 'home', color: 'emerald' },
@@ -637,265 +639,231 @@
       }
     };
 
-    // Global listeners trackers
-    let unsubscribeTasks = null;
-    let unsubscribeNotes = null;
-    let unsubscribeProfile = null;
     let scratchpadDebounceTimer = null;
     let profileDebounceTimer = null;
 
-    // Database Refs
-    let db = null;
-    let auth = null;
-
     // 1. Initialise and load local settings
     window.addEventListener('DOMContentLoaded', () => {
-      // Set default selected date (today)
       const now = new Date();
       state.selectedDate = formatDate(now);
-      
-      // Load or create a unique Sync Code
-      let localSyncCode = localStorage.getItem('zen_planner_sync_code');
-      if (!localSyncCode) {
-        localSyncCode = generateNewSyncCode();
-        localStorage.setItem('zen_planner_sync_code', localSyncCode);
-      }
-      state.syncCode = localSyncCode;
-      
-      // Update displays
-      document.getElementById('syncCodeDisplay').textContent = state.syncCode;
-      document.getElementById('syncModalCodeDisplay').textContent = state.syncCode;
-
-      // Theme Init
+      loadLocalFallbackData();
       const isLocalDark = localStorage.getItem('zen_planner_theme') === 'dark';
       if (isLocalDark || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('zen_planner_theme'))) {
         setTheme(true);
       } else {
         setTheme(false);
       }
-
-      // Initialize UI controls
       renderWeeklyDatePicker();
       renderCategoryFilters();
-
-      // Setup Firebase Firestore Integration
-      initializeFirebaseSync();
+      initializeGithubStorageSync();
     });
 
-    // Helper: format Date object to YYYY-MM-DD local format
     function formatDate(date) {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
+      return year + '-' + month + '-' + day;
     }
 
-    function generateNewSyncCode() {
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      let result = 'PLAN-';
-      for (let i = 0; i < 6; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return result;
+    // ===== GitHub Storage Functions =====
+    function encodeBase64Utf8(str) {
+      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode('0x' + p1);
+      }));
     }
 
-    // 2. Setup Firebase auth and live sync
-    async function initializeFirebaseSync() {
-      if (!firebaseConfig || !firebaseConfig.projectId || firebaseConfig.projectId === "mock-project") {
-        updateSyncIndicator('local', '本地模式运行中');
-        loadLocalFallbackData();
-        return;
-      }
+    function decodeBase64Utf8(str) {
+      return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+    }
 
-      try {
-        updateSyncIndicator('connecting', '正在建立云端同步');
-        
-        if (firebase.apps.length === 0) {
-          firebase.initializeApp(firebaseConfig);
-        }
-        
-        db = firebase.firestore();
-        auth = firebase.auth();
-
-        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-          await auth.signInWithCustomToken(__initial_auth_token);
-        } else {
-          await auth.signInAnonymously();
-        }
-
+    async function initializeGithubStorageSync() {
+      const token = localStorage.getItem('github_token');
+      const owner = localStorage.getItem('github_username');
+      const repo = localStorage.getItem('github_repo');
+      if (token && owner && repo) {
         state.isCloudActive = true;
-        updateSyncIndicator('connected', '已连云端 - 实时多端同步');
-        
-        startSyncListeners();
-
-      } catch (err) {
-        console.error("Firebase Auth/Sync failed:", err);
-        updateSyncIndicator('local', '本地备份模式运行');
-        loadLocalFallbackData();
+        document.getElementById('githubRepoDisplay').textContent = owner + '/' + repo;
+        updateSyncIndicator('connecting', '正在与 GitHub 同步中');
+        await syncToGithub();
+      } else {
+        state.isCloudActive = false;
+        document.getElementById('githubRepoDisplay').textContent = "未配置同步端";
+        updateSyncIndicator('local', '本地单机存储模式');
       }
     }
 
-    // Connect and listen in real-time
-    function startSyncListeners() {
-      if (!state.isCloudActive || !db || !auth.currentUser) return;
-
-      if (unsubscribeTasks) unsubscribeTasks();
-      if (unsubscribeNotes) unsubscribeNotes();
-      if (unsubscribeProfile) unsubscribeProfile();
-
-      const userSyncCode = state.syncCode;
-
-      // Collection 1: /artifacts/{appId}/public/data/tasks
-      const tasksRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('tasks');
-      unsubscribeTasks = tasksRef.onSnapshot((snapshot) => {
-        const fetchedTasks = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          if (data.syncCode === userSyncCode) {
-            fetchedTasks.push({ id: doc.id, ...data });
-          }
-        });
-        
-        state.tasks = fetchedTasks;
-        localStorage.setItem(`tasks_${userSyncCode}`, JSON.stringify(fetchedTasks));
-        
-        renderTasks();
-        updateProgress();
-      }, (err) => {
-        console.error("Tasks sync error:", err);
-        loadLocalFallbackData();
+    async function getGithubData(token, owner, repo, path) {
+      const url = 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/' + path;
+      const response = await fetch(url, {
+        headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
       });
+      if (response.status === 404) return { content: null, sha: null };
+      if (!response.ok) throw new Error('连接 GitHub 失败: ' + response.statusText);
+      const data = await response.json();
+      return { content: JSON.parse(decodeBase64Utf8(data.content)), sha: data.sha };
+    }
 
-      // Collection 2: /artifacts/{appId}/public/data/notes
-      const notesRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('notes');
-      unsubscribeNotes = notesRef.onSnapshot((snapshot) => {
-        const fetchedNotes = {};
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          if (data.syncCode === userSyncCode) {
-            fetchedNotes[data.date] = data.content;
-          }
-        });
-        
-        state.notes = fetchedNotes;
-        localStorage.setItem(`notes_${userSyncCode}`, JSON.stringify(fetchedNotes));
-        renderScratchpad();
-      }, (err) => {
-        console.error("Notes sync error:", err);
+    async function saveGithubData(token, owner, repo, path, contentObj, sha) {
+      const url = 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/' + path;
+      const body = { message: 'Update Zen Planner Data', content: encodeBase64Utf8(JSON.stringify(contentObj, null, 2)) };
+      if (sha) body.sha = sha;
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
       });
+      if (!response.ok) { const err = await response.json(); throw new Error('推送失败: ' + (err.message || response.statusText)); }
+      return (await response.json()).content.sha;
+    }
 
-      // Collection 3: /artifacts/{appId}/public/data/profiles
-      const profileRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('profiles').doc(userSyncCode);
-      unsubscribeProfile = profileRef.onSnapshot((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-          state.profileGoals = data.goals || '';
-          state.profileHabits = data.habits || '';
-          
+    let syncQueueActive = false;
+    async function syncToGithub() {
+      if (!state.isCloudActive || syncQueueActive) return;
+      syncQueueActive = true;
+      const syncBtn = document.getElementById('githubSyncBtn');
+      const originalHtml = syncBtn.innerHTML;
+      syncBtn.disabled = true;
+      syncBtn.innerHTML = '<span>同步中...</span>';
+      try {
+        const token = localStorage.getItem('github_token');
+        const owner = localStorage.getItem('github_username');
+        const repo = localStorage.getItem('github_repo');
+        const path = localStorage.getItem('github_path') || 'zen_planner_sync.json';
+        const { content: cloud, sha } = await getGithubData(token, owner, repo, path);
+        let mergedTasks = [].concat(state.tasks);
+        let mergedNotes = Object.assign({}, state.notes);
+        if (cloud) {
+          const cloudTasks = cloud.tasks || [];
+          const taskMap = new Map();
+          cloudTasks.forEach(function(t) { taskMap.set(t.id, t); });
+          state.tasks.forEach(function(t) {
+            const existing = taskMap.get(t.id);
+            if (!existing || (t.updatedAt && t.updatedAt > existing.updatedAt)) taskMap.set(t.id, t);
+          });
+          mergedTasks = Array.from(taskMap.values());
+          mergedNotes = Object.assign({}, cloud.notes || {}, state.notes);
+        }
+        const mergedData = {
+          tasks: mergedTasks, notes: mergedNotes,
+          profileGoals: state.profileGoals || (cloud ? cloud.profileGoals : ''),
+          profileHabits: state.profileHabits || (cloud ? cloud.profileHabits : ''),
+          lastSyncTime: Date.now()
+        };
+        await saveGithubData(token, owner, repo, path, mergedData, sha);
+        state.tasks = mergedTasks;
+        state.notes = mergedNotes;
+        if (cloud) {
+          state.profileGoals = mergedData.profileGoals;
+          state.profileHabits = mergedData.profileHabits;
           document.getElementById('profileGoals').value = state.profileGoals;
           document.getElementById('profileHabits').value = state.profileHabits;
-          
-          localStorage.setItem(`profile_goals_${userSyncCode}`, state.profileGoals);
-          localStorage.setItem(`profile_habits_${userSyncCode}`, state.profileHabits);
         }
-      }, (err) => {
-        console.error("Profile sync error:", err);
-      });
+        localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+        localStorage.setItem('notes_local', JSON.stringify(state.notes));
+        localStorage.setItem('profile_goals_local', state.profileGoals);
+        localStorage.setItem('profile_habits_local', state.profileHabits);
+        renderTasks();
+        renderScratchpad();
+        updateProgress();
+        updateSyncIndicator('connected', '云端实时同步已就绪');
+        showToast('多端数据同步完成', 'success');
+      } catch (err) {
+        console.error(err);
+        updateSyncIndicator('local', '同步失败已切回本地');
+        showToast('云同步失败: ' + err.message, 'error');
+      } finally {
+        syncQueueActive = false;
+        syncBtn.disabled = false;
+        syncBtn.innerHTML = originalHtml;
+      }
     }
 
     function loadLocalFallbackData() {
-      const code = state.syncCode;
-      const cachedTasks = localStorage.getItem(`tasks_${code}`);
-      const cachedNotes = localStorage.getItem(`notes_${code}`);
-      const cachedGoals = localStorage.getItem(`profile_goals_${code}`) || '';
-      const cachedHabits = localStorage.getItem(`profile_habits_${code}`) || '';
-      
+      const cachedTasks = localStorage.getItem('tasks_local');
+      const cachedNotes = localStorage.getItem('notes_local');
+      const cachedGoals = localStorage.getItem('profile_goals_local') || '';
+      const cachedHabits = localStorage.getItem('profile_habits_local') || '';
       state.tasks = cachedTasks ? JSON.parse(cachedTasks) : [];
       state.notes = cachedNotes ? JSON.parse(cachedNotes) : {};
       state.profileGoals = cachedGoals;
       state.profileHabits = cachedHabits;
-
       document.getElementById('profileGoals').value = cachedGoals;
       document.getElementById('profileHabits').value = cachedHabits;
-      
       renderTasks();
       updateProgress();
       renderScratchpad();
     }
 
-    // 3. Profiles Debounced Auto Saver
     function saveProfileDebounce() {
       if (profileDebounceTimer) clearTimeout(profileDebounceTimer);
-      
-      profileDebounceTimer = setTimeout(async () => {
+      profileDebounceTimer = setTimeout(async function() {
         const goals = document.getElementById('profileGoals').value;
         const habits = document.getElementById('profileHabits').value;
-        
         state.profileGoals = goals;
         state.profileHabits = habits;
-        
-        const code = state.syncCode;
-        localStorage.setItem(`profile_goals_${code}`, goals);
-        localStorage.setItem(`profile_habits_${code}`, habits);
-
-        if (state.isCloudActive) {
-          try {
-            await db.collection('artifacts').doc(appId)
-              .collection('public').doc('data')
-              .collection('profiles').doc(code)
-              .set({
-                goals: goals,
-                habits: habits,
-                updatedAt: Date.now()
-              });
-          } catch (e) {
-            console.error("Cloud saving profile failed:", e);
-          }
-        }
-      }, 800);
+        localStorage.setItem('profile_goals_local', goals);
+        localStorage.setItem('profile_habits_local', habits);
+        if (state.isCloudActive) await syncToGithub();
+      }, 1000);
     }
 
-    // Sync settings logic
-    function importSyncCode() {
-      const inputVal = document.getElementById('importSyncCodeInput').value.trim().toUpperCase();
-      
-      if (!inputVal || !/^PLAN-[A-Z0-9]{6}$/.test(inputVal)) {
-        showToast("同步码格式不合法。请确保格式形如：PLAN-XXXXXX", "error");
-        return;
-      }
+    function loadSettingsIntoForm() {
+      document.getElementById('githubUsernameInput').value = localStorage.getItem('github_username') || '';
+      document.getElementById('githubTokenInput').value = localStorage.getItem('github_token') || '';
+      document.getElementById('githubRepoInput').value = localStorage.getItem('github_repo') || '';
+      document.getElementById('githubPathInput').value = localStorage.getItem('github_path') || 'zen_planner_sync.json';
+      const aiConfig = getAISettings();
+      document.getElementById('aiProviderSelect').value = aiConfig.provider;
+      document.getElementById('aiApiKeyInput').value = aiConfig.apiKey;
+      document.getElementById('aiEndpointInput').value = aiConfig.apiEndpoint;
+      document.getElementById('aiModelInput').value = aiConfig.model;
+    }
 
-      state.syncCode = inputVal;
-      localStorage.setItem('zen_planner_sync_code', inputVal);
-      
-      document.getElementById('syncCodeDisplay').textContent = inputVal;
-      document.getElementById('syncModalCodeDisplay').textContent = inputVal;
-      
+    async function saveSettingsFromForm(event) {
+      event.preventDefault();
+      const username = document.getElementById('githubUsernameInput').value.trim();
+      const token = document.getElementById('githubTokenInput').value.trim();
+      const repo = document.getElementById('githubRepoInput').value.trim();
+      const path = document.getElementById('githubPathInput').value.trim() || 'zen_planner_sync.json';
+      localStorage.setItem('github_username', username);
+      localStorage.setItem('github_token', token);
+      localStorage.setItem('github_repo', repo);
+      localStorage.setItem('github_path', path);
+      const provider = document.getElementById('aiProviderSelect').value;
+      const apiKeyInput = document.getElementById('aiApiKeyInput').value.trim();
+      const endpoint = document.getElementById('aiEndpointInput').value.trim();
+      const model = document.getElementById('aiModelInput').value.trim();
+      localStorage.setItem('zen_planner_ai_settings', JSON.stringify({ provider: provider, apiKey: apiKeyInput, apiEndpoint: endpoint, model: model }));
       closeSyncModal();
-      document.getElementById('importSyncCodeInput').value = '';
-
-      showToast(`已切换至同步空间: ${inputVal}`, "success");
-
-      if (state.isCloudActive) {
-        startSyncListeners();
+      if (username && token && repo) {
+        state.isCloudActive = true;
+        document.getElementById('githubRepoDisplay').textContent = username + '/' + repo;
+        updateSyncIndicator('connecting', '正在尝试连接 GitHub');
+        await syncToGithub();
       } else {
-        loadLocalFallbackData();
+        state.isCloudActive = false;
+        document.getElementById('githubRepoDisplay').textContent = '未配置同步端';
+        updateSyncIndicator('local', '本地存储模式');
+        showToast('已切换到本地单机存储', 'success');
       }
     }
 
-    function copySyncCode() {
-      const textToCopy = state.syncCode;
-      const dummyInput = document.createElement("input");
-      document.body.appendChild(dummyInput);
-      dummyInput.setAttribute("value", textToCopy);
-      dummyInput.select();
-      
-      try {
-        document.execCommand('copy');
-        showToast("同步码已复制到剪贴板，可在另一端导入", "success");
-      } catch (err) {
-        showToast("自动复制失败，请手动选取字符复制", "error");
-      }
-      document.body.removeChild(dummyInput);
+    function getAISettings() {
+      const fallback = { provider: 'deepseek', apiKey: '', apiEndpoint: 'https://api.deepseek.com/v1/chat/completions', model: 'deepseek-chat' };
+      const saved = localStorage.getItem('zen_planner_ai_settings');
+      return saved ? JSON.parse(saved) : fallback;
+    }
+
+    function handleAIProviderChange() {
+      const provider = document.getElementById('aiProviderSelect').value;
+      const e = document.getElementById('aiEndpointInput');
+      const m = document.getElementById('aiModelInput');
+      if (provider === 'deepseek') { e.value = 'https://api.deepseek.com/v1/chat/completions'; m.value = 'deepseek-chat'; }
+      else if (provider === 'gemini') { e.value = ''; m.value = 'gemini-2.5-flash-preview-09-2025'; }
+      else if (provider === 'mimo') { e.value = 'https://api.mimo.xiaomi.com/v1/chat/completions'; m.value = 'mimo-chat'; }
+      else { e.value = ''; m.value = ''; }
     }
 
     // 4. Weekly Calendar Selector Renderer
@@ -1167,10 +1135,9 @@
       return card;
     }
 
-    // 6. DB Operations
+    // 6. Local Save and Sync Trigger
     async function handleTaskSubmit(event) {
       event.preventDefault();
-      
       const id = document.getElementById('taskFormId').value;
       const title = document.getElementById('taskTitle').value.trim();
       const date = document.getElementById('taskDate').value;
@@ -1178,110 +1145,43 @@
       const category = document.getElementById('taskCategory').value;
       const isTopThree = document.getElementById('taskIsTopThree').checked;
       const notes = document.getElementById('taskNotes').value.trim();
-
       if (!title) return;
-
-      const taskData = {
-        title,
-        date,
-        startTime,
-        category,
-        isTopThree,
-        notes,
-        completed: id ? (state.tasks.find(t => t.id === id)?.completed || false) : false
-      };
-
-      try {
-        if (state.isCloudActive) {
-          const tasksRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('tasks');
-          
-          if (id) {
-            await tasksRef.doc(id).set({
-              ...taskData,
-              id,
-              syncCode: state.syncCode,
-              updatedAt: Date.now()
-            });
-            showToast("成功编辑计划事项", "success");
-          } else {
-            const newDoc = tasksRef.doc();
-            await newDoc.set({
-              ...taskData,
-              id: newDoc.id,
-              syncCode: state.syncCode,
-              updatedAt: Date.now()
-            });
-            showToast("成功添加新计划事项", "success");
-          }
-        } else {
-          const finalId = id || 'local_' + Date.now() + Math.random().toString(36).substr(2, 5);
-          const taskObj = { ...taskData, id: finalId, syncCode: state.syncCode };
-          
-          if (id) {
-            state.tasks = state.tasks.map(t => t.id === id ? taskObj : t);
-          } else {
-            state.tasks.push(taskObj);
-          }
-          localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
-          renderTasks();
-          updateProgress();
-          showToast(id ? "本地修改成功" : "本地新建成功", "success");
-        }
-
-        closeTaskModal();
-      } catch (err) {
-        showToast("无法保存到日程，请重试", "error");
+      var existing = state.tasks.find(function(t) { return t.id === id; });
+      var finalId = id || 'local_' + Date.now() + Math.random().toString(36).substr(2, 5);
+      var taskObj = { title: title, date: date, startTime: startTime, category: category, isTopThree: isTopThree, notes: notes, completed: existing ? existing.completed : false, id: finalId, updatedAt: Date.now() };
+      if (id) {
+        state.tasks = state.tasks.map(function(t) { return t.id === id ? taskObj : t; });
+      } else {
+        state.tasks.push(taskObj);
       }
+      localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+      renderTasks();
+      updateProgress();
+      showToast(id ? '修改已保存' : '新建计划成功', 'success');
+      closeTaskModal();
+      if (state.isCloudActive) await syncToGithub();
     }
 
     async function toggleTaskComplete(id) {
-      const task = state.tasks.find(t => t.id === id);
+      var task = state.tasks.find(function(t) { return t.id === id; });
       if (!task) return;
-
-      const newCompletedState = !task.completed;
-
-      try {
-        if (state.isCloudActive) {
-          await db.collection('artifacts').doc(appId)
-            .collection('public').doc('data')
-            .collection('tasks').doc(id)
-            .update({
-              completed: newCompletedState,
-              updatedAt: Date.now()
-            });
-        } else {
-          state.tasks = state.tasks.map(t => t.id === id ? { ...t, completed: newCompletedState } : t);
-          localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
-          renderTasks();
-          updateProgress();
-        }
-        
-        showToast(newCompletedState ? "计划已完成，继续保持！" : "计划已重新开启", "success");
-      } catch (err) {
-        showToast("状态更新失败：" + err.message, "error");
-      }
+      var newState = !task.completed;
+      state.tasks = state.tasks.map(function(t) { return t.id === id ? Object.assign({}, t, { completed: newState, updatedAt: Date.now() }) : t; });
+      localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+      renderTasks();
+      updateProgress();
+      showToast(newState ? '计划已完成' : '计划已重新开启', 'success');
+      if (state.isCloudActive) await syncToGithub();
     }
 
     async function deleteTask(id) {
-      if (!confirm("确定要删除这项日程规划吗？")) return;
-
-      try {
-        if (state.isCloudActive) {
-          await db.collection('artifacts').doc(appId)
-            .collection('public').doc('data')
-            .collection('tasks').doc(id)
-            .delete();
-          showToast("已成功删除计划", "success");
-        } else {
-          state.tasks = state.tasks.filter(t => t.id !== id);
-          localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
-          renderTasks();
-          updateProgress();
-          showToast("本地已删除日程计划", "success");
-        }
-      } catch (err) {
-        showToast("操作删除失败：" + err.message, "error");
-      }
+      if (!confirm('确定要删除这项日程规划吗？')) return;
+      state.tasks = state.tasks.filter(function(t) { return t.id !== id; });
+      localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+      renderTasks();
+      updateProgress();
+      showToast('日程计划已删除', 'success');
+      if (state.isCloudActive) await syncToGithub();
     }
 
     // 7. Memo / Scratchpad Handler
@@ -1347,27 +1247,19 @@
     function openAddTaskModal() {
       const modal = document.getElementById('taskModal');
       const content = document.getElementById('taskModalContent');
-      
       document.getElementById('taskFormId').value = '';
       document.getElementById('taskForm').reset();
-      
       document.getElementById('taskDate').value = state.selectedDate;
       document.getElementById('modalTitle').textContent = '制定今日计划事项';
-
       modal.classList.remove('hidden');
-      setTimeout(() => {
-        content.classList.remove('scale-95', 'opacity-0');
-        content.classList.add('scale-100', 'opacity-100');
-      }, 10);
+      setTimeout(function() { content.classList.remove('scale-95', 'opacity-0'); content.classList.add('scale-100', 'opacity-100'); }, 10);
     }
 
     function editTask(id) {
-      const task = state.tasks.find(t => t.id === id);
+      const task = state.tasks.find(function(t) { return t.id === id; });
       if (!task) return;
-
       const modal = document.getElementById('taskModal');
       const content = document.getElementById('taskModalContent');
-
       document.getElementById('taskFormId').value = task.id;
       document.getElementById('taskTitle').value = task.title;
       document.getElementById('taskDate').value = task.date;
@@ -1375,47 +1267,33 @@
       document.getElementById('taskCategory').value = task.category;
       document.getElementById('taskIsTopThree').checked = task.isTopThree || false;
       document.getElementById('taskNotes').value = task.notes || '';
-
       document.getElementById('modalTitle').textContent = '编辑已有计划事项';
-
       modal.classList.remove('hidden');
-      setTimeout(() => {
-        content.classList.remove('scale-95', 'opacity-0');
-        content.classList.add('scale-100', 'opacity-100');
-      }, 10);
+      setTimeout(function() { content.classList.remove('scale-95', 'opacity-0'); content.classList.add('scale-100', 'opacity-100'); }, 10);
     }
 
     function closeTaskModal() {
       const modal = document.getElementById('taskModal');
       const content = document.getElementById('taskModalContent');
-      
       content.classList.remove('scale-100', 'opacity-100');
       content.classList.add('scale-95', 'opacity-0');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-      }, 200);
+      setTimeout(function() { modal.classList.add('hidden'); }, 200);
     }
 
     function openSyncModal() {
+      loadSettingsIntoForm();
       const modal = document.getElementById('syncModal');
       const content = document.getElementById('syncModalContent');
-      
       modal.classList.remove('hidden');
-      setTimeout(() => {
-        content.classList.remove('scale-95', 'opacity-0');
-        content.classList.add('scale-100', 'opacity-100');
-      }, 10);
+      setTimeout(function() { content.classList.remove('scale-95', 'opacity-0'); content.classList.add('scale-100', 'opacity-100'); }, 10);
     }
 
     function closeSyncModal() {
       const modal = document.getElementById('syncModal');
       const content = document.getElementById('syncModalContent');
-      
       content.classList.remove('scale-100', 'opacity-100');
       content.classList.add('scale-95', 'opacity-0');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-      }, 200);
+      setTimeout(function() { modal.classList.add('hidden'); }, 200);
     }
 
     // 10. Right Sidebar Tab Navigation
@@ -1532,142 +1410,64 @@
 
 
     // =========================================================================
-    // 12. GEMINI API INTELLIGENT INTEGRATION
+    // 12. MULTI LLM API ROUTER INTEGRATION
     // =========================================================================
     
-    // Core Fetch Wrapper implementing Exponential Backoff Retry up to 5 times
-    async function callGemini(payload) {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-      let delay = 1000;
-      
-      for (let attempt = 0; attempt < 5; attempt++) {
-        try {
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          });
-          
-          if (response.ok) {
-            return await response.json();
-          }
-          const errText = await response.text();
-          console.warn(`Gemini call attempt ${attempt + 1} rejected: ${errText}`);
-        } catch (e) {
-          console.warn(`Gemini call attempt ${attempt + 1} failed network check:`, e);
+    async function callSelectedAI(systemPrompt, userPrompt, jsonMode) {
+      var config = getAISettings();
+      if (!config.apiKey) throw new Error('未配置 AI 密钥，请先在设置中配置');
+      var delay = 1000;
+      var finalResult = null;
+      if (config.provider === 'gemini') {
+        var modelId = config.model || 'gemini-2.5-flash-preview-09-2025';
+        var url = 'https://generativelanguage.googleapis.com/v1beta/models/' + modelId + ':generateContent?key=' + config.apiKey;
+        var payload = { contents: [{ parts: [{ text: userPrompt }] }], systemInstruction: { parts: [{ text: systemPrompt }] } };
+        if (jsonMode) payload.generationConfig = { responseMimeType: 'application/json' };
+        for (var a = 0; a < 5; a++) {
+          try {
+            var r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            if (r.ok) { var d = await r.json(); finalResult = d.candidates?.[0]?.content?.parts?.[0]?.text; break; }
+          } catch(e) {}
+          await new Promise(function(r2) { setTimeout(r2, delay); });
+          delay *= 2;
         }
-        
-        await new Promise(resolve => setTimeout(resolve, delay));
-        delay *= 2;
+      } else {
+        var url2 = config.apiEndpoint || 'https://api.deepseek.com/v1/chat/completions';
+        var payload2 = { model: config.model || 'deepseek-chat', messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userPrompt }] };
+        if (jsonMode) payload2.response_format = { type: 'json_object' };
+        for (var b = 0; b < 5; b++) {
+          try {
+            var r2 = await fetch(url2, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + config.apiKey }, body: JSON.stringify(payload2) });
+            if (r2.ok) { var d2 = await r2.json(); finalResult = d2.choices?.[0]?.message?.content; break; }
+          } catch(e) {}
+          await new Promise(function(r3) { setTimeout(r3, delay); });
+          delay *= 2;
+        }
       }
-      
-      throw new Error("云端 AI 规划智算链路超时。请稍后再试。");
+      if (finalResult !== null) return finalResult;
+      throw new Error('AI 智算链路超时，请检查网络和密钥配置');
     }
 
-    // FEATURE 1: 给我安排今天 (PLAN MY DAY ENGINE)
     async function triggerAIPlanMyDay() {
-      const planBtn = document.getElementById('aiPlanMyDayBtn');
-      const originalText = planBtn.innerHTML;
-      
-      // Compile current date's manual tasks
-      const dateTasks = state.tasks.filter(t => t.date === state.selectedDate);
-      const manualTasksSummary = dateTasks.map((t, idx) => {
-        return `- ${t.title} (开始时间: ${t.startTime || '未定'}, 备注: ${t.notes || '无'})`;
-      }).join('\n');
-
+      var planBtn = document.getElementById('aiPlanMyDayBtn');
+      var originalText = planBtn.innerHTML;
+      var dateTasks = state.tasks.filter(function(t) { return t.date === state.selectedDate; });
+      var manualTasksSummary = dateTasks.map(function(t) { return '- ' + t.title + ' (开始时间: ' + (t.startTime || '未定') + ', 备注: ' + (t.notes || '无') + ')'; }).join('\n');
       planBtn.disabled = true;
-      planBtn.innerHTML = `
-        <span class="inline-block w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin mr-1.5"></span>
-        <span>深度统筹中...</span>
-      `;
-
-      const systemPrompt = `你是一个超强的时间效能和规划大模型。你的职责是结合当前日期、用户的手动日程、长期目标、日常习惯，输出一幅极具操作性的"今日战斗计划"时段蓝图。
-你必须且只能返回一个合法的 JSON 对象，不包含任何 Markdown 的 \`\`\`json 标记，直接以 { 开始，以 } 结束。
-分类字段 category 只能在 'Work', 'Personal', 'Health', 'Study', 'Finance' 之间进行选择。`;
-
-      const userPrompt = `今天日期: ${state.selectedDate}
-
-1. 用户已安排的手动任务：
-${manualTasksSummary || '（无手动日程安排）'}
-
-2. 用户的长期目标：
-"${state.profileGoals || '（暂未设定长期目标）'}"
-
-3. 用户的日常历史习惯：
-"${state.profileHabits || '（暂未设定日常习惯）'}"
-
-请结合上述信息，为他进行时间分段管理，设计一个包含 4 个最重要时间片段的"今日战斗计划"。
-若用户已手动排定某时间段的任务，请务必将其安排在对应时间段，并结合其长期目标与习惯在其余空白时间设计合理充能/学习习惯，以防止他在"没有任务"时感到迷茫。
-
-请严格返回以下 JSON 格式对象：
-{
-  "tasks": [
-    {
-      "title": "任务精简名称 (15字以内)",
-      "timeSlot": "时间跨度(例如: '09:00-10:00')",
-      "notes": "做什么/任务详情 (20字以内)",
-      "category": "只能是 'Work' | 'Personal' | 'Health' | 'Study' | 'Finance'",
-      "isTopThree": 代表是否置顶为核心要事布尔值 (true / false)
-    }
-  ]
-}`;
-
-      const payload = {
-        contents: [{ parts: [{ text: userPrompt }] }],
-        systemInstruction: { parts: [{ text: systemPrompt }] },
-        generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: "OBJECT",
-            properties: {
-              tasks: {
-                type: "ARRAY",
-                items: {
-                  type: "OBJECT",
-                  properties: {
-                    title: { type: "STRING" },
-                    timeSlot: { type: "STRING" },
-                    notes: { type: "STRING" },
-                    category: { type: "STRING" },
-                    isTopThree: { type: "BOOLEAN" }
-                  },
-                  required: ["title", "timeSlot", "notes", "category", "isTopThree"]
-                }
-              }
-            },
-            required: ["tasks"]
-          }
-        }
-      };
-
+      planBtn.innerHTML = '<span class="inline-block w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin mr-1.5"></span><span>深度统筹中...</span>';
+      var systemPrompt = '你是一个优秀的时间效能和规划大模型。你的职责是结合当前日期、用户的手动日程、长期目标、日常习惯，输出一幅极具操作性的今日战斗计划时段蓝图。你必须且只能返回一个合法的 JSON 对象。分类字段 category 只能在 Work, Personal, Health, Study, Finance 之间选择。';
+      var userPrompt = '今天日期: ' + state.selectedDate + '\n\n1. 用户已安排的手动任务：\n' + (manualTasksSummary || '无') + '\n\n2. 用户的长期目标：\n' + (state.profileGoals || '无') + '\n\n3. 用户的日常历史习惯：\n' + (state.profileHabits || '无') + '\n\n请设计一个包含 4 个最重要时间片段的今日战斗计划。返回 JSON: { "tasks": [{ "title": "任务名", "timeSlot": "09:00-10:00", "notes": "详情", "category": "Work|Personal|Health|Study|Finance", "isTopThree": true/false }] }';
       try {
-        const result = await callGemini(payload);
-        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-        
-        let parsed = null;
-        try {
-          parsed = JSON.parse(text);
-        } catch (je) {
-          const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
-          parsed = JSON.parse(cleanedText);
-        }
-
+        var text = await callSelectedAI(systemPrompt, userPrompt, true);
+        var parsed = null;
+        try { parsed = JSON.parse(text); } catch(je) { parsed = JSON.parse(text.replace(/```json/g,'').replace(/```/g,'').trim()); }
         if (parsed && Array.isArray(parsed.tasks)) {
           state.currentBattlePlan = parsed.tasks;
           renderBattlePlanPreview();
-          showToast("✨ 今日战斗计划已经就绪！", "success");
-        } else {
-          showToast("生成计划不完整，请重新点击", "error");
-        }
-      } catch (err) {
-        console.error(err);
-        showToast("AI 规划失败：" + err.message, "error");
-      } finally {
-        planBtn.disabled = false;
-        planBtn.innerHTML = originalText;
-      }
+          showToast('今日战斗计划已经就绪！', 'success');
+        } else { showToast('生成计划不完整', 'error'); }
+      } catch(err) { console.error(err); showToast('AI 规划失败: ' + err.message, 'error'); }
+      finally { planBtn.disabled = false; planBtn.innerHTML = originalText; }
     }
 
     // Render Preview Section of Battle Plan
@@ -1715,339 +1515,129 @@ ${manualTasksSummary || '（无手动日程安排）'}
       document.getElementById('battlePlanSection').classList.add('hidden');
     }
 
-    // Import temporary Battle Plan to Real Checklist (Manual Sync parallel entry)
+    // Import Battle Plan to Schedule
     async function importBattlePlanToSchedule() {
       if (!state.currentBattlePlan || state.currentBattlePlan.length === 0) return;
-
-      if (!confirm("是否将此 AI 战斗计划一键合并到您当天的清单中？（现有的手动日程将不会被影响）")) return;
-
-      const importBtn = document.querySelector('[onclick="importBattlePlanToSchedule()"]');
-      const originalText = importBtn.innerHTML;
-      importBtn.disabled = true;
-      importBtn.innerHTML = `<span>同步导入中...</span>`;
-
+      if (!confirm('是否将此 AI 战斗计划合并到当天的日常清单中？（现有手动日程不会被影响）')) return;
+      var btn = document.querySelector('[onclick="importBattlePlanToSchedule()"]');
+      var orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span>同步导入中...</span>';
       try {
-        const formattedTasks = state.currentBattlePlan.map(t => {
-          // Parse start time from timeslot (e.g., '09:00-10:00' -> '09:00')
-          const timeParts = t.timeSlot.split('-');
-          const start = timeParts[0] ? timeParts[0].trim() : '';
-
-          return {
-            title: t.title,
-            date: state.selectedDate,
-            startTime: start,
-            category: t.category,
-            isTopThree: t.isTopThree,
-            notes: `[AI 规划] ${t.notes}`,
-            completed: false,
-            syncCode: state.syncCode,
-            id: state.isCloudActive ? '' : 'local_' + Date.now() + Math.random().toString(36).substr(2, 5)
-          };
+        var formattedTasks = state.currentBattlePlan.map(function(t) {
+          var parts = t.timeSlot.split('-');
+          return { title: t.title, date: state.selectedDate, startTime: parts[0] ? parts[0].trim() : '', category: t.category, isTopThree: t.isTopThree, notes: '[AI] ' + t.notes, completed: false, id: 'local_' + Date.now() + Math.random().toString(36).substr(2, 5), updatedAt: Date.now() };
         });
+        state.tasks = state.tasks.concat(formattedTasks);
+        localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+        renderTasks();
+        updateProgress();
+        showToast('战斗计划已合并至日程清单！', 'success');
+        closeBattlePlanPreview();
+        if (state.isCloudActive) await syncToGithub();
+      } catch(err) { showToast('导入失败', 'error'); }
+      finally { btn.disabled = false; btn.innerHTML = orig; }
+    }
 
-        if (state.isCloudActive) {
-          const tasksRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('tasks');
-          for (const nt of formattedTasks) {
-            const newDoc = tasksRef.doc();
-            await newDoc.set({
-              ...nt,
-              id: newDoc.id,
-              updatedAt: Date.now()
-            });
-          }
-        } else {
-          state.tasks = [...state.tasks, ...formattedTasks];
-          localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
+    // AI Task Breakdown
+    async function triggerAITaskDecompose() {
+      var title = document.getElementById('taskTitle').value.trim();
+      if (!title) { showToast('请先输入计划标题', 'error'); return; }
+      var btn = document.getElementById('aiDecomposeBtn');
+      var orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span>AI 策划中...</span>';
+      try {
+        var text = await callSelectedAI('你是一个时间管理导师，将任务拆为3条精炼步骤，80字以内。', '标题: ' + title + '\n分类: ' + document.getElementById('taskCategory').value + '\n\n输出3条可直接执行的待办步骤。', false);
+        if (text) { document.getElementById('taskNotes').value = text.trim(); showToast('AI 方案已生成', 'success'); }
+        else { showToast('生成异常', 'error'); }
+      } catch(err) { showToast(err.message, 'error'); }
+      finally { btn.disabled = false; btn.innerHTML = orig; }
+    }
+
+    // AI Scratchpad Convert
+    async function triggerAIScratchpadConvert() {
+      var content = document.getElementById('scratchpadTextarea').value.trim();
+      if (!content) { showToast('请先在草稿中填写内容', 'error'); return; }
+      var btn = document.getElementById('aiExtractBtn');
+      var orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span>AI 解析中...</span>';
+      try {
+        var text = await callSelectedAI('你是日程提取助手，提取草稿中的待办日程。必须返回合法JSON数组。', '提取以下草稿中的待办日程：\n"' + content + '"\n\n返回 JSON: [{ "title": "任务名", "startTime": "HH:MM或空", "category": "Work|Personal|Health|Study|Finance", "isTopThree": true/false, "notes": "详情" }]', true);
+        var tasks = [];
+        try { tasks = JSON.parse(text); } catch(e) { tasks = JSON.parse(text.replace(/```json/g,'').replace(/```/g,'').trim()); }
+        if (Array.isArray(tasks) && tasks.length > 0) {
+          var newTasks = tasks.map(function(t) { return { title: t.title, startTime: t.startTime || '', category: t.category, isTopThree: t.isTopThree || false, notes: t.notes || '', date: state.selectedDate, completed: false, id: 'local_' + Date.now() + Math.random().toString(36).substr(2, 5), updatedAt: Date.now() }; });
+          state.tasks = state.tasks.concat(newTasks);
+          localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
           renderTasks();
           updateProgress();
-        }
-
-        showToast("战斗计划已成功合并至日常日程清单中！", "success");
-        closeBattlePlanPreview();
-      } catch (err) {
-        showToast("导入日程失败，请重试", "error");
-      } finally {
-        importBtn.disabled = false;
-        importBtn.innerHTML = originalText;
-      }
+          showToast('已导入 ' + newTasks.length + ' 个新日程', 'success');
+          if (state.isCloudActive) await syncToGithub();
+        } else { showToast('未提取到行动计划', 'error'); }
+      } catch(err) { showToast('AI 解析失败: ' + err.message, 'error'); }
+      finally { btn.disabled = false; btn.innerHTML = orig; }
     }
 
-
-    // FEATURE 2: AI Task Breakdown Helper (日程细化拆解)
-    async function triggerAITaskDecompose() {
-      const titleInput = document.getElementById('taskTitle').value.trim();
-      const categorySelect = document.getElementById('taskCategory').value;
-      const notesTextarea = document.getElementById('taskNotes');
-      const aiBtn = document.getElementById('aiDecomposeBtn');
-
-      if (!titleInput) {
-        showToast("请先在上方输入计划事项的标题，以便 AI 帮您精准拆解", "error");
-        return;
-      }
-
-      const originalText = aiBtn.innerHTML;
-      aiBtn.disabled = true;
-      aiBtn.innerHTML = `<span>AI 策划中...</span>`;
-      notesTextarea.placeholder = "正在为您拆分任务节点，请稍候...";
-
-      const systemPrompt = "你是一个精通敏捷规划的 AI 时间管理导师。你需要将用户填写的日程任务，转化为一个极其具备可操作性的 3 条精炼子步骤行动指南。字数严格控制在 80 字以内。不要解释。直接输出符号引导的列表内容。";
-      const userPrompt = `用户正在计划添加这一日程：\n标题: "${titleInput}"\n分类: "${categorySelect}"\n\n请输出 3 条高度精准、可直接执行的待办步骤。`;
-
-      const payload = {
-        contents: [{ parts: [{ text: userPrompt }] }],
-        systemInstruction: { parts: [{ text: systemPrompt }] }
-      };
-
-      try {
-        const result = await callGemini(payload);
-        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-        
-        if (text) {
-          notesTextarea.value = text.trim();
-          showToast("AI 智能规划方案已生成，并填充到日程备注中", "success");
-        } else {
-          showToast("AI 生成内容异常，请重试", "error");
-        }
-      } catch (err) {
-        showToast(err.message, "error");
-      } finally {
-        aiBtn.disabled = false;
-        aiBtn.innerHTML = originalText;
-        notesTextarea.placeholder = "补充一些注意事项、细化的小任务或子计划清单...";
-      }
-    }
-
-    // FEATURE 3: AI Scratchpad Converter (草稿智能提取)
-    async function triggerAIScratchpadConvert() {
-      const notesContent = document.getElementById('scratchpadTextarea').value.trim();
-      const extractBtn = document.getElementById('aiExtractBtn');
-
-      if (!notesContent) {
-        showToast("请先在今日草稿中填写您的备忘或灵感想法", "error");
-        return;
-      }
-
-      const originalBtnText = extractBtn.innerHTML;
-      extractBtn.disabled = true;
-      extractBtn.innerHTML = `<span>AI 解析中...</span>`;
-
-      const systemPrompt = "你是一个超高精度的日程和代办提取助手。你唯一的职责是阅读并提取用户在草稿中写下的日程安排。你必须并且只能返回一个合法的 JSON 数组，不包含任何 Markdown 的 ```json 块标记，直接以 [ 开始，以 ] 结束。";
-      const userPrompt = `提取以下草稿里的具体待办日程：\n\n"${notesContent}"\n\n请严格按照如下 JSON 结构返回：
-      [
-        {
-          "title": "任务的精简标题(不超过25字)",
-          "startTime": "HH:MM格式的24小时时间戳，如果草稿中提到了时间则填写，未提及必须留空字符串''",
-          "category": "类别，只能是以下五者之一：'Work' | 'Personal' | 'Health' | 'Study' | 'Finance'",
-          "isTopThree": 是否代表最重要事项的布尔值 (true / false),
-          "notes": "对该任务描述(若能从原文归纳，则控制在30字内)"
-        }
-      ]`;
-
-      const payload = {
-        contents: [{ parts: [{ text: userPrompt }] }],
-        systemInstruction: { parts: [{ text: systemPrompt }] },
-        generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: "ARRAY",
-            items: {
-              type: "OBJECT",
-              properties: {
-                title: { type: "STRING" },
-                startTime: { type: "STRING" },
-                category: { type: "STRING" },
-                isTopThree: { type: "BOOLEAN" },
-                notes: { type: "STRING" }
-              },
-              required: ["title", "category", "isTopThree", "notes"]
-            }
-          }
-        }
-      };
-
-      try {
-        const result = await callGemini(payload);
-        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-        
-        let parsedTasks = [];
-        try {
-          parsedTasks = JSON.parse(text);
-        } catch (jsonErr) {
-          const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
-          parsedTasks = JSON.parse(cleanedText);
-        }
-
-        if (Array.isArray(parsedTasks) && parsedTasks.length > 0) {
-          const newTasks = parsedTasks.map(t => ({
-            ...t,
-            id: state.isCloudActive ? '' : 'local_' + Date.now() + Math.random().toString(36).substr(2, 5),
-            date: state.selectedDate,
-            completed: false,
-            syncCode: state.syncCode
-          }));
-
-          if (state.isCloudActive) {
-            const tasksRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('tasks');
-            for (const nt of newTasks) {
-              const newDoc = tasksRef.doc();
-              await newDoc.set({
-                ...nt,
-                id: newDoc.id,
-                updatedAt: Date.now()
-              });
-            }
-          } else {
-            state.tasks = [...state.tasks, ...newTasks];
-            localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
-            renderTasks();
-            updateProgress();
-          }
-
-          showToast(`已智能识别并导入了 ${newTasks.length} 个新日程计划！`, "success");
-        } else {
-          showToast("草稿中未提取到明显的行动计划", "error");
-        }
-      } catch (err) {
-        showToast("AI 解析失败: " + err.message, "error");
-      } finally {
-        extractBtn.disabled = false;
-        extractBtn.innerHTML = originalBtnText;
-      }
-    }
-
-    // FEATURE 4: AI Daily Schedule Diagnostician (日程合理性诊断)
+    // AI Diagnose
     async function diagnoseDailyPlanner() {
-      const diagnoseBtn = document.getElementById('diagnoseBtn');
-
-      const todayTasks = state.tasks.filter(t => t.date === state.selectedDate);
-      const notesContent = state.notes[state.selectedDate] || '';
-
-      const originalBtnText = diagnoseBtn.innerHTML;
-      diagnoseBtn.disabled = true;
-      diagnoseBtn.innerHTML = `<span>诊断分析中...</span>`;
-
-      let taskSummary = todayTasks.map((t, idx) => {
-        const catLabel = state.categories[t.category]?.label || '其他';
-        return `${idx+1}. 【${catLabel}】 ${t.title} (${t.startTime || '全天'}) - ${t.completed ? '已完成' : '未完成'}. 备注: ${t.notes || '无'}`;
-      }).join('\n');
-
-      if (!taskSummary) {
-        taskSummary = "（当前日期还未创建任何具体日程）";
-      }
-
-      const systemPrompt = "你是一个时间管理心理专家和效率诊断教练。你需要分析用户当天的日程计划与草稿，给出精炼、不罗嗦、极具启发性的效率诊断与抗拖延建议。限制字数在 150 字以内。";
-      const userPrompt = `日期是: ${state.selectedDate}\n\n已排日程规划：\n${taskSummary}\n\n当日草稿备注：\n"${notesContent}"\n\n请针对这一排期做出客观、高效的精炼复盘诊断并给出突破方案。`;
-
-      const payload = {
-        contents: [{ parts: [{ text: userPrompt }] }],
-        systemInstruction: { parts: [{ text: systemPrompt }] }
-      };
-
+      var btn = document.getElementById('diagnoseBtn');
+      var orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span>诊断分析中...</span>';
+      var tasks = state.tasks.filter(function(t) { return t.date === state.selectedDate; });
+      var summary = tasks.map(function(t, i) { return (i+1) + '. [' + (state.categories[t.category]?.label || '其他') + '] ' + t.title + ' (' + (t.startTime || '全天') + ')'; }).join('\n') || '无日程';
       try {
-        const result = await callGemini(payload);
-        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-        if (text) {
-          appendAIChatMessage('coach', text);
-          showToast("日程诊断报告已生成，切换至 AI 导师面板阅读", "success");
-        } else {
-          showToast("AI 反馈异常，请重试", "error");
-        }
-      } catch (err) {
-        showToast(err.message, "error");
-      } finally {
-        diagnoseBtn.disabled = false;
-        diagnoseBtn.innerHTML = originalBtnText;
-      }
+        var text = await callSelectedAI('你是时间管理诊断专家，给出精炼诊断与抗拖延建议（150字内）。', '日期: ' + state.selectedDate + '\n日程：\n' + summary + '\n\n请给出诊断与改进方案。', false);
+        if (text) { appendAIChatMessage('coach', text); showToast('诊断报告已生成', 'success'); }
+      } catch(err) { showToast(err.message, 'error'); }
+      finally { btn.disabled = false; btn.innerHTML = orig; }
     }
 
-    // AI Interactive Chats Engine (Double-way dialogue)
     function appendAIChatMessage(sender, text) {
-      const container = document.getElementById('aiChatHistoryContainer');
-      const bubble = document.createElement('div');
-      
-      const isCoach = sender === 'coach';
-      
-      bubble.className = `p-3 rounded-2xl max-w-[90%] text-xs leading-relaxed transition-all ${
-        isCoach 
-          ? 'bg-indigo-50/70 dark:bg-indigo-950/20 text-zinc-800 dark:text-zinc-200 border border-indigo-100/30 dark:border-indigo-900/10 mr-auto' 
-          : 'bg-brand-500 text-white ml-auto'
-      }`;
-
-      bubble.innerHTML = `
-        <div class="flex items-center space-x-1.5 mb-1 opacity-80">
-          <span class="font-bold">${isCoach ? 'AI 规划导师' : '我'}</span>
-          <span class="text-[9px] scale-90">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-        </div>
-        <p class="whitespace-pre-wrap leading-relaxed">${escapeHTML(text)}</p>
-      `;
-
+      var container = document.getElementById('aiChatHistoryContainer');
+      var bubble = document.createElement('div');
+      var isCoach = sender === 'coach';
+      bubble.className = 'p-3 rounded-2xl max-w-[90%] text-xs leading-relaxed transition-all ' + (isCoach ? 'bg-indigo-50/70 dark:bg-indigo-950/20 text-zinc-800 dark:text-zinc-200 border border-indigo-100/30 dark:border-indigo-900/10 mr-auto' : 'bg-brand-500 text-white ml-auto');
+      bubble.innerHTML = '<div class="flex items-center space-x-1.5 mb-1 opacity-80"><span class="font-bold">' + (isCoach ? 'AI 规划导师' : '我') + '</span><span class="text-[9px] scale-90">' + new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) + '</span></div><p class="whitespace-pre-wrap leading-relaxed">' + escapeHTML(text) + '</p>';
       container.appendChild(bubble);
-      
       switchRightTab('ai');
-      state.aiChatHistory.push({ sender, text });
+      state.aiChatHistory.push({ sender: sender, text: text });
       scrollAIChatToBottom();
     }
 
     async function sendAIChatMessage() {
-      const input = document.getElementById('aiChatInput');
-      const userText = input.value.trim();
-      const sendBtn = document.getElementById('aiSendBtn');
-
-      if (!userText) return;
-
-      appendAIChatMessage('user', userText);
+      var input = document.getElementById('aiChatInput');
+      var text = input.value.trim();
+      if (!text) return;
+      appendAIChatMessage('user', text);
       input.value = '';
-
-      const container = document.getElementById('aiChatHistoryContainer');
-      const shimmerBubble = document.createElement('div');
-      shimmerBubble.id = 'ai-shimmer-bubble';
-      shimmerBubble.className = "p-4 rounded-xl ai-loading-shimmer text-zinc-400 max-w-[80%] mr-auto h-16 w-3/4 mb-3 rounded-2xl";
-      container.appendChild(shimmerBubble);
+      var container = document.getElementById('aiChatHistoryContainer');
+      var shimmer = document.createElement('div');
+      shimmer.id = 'ai-shimmer-bubble';
+      shimmer.className = 'p-4 rounded-xl ai-loading-shimmer max-w-[80%] mr-auto h-16 w-3/4 mb-3 rounded-2xl';
+      container.appendChild(shimmer);
       scrollAIChatToBottom();
-
+      var sendBtn = document.getElementById('aiSendBtn');
       sendBtn.disabled = true;
-
-      const formattedHistory = state.aiChatHistory.map(item => {
-        return `${item.sender === 'coach' ? 'AI 规划导师' : '用户'}: ${item.text}`;
-      }).join('\n');
-
-      const todayTasks = state.tasks.filter(t => t.date === state.selectedDate);
-      let taskSummary = todayTasks.map((t, idx) => `[${t.category}] ${t.title}`).join(', ');
-
-      const systemPrompt = "你是一个时间管理心理学家。根据用户当前的日程进度和他的疑问，给出深刻、简明、可行、充满心理学关怀支持和指导的解答。回答限制在150字内。";
-      const userPrompt = `日期: ${state.selectedDate}。今日任务有: [${taskSummary}]。\n\n对话上下文历史：\n${formattedHistory}\n\n最新提问："${userText}"\n\n请对此给出专业的效能指导、战胜拖延对策、或情绪激励建议。`;
-
-      const payload = {
-        contents: [{ parts: [{ text: userPrompt }] }],
-        systemInstruction: { parts: [{ text: systemPrompt }] }
-      };
-
+      var history = state.aiChatHistory.map(function(i) { return (i.sender === 'coach' ? 'AI' : '用户') + ': ' + i.text; }).join('\n');
+      var todayT = state.tasks.filter(function(t) { return t.date === state.selectedDate; });
       try {
-        const result = await callGemini(payload);
-        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-        const shimmer = document.getElementById('ai-shimmer-bubble');
-        if (shimmer) shimmer.remove();
-
-        if (text) {
-          appendAIChatMessage('coach', text);
-        } else {
-          appendAIChatMessage('coach', "抱歉，思考模块收到未知波动。请再次提问。");
-        }
-      } catch (err) {
-        const shimmer = document.getElementById('ai-shimmer-bubble');
-        if (shimmer) shimmer.remove();
-        appendAIChatMessage('coach', "发生网络阻塞：" + err.message);
-      } finally {
-        sendBtn.disabled = false;
-      }
+        var result = await callSelectedAI('你是时间管理心理学家，给出简明可行的指导（150字内）。', '日期: ' + state.selectedDate + '\n\n对话历史：\n' + history + '\n\n最新提问：' + text + '\n\n请给出专业效能的指导。', false);
+        var sh = document.getElementById('ai-shimmer-bubble');
+        if (sh) sh.remove();
+        if (result) appendAIChatMessage('coach', result);
+        else appendAIChatMessage('coach', '抱歉，请再次提问。');
+      } catch(err) {
+        var sh2 = document.getElementById('ai-shimmer-bubble');
+        if (sh2) sh2.remove();
+        appendAIChatMessage('coach', '网络阻塞: ' + err.message);
+      } finally { sendBtn.disabled = false; }
     }
 
-    function handleAIChatKeyDown(event) {
-      if (event.key === 'Enter') {
-        sendAIChatMessage();
-      }
+    function handleAIChatKeyDown(e) {
+      if (e.key === 'Enter') sendAIChatMessage();
     }
   </script>
 </body>
