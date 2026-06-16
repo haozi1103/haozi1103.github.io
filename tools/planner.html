@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="zh-CN" class="h-full">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -62,44 +62,12 @@
       background-size: 200% 100%;
       animation: shimmer 1.5s infinite;
     }
-    /* Back to tools bar */
-    .planner-toolbar {
-      background: #1e1b4b;
-      color: white;
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 13px;
-    }
-    .planner-toolbar a {
-      color: #a5b4fc;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .planner-toolbar a:hover {
-      color: #c7d2fe;
-    }
-    .dark .planner-toolbar {
-      background: #0f0d2e;
-    }
   </style>
 </head>
-<body class="h-full bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 transition-colors duration-200 overflow-hidden">
-
-  <!-- Planner Toolbar -->
-  <div class="planner-toolbar">
-    <a href="/tools/">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-      返回工具集
-    </a>
-    <span>逸程计划 · 个人日程多端同步系统</span>
-  </div>
+<body class="h-dvh bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 transition-colors duration-200 flex flex-col overflow-hidden">
 
   <!-- Core App Layout -->
-  <div class="h-full flex flex-col lg:flex-row overflow-hidden" style="height: calc(100vh - 40px);">
+  <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
     
     <!-- Sidebar (Left Column - App Brand & Date Select & Sync Controls) -->
     <aside id="leftSidebar" class="hidden lg:flex w-full lg:w-80 bg-white dark:bg-zinc-900 border-b lg:border-b-0 lg:border-r border-zinc-200 dark:border-zinc-800 flex-col flex-shrink-0 overflow-y-auto custom-scrollbar">
