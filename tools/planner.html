@@ -2,7 +2,7 @@
 <html lang="zh-CN" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>逸程计划 - 个人日程多端同步系统</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -102,7 +102,7 @@
   <div class="h-full flex flex-col lg:flex-row overflow-hidden" style="height: calc(100vh - 40px);">
     
     <!-- Sidebar (Left Column - App Brand & Date Select & Sync Controls) -->
-    <aside class="w-full lg:w-80 bg-white dark:bg-zinc-900 border-b lg:border-b-0 lg:border-r border-zinc-200 dark:border-zinc-800 flex flex-col flex-shrink-0 overflow-y-auto custom-scrollbar">
+    <aside id="leftSidebar" class="hidden lg:flex w-full lg:w-80 bg-white dark:bg-zinc-900 border-b lg:border-b-0 lg:border-r border-zinc-200 dark:border-zinc-800 flex-col flex-shrink-0 overflow-y-auto custom-scrollbar">
       <!-- Header / Logo -->
       <div class="p-5 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-between flex-shrink-0">
         <div class="flex items-center space-x-3">
@@ -198,7 +198,7 @@
     </aside>
 
     <!-- Main Schedule Pane (Center Column) -->
-    <main class="flex-1 flex flex-col min-w-0 bg-white dark:bg-zinc-950 overflow-hidden">
+    <main id="mainContent" class="flex flex-col flex-1 min-w-0 bg-white dark:bg-zinc-950 overflow-hidden">
       
       <!-- Date Display and App Control Bar -->
       <header class="p-4 lg:p-6 border-b border-zinc-100 dark:border-zinc-900 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 flex-shrink-0">
@@ -232,6 +232,13 @@
           </button>
         </div>
       </header>
+
+      <!-- Weekly Date Picker (visible on both mobile & desktop) -->
+      <div class="px-4 lg:px-6 py-2.5 bg-zinc-50/50 dark:bg-zinc-900/30 border-b border-zinc-100 dark:border-zinc-900 flex-shrink-0">
+        <div class="grid grid-cols-7 gap-1.5 text-center max-w-xl">
+          <div id="weeklyDatePicker" class="col-span-7 grid grid-cols-7 gap-1"></div>
+        </div>
+      </div>
 
       <!-- Task Lists Grid Wrapper -->
       <div class="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6 custom-scrollbar">
@@ -312,7 +319,7 @@
     </main>
 
     <!-- Side Interactive Panel (Right Column - Dynamic Scratchpad, AI Assistant & Manual) -->
-    <aside id="rightSidebar" class="w-full lg:w-96 bg-zinc-50 dark:bg-zinc-900 border-t lg:border-t-0 lg:border-l border-zinc-200 dark:border-zinc-800 flex flex-col flex-shrink-0 h-[32rem] lg:h-auto overflow-hidden">
+    <aside id="rightSidebar" class="hidden lg:flex w-full lg:w-96 bg-zinc-50 dark:bg-zinc-900 border-t lg:border-t-0 lg:border-l border-zinc-200 dark:border-zinc-800 flex-col flex-shrink-0 h-full lg:h-auto overflow-hidden">
       <!-- Tabs header -->
       <div class="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between p-1 flex-shrink-0">
         <div class="flex space-x-1 w-full">
@@ -364,7 +371,7 @@
                 </div>
                 <div>
                   <h4 class="font-bold text-zinc-800 dark:text-zinc-100">AI 效率规划导师</h4>
-                  <p class="text-[10px] text-zinc-400">基于 Gemini 的日程诊断专家</p>
+                  <p class="text-[10px] text-zinc-400">基于 AI 的日程诊断专家</p>
                 </div>
               </div>
               <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
@@ -394,48 +401,54 @@
         <div id="panel-manual" class="hidden p-4 space-y-4 text-xs">
           <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 rounded-xl shadow-sm space-y-3">
             <h4 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1.5 text-sm">
-              <i data-lucide="cloud-lightning" class="w-4 h-4 text-brand-500"></i> 多端极速同步方案手册
+              <i data-lucide="cloud-lightning" class="w-4 h-4 text-brand-500"></i> 去中心化同步与 AI 智算手册
             </h4>
             
             <div class="space-y-3 text-zinc-600 dark:text-zinc-300 leading-relaxed">
               <section>
                 <h5 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 1. 同步原理
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 1. 密钥防重置说明（硬编码默认配置）
                 </h5>
-                <p class="pl-2.5 mt-1">本应用采用免注册的「同步码（Sync Code）」设计。每台设备独享一个唯一的同步秘钥。若要在其他端（如 iOS 手机端、Windows 电脑端）连接并共享您的计划清单，仅需在其他设备上填入此秘钥即可秒级完成云合并。</p>
-              </section>
-
-              <section>
-                <h5 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 2. 同步步骤
-                </h5>
-                <ol class="pl-2.5 list-decimal list-inside space-y-1 mt-1">
-                  <li>在当前设备复制您的 **专属同步码**；</li>
-                  <li>在另一台设备的本应用中，点击左侧「设置多端同步」；</li>
-                  <li>在下方粘贴该同步码，并点击「连接并同步」即可。</li>
+                <p class="pl-2.5 mt-1">如果您将应用部署在自己的 Hexo 博客根目录下，每次执行 hexo clean 并重新部署可能会导致本地存储清空。为了避免每次重新输入密钥和令牌，可以直接在本网页 HTML 文件的代码中进行永久硬编码配置：</p>
+                <ol class="pl-2.5 list-decimal list-inside space-y-1 mt-1.5 text-brand-600 dark:text-brand-400 font-semibold">
+                  <li>在本地用文本编辑器打开本 HTML 文件；</li>
+                  <li>寻找到代码的 HARDCODED_CONFIG 配置项；</li>
+                  <li>将您的 GitHub 用户名、Token、Repository 以及 DeepSeek 的 API Key 填入对象的双引号内并保存；</li>
+                  <li>最后执行 hexo g && hexo d 部署。此后无论清理多少次，多端打开即可直接同步，无须再次手动输入密钥。</li>
                 </ol>
               </section>
 
               <section>
                 <h5 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 3. iOS 端无痛安装 (Safari PWA)
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 2. GitHub 存储与同步配置
                 </h5>
                 <ol class="pl-2.5 list-decimal list-inside space-y-1 mt-1">
-                  <li>在 iPhone 自带的 **Safari 浏览器** 中打开本网页链接；</li>
-                  <li>点击浏览器底部的 **"分享"** 按钮（向上箭头的正方形图标）；</li>
-                  <li>在弹出的功能菜单中，向下滚动并选择 **"添加到主屏幕"**；</li>
-                  <li>返回主屏幕，点击生成的"逸程计划"应用图标，即可获得无浏览器地址栏、全屏的原生客户端体验。</li>
+                  <li>在您的 GitHub 新建一个仓库（推荐设为 Private 私有仓库以确保个人数据绝对隐私），例如：planner-data；</li>
+                  <li>进入 GitHub 的 Settings -> Developer settings -> Personal Access Tokens (classic)，点击新建令牌，勾选 repo 读写权限，复制生成的以 ghp_ 开头的 Token；</li>
+                  <li>在本应用左下角设置弹窗中填入用户名、仓库名、生成的 Token 及同步路径，即可启用全球秒级去中心化同步。</li>
                 </ol>
               </section>
 
               <section>
                 <h5 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 4. Windows / 桌面端安装 (PWA)
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 3. 接入多端 AI 智算密钥
+                </h5>
+                <p class="pl-2.5 mt-1">本应用原生集成了 DeepSeek 官方大模型、小米 MiMo 以及标准的 OpenAI 或谷歌 Gemini：</p>
+                <ol class="pl-2.5 list-decimal list-inside space-y-1 mt-1.5">
+                  <li>在设置面板中选择您的 AI 服务商（如 DeepSeek）；</li>
+                  <li>输入对应的 API 密钥。DeepSeek 与 MiMo 会自动预填标准的 API 调用端点和对应的模型名称。建议将其直接填入 HTML 代码顶部的 HARDCODED_CONFIG 中。</li>
+                </ol>
+              </section>
+
+              <section>
+                <h5 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 4. 移动端 (iOS) 客户端部署 PWA
                 </h5>
                 <ol class="pl-2.5 list-decimal list-inside space-y-1 mt-1">
-                  <li>使用 **Edge 浏览器** 或 **Chrome** 浏览器打开网页；</li>
-                  <li>点击浏览器最右侧地址栏的 **"安装应用"**（通常为加号或三个点中的安装选项）；</li>
-                  <li>应用会一键生成桌面图标，并作为单独视窗的 Windows 桌面应用运行，支持多端数据实时云拉取。</li>
+                  <li>在 iPhone 自带的 Safari 浏览器中访问您部署好的博客网址。</li>
+                  <li>点击浏览器底部的 分享 按钮。</li>
+                  <li>在滑出的选项中点击 添加到主屏幕。</li>
+                  <li>回到 iPhone 桌面打开逸程计划，即可体验无浏览器地址栏、全屏运行的原生客户端。</li>
                 </ol>
               </section>
             </div>
@@ -444,6 +457,22 @@
 
       </div>
     </aside>
+  </div>
+
+  <!-- Mobile Bottom Tab Navigation Bar (iOS safe area) -->
+  <div class="lg:hidden bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-around flex-shrink-0 z-40" style="padding-bottom: env(safe-area-inset-bottom); height: calc(4rem + env(safe-area-inset-bottom));">
+    <button onclick="switchMobileTab('config')" id="m-tab-config" class="flex flex-col items-center justify-center flex-1 py-2 text-zinc-400 dark:text-zinc-500">
+      <i data-lucide="settings" class="w-5 h-5"></i>
+      <span class="text-[10px] mt-1 font-semibold">同步配置</span>
+    </button>
+    <button onclick="switchMobileTab('schedule')" id="m-tab-schedule" class="flex flex-col items-center justify-center flex-1 py-2 text-brand-500">
+      <i data-lucide="calendar" class="w-5 h-5"></i>
+      <span class="text-[10px] mt-1 font-bold">每日清单</span>
+    </button>
+    <button onclick="switchMobileTab('notes')" id="m-tab-notes" class="flex flex-col items-center justify-center flex-1 py-2 text-zinc-400 dark:text-zinc-500">
+      <i data-lucide="file-text" class="w-5 h-5"></i>
+      <span class="text-[10px] mt-1 font-semibold">备忘智能</span>
+    </button>
   </div>
 
   <!-- Dialog MODAL: Add/Edit Task -->
@@ -481,11 +510,11 @@
         <div>
           <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">日程类别</label>
           <select id="taskCategory" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
-            <option value="Work" class="bg-white dark:bg-zinc-900">💼 工作项目</option>
-            <option value="Personal" class="bg-white dark:bg-zinc-900">🏠 个人生活</option>
-            <option value="Health" class="bg-white dark:bg-zinc-900">🏃 运动健康</option>
-            <option value="Study" class="bg-white dark:bg-zinc-900">📚 学习提升</option>
-            <option value="Finance" class="bg-white dark:bg-zinc-900">💰 财务规划</option>
+            <option value="Work" class="bg-white dark:bg-zinc-900">工作项目</option>
+            <option value="Personal" class="bg-white dark:bg-zinc-900">个人生活</option>
+            <option value="Health" class="bg-white dark:bg-zinc-900">运动健康</option>
+            <option value="Study" class="bg-white dark:bg-zinc-900">学习提升</option>
+            <option value="Finance" class="bg-white dark:bg-zinc-900">财务规划</option>
           </select>
         </div>
 
@@ -640,6 +669,7 @@
       syncCode: '',
       isCloudActive: false,
       currentRightTab: 'scratchpad',
+      activeMobileTab: 'schedule',
       aiChatHistory: [],
       profileGoals: '',
       profileHabits: '',
@@ -700,6 +730,11 @@
       renderWeeklyDatePicker();
       renderCategoryFilters();
       initializeGithubStorageSync();
+
+      // Init mobile tab view
+      if (window.innerWidth < 1024) {
+        setTimeout(function() { switchMobileTab('schedule'); }, 50);
+      }
     });
 
     function formatDate(date) {
@@ -1370,9 +1405,43 @@
       }
     }
 
+    // 10.1 Mobile Bottom Tab view toggler
+    function switchMobileTab(tabName) {
+      if (window.innerWidth >= 1024) return;
+      state.activeMobileTab = tabName;
+      var leftSidebar = document.getElementById('leftSidebar');
+      var mainContent = document.getElementById('mainContent');
+      var rightSidebar = document.getElementById('rightSidebar');
+      var tabConfig = document.getElementById('m-tab-config');
+      var tabSchedule = document.getElementById('m-tab-schedule');
+      var tabNotes = document.getElementById('m-tab-notes');
+      if (leftSidebar) leftSidebar.style.display = 'none';
+      if (mainContent) mainContent.style.display = 'none';
+      if (rightSidebar) rightSidebar.style.display = 'none';
+      [tabConfig, tabSchedule, tabNotes].forEach(function(t) { if (t) { t.className = 'flex flex-col items-center justify-center flex-1 py-2 text-zinc-400 dark:text-zinc-500'; var s = t.querySelector('span'); if (s) s.className = 'text-[10px] mt-1 font-semibold'; } });
+      var activeBtn = { config: tabConfig, schedule: tabSchedule, notes: tabNotes }[tabName];
+      if (activeBtn) { activeBtn.className = 'flex flex-col items-center justify-center flex-1 py-2 text-brand-500 dark:text-brand-400'; var sp = activeBtn.querySelector('span'); if (sp) sp.className = 'text-[10px] mt-1 font-bold'; }
+      var activePanel = { config: leftSidebar, schedule: mainContent, notes: rightSidebar }[tabName];
+      if (activePanel) activePanel.style.display = 'flex';
+      safeCreateIcons();
+    }
+
+    window.addEventListener('resize', function() {
+      var leftSidebar = document.getElementById('leftSidebar');
+      var mainContent = document.getElementById('mainContent');
+      var rightSidebar = document.getElementById('rightSidebar');
+      if (window.innerWidth >= 1024) {
+        if (leftSidebar) leftSidebar.style.display = '';
+        if (mainContent) mainContent.style.display = '';
+        if (rightSidebar) rightSidebar.style.display = '';
+      } else {
+        switchMobileTab(state.activeMobileTab || 'schedule');
+      }
+    });
+
     function scrollAIChatToBottom() {
       const view = document.getElementById('aiChatViewport');
-      view.scrollTop = view.scrollHeight;
+      if (view) view.scrollTop = view.scrollHeight;
     }
 
     // 11. Design Aesthetic Handlers (Dark/Light themes)
