@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" class="h-full">
 <head>
   <meta charset="UTF-8">
@@ -613,7 +613,21 @@
 
   <!-- Interactive JavaScript Logic -->
   <script>
-    // System Config Fallback Support
+    // =========================================================================
+    // 【永久保存密钥免重置配置】如果您希望在 hexo clean/deploy 后不丢失密钥，
+    // 以及避免在多端（如手机、平板）重复填写配置，可以直接在此处硬编码填写您的配置：
+    // =========================================================================
+    const HARDCODED_CONFIG = {
+      github_username: "",
+      github_token: "",
+      github_repo: "",
+      github_path: "zen_planner_sync.json",
+      ai_provider: "deepseek",
+      ai_api_key: "",
+      ai_endpoint: "https://api.deepseek.com/v1/chat/completions",
+      ai_model: "deepseek-chat"
+    };
+
     const appId = 'personal-planner-app';
 
     // Application state
@@ -639,6 +653,36 @@
       }
     };
 
+    // ===== iOS Safari Compatible Helpers =====
+    function safeParseDate(dateStr) {
+      if (!dateStr) return new Date();
+      if (typeof dateStr === 'string') return new Date(dateStr.replace(/-/g, '/'));
+      return new Date(dateStr);
+    }
+
+    function safeGetItem(key, fallback) {
+      if (fallback === undefined) fallback = '';
+      try { var v = localStorage.getItem(key); return v !== null ? v : fallback; }
+      catch(e) { console.warn('localStorage 不可用(Safari无痕模式):', e); return fallback; }
+    }
+
+    function safeSetItem(key, value) {
+      try { localStorage.setItem(key, value); } catch(e) { console.warn('localStorage 写入失败:', e); }
+    }
+
+    function safeCreateIcons() {
+      try { if (typeof lucide !== 'undefined') lucide.createIcons(); else setTimeout(function() { if (typeof lucide !== 'undefined') lucide.createIcons(); }, 150); }
+      catch(e) { console.error('Lucide 图标异常:', e); }
+    }
+
+    function getSetting(key, fallback) {
+      if (fallback === undefined) fallback = '';
+      var localVal = safeGetItem(key);
+      if (localVal !== '') return localVal;
+      if (HARDCODED_CONFIG[key] !== undefined && HARDCODED_CONFIG[key] !== '') return HARDCODED_CONFIG[key];
+      return fallback;
+    }
+
     let scratchpadDebounceTimer = null;
     let profileDebounceTimer = null;
 
@@ -647,8 +691,8 @@
       const now = new Date();
       state.selectedDate = formatDate(now);
       loadLocalFallbackData();
-      const isLocalDark = localStorage.getItem('zen_planner_theme') === 'dark';
-      if (isLocalDark || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('zen_planner_theme'))) {
+      const isLocalDark = safeGetItem('zen_planner_theme') === 'dark';
+      if (isLocalDark || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !safeGetItem('zen_planner_theme'))) {
         setTheme(true);
       } else {
         setTheme(false);
@@ -679,9 +723,9 @@
     }
 
     async function initializeGithubStorageSync() {
-      const token = localStorage.getItem('github_token');
-      const owner = localStorage.getItem('github_username');
-      const repo = localStorage.getItem('github_repo');
+      const token = getSetting('github_token');
+      const owner = getSetting('github_username');
+      const repo = getSetting('github_repo');
       if (token && owner && repo) {
         state.isCloudActive = true;
         document.getElementById('githubRepoDisplay').textContent = owner + '/' + repo;
@@ -727,10 +771,10 @@
       syncBtn.disabled = true;
       syncBtn.innerHTML = '<span>同步中...</span>';
       try {
-        const token = localStorage.getItem('github_token');
-        const owner = localStorage.getItem('github_username');
-        const repo = localStorage.getItem('github_repo');
-        const path = localStorage.getItem('github_path') || 'zen_planner_sync.json';
+        const token = getSetting('github_token');
+        const owner = getSetting('github_username');
+        const repo = getSetting('github_repo');
+        const path = getSetting('github_path', 'zen_planner_sync.json');
         const { content: cloud, sha } = await getGithubData(token, owner, repo, path);
         let mergedTasks = [].concat(state.tasks);
         let mergedNotes = Object.assign({}, state.notes);
@@ -760,10 +804,10 @@
           document.getElementById('profileGoals').value = state.profileGoals;
           document.getElementById('profileHabits').value = state.profileHabits;
         }
-        localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
-        localStorage.setItem('notes_local', JSON.stringify(state.notes));
-        localStorage.setItem('profile_goals_local', state.profileGoals);
-        localStorage.setItem('profile_habits_local', state.profileHabits);
+        safeSetItem('tasks_local', JSON.stringify(state.tasks));
+        safeSetItem('notes_local', JSON.stringify(state.notes));
+        safeSetItem('profile_goals_local', state.profileGoals);
+        safeSetItem('profile_habits_local', state.profileHabits);
         renderTasks();
         renderScratchpad();
         updateProgress();
@@ -781,10 +825,10 @@
     }
 
     function loadLocalFallbackData() {
-      const cachedTasks = localStorage.getItem('tasks_local');
-      const cachedNotes = localStorage.getItem('notes_local');
-      const cachedGoals = localStorage.getItem('profile_goals_local') || '';
-      const cachedHabits = localStorage.getItem('profile_habits_local') || '';
+      const cachedTasks = safeGetItem('tasks_local');
+      const cachedNotes = safeGetItem('notes_local');
+      const cachedGoals = safeGetItem('profile_goals_local') || '';
+      const cachedHabits = safeGetItem('profile_habits_local') || '';
       state.tasks = cachedTasks ? JSON.parse(cachedTasks) : [];
       state.notes = cachedNotes ? JSON.parse(cachedNotes) : {};
       state.profileGoals = cachedGoals;
@@ -803,17 +847,17 @@
         const habits = document.getElementById('profileHabits').value;
         state.profileGoals = goals;
         state.profileHabits = habits;
-        localStorage.setItem('profile_goals_local', goals);
-        localStorage.setItem('profile_habits_local', habits);
+        safeSetItem('profile_goals_local', goals);
+        safeSetItem('profile_habits_local', habits);
         if (state.isCloudActive) await syncToGithub();
       }, 1000);
     }
 
     function loadSettingsIntoForm() {
-      document.getElementById('githubUsernameInput').value = localStorage.getItem('github_username') || '';
-      document.getElementById('githubTokenInput').value = localStorage.getItem('github_token') || '';
-      document.getElementById('githubRepoInput').value = localStorage.getItem('github_repo') || '';
-      document.getElementById('githubPathInput').value = localStorage.getItem('github_path') || 'zen_planner_sync.json';
+      document.getElementById('githubUsernameInput').value = safeGetItem('github_username') || HARDCODED_CONFIG.github_username || '';
+      document.getElementById('githubTokenInput').value = safeGetItem('github_token') || HARDCODED_CONFIG.github_token || '';
+      document.getElementById('githubRepoInput').value = safeGetItem('github_repo') || HARDCODED_CONFIG.github_repo || '';
+      document.getElementById('githubPathInput').value = safeGetItem('github_path') || HARDCODED_CONFIG.github_path || 'zen_planner_sync.json';
       const aiConfig = getAISettings();
       document.getElementById('aiProviderSelect').value = aiConfig.provider;
       document.getElementById('aiApiKeyInput').value = aiConfig.apiKey;
@@ -827,15 +871,15 @@
       const token = document.getElementById('githubTokenInput').value.trim();
       const repo = document.getElementById('githubRepoInput').value.trim();
       const path = document.getElementById('githubPathInput').value.trim() || 'zen_planner_sync.json';
-      localStorage.setItem('github_username', username);
-      localStorage.setItem('github_token', token);
-      localStorage.setItem('github_repo', repo);
-      localStorage.setItem('github_path', path);
+      safeSetItem('github_username', username);
+      safeSetItem('github_token', token);
+      safeSetItem('github_repo', repo);
+      safeSetItem('github_path', path);
       const provider = document.getElementById('aiProviderSelect').value;
       const apiKeyInput = document.getElementById('aiApiKeyInput').value.trim();
       const endpoint = document.getElementById('aiEndpointInput').value.trim();
       const model = document.getElementById('aiModelInput').value.trim();
-      localStorage.setItem('zen_planner_ai_settings', JSON.stringify({ provider: provider, apiKey: apiKeyInput, apiEndpoint: endpoint, model: model }));
+      safeSetItem('zen_planner_ai_settings', JSON.stringify({ provider: provider, apiKey: apiKeyInput, apiEndpoint: endpoint, model: model }));
       closeSyncModal();
       if (username && token && repo) {
         state.isCloudActive = true;
@@ -852,7 +896,7 @@
 
     function getAISettings() {
       const fallback = { provider: 'deepseek', apiKey: '', apiEndpoint: 'https://api.deepseek.com/v1/chat/completions', model: 'deepseek-chat' };
-      const saved = localStorage.getItem('zen_planner_ai_settings');
+      const saved = safeGetItem('zen_planner_ai_settings');
       return saved ? JSON.parse(saved) : fallback;
     }
 
@@ -871,7 +915,7 @@
       const container = document.getElementById('weeklyDatePicker');
       container.innerHTML = '';
 
-      const pivotDate = new Date(state.selectedDate);
+      const pivotDate = safeParseDate(state.selectedDate);
       
       for (let i = -3; i <= 3; i++) {
         const currentDate = new Date(pivotDate);
@@ -902,7 +946,7 @@
         container.appendChild(dayBtn);
       }
       
-      const headerDate = new Date(state.selectedDate);
+      const headerDate = safeParseDate(state.selectedDate);
       const year = headerDate.getFullYear();
       const month = String(headerDate.getMonth() + 1).padStart(2, '0');
       const day = String(headerDate.getDate()).padStart(2, '0');
@@ -934,7 +978,7 @@
     }
 
     function changeDay(offset) {
-      const targetDate = new Date(state.selectedDate);
+      const targetDate = safeParseDate(state.selectedDate);
       targetDate.setDate(targetDate.getDate() + offset);
       selectDate(formatDate(targetDate));
     }
@@ -984,7 +1028,7 @@
       });
 
       // Rerun Lucide Renderer to inject vector icons
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     function setCategoryFilter(filterVal) {
@@ -1154,7 +1198,7 @@
       } else {
         state.tasks.push(taskObj);
       }
-      localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+      safeSetItem('tasks_local', JSON.stringify(state.tasks));
       renderTasks();
       updateProgress();
       showToast(id ? '修改已保存' : '新建计划成功', 'success');
@@ -1167,7 +1211,7 @@
       if (!task) return;
       var newState = !task.completed;
       state.tasks = state.tasks.map(function(t) { return t.id === id ? Object.assign({}, t, { completed: newState, updatedAt: Date.now() }) : t; });
-      localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+      safeSetItem('tasks_local', JSON.stringify(state.tasks));
       renderTasks();
       updateProgress();
       showToast(newState ? '计划已完成' : '计划已重新开启', 'success');
@@ -1177,7 +1221,7 @@
     async function deleteTask(id) {
       if (!confirm('确定要删除这项日程规划吗？')) return;
       state.tasks = state.tasks.filter(function(t) { return t.id !== id; });
-      localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+      safeSetItem('tasks_local', JSON.stringify(state.tasks));
       renderTasks();
       updateProgress();
       showToast('日程计划已删除', 'success');
@@ -1203,7 +1247,7 @@
       scratchpadDebounceTimer = setTimeout(async () => {
         try {
           state.notes[date] = content;
-          localStorage.setItem(`notes_${state.syncCode}`, JSON.stringify(state.notes));
+          safeSetItem('notes_local', JSON.stringify(state.notes));
 
           if (state.isCloudActive) {
             const notesRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('notes');
@@ -1342,19 +1386,19 @@
       
       if (isDark) {
         htmlEl.classList.add('dark');
-        localStorage.setItem('zen_planner_theme', 'dark');
+        safeSetItem('zen_planner_theme', 'dark');
         setTimeout(() => {
           const icon = document.getElementById('themeIcon');
           if (icon) icon.setAttribute('data-lucide', 'moon');
-          lucide.createIcons();
+          safeCreateIcons();
         }, 10);
       } else {
         htmlEl.classList.remove('dark');
-        localStorage.setItem('zen_planner_theme', 'light');
+        safeSetItem('zen_planner_theme', 'light');
         setTimeout(() => {
           const icon = document.getElementById('themeIcon');
           if (icon) icon.setAttribute('data-lucide', 'sun');
-          lucide.createIcons();
+          safeCreateIcons();
         }, 10);
       }
     }
@@ -1529,7 +1573,7 @@
           return { title: t.title, date: state.selectedDate, startTime: parts[0] ? parts[0].trim() : '', category: t.category, isTopThree: t.isTopThree, notes: '[AI] ' + t.notes, completed: false, id: 'local_' + Date.now() + Math.random().toString(36).substr(2, 5), updatedAt: Date.now() };
         });
         state.tasks = state.tasks.concat(formattedTasks);
-        localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+        safeSetItem('tasks_local', JSON.stringify(state.tasks));
         renderTasks();
         updateProgress();
         showToast('战斗计划已合并至日程清单！', 'success');
@@ -1570,7 +1614,7 @@
         if (Array.isArray(tasks) && tasks.length > 0) {
           var newTasks = tasks.map(function(t) { return { title: t.title, startTime: t.startTime || '', category: t.category, isTopThree: t.isTopThree || false, notes: t.notes || '', date: state.selectedDate, completed: false, id: 'local_' + Date.now() + Math.random().toString(36).substr(2, 5), updatedAt: Date.now() }; });
           state.tasks = state.tasks.concat(newTasks);
-          localStorage.setItem('tasks_local', JSON.stringify(state.tasks));
+          safeSetItem('tasks_local', JSON.stringify(state.tasks));
           renderTasks();
           updateProgress();
           showToast('已导入 ' + newTasks.length + ' 个新日程', 'success');
