@@ -1,0 +1,750 @@
+﻿/* =====================================
+   Quiz Learning System v2.0 鈥?Unified Planner Style
+   Matches the aesthetic of 閫哥▼璁″垝 (Tailwind-like)
+   ===================================== */
+
+:root {
+  --bg: #fafafa;
+  --bg-card: #ffffff;
+  --bg-subtle: #f4f4f5;
+  --border: #e4e4e7;
+  --border-light: #f0f0f1;
+  --text: #18181b;
+  --text-secondary: #71717a;
+  --text-muted: #a1a1aa;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-light: #eef2ff;
+  --success: #10b981;
+  --success-light: #d1fae5;
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --rose: #e11d48;
+  --rose-light: #ffe4e6;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --shadow: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07);
+  --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.08);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', system-ui, sans-serif;
+  --transition: all 0.15s ease;
+}
+
+/* Dark mode overrides — synced with planner's #333333 palette */
+.dark {
+  --bg: #09090b;
+  --bg-card: #333333;
+  --bg-subtle: #3a3a3a;
+  --border: #3f3f46;
+  --border-light: #333333;
+  --text: #fafafa;
+  --text-secondary: #d4d4d8;
+  --text-muted: #a1a1aa;
+  --accent-light: #2d1b69;
+  --success-light: #052e16;
+  --danger-light: #450a0a;
+  --warning-light: #451a03;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+  --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.5);
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+/* ===== Layout ===== */
+.gh-container {
+  max-width: 1012px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* ===== Header ===== */
+.gh-header {
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.gh-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gh-header h1 .emoji { font-size: 28px; }
+.gh-header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ===== Buttons ===== */
+.gh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.gh-btn:hover {
+  background: var(--border);
+  color: var(--text);
+  text-decoration: none;
+}
+.gh-btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.gh-btn-primary:hover {
+  background: var(--accent-hover);
+}
+.gh-btn-danger {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+.gh-btn-danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+.gh-btn-sm {
+  padding: 3px 10px;
+  font-size: 12px;
+}
+.gh-btn-lg {
+  padding: 10px 20px;
+  font-size: 15px;
+}
+
+/* ===== Stats Bar ===== */
+.gh-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.gh-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  transition: box-shadow 0.15s ease;
+}
+.gh-stat-card:hover {
+  box-shadow: var(--shadow);
+}
+.gh-stat-number {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text);
+}
+.gh-stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* ===== Two-column layout ===== */
+.gh-two-col {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .gh-two-col { grid-template-columns: 1fr; }
+}
+
+/* ===== Card ===== */
+.gh-card {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+}
+.gh-card-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.gh-card-body {
+  padding: 16px;
+}
+
+/* ===== Repo-style Cards ===== */
+.gh-repo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gh-repo-card {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 16px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.gh-repo-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+}
+.gh-repo-card.custom {
+  border-left: 3px solid var(--warning);
+}
+.gh-repo-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gh-repo-title:hover { text-decoration: underline; }
+.gh-repo-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.gh-repo-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.gh-repo-meta .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.gh-repo-meta .lang { display: flex; align-items: center; gap: 4px; }
+
+/* ===== Badge ===== */
+.gh-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.gh-badge.custom {
+  background: rgba(210,153,34,0.2);
+  color: var(--warning);
+}
+
+/* ===== Contribution Heatmap ===== */
+.gh-heatmap-wrap {
+  overflow-x: auto;
+}
+.gh-heatmap {
+  display: flex;
+  gap: 3px;
+}
+.gh-heatmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.gh-heatmap-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--border);
+  transition: all 0.15s ease;
+  position: relative;
+}
+.gh-heatmap-cell:hover {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  z-index: 1;
+}
+
+.gh-heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  justify-content: flex-end;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.gh-heatmap-legend .cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.gh-heatmap-month-labels {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 4px;
+  font-size: 10px;
+  color: var(--text-muted);
+  padding-left: 0;
+}
+.gh-heatmap-month-labels span {
+  width: 12px;
+  text-align: center;
+}
+
+/* ===== Wrong list ===== */
+.gh-wrong-list { list-style: none; }
+.gh-wrong-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 13px;
+}
+.gh-wrong-item:last-child { border-bottom: none; }
+.gh-wrong-item .q { color: var(--text); }
+.gh-wrong-item .meta {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.gh-empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.gh-empty-state .emoji { font-size: 32px; display: block; margin-bottom: 8px; }
+
+/* ===== Drop Zone ===== */
+.gh-drop-zone {
+  margin-top: 12px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.gh-drop-zone:hover,
+.gh-drop-zone.dragover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--text-secondary);
+}
+.gh-drop-zone .icon { font-size: 28px; display: block; margin-bottom: 8px; }
+.gh-drop-zone .hint { font-size: 12px; margin-top: 4px; }
+.gh-drop-zone input[type="file"] { display: none; }
+
+/* ===== Inline icon button ===== */
+.gh-btn-icon {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 4px;
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+.gh-btn-icon:hover { color: var(--danger); }
+
+/* =====================================
+   Quiz Page Styles
+   ===================================== */
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 24px;
+}
+.quiz-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.quiz-header-left h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ===== Mode indicator ===== */
+.gh-mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.gh-mode-badge.normal {
+  background: rgba(88,166,255,0.15);
+  color: var(--accent);
+}
+.gh-mode-badge.review {
+  background: rgba(210,153,34,0.2);
+  color: var(--warning);
+}
+
+/* ===== Progress bar ===== */
+.gh-progress {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.gh-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* ===== Question card ===== */
+.gh-question-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  background: var(--bg-card);
+}
+.gh-question-number {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.gh-question-text {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* ===== Options ===== */
+.gh-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gh-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 15px;
+  background: var(--bg);
+}
+.gh-option:hover {
+  border-color: var(--accent);
+  background: var(--bg-card);
+}
+.gh-option .letter {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.gh-option.selected {
+  border-color: var(--accent);
+  background: rgba(88,166,255,0.15);
+}
+.gh-option.selected .letter {
+  background: var(--accent);
+  color: #fff;
+}
+.gh-option.correct {
+  border-color: var(--success);
+  background: rgba(63,185,80,0.15);
+}
+.gh-option.correct .letter {
+  background: var(--success);
+  color: #fff;
+}
+.gh-option.wrong {
+  border-color: var(--danger);
+  background: rgba(248,81,73,0.15);
+}
+.gh-option.wrong .letter {
+  background: var(--danger);
+  color: #fff;
+}
+.gh-option.disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+/* ===== Feedback ===== */
+.gh-feedback {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  display: none;
+}
+.gh-feedback.show { display: block; }
+.gh-feedback.correct {
+  background: rgba(63,185,80,0.15);
+  border: 1px solid rgba(63,185,80,0.3);
+  color: var(--success);
+}
+.gh-feedback.wrong {
+  background: rgba(248,81,73,0.15);
+  border: 1px solid rgba(248,81,73,0.3);
+  color: var(--danger);
+}
+
+/* ===== Quiz footer ===== */
+.gh-quiz-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+/* ===== Review completion ===== */
+.gh-review-done {
+  text-align: center;
+  padding: 48px 16px;
+}
+.gh-review-done .emoji { font-size: 48px; display: block; margin-bottom: 16px; }
+.gh-review-done h2 { font-size: 24px; margin-bottom: 8px; }
+.gh-review-done p { color: var(--text-secondary); margin-bottom: 16px; }
+
+/* ===== Utility ===== */
+.gh-text-muted { color: var(--text-secondary); }
+.gh-mt-8  { margin-top: 8px; }
+.gh-mt-16 { margin-top: 16px; }
+.gh-mt-24 { margin-top: 24px; }
+.gh-mb-8  { margin-bottom: 8px; }
+.gh-mb-16 { margin-bottom: 16px; }
+.gh-text-center { text-align: center; }
+.gh-flex { display: flex; }
+.gh-flex-center { display: flex; align-items: center; gap: 8px; }
+.gh-gap-8 { gap: 8px; }
+
+/* =====================================
+   v2.0 New Styles: Question Palette & Stats
+   ===================================== */
+
+/* ===== Question Status Palette ===== */
+.gh-palette {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.gh-palette-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.gh-palette-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.gh-palette-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-height: 140px;
+  overflow-y: auto;
+  padding: 2px;
+}
+.gh-palette-grid::-webkit-scrollbar { width: 4px; }
+.gh-palette-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.gh-palette-item {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+.gh-palette-item:hover { border-color: var(--accent); background: var(--accent-light); }
+.gh-palette-item.current { border-color: var(--accent); background: var(--accent); color: #fff; }
+.gh-palette-item.correct { border-color: var(--success); background: var(--success-light); color: #065f46; }
+.dark .gh-palette-item.correct { color: var(--success); }
+.gh-palette-item.wrong { border-color: var(--danger); background: var(--danger-light); color: #991b1b; }
+.dark .gh-palette-item.wrong { color: var(--danger); }
+
+/* ===== Quiz Stats Bar ===== */
+.gh-quiz-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.gh-quiz-stats .stat-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+/* ===== Quiz Footer (v2) ===== */
+.gh-quiz-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+.gh-quiz-footer .left { display: flex; align-items: center; gap: 16px; }
+.gh-quiz-footer .right { display: flex; align-items: center; gap: 8px; }
+
+/* ===== Review Completion (v2) ===== */
+.gh-review-done {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.gh-review-done .icon-wrap {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  background: var(--success-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--success);
+}
+.gh-review-done h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.gh-review-done p { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; }
+
+/* ===== Heatmap Empty State ===== */
+.gh-heatmap-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.gh-heatmap-empty .icon-wrap {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 12px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+/* ===== Quiz page mini heatmap ===== */
+.gh-quiz-heatmap-wrap { margin-bottom: 20px; }
+.gh-quiz-heatmap-wrap .gh-heatmap-cell { width: 10px; height: 10px; }
+
+/* ===== Empty state with icon ===== */
+.gh-empty-state .icon-wrap {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+/* ===== Drop zone icon ===== */
+.gh-drop-zone .icon-wrap { font-size: 28px; margin-bottom: 8px; }
+
+/* ===== Heatmap legend light cells ===== */
+.gh-heatmap-cell[data-level="0"] { background: var(--border); }
+.gh-heatmap-cell[data-level="1"] { background: #bbf7d0; }
+.gh-heatmap-cell[data-level="2"] { background: #4ade80; }
+.gh-heatmap-cell[data-level="3"] { background: #16a34a; }
+.gh-heatmap-cell[data-level="4"] { background: #15803d; }
+.dark .gh-heatmap-cell[data-level="0"] { background: #27272a; }
+.dark .gh-heatmap-cell[data-level="1"] { background: #064e3b; }
+.dark .gh-heatmap-cell[data-level="2"] { background: #047857; }
+.dark .gh-heatmap-cell[data-level="3"] { background: #10b981; }
+.dark .gh-heatmap-cell[data-level="4"] { background: #34d399; }

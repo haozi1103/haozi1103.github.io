@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>逸程计划 - 个人日程多端同步系统</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f5f7ff',
+              100: '#ebf0ff',
+              500: '#4f46e5',
+              600: '#4338ca',
+              700: '#3730a3',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Firebase JS SDK (Compat version for reliable single-file integration) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <!-- Font Configuration -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #475569;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .ai-loading-shimmer {
+      background: linear-gradient(90deg, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    .dark .ai-loading-shimmer {
+      background: linear-gradient(90deg, #3f3f46 25%, #52525b 50%, #3f3f46 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    /* Back to tools bar */
+    .planner-toolbar {
+      background: #1e1b4b;
+      color: white;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .planner-toolbar a {
+      color: #a5b4fc;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .planner-toolbar a:hover {
+      color: #c7d2fe;
+    }
+    .dark .planner-toolbar {
+      background: #0f0d2e;
+    }
+  </style>
+</head>
+<body class="h-full bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 transition-colors duration-200 overflow-hidden">
+
+  <!-- Planner Toolbar -->
+  <div class="planner-toolbar">
+    <a href="/tools/">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      返回工具集
+    </a>
+    <span>逸程计划 · 个人日程多端同步系统</span>
+  </div>
+
+  <!-- Core App Layout -->
+  <div class="h-full flex flex-col lg:flex-row overflow-hidden" style="height: calc(100vh - 40px);">
+    
+    <!-- Sidebar (Left Column - App Brand & Date Select & Sync Controls) -->
+    <aside class="w-full lg:w-80 bg-white dark:bg-zinc-900 border-b lg:border-b-0 lg:border-r border-zinc-200 dark:border-zinc-800 flex flex-col flex-shrink-0 overflow-y-auto custom-scrollbar">
+      <!-- Header / Logo -->
+      <div class="p-5 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+            <i data-lucide="check-square" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1 class="text-base font-bold tracking-tight">逸程计划</h1>
+            <p class="text-[11px] text-zinc-400 dark:text-zinc-500 font-medium tracking-wide">ZEN PLANNER</p>
+          </div>
+        </div>
+        
+        <!-- Theme Toggle Button -->
+        <button onclick="toggleTheme()" class="p-2 rounded-lg text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition">
+          <i id="themeIcon" data-lucide="sun" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Sync Status Card -->
+      <div class="p-4 mx-4 mt-4 bg-zinc-50 dark:bg-zinc-950 rounded-xl border border-zinc-200/50 dark:border-zinc-800/60">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+            <i data-lucide="refresh-cw" class="w-3 h-3"></i> 同步状态
+          </span>
+          <div class="flex items-center space-x-1.5">
+            <span id="syncIndicatorDot" class="w-2 h-2 rounded-full bg-zinc-300 animate-pulse"></span>
+            <span id="syncIndicatorText" class="text-[11px] font-medium text-zinc-400">正在初始化</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between mt-3 bg-white dark:bg-zinc-900 rounded-lg p-2 border border-zinc-100 dark:border-zinc-800 shadow-sm">
+          <div class="overflow-hidden mr-2">
+            <p class="text-[10px] text-zinc-400 uppercase font-bold tracking-wider">专属同步码</p>
+            <p id="syncCodeDisplay" class="text-xs font-mono font-bold text-zinc-700 dark:text-zinc-300 truncate">加载中...</p>
+          </div>
+          <button onclick="copySyncCode()" class="px-2.5 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 rounded text-xs font-medium transition flex-shrink-0">
+            复制
+          </button>
+        </div>
+        <div class="mt-3">
+          <button onclick="openSyncModal()" class="w-full text-center py-1.5 bg-brand-500 hover:bg-brand-600 text-white rounded-lg text-xs font-medium transition shadow-sm shadow-brand-500/10">
+            设置多端同步
+          </button>
+        </div>
+      </div>
+
+      <!-- Date Select Navigation (Daily Planner Focus) -->
+      <div class="p-4 flex-1 flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 block mb-3 px-1 uppercase tracking-wider flex items-center gap-1">
+            <i data-lucide="calendar" class="w-3.5 h-3.5"></i> 快速日程导航
+          </span>
+          <div class="grid grid-cols-7 gap-1.5 mb-4 text-center">
+            <div id="weeklyDatePicker" class="col-span-7 grid grid-cols-7 gap-1"></div>
+          </div>
+          
+          <!-- Category List Filters -->
+          <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 block mt-6 mb-3 px-1 uppercase tracking-wider flex items-center gap-1">
+            <i data-lucide="filter" class="w-3.5 h-3.5"></i> 类别过滤
+          </span>
+          <div class="space-y-1.5" id="categoryFilterContainer">
+            <!-- Populated dynamically via JS -->
+          </div>
+
+          <!-- Personal Copilot Config (Long Term Goals & Habits) -->
+          <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 block mt-6 mb-3 px-1 uppercase tracking-wider flex items-center gap-1">
+            <i data-lucide="user" class="w-3.5 h-3.5"></i> 个人智能配置
+          </span>
+          <div class="space-y-3 bg-zinc-50 dark:bg-zinc-950 p-3 rounded-xl border border-zinc-200/50 dark:border-zinc-800/60 text-xs">
+            <div>
+              <label class="block text-[10px] text-zinc-400 uppercase font-bold mb-1">长期核心目标</label>
+              <textarea id="profileGoals" oninput="saveProfileDebounce()" placeholder="例如：考取数字化制造基础证书；完成有限元学术论文；养成每日锻炼习惯。" class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-2 outline-none text-xs focus:ring-1 focus:ring-brand-500 resize-none h-16 leading-relaxed"></textarea>
+            </div>
+            <div>
+              <label class="block text-[10px] text-zinc-400 uppercase font-bold mb-1">历史日常习惯</label>
+              <textarea id="profileHabits" oninput="saveProfileDebounce()" placeholder="例如：每天上午复习专业课；下午抽半小时修改博客；晚上跑步健身。" class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-2 outline-none text-xs focus:ring-1 focus:ring-brand-500 resize-none h-16 leading-relaxed"></textarea>
+            </div>
+            <div class="text-[10px] text-zinc-400 dark:text-zinc-500">
+              * 此配置会加密保存至您的云同步端，用于辅助 AI 生成"今日战斗计划"。
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-zinc-100 dark:border-zinc-800 mt-6">
+          <div class="bg-gradient-to-br from-brand-500/5 to-indigo-500/5 dark:from-brand-500/10 dark:to-indigo-500/10 p-3 rounded-lg border border-brand-500/10 text-center">
+            <h4 class="text-xs font-bold text-brand-500 dark:text-brand-400 flex items-center justify-center gap-1.5">
+              <i data-lucide="tablet" class="w-3.5 h-3.5"></i> 跨端部署就绪
+            </h4>
+            <p class="text-[10px] text-zinc-400 dark:text-zinc-400 mt-1">iOS Safari 与 Windows 客户端均可全屏脱离浏览器运行。</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Schedule Pane (Center Column) -->
+    <main class="flex-1 flex flex-col min-w-0 bg-white dark:bg-zinc-950 overflow-hidden">
+      
+      <!-- Date Display and App Control Bar -->
+      <header class="p-4 lg:p-6 border-b border-zinc-100 dark:border-zinc-900 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 flex-shrink-0">
+        <div>
+          <div class="flex items-center space-x-2">
+            <button onclick="changeDay(-1)" class="p-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400 transition">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <h2 id="currentDateTitle" class="text-lg lg:text-xl font-bold tracking-tight">2026年06月16日</h2>
+            <button onclick="changeDay(1)" class="p-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400 transition">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+            <button onclick="goToToday()" class="px-2.5 py-1 text-xs border border-zinc-200 dark:border-zinc-800 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg font-medium transition">
+              今天
+            </button>
+          </div>
+          <p id="todayProgressText" class="text-xs text-zinc-400 dark:text-zinc-500 mt-1">今日无日程计划</p>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <!-- Main Action: PLAN MY DAY -->
+          <button onclick="triggerAIPlanMyDay()" id="aiPlanMyDayBtn" class="flex items-center justify-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-brand-500 to-indigo-600 hover:from-brand-600 hover:to-indigo-700 text-white rounded-xl text-sm font-semibold transition shadow-md shadow-brand-500/10">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>给我安排今天</span>
+          </button>
+
+          <!-- Add Task Button -->
+          <button onclick="openAddTaskModal()" class="flex items-center justify-center space-x-2 px-4 py-2.5 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-xl text-sm font-semibold transition">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>新建计划</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Task Lists Grid Wrapper -->
+      <div class="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6 custom-scrollbar">
+        
+        <!-- Pinned / Rendered Today's Battle Plan generated by AI -->
+        <section id="battlePlanSection" class="hidden">
+          <div class="p-4 rounded-2xl bg-gradient-to-br from-indigo-500/5 via-brand-500/5 to-purple-500/5 dark:from-indigo-950/20 dark:via-brand-950/10 dark:to-purple-950/20 border border-brand-100 dark:border-brand-900/50 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center space-x-2">
+                <div class="p-1.5 bg-brand-500 text-white rounded-lg">
+                  <i data-lucide="swords" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-zinc-800 dark:text-zinc-100">今日战斗计划</h3>
+                  <p class="text-[10px] text-zinc-400 dark:text-zinc-500">根据长期目标与历史习惯为您生成的分时段蓝图</p>
+                </div>
+              </div>
+              <div class="flex space-x-1.5">
+                <button onclick="importBattlePlanToSchedule()" class="px-3 py-1.5 bg-brand-500 hover:bg-brand-600 text-white rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm">
+                  <i data-lucide="calendar-plus" class="w-3.5 h-3.5"></i> 一键同步到日常清单
+                </button>
+                <button onclick="closeBattlePlanPreview()" class="p-1.5 hover:bg-zinc-200/50 dark:hover:bg-zinc-800 rounded-lg text-zinc-400 transition">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Timeline of Battle Plan -->
+            <div id="battlePlanTimeline" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+        
+        <!-- Priority Focus Area (Top 3 Priority Daily Targets) -->
+        <section id="topThreeSection" class="hidden">
+          <div class="flex items-center space-x-2 mb-3">
+            <span class="w-1.5 h-4 bg-rose-500 rounded-full"></span>
+            <h3 class="text-xs font-bold text-rose-500 tracking-wide uppercase flex items-center gap-1">
+              <i data-lucide="zap" class="w-3.5 h-3.5"></i> 今日最重要事项 (Top 3 Focus)
+            </h3>
+          </div>
+          <div id="topThreeGrid" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- Standard Schedule / Tasks List -->
+        <section>
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <span class="w-1.5 h-4 bg-brand-500 rounded-full"></span>
+              <h3 class="text-xs font-bold text-zinc-400 dark:text-zinc-500 tracking-wide uppercase flex items-center gap-1">
+                <i data-lucide="list-todo" class="w-3.5 h-3.5"></i> 日常规划清单
+              </h3>
+            </div>
+            <div class="flex items-center space-x-2 text-xs text-zinc-400">
+              <span id="filteredCountText">显示全部事项</span>
+            </div>
+          </div>
+          
+          <div id="taskListContainer" class="space-y-2.5">
+            <!-- Dynamic task items injected here -->
+          </div>
+          
+          <!-- Empty State -->
+          <div id="emptyState" class="hidden py-16 text-center">
+            <div class="w-16 h-16 bg-zinc-100 dark:bg-zinc-900 rounded-2xl flex items-center justify-center mx-auto text-zinc-400 dark:text-zinc-600 mb-4 border border-zinc-200/40 dark:border-zinc-800/40">
+              <i data-lucide="calendar-dashed" class="w-8 h-8"></i>
+            </div>
+            <h4 class="text-sm font-semibold text-zinc-500 dark:text-zinc-400">今天没有排定任何日程</h4>
+            <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-1 max-w-xs mx-auto">
+              迷茫或没有头绪？点击上方"给我安排今天"，让 AI 助手基于您的长期目标与历史习惯，瞬间生成今日奋斗方案！
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Side Interactive Panel (Right Column - Dynamic Scratchpad, AI Assistant & Manual) -->
+    <aside id="rightSidebar" class="w-full lg:w-96 bg-zinc-50 dark:bg-zinc-900 border-t lg:border-t-0 lg:border-l border-zinc-200 dark:border-zinc-800 flex flex-col flex-shrink-0 h-[32rem] lg:h-auto overflow-hidden">
+      <!-- Tabs header -->
+      <div class="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between p-1 flex-shrink-0">
+        <div class="flex space-x-1 w-full">
+          <button onclick="switchRightTab('scratchpad')" id="tab-scratchpad-btn" class="flex-1 py-3 px-1 text-xs font-bold text-center border-b-2 border-brand-500 text-brand-600 dark:text-brand-400 flex items-center justify-center space-x-1 transition">
+            <i data-lucide="file-edit" class="w-3.5 h-3.5"></i>
+            <span>草稿备忘</span>
+          </button>
+          <button onclick="switchRightTab('ai')" id="tab-ai-btn" class="flex-1 py-3 px-1 text-xs font-bold text-center border-b-2 border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 flex items-center justify-center space-x-1 transition">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            <span>AI 导师</span>
+          </button>
+          <button onclick="switchRightTab('manual')" id="tab-manual-btn" class="flex-1 py-3 px-1 text-xs font-bold text-center border-b-2 border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 flex items-center justify-center space-x-1 transition">
+            <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+            <span>使用手册</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Content Container -->
+      <div class="flex-1 overflow-y-auto flex flex-col h-full bg-zinc-50/50 dark:bg-zinc-950/20">
+        
+        <!-- TAB 1: Scratchpad Notes -->
+        <div id="panel-scratchpad" class="flex-1 flex flex-col p-4 space-y-3">
+          <div class="flex items-center justify-between flex-shrink-0">
+            <span id="scratchpadSaveStatus" class="text-[10px] text-zinc-400 font-medium">已自动同步至云端</span>
+            <button onclick="triggerAIScratchpadConvert()" id="aiExtractBtn" class="flex items-center space-x-1 px-2.5 py-1.5 bg-gradient-to-r from-brand-500 to-indigo-600 hover:from-brand-600 hover:to-indigo-700 text-white rounded-lg text-xs font-bold transition shadow-sm">
+              <i data-lucide="wand-2" class="w-3 h-3"></i>
+              <span>智能提取计划</span>
+            </button>
+          </div>
+          <div class="flex-1 bg-white dark:bg-zinc-900 p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 flex flex-col min-h-[150px]">
+            <textarea id="scratchpadTextarea" oninput="handleScratchpadInput()" placeholder="在这里输入今日的灵感、待办草稿或未整理的想法... 
+
+例如：'下午3点和张经理开会沟通UI设计。顺便买两瓶苏打水，晚上8点去健身房跑步1小时。'
+
+然后点击上方的"智能提取计划"，AI 将自动为您分析并导入日程！" class="w-full flex-1 bg-transparent border-0 outline-none resize-none text-sm leading-relaxed text-zinc-700 dark:text-zinc-300 placeholder-zinc-400 dark:placeholder-zinc-600 focus:ring-0 focus:outline-none"></textarea>
+          </div>
+        </div>
+
+        <!-- TAB 2: AI Coach Assistant -->
+        <div id="panel-ai" class="hidden flex-1 flex flex-col h-full">
+          <!-- Coach Messages viewport -->
+          <div class="flex-1 p-4 overflow-y-auto custom-scrollbar space-y-4 text-xs h-[200px]" id="aiChatViewport">
+            <!-- Initial Coach Greeting Card -->
+            <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 rounded-xl shadow-sm space-y-3">
+              <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950 flex items-center justify-center text-brand-600 dark:text-brand-400">
+                  <i data-lucide="sparkles" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-zinc-800 dark:text-zinc-100">AI 效率规划导师</h4>
+                  <p class="text-[10px] text-zinc-400">基于 Gemini 的日程诊断专家</p>
+                </div>
+              </div>
+              <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                我是您的专属 AI 效率规划导师。我可以深度分析您今日日程安排的负荷配比，并为您定制防拖延的心理调节方案。
+              </p>
+              <button onclick="diagnoseDailyPlanner()" id="diagnoseBtn" class="w-full py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg font-bold text-center transition flex items-center justify-center space-x-1.5 text-zinc-700 dark:text-zinc-200">
+                <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+                <span>立即诊断今日计划</span>
+              </button>
+            </div>
+            
+            <div id="aiChatHistoryContainer" class="space-y-3.5">
+              <!-- Chat bubbles append here -->
+            </div>
+          </div>
+
+          <!-- Chat Input -->
+          <div class="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200/60 dark:border-zinc-800/60 flex-shrink-0 flex items-center space-x-2">
+            <input type="text" id="aiChatInput" onkeydown="handleAIChatKeyDown(event)" placeholder="问我如何高效完成计划、抗拒拖延..." class="flex-1 px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+            <button onclick="sendAIChatMessage()" id="aiSendBtn" class="p-2 bg-brand-500 hover:bg-brand-600 text-white rounded-xl transition flex-shrink-0">
+              <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 3: User Manual (사용 가이드 / 同步与安装手册) -->
+        <div id="panel-manual" class="hidden p-4 space-y-4 text-xs">
+          <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 rounded-xl shadow-sm space-y-3">
+            <h4 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1.5 text-sm">
+              <i data-lucide="cloud-lightning" class="w-4 h-4 text-brand-500"></i> 多端极速同步方案手册
+            </h4>
+            
+            <div class="space-y-3 text-zinc-600 dark:text-zinc-300 leading-relaxed">
+              <section>
+                <h5 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 1. 同步原理
+                </h5>
+                <p class="pl-2.5 mt-1">本应用采用免注册的「同步码（Sync Code）」设计。每台设备独享一个唯一的同步秘钥。若要在其他端（如 iOS 手机端、Windows 电脑端）连接并共享您的计划清单，仅需在其他设备上填入此秘钥即可秒级完成云合并。</p>
+              </section>
+
+              <section>
+                <h5 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 2. 同步步骤
+                </h5>
+                <ol class="pl-2.5 list-decimal list-inside space-y-1 mt-1">
+                  <li>在当前设备复制您的 **专属同步码**；</li>
+                  <li>在另一台设备的本应用中，点击左侧「设置多端同步」；</li>
+                  <li>在下方粘贴该同步码，并点击「连接并同步」即可。</li>
+                </ol>
+              </section>
+
+              <section>
+                <h5 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 3. iOS 端无痛安装 (Safari PWA)
+                </h5>
+                <ol class="pl-2.5 list-decimal list-inside space-y-1 mt-1">
+                  <li>在 iPhone 自带的 **Safari 浏览器** 中打开本网页链接；</li>
+                  <li>点击浏览器底部的 **"分享"** 按钮（向上箭头的正方形图标）；</li>
+                  <li>在弹出的功能菜单中，向下滚动并选择 **"添加到主屏幕"**；</li>
+                  <li>返回主屏幕，点击生成的"逸程计划"应用图标，即可获得无浏览器地址栏、全屏的原生客户端体验。</li>
+                </ol>
+              </section>
+
+              <section>
+                <h5 class="font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span> 4. Windows / 桌面端安装 (PWA)
+                </h5>
+                <ol class="pl-2.5 list-decimal list-inside space-y-1 mt-1">
+                  <li>使用 **Edge 浏览器** 或 **Chrome** 浏览器打开网页；</li>
+                  <li>点击浏览器最右侧地址栏的 **"安装应用"**（通常为加号或三个点中的安装选项）；</li>
+                  <li>应用会一键生成桌面图标，并作为单独视窗的 Windows 桌面应用运行，支持多端数据实时云拉取。</li>
+                </ol>
+              </section>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+  </div>
+
+  <!-- Dialog MODAL: Add/Edit Task -->
+  <div id="taskModal" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-md overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-2xl transition-all scale-95 opacity-0 transform" id="taskModalContent">
+      <div class="p-5 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
+        <h3 id="modalTitle" class="text-base font-bold text-zinc-800 dark:text-zinc-100">新建日程事项</h3>
+        <button onclick="closeTaskModal()" class="p-1 rounded-lg text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      
+      <form id="taskForm" onsubmit="handleTaskSubmit(event)" class="p-5 space-y-4">
+        <input type="hidden" id="taskFormId">
+        
+        <!-- Title Input -->
+        <div>
+          <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">计划标题 *</label>
+          <input type="text" id="taskTitle" required placeholder="例如：准备项目立项报告..." class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+        </div>
+
+        <!-- Date & Time Row -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">日期</label>
+            <input type="date" id="taskDate" required class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">开始时间</label>
+            <input type="time" id="taskTime" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Category Tag -->
+        <div>
+          <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">日程类别</label>
+          <select id="taskCategory" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+            <option value="Work" class="bg-white dark:bg-zinc-900">💼 工作项目</option>
+            <option value="Personal" class="bg-white dark:bg-zinc-900">🏠 个人生活</option>
+            <option value="Health" class="bg-white dark:bg-zinc-900">🏃 运动健康</option>
+            <option value="Study" class="bg-white dark:bg-zinc-900">📚 学习提升</option>
+            <option value="Finance" class="bg-white dark:bg-zinc-900">💰 财务规划</option>
+          </select>
+        </div>
+
+        <!-- Priority Settings (Top 3 Focus Switch) -->
+        <div class="flex items-center justify-between p-3.5 bg-zinc-50 dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800">
+          <div class="mr-3">
+            <span class="block text-xs font-bold text-zinc-700 dark:text-zinc-300">设为今日核心要事 (Top 3 Priority)</span>
+            <span class="text-[10px] text-zinc-400 block mt-0.5">置顶显示，保持最高专注度进行深度工作</span>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="taskIsTopThree" class="sr-only peer">
+            <div class="w-11 h-6 bg-zinc-200 peer-focus:outline-none rounded-full peer dark:bg-zinc-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-zinc-600 peer-checked:bg-rose-500"></div>
+          </label>
+        </div>
+
+        <!-- Notes -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">事项详情 / 备注</label>
+            <button type="button" onclick="triggerAITaskDecompose()" id="aiDecomposeBtn" class="text-xs font-bold text-brand-600 dark:text-brand-400 flex items-center space-x-1 hover:underline transition">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <span>AI 智能细化拆解</span>
+            </button>
+          </div>
+          <textarea id="taskNotes" rows="3" placeholder="补充一些注意事项、细化的小任务或子计划清单..." class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"></textarea>
+        </div>
+
+        <!-- Form Buttons -->
+        <div class="flex space-x-3 pt-2">
+          <button type="button" onclick="closeTaskModal()" class="w-1/2 text-center py-2.5 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl text-sm font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition">
+            取消
+          </button>
+          <button type="submit" class="w-1/2 text-center py-2.5 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-sm font-semibold transition shadow-md shadow-brand-500/10">
+            保存事项
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dialog MODAL: Sync Configuration -->
+  <div id="syncModal" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-md overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-2xl transition-all scale-95 opacity-0 transform" id="syncModalContent">
+      <div class="p-5 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
+        <h3 class="text-base font-bold text-zinc-800 dark:text-zinc-100">配置多端实时同步</h3>
+        <button onclick="closeSyncModal()" class="p-1 rounded-lg text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-5">
+        <!-- Explainer -->
+        <div class="text-xs text-zinc-500 dark:text-zinc-400 space-y-2 bg-zinc-50 dark:bg-zinc-950 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
+          <p class="font-bold text-zinc-700 dark:text-zinc-300 mb-1">如何进行多端（iOS 与 Windows）同步？</p>
+          <ol class="list-decimal list-inside space-y-1 text-zinc-600 dark:text-zinc-400">
+            <li>在当前设备复制下方的 **专属同步码**。</li>
+            <li>在另一台设备的本软件中，在此窗口的下方输入框粘贴此码。</li>
+            <li>点击"连接同步"，系统将立刻合并并共享两端计划。</li>
+          </ol>
+        </div>
+
+        <!-- Current Sync Code -->
+        <div>
+          <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">当前设备同步码 (Sync Code)</label>
+          <div class="flex items-center space-x-2">
+            <div id="syncModalCodeDisplay" class="flex-1 px-4 py-3 bg-zinc-100 dark:bg-zinc-950 rounded-xl font-mono text-base font-bold text-zinc-700 dark:text-zinc-300 text-center tracking-widest border border-zinc-200/50 dark:border-zinc-800">
+              PLAN-XXXXXX
+            </div>
+            <button onclick="copySyncCode()" class="px-4 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-sm font-semibold transition shadow-sm">
+              复制
+            </button>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="relative flex items-center justify-center">
+          <div class="absolute w-full border-t border-zinc-100 dark:border-zinc-800"></div>
+          <span class="relative bg-white dark:bg-zinc-900 px-3 text-xs text-zinc-400 uppercase font-bold tracking-wider">连接已有同步码</span>
+        </div>
+
+        <!-- Input New Sync Code -->
+        <div>
+          <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5 font-bold text-brand-500">输入另一台设备的同步码</label>
+          <div class="flex space-x-2">
+            <input type="text" id="importSyncCodeInput" placeholder="输入 PLAN-XXXXXX 格式代码" class="flex-1 px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent font-mono text-sm uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+            <button onclick="importSyncCode()" class="px-4 py-3 bg-zinc-800 hover:bg-zinc-900 dark:bg-zinc-100 dark:hover:bg-zinc-50 text-white dark:text-zinc-900 rounded-xl text-sm font-semibold transition">
+              连接并同步
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Dialog / Notice Box -->
+  <div id="toastNotification" class="fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 pointer-events-none transition-all duration-300 flex items-center space-x-3 px-4 py-3 rounded-xl shadow-xl border bg-white dark:bg-zinc-900 border-zinc-100 dark:border-zinc-800">
+    <div id="toastIconContainer" class="w-6 h-6 rounded-lg flex items-center justify-center text-white">
+      <!-- Icon dynamic -->
+    </div>
+    <span id="toastMessage" class="text-xs font-bold text-zinc-800 dark:text-zinc-100">通知消息内容</span>
+  </div>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // System Config Fallback Support
+    const mockFirebaseConfig = {
+      apiKey: "",
+      authDomain: "mock-domain.firebaseapp.com",
+      projectId: "mock-project",
+      storageBucket: "mock-project.appspot.com",
+      messagingSenderId: "1234567890",
+      appId: "1:1234567890:web:mock123"
+    };
+
+    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : mockFirebaseConfig;
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'personal-planner-app';
+    
+    // Gemini API Setup
+    const apiKey = "";
+
+    // Application state
+    const state = {
+      tasks: [],
+      notes: {}, // Mapping of date -> notes text
+      selectedDate: '', // Format: YYYY-MM-DD
+      selectedCategoryFilter: 'all',
+      isDarkMode: false,
+      syncCode: '',
+      isCloudActive: false,
+      currentRightTab: 'scratchpad',
+      aiChatHistory: [],
+      
+      // Personal Profile for Gemini AI Context
+      profileGoals: '',
+      profileHabits: '',
+      
+      // Temporary holder for the AI Combat Plan generated for the day
+      currentBattlePlan: null,
+
+      categories: {
+        'Work': { label: '工作项目', icon: 'briefcase', color: 'indigo' },
+        'Personal': { label: '个人生活', icon: 'home', color: 'emerald' },
+        'Health': { label: '运动健康', icon: 'dumbbell', color: 'rose' },
+        'Study': { label: '学习提升', icon: 'graduation-cap', color: 'amber' },
+        'Finance': { label: '财务规划', icon: 'wallet', color: 'teal' }
+      }
+    };
+
+    // Global listeners trackers
+    let unsubscribeTasks = null;
+    let unsubscribeNotes = null;
+    let unsubscribeProfile = null;
+    let scratchpadDebounceTimer = null;
+    let profileDebounceTimer = null;
+
+    // Database Refs
+    let db = null;
+    let auth = null;
+
+    // 1. Initialise and load local settings
+    window.addEventListener('DOMContentLoaded', () => {
+      // Set default selected date (today)
+      const now = new Date();
+      state.selectedDate = formatDate(now);
+      
+      // Load or create a unique Sync Code
+      let localSyncCode = localStorage.getItem('zen_planner_sync_code');
+      if (!localSyncCode) {
+        localSyncCode = generateNewSyncCode();
+        localStorage.setItem('zen_planner_sync_code', localSyncCode);
+      }
+      state.syncCode = localSyncCode;
+      
+      // Update displays
+      document.getElementById('syncCodeDisplay').textContent = state.syncCode;
+      document.getElementById('syncModalCodeDisplay').textContent = state.syncCode;
+
+      // Theme Init
+      const isLocalDark = localStorage.getItem('zen_planner_theme') === 'dark';
+      if (isLocalDark || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('zen_planner_theme'))) {
+        setTheme(true);
+      } else {
+        setTheme(false);
+      }
+
+      // Initialize UI controls
+      renderWeeklyDatePicker();
+      renderCategoryFilters();
+
+      // Setup Firebase Firestore Integration
+      initializeFirebaseSync();
+    });
+
+    // Helper: format Date object to YYYY-MM-DD local format
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function generateNewSyncCode() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let result = 'PLAN-';
+      for (let i = 0; i < 6; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    // 2. Setup Firebase auth and live sync
+    async function initializeFirebaseSync() {
+      if (!firebaseConfig || !firebaseConfig.projectId || firebaseConfig.projectId === "mock-project") {
+        updateSyncIndicator('local', '本地模式运行中');
+        loadLocalFallbackData();
+        return;
+      }
+
+      try {
+        updateSyncIndicator('connecting', '正在建立云端同步');
+        
+        if (firebase.apps.length === 0) {
+          firebase.initializeApp(firebaseConfig);
+        }
+        
+        db = firebase.firestore();
+        auth = firebase.auth();
+
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await auth.signInWithCustomToken(__initial_auth_token);
+        } else {
+          await auth.signInAnonymously();
+        }
+
+        state.isCloudActive = true;
+        updateSyncIndicator('connected', '已连云端 - 实时多端同步');
+        
+        startSyncListeners();
+
+      } catch (err) {
+        console.error("Firebase Auth/Sync failed:", err);
+        updateSyncIndicator('local', '本地备份模式运行');
+        loadLocalFallbackData();
+      }
+    }
+
+    // Connect and listen in real-time
+    function startSyncListeners() {
+      if (!state.isCloudActive || !db || !auth.currentUser) return;
+
+      if (unsubscribeTasks) unsubscribeTasks();
+      if (unsubscribeNotes) unsubscribeNotes();
+      if (unsubscribeProfile) unsubscribeProfile();
+
+      const userSyncCode = state.syncCode;
+
+      // Collection 1: /artifacts/{appId}/public/data/tasks
+      const tasksRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('tasks');
+      unsubscribeTasks = tasksRef.onSnapshot((snapshot) => {
+        const fetchedTasks = [];
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.syncCode === userSyncCode) {
+            fetchedTasks.push({ id: doc.id, ...data });
+          }
+        });
+        
+        state.tasks = fetchedTasks;
+        localStorage.setItem(`tasks_${userSyncCode}`, JSON.stringify(fetchedTasks));
+        
+        renderTasks();
+        updateProgress();
+      }, (err) => {
+        console.error("Tasks sync error:", err);
+        loadLocalFallbackData();
+      });
+
+      // Collection 2: /artifacts/{appId}/public/data/notes
+      const notesRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('notes');
+      unsubscribeNotes = notesRef.onSnapshot((snapshot) => {
+        const fetchedNotes = {};
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.syncCode === userSyncCode) {
+            fetchedNotes[data.date] = data.content;
+          }
+        });
+        
+        state.notes = fetchedNotes;
+        localStorage.setItem(`notes_${userSyncCode}`, JSON.stringify(fetchedNotes));
+        renderScratchpad();
+      }, (err) => {
+        console.error("Notes sync error:", err);
+      });
+
+      // Collection 3: /artifacts/{appId}/public/data/profiles
+      const profileRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('profiles').doc(userSyncCode);
+      unsubscribeProfile = profileRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          state.profileGoals = data.goals || '';
+          state.profileHabits = data.habits || '';
+          
+          document.getElementById('profileGoals').value = state.profileGoals;
+          document.getElementById('profileHabits').value = state.profileHabits;
+          
+          localStorage.setItem(`profile_goals_${userSyncCode}`, state.profileGoals);
+          localStorage.setItem(`profile_habits_${userSyncCode}`, state.profileHabits);
+        }
+      }, (err) => {
+        console.error("Profile sync error:", err);
+      });
+    }
+
+    function loadLocalFallbackData() {
+      const code = state.syncCode;
+      const cachedTasks = localStorage.getItem(`tasks_${code}`);
+      const cachedNotes = localStorage.getItem(`notes_${code}`);
+      const cachedGoals = localStorage.getItem(`profile_goals_${code}`) || '';
+      const cachedHabits = localStorage.getItem(`profile_habits_${code}`) || '';
+      
+      state.tasks = cachedTasks ? JSON.parse(cachedTasks) : [];
+      state.notes = cachedNotes ? JSON.parse(cachedNotes) : {};
+      state.profileGoals = cachedGoals;
+      state.profileHabits = cachedHabits;
+
+      document.getElementById('profileGoals').value = cachedGoals;
+      document.getElementById('profileHabits').value = cachedHabits;
+      
+      renderTasks();
+      updateProgress();
+      renderScratchpad();
+    }
+
+    // 3. Profiles Debounced Auto Saver
+    function saveProfileDebounce() {
+      if (profileDebounceTimer) clearTimeout(profileDebounceTimer);
+      
+      profileDebounceTimer = setTimeout(async () => {
+        const goals = document.getElementById('profileGoals').value;
+        const habits = document.getElementById('profileHabits').value;
+        
+        state.profileGoals = goals;
+        state.profileHabits = habits;
+        
+        const code = state.syncCode;
+        localStorage.setItem(`profile_goals_${code}`, goals);
+        localStorage.setItem(`profile_habits_${code}`, habits);
+
+        if (state.isCloudActive) {
+          try {
+            await db.collection('artifacts').doc(appId)
+              .collection('public').doc('data')
+              .collection('profiles').doc(code)
+              .set({
+                goals: goals,
+                habits: habits,
+                updatedAt: Date.now()
+              });
+          } catch (e) {
+            console.error("Cloud saving profile failed:", e);
+          }
+        }
+      }, 800);
+    }
+
+    // Sync settings logic
+    function importSyncCode() {
+      const inputVal = document.getElementById('importSyncCodeInput').value.trim().toUpperCase();
+      
+      if (!inputVal || !/^PLAN-[A-Z0-9]{6}$/.test(inputVal)) {
+        showToast("同步码格式不合法。请确保格式形如：PLAN-XXXXXX", "error");
+        return;
+      }
+
+      state.syncCode = inputVal;
+      localStorage.setItem('zen_planner_sync_code', inputVal);
+      
+      document.getElementById('syncCodeDisplay').textContent = inputVal;
+      document.getElementById('syncModalCodeDisplay').textContent = inputVal;
+      
+      closeSyncModal();
+      document.getElementById('importSyncCodeInput').value = '';
+
+      showToast(`已切换至同步空间: ${inputVal}`, "success");
+
+      if (state.isCloudActive) {
+        startSyncListeners();
+      } else {
+        loadLocalFallbackData();
+      }
+    }
+
+    function copySyncCode() {
+      const textToCopy = state.syncCode;
+      const dummyInput = document.createElement("input");
+      document.body.appendChild(dummyInput);
+      dummyInput.setAttribute("value", textToCopy);
+      dummyInput.select();
+      
+      try {
+        document.execCommand('copy');
+        showToast("同步码已复制到剪贴板，可在另一端导入", "success");
+      } catch (err) {
+        showToast("自动复制失败，请手动选取字符复制", "error");
+      }
+      document.body.removeChild(dummyInput);
+    }
+
+    // 4. Weekly Calendar Selector Renderer
+    function renderWeeklyDatePicker() {
+      const container = document.getElementById('weeklyDatePicker');
+      container.innerHTML = '';
+
+      const pivotDate = new Date(state.selectedDate);
+      
+      for (let i = -3; i <= 3; i++) {
+        const currentDate = new Date(pivotDate);
+        currentDate.setDate(pivotDate.getDate() + i);
+        
+        const dateStr = formatDate(currentDate);
+        const dayOfMonth = currentDate.getDate();
+        const weekdayName = getShortWeekday(currentDate.getDay());
+        const isSelected = dateStr === state.selectedDate;
+        const isTodayDate = formatDate(new Date()) === dateStr;
+
+        const dayBtn = document.createElement('button');
+        dayBtn.type = 'button';
+        dayBtn.className = `flex flex-col items-center p-2 rounded-xl transition ${
+          isSelected 
+            ? 'bg-brand-500 text-white shadow-sm shadow-brand-500/20 font-bold' 
+            : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'
+        }`;
+        dayBtn.onclick = () => selectDate(dateStr);
+
+        dayBtn.innerHTML = `
+          <span class="text-[9px] uppercase font-bold tracking-tight ${isSelected ? 'text-brand-100' : 'text-zinc-400'}">${weekdayName}</span>
+          <span class="text-sm font-bold mt-1">${dayOfMonth}</span>
+          ${isTodayDate && !isSelected ? '<span class="w-1.5 h-1.5 bg-brand-500 rounded-full mt-1"></span>' : ''}
+          ${isSelected ? '<span class="w-1.5 h-1.5 bg-white rounded-full mt-1"></span>' : ''}
+        `;
+
+        container.appendChild(dayBtn);
+      }
+      
+      const headerDate = new Date(state.selectedDate);
+      const year = headerDate.getFullYear();
+      const month = String(headerDate.getMonth() + 1).padStart(2, '0');
+      const day = String(headerDate.getDate()).padStart(2, '0');
+      const fullWeekday = getLongWeekday(headerDate.getDay());
+      document.getElementById('currentDateTitle').textContent = `${year}年${month}月${day}日 (${fullWeekday})`;
+    }
+
+    function getShortWeekday(dayNum) {
+      const days = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+      return days[dayNum];
+    }
+
+    function getLongWeekday(dayNum) {
+      const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+      return days[dayNum];
+    }
+
+    function selectDate(dateStr) {
+      state.selectedDate = dateStr;
+      
+      // Clear temporary generated battle plan for other dates
+      state.currentBattlePlan = null;
+      document.getElementById('battlePlanSection').classList.add('hidden');
+
+      renderWeeklyDatePicker();
+      renderTasks();
+      renderScratchpad();
+      updateProgress();
+    }
+
+    function changeDay(offset) {
+      const targetDate = new Date(state.selectedDate);
+      targetDate.setDate(targetDate.getDate() + offset);
+      selectDate(formatDate(targetDate));
+    }
+
+    function goToToday() {
+      selectDate(formatDate(new Date()));
+    }
+
+    // Render Category filters on sidebar
+    function renderCategoryFilters() {
+      const container = document.getElementById('categoryFilterContainer');
+      container.innerHTML = '';
+
+      const allBtn = document.createElement('button');
+      allBtn.className = `w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold tracking-wide transition ${
+        state.selectedCategoryFilter === 'all'
+          ? 'bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400'
+          : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+      }`;
+      allBtn.onclick = () => setCategoryFilter('all');
+      allBtn.innerHTML = `
+        <div class="flex items-center space-x-2.5">
+          <i data-lucide="grid" class="w-3.5 h-3.5"></i>
+          <span>全部分类</span>
+        </div>
+      `;
+      container.appendChild(allBtn);
+
+      Object.entries(state.categories).forEach(([key, config]) => {
+        const btn = document.createElement('button');
+        const isActive = state.selectedCategoryFilter === key;
+        
+        btn.className = `w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold tracking-wide transition ${
+          isActive
+            ? 'bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400'
+            : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+        }`;
+        btn.onclick = () => setCategoryFilter(key);
+
+        btn.innerHTML = `
+          <div class="flex items-center space-x-2.5">
+            <i data-lucide="${config.icon}" class="w-3.5 h-3.5"></i>
+            <span>${config.label}</span>
+          </div>
+        `;
+        container.appendChild(btn);
+      });
+
+      // Rerun Lucide Renderer to inject vector icons
+      lucide.createIcons();
+    }
+
+    function setCategoryFilter(filterVal) {
+      state.selectedCategoryFilter = filterVal;
+      renderCategoryFilters();
+      renderTasks();
+    }
+
+    // 5. Tasks Management System Renderers
+    function renderTasks() {
+      const container = document.getElementById('taskListContainer');
+      const emptyState = document.getElementById('emptyState');
+      const topThreeGrid = document.getElementById('topThreeGrid');
+      const topThreeSection = document.getElementById('topThreeSection');
+
+      container.innerHTML = '';
+      topThreeGrid.innerHTML = '';
+      
+      let dateTasks = state.tasks.filter(t => t.date === state.selectedDate);
+      
+      dateTasks.sort((a, b) => {
+        if (a.completed !== b.completed) {
+          return a.completed ? 1 : -1;
+        }
+        if (!a.startTime) return 1;
+        if (!b.startTime) return -1;
+        return a.startTime.localeCompare(b.startTime);
+      });
+
+      let filteredTasks = dateTasks;
+      if (state.selectedCategoryFilter !== 'all') {
+        filteredTasks = dateTasks.filter(t => t.category === state.selectedCategoryFilter);
+      }
+
+      document.getElementById('filteredCountText').textContent = 
+        state.selectedCategoryFilter === 'all' 
+          ? `共 ${filteredTasks.length} 个计划事项` 
+          : `分类下共 ${filteredTasks.length} 个计划事项`;
+
+      const topThreeTasks = dateTasks.filter(t => t.isTopThree);
+      
+      if (topThreeTasks.length > 0) {
+        topThreeSection.classList.remove('hidden');
+        topThreeTasks.forEach(task => {
+          topThreeGrid.appendChild(createTopThreeCard(task));
+        });
+      } else {
+        topThreeSection.classList.add('hidden');
+      }
+
+      if (filteredTasks.length === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        filteredTasks.forEach(task => {
+          container.appendChild(createTaskCard(task));
+        });
+      }
+
+      // Re-trigger Lucide Renderer for dynamically created icons
+      lucide.createIcons();
+    }
+
+    function createTopThreeCard(task) {
+      const card = document.createElement('div');
+      card.className = `p-4 rounded-xl border relative transition shadow-sm flex flex-col justify-between ${
+        task.completed 
+          ? 'bg-zinc-50 dark:bg-zinc-900 border-zinc-200/50 dark:border-zinc-800 opacity-60' 
+          : 'bg-rose-50/40 dark:bg-rose-950/20 border-rose-100 dark:border-rose-900/50 hover:shadow-md'
+      }`;
+
+      const catBadge = state.categories[task.category] || { label: '其他', icon: 'file-text', color: 'indigo' };
+
+      card.innerHTML = `
+        <div class="flex items-start justify-between">
+          <div class="flex items-start space-x-2.5 mr-3">
+            <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTaskComplete('${task.id}')" class="w-4 h-4 rounded border-rose-300 text-rose-600 focus:ring-rose-500 mt-0.5 flex-shrink-0 cursor-pointer">
+            <div>
+              <h4 class="text-sm font-bold leading-tight ${task.completed ? 'line-through text-zinc-400' : 'text-zinc-800 dark:text-zinc-100'}">${escapeHTML(task.title)}</h4>
+              ${task.startTime ? `<span class="inline-flex items-center text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 font-semibold">🕒 ${task.startTime}</span>` : ''}
+              ${task.notes ? `<p class="text-[11px] text-zinc-500 mt-1.5 whitespace-pre-wrap leading-relaxed">${escapeHTML(task.notes)}</p>` : ''}
+            </div>
+          </div>
+          <div class="flex items-center space-x-1 flex-shrink-0">
+            <button onclick="editTask('${task.id}')" class="p-1 rounded text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800">
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="deleteTask('${task.id}')" class="p-1 rounded text-zinc-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center justify-between mt-4 pt-2 border-t border-zinc-100 dark:border-zinc-800/50">
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold tracking-wider uppercase bg-rose-100/50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">核心要事</span>
+          <span class="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium flex items-center gap-1">
+            <i data-lucide="${catBadge.icon}" class="w-3 h-3"></i> ${catBadge.label}
+          </span>
+        </div>
+      `;
+      return card;
+    }
+
+    function createTaskCard(task) {
+      const card = document.createElement('div');
+      card.className = `p-4 rounded-xl border flex items-center justify-between transition ${
+        task.completed 
+          ? 'bg-zinc-50 dark:bg-zinc-900 border-zinc-200/50 dark:border-zinc-800 opacity-60' 
+          : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 hover:shadow-md'
+      }`;
+
+      const catBadge = state.categories[task.category] || { label: '其他', icon: 'file-text', color: 'indigo' };
+      const colorIndicatorClass = {
+        indigo: 'text-indigo-500',
+        emerald: 'text-emerald-500',
+        rose: 'text-rose-500',
+        amber: 'text-amber-500',
+        teal: 'text-teal-500'
+      }[catBadge.color] || 'text-brand-500';
+
+      card.innerHTML = `
+        <div class="flex items-center space-x-3.5 min-w-0 flex-1">
+          <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTaskComplete('${task.id}')" class="w-4 h-4 rounded border-zinc-300 text-brand-600 focus:ring-brand-500 flex-shrink-0 cursor-pointer">
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="${catBadge.icon}" class="w-3.5 h-3.5 flex-shrink-0 ${colorIndicatorClass}"></i>
+              <h4 class="text-sm font-semibold truncate ${task.completed ? 'line-through text-zinc-400' : 'text-zinc-800 dark:text-zinc-100'}">${escapeHTML(task.title)}</h4>
+              ${task.isTopThree ? '<span class="px-1.5 py-0.2 bg-rose-100 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 text-[9px] font-bold rounded flex-shrink-0">核心要事</span>' : ''}
+            </div>
+            <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-3 mt-1 text-[11px] text-zinc-400">
+              <div class="flex items-center space-x-2">
+                ${task.startTime ? `<span class="flex items-center font-medium text-zinc-500 dark:text-zinc-400">🕒 ${task.startTime}</span>` : ''}
+                <span>${catBadge.label}</span>
+              </div>
+              ${task.notes ? `<span class="truncate max-w-md hidden sm:inline text-zinc-400">| ${escapeHTML(task.notes).replace(/\n/g, ' ')}</span>` : ''}
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex items-center space-x-1.5 flex-shrink-0">
+          <button onclick="editTask('${task.id}')" class="p-1.5 rounded-lg text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition">
+            <i data-lucide="edit-3" class="w-4 h-4"></i>
+          </button>
+          <button onclick="deleteTask('${task.id}')" class="p-1.5 rounded-lg text-zinc-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        </div>
+      `;
+      return card;
+    }
+
+    // 6. DB Operations
+    async function handleTaskSubmit(event) {
+      event.preventDefault();
+      
+      const id = document.getElementById('taskFormId').value;
+      const title = document.getElementById('taskTitle').value.trim();
+      const date = document.getElementById('taskDate').value;
+      const startTime = document.getElementById('taskTime').value;
+      const category = document.getElementById('taskCategory').value;
+      const isTopThree = document.getElementById('taskIsTopThree').checked;
+      const notes = document.getElementById('taskNotes').value.trim();
+
+      if (!title) return;
+
+      const taskData = {
+        title,
+        date,
+        startTime,
+        category,
+        isTopThree,
+        notes,
+        completed: id ? (state.tasks.find(t => t.id === id)?.completed || false) : false
+      };
+
+      try {
+        if (state.isCloudActive) {
+          const tasksRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('tasks');
+          
+          if (id) {
+            await tasksRef.doc(id).set({
+              ...taskData,
+              id,
+              syncCode: state.syncCode,
+              updatedAt: Date.now()
+            });
+            showToast("成功编辑计划事项", "success");
+          } else {
+            const newDoc = tasksRef.doc();
+            await newDoc.set({
+              ...taskData,
+              id: newDoc.id,
+              syncCode: state.syncCode,
+              updatedAt: Date.now()
+            });
+            showToast("成功添加新计划事项", "success");
+          }
+        } else {
+          const finalId = id || 'local_' + Date.now() + Math.random().toString(36).substr(2, 5);
+          const taskObj = { ...taskData, id: finalId, syncCode: state.syncCode };
+          
+          if (id) {
+            state.tasks = state.tasks.map(t => t.id === id ? taskObj : t);
+          } else {
+            state.tasks.push(taskObj);
+          }
+          localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
+          renderTasks();
+          updateProgress();
+          showToast(id ? "本地修改成功" : "本地新建成功", "success");
+        }
+
+        closeTaskModal();
+      } catch (err) {
+        showToast("无法保存到日程，请重试", "error");
+      }
+    }
+
+    async function toggleTaskComplete(id) {
+      const task = state.tasks.find(t => t.id === id);
+      if (!task) return;
+
+      const newCompletedState = !task.completed;
+
+      try {
+        if (state.isCloudActive) {
+          await db.collection('artifacts').doc(appId)
+            .collection('public').doc('data')
+            .collection('tasks').doc(id)
+            .update({
+              completed: newCompletedState,
+              updatedAt: Date.now()
+            });
+        } else {
+          state.tasks = state.tasks.map(t => t.id === id ? { ...t, completed: newCompletedState } : t);
+          localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
+          renderTasks();
+          updateProgress();
+        }
+        
+        showToast(newCompletedState ? "计划已完成，继续保持！" : "计划已重新开启", "success");
+      } catch (err) {
+        showToast("状态更新失败：" + err.message, "error");
+      }
+    }
+
+    async function deleteTask(id) {
+      if (!confirm("确定要删除这项日程规划吗？")) return;
+
+      try {
+        if (state.isCloudActive) {
+          await db.collection('artifacts').doc(appId)
+            .collection('public').doc('data')
+            .collection('tasks').doc(id)
+            .delete();
+          showToast("已成功删除计划", "success");
+        } else {
+          state.tasks = state.tasks.filter(t => t.id !== id);
+          localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
+          renderTasks();
+          updateProgress();
+          showToast("本地已删除日程计划", "success");
+        }
+      } catch (err) {
+        showToast("操作删除失败：" + err.message, "error");
+      }
+    }
+
+    // 7. Memo / Scratchpad Handler
+    function renderScratchpad() {
+      const textarea = document.getElementById('scratchpadTextarea');
+      const savedText = state.notes[state.selectedDate] || '';
+      textarea.value = savedText;
+    }
+
+    function handleScratchpadInput() {
+      const content = document.getElementById('scratchpadTextarea').value;
+      const date = state.selectedDate;
+
+      document.getElementById('scratchpadSaveStatus').textContent = "正在输入并同步...";
+      document.getElementById('scratchpadSaveStatus').className = "text-[10px] text-brand-500 font-bold";
+
+      if (scratchpadDebounceTimer) clearTimeout(scratchpadDebounceTimer);
+      
+      scratchpadDebounceTimer = setTimeout(async () => {
+        try {
+          state.notes[date] = content;
+          localStorage.setItem(`notes_${state.syncCode}`, JSON.stringify(state.notes));
+
+          if (state.isCloudActive) {
+            const notesRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('notes');
+            const docId = `${state.syncCode}_${date}`;
+            
+            await notesRef.doc(docId).set({
+              syncCode: state.syncCode,
+              date: date,
+              content: content,
+              updatedAt: Date.now()
+            });
+          }
+
+          document.getElementById('scratchpadSaveStatus').textContent = "已实时同步到云端";
+          document.getElementById('scratchpadSaveStatus').className = "text-[10px] text-zinc-400 font-medium";
+        } catch (err) {
+          document.getElementById('scratchpadSaveStatus').textContent = "同步失败，保存在本地";
+          document.getElementById('scratchpadSaveStatus').className = "text-[10px] text-rose-500 font-bold";
+        }
+      }, 700);
+    }
+
+    // 8. Progress Calculation
+    function updateProgress() {
+      const todayTasks = state.tasks.filter(t => t.date === state.selectedDate);
+      const total = todayTasks.length;
+      
+      if (total === 0) {
+        document.getElementById('todayProgressText').textContent = "今日暂未安排具体计划。";
+        return;
+      }
+
+      const completedCount = todayTasks.filter(t => t.completed).length;
+      const percentage = Math.round((completedCount / total) * 100);
+
+      document.getElementById('todayProgressText').textContent = 
+        `今日进度为 ${percentage}% (已完成 ${completedCount}/${total} 个计划事项)`;
+    }
+
+    // 9. Modals Open/Close
+    function openAddTaskModal() {
+      const modal = document.getElementById('taskModal');
+      const content = document.getElementById('taskModalContent');
+      
+      document.getElementById('taskFormId').value = '';
+      document.getElementById('taskForm').reset();
+      
+      document.getElementById('taskDate').value = state.selectedDate;
+      document.getElementById('modalTitle').textContent = '制定今日计划事项';
+
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+
+    function editTask(id) {
+      const task = state.tasks.find(t => t.id === id);
+      if (!task) return;
+
+      const modal = document.getElementById('taskModal');
+      const content = document.getElementById('taskModalContent');
+
+      document.getElementById('taskFormId').value = task.id;
+      document.getElementById('taskTitle').value = task.title;
+      document.getElementById('taskDate').value = task.date;
+      document.getElementById('taskTime').value = task.startTime || '';
+      document.getElementById('taskCategory').value = task.category;
+      document.getElementById('taskIsTopThree').checked = task.isTopThree || false;
+      document.getElementById('taskNotes').value = task.notes || '';
+
+      document.getElementById('modalTitle').textContent = '编辑已有计划事项';
+
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+
+    function closeTaskModal() {
+      const modal = document.getElementById('taskModal');
+      const content = document.getElementById('taskModalContent');
+      
+      content.classList.remove('scale-100', 'opacity-100');
+      content.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+
+    function openSyncModal() {
+      const modal = document.getElementById('syncModal');
+      const content = document.getElementById('syncModalContent');
+      
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+
+    function closeSyncModal() {
+      const modal = document.getElementById('syncModal');
+      const content = document.getElementById('syncModalContent');
+      
+      content.classList.remove('scale-100', 'opacity-100');
+      content.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+
+    // 10. Right Sidebar Tab Navigation
+    function switchRightTab(tabName) {
+      state.currentRightTab = tabName;
+      
+      const tabScratchpad = document.getElementById('tab-scratchpad-btn');
+      const tabAI = document.getElementById('tab-ai-btn');
+      const tabManual = document.getElementById('tab-manual-btn');
+      
+      const panelScratchpad = document.getElementById('panel-scratchpad');
+      const panelAI = document.getElementById('panel-ai');
+      const panelManual = document.getElementById('panel-manual');
+
+      // Clear all active tabs classes
+      [tabScratchpad, tabAI, tabManual].forEach(el => {
+        el.className = "flex-1 py-3 px-1 text-xs font-bold text-center border-b-2 border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 flex items-center justify-center space-x-1 transition";
+      });
+
+      [panelScratchpad, panelAI, panelManual].forEach(panel => panel.classList.add('hidden'));
+
+      const activeBtn = { scratchpad: tabScratchpad, ai: tabAI, manual: tabManual }[tabName];
+      activeBtn.className = "flex-1 py-3 px-1 text-xs font-bold text-center border-b-2 border-brand-500 text-brand-600 dark:text-brand-400 flex items-center justify-center space-x-1 transition";
+      
+      const activePanel = { scratchpad: panelScratchpad, ai: panelAI, manual: panelManual }[tabName];
+      activePanel.classList.remove('hidden');
+      
+      if (tabName === 'ai') {
+        setTimeout(scrollAIChatToBottom, 100);
+      }
+    }
+
+    function scrollAIChatToBottom() {
+      const view = document.getElementById('aiChatViewport');
+      view.scrollTop = view.scrollHeight;
+    }
+
+    // 11. Design Aesthetic Handlers (Dark/Light themes)
+    function toggleTheme() {
+      setTheme(!state.isDarkMode);
+    }
+
+    function setTheme(isDark) {
+      state.isDarkMode = isDark;
+      const htmlEl = document.documentElement;
+      
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        localStorage.setItem('zen_planner_theme', 'dark');
+        setTimeout(() => {
+          const icon = document.getElementById('themeIcon');
+          if (icon) icon.setAttribute('data-lucide', 'moon');
+          lucide.createIcons();
+        }, 10);
+      } else {
+        htmlEl.classList.remove('dark');
+        localStorage.setItem('zen_planner_theme', 'light');
+        setTimeout(() => {
+          const icon = document.getElementById('themeIcon');
+          if (icon) icon.setAttribute('data-lucide', 'sun');
+          lucide.createIcons();
+        }, 10);
+      }
+    }
+
+    function updateSyncIndicator(status, message) {
+      const dot = document.getElementById('syncIndicatorDot');
+      const txt = document.getElementById('syncIndicatorText');
+      if (txt) txt.textContent = message;
+
+      if (dot) {
+        dot.className = "w-2 h-2 rounded-full animate-pulse " + {
+          connecting: 'bg-amber-400',
+          connected: 'bg-emerald-500',
+          local: 'bg-zinc-400'
+        }[status];
+      }
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toastNotification');
+      const iconContainer = document.getElementById('toastIconContainer');
+      const msgText = document.getElementById('toastMessage');
+
+      msgText.textContent = message;
+
+      if (type === 'success') {
+        iconContainer.className = "w-6 h-6 rounded-lg flex items-center justify-center text-white bg-emerald-500";
+        iconContainer.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i>`;
+      } else {
+        iconContainer.className = "w-6 h-6 rounded-lg flex items-center justify-center text-white bg-rose-500";
+        iconContainer.innerHTML = `<i data-lucide="alert-circle" class="w-4 h-4"></i>`;
+      }
+      lucide.createIcons();
+
+      toast.classList.remove('translate-y-10', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-10', 'opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+
+    // =========================================================================
+    // 12. GEMINI API INTELLIGENT INTEGRATION
+    // =========================================================================
+    
+    // Core Fetch Wrapper implementing Exponential Backoff Retry up to 5 times
+    async function callGemini(payload) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      let delay = 1000;
+      
+      for (let attempt = 0; attempt < 5; attempt++) {
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+          
+          if (response.ok) {
+            return await response.json();
+          }
+          const errText = await response.text();
+          console.warn(`Gemini call attempt ${attempt + 1} rejected: ${errText}`);
+        } catch (e) {
+          console.warn(`Gemini call attempt ${attempt + 1} failed network check:`, e);
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, delay));
+        delay *= 2;
+      }
+      
+      throw new Error("云端 AI 规划智算链路超时。请稍后再试。");
+    }
+
+    // FEATURE 1: 给我安排今天 (PLAN MY DAY ENGINE)
+    async function triggerAIPlanMyDay() {
+      const planBtn = document.getElementById('aiPlanMyDayBtn');
+      const originalText = planBtn.innerHTML;
+      
+      // Compile current date's manual tasks
+      const dateTasks = state.tasks.filter(t => t.date === state.selectedDate);
+      const manualTasksSummary = dateTasks.map((t, idx) => {
+        return `- ${t.title} (开始时间: ${t.startTime || '未定'}, 备注: ${t.notes || '无'})`;
+      }).join('\n');
+
+      planBtn.disabled = true;
+      planBtn.innerHTML = `
+        <span class="inline-block w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin mr-1.5"></span>
+        <span>深度统筹中...</span>
+      `;
+
+      const systemPrompt = `你是一个超强的时间效能和规划大模型。你的职责是结合当前日期、用户的手动日程、长期目标、日常习惯，输出一幅极具操作性的"今日战斗计划"时段蓝图。
+你必须且只能返回一个合法的 JSON 对象，不包含任何 Markdown 的 \`\`\`json 标记，直接以 { 开始，以 } 结束。
+分类字段 category 只能在 'Work', 'Personal', 'Health', 'Study', 'Finance' 之间进行选择。`;
+
+      const userPrompt = `今天日期: ${state.selectedDate}
+
+1. 用户已安排的手动任务：
+${manualTasksSummary || '（无手动日程安排）'}
+
+2. 用户的长期目标：
+"${state.profileGoals || '（暂未设定长期目标）'}"
+
+3. 用户的日常历史习惯：
+"${state.profileHabits || '（暂未设定日常习惯）'}"
+
+请结合上述信息，为他进行时间分段管理，设计一个包含 4 个最重要时间片段的"今日战斗计划"。
+若用户已手动排定某时间段的任务，请务必将其安排在对应时间段，并结合其长期目标与习惯在其余空白时间设计合理充能/学习习惯，以防止他在"没有任务"时感到迷茫。
+
+请严格返回以下 JSON 格式对象：
+{
+  "tasks": [
+    {
+      "title": "任务精简名称 (15字以内)",
+      "timeSlot": "时间跨度(例如: '09:00-10:00')",
+      "notes": "做什么/任务详情 (20字以内)",
+      "category": "只能是 'Work' | 'Personal' | 'Health' | 'Study' | 'Finance'",
+      "isTopThree": 代表是否置顶为核心要事布尔值 (true / false)
+    }
+  ]
+}`;
+
+      const payload = {
+        contents: [{ parts: [{ text: userPrompt }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] },
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: "OBJECT",
+            properties: {
+              tasks: {
+                type: "ARRAY",
+                items: {
+                  type: "OBJECT",
+                  properties: {
+                    title: { type: "STRING" },
+                    timeSlot: { type: "STRING" },
+                    notes: { type: "STRING" },
+                    category: { type: "STRING" },
+                    isTopThree: { type: "BOOLEAN" }
+                  },
+                  required: ["title", "timeSlot", "notes", "category", "isTopThree"]
+                }
+              }
+            },
+            required: ["tasks"]
+          }
+        }
+      };
+
+      try {
+        const result = await callGemini(payload);
+        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+        
+        let parsed = null;
+        try {
+          parsed = JSON.parse(text);
+        } catch (je) {
+          const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
+          parsed = JSON.parse(cleanedText);
+        }
+
+        if (parsed && Array.isArray(parsed.tasks)) {
+          state.currentBattlePlan = parsed.tasks;
+          renderBattlePlanPreview();
+          showToast("✨ 今日战斗计划已经就绪！", "success");
+        } else {
+          showToast("生成计划不完整，请重新点击", "error");
+        }
+      } catch (err) {
+        console.error(err);
+        showToast("AI 规划失败：" + err.message, "error");
+      } finally {
+        planBtn.disabled = false;
+        planBtn.innerHTML = originalText;
+      }
+    }
+
+    // Render Preview Section of Battle Plan
+    function renderBattlePlanPreview() {
+      const section = document.getElementById('battlePlanSection');
+      const timeline = document.getElementById('battlePlanTimeline');
+      
+      if (!state.currentBattlePlan || state.currentBattlePlan.length === 0) {
+        section.classList.add('hidden');
+        return;
+      }
+
+      timeline.innerHTML = '';
+      section.classList.remove('hidden');
+
+      state.currentBattlePlan.forEach(task => {
+        const catConfig = state.categories[task.category] || { label: '工作', icon: 'briefcase', color: 'indigo' };
+        
+        const card = document.createElement('div');
+        card.className = "p-3 bg-white dark:bg-zinc-900 border border-brand-100 dark:border-brand-900 rounded-xl relative shadow-xs";
+        
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-bold text-zinc-400 flex items-center gap-1">
+              🕒 ${task.timeSlot}
+            </span>
+            <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-bold tracking-wider uppercase bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+              <i data-lucide="${catConfig.icon}" class="w-2.5 h-2.5"></i> ${catConfig.label}
+            </span>
+          </div>
+          <h4 class="text-xs font-bold text-zinc-800 dark:text-zinc-200 truncate">${escapeHTML(task.title)}</h4>
+          <p class="text-[10px] text-zinc-500 mt-1 truncate">${escapeHTML(task.notes)}</p>
+          ${task.isTopThree ? `<div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-rose-500 rounded-full border border-white"></div>` : ''}
+        `;
+        
+        timeline.appendChild(card);
+      });
+
+      // Update vector icons in combat plan timeline
+      lucide.createIcons();
+    }
+
+    function closeBattlePlanPreview() {
+      state.currentBattlePlan = null;
+      document.getElementById('battlePlanSection').classList.add('hidden');
+    }
+
+    // Import temporary Battle Plan to Real Checklist (Manual Sync parallel entry)
+    async function importBattlePlanToSchedule() {
+      if (!state.currentBattlePlan || state.currentBattlePlan.length === 0) return;
+
+      if (!confirm("是否将此 AI 战斗计划一键合并到您当天的清单中？（现有的手动日程将不会被影响）")) return;
+
+      const importBtn = document.querySelector('[onclick="importBattlePlanToSchedule()"]');
+      const originalText = importBtn.innerHTML;
+      importBtn.disabled = true;
+      importBtn.innerHTML = `<span>同步导入中...</span>`;
+
+      try {
+        const formattedTasks = state.currentBattlePlan.map(t => {
+          // Parse start time from timeslot (e.g., '09:00-10:00' -> '09:00')
+          const timeParts = t.timeSlot.split('-');
+          const start = timeParts[0] ? timeParts[0].trim() : '';
+
+          return {
+            title: t.title,
+            date: state.selectedDate,
+            startTime: start,
+            category: t.category,
+            isTopThree: t.isTopThree,
+            notes: `[AI 规划] ${t.notes}`,
+            completed: false,
+            syncCode: state.syncCode,
+            id: state.isCloudActive ? '' : 'local_' + Date.now() + Math.random().toString(36).substr(2, 5)
+          };
+        });
+
+        if (state.isCloudActive) {
+          const tasksRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('tasks');
+          for (const nt of formattedTasks) {
+            const newDoc = tasksRef.doc();
+            await newDoc.set({
+              ...nt,
+              id: newDoc.id,
+              updatedAt: Date.now()
+            });
+          }
+        } else {
+          state.tasks = [...state.tasks, ...formattedTasks];
+          localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
+          renderTasks();
+          updateProgress();
+        }
+
+        showToast("战斗计划已成功合并至日常日程清单中！", "success");
+        closeBattlePlanPreview();
+      } catch (err) {
+        showToast("导入日程失败，请重试", "error");
+      } finally {
+        importBtn.disabled = false;
+        importBtn.innerHTML = originalText;
+      }
+    }
+
+
+    // FEATURE 2: AI Task Breakdown Helper (日程细化拆解)
+    async function triggerAITaskDecompose() {
+      const titleInput = document.getElementById('taskTitle').value.trim();
+      const categorySelect = document.getElementById('taskCategory').value;
+      const notesTextarea = document.getElementById('taskNotes');
+      const aiBtn = document.getElementById('aiDecomposeBtn');
+
+      if (!titleInput) {
+        showToast("请先在上方输入计划事项的标题，以便 AI 帮您精准拆解", "error");
+        return;
+      }
+
+      const originalText = aiBtn.innerHTML;
+      aiBtn.disabled = true;
+      aiBtn.innerHTML = `<span>AI 策划中...</span>`;
+      notesTextarea.placeholder = "正在为您拆分任务节点，请稍候...";
+
+      const systemPrompt = "你是一个精通敏捷规划的 AI 时间管理导师。你需要将用户填写的日程任务，转化为一个极其具备可操作性的 3 条精炼子步骤行动指南。字数严格控制在 80 字以内。不要解释。直接输出符号引导的列表内容。";
+      const userPrompt = `用户正在计划添加这一日程：\n标题: "${titleInput}"\n分类: "${categorySelect}"\n\n请输出 3 条高度精准、可直接执行的待办步骤。`;
+
+      const payload = {
+        contents: [{ parts: [{ text: userPrompt }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] }
+      };
+
+      try {
+        const result = await callGemini(payload);
+        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+        
+        if (text) {
+          notesTextarea.value = text.trim();
+          showToast("AI 智能规划方案已生成，并填充到日程备注中", "success");
+        } else {
+          showToast("AI 生成内容异常，请重试", "error");
+        }
+      } catch (err) {
+        showToast(err.message, "error");
+      } finally {
+        aiBtn.disabled = false;
+        aiBtn.innerHTML = originalText;
+        notesTextarea.placeholder = "补充一些注意事项、细化的小任务或子计划清单...";
+      }
+    }
+
+    // FEATURE 3: AI Scratchpad Converter (草稿智能提取)
+    async function triggerAIScratchpadConvert() {
+      const notesContent = document.getElementById('scratchpadTextarea').value.trim();
+      const extractBtn = document.getElementById('aiExtractBtn');
+
+      if (!notesContent) {
+        showToast("请先在今日草稿中填写您的备忘或灵感想法", "error");
+        return;
+      }
+
+      const originalBtnText = extractBtn.innerHTML;
+      extractBtn.disabled = true;
+      extractBtn.innerHTML = `<span>AI 解析中...</span>`;
+
+      const systemPrompt = "你是一个超高精度的日程和代办提取助手。你唯一的职责是阅读并提取用户在草稿中写下的日程安排。你必须并且只能返回一个合法的 JSON 数组，不包含任何 Markdown 的 ```json 块标记，直接以 [ 开始，以 ] 结束。";
+      const userPrompt = `提取以下草稿里的具体待办日程：\n\n"${notesContent}"\n\n请严格按照如下 JSON 结构返回：
+      [
+        {
+          "title": "任务的精简标题(不超过25字)",
+          "startTime": "HH:MM格式的24小时时间戳，如果草稿中提到了时间则填写，未提及必须留空字符串''",
+          "category": "类别，只能是以下五者之一：'Work' | 'Personal' | 'Health' | 'Study' | 'Finance'",
+          "isTopThree": 是否代表最重要事项的布尔值 (true / false),
+          "notes": "对该任务描述(若能从原文归纳，则控制在30字内)"
+        }
+      ]`;
+
+      const payload = {
+        contents: [{ parts: [{ text: userPrompt }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] },
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: "ARRAY",
+            items: {
+              type: "OBJECT",
+              properties: {
+                title: { type: "STRING" },
+                startTime: { type: "STRING" },
+                category: { type: "STRING" },
+                isTopThree: { type: "BOOLEAN" },
+                notes: { type: "STRING" }
+              },
+              required: ["title", "category", "isTopThree", "notes"]
+            }
+          }
+        }
+      };
+
+      try {
+        const result = await callGemini(payload);
+        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+        
+        let parsedTasks = [];
+        try {
+          parsedTasks = JSON.parse(text);
+        } catch (jsonErr) {
+          const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
+          parsedTasks = JSON.parse(cleanedText);
+        }
+
+        if (Array.isArray(parsedTasks) && parsedTasks.length > 0) {
+          const newTasks = parsedTasks.map(t => ({
+            ...t,
+            id: state.isCloudActive ? '' : 'local_' + Date.now() + Math.random().toString(36).substr(2, 5),
+            date: state.selectedDate,
+            completed: false,
+            syncCode: state.syncCode
+          }));
+
+          if (state.isCloudActive) {
+            const tasksRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('tasks');
+            for (const nt of newTasks) {
+              const newDoc = tasksRef.doc();
+              await newDoc.set({
+                ...nt,
+                id: newDoc.id,
+                updatedAt: Date.now()
+              });
+            }
+          } else {
+            state.tasks = [...state.tasks, ...newTasks];
+            localStorage.setItem(`tasks_${state.syncCode}`, JSON.stringify(state.tasks));
+            renderTasks();
+            updateProgress();
+          }
+
+          showToast(`已智能识别并导入了 ${newTasks.length} 个新日程计划！`, "success");
+        } else {
+          showToast("草稿中未提取到明显的行动计划", "error");
+        }
+      } catch (err) {
+        showToast("AI 解析失败: " + err.message, "error");
+      } finally {
+        extractBtn.disabled = false;
+        extractBtn.innerHTML = originalBtnText;
+      }
+    }
+
+    // FEATURE 4: AI Daily Schedule Diagnostician (日程合理性诊断)
+    async function diagnoseDailyPlanner() {
+      const diagnoseBtn = document.getElementById('diagnoseBtn');
+
+      const todayTasks = state.tasks.filter(t => t.date === state.selectedDate);
+      const notesContent = state.notes[state.selectedDate] || '';
+
+      const originalBtnText = diagnoseBtn.innerHTML;
+      diagnoseBtn.disabled = true;
+      diagnoseBtn.innerHTML = `<span>诊断分析中...</span>`;
+
+      let taskSummary = todayTasks.map((t, idx) => {
+        const catLabel = state.categories[t.category]?.label || '其他';
+        return `${idx+1}. 【${catLabel}】 ${t.title} (${t.startTime || '全天'}) - ${t.completed ? '已完成' : '未完成'}. 备注: ${t.notes || '无'}`;
+      }).join('\n');
+
+      if (!taskSummary) {
+        taskSummary = "（当前日期还未创建任何具体日程）";
+      }
+
+      const systemPrompt = "你是一个时间管理心理专家和效率诊断教练。你需要分析用户当天的日程计划与草稿，给出精炼、不罗嗦、极具启发性的效率诊断与抗拖延建议。限制字数在 150 字以内。";
+      const userPrompt = `日期是: ${state.selectedDate}\n\n已排日程规划：\n${taskSummary}\n\n当日草稿备注：\n"${notesContent}"\n\n请针对这一排期做出客观、高效的精炼复盘诊断并给出突破方案。`;
+
+      const payload = {
+        contents: [{ parts: [{ text: userPrompt }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] }
+      };
+
+      try {
+        const result = await callGemini(payload);
+        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (text) {
+          appendAIChatMessage('coach', text);
+          showToast("日程诊断报告已生成，切换至 AI 导师面板阅读", "success");
+        } else {
+          showToast("AI 反馈异常，请重试", "error");
+        }
+      } catch (err) {
+        showToast(err.message, "error");
+      } finally {
+        diagnoseBtn.disabled = false;
+        diagnoseBtn.innerHTML = originalBtnText;
+      }
+    }
+
+    // AI Interactive Chats Engine (Double-way dialogue)
+    function appendAIChatMessage(sender, text) {
+      const container = document.getElementById('aiChatHistoryContainer');
+      const bubble = document.createElement('div');
+      
+      const isCoach = sender === 'coach';
+      
+      bubble.className = `p-3 rounded-2xl max-w-[90%] text-xs leading-relaxed transition-all ${
+        isCoach 
+          ? 'bg-indigo-50/70 dark:bg-indigo-950/20 text-zinc-800 dark:text-zinc-200 border border-indigo-100/30 dark:border-indigo-900/10 mr-auto' 
+          : 'bg-brand-500 text-white ml-auto'
+      }`;
+
+      bubble.innerHTML = `
+        <div class="flex items-center space-x-1.5 mb-1 opacity-80">
+          <span class="font-bold">${isCoach ? 'AI 规划导师' : '我'}</span>
+          <span class="text-[9px] scale-90">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+        </div>
+        <p class="whitespace-pre-wrap leading-relaxed">${escapeHTML(text)}</p>
+      `;
+
+      container.appendChild(bubble);
+      
+      switchRightTab('ai');
+      state.aiChatHistory.push({ sender, text });
+      scrollAIChatToBottom();
+    }
+
+    async function sendAIChatMessage() {
+      const input = document.getElementById('aiChatInput');
+      const userText = input.value.trim();
+      const sendBtn = document.getElementById('aiSendBtn');
+
+      if (!userText) return;
+
+      appendAIChatMessage('user', userText);
+      input.value = '';
+
+      const container = document.getElementById('aiChatHistoryContainer');
+      const shimmerBubble = document.createElement('div');
+      shimmerBubble.id = 'ai-shimmer-bubble';
+      shimmerBubble.className = "p-4 rounded-xl ai-loading-shimmer text-zinc-400 max-w-[80%] mr-auto h-16 w-3/4 mb-3 rounded-2xl";
+      container.appendChild(shimmerBubble);
+      scrollAIChatToBottom();
+
+      sendBtn.disabled = true;
+
+      const formattedHistory = state.aiChatHistory.map(item => {
+        return `${item.sender === 'coach' ? 'AI 规划导师' : '用户'}: ${item.text}`;
+      }).join('\n');
+
+      const todayTasks = state.tasks.filter(t => t.date === state.selectedDate);
+      let taskSummary = todayTasks.map((t, idx) => `[${t.category}] ${t.title}`).join(', ');
+
+      const systemPrompt = "你是一个时间管理心理学家。根据用户当前的日程进度和他的疑问，给出深刻、简明、可行、充满心理学关怀支持和指导的解答。回答限制在150字内。";
+      const userPrompt = `日期: ${state.selectedDate}。今日任务有: [${taskSummary}]。\n\n对话上下文历史：\n${formattedHistory}\n\n最新提问："${userText}"\n\n请对此给出专业的效能指导、战胜拖延对策、或情绪激励建议。`;
+
+      const payload = {
+        contents: [{ parts: [{ text: userPrompt }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] }
+      };
+
+      try {
+        const result = await callGemini(payload);
+        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        const shimmer = document.getElementById('ai-shimmer-bubble');
+        if (shimmer) shimmer.remove();
+
+        if (text) {
+          appendAIChatMessage('coach', text);
+        } else {
+          appendAIChatMessage('coach', "抱歉，思考模块收到未知波动。请再次提问。");
+        }
+      } catch (err) {
+        const shimmer = document.getElementById('ai-shimmer-bubble');
+        if (shimmer) shimmer.remove();
+        appendAIChatMessage('coach', "发生网络阻塞：" + err.message);
+      } finally {
+        sendBtn.disabled = false;
+      }
+    }
+
+    function handleAIChatKeyDown(event) {
+      if (event.key === 'Enter') {
+        sendAIChatMessage();
+      }
+    }
+  </script>
+</body>
+</html>

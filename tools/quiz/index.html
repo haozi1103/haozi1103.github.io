@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学习面板 — Quiz System</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    (function() {
+      var html = document.documentElement;
+      function syncDark() {
+        // Check parent page dark class
+        var parentDark = window.parent && window.parent.document.documentElement.classList.contains('dark');
+        // Also check localStorage (planner saves dark mode setting here)
+        var localDark = localStorage.getItem('zen_planner_theme') === 'dark';
+        // Also check system preference
+        var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (parentDark || localDark || (sysDark && !localStorage.getItem('zen_planner_theme'))) {
+          html.classList.add('dark');
+        } else {
+          html.classList.remove('dark');
+        }
+      }
+      syncDark();
+      // Watch parent class changes
+      if (window.parent) {
+        var observer = new MutationObserver(syncDark);
+        observer.observe(window.parent.document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      }
+      // Also react to storage changes (when planner toggles in another tab)
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'zen_planner_theme') syncDark();
+      });
+    })();
+  </script>
+</head>
+<body>
+  <div class="gh-container">
+
+    <!-- ===== Header ===== -->
+    <header class="gh-header">
+      <h1>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        学习面板
+      </h1>
+      <div class="gh-header-actions">
+        <a href="/tools/" class="gh-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg> 返回工具集
+        </a>
+        <a href="/" class="gh-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> 博客首页
+        </a>
+      </div>
+    </header>
+
+    <!-- ===== Stats Bar ===== -->
+    <div class="gh-stats" id="stats-bar">
+      <div class="gh-stat-card">
+        <div class="gh-stat-number" id="stat-total">0</div>
+        <div class="gh-stat-label"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg> 总题量</div>
+      </div>
+      <div class="gh-stat-card">
+        <div class="gh-stat-number" id="stat-accuracy">0%</div>
+        <div class="gh-stat-label"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 正确率</div>
+      </div>
+      <div class="gh-stat-card">
+        <div class="gh-stat-number" id="stat-streak">0</div>
+        <div class="gh-stat-label"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> 连续学习天数</div>
+      </div>
+      <div class="gh-stat-card">
+        <div class="gh-stat-number" id="stat-wrong">0</div>
+        <div class="gh-stat-label"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> 待复习错题</div>
+      </div>
+    </div>
+
+    <!-- ===== Two Column Layout ===== -->
+    <div class="gh-two-col">
+
+      <!-- ===== Left: Library List ===== -->
+      <div class="gh-card">
+        <div class="gh-card-header">
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> 题库列表</span>
+          <span class="gh-text-muted" id="lib-count"></span>
+        </div>
+        <div class="gh-card-body">
+          <div class="gh-repo-list" id="library-list">
+            <!-- Rendered by JS -->
+          </div>
+          <!-- ===== 拖拽导入区 ===== -->
+          <div class="gh-drop-zone" id="drop-zone">
+            <span class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
+            <strong>拖入 JSON 题库文件</strong>
+            <div class="hint">或点击选择文件 · 格式: [{ id, question, options, answer }]</div>
+            <input type="file" id="file-input" accept=".json" multiple>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Right: Heatmap + Wrong Questions ===== -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+
+        <!-- Heatmap -->
+        <div class="gh-card">
+          <div class="gh-card-header">
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;color:var(--danger)"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> 学习热力图</span>
+            <span class="gh-text-muted" style="font-weight:400;font-size:12px;" id="heatmap-lib-label">全部</span>
+          </div>
+          <div class="gh-card-body">
+            <div class="gh-heatmap-wrap">
+              <div id="heatmap-container">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+            <div class="gh-heatmap-legend">
+              <span>少</span>
+              <span class="cell" style="background:var(--border)"></span>
+              <span class="cell" style="background:#bbf7d0"></span>
+              <span class="cell" style="background:#4ade80"></span>
+              <span class="cell" style="background:#16a34a"></span>
+              <span class="cell" style="background:#15803d"></span>
+              <span>多</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Wrong -->
+        <div class="gh-card">
+          <div class="gh-card-header">
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;color:var(--danger)"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 最近错题</span>
+          </div>
+          <div class="gh-card-body" id="wrong-container">
+            <div class="gh-empty-state">
+              <div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              暂无错题，继续保持！
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+  (async function() {
+    'use strict';
+
+    lucide.createIcons();
+
+    // ===== 加载所有题库 =====
+    const libList = QuizEngine.getLibraryList();
+    document.getElementById('lib-count').textContent = `${libList.length} 个题库`;
+
+    // ===== 渲染题库卡片 =====
+    async function renderLibraries() {
+      const libContainer = document.getElementById('library-list');
+      libContainer.innerHTML = '';
+
+      for (const lib of libList) {
+        const questions = await QuizEngine.loadLibrary(lib.id);
+        const count = questions ? questions.length : 0;
+        const wrong = QuizEngine.getWrongQuestions(lib.id);
+        const wrongCount = wrong.length;
+        const correctCount = count - wrongCount;
+        const accuracy = count > 0 ? Math.round((correctCount / count) * 100) : 0;
+
+        const card = document.createElement('div');
+        card.className = 'gh-repo-card' + (lib.custom ? ' custom' : '');
+        const checkSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+        const crossSvg = wrongCount > 0 ? '<span style="color:var(--danger);display:inline-flex;align-items:center;gap:2px"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> ' + wrongCount + '</span>' : '';
+
+        card.innerHTML = `
+          <div class="gh-repo-title">
+            <span>${lib.title}</span>
+            ${lib.custom ? '<span class="gh-badge custom">自定义</span>' : ''}
+            ${lib.custom ? '<button class="gh-btn-icon" data-id="' + lib.id + '" data-action="delete" title="删除题库">✕</button>' : ''}
+          </div>
+          <div class="gh-repo-desc">${lib.desc || ''}</div>
+          <div class="gh-repo-meta">
+            <span class="lang"><span class="dot" style="background:${lib.color}"></span> ${count} 题</span>
+            <span style="display:inline-flex;align-items:center;gap:3px">${checkSvg} ${accuracy}%</span>
+            ${crossSvg}
+          </div>
+        `;
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.gh-btn-icon')) return;
+          window.location.href = `quiz.html?lib=${lib.id}`;
+        });
+        libContainer.appendChild(card);
+      }
+
+      libContainer.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-action="delete"]');
+        if (!btn) return;
+        const id = btn.dataset.id;
+        if (confirm('确定删除这个自定义题库吗？（错题记录也会清除）')) {
+          QuizEngine.deleteCustomLibrary(id);
+          QuizEngine.clearWrongQuestions(id);
+          location.reload();
+        }
+      });
+      
+      lucide.createIcons();
+    }
+
+    await renderLibraries();
+
+    // ===== 计算全局统计 =====
+    let totalQuestions = 0;
+    let totalCorrect = 0;
+    const totalWrong = QuizEngine.getTotalWrongCount();
+
+    for (const lib of libList) {
+      const stats = QuizEngine.computeStats(lib.id);
+      totalQuestions += stats.totalQuestions;
+      totalCorrect += stats.correctCount;
+    }
+    const globalAccuracy = totalQuestions > 0
+      ? Math.round((totalCorrect / totalQuestions) * 100)
+      : 0;
+
+    // 连续天数
+    const heatmapData = QuizEngine.getHeatmapData();
+    const dates = Object.keys(heatmapData).sort().reverse();
+    let streak = 0;
+    const today = new Date().toISOString().split('T')[0];
+    let checkDate = new Date(today);
+    for (const dateStr of dates) {
+      const d = new Date(dateStr + 'T00:00:00');
+      if (d.toISOString().split('T')[0] === checkDate.toISOString().split('T')[0]) {
+        streak++;
+        checkDate.setDate(checkDate.getDate() - 1);
+      }
+    }
+
+    document.getElementById('stat-total').textContent = totalQuestions;
+    document.getElementById('stat-accuracy').textContent = globalAccuracy + '%';
+    document.getElementById('stat-streak').textContent = streak;
+    document.getElementById('stat-wrong').textContent = totalWrong;
+
+    // ===== 渲染热力图 =====
+    function renderHeatmap(libName) {
+      const container = document.getElementById('heatmap-container');
+      const allData = QuizEngine.getHeatmapData();
+      const hasData = Object.keys(allData).length > 0;
+
+      if (!hasData) {
+        container.innerHTML = '<div class="gh-heatmap-empty"><div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div>暂无学习记录<br><span style="font-size:11px;color:var(--text-muted)">开始答题后将自动记录</span></div>';
+        return;
+      }
+
+      const { grid, monthLabels } = QuizEngine.buildHeatmapGrid(libName, 26);
+      if (!grid || !grid[0] || grid[0].length === 0) {
+        container.innerHTML = '<div class="gh-heatmap-empty">暂无数据</div>';
+        return;
+      }
+
+      let html = '<div class="gh-heatmap-month-labels">';
+      let labelPos = 0;
+      for (const ml of monthLabels) {
+        const offset = ml.week - labelPos;
+        html += '<span style="width:' + (offset * 15 + 12) + 'px;text-align:left;">' + ml.label + '</span>';
+        labelPos = ml.week + 1;
+      }
+      html += '</div>';
+
+      html += '<div class="gh-heatmap">';
+      for (let col = 0; col < grid[0].length; col++) {
+        html += '<div class="gh-heatmap-col">';
+        for (let row = 0; row < 7; row++) {
+          const cell = grid[row][col];
+          html += '<div class="gh-heatmap-cell" data-level="' + cell.level + '" title="' + cell.date + ': ' + cell.count + ' 次学习"></div>';
+        }
+        html += '</div>';
+      }
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    renderHeatmap(null);
+
+    // ===== 渲染最近错题 =====
+    function renderWrongQuestions() {
+      const container = document.getElementById('wrong-container');
+      const allWrong = [];
+      for (const lib of libList) {
+        const w = QuizEngine.getWrongQuestions(lib.id);
+        w.forEach(q => {
+          allWrong.push({ ...q, lib: lib.title, libId: lib.id });
+        });
+      }
+      if (allWrong.length === 0) {
+        container.innerHTML = '<div class="gh-empty-state"><div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>暂无错题，继续保持！</div>';
+        return;
+      }
+      let html = '<ul class="gh-wrong-list">';
+      const recent = allWrong.slice(0, 5);
+      for (const q of recent) {
+        html += '<li class="gh-wrong-item"><div class="q">' + escapeHtml(q.question) + '</div><div class="meta"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> ' + q.lib + ' · 去复习 → <a href="quiz.html?lib=' + q.libId + '">' + q.lib + '</a></div></li>';
+      }
+      html += '</ul>';
+      if (allWrong.length > 5) {
+        html += '<div style="text-align:center;margin-top:8px;"><span class="gh-text-muted">还有 ' + (allWrong.length - 5) + ' 条错题...</span></div>';
+      }
+      container.innerHTML = html;
+    }
+
+    renderWrongQuestions();
+    lucide.createIcons();
+
+    // ===== 拖拽导入 =====
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      handleFiles(files);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+      fileInput.value = '';
+    });
+
+    async function handleFiles(files) {
+      for (const file of files) {
+        if (!file.name.endsWith('.json')) {
+          alert(`「${file.name}」不是 JSON 文件，已跳过。`);
+          continue;
+        }
+        try {
+          const text = await file.text();
+
+          // 1) 尝试解析为纯 JSON
+          let questions;
+          try {
+            questions = JSON.parse(text);
+          } catch (_) {
+            // 2) 解析失败 → 当作 JS 格式处理
+            // 去掉所有注释 // 和 /* */
+            let cleaned = text
+              .replace(/\/\/.*$/gm, '')     // 去掉 // 行注释
+              .replace(/\/\*[\s\S]*?\*\//g, '') // 去掉 /* */ 块注释
+              .replace(/^\s*(const|let|var)\s+\w+\s*=\s*/gm, '') // 去掉 const/let/var xxx =
+              .replace(/;\s*$/g, '')         // 去掉末尾分号
+              .replace(/,\s*([\]}])/g, '$1') // 去掉尾随逗号
+              .trim();
+            // 给所有对象键名加引号: {id:1 → {"id":1
+            // 但避免给字符串内部的加引号（简单启发：只在 { 或 , 后面紧跟的 word 加引号）
+            cleaned = cleaned.replace(/([{,]\s*)(\w+)(\s*:)/g, '$1"$2"$3');
+            // 如果还包着数组，再解一层
+            if (!cleaned.startsWith('[')) {
+              const start = cleaned.indexOf('[');
+              const end = cleaned.lastIndexOf(']');
+              if (start >= 0 && end > start) {
+                cleaned = cleaned.substring(start, end + 1);
+              }
+            }
+            questions = JSON.parse(cleaned);
+          }
+
+          if (!Array.isArray(questions) || questions.length === 0) {
+            alert(`「${file.name}」格式错误：需要是非空数组。`);
+            continue;
+          }
+
+          // 3) 标准化每个题目
+          const normalized = questions.map(normalizeQuestion);
+
+          // 4) 校验
+          const valid = normalized.every(q =>
+            q.id !== undefined && q.question && Array.isArray(q.options) && q.options.length >= 2 && typeof q.answer === 'number'
+          );
+          if (!valid) {
+            alert(`「${file.name}」格式不完整。请确保每个题目包含 id/question/options(≥2项)/answer。`);
+            continue;
+          }
+
+          // 5) 保存
+          const name = file.name.replace(/\.json$/i, '');
+          QuizEngine.saveCustomLibrary(name, normalized);
+          alert(`✅ 「${name}」导入成功！共 ${normalized.length} 题。`);
+          location.reload();
+        } catch (err) {
+          alert(`「${file.name}」解析失败：${err.message}\n\n文件内容看起来不是有效的 JSON 或 JS 数组格式。`);
+        }
+      }
+    }
+
+    // 标准化题目：字母答案 → 数字索引，补全缺失字段
+    function normalizeQuestion(q) {
+      const opt = q.options || [];
+      let ans = q.answer;
+
+      // 字母答案 → 数字
+      if (typeof ans === 'string' && /^[A-F]$/i.test(ans)) {
+        const letters = 'ABCDEF';
+        ans = letters.indexOf(ans.toUpperCase());
+      }
+      // 数字字符串 → 数字
+      if (typeof ans === 'string' && /^\d+$/.test(ans)) {
+        ans = parseInt(ans, 10);
+      }
+      // 越界保护
+      if (typeof ans !== 'number' || ans < 0 || ans >= opt.length) {
+        ans = 0;
+      }
+
+      return {
+        id: q.id,
+        question: q.question,
+        options: opt,
+        answer: ans
+      };
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+  })();
+  </script>
+</body>
+</html>

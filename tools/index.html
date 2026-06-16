@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工具集 — Haozi's Blog</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --accent-light: #eef2ff;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-hover: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    /* ===== Top Navigation Bar ===== */
+    .tools-nav {
+      background: #333333;
+      border-bottom: 1px solid #444444;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      flex-shrink: 0;
+      gap: 8px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .tools-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+
+    .tools-nav-brand .logo {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .tools-nav-brand .title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #e4e4e7;
+    }
+
+    .tools-nav-brand .subtitle {
+      font-size: 11px;
+      color: #a1a1aa;
+      font-weight: 500;
+    }
+
+    .tools-nav-tabs {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+      overflow-x: auto;
+    }
+
+    .tools-nav-tab {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #a1a1aa;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .tools-nav-tab:hover {
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+    }
+
+    .tools-nav-tab.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(79,70,229,0.25);
+    }
+
+    .tools-nav-tab .icon { font-size: 16px; }
+
+    .tools-nav-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #a1a1aa;
+      border: 1px solid #444444;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .tools-nav-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    /* ===== Tool Content Area ===== */
+    .tools-content {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-panel {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .tool-panel.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool-panel iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      flex: 1;
+    }
+
+    /* ===== Welcome / Loading State ===== */
+    .tool-panel-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .tool-panel-loading .spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 12px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 640px) {
+      .tools-nav {
+        padding: 0 12px;
+        height: 48px;
+        gap: 4px;
+      }
+      .tools-nav-brand { margin-right: 8px; }
+      .tools-nav-brand .logo { width: 28px; height: 28px; font-size: 14px; }
+      .tools-nav-brand .title { font-size: 13px; }
+      .tools-nav-brand .subtitle { display: none; }
+      .tools-nav-tab {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+      .tools-nav-tab .label-short { display: inline; }
+      .tools-nav-tab .label-long { display: none; }
+      .tools-nav-back { padding: 6px 10px; font-size: 12px; }
+      .tools-nav-back .back-text { display: none; }
+    }
+
+    @media (min-width: 641px) {
+      .tools-nav-tab .label-short { display: none; }
+      .tools-nav-tab .label-long { display: inline; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <nav class="tools-nav">
+    <div class="tools-nav-brand">
+      <div class="logo">🔧</div>
+      <div>
+        <div class="title">工具集</div>
+        <div class="subtitle">Tools Hub</div>
+      </div>
+    </div>
+
+    <div class="tools-nav-tabs">
+      <button class="tools-nav-tab active" data-tool="planner" onclick="switchTool('planner')">
+        <span class="icon">📅</span>
+        <span class="label-long">日程计划</span>
+        <span class="label-short">日程</span>
+      </button>
+      <button class="tools-nav-tab" data-tool="quiz" onclick="switchTool('quiz')">
+        <span class="icon">📚</span>
+        <span class="label-long">学习测验</span>
+        <span class="label-short">测验</span>
+      </button>
+    </div>
+
+    <a href="/" class="tools-nav-back">
+      <span>←</span>
+      <span class="back-text">返回博客</span>
+    </a>
+  </nav>
+
+  <!-- Tool Content Area -->
+  <div class="tools-content">
+    <!-- Planner Panel -->
+    <div class="tool-panel active" id="panel-planner">
+      <div class="tool-panel-loading" id="loading-planner">
+        <div class="spinner"></div>
+        <span>正在加载日程计划...</span>
+      </div>
+      <iframe src="planner.html" onload="document.getElementById('loading-planner').style.display='none'" title="逸程计划 - 日程管理"></iframe>
+    </div>
+
+    <!-- Quiz Panel -->
+    <div class="tool-panel" id="panel-quiz">
+      <div class="tool-panel-loading" id="loading-quiz">
+        <div class="spinner"></div>
+        <span>正在加载学习测验...</span>
+      </div>
+      <iframe src="quiz/index.html" onload="document.getElementById('loading-quiz').style.display='none'" title="学习测验系统"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function switchTool(toolName) {
+      // Update tab buttons
+      document.querySelectorAll('.tools-nav-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tool === toolName);
+      });
+
+      // Update panels
+      document.querySelectorAll('.tool-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      document.getElementById('panel-' + toolName).classList.add('active');
+
+      // Update URL hash
+      window.location.hash = toolName;
+    }
+
+    // Check URL hash on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && ['planner', 'quiz'].includes(hash)) {
+        switchTool(hash);
+      }
+    });
+  </script>
+</body>
+</html>
