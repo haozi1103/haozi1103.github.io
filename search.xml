@@ -494,37 +494,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </tags>
   </entry>
   <entry>
-    <title>UG NX12如何进行数控仿真？</title>
-    <url>/2026/06/11/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" alt="ugnx1"><br>
-UG NX12如何进行数控仿真？</p>
- <span id="more"></span>
-<p>数控车床</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221511401.png" alt="image-20260318221511286"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221633130.png" alt="image-20260318221633079"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318223143227.png" alt="image-20260318223143171"></p>
-<p>非切削参数里面修改<strong>逼近、退刀点</strong></p>
-<p>切削参数里面设置<strong>切削余量</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224403913.png" alt="image-20260318224403844"></p>
-<p>显示T0101的方法：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318230934810.png" alt="image-20260318230934759"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224620067.png" alt="image-20260318224620007"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224638708.png" alt="image-20260318224638679"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**我不能 100% 保证刀片“绝对不会崩”**（任何切断操作都有风险，尤其是你这个 Ø220 mm 切到 Ø60 mm 的大切深），但**用我下面调整后的参数 + 正确刀具，崩刀概率会降到非常低**（实际工厂里 95% 以上都不会崩）。</span><br><span class="line"></span><br><span class="line">我根据你的工件尺寸（大直径铝件）和 NX 12 的 Parting 操作，专门给你**最保守、最安全的参数**（比我之前推荐的还更保守）。</span><br><span class="line"></span><br><span class="line">### 1. 必须换一把“长 + 强”切断刀（这是防崩基础）</span><br><span class="line">- 刀片宽度：**3 mm**（不要用 4 mm，窄一点刚性更好）</span><br><span class="line">- 刀杆总长（Shank Length）：**至少 70–80 mm**（你之前那把太短了）</span><br><span class="line">- 刀片要求：**带断屑槽 + 涂层**（推荐 Kennametal N123 或 Sandvik CoroCut，铝专用等级）</span><br><span class="line">- NX 12 操作：在 Parting 操作里新建刀具 → Turning Tool → Parting Tool → 把长度改成 80 mm</span><br><span class="line"></span><br><span class="line">### 2. 最安全的 Parting 参数设置（直接复制）</span><br><span class="line">双击你的 PART_OFF 操作后，按下面填（这是防崩最关键的 3 个地方）：</span><br><span class="line"></span><br><span class="line">**Cut Parameters（切削参数）标签页**</span><br><span class="line">- Multiple Passes：**必须勾选**</span><br><span class="line">- Depth per Pass（每层切深）：**0.8 ~ 1.0 mm**（我现在给你降到 1 mm 以内，比之前更保守）</span><br><span class="line">- Stock（最终余量）：**0.3 mm**</span><br><span class="line">- Feed（进给）：**0.05 ~ 0.07 mm/rev**（非常慢，防止崩刃）</span><br><span class="line">- Speed（转速）：**1500 ~ 1800 rpm**（铝件不要太快）</span><br><span class="line"></span><br><span class="line">**Non-Cutting Moves（非切削移动）标签页**</span><br><span class="line">- Approach（进刀）：**Ramp**（斜进刀）</span><br><span class="line">- Retract（退刀）：</span><br><span class="line">  - Retract Distance：**X +12 mm**（先把刀从槽里拉出来）</span><br><span class="line">  - **必须先退 X，再退 Z**</span><br><span class="line">- Clearance Plane：**Z +100 mm**（抬得更高一点）</span><br><span class="line"></span><br><span class="line">**额外防崩开关**：</span><br><span class="line">- 在 Cut Parameters 里勾选 **Use Fixed Cycle** → 选 **G75**（自动 peck 退刀断屑，最防崩！）</span><br><span class="line"></span><br><span class="line">### 3. 额外两招几乎零崩刀（强烈建议做）</span><br><span class="line">**招式1（最推荐）**：先车一个**退刀槽**</span><br><span class="line">- 在切断位置前方 3 mm 处，先做一个 Groove Turning 操作：</span><br><span class="line">  - 宽度 5 mm，深度 3 mm</span><br><span class="line">- 然后再做 Parting 操作，刀具直接进到这个槽里切，崩刀风险几乎为 0。</span><br><span class="line"></span><br><span class="line">**招式2**：中心前减速</span><br><span class="line">- 在切到直径 Ø80 mm 左右时，手动把进给降到 **0.03 mm/rev**（接近中心时切削力最大，最容易崩）</span><br><span class="line"></span><br><span class="line">### 4. 实际操作前的最后检查（必须做！）</span><br><span class="line">1. 生成刀路后 → 右键 **Verify → Machine Simulation**</span><br><span class="line">2. 勾选 Holder Collision + Fixture Collision</span><br><span class="line">3. 播放完整仿真：</span><br><span class="line">   - 看刀片是否一直保持 0.8–1.0 mm 每层切</span><br><span class="line">   - 看退刀是否“先拉 X 再抬 Z”</span><br><span class="line">   - 如果全程无红色报警 → 基本安全</span><br><span class="line"></span><br><span class="line">### 总结一句话</span><br><span class="line">**用上面参数（每层 ≤1.0 mm + 先退 X + G75 + 长刀杆），刀片崩的概率极低**（我教过的学生用这个方法切 Ø200+ 铝件都没崩过）。</span><br><span class="line"></span><br><span class="line">**现在你直接做**：</span><br><span class="line">1. 把切深改成 **0.8–1.0 mm**</span><br><span class="line">2. 进给改成 **0.05–0.07 mm/rev**</span><br><span class="line">3. 新建一把 80 mm 长的切断刀</span><br><span class="line">4. 勾选 G75 + 生成刀路</span><br><span class="line">5. 仿真一次</span><br><span class="line"></span><br><span class="line">做完**仿真截图**发我（尤其是刀路播放到中心位置的时候），我帮你最后看一眼是否安全。  </span><br><span class="line">或者你现在就把当前 Depth per Pass 和 Feed 值告诉我，我再给你精确数字。</span><br><span class="line"></span><br><span class="line">放心，按这个保守参数走，刀片不会轻易崩的！  </span><br><span class="line">继续操作，有问题随时截图问我。</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260319213946556.png" alt="image-20260319213946453"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260320134843281.png" alt="image-20260320134843073"></p>
-<p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
-<p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
-<p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
-]]></content>
-      <categories>
-        <category>How-To</category>
-      </categories>
-      <tags>
-        <tag>ug-nx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora怎么用的顺手？</title>
     <url>/2025/08/19/Typora%E6%80%8E%E4%B9%88%E7%94%A8%E7%9A%84%E9%A1%BA%E6%89%8B%EF%BC%9F/</url>
     <content><![CDATA[<p>工欲善其事，必先利其器嘛。想要好一个软件，得用顺眼了，用方便了</p>
@@ -696,6 +665,37 @@ UG NX12如何进行数控仿真？</p>
       </categories>
   </entry>
   <entry>
+    <title>UG NX12如何进行数控仿真？</title>
+    <url>/2026/06/11/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" alt="ugnx1"><br>
+UG NX12如何进行数控仿真？</p>
+ <span id="more"></span>
+<p>数控车床</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221511401.png" alt="image-20260318221511286"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221633130.png" alt="image-20260318221633079"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318223143227.png" alt="image-20260318223143171"></p>
+<p>非切削参数里面修改<strong>逼近、退刀点</strong></p>
+<p>切削参数里面设置<strong>切削余量</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224403913.png" alt="image-20260318224403844"></p>
+<p>显示T0101的方法：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318230934810.png" alt="image-20260318230934759"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224620067.png" alt="image-20260318224620007"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224638708.png" alt="image-20260318224638679"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**我不能 100% 保证刀片“绝对不会崩”**（任何切断操作都有风险，尤其是你这个 Ø220 mm 切到 Ø60 mm 的大切深），但**用我下面调整后的参数 + 正确刀具，崩刀概率会降到非常低**（实际工厂里 95% 以上都不会崩）。</span><br><span class="line"></span><br><span class="line">我根据你的工件尺寸（大直径铝件）和 NX 12 的 Parting 操作，专门给你**最保守、最安全的参数**（比我之前推荐的还更保守）。</span><br><span class="line"></span><br><span class="line">### 1. 必须换一把“长 + 强”切断刀（这是防崩基础）</span><br><span class="line">- 刀片宽度：**3 mm**（不要用 4 mm，窄一点刚性更好）</span><br><span class="line">- 刀杆总长（Shank Length）：**至少 70–80 mm**（你之前那把太短了）</span><br><span class="line">- 刀片要求：**带断屑槽 + 涂层**（推荐 Kennametal N123 或 Sandvik CoroCut，铝专用等级）</span><br><span class="line">- NX 12 操作：在 Parting 操作里新建刀具 → Turning Tool → Parting Tool → 把长度改成 80 mm</span><br><span class="line"></span><br><span class="line">### 2. 最安全的 Parting 参数设置（直接复制）</span><br><span class="line">双击你的 PART_OFF 操作后，按下面填（这是防崩最关键的 3 个地方）：</span><br><span class="line"></span><br><span class="line">**Cut Parameters（切削参数）标签页**</span><br><span class="line">- Multiple Passes：**必须勾选**</span><br><span class="line">- Depth per Pass（每层切深）：**0.8 ~ 1.0 mm**（我现在给你降到 1 mm 以内，比之前更保守）</span><br><span class="line">- Stock（最终余量）：**0.3 mm**</span><br><span class="line">- Feed（进给）：**0.05 ~ 0.07 mm/rev**（非常慢，防止崩刃）</span><br><span class="line">- Speed（转速）：**1500 ~ 1800 rpm**（铝件不要太快）</span><br><span class="line"></span><br><span class="line">**Non-Cutting Moves（非切削移动）标签页**</span><br><span class="line">- Approach（进刀）：**Ramp**（斜进刀）</span><br><span class="line">- Retract（退刀）：</span><br><span class="line">  - Retract Distance：**X +12 mm**（先把刀从槽里拉出来）</span><br><span class="line">  - **必须先退 X，再退 Z**</span><br><span class="line">- Clearance Plane：**Z +100 mm**（抬得更高一点）</span><br><span class="line"></span><br><span class="line">**额外防崩开关**：</span><br><span class="line">- 在 Cut Parameters 里勾选 **Use Fixed Cycle** → 选 **G75**（自动 peck 退刀断屑，最防崩！）</span><br><span class="line"></span><br><span class="line">### 3. 额外两招几乎零崩刀（强烈建议做）</span><br><span class="line">**招式1（最推荐）**：先车一个**退刀槽**</span><br><span class="line">- 在切断位置前方 3 mm 处，先做一个 Groove Turning 操作：</span><br><span class="line">  - 宽度 5 mm，深度 3 mm</span><br><span class="line">- 然后再做 Parting 操作，刀具直接进到这个槽里切，崩刀风险几乎为 0。</span><br><span class="line"></span><br><span class="line">**招式2**：中心前减速</span><br><span class="line">- 在切到直径 Ø80 mm 左右时，手动把进给降到 **0.03 mm/rev**（接近中心时切削力最大，最容易崩）</span><br><span class="line"></span><br><span class="line">### 4. 实际操作前的最后检查（必须做！）</span><br><span class="line">1. 生成刀路后 → 右键 **Verify → Machine Simulation**</span><br><span class="line">2. 勾选 Holder Collision + Fixture Collision</span><br><span class="line">3. 播放完整仿真：</span><br><span class="line">   - 看刀片是否一直保持 0.8–1.0 mm 每层切</span><br><span class="line">   - 看退刀是否“先拉 X 再抬 Z”</span><br><span class="line">   - 如果全程无红色报警 → 基本安全</span><br><span class="line"></span><br><span class="line">### 总结一句话</span><br><span class="line">**用上面参数（每层 ≤1.0 mm + 先退 X + G75 + 长刀杆），刀片崩的概率极低**（我教过的学生用这个方法切 Ø200+ 铝件都没崩过）。</span><br><span class="line"></span><br><span class="line">**现在你直接做**：</span><br><span class="line">1. 把切深改成 **0.8–1.0 mm**</span><br><span class="line">2. 进给改成 **0.05–0.07 mm/rev**</span><br><span class="line">3. 新建一把 80 mm 长的切断刀</span><br><span class="line">4. 勾选 G75 + 生成刀路</span><br><span class="line">5. 仿真一次</span><br><span class="line"></span><br><span class="line">做完**仿真截图**发我（尤其是刀路播放到中心位置的时候），我帮你最后看一眼是否安全。  </span><br><span class="line">或者你现在就把当前 Depth per Pass 和 Feed 值告诉我，我再给你精确数字。</span><br><span class="line"></span><br><span class="line">放心，按这个保守参数走，刀片不会轻易崩的！  </span><br><span class="line">继续操作，有问题随时截图问我。</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260319213946556.png" alt="image-20260319213946453"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260320134843281.png" alt="image-20260320134843073"></p>
+<p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
+<p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
+<p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+      <tags>
+        <tag>ug-nx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>UG NX12怎么去安装？</title>
     <url>/2026/06/11/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318140642944.png" alt="image-20260318140642944"></p>
@@ -717,26 +717,6 @@ UG NX12如何进行数控仿真？</p>
       </categories>
       <tags>
         <tag>ug-nx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>c盘怎么去清理？</title>
-    <url>/2026/06/11/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/</url>
-    <content><![CDATA[<p>c盘怎么去清理？</p>
-<span id="more"></span>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327173351384.png" alt="image-20260327173351162"></p>
-<h1>清理缓存文件</h1>
-<p>这一步网上有很多教程，可以去搜搜</p>
-<h1>wx文件管理</h1>
-<p>可以转移一下微信文件位置，不要放在c盘目录下</p>
-<h1>spaceniffer</h1>
-<p>使用spaceniffer看电脑文件分布，决定删除什么文件。在尽量不要删除系统文件的前提下，删掉我们自己下载的东西</p>
-]]></content>
-      <categories>
-        <category>How-To</category>
-      </categories>
-      <tags>
-        <tag>windows</tag>
       </tags>
   </entry>
   <entry>
@@ -834,6 +814,26 @@ UG NX12如何进行数控仿真？</p>
       </tags>
   </entry>
   <entry>
+    <title>c盘怎么去清理？</title>
+    <url>/2026/06/11/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/</url>
+    <content><![CDATA[<p>c盘怎么去清理？</p>
+<span id="more"></span>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327173351384.png" alt="image-20260327173351162"></p>
+<h1>清理缓存文件</h1>
+<p>这一步网上有很多教程，可以去搜搜</p>
+<h1>wx文件管理</h1>
+<p>可以转移一下微信文件位置，不要放在c盘目录下</p>
+<h1>spaceniffer</h1>
+<p>使用spaceniffer看电脑文件分布，决定删除什么文件。在尽量不要删除系统文件的前提下，删掉我们自己下载的东西</p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+      <tags>
+        <tag>windows</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>jellyfin如何设置优雅的刮削？</title>
     <url>/2026/06/11/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403145425463.png" alt="image-20260403145425463"></p>
@@ -919,143 +919,20 @@ UG NX12如何进行数控仿真？</p>
       </tags>
   </entry>
   <entry>
-    <title>怎么去优雅的转pt种？</title>
-    <url>/2026/06/11/pt/</url>
-    <content><![CDATA[<h1><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944"></h1>
+    <title>swiftfin如何设置优雅的刮削？</title>
+    <url>/2026/06/17/no_swiftfin%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%AD%97%E5%B9%95%E5%85%A8%E5%B1%8F%E7%9C%8B%E4%B8%8D%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>询问grok，发现把字幕烧录进视频文件是一个似乎可行的方案</p>
 <span id="more"></span>
-<h2 id="北洋园pt自查">北洋园pt自查</h2>
-<h3 id="电影">电影</h3>
-<ul>
-<li>
-<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
-</li>
-<li>
-<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
-</li>
-</ul>
-<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
-<ul>
-<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
-</ul>
-<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
-<ul>
-<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
-</ul>
-<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
-<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
-<ul>
-<li>
-<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
-</li>
-<li>
-<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
-</li>
-<li>
-<p>[ ] 我确定站内没有更好的源</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
-</li>
-</ul>
-<h2 id="btschool自查">btschool自查</h2>
-<ul>
-<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
-<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
-</ul>
-<h1>发种</h1>
-<h2 id="手动发种">手动发种</h2>
-<h3 id="代码操作">代码操作</h3>
-<p><strong>引用内容</strong></p>
-<p>[quote]我是引用内容[/quote]</p>
-<p><strong>媒体信息隐藏显示</strong></p>
-<p>[hide=Mediainfo/媒体信息]</p>
-<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
-<p>[/hide]</p>
-<p><strong>图片显示</strong></p>
-<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
-<h3 id="不同站点">不同站点</h3>
-<h4 id="北洋园pt">北洋园pt</h4>
-<p><strong>基本步骤是：</strong></p>
-<ol>
-<li>从其他站点下载你想要转的资源</li>
-<li>填写发布页面（用引用id简单一点）</li>
-<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
-</ol>
-<p><strong>填写发布页面：</strong></p>
-<p>在上面那一行里面，点击候选</p>
-<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
-<p>如果要用引用种子id的话，这样去找：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
-<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
-<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
-<p>提交成功以后你会跳转到一个界面，显示：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
-<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
-<p>进入utorrent，选择添加种子文件</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
-<p>显示这样就是做种成功了</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
-<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
-<h4 id="btschool-52pt">btschool/52pt</h4>
-<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
-<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
-<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
-<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
-<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
-<h4 id="mt-ttg">mt/ttg</h4>
-<p>这两个都是大站，估摸着发种不会那么简单</p>
-<h2 id="自动发种">自动发种</h2>
-<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
-<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
-<h3 id="安装步骤">安装步骤</h3>
-<ol>
-<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
-<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
-</ol>
-<h3 id="使用流程">使用流程</h3>
-<ol>
-<li>
-<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
-</li>
-<li>
-<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
-<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
-</li>
-<li>
-<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
-</li>
-<li>
-<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
-</li>
-</ol>
-<h3 id="遇到的问题">遇到的问题</h3>
-<ol>
-<li>
-<p>如果发现转过去的图片无法显示怎么办？</p>
-<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
-</li>
-</ol>
-<h3 id="写在最后">写在最后</h3>
-<ul>
-<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
-<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
-<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
-<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
-</ul>
+<p>问题的本质是我们视频缩放放大以后，字幕并没有跟随缩放以后的safe area，自己跑到框的外面去了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155304758.png" alt="image-20260405155304758"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155316101.png" alt="image-20260405155316101"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155333781.png" alt="image-20260405155333781"></p>
 ]]></content>
       <categories>
         <category>How-To</category>
       </categories>
       <tags>
-        <tag>pt</tag>
+        <tag>jellyfin</tag>
       </tags>
   </entry>
   <entry>
@@ -1446,37 +1323,144 @@ UG NX12如何进行数控仿真？</p>
       </tags>
   </entry>
   <entry>
-    <title>swiftfin如何设置优雅的刮削？</title>
-    <url>/2026/06/17/no_swiftfin%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%AD%97%E5%B9%95%E5%85%A8%E5%B1%8F%E7%9C%8B%E4%B8%8D%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>询问grok，发现把字幕烧录进视频文件是一个似乎可行的方案</p>
+    <title>怎么去优雅的转pt种？</title>
+    <url>/2026/06/11/pt/</url>
+    <content><![CDATA[<h1><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944"></h1>
 <span id="more"></span>
-<p>问题的本质是我们视频缩放放大以后，字幕并没有跟随缩放以后的safe area，自己跑到框的外面去了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155304758.png" alt="image-20260405155304758"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155316101.png" alt="image-20260405155316101"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155333781.png" alt="image-20260405155333781"></p>
+<h2 id="北洋园pt自查">北洋园pt自查</h2>
+<h3 id="电影">电影</h3>
+<ul>
+<li>
+<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
+</li>
+<li>
+<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
+</li>
+</ul>
+<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
+<ul>
+<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
+</ul>
+<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
+<ul>
+<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
+</ul>
+<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
+<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
+<ul>
+<li>
+<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
+</li>
+<li>
+<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
+</li>
+<li>
+<p>[ ] 我确定站内没有更好的源</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
+</li>
+</ul>
+<h2 id="btschool自查">btschool自查</h2>
+<ul>
+<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
+<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
+</ul>
+<h1>发种</h1>
+<h2 id="手动发种">手动发种</h2>
+<h3 id="代码操作">代码操作</h3>
+<p><strong>引用内容</strong></p>
+<p>[quote]我是引用内容[/quote]</p>
+<p><strong>媒体信息隐藏显示</strong></p>
+<p>[hide=Mediainfo/媒体信息]</p>
+<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
+<p>[/hide]</p>
+<p><strong>图片显示</strong></p>
+<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
+<h3 id="不同站点">不同站点</h3>
+<h4 id="北洋园pt">北洋园pt</h4>
+<p><strong>基本步骤是：</strong></p>
+<ol>
+<li>从其他站点下载你想要转的资源</li>
+<li>填写发布页面（用引用id简单一点）</li>
+<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
+</ol>
+<p><strong>填写发布页面：</strong></p>
+<p>在上面那一行里面，点击候选</p>
+<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
+<p>如果要用引用种子id的话，这样去找：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
+<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
+<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
+<p>提交成功以后你会跳转到一个界面，显示：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
+<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
+<p>进入utorrent，选择添加种子文件</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
+<p>显示这样就是做种成功了</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
+<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
+<h4 id="btschool-52pt">btschool/52pt</h4>
+<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
+<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
+<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
+<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
+<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
+<h4 id="mt-ttg">mt/ttg</h4>
+<p>这两个都是大站，估摸着发种不会那么简单</p>
+<h2 id="自动发种">自动发种</h2>
+<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
+<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
+<h3 id="安装步骤">安装步骤</h3>
+<ol>
+<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
+<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
+</ol>
+<h3 id="使用流程">使用流程</h3>
+<ol>
+<li>
+<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
+</li>
+<li>
+<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
+<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
+</li>
+</ol>
+<h3 id="遇到的问题">遇到的问题</h3>
+<ol>
+<li>
+<p>如果发现转过去的图片无法显示怎么办？</p>
+<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
+</li>
+</ol>
+<h3 id="写在最后">写在最后</h3>
+<ul>
+<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
+<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
+<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
+<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
+</ul>
 ]]></content>
       <categories>
         <category>How-To</category>
       </categories>
       <tags>
-        <tag>jellyfin</tag>
+        <tag>pt</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>《Soul》</title>
-    <url>/2026/06/11/%E3%80%8ASoul%E3%80%8B/</url>
-    <content><![CDATA[<p>创作的灵感有点枯竭，得去豆瓣上看一看别人是怎么看的。</p>
-<span id="more"></span>
-<h2 id="22">22</h2>
-<p>22，教会了gardner怎么去爱，怎么去悲，怎么去活。</p>
-<h2 id="活在当下">活在当下</h2>
-<p>抚摸每一阵风的轻盈，驻足每一片沿途的风景，珍惜眼前的人和事情，为树叶飘落而悲，为世间冷暖而泣…</p>
-<p>正如苏轼的《赤壁赋》：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">惟江上之清风，与山间之明月</span><br><span class="line">耳得之而为声，目遇之而成色</span><br><span class="line">取之无禁，用之不竭</span><br><span class="line">是造物者之无尽藏也。</span><br><span class="line">而吾与子之所共适</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Movie &amp; TV</category>
-      </categories>
   </entry>
   <entry>
     <title>win10电脑如何拆分硬盘空间给另一个硬盘？</title>
@@ -1519,6 +1503,22 @@ UG NX12如何进行数控仿真？</p>
       <tags>
         <tag>disk-cleanup</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>《Soul》</title>
+    <url>/2026/06/11/%E3%80%8ASoul%E3%80%8B/</url>
+    <content><![CDATA[<p>创作的灵感有点枯竭，得去豆瓣上看一看别人是怎么看的。</p>
+<span id="more"></span>
+<h2 id="22">22</h2>
+<p>22，教会了gardner怎么去爱，怎么去悲，怎么去活。</p>
+<h2 id="活在当下">活在当下</h2>
+<p>抚摸每一阵风的轻盈，驻足每一片沿途的风景，珍惜眼前的人和事情，为树叶飘落而悲，为世间冷暖而泣…</p>
+<p>正如苏轼的《赤壁赋》：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">惟江上之清风，与山间之明月</span><br><span class="line">耳得之而为声，目遇之而成色</span><br><span class="line">取之无禁，用之不竭</span><br><span class="line">是造物者之无尽藏也。</span><br><span class="line">而吾与子之所共适</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Movie &amp; TV</category>
+      </categories>
   </entry>
   <entry>
     <title>彩虹之后，我在想人间</title>
@@ -1587,6 +1587,53 @@ UG NX12如何进行数控仿真？</p>
 <p><strong>经不住似水流年，逃不过此间少年。彩云易散琉璃脆，水仙已乘鲤鱼去…</strong></p>
 <p><strong>我把校园卡丢了，我把那个女孩丢了，我把至亲丢了。我再也找不到他们，就连找个影子，都显得那么徒劳…</strong></p>
 <p>听不见了，听 不 见 了，听  不  见  了…</p>
+]]></content>
+      <categories>
+        <category>Movie &amp; TV</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>《消失的女孩》：Amy复仇记</title>
+    <url>/2025/08/21/%E3%80%8A%E6%B6%88%E5%A4%B1%E7%9A%84%E5%A5%B3%E5%AD%A9%E3%80%8B/</url>
+    <content><![CDATA[<p>不要忘记，Amazing Amy其实从来都没有真实存在过</p>
+<span id="more"></span>
+<h2 id="感受">感受</h2>
+<p>看完这部电影，最大的感受就是恐怖，如果我是Nick,我会和他一样抓狂，会和他一样去问质问：你为什么要死缠着我？</p>
+<p><strong>恐怖的地方不在于最后死了谁，而在于最后谁也没死。</strong></p>
+<p>Nick最后的反问：我们互相折磨，互相控制，有什么意义？</p>
+<p>Amy是这样回答的：这就是婚姻。</p>
+<p><strong>最后，Nick对于这段婚姻没有任何办法，在聚光灯下，在媒体塑造的国民爱神——Amy面前，他必须维持这种虚伪的关系，他，别无选择。</strong></p>
+<p>Amy，其实她动了很多次“自杀”的念头，但是都没有执行，就是因为她不想死，控制欲极强的她，还是想看到自己的丈夫变成自己理想的模样，她不愿意接受自己婚姻失败的现实。影片中她在看到Nick接受电视台采访的时候，眼神发了光，改变了主意:动了杀心，想要干掉眼前呆傻的富二代（Desi挺惨的，惹谁了呜呜呜）。<strong>说Amy是世界上最精明的女人也不为过，但其实也是最愚蠢的女人。</strong></p>
+<h2 id="猫">猫</h2>
+<p>影片中多次给了一只橘猫镜头，下面这个博主的解读很有意思:</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">就在观影前一天我看了一个帖，大意是说为什么你养的猫没有把你吃掉，主要是因为你对她来说有点太大了，吃起来不是很方便。</span><br><span class="line"></span><br><span class="line">你看Amy的眼神就知道为什么会提到猫。</span><br><span class="line"></span><br><span class="line">关于猫的另外一点事实是，人类总是认为自己豢养了猫，但在猫心中，她才是这段关系的主人，被驯服且豢养的那个人是你。</span><br><span class="line"></span><br><span class="line">只因为她以乖巧的样子示人，看上去精致柔弱美丽可爱，就忘记她是只猫，忘记她要做一段关系的主人，忘记她有操控一切的欲望与实力。</span><br><span class="line"></span><br><span class="line">男人就是这么愚蠢，永远也学不会。</span><br></pre></td></tr></table></figure>
+<p><a href="https://movie.douban.com/review/7305838/">从未真正存在过的Amazing Amy（消失的爱人）影评</a></p>
+<h2 id="病蔷薇">病蔷薇</h2>
+<p>Amy是一个很有才华、学历很高、聪明绝顶的作家，她很爱玩解谜游戏，她塑造了一个故事中的“完美的她”，“她”无论做什么都先自己一步，比自己先打上排球校队，比自己先“虚拟结婚”等等。<strong>在Amy的眼中，Nick不过是自己小说中的一个主演，至于你怎么演，得全听我这个编剧。</strong></p>
+<p><strong>至于Desi的死，也根本不意外</strong>，Desi的严密布防的监控，触碰到了Amy的逆鳞，让控制欲爆棚的她感到了被他人控制的窒息。Desi的死，虽然有点可惜，但是既然碰到了Amy，也是必然的结果。</p>
+<p><strong>Amy的这种人格缺陷和变态倾向，不是没有原因，最大的原因就是父母</strong>，父母从小就榨取剽窃Amy的童年，把女儿没有当做是一个独立的、有精神属性的人，而是把她当成了一个具有社会影响力的物品。在女儿失踪以后的第一次新闻发布会上，父母依然端着童书的书架子，做着体面而不失煽情的演讲：神奇的Amy伴随着数以万计的美国孩子一起长大，我们大家需要帮助，帮助我没找到她。就连信息发布的网址都含有“Amazing-Amy”的元素。</p>
+<p><strong>Amy的控制欲，是极度完美主义下的产物。</strong></p>
+<p><a href="https://movie.douban.com/review/7246889/">病蔷薇（消失的爱人）影评</a></p>
+<h2 id="社会舆论">社会舆论</h2>
+<p>Amy很坏，懂得利用社会舆论来转移矛盾，本来这只是一个丈夫的出轨，但Amy的强烈控制欲和破坏欲可不会善罢甘休。她很机灵，伪造了自己怀孕的故事，伪造了丈夫杀害自己现场，伪造了自己弱者的身份，博得了社会大众的同情，而社会大众，往往更倾向于相信弱者所阐述即为事实。</p>
+<p><strong>千夫所指，皆为Nick。</strong></p>
+<p>而Nick的律师很有头脑，认为他应该主动去澄清自己出轨的事实，塑造自己“好丈夫”，浪子回头的社会形象。</p>
+<p><strong>也正是舆论，让Nick的风评有了好转。</strong></p>
+<p>舆论这个东西啊，既能覆舟，亦能载舟。</p>
+<h2 id="袍和虱子">袍和虱子</h2>
+<p>影片的最后是和开头一样的镜头（很像一只猫有没有？）：</p>
+<p><img src="/images/xsdnh2.png" alt=""></p>
+<p><img src="/images/xsdnh3.png" alt=""></p>
+<p><img src="/images/xsdnh4.png" alt=""></p>
+<p><img src="/images/xsdnh5.png" alt=""></p>
+<p>婚姻里最重要的问题：“你在想什么”、“你感觉如何”、“我们都对彼此做了些什么”。</p>
+<p><strong>能搞清楚这三个问题，婚姻便不至于此</strong>。影片中的Amy就是因为看到了Nick外出幽会，心里埋藏的怨恨便一下子爆发，邪恶的计划在心里萌生。Nick也是从自己的视角去看待Amy，认为是她一直不想要孩子。</p>
+<p>婚姻啊，各执一词，对伴侣心里想的、对对方做的妄加揣测，是很难延续的。</p>
+<p><strong>有什么事，往开了说嘛。</strong></p>
+<p>张爱玲说过“生命是一袭华美的袍，里面爬满了虱子”，这句话其实并不是说婚姻的，出自于张爱玲18岁的散文作品（真厉害，十八岁说得出这么有深意的话），但用来形容婚姻也不错：婚姻是一袭华美的袍，这是面子；爬满了虱子，这是里子。</p>
+<p><strong>婚姻的过程中少不了矛盾和纠纷，完美的伴侣是绝对不存在的</strong>,Amy在电影中的这句话“人在经济状况很糟糕的时候，往往会暴露出最脆弱的软肋”就概括的很精炼，Amy和Nick之间的矛盾就是在他们双双失业、婆婆乳腺癌四期那时激发的。</p>
+<p><strong>婚姻，是不可能没有虱子的，有虱子，我们就把它抓掉嘛。</strong></p>
+<p>总的来说，《消失的爱人》是一部很深刻的反映了婚姻问题的电影，很好的刻画了控制欲过强的变态人格。当然，这些问题不是恐婚不婚的借口，婚姻没有错，有错的是人，正如我上面说的那样：<strong>婚姻是不可能没有虱子的，有虱子，我们就把他抓掉嘛。</strong></p>
 ]]></content>
       <categories>
         <category>Movie &amp; TV</category>
@@ -1684,53 +1731,6 @@ UG NX12如何进行数控仿真？</p>
       </categories>
   </entry>
   <entry>
-    <title>《消失的女孩》：Amy复仇记</title>
-    <url>/2025/08/21/%E3%80%8A%E6%B6%88%E5%A4%B1%E7%9A%84%E5%A5%B3%E5%AD%A9%E3%80%8B/</url>
-    <content><![CDATA[<p>不要忘记，Amazing Amy其实从来都没有真实存在过</p>
-<span id="more"></span>
-<h2 id="感受">感受</h2>
-<p>看完这部电影，最大的感受就是恐怖，如果我是Nick,我会和他一样抓狂，会和他一样去问质问：你为什么要死缠着我？</p>
-<p><strong>恐怖的地方不在于最后死了谁，而在于最后谁也没死。</strong></p>
-<p>Nick最后的反问：我们互相折磨，互相控制，有什么意义？</p>
-<p>Amy是这样回答的：这就是婚姻。</p>
-<p><strong>最后，Nick对于这段婚姻没有任何办法，在聚光灯下，在媒体塑造的国民爱神——Amy面前，他必须维持这种虚伪的关系，他，别无选择。</strong></p>
-<p>Amy，其实她动了很多次“自杀”的念头，但是都没有执行，就是因为她不想死，控制欲极强的她，还是想看到自己的丈夫变成自己理想的模样，她不愿意接受自己婚姻失败的现实。影片中她在看到Nick接受电视台采访的时候，眼神发了光，改变了主意:动了杀心，想要干掉眼前呆傻的富二代（Desi挺惨的，惹谁了呜呜呜）。<strong>说Amy是世界上最精明的女人也不为过，但其实也是最愚蠢的女人。</strong></p>
-<h2 id="猫">猫</h2>
-<p>影片中多次给了一只橘猫镜头，下面这个博主的解读很有意思:</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">就在观影前一天我看了一个帖，大意是说为什么你养的猫没有把你吃掉，主要是因为你对她来说有点太大了，吃起来不是很方便。</span><br><span class="line"></span><br><span class="line">你看Amy的眼神就知道为什么会提到猫。</span><br><span class="line"></span><br><span class="line">关于猫的另外一点事实是，人类总是认为自己豢养了猫，但在猫心中，她才是这段关系的主人，被驯服且豢养的那个人是你。</span><br><span class="line"></span><br><span class="line">只因为她以乖巧的样子示人，看上去精致柔弱美丽可爱，就忘记她是只猫，忘记她要做一段关系的主人，忘记她有操控一切的欲望与实力。</span><br><span class="line"></span><br><span class="line">男人就是这么愚蠢，永远也学不会。</span><br></pre></td></tr></table></figure>
-<p><a href="https://movie.douban.com/review/7305838/">从未真正存在过的Amazing Amy（消失的爱人）影评</a></p>
-<h2 id="病蔷薇">病蔷薇</h2>
-<p>Amy是一个很有才华、学历很高、聪明绝顶的作家，她很爱玩解谜游戏，她塑造了一个故事中的“完美的她”，“她”无论做什么都先自己一步，比自己先打上排球校队，比自己先“虚拟结婚”等等。<strong>在Amy的眼中，Nick不过是自己小说中的一个主演，至于你怎么演，得全听我这个编剧。</strong></p>
-<p><strong>至于Desi的死，也根本不意外</strong>，Desi的严密布防的监控，触碰到了Amy的逆鳞，让控制欲爆棚的她感到了被他人控制的窒息。Desi的死，虽然有点可惜，但是既然碰到了Amy，也是必然的结果。</p>
-<p><strong>Amy的这种人格缺陷和变态倾向，不是没有原因，最大的原因就是父母</strong>，父母从小就榨取剽窃Amy的童年，把女儿没有当做是一个独立的、有精神属性的人，而是把她当成了一个具有社会影响力的物品。在女儿失踪以后的第一次新闻发布会上，父母依然端着童书的书架子，做着体面而不失煽情的演讲：神奇的Amy伴随着数以万计的美国孩子一起长大，我们大家需要帮助，帮助我没找到她。就连信息发布的网址都含有“Amazing-Amy”的元素。</p>
-<p><strong>Amy的控制欲，是极度完美主义下的产物。</strong></p>
-<p><a href="https://movie.douban.com/review/7246889/">病蔷薇（消失的爱人）影评</a></p>
-<h2 id="社会舆论">社会舆论</h2>
-<p>Amy很坏，懂得利用社会舆论来转移矛盾，本来这只是一个丈夫的出轨，但Amy的强烈控制欲和破坏欲可不会善罢甘休。她很机灵，伪造了自己怀孕的故事，伪造了丈夫杀害自己现场，伪造了自己弱者的身份，博得了社会大众的同情，而社会大众，往往更倾向于相信弱者所阐述即为事实。</p>
-<p><strong>千夫所指，皆为Nick。</strong></p>
-<p>而Nick的律师很有头脑，认为他应该主动去澄清自己出轨的事实，塑造自己“好丈夫”，浪子回头的社会形象。</p>
-<p><strong>也正是舆论，让Nick的风评有了好转。</strong></p>
-<p>舆论这个东西啊，既能覆舟，亦能载舟。</p>
-<h2 id="袍和虱子">袍和虱子</h2>
-<p>影片的最后是和开头一样的镜头（很像一只猫有没有？）：</p>
-<p><img src="/images/xsdnh2.png" alt=""></p>
-<p><img src="/images/xsdnh3.png" alt=""></p>
-<p><img src="/images/xsdnh4.png" alt=""></p>
-<p><img src="/images/xsdnh5.png" alt=""></p>
-<p>婚姻里最重要的问题：“你在想什么”、“你感觉如何”、“我们都对彼此做了些什么”。</p>
-<p><strong>能搞清楚这三个问题，婚姻便不至于此</strong>。影片中的Amy就是因为看到了Nick外出幽会，心里埋藏的怨恨便一下子爆发，邪恶的计划在心里萌生。Nick也是从自己的视角去看待Amy，认为是她一直不想要孩子。</p>
-<p>婚姻啊，各执一词，对伴侣心里想的、对对方做的妄加揣测，是很难延续的。</p>
-<p><strong>有什么事，往开了说嘛。</strong></p>
-<p>张爱玲说过“生命是一袭华美的袍，里面爬满了虱子”，这句话其实并不是说婚姻的，出自于张爱玲18岁的散文作品（真厉害，十八岁说得出这么有深意的话），但用来形容婚姻也不错：婚姻是一袭华美的袍，这是面子；爬满了虱子，这是里子。</p>
-<p><strong>婚姻的过程中少不了矛盾和纠纷，完美的伴侣是绝对不存在的</strong>,Amy在电影中的这句话“人在经济状况很糟糕的时候，往往会暴露出最脆弱的软肋”就概括的很精炼，Amy和Nick之间的矛盾就是在他们双双失业、婆婆乳腺癌四期那时激发的。</p>
-<p><strong>婚姻，是不可能没有虱子的，有虱子，我们就把它抓掉嘛。</strong></p>
-<p>总的来说，《消失的爱人》是一部很深刻的反映了婚姻问题的电影，很好的刻画了控制欲过强的变态人格。当然，这些问题不是恐婚不婚的借口，婚姻没有错，有错的是人，正如我上面说的那样：<strong>婚姻是不可能没有虱子的，有虱子，我们就把他抓掉嘛。</strong></p>
-]]></content>
-      <categories>
-        <category>Movie &amp; TV</category>
-      </categories>
-  </entry>
-  <entry>
     <title>《生死疲劳》</title>
     <url>/2026/06/11/%E3%80%8A%E7%94%9F%E6%AD%BB%E7%96%B2%E5%8A%B3%E3%80%8B/</url>
     <content><![CDATA[<p>看完这本《生死疲劳》，前前后后花了大几个月的时间，一直在拖延，一直没有时间看完这本著作。</p>
@@ -1766,30 +1766,6 @@ UG NX12如何进行数控仿真？</p>
 <p>贴吧上居然有一个“关门岛吧”，专门来讨论这部电影的细节的，其中关于“RUN”的解释就有很多。</p>
 <p><a href="https://tieba.baidu.com/p/2558349844?share=9105&amp;fr=sharewise&amp;is_video=false&amp;unique=D92D4D3D566FEFB36574672D31407766&amp;st=1757211710&amp;client_type=1&amp;client_version=12.88.1.1&amp;sfc=weixin&amp;share_from=post">重整&quot;RUN&quot;字帖，RUN究竟是谁写的？（图文）_关门岛吧_百度贴吧</a></p>
 <p>这是一部值得二刷三刷，用显微镜去观察的悬疑电影！</p>
-]]></content>
-      <categories>
-        <category>Movie &amp; TV</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>《蝴蝶效应》：后劲很足的一部电影</title>
-    <url>/2026/06/11/%E3%80%8A%E8%9D%B4%E8%9D%B6%E6%95%88%E5%BA%94%E3%80%8B/</url>
-    <content><![CDATA[<p>一只南美洲的蝴蝶扇动翅膀，结果可能引发德克萨斯州的龙卷风</p>
-<span id="more"></span>
-<h2 id="完美悖论">完美悖论</h2>
-<p>豆瓣上这个老哥的评论感觉观点很新奇，也很有想象力：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">剧情中最关键的点其实是男主和他爸的关系</span><br><span class="line">全片中，男主修改时间线是为了救身边的人</span><br><span class="line">那么他爸修改时间线是为了什么？答案就在最后</span><br><span class="line">因为男主的胎死腹中，一定会导致他妈的抑郁，抽烟，肺癌</span><br><span class="line">所以他爸会为了救他妈</span><br><span class="line">一遍遍回到他出生前，去修改这个结局</span><br><span class="line">但是这就会导致一个结果：</span><br><span class="line">只要男主出生，他就一定会遭遇后来的所有</span><br><span class="line">他也一定会像父亲一样修改时间线</span><br><span class="line">而最后的结局</span><br><span class="line">也一定是他再次扼死自己一而这个结局又会被他爸再次修改</span><br><span class="line">如此循环往复。</span><br><span class="line">所以，终结这个循环的方法只有一个：他爸不再修改他胎死腹中的结局</span><br><span class="line">接受这个事实</span><br><span class="line">因为他明白了：这个儿子的死是必然的</span><br><span class="line">任何努力都没用，都会让一切回到原点。</span><br><span class="line">这就是为什么男主爸爸会说：你做不了上帝，孩子。</span><br><span class="line">这句话，才是电影的题眼</span><br></pre></td></tr></table></figure>
-<p>豆瓣上有三派人，一派人很悲：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">或许，我也应该用脐带勒死自己</span><br></pre></td></tr></table></figure>
-<p>还有一派人很乐观：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">每一次的选择已经是最好的选择了。改变未必是优化</span><br></pre></td></tr></table></figure>
-<p>还有一派人很客观：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">命中注定的事 释然去面对吧</span><br><span class="line">放下过去，才有未来...</span><br><span class="line">即使你握着人生遥控器</span><br><span class="line">也未能遥出一个完美的人生</span><br></pre></td></tr></table></figure>
-<h2 id="互动游戏">互动游戏</h2>
-<p>感觉很像玩了一个具有丰富故事线的游戏，就好像《飞跃13号房》里，你的每一句话和每一次选择都会影响别人对你的看法，以及对待你的态度，也自然就影响了故事的走向和发展。</p>
-<p>但是，游戏是可以修改的，是可以通过时间回溯来解决问题的，《蝴蝶效应》就告诉了我们：如果你拥有人生回溯的超能力，这也未尝不是一件好事。</p>
-<p>人生不比游戏，他不会有“增加和某某好感度”的提示，也不会有“前往某某地”的提示。人生是旷野，有太多未知等待你自己去探索。你不知道，可能你今天随手扔的一个易拉罐，哪天绊倒了一个七八十岁的老大爷，让他们一命呜呼。</p>
-<p><strong>很好玩很有趣、后劲很足的一部电影。</strong></p>
 ]]></content>
       <categories>
         <category>Movie &amp; TV</category>
@@ -1990,6 +1966,67 @@ UG NX12如何进行数控仿真？</p>
       </categories>
   </entry>
   <entry>
+    <title>《蝴蝶效应》：后劲很足的一部电影</title>
+    <url>/2026/06/11/%E3%80%8A%E8%9D%B4%E8%9D%B6%E6%95%88%E5%BA%94%E3%80%8B/</url>
+    <content><![CDATA[<p>一只南美洲的蝴蝶扇动翅膀，结果可能引发德克萨斯州的龙卷风</p>
+<span id="more"></span>
+<h2 id="完美悖论">完美悖论</h2>
+<p>豆瓣上这个老哥的评论感觉观点很新奇，也很有想象力：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">剧情中最关键的点其实是男主和他爸的关系</span><br><span class="line">全片中，男主修改时间线是为了救身边的人</span><br><span class="line">那么他爸修改时间线是为了什么？答案就在最后</span><br><span class="line">因为男主的胎死腹中，一定会导致他妈的抑郁，抽烟，肺癌</span><br><span class="line">所以他爸会为了救他妈</span><br><span class="line">一遍遍回到他出生前，去修改这个结局</span><br><span class="line">但是这就会导致一个结果：</span><br><span class="line">只要男主出生，他就一定会遭遇后来的所有</span><br><span class="line">他也一定会像父亲一样修改时间线</span><br><span class="line">而最后的结局</span><br><span class="line">也一定是他再次扼死自己一而这个结局又会被他爸再次修改</span><br><span class="line">如此循环往复。</span><br><span class="line">所以，终结这个循环的方法只有一个：他爸不再修改他胎死腹中的结局</span><br><span class="line">接受这个事实</span><br><span class="line">因为他明白了：这个儿子的死是必然的</span><br><span class="line">任何努力都没用，都会让一切回到原点。</span><br><span class="line">这就是为什么男主爸爸会说：你做不了上帝，孩子。</span><br><span class="line">这句话，才是电影的题眼</span><br></pre></td></tr></table></figure>
+<p>豆瓣上有三派人，一派人很悲：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">或许，我也应该用脐带勒死自己</span><br></pre></td></tr></table></figure>
+<p>还有一派人很乐观：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">每一次的选择已经是最好的选择了。改变未必是优化</span><br></pre></td></tr></table></figure>
+<p>还有一派人很客观：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">命中注定的事 释然去面对吧</span><br><span class="line">放下过去，才有未来...</span><br><span class="line">即使你握着人生遥控器</span><br><span class="line">也未能遥出一个完美的人生</span><br></pre></td></tr></table></figure>
+<h2 id="互动游戏">互动游戏</h2>
+<p>感觉很像玩了一个具有丰富故事线的游戏，就好像《飞跃13号房》里，你的每一句话和每一次选择都会影响别人对你的看法，以及对待你的态度，也自然就影响了故事的走向和发展。</p>
+<p>但是，游戏是可以修改的，是可以通过时间回溯来解决问题的，《蝴蝶效应》就告诉了我们：如果你拥有人生回溯的超能力，这也未尝不是一件好事。</p>
+<p>人生不比游戏，他不会有“增加和某某好感度”的提示，也不会有“前往某某地”的提示。人生是旷野，有太多未知等待你自己去探索。你不知道，可能你今天随手扔的一个易拉罐，哪天绊倒了一个七八十岁的老大爷，让他们一命呜呼。</p>
+<p><strong>很好玩很有趣、后劲很足的一部电影。</strong></p>
+]]></content>
+      <categories>
+        <category>Movie &amp; TV</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>《里斯本丸沉没》：打捞起一个即将被遗忘的故事</title>
+    <url>/2026/06/11/%E3%80%8A%E9%87%8C%E6%96%AF%E6%9C%AC%E4%B8%B8%E6%B2%89%E6%B2%A1%E3%80%8B/</url>
+    <content><![CDATA[<p>在飞机上看了《里斯本丸沉没》这部电影，更确切的来说是一部纪录片，按我的直观感受，这是一部制作精良，具有深远意义的纪录片。</p>
+<span id="more"></span>
+<h2 id="导演会拍摄">导演会拍摄</h2>
+<p>导演方励不仅仅是一个导演，同时还是一个地理海洋学家，天生的职业属性赋予了《里斯本丸沉没》格外的魅力。一次偶然的机会，当导演方励在东极岛拍摄的时候，听说了东极岛的故事，于是他利用现代的声呐技术来寻找这沉睡的里斯本丸号，经过一番不为人知的努力，沉默了八十年的里斯本丸号，终于揭开了面纱。如今，是时候由我们中国人来讲述这段不为人知的历史了。</p>
+<p>影片导演有一句自白，让我印象很深刻：现在经历过里斯本丸沉没的人大多都去世了，我不敢想，如果当年的亲历者都已经去世，那么这段历史将有谁来讲述？<strong>我不敢怠慢，更要加紧采访和调查的步伐，在影片的最后，很不幸的是，这一幕还是出现了</strong>。</p>
+<p><strong>导演是一个肯吃苦的实干派导演</strong>。方励走遍了英国、美国、加拿大、日本，只为更全面的向大众讲述1942年10月1日发生的故事：当年里斯本丸号沉没的故事；<strong>导演是一个温情的人</strong>。在面对老人时，方励充当的是一个积极的倾听者，这份温情，被带到了电影里。</p>
+<p><strong>中国不缺导演，但缺少的是像方励一样，愿意以社会为题材、反映社会现实，发自内心想要让观众了解历史的导演。</strong></p>
+<h2 id="群像会说话">群像会说话</h2>
+<p>影片中无论是一等兵、二等兵亦或是上将，导演总能抓住他们身上的独特的点，让我们觉得，他们和我们的距离这么近。他们也是普通人，<strong>他们也有人性</strong>，美军的炮手在得知自己职业生涯的第一炮，毁了那么多本该幸福美满的家庭以后，用自己的一生来赎罪；<strong>他们也有爱情</strong>，影片中一个米德尔塞克斯士兵在香港爱上了一个这个女孩，写信给自己的妈妈告诉这件喜事，他们结了婚，但她再也没等到自己的郎；<strong>他们也有亲情</strong>，士兵奋不顾身的冲进燃烧的火堆，抢救出自己妻子的照片，并且用镜片制作成一个精美的相框，时刻看着，只为警醒自己还活着，自己还有故乡的亲人在等着自己回家；<strong>他们也有友情</strong>，军官在逃亡的危难之际，仍然不管自己的死活，安慰自己并肩作战的战友，和他们喝一杯酒、叙一叙旧，让他们体面的去见上帝…</p>
+<p><strong>里斯本丸沉没事件中，有关“他”的故事太多太多，虽然他们的名字我无法一个个记住，但是他们的故事，只要有一个人看了，便不会忘记。</strong></p>
+<p><strong>讲故事嘛，不要高高在上，从大众的视角出发，才是真正的好电影。</strong></p>
+<h2 id="眼泪会流出">眼泪会流出</h2>
+<p>后半段很感人，尤其是最后林阿根和来自异国他乡的素未莫面的“亲人”握手寒暄，似乎他们之间的关系已经超越了语言和地界，产生了非凡的联结。</p>
+<p>后半段我哭的稀里哗啦，既是代入遇难者亲人视角而感到深深的悲痛，也是代入亲历者的故事而感到深深悲痛。</p>
+<p><strong>里斯本丸的沉没，就这样啊，影响了他们的一生</strong>。即使事情已经过去很多年，他们依然PTSD，会有很强烈的创伤应激综合症：他们中，有的每晚睡觉都会说日语，只为乞求日本军官给他们一口水喝、一口饭吃；有的吃饭都根本不敢上桌，因为他们怕啊，怕上桌吃饭会挨打；有的脾气暴跳如雷，暴躁的让自己的子女都感觉陌生的可怕；有的对孩子一句“快要饿死了”的闲话极为反感，因为在他们看来，孩子根本就不知道“什么是真正的快要被饿死了，也根本不希望他们知道”。</p>
+<p><strong>那我问你，为什么明明是日军犯下的滔天大罪，要受害的家庭来用一生来偿还？</strong></p>
+<p>如果只是沉沦在过去，无意会积累仇恨，那我们应该怎么做呢？</p>
+<p><strong>就像威廉.班尼菲福德（比尔1号）说的一样，我们要&quot;I don’t live in the past,I live for future…&quot;</strong></p>
+<p><a href="https://imgse.com/i/pVs5FOI"><img src="https://s21.ax1x.com/2025/08/24/pVs5FOI.png" alt="pVs5FOI.png" border="0" /></a></p>
+<h2 id="战争会吃人">战争会吃人</h2>
+<p>里斯本丸沉没，只是众多战争事件的冰山一角，可以想到，这个世界还有多少埋藏在地下的故事，在等待着人们去讲述…</p>
+<p>经历过山河破碎、家国蹂躏的我们，更加渴望和平。</p>
+<p><strong>因为没有人比我们更懂战争的危害和恐怖。</strong></p>
+<p><strong>战争，真的会吃人！</strong></p>
+<p>让我们再看一眼他们…</p>
+<p>让我们铭记参与救援的中国渔民…</p>
+<p>30° 13’ 44.42&quot;N，122° 45’ 31.14&quot;E</p>
+<p><strong>历史，将会永远记住这个坐标！</strong></p>
+<p><a href="https://imgse.com/i/pVs5Pld"><img src="https://s21.ax1x.com/2025/08/24/pVs5Pld.png" alt="pVs5Pld.png"  /></a></p>
+]]></content>
+      <categories>
+        <category>Movie &amp; TV</category>
+      </categories>
+  </entry>
+  <entry>
     <title>《辛德勒的名单》</title>
     <url>/2026/06/11/%E3%80%8A%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95%E3%80%8B/</url>
     <content><![CDATA[<p>以凡人之躯比肩神明</p>
@@ -2042,43 +2079,6 @@ UG NX12如何进行数控仿真？</p>
 <p><strong>我很庆幸自己生活在一个热爱和平、不好战的国度。</strong></p>
 <p>中华民族经历的苦难不比犹太人少，我们在自己的家园里，被大肆的屠杀，但中国，从来不会主动挑起战争，而是呼吁和平、维护世界和平！</p>
 <p><strong>我为自己是中华民族而自豪！</strong></p>
-]]></content>
-      <categories>
-        <category>Movie &amp; TV</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>《里斯本丸沉没》：打捞起一个即将被遗忘的故事</title>
-    <url>/2026/06/11/%E3%80%8A%E9%87%8C%E6%96%AF%E6%9C%AC%E4%B8%B8%E6%B2%89%E6%B2%A1%E3%80%8B/</url>
-    <content><![CDATA[<p>在飞机上看了《里斯本丸沉没》这部电影，更确切的来说是一部纪录片，按我的直观感受，这是一部制作精良，具有深远意义的纪录片。</p>
-<span id="more"></span>
-<h2 id="导演会拍摄">导演会拍摄</h2>
-<p>导演方励不仅仅是一个导演，同时还是一个地理海洋学家，天生的职业属性赋予了《里斯本丸沉没》格外的魅力。一次偶然的机会，当导演方励在东极岛拍摄的时候，听说了东极岛的故事，于是他利用现代的声呐技术来寻找这沉睡的里斯本丸号，经过一番不为人知的努力，沉默了八十年的里斯本丸号，终于揭开了面纱。如今，是时候由我们中国人来讲述这段不为人知的历史了。</p>
-<p>影片导演有一句自白，让我印象很深刻：现在经历过里斯本丸沉没的人大多都去世了，我不敢想，如果当年的亲历者都已经去世，那么这段历史将有谁来讲述？<strong>我不敢怠慢，更要加紧采访和调查的步伐，在影片的最后，很不幸的是，这一幕还是出现了</strong>。</p>
-<p><strong>导演是一个肯吃苦的实干派导演</strong>。方励走遍了英国、美国、加拿大、日本，只为更全面的向大众讲述1942年10月1日发生的故事：当年里斯本丸号沉没的故事；<strong>导演是一个温情的人</strong>。在面对老人时，方励充当的是一个积极的倾听者，这份温情，被带到了电影里。</p>
-<p><strong>中国不缺导演，但缺少的是像方励一样，愿意以社会为题材、反映社会现实，发自内心想要让观众了解历史的导演。</strong></p>
-<h2 id="群像会说话">群像会说话</h2>
-<p>影片中无论是一等兵、二等兵亦或是上将，导演总能抓住他们身上的独特的点，让我们觉得，他们和我们的距离这么近。他们也是普通人，<strong>他们也有人性</strong>，美军的炮手在得知自己职业生涯的第一炮，毁了那么多本该幸福美满的家庭以后，用自己的一生来赎罪；<strong>他们也有爱情</strong>，影片中一个米德尔塞克斯士兵在香港爱上了一个这个女孩，写信给自己的妈妈告诉这件喜事，他们结了婚，但她再也没等到自己的郎；<strong>他们也有亲情</strong>，士兵奋不顾身的冲进燃烧的火堆，抢救出自己妻子的照片，并且用镜片制作成一个精美的相框，时刻看着，只为警醒自己还活着，自己还有故乡的亲人在等着自己回家；<strong>他们也有友情</strong>，军官在逃亡的危难之际，仍然不管自己的死活，安慰自己并肩作战的战友，和他们喝一杯酒、叙一叙旧，让他们体面的去见上帝…</p>
-<p><strong>里斯本丸沉没事件中，有关“他”的故事太多太多，虽然他们的名字我无法一个个记住，但是他们的故事，只要有一个人看了，便不会忘记。</strong></p>
-<p><strong>讲故事嘛，不要高高在上，从大众的视角出发，才是真正的好电影。</strong></p>
-<h2 id="眼泪会流出">眼泪会流出</h2>
-<p>后半段很感人，尤其是最后林阿根和来自异国他乡的素未莫面的“亲人”握手寒暄，似乎他们之间的关系已经超越了语言和地界，产生了非凡的联结。</p>
-<p>后半段我哭的稀里哗啦，既是代入遇难者亲人视角而感到深深的悲痛，也是代入亲历者的故事而感到深深悲痛。</p>
-<p><strong>里斯本丸的沉没，就这样啊，影响了他们的一生</strong>。即使事情已经过去很多年，他们依然PTSD，会有很强烈的创伤应激综合症：他们中，有的每晚睡觉都会说日语，只为乞求日本军官给他们一口水喝、一口饭吃；有的吃饭都根本不敢上桌，因为他们怕啊，怕上桌吃饭会挨打；有的脾气暴跳如雷，暴躁的让自己的子女都感觉陌生的可怕；有的对孩子一句“快要饿死了”的闲话极为反感，因为在他们看来，孩子根本就不知道“什么是真正的快要被饿死了，也根本不希望他们知道”。</p>
-<p><strong>那我问你，为什么明明是日军犯下的滔天大罪，要受害的家庭来用一生来偿还？</strong></p>
-<p>如果只是沉沦在过去，无意会积累仇恨，那我们应该怎么做呢？</p>
-<p><strong>就像威廉.班尼菲福德（比尔1号）说的一样，我们要&quot;I don’t live in the past,I live for future…&quot;</strong></p>
-<p><a href="https://imgse.com/i/pVs5FOI"><img src="https://s21.ax1x.com/2025/08/24/pVs5FOI.png" alt="pVs5FOI.png" border="0" /></a></p>
-<h2 id="战争会吃人">战争会吃人</h2>
-<p>里斯本丸沉没，只是众多战争事件的冰山一角，可以想到，这个世界还有多少埋藏在地下的故事，在等待着人们去讲述…</p>
-<p>经历过山河破碎、家国蹂躏的我们，更加渴望和平。</p>
-<p><strong>因为没有人比我们更懂战争的危害和恐怖。</strong></p>
-<p><strong>战争，真的会吃人！</strong></p>
-<p>让我们再看一眼他们…</p>
-<p>让我们铭记参与救援的中国渔民…</p>
-<p>30° 13’ 44.42&quot;N，122° 45’ 31.14&quot;E</p>
-<p><strong>历史，将会永远记住这个坐标！</strong></p>
-<p><a href="https://imgse.com/i/pVs5Pld"><img src="https://s21.ax1x.com/2025/08/24/pVs5Pld.png" alt="pVs5Pld.png"  /></a></p>
 ]]></content>
       <categories>
         <category>Movie &amp; TV</category>
@@ -2161,27 +2161,6 @@ UG NX12如何进行数控仿真？</p>
       </categories>
   </entry>
   <entry>
-    <title>丢掉手机，好好吃饭！</title>
-    <url>/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/</url>
-    <content><![CDATA[<p>手机等电子产品非常喜欢多管闲事，什么活动他都会插一嘴，踢一脚</p>
-<span id="more"></span>
-<p>今天吃饭尝试彻底丢掉手机，发现一个很大的变化：就是吃饭的时间缩短了一大堆，平常刷电子产品吃顿饭要半个小时，丢掉手机吃顿饭，只要十分钟，很吓人。</p>
-<p>除此之外，丢掉手机以后，我发现脑子似乎更加清醒，脑子里面似乎会有说不完的问题和想法等着去解答，有数不完的领域可以去探索，回想之前刷着手机吃着饭，似乎脑子根本不会想那么多，就连吃的饭是具体什么味道都不清楚。</p>
-<p>但今天不同，细细品味了吃的排骨玉米饭，注意到了里面的枸杞和葱花，注意到了入嘴的生姜，还在心里感触：小时候那个不吃葱不吃香料的孩子，现在长大了，不知道为什么想到这个，心里还有点酸酸的。</p>
-<p>丢掉电子产品，好好吃饭睡觉，说的轻巧，做起来好难的。</p>
-<p>不带手机吃饭，你怎么付钱？</p>
-<p>不带手机上床睡觉，你明天迟到了怎么办？谁来叫醒你？</p>
-]]></content>
-      <categories>
-        <category>Life</category>
-      </categories>
-      <tags>
-        <tag>habits</tag>
-        <tag>digital-detox</tag>
-        <tag>mindfulness</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>两个电脑，what i can do？</title>
     <url>/2026/06/14/%E4%B8%A4%E4%B8%AA%E7%94%B5%E8%84%91%EF%BC%8Cwhat%20i%20can%20do%EF%BC%9F/</url>
     <content><![CDATA[<p>一个台式机，屏幕很大，配置更好；一个笔记本，屏幕很小，配置差一点，但是屏幕的分辨率高一些。能干啥才不会让其中一个电脑吃灰？</p>
@@ -2224,6 +2203,57 @@ UG NX12如何进行数控仿真？</p>
         <tag>motivation</tag>
         <tag>study</tag>
         <tag>self-reflection</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>丢掉手机，好好吃饭！</title>
+    <url>/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/</url>
+    <content><![CDATA[<p>手机等电子产品非常喜欢多管闲事，什么活动他都会插一嘴，踢一脚</p>
+<span id="more"></span>
+<p>今天吃饭尝试彻底丢掉手机，发现一个很大的变化：就是吃饭的时间缩短了一大堆，平常刷电子产品吃顿饭要半个小时，丢掉手机吃顿饭，只要十分钟，很吓人。</p>
+<p>除此之外，丢掉手机以后，我发现脑子似乎更加清醒，脑子里面似乎会有说不完的问题和想法等着去解答，有数不完的领域可以去探索，回想之前刷着手机吃着饭，似乎脑子根本不会想那么多，就连吃的饭是具体什么味道都不清楚。</p>
+<p>但今天不同，细细品味了吃的排骨玉米饭，注意到了里面的枸杞和葱花，注意到了入嘴的生姜，还在心里感触：小时候那个不吃葱不吃香料的孩子，现在长大了，不知道为什么想到这个，心里还有点酸酸的。</p>
+<p>丢掉电子产品，好好吃饭睡觉，说的轻巧，做起来好难的。</p>
+<p>不带手机吃饭，你怎么付钱？</p>
+<p>不带手机上床睡觉，你明天迟到了怎么办？谁来叫醒你？</p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>habits</tag>
+        <tag>digital-detox</tag>
+        <tag>mindfulness</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>耗子的奶昔方案设计记录</title>
+    <url>/2026/06/11/%E5%81%9A%E5%A5%B6%E6%98%94/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328224552025.png" alt="image-20260328224552025"></p>
+<span id="more"></span>
+<h1>香蕉、芒果、西梅奶昔</h1>
+<p>一根香蕉、一个芒果（其实是半个）、三个西梅（其实只切了两个😄）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7986.jpeg" alt="IMG_7986"></p>
+<p>水果躺板板咯，切得有点凌乱哈</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7987.jpeg" alt="IMG_7987"></p>
+<p>榨汁杯里面的，是安慕希草莓酸奶150ml</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7988.jpeg" alt="IMG_7988"></p>
+<p>大概榨汁榨了2min左右，出来的奶昔是这样的</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7989.jpeg" alt="IMG_7989" style="zoom: 25%;" />
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7990.jpeg" alt="IMG_7990" style="zoom:25%;" />
+<p>感觉味道还是不错的，仔细喝喝，可以喝出来西梅的颗粒，芒果的味道没咋感觉到，不过颜色上有一些体现（变得很黄），香蕉的味道有点太重了，还有就是酸奶实在是太浓了，感觉本来就很浓的酸奶，加上一大堆的颗粒，浓的有点不像样的，不像是饮料，像是浓粥了哈哈</p>
+<p>以后做奶昔，可以试着：</p>
+<ol>
+<li>尽量用稀一点的牛奶，酸奶太浓稠了</li>
+<li>搅拌机要保证有足够的电量来榨，榨到一半没电了会很崩溃的</li>
+<li>像香蕉这种气味极重的水果，不要放的过量，因为这样会让你根本吃不到其他水果的味道</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Life Philosophy</category>
+      </categories>
+      <tags>
+        <tag>smoothie</tag>
       </tags>
   </entry>
   <entry>
@@ -2468,36 +2498,6 @@ UG NX12如何进行数控仿真？</p>
         <tag>sensor-testing</tag>
         <tag>measurement</tag>
         <tag>exam-notes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>耗子的奶昔方案设计记录</title>
-    <url>/2026/06/11/%E5%81%9A%E5%A5%B6%E6%98%94/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328224552025.png" alt="image-20260328224552025"></p>
-<span id="more"></span>
-<h1>香蕉、芒果、西梅奶昔</h1>
-<p>一根香蕉、一个芒果（其实是半个）、三个西梅（其实只切了两个😄）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7986.jpeg" alt="IMG_7986"></p>
-<p>水果躺板板咯，切得有点凌乱哈</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7987.jpeg" alt="IMG_7987"></p>
-<p>榨汁杯里面的，是安慕希草莓酸奶150ml</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7988.jpeg" alt="IMG_7988"></p>
-<p>大概榨汁榨了2min左右，出来的奶昔是这样的</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7989.jpeg" alt="IMG_7989" style="zoom: 25%;" />
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7990.jpeg" alt="IMG_7990" style="zoom:25%;" />
-<p>感觉味道还是不错的，仔细喝喝，可以喝出来西梅的颗粒，芒果的味道没咋感觉到，不过颜色上有一些体现（变得很黄），香蕉的味道有点太重了，还有就是酸奶实在是太浓了，感觉本来就很浓的酸奶，加上一大堆的颗粒，浓的有点不像样的，不像是饮料，像是浓粥了哈哈</p>
-<p>以后做奶昔，可以试着：</p>
-<ol>
-<li>尽量用稀一点的牛奶，酸奶太浓稠了</li>
-<li>搅拌机要保证有足够的电量来榨，榨到一半没电了会很崩溃的</li>
-<li>像香蕉这种气味极重的水果，不要放的过量，因为这样会让你根本吃不到其他水果的味道</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Life Philosophy</category>
-      </categories>
-      <tags>
-        <tag>smoothie</tag>
       </tags>
   </entry>
   <entry>
@@ -2755,6 +2755,35 @@ UG NX12如何进行数控仿真？</p>
       </tags>
   </entry>
   <entry>
+    <title>想买东西了？记得写在这</title>
+    <url>/2026/06/16/%E6%83%B3%E4%B9%B0%E4%B8%9C%E8%A5%BF%E4%BA%86%EF%BC%9F%E8%AE%B0%E5%BE%97%E5%86%99%E5%9C%A8%E8%BF%99/</url>
+    <content><![CDATA[<p>制定一个规则：写下来想要买的东西24h之后再买。延迟满足</p>
+<span id="more"></span>
+<h2 id="26-06-16">26.06.16</h2>
+<ul>
+<li>洗发水一瓶（实在是没了）</li>
+<li>滴露消毒水——洗内裤内衣袜子没有的话就太臭了</li>
+<li>买本书《硬汉技能手册》</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9642.png" alt="IMG_9642"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9641.png" alt="IMG_9641"></p>
+<p>Claude Code 实战指南</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9643.png" alt="IMG_9643"></p>
+<p>Vibe Coding 实战教程</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9644.png" alt="IMG_9644"></p>
+<p>下面这本书看起来也挺有意思</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9645.png" alt="IMG_9645"></p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>habits</tag>
+        <tag>delayed-gratification</tag>
+        <tag>consumption</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>护城河有什么用？</title>
     <url>/2026/06/11/%E6%8A%A4%E5%9F%8E%E6%B2%B3/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315212130095.png" alt="image-20260315212130095"></p>
@@ -2838,35 +2867,6 @@ UG NX12如何进行数控仿真？</p>
       <tags>
         <tag>business</tag>
         <tag>growth</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>想买东西了？记得写在这</title>
-    <url>/2026/06/16/%E6%83%B3%E4%B9%B0%E4%B8%9C%E8%A5%BF%E4%BA%86%EF%BC%9F%E8%AE%B0%E5%BE%97%E5%86%99%E5%9C%A8%E8%BF%99/</url>
-    <content><![CDATA[<p>制定一个规则：写下来想要买的东西24h之后再买。延迟满足</p>
-<span id="more"></span>
-<h2 id="26-06-16">26.06.16</h2>
-<ul>
-<li>洗发水一瓶（实在是没了）</li>
-<li>滴露消毒水——洗内裤内衣袜子没有的话就太臭了</li>
-<li>买本书《硬汉技能手册》</li>
-</ul>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9642.png" alt="IMG_9642"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9641.png" alt="IMG_9641"></p>
-<p>Claude Code 实战指南</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9643.png" alt="IMG_9643"></p>
-<p>Vibe Coding 实战教程</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9644.png" alt="IMG_9644"></p>
-<p>下面这本书看起来也挺有意思</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9645.png" alt="IMG_9645"></p>
-]]></content>
-      <categories>
-        <category>Life</category>
-      </categories>
-      <tags>
-        <tag>habits</tag>
-        <tag>delayed-gratification</tag>
-        <tag>consumption</tag>
       </tags>
   </entry>
   <entry>
@@ -6050,8 +6050,8 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
         <category>Life</category>
       </categories>
       <tags>
-        <tag>digital-detox</tag>
         <tag>productivity</tag>
+        <tag>digital-detox</tag>
         <tag>ali-abdaal</tag>
         <tag>time-management</tag>
       </tags>
