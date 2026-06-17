@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一门差点放弃的考试课，靠学姐的复习文档找到了学习的锚点——传感器分类、选型和各类传感器的工作原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="传感与测试技术——从摆烂到找到锚点">
+<meta property="og:url" content="http://haozi.space/2026/03/14/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="一门差点放弃的考试课，靠学姐的复习文档找到了学习的锚点——传感器分类、选型和各类传感器的工作原理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314200044992.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325212151455.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325213418916.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214023161.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214033208.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214100447.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214119080.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214153430.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214201995.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403171507567.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172055487.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172356298.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172430884.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172512079.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172831326.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403173208296.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403174656406.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175654588.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175950668.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175706030.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403180000397.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175731870.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403180010955.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175753887.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403180021139.png">
+<meta property="article:published_time" content="2026-03-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-13T16:00:00.000Z">
+<meta property="article:author" content="haozi">
+<meta property="article:tag" content="sensor-testing">
+<meta property="article:tag" content="measurement">
+<meta property="article:tag" content="exam-notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314200044992.png">
+
+<link rel="canonical" href="http://haozi.space/2026/03/14/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- HarmonyOS Sans SC Font -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
+<style>
+  /* Fallback: If LXGW WenKai is used, override font-family */
+  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
+  /*
+  @font-face {
+    font-family: 'HarmonyOS Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
+  }
+  */
+</style>
+
+  <title>传感与测试技术——从摆烂到找到锚点 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-future">
+
+    <a href="/future/" rel="section"><i class="fa fa-terminal fa-fw"></i>Future Self</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>tools</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/14/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          传感与测试技术——从摆烂到找到锚点
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-14T00:00:00+08:00">2026-03-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exam/" itemprop="url" rel="index"><span itemprop="name">Exam</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">一门差点放弃的考试课，靠学姐的复习文档找到了学习的锚点——传感器分类、选型和各类传感器的工作原理</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314200044992.png" alt="image-20260314200044992"></p>
+<p>不知道写什么了，写几个字凑凑数吧，不然显得太敷衍了</p>
+<span id="more"></span>
+<p>拖延了好久，都甚至没有开始写学习文档，这门课真的好惨…甚至不知道为啥，就是不想去学啊，真的很奇怪啊</p>
+<p>归根结底，是没有找到锚点，找到可以去抓住学习的点，欸，这一点，今天找到了，学姐的备考复习文档里面就有很多好东西啊哈哈哈，感觉希望又大大的了</p>
+<p>你看哈 这门课叫传感与测试技术<br>
+不管是传感还是测试 围绕的都是信号这个东西 测试也是测信号 传感器他是检测一些物理量然后给他转换成信号的</p>
+<p>所以第一章 就是带你认识信号到底是啥 它分为哪些？我们又怎样数学的去描述这个听起来很抽象的东西</p>
+<p>在知道了这是个什么东西也知道了怎么用一个公式去表示他之后 我们就可以用数学的方式去分析还有处理了 这就是第二章 告诉我们一个在看到一个信号的数学表示的时候 大概能了解到他的一些信息 或者两个信号之间的关系 以及怎样去处理一些不太好的收集到的信号</p>
+<p>然后 在拿到一个信号了 我们现在会分析了 也会处理了 处理完我们是不是就该测试了 第三章就是介绍测试系统的 分析一个测试系统的性能</p>
+<p>第四章 传感器 他就把一些物理量转换成电信号 这里就有很多分类了 比如根据物理量去分 有温度传感器 位移传感器 根据电信号去分 有电容电感等等</p>
+<p>第五章 因为传感器输出的原始电信号他可能很微弱或者有噪声啥的 这是对他的调理</p>
+<p>课程先教你“测量要满足什么要求”（基础理论），再教你“有哪些工具可用”（传感器），最后教你“怎么组合工具完成任务”（测试系统与应用）</p>
+<h1>第一章 信号及其描述</h1>
+<h1>第二章 信号的分析和处理</h1>
+<h1>第三章 测试系统的特性</h1>
+<h1>第四章 常用传感器</h1>
+<ul>
+<li>
+<p>传感器的分类</p>
+<ul>
+<li>
+<p>按照被测物理量：</p>
+<p>位移传感器、流量传感器、温度传感器、力传感器、加速度传感器等</p>
+</li>
+<li>
+<p>按构成原理：</p>
+<p>物性型</p>
+<ul>
+<li>压阻式传感器、水银温度计</li>
+</ul>
+<p>结构型</p>
+<ul>
+<li>电容式、电感式传感器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>传感器的选用</p>
+<p><strong>先做什么：</strong></p>
+<ul>
+<li>初步确定传感器类型</li>
+<li>分析环境干扰</li>
+<li>根据测试范围大小进一步细化传感器类型</li>
+<li>确定测量方式：接触/非接触？</li>
+<li>传感器的体积以及安装方式</li>
+<li>价格</li>
+</ul>
+<p><strong>后做什么：</strong></p>
+<ul>
+<li>灵敏度：可能会放大噪声，所以要求传感器有较大的信噪比</li>
+<li>线性范围：在这个范围以内，输出和输入成线性关系</li>
+<li>响应特性：尽量保持不失真，延迟时间越短越好</li>
+<li>稳定性：经过长期使用以后，其输出特性不发生变化的性能</li>
+<li>精度：表示传感器的输出和被测量的对应程度</li>
+</ul>
+</li>
+<li>
+<p>具体的传感器</p>
+<ul>
+<li>
+<p>电阻式传感器</p>
+<ul>
+<li>
+<p>电阻应变式传感器</p>
+<ul>
+<li>
+<p>基本原理：位移、应力、应变-&gt;应变-&gt;电阻变化</p>
+</li>
+<li>
+<p>核心元件：电阻应变片</p>
+</li>
+<li>
+<p>工作原理：电阻应变效应</p>
+</li>
+<li>
+<p>电阻应变效应：指金属导体在外力作用下发生机械变形时，其电阻值随着所受机械变形（伸长或缩短）的变化而发生变化的现象</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325212151455.png" alt="image-20260325212151455"></p>
+<p>通常S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>​=1.7~3.6</p>
+<p><strong>一般用502胶粘应变片而不用胶布</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>压阻式传感器</p>
+<ul>
+<li>
+<p>压阻效应：半导体材料受到应力作用时，其电阻率会发生变化，这种现象为压阻效应</p>
+</li>
+<li>
+<p>半导体应变片<strong>对比</strong>金属应变片</p>
+<p><strong>优点：</strong></p>
+<p>①灵敏度非常高，有时传感器的输出不需要放大可直接用于测量；</p>
+<p>②分辨率高，例如测量压力时可测出10 ~ 20 Pa的微压；</p>
+<p>③测量元件的有效面积可做得很小，故频率响应高；</p>
+<p><strong>缺点：</strong></p>
+<p>温度误差大，故需要温度补偿或在恒温条件下使用。</p>
+</li>
+<li>
+<p>灵敏度</p>
+<p>S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>=<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mi>L</mi></msub></mrow><annotation encoding="application/x-tex">_L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4783em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>E，一般在50-100之间（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mi>L</mi></msub></mrow><annotation encoding="application/x-tex">_L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4783em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>​是半导体材料的压阻系数，E是半导体材料的弹性模量），灵敏度比电阻应变式传感器好</p>
+</li>
+</ul>
+</li>
+<li>
+<p>电感传感器</p>
+<ul>
+<li>自感式传感器</li>
+<li>互感式传感器</li>
+</ul>
+</li>
+<li>
+<p>电容传感器</p>
+<p>ε<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>=8.854*10<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mrow><mo>−</mo><mn>12</mn></mrow></msup></mrow><annotation encoding="application/x-tex">^{-12}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">12</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325213418916.png" alt=""></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214023161.png" alt="image-20260325214023161"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214033208.png" alt="image-20260325214033208"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214100447.png" alt="image-20260325214100447"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214119080.png" alt="image-20260325214119080"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214153430.png" alt="image-20260325214153430"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214201995.png" alt="image-20260325214201995"></p>
+</li>
+<li>
+<p>压电式传感器</p>
+<ul>
+<li>
+<p>压电效应：某些电介质，在沿着一定方向对其加力而使其变形时，在一定表面上将会产生电荷，而外力去掉后又重新回到不带电状态</p>
+</li>
+<li>
+<p>纵向压电效应：沿x轴加力，电荷出现在垂直于x轴的表面</p>
+<p>横向压电效应：沿 y 轴加力，电荷仍出现在垂直于 x 轴的表面</p>
+<p>切向压电效应：沿x轴或y轴施加垂直于z轴的剪切力，在垂直于 x 轴的晶体表面产生电荷</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403171507567.png" alt="image-20260403171507567"></p>
+</li>
+<li>
+<p>压电元件等效电路</p>
+<p>1）电荷源Q和电容器Ca并联</p>
+<p>2）电压源U和电容器Ca串联</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172055487.png" alt="image-20260403172055487"></p>
+<p>由于存在电荷泄漏，<strong>压电式传感器适宜作动态测量</strong></p>
+</li>
+<li>
+<p>压电元件常用的结构形式</p>
+<p>连接方法有两种：并联连接和串联</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172356298.png" alt="image-20260403172356298"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172430884.png" alt="image-20260403172430884"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>磁电式传感器</p>
+<ul>
+<li>
+<p>工作原理</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172512079.png" alt="image-20260403172512079"></p>
+</li>
+<li>
+<p>分类</p>
+<p>1）恒定磁通式</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172831326.png" alt="image-20260403172831326"></p>
+<p>2）变磁通式</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403173208296.png" alt="image-20260403173208296"></p>
+<p>3）霍尔式传感器</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403174656406.png" alt="image-20260403174656406"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>光电式传感器</p>
+<ul>
+<li>
+<p>工作原理：光电效应</p>
+</li>
+<li>
+<p>光电效应及光电器件</p>
+<ul>
+<li>
+<p>外光电效应</p>
+<p>在光线作用下，物质内的电子逸出物体表面向外发射的现象，称为外光电效应</p>
+</li>
+<li>
+<p>内光电效应</p>
+<p>受光照物体（通常为半导体材料）电导率发生变化或产生光电动势的效应称为内光电效应</p>
+<ul>
+<li>光电导效应：光照后电阻率发生变化的现象2</li>
+<li>光生伏特效应：光生伏特效应：半导体P-N结受光照后产生电动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>光电传感器的形式</p>
+<ul>
+<li>
+<p>模拟式光电传感器</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175654588.png" alt="image-20260403175654588"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175950668.png" alt="image-20260403175950668"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175706030.png" alt="image-20260403175706030"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403180000397.png" alt="image-20260403180000397"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175731870.png" alt="image-20260403175731870"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403180010955.png" alt="image-20260403180010955"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175753887.png" alt="image-20260403175753887"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403180021139.png" alt="image-20260403180021139"></p>
+</li>
+<li>
+<p>脉冲式光电传感器</p>
+<p>光电元件的输出仅有两种稳定状态，就是“通”、“断”的开关状态。<strong>光电测速计、光电式转速计</strong>就是这方面的应用实例</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1>经验提炼</h1>
+<ol>
+<li>
+<p><strong>找不到学习动力的时候，去找一个&quot;锚点&quot;。</strong> 这门课差点被我放弃，直到找到学姐的复习文档。有时候你缺的不是能力，而是一个能让你看到方向的外部资源。</p>
+</li>
+<li>
+<p><strong>理解课程的逻辑结构比死记硬背重要。</strong> 这门课的设计其实是：先教你&quot;测量要满足什么要求&quot;（理论基础），再教你&quot;有哪些工具可用&quot;（传感器），最后教你&quot;怎么组合工具完成任务&quot;（信号调理）。看清这个框架，学习就有章法了。</p>
+</li>
+<li>
+<p><strong>传感器选型是一个工程决策过程。</strong> 不是选&quot;最好的&quot;，而是选&quot;最合适的&quot;——要考虑灵敏度、线性范围、响应速度、稳定性、精度，还要考虑环境干扰和成本。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 2rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="gruvbox"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/sensor-testing/" rel="tag"># sensor-testing</a>
+              <a href="/tags/measurement/" rel="tag"># measurement</a>
+              <a href="/tags/exam-notes/" rel="tag"># exam-notes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/03/14/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" rel="prev" title="数字化设计——贝塞尔曲面与有限元入门">
+      <i class="fa fa-chevron-left"></i> 数字化设计——贝塞尔曲面与有限元入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/03/14/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/" rel="next" title="从MATLAB零基础到用贝塞尔曲面做植物大战僵尸">
+      从MATLAB零基础到用贝塞尔曲面做植物大战僵尸 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">第一章 信号及其描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">第二章 信号的分析和处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">第三章 测试系统的特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">第四章 常用传感器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">经验提炼</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">Good morning, and in case I don't see you, good afternoon, good evening, and good night!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - ASCII Cat -->
+<div id="pet-toggle" class="pet-toggle" title="Click to open terminal pet">
+  <span class="pet-toggle-icon">>_</span>
+  <span class="pet-toggle-label">Pet</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet" style="display:none;">
+  <div class="terminal-header">
+    <span class="terminal-dot red"></span>
+    <span class="terminal-dot yellow"></span>
+    <span class="terminal-dot green"></span>
+    <span class="terminal-title">haozi's blog~</span>
+    <span class="terminal-close" id="pet-close">&times;</span>
+  </div>
+  <div class="terminal-body">
+    <pre id="pet-ascii" class="pet-ascii"></pre>
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #2d2d2d;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  opacity: 0.85;
+}
+.pet-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px #7e8027;
+}
+.pet-toggle-icon {
+  color: #7e8027;
+  font-family: 'Consolas', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+}
+.pet-toggle-label {
+  color: #888;
+  font-size: 8px;
+  margin-top: 2px;
+}
+
+/* Terminal Pet Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 260px;
+  background: #2d2d2d;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  z-index: 9999;
+  font-family: 'Consolas', 'Courier New', monospace;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0.95;
+}
+.terminal-pet:hover {
+  opacity: 1;
+  box-shadow: 0 2px 5px #7e8027;
+}
+.terminal-header {
+  background: #2d2d2d;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: move;
+  user-select: none;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+.terminal-title {
+  color: #aaa;
+  font-size: 11px;
+  margin-left: 8px;
+  flex: 1;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #888;
+  background: #e81123;
+}
+.terminal-body {
+  padding: 12px 14px 10px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pet-ascii {
+  color: #7e8027;
+  font-size: 11px;
+  line-height: 1.2;
+  margin: 0;
+  white-space: pre;
+  text-align: center;
+  transition: color 0.3s;
+  animation: catBreathe 3s ease-in-out infinite;
+}
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #ddd;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes catBreathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.02); }
+}
+/* Dark mode */
+.dark .terminal-pet,
+.dark .pet-toggle {
+  background: #1a1a1a;
+}
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 200px;
+    right: 10px;
+  }
+  .pet-toggle {
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .pet-toggle-icon {
+    font-size: 13px;
+  }
+  .pet-toggle-label {
+    font-size: 7px;
+  }
+  .pet-ascii {
+    font-size: 9px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var catFrames = [
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( -.- ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)']
+  ];
+
+  var messages = [
+    '> Welcome to the blog!',
+    '> Meow, nice to meet you!',
+    '> Just vibing here...',
+    '> Deploying purr-duction...',
+    '> git commit -m "feed cat"',
+    '> printf("meow\\n");',
+    '> 404: Treats not found',
+    '> while(true) { nap(); }',
+    '> sudo rm -rf belly_rub',
+    '> Cat > Dog // true',
+    '> Loading cuteness... 100%',
+    '> echo "Hello World!"',
+    '> Compiling... nyaaa~'
+  ];
+
+  var currentFrame = 0;
+  var currentMsg = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var header = container.querySelector('.terminal-header');
+  var isOpen = false;
+
+  function updateCat() {
+    if (!isOpen) return;
+    petEl.textContent = catFrames[currentFrame].join('\n');
+    currentFrame = (currentFrame + 1) % catFrames.length;
+  }
+
+  function typewriterEffect(text, el, speed) {
+    speed = speed || 50;
+    el.textContent = '';
+    var i = 0;
+    var interval = setInterval(function() {
+      if (i < text.length) {
+        el.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, speed);
+  }
+
+  function changeMessage() {
+    if (!isOpen) return;
+    currentMsg = (currentMsg + 1) % messages.length;
+    typewriterEffect(messages[currentMsg], msgEl, 40);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    updateCat();
+    typewriterEffect(messages[0], msgEl, 40);
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+  }
+
+  // Toggle button click
+  toggleBtn.addEventListener('click', openPet);
+
+  // Close button
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+
+  // Animation loops (only run when open)
+  setInterval(updateCat, 1000);
+  setInterval(changeMessage, 4000);
+
+  // Drag functionality
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  // Clear localStorage to reset pet state on page load
+  try {
+    localStorage.removeItem('terminal-pet-hidden');
+  } catch(e) {}
+
+  header.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+
+  // Touch support
+  header.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    var touch = e.touches[0];
+    dragOffsetX = touch.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = touch.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    var touch = e.touches[0];
+    var x = touch.clientX - dragOffsetX;
+    var y = touch.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  }, { passive: true });
+  document.addEventListener('touchend', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>KEIL C51的使用</title>
+    <url>/2026/06/11/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>C51的使用技巧</p>
+<span id="more"></span>
+<h1>键位</h1>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>键位</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>键盘</td>
+<td>tab</td>
+<td>缩进，使得代码可读性增强</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+home</td>
+<td>跳转到开头</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+end</td>
+<td>跳转到结尾</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>configuration</td>
+<td>调整字体样式</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>build translate rebuild</td>
+<td>类似于编译（？）</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>output</td>
+<td>需要输出isp可以编译的文件，需要调整这个</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1>注意事项</h1>
+<p>while循环后面的括号不能为空，要让他循环可以在里面写上&quot;1&quot;</p>
+<p>#include &lt;intrins.h&gt;	//“nop” need this</p>
+<p>对于发光二极管，1111 1110而不是0000 0001的时候，一个灯亮，只有当输入数字为0的时候，灯才会亮，你可以理解为只有为0的时候才有电位差，二极管才会发光</p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+  </entry>
+  <entry>
     <title>C51的学习历程</title>
     <url>/2026/06/11/C51-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>C51的学习历程</p>
@@ -60,67 +121,7 @@
 <p>实验成功的一瞬间，其实心里还是很开心的！</p>
 ]]></content>
       <categories>
-        <category>生活哲学</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>KEIL C51的使用</title>
-    <url>/2026/06/11/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1>键位</h1>
-<table>
-<thead>
-<tr>
-<th>位置</th>
-<th>键位</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>键盘</td>
-<td>tab</td>
-<td>缩进，使得代码可读性增强</td>
-</tr>
-<tr>
-<td>键盘</td>
-<td>ctrl+home</td>
-<td>跳转到开头</td>
-</tr>
-<tr>
-<td>键盘</td>
-<td>ctrl+end</td>
-<td>跳转到结尾</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>configuration</td>
-<td>调整字体样式</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>build translate rebuild</td>
-<td>类似于编译（？）</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>output</td>
-<td>需要输出isp可以编译的文件，需要调整这个</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h1>注意事项</h1>
-<p>while循环后面的括号不能为空，要让他循环可以在里面写上&quot;1&quot;</p>
-<p>#include &lt;intrins.h&gt;	//“nop” need this</p>
-<p>对于发光二极管，1111 1110而不是0000 0001的时候，一个灯亮，只有当输入数字为0的时候，灯才会亮，你可以理解为只有为0的时候才有电位差，二极管才会发光</p>
-]]></content>
-      <categories>
-        <category>方法</category>
+        <category>Life Philosophy</category>
       </categories>
   </entry>
   <entry>
@@ -248,11 +249,279 @@
 <p>也许过一段时间再回来看，会发现自己已经学会了很多当时觉得复杂的东西。</p>
 ]]></content>
       <categories>
-        <category>方法</category>
+        <category>How-To</category>
       </categories>
       <tags>
-        <tag>Cloudflare</tag>
-        <tag>Alist</tag>
+        <tag>cloudflare</tag>
+        <tag>alist</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git版本控制常用命令指南</title>
+    <url>/2026/06/17/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<p>用多了就记住了，不用就会忘，所以写下来</p>
+<span id="more"></span>
+<h2 id="为什么写这篇？">为什么写这篇？</h2>
+<p>Git 命令真的太多了，每次用的时候都要去搜，很烦。今天好好整理一下，把最常用的那些记下来，以后忘了就来翻翻。</p>
+<hr>
+<h2 id="一、配置（第一次用必须搞）">一、配置（第一次用必须搞）</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置你的名字和邮箱，提交代码时会显示</span></span><br><span class="line">git config --global user.name <span class="string">&quot;你的名字&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的邮箱@example.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化一个新仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆别人的仓库</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/用户名/仓库名.git</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="二、日常三板斧（最最最常用）">二、日常三板斧（最最最常用）</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1. 看看当前状态（改了啥、有没有新文件）</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 把修改添加到暂存区</span></span><br><span class="line">git add 文件名        <span class="comment"># 添加单个文件</span></span><br><span class="line">git add .            <span class="comment"># 添加所有修改（懒人专用）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 提交到本地仓库</span></span><br><span class="line">git commit -m <span class="string">&quot;写清楚你改了啥&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 推送到远程（GitHub等）</span></span><br><span class="line">git push origin 分支名</span><br></pre></td></tr></table></figure>
+<p><strong>记住这个流程：改代码 → add → commit → push</strong></p>
+<hr>
+<h2 id="三、拉取更新">三、拉取更新</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从远程拉取最新代码并合并</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line">git fetch origin</span><br><span class="line">git merge origin/main</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="四、分支操作（多人协作必备）">四、分支操作（多人协作必备）</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch 新分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git checkout 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建并切换（最常用！）</span></span><br><span class="line">git checkout -b 新分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支（先切回主分支）</span></span><br><span class="line">git checkout main</span><br><span class="line">git merge 要合并的分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">git branch -d 分支名    <span class="comment"># 已合并的</span></span><br><span class="line">git branch -D 分支名    <span class="comment"># 强制删除</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="五、查看历史">五、查看历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看提交记录</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line">git <span class="built_in">log</span> --oneline        <span class="comment"># 简洁版，一行一条</span></span><br><span class="line">git <span class="built_in">log</span> --oneline -10    <span class="comment"># 只看最近10条</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看具体改了啥</span></span><br><span class="line">git diff 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某次提交的详情</span></span><br><span class="line">git show 提交哈希值</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="六、撤销操作（救命用）">六、撤销操作（救命用）</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 撤销工作区的修改（还没add的时候）</span></span><br><span class="line">git checkout -- 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销已add的文件（从暂存区拿出来）</span></span><br><span class="line">git reset HEAD 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销最近一次commit，保留修改</span></span><br><span class="line">git reset --soft HEAD~1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销最近一次commit，丢弃修改（慎用！）</span></span><br><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="七、远程仓库操作">七、远程仓库操作</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看远程仓库信息</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加远程仓库</span></span><br><span class="line">git remote add origin https://github.com/用户名/仓库名.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一次推送时设置上游分支</span></span><br><span class="line">git push -u origin 分支名</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="八、常用场景速查">八、常用场景速查</h2>
+<h3 id="场景1：日常开发流程">场景1：日常开发流程</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status                <span class="comment"># 看看改了啥</span></span><br><span class="line">git add .                 <span class="comment"># 全部添加</span></span><br><span class="line">git commit -m <span class="string">&quot;feat: 新功能&quot;</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h3 id="场景2：开发新功能">场景2：开发新功能</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -b feature/新功能</span><br><span class="line"><span class="comment"># ... 写代码 ...</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;feat: 完成新功能&quot;</span></span><br><span class="line">git push -u origin feature/新功能</span><br><span class="line"><span class="comment"># 去GitHub创建Pull Request</span></span><br></pre></td></tr></table></figure>
+<h3 id="场景3：拉取最新代码">场景3：拉取最新代码</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
+<h3 id="场景4：放弃本地修改，用远程的">场景4：放弃本地修改，用远程的</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch origin</span><br><span class="line">git reset --hard origin/main</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="九、-gitignore-文件">九、.gitignore 文件</h2>
+<p>在项目根目录创建 <code>.gitignore</code> 文件，列出不想被 git 追踪的文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 示例</span><br><span class="line">node_modules/</span><br><span class="line">.env</span><br><span class="line">.DS_Store</span><br><span class="line">*.log</span><br><span class="line">build/</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="十、小技巧">十、小技巧</h2>
+<ol>
+<li><strong>多用 <code>git status</code></strong>：不确定状态时，先看看</li>
+<li><strong>commit 信息要写清楚</strong>：<code>feat:</code>、<code>fix:</code>、<code>docs:</code> 这样开头，方便看</li>
+<li><strong>分支命名规范</strong>：<code>feature/xxx</code>、<code>bugfix/xxx</code>、<code>hotfix/xxx</code></li>
+<li><strong>不会就 <code>git status</code></strong>：它会告诉你下一步该干啥</li>
+</ol>
+<hr>
+<h2 id="十一、血泪教训">十一、血泪教训</h2>
+<ol>
+<li><strong>不要在 main 分支上直接开发</strong>：先建分支！</li>
+<li><strong>push 之前先 pull</strong>：不然容易冲突</li>
+<li><strong>不要用 <code>git push --force</code></strong>：除非你真的知道自己在干嘛</li>
+<li><strong>commit 前看看 <code>git diff</code></strong>：确认改了啥再提交</li>
+</ol>
+<hr>
+<p>写于 2026 年 6 月 17 日，为了以后不再到处搜 Git 命令</p>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>version-control</tag>
+        <tag>cheatsheet</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Notability+Alist+天翼云盘 实现笔记自动备份</title>
+    <url>/2026/06/11/Notability+Alist+%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD/</url>
+    <content><![CDATA[<p>Notability+Alist+天翼云盘实现笔记的自动备份</p>
+<span id="more"></span>
+<h1>背景</h1>
+<p>Notability 是我日常使用的笔记工具，但它的 iCloud 同步局限性比较大。iCloud免费空间太少，只有5GB。为了更灵活地管理和长期保存笔记，<strong>我选择了 AList 挂载天翼云盘，再通过 Notability 的 WebDAV 自动备份功能，实现笔记的自动同步</strong></p>
+<h1>准备工作</h1>
+<p>Notability：支持 WebDAV 自动备份</p>
+<p>AList：轻量文件列表程序，可挂载多种存储后端</p>
+<p>天翼云盘：作为最终存储空间</p>
+<p>本地电脑：运行 AList，提供 WebDAV 服务</p>
+<h1>基本步骤</h1>
+<p>步骤一：在本地电脑部署 AList</p>
+<ol>
+<li>
+<p>下载 AList</p>
+<p><a href="https://github.com/AlistGo/alist">https://github.com/AlistGo/alist</a></p>
+<p><a href="https://imgchr.com/i/pe997Sx"><img src="https://s41.ax1x.com/2026/03/03/pe997Sx.png" alt="pe997Sx.png"></a></p>
+<p>注意windows电脑下载的是amd64，而不是arm64（已经被坑过一次了哈哈）</p>
+<p><a href="https://imgchr.com/i/pe99OmD"><img src="https://s41.ax1x.com/2026/03/03/pe99OmD.png" alt="pe99OmD.png"></a></p>
+</li>
+<li>
+<p>解压alist 程序压缩包，找到你解压出的文件包的位置，输入cmd，按照下图指示操作</p>
+<p><a href="https://imgchr.com/i/pe9CSfI"><img src="https://s41.ax1x.com/2026/03/03/pe9CSfI.md.png" alt="pe9CSfI.md.png"></a></p>
+<p>cmd终端输入alist server即可启动alist客户端</p>
+<p><a href="https://imgchr.com/i/pe9CC1P"><img src="https://s41.ax1x.com/2026/03/03/pe9CC1P.md.png" alt="pe9CC1P.md.png"></a></p>
+</li>
+<li>
+<p>打开浏览器访问 <a href="http://localhost:5244">http://localhost:5244</a></p>
+<p>登录后台管理界面，初始密码在上图中是有的,具体是在&quot;initial password is&quot;后面</p>
+</li>
+</ol>
+<p>步骤二：挂载天翼云盘</p>
+<ol>
+<li>
+<p>在后台选择 存储 → 添加存储。</p>
+</li>
+<li>
+<p>类型选择 天翼云盘。</p>
+</li>
+<li>
+<p>填写参数：用户名：天翼云盘手机号<br>
+密码：登录密码<br>
+根文件夹 ID：在天翼云盘网页端打开某个文件夹，URL 最后的数字就是 ID<br>
+Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie</p>
+</li>
+<li>
+<p>保存后，AList 前端即可访问天翼云盘文件。</p>
+</li>
+</ol>
+<p>这里的操作不再赘述，alist官方的操作文档喂饭级别的教程很不错了</p>
+<p><a href="https://alistgo.com/zh/guide/drivers/189.html">https://alistgo.com/zh/guide/drivers/189.html</a></p>
+<p>步骤三：配置 Notability 自动备份</p>
+<ol>
+<li>
+<p>打开 Notability → 设置 → 自动备份。</p>
+</li>
+<li>
+<p>选择 WebDAV。</p>
+</li>
+<li>
+<p>填写信息：服务器地址：http://&lt;你的电脑IP&gt;:5244/dav/天翼云盘<br>
+用户名/密码：AList 初始化账号密码（如果你更改过密码的话，输入更改后的密码）</p>
+<p>电脑ip使用ipconfig获取，/天翼云盘 必须有，同理，如果你挂载的是百度网盘，相应的路径要更改为 /百度网盘</p>
+</li>
+<li>
+<p>保存后，Notability 会自动将笔记备份到天翼云盘。</p>
+<p>（可选，不强求）步骤四：下载Raidrive，本地查看自动备份文件</p>
+<ol>
+<li>
+<p>安装好raidrive之后</p>
+<p><a href="https://imgchr.com/i/pe9CDBD"><img src="https://s41.ax1x.com/2026/03/03/pe9CDBD.md.png" alt="pe9CDBD.md.png"></a></p>
+</li>
+<li>
+<p>打开自己的文件管理器，看看本地是不是多出来一个webdav的网络位置，如果有的话就是成功了，可以实时看自己本地的文件了</p>
+</li>
+</ol>
+</li>
+</ol>
+<h1>总结</h1>
+<p>通过 Notability 内置 WebDAV → AList → 天翼云盘，我实现了一个自动化、轻量化的笔记备份方案，不再需要手动导出，笔记实时备份。</p>
+<p>注意事项：确保电脑运行 AList 程序，<strong>alist的cmd不要手痒关掉</strong>，否则 WebDAV 服务不可用</p>
+<p>后续备份：同样，可以把文件拷一份到移动硬盘中，遵循3-2-1备份原则</p>
+<p>方案可扩展，AList 还能挂载其他云盘</p>
+<p>如果电脑ip地址更改了需要修改webdav地址的,需要实时进行电脑ip地址的获取，后续可以考虑内网穿透实现直接远程访问的方案</p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+      <tags>
+        <tag>alist</tag>
+        <tag>notability</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Porn和masturbation，你得分清楚</title>
+    <url>/2026/06/15/Porn%E5%92%8Cmasturbation%EF%BC%8C%E4%BD%A0%E5%BE%97%E5%88%86%E6%B8%85%E6%A5%9A/</url>
+    <content><![CDATA[<p>pornography 的东西，我认为是百害无一益。masturbation 不一样，我认为他有他的好处</p>
+<span id="more"></span>
+<p>其实一直有一个困扰我很久的问题，就是为什么看 pornography 来 masturbation 这件事惯性这么大，这么难以改变。</p>
+<p>昨天看一个油管上的视频，获得了点启发：触发因素是压力和无聊，想不到干什么事情的时候就来，而且这件事给你的大脑带来的多巴胺还多的恐怖。</p>
+<p>所以现在的问题转换为，如何减少频率，如何减少你对于压力的态度，如何减少无聊这种生活状态的出现。</p>
+<p>其实我感觉戒除这个东西，光光靠意志力肯定是不够的，你如果让我一年不 masturbation，显然是扯蛋，因为我相信科学，明白定时规律的排出是对身体有益处的。当然，相比于科学，我更相信我自己的身体反应，2天一次的话对我来说是有点太频繁的，最近其实感觉人的精神就不是很好，专注力很差其实，身体状态还永远没有到最佳的状态。还有一个就是晨勃的现象可以作为一个很好的标准，如果连续2天出现很胀痛的情况，就是你的身体在提醒你要适时排出了。</p>
+<p>之所以你会去向往看 pornography，还有一个原因，就是你不注重于当下，你把排出这件事情和网络屏幕上的图像视频相关联，但往往忽视了自己身体的细微反应，一些排出前的信号，一些控制的能力。</p>
+<p>定期的 masturbation 是好的，有以下几点想法：</p>
+<ol>
+<li>为此设定目标和意图：比如你是想多长时间？你想不想排出？用什么方式？想要达到什么地步？</li>
+<li>增加呼吸频率，让你的身体感觉你在运动，供给充分的氧气，深呼吸</li>
+<li>抚摸你的各个身体部位，感受这种触觉</li>
+<li>频率不要过快，记住，你的目的不是排出，而是为了锻炼耐受力，享受这个过程</li>
+<li>可以更换姿势，增加新鲜感，而不是寻求荧幕上的新鲜刺激，那种刺激过于强烈</li>
+<li>可以发挥自己的想象，自行脑补</li>
+</ol>
+<p>2026年6月15日晚上，可以感受到的是：不依赖 pornography 的话，事后完全不会那么空虚，睡眠质量也非常不错，一夜之间只醒了一次，84分的睡眠，还是不错的。其实昨天晚上睡得好还有一个原因：就是睡前泡了个脚，可能也是比较有助于睡眠的。</p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>health</tag>
+        <tag>habits</tag>
+        <tag>self-awareness</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora如何插入自己的云端视频？</title>
+    <url>/2026/06/17/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409204348853.png" alt="image-20260409204348853"></p>
+<span id="more"></span>
+<h1>怎么做</h1>
+<h2 id="建立一个github仓库">建立一个github仓库</h2>
+<p>访问github，点击个人头像，点击<strong>github仓库</strong>repository</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409200339144.png" alt="image-20260409200339144"></p>
+<p>到达以下界面，建立一个新仓库</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409200644852.png" alt="image-20260409200644852"></p>
+<p>命名为video</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409200719165.png" alt="image-20260409200719165"></p>
+<h2 id="上传本地视频">上传本地视频</h2>
+<p>点击仓库video，进入issue界面，建立一个新的issue</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409200827074.png" alt="image-20260409200827074"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409200910129.png" alt="image-20260409200910129"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409201024688.png" alt="image-20260409201024688"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409201116160.png" alt="image-20260409201116160"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409201232932.png" alt="image-20260409201232932"></p>
+<p>得到这样的一串地址</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://private-user-images.githubusercontent.com/227099768/575928803-456bb596-5621-403f-8e68-17ec1299d1a6.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU3MzczOTcsIm5iZiI6MTc3NTczNzA5NywicGF0aCI6Ii8yMjcwOTk3NjgvNTc1OTI4ODAzLTQ1NmJiNTk2LTU2MjEtNDAzZi04ZTY4LTE3ZWMxMjk5ZDFhNi5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDA5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQwOVQxMjE4MTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04OTk0MDMzOTUzOGY0OTI4ZTI3NDUzZTI4ZTYxZjc0ZTU0OTBjY2QyZDc2ZjNjYTMwYTFkNjQ0Y2QyMzBkNDRkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.QUr0Cq4XrYwu_qXE4GdpRAipzGY_6afpNHRRz-i7Kfc</span><br></pre></td></tr></table></figure>
+<h2 id="嵌入到Typora">嵌入到Typora</h2>
+<p>打开B站随便一个视频，复制嵌入代码</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409201346819.png" alt="image-20260409201346819"></p>
+<p>复制得到的应该是这样一串 东东</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;iframe src=&quot;//player.bilibili.com/player.html?isOutside=true&amp;aid=116368313679961&amp;bvid=BV1y3DjB2E9d&amp;cid=37334352602&amp;p=1&quot;</span><br><span class="line">scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409201951907.png" alt="image-20260409201951907"></p>
+<p>以下是实际效果，还是很不错的啦！适合平时上传10mb左右的小视频，视频太大就不是很行啦</p>
+<iframe src="https://private-user-images.githubusercontent.com/227099768/575922934-9a27e4a4-2ad5-43ce-8c09-d5c3a4ac46c9.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU5OTQ5MDQsIm5iZiI6MTc3NTk5NDYwNCwicGF0aCI6Ii8yMjcwOTk3NjgvNTc1OTIyOTM0LTlhMjdlNGE0LTJhZDUtNDNjZS04YzA5LWQ1YzNhNGFjNDZjOS5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMlQxMTUwMDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yMzNjOTU4YTUyNmE4MTZlNGJiNTQwYjBmZjE0MDk1OWRiM2M4NmIzYjczN2U3M2M0NTRhMjA3OTFjMzQ5NmQ5JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9dmlkZW8lMkZtcDQifQ.AJA9C2DGs6aczbBmussoqQI2RDpc05DCJZw8MTAazU0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<h1>参考文章</h1>
+<p><a href="https://blog.csdn.net/qq_45830323/article/details/134758982">关于Typora如何插入自己的云端视频的方法</a></p>
+<p><a href="https://blog.csdn.net/weixin_45940369/article/details/130551018">GitHub 仓库的 README 直接播放视频</a></p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UG NX12如何进行数控仿真？</title>
+    <url>/2026/06/11/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" alt="ugnx1"><br>
+UG NX12如何进行数控仿真？</p>
+ <span id="more"></span>
+<p>数控车床</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221511401.png" alt="image-20260318221511286"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221633130.png" alt="image-20260318221633079"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318223143227.png" alt="image-20260318223143171"></p>
+<p>非切削参数里面修改<strong>逼近、退刀点</strong></p>
+<p>切削参数里面设置<strong>切削余量</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224403913.png" alt="image-20260318224403844"></p>
+<p>显示T0101的方法：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318230934810.png" alt="image-20260318230934759"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224620067.png" alt="image-20260318224620007"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224638708.png" alt="image-20260318224638679"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**我不能 100% 保证刀片“绝对不会崩”**（任何切断操作都有风险，尤其是你这个 Ø220 mm 切到 Ø60 mm 的大切深），但**用我下面调整后的参数 + 正确刀具，崩刀概率会降到非常低**（实际工厂里 95% 以上都不会崩）。</span><br><span class="line"></span><br><span class="line">我根据你的工件尺寸（大直径铝件）和 NX 12 的 Parting 操作，专门给你**最保守、最安全的参数**（比我之前推荐的还更保守）。</span><br><span class="line"></span><br><span class="line">### 1. 必须换一把“长 + 强”切断刀（这是防崩基础）</span><br><span class="line">- 刀片宽度：**3 mm**（不要用 4 mm，窄一点刚性更好）</span><br><span class="line">- 刀杆总长（Shank Length）：**至少 70–80 mm**（你之前那把太短了）</span><br><span class="line">- 刀片要求：**带断屑槽 + 涂层**（推荐 Kennametal N123 或 Sandvik CoroCut，铝专用等级）</span><br><span class="line">- NX 12 操作：在 Parting 操作里新建刀具 → Turning Tool → Parting Tool → 把长度改成 80 mm</span><br><span class="line"></span><br><span class="line">### 2. 最安全的 Parting 参数设置（直接复制）</span><br><span class="line">双击你的 PART_OFF 操作后，按下面填（这是防崩最关键的 3 个地方）：</span><br><span class="line"></span><br><span class="line">**Cut Parameters（切削参数）标签页**</span><br><span class="line">- Multiple Passes：**必须勾选**</span><br><span class="line">- Depth per Pass（每层切深）：**0.8 ~ 1.0 mm**（我现在给你降到 1 mm 以内，比之前更保守）</span><br><span class="line">- Stock（最终余量）：**0.3 mm**</span><br><span class="line">- Feed（进给）：**0.05 ~ 0.07 mm/rev**（非常慢，防止崩刃）</span><br><span class="line">- Speed（转速）：**1500 ~ 1800 rpm**（铝件不要太快）</span><br><span class="line"></span><br><span class="line">**Non-Cutting Moves（非切削移动）标签页**</span><br><span class="line">- Approach（进刀）：**Ramp**（斜进刀）</span><br><span class="line">- Retract（退刀）：</span><br><span class="line">  - Retract Distance：**X +12 mm**（先把刀从槽里拉出来）</span><br><span class="line">  - **必须先退 X，再退 Z**</span><br><span class="line">- Clearance Plane：**Z +100 mm**（抬得更高一点）</span><br><span class="line"></span><br><span class="line">**额外防崩开关**：</span><br><span class="line">- 在 Cut Parameters 里勾选 **Use Fixed Cycle** → 选 **G75**（自动 peck 退刀断屑，最防崩！）</span><br><span class="line"></span><br><span class="line">### 3. 额外两招几乎零崩刀（强烈建议做）</span><br><span class="line">**招式1（最推荐）**：先车一个**退刀槽**</span><br><span class="line">- 在切断位置前方 3 mm 处，先做一个 Groove Turning 操作：</span><br><span class="line">  - 宽度 5 mm，深度 3 mm</span><br><span class="line">- 然后再做 Parting 操作，刀具直接进到这个槽里切，崩刀风险几乎为 0。</span><br><span class="line"></span><br><span class="line">**招式2**：中心前减速</span><br><span class="line">- 在切到直径 Ø80 mm 左右时，手动把进给降到 **0.03 mm/rev**（接近中心时切削力最大，最容易崩）</span><br><span class="line"></span><br><span class="line">### 4. 实际操作前的最后检查（必须做！）</span><br><span class="line">1. 生成刀路后 → 右键 **Verify → Machine Simulation**</span><br><span class="line">2. 勾选 Holder Collision + Fixture Collision</span><br><span class="line">3. 播放完整仿真：</span><br><span class="line">   - 看刀片是否一直保持 0.8–1.0 mm 每层切</span><br><span class="line">   - 看退刀是否“先拉 X 再抬 Z”</span><br><span class="line">   - 如果全程无红色报警 → 基本安全</span><br><span class="line"></span><br><span class="line">### 总结一句话</span><br><span class="line">**用上面参数（每层 ≤1.0 mm + 先退 X + G75 + 长刀杆），刀片崩的概率极低**（我教过的学生用这个方法切 Ø200+ 铝件都没崩过）。</span><br><span class="line"></span><br><span class="line">**现在你直接做**：</span><br><span class="line">1. 把切深改成 **0.8–1.0 mm**</span><br><span class="line">2. 进给改成 **0.05–0.07 mm/rev**</span><br><span class="line">3. 新建一把 80 mm 长的切断刀</span><br><span class="line">4. 勾选 G75 + 生成刀路</span><br><span class="line">5. 仿真一次</span><br><span class="line"></span><br><span class="line">做完**仿真截图**发我（尤其是刀路播放到中心位置的时候），我帮你最后看一眼是否安全。  </span><br><span class="line">或者你现在就把当前 Depth per Pass 和 Feed 值告诉我，我再给你精确数字。</span><br><span class="line"></span><br><span class="line">放心，按这个保守参数走，刀片不会轻易崩的！  </span><br><span class="line">继续操作，有问题随时截图问我。</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260319213946556.png" alt="image-20260319213946453"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260320134843281.png" alt="image-20260320134843073"></p>
+<p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
+<p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
+<p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+      <tags>
+        <tag>ug-nx</tag>
       </tags>
   </entry>
   <entry>
@@ -423,139 +692,13 @@
 </ul>
 ]]></content>
       <categories>
-        <category>方法</category>
+        <category>How-To</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Notability+Alist+天翼云盘 实现笔记自动备份</title>
-    <url>/2026/06/11/Notability+Alist+%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD/</url>
-    <content><![CDATA[<p>Notability+Alist+天翼云盘实现笔记的自动备份</p>
-<span id="more"></span>
-<h2 id="背景">背景</h2>
-<p>Notability 是我日常使用的笔记工具，但它的 iCloud 同步局限性比较大。iCloud免费空间太少，只有5GB。为了更灵活地管理和长期保存笔记，<strong>我选择了 AList 挂载天翼云盘，再通过 Notability 的 WebDAV 自动备份功能，实现笔记的自动同步</strong></p>
-<h2 id="准备工作">准备工作</h2>
-<p>Notability：支持 WebDAV 自动备份</p>
-<p>AList：轻量文件列表程序，可挂载多种存储后端</p>
-<p>天翼云盘：作为最终存储空间</p>
-<p>本地电脑：运行 AList，提供 WebDAV 服务</p>
-<p>步骤一：在本地电脑部署 AList</p>
-<ol>
-<li>
-<p>下载 AList</p>
-<p><a href="https://github.com/AlistGo/alist">https://github.com/AlistGo/alist</a></p>
-<p><a href="https://imgchr.com/i/pe997Sx"><img src="https://s41.ax1x.com/2026/03/03/pe997Sx.png" alt="pe997Sx.png"></a></p>
-<p>注意windows电脑下载的是amd64，而不是arm64（已经被坑过一次了哈哈）</p>
-<p><a href="https://imgchr.com/i/pe99OmD"><img src="https://s41.ax1x.com/2026/03/03/pe99OmD.png" alt="pe99OmD.png"></a></p>
-</li>
-<li>
-<p>解压alist 程序压缩包，找到你解压出的文件包的位置，输入cmd，按照下图指示操作</p>
-<p><a href="https://imgchr.com/i/pe9CSfI"><img src="https://s41.ax1x.com/2026/03/03/pe9CSfI.md.png" alt="pe9CSfI.md.png"></a></p>
-<p>cmd终端输入alist server即可启动alist客户端</p>
-<p><a href="https://imgchr.com/i/pe9CC1P"><img src="https://s41.ax1x.com/2026/03/03/pe9CC1P.md.png" alt="pe9CC1P.md.png"></a></p>
-</li>
-<li>
-<p>打开浏览器访问 <a href="http://localhost:5244">http://localhost:5244</a></p>
-<p>登录后台管理界面，初始密码在上图中是有的,具体是在&quot;initial password is&quot;后面</p>
-</li>
-</ol>
-<p>步骤二：挂载天翼云盘</p>
-<ol>
-<li>
-<p>在后台选择 存储 → 添加存储。</p>
-</li>
-<li>
-<p>类型选择 天翼云盘。</p>
-</li>
-<li>
-<p>填写参数：用户名：天翼云盘手机号<br>
-密码：登录密码<br>
-根文件夹 ID：在天翼云盘网页端打开某个文件夹，URL 最后的数字就是 ID<br>
-Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie</p>
-</li>
-<li>
-<p>保存后，AList 前端即可访问天翼云盘文件。</p>
-</li>
-</ol>
-<p>这里的操作不再赘述，alist官方的操作文档喂饭级别的教程很不错了</p>
-<p><a href="https://alistgo.com/zh/guide/drivers/189.html">https://alistgo.com/zh/guide/drivers/189.html</a></p>
-<p>步骤三：配置 Notability 自动备份</p>
-<ol>
-<li>
-<p>打开 Notability → 设置 → 自动备份。</p>
-</li>
-<li>
-<p>选择 WebDAV。</p>
-</li>
-<li>
-<p>填写信息：服务器地址：http://&lt;你的电脑IP&gt;:5244/dav/天翼云盘<br>
-用户名/密码：AList 初始化账号密码（如果你更改过密码的话，输入更改后的密码）</p>
-<p>电脑ip使用ipconfig获取，/天翼云盘 必须有，同理，如果你挂载的是百度网盘，相应的路径要更改为 /百度网盘</p>
-</li>
-<li>
-<p>保存后，Notability 会自动将笔记备份到天翼云盘。</p>
-<p>（可选，不强求）步骤四：下载Raidrive，本地查看自动备份文件</p>
-<ol>
-<li>
-<p>安装好raidrive之后</p>
-<p><a href="https://imgchr.com/i/pe9CDBD"><img src="https://s41.ax1x.com/2026/03/03/pe9CDBD.md.png" alt="pe9CDBD.md.png"></a></p>
-</li>
-<li>
-<p>打开自己的文件管理器，看看本地是不是多出来一个webdav的网络位置，如果有的话就是成功了，可以实时看自己本地的文件了</p>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="总结">总结</h2>
-<p>通过 Notability 内置 WebDAV → AList → 天翼云盘，我实现了一个自动化、轻量化的笔记备份方案，不再需要手动导出，笔记实时备份。</p>
-<p>注意事项：确保电脑运行 AList 程序，<strong>alist的cmd不要手痒关掉</strong>，否则 WebDAV 服务不可用</p>
-<p>后续备份：同样，可以把文件拷一份到移动硬盘中，遵循3-2-1备份原则</p>
-<p>方案可扩展，AList 还能挂载其他云盘</p>
-<p>如果电脑ip地址更改了需要修改webdav地址的,需要实时进行电脑ip地址的获取，后续可以考虑内网穿透实现直接远程访问的方案</p>
-]]></content>
-      <categories>
-        <category>方法</category>
-      </categories>
-      <tags>
-        <tag>Alist</tag>
-        <tag>Notability</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UG NX12如何进行数控仿真？</title>
-    <url>/2026/06/11/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/</url>
-    <content><![CDATA[<p>UG NX12如何进行数控仿真？<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" alt="ugnx1"></p>
- <span id="more"></span>
-<p>数控车床</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221511401.png" alt="image-20260318221511286"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221633130.png" alt="image-20260318221633079"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318223143227.png" alt="image-20260318223143171"></p>
-<p>非切削参数里面修改<strong>逼近、退刀点</strong></p>
-<p>切削参数里面设置<strong>切削余量</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224403913.png" alt="image-20260318224403844"></p>
-<p>显示T0101的方法：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318230934810.png" alt="image-20260318230934759"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224620067.png" alt="image-20260318224620007"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224638708.png" alt="image-20260318224638679"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**我不能 100% 保证刀片“绝对不会崩”**（任何切断操作都有风险，尤其是你这个 Ø220 mm 切到 Ø60 mm 的大切深），但**用我下面调整后的参数 + 正确刀具，崩刀概率会降到非常低**（实际工厂里 95% 以上都不会崩）。</span><br><span class="line"></span><br><span class="line">我根据你的工件尺寸（大直径铝件）和 NX 12 的 Parting 操作，专门给你**最保守、最安全的参数**（比我之前推荐的还更保守）。</span><br><span class="line"></span><br><span class="line">### 1. 必须换一把“长 + 强”切断刀（这是防崩基础）</span><br><span class="line">- 刀片宽度：**3 mm**（不要用 4 mm，窄一点刚性更好）</span><br><span class="line">- 刀杆总长（Shank Length）：**至少 70–80 mm**（你之前那把太短了）</span><br><span class="line">- 刀片要求：**带断屑槽 + 涂层**（推荐 Kennametal N123 或 Sandvik CoroCut，铝专用等级）</span><br><span class="line">- NX 12 操作：在 Parting 操作里新建刀具 → Turning Tool → Parting Tool → 把长度改成 80 mm</span><br><span class="line"></span><br><span class="line">### 2. 最安全的 Parting 参数设置（直接复制）</span><br><span class="line">双击你的 PART_OFF 操作后，按下面填（这是防崩最关键的 3 个地方）：</span><br><span class="line"></span><br><span class="line">**Cut Parameters（切削参数）标签页**</span><br><span class="line">- Multiple Passes：**必须勾选**</span><br><span class="line">- Depth per Pass（每层切深）：**0.8 ~ 1.0 mm**（我现在给你降到 1 mm 以内，比之前更保守）</span><br><span class="line">- Stock（最终余量）：**0.3 mm**</span><br><span class="line">- Feed（进给）：**0.05 ~ 0.07 mm/rev**（非常慢，防止崩刃）</span><br><span class="line">- Speed（转速）：**1500 ~ 1800 rpm**（铝件不要太快）</span><br><span class="line"></span><br><span class="line">**Non-Cutting Moves（非切削移动）标签页**</span><br><span class="line">- Approach（进刀）：**Ramp**（斜进刀）</span><br><span class="line">- Retract（退刀）：</span><br><span class="line">  - Retract Distance：**X +12 mm**（先把刀从槽里拉出来）</span><br><span class="line">  - **必须先退 X，再退 Z**</span><br><span class="line">- Clearance Plane：**Z +100 mm**（抬得更高一点）</span><br><span class="line"></span><br><span class="line">**额外防崩开关**：</span><br><span class="line">- 在 Cut Parameters 里勾选 **Use Fixed Cycle** → 选 **G75**（自动 peck 退刀断屑，最防崩！）</span><br><span class="line"></span><br><span class="line">### 3. 额外两招几乎零崩刀（强烈建议做）</span><br><span class="line">**招式1（最推荐）**：先车一个**退刀槽**</span><br><span class="line">- 在切断位置前方 3 mm 处，先做一个 Groove Turning 操作：</span><br><span class="line">  - 宽度 5 mm，深度 3 mm</span><br><span class="line">- 然后再做 Parting 操作，刀具直接进到这个槽里切，崩刀风险几乎为 0。</span><br><span class="line"></span><br><span class="line">**招式2**：中心前减速</span><br><span class="line">- 在切到直径 Ø80 mm 左右时，手动把进给降到 **0.03 mm/rev**（接近中心时切削力最大，最容易崩）</span><br><span class="line"></span><br><span class="line">### 4. 实际操作前的最后检查（必须做！）</span><br><span class="line">1. 生成刀路后 → 右键 **Verify → Machine Simulation**</span><br><span class="line">2. 勾选 Holder Collision + Fixture Collision</span><br><span class="line">3. 播放完整仿真：</span><br><span class="line">   - 看刀片是否一直保持 0.8–1.0 mm 每层切</span><br><span class="line">   - 看退刀是否“先拉 X 再抬 Z”</span><br><span class="line">   - 如果全程无红色报警 → 基本安全</span><br><span class="line"></span><br><span class="line">### 总结一句话</span><br><span class="line">**用上面参数（每层 ≤1.0 mm + 先退 X + G75 + 长刀杆），刀片崩的概率极低**（我教过的学生用这个方法切 Ø200+ 铝件都没崩过）。</span><br><span class="line"></span><br><span class="line">**现在你直接做**：</span><br><span class="line">1. 把切深改成 **0.8–1.0 mm**</span><br><span class="line">2. 进给改成 **0.05–0.07 mm/rev**</span><br><span class="line">3. 新建一把 80 mm 长的切断刀</span><br><span class="line">4. 勾选 G75 + 生成刀路</span><br><span class="line">5. 仿真一次</span><br><span class="line"></span><br><span class="line">做完**仿真截图**发我（尤其是刀路播放到中心位置的时候），我帮你最后看一眼是否安全。  </span><br><span class="line">或者你现在就把当前 Depth per Pass 和 Feed 值告诉我，我再给你精确数字。</span><br><span class="line"></span><br><span class="line">放心，按这个保守参数走，刀片不会轻易崩的！  </span><br><span class="line">继续操作，有问题随时截图问我。</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260319213946556.png" alt="image-20260319213946453"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260320134843281.png" alt="image-20260320134843073"></p>
-<p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
-<p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
-<p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
-]]></content>
-      <categories>
-        <category>方法</category>
-      </categories>
-      <tags>
-        <tag>UG</tag>
-      </tags>
   </entry>
   <entry>
     <title>UG NX12怎么去安装？</title>
     <url>/2026/06/11/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>UG NX12怎么去安装？<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318140642944.png" alt="image-20260318140642944"></p>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318140642944.png" alt="image-20260318140642944"></p>
 <span id="more"></span>
 <h1>需要的文件：</h1>
 <p><a href="https://www.123865.com/s/bBy8vd-gYwXv">123网盘UG12.0链接</a></p>
@@ -570,10 +713,10 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p><a href="https://www.bilibili.com/video/BV1rh411m7u6/?vd_source=be5a0b6c58eb0ef9b1da5603d170bc44">UG-NX12.0软件安装</a></p>
 ]]></content>
       <categories>
-        <category>方法</category>
+        <category>How-To</category>
       </categories>
       <tags>
-        <tag>UG</tag>
+        <tag>ug-nx</tag>
       </tags>
   </entry>
   <entry>
@@ -590,17 +733,111 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>使用spaceniffer看电脑文件分布，决定删除什么文件。在尽量不要删除系统文件的前提下，删掉我们自己下载的东西</p>
 ]]></content>
       <categories>
-        <category>方法</category>
+        <category>How-To</category>
       </categories>
       <tags>
         <tag>windows</tag>
       </tags>
   </entry>
   <entry>
+    <title>haozi的vibe coding笔记</title>
+    <url>/2026/06/15/haozi%E7%9A%84vibe%20coding%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>新手期的嘗試才是最珍貴的</p>
+<span id="more"></span>
+<h2 id="MCP-vs-Agent-Skill">MCP vs Agent Skill</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260616230337131.png" alt="image.png"></p>
+<h2 id="Vibe-Coding">Vibe Coding</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260617191037525.png" alt="image.png"></p>
+<h2 id="HOW-TO-MAKE-A-PRD">HOW TO MAKE A PRD</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260617191638966.png" alt="image.png"></p>
+<h2 id="KNOW-THE-FRAMEWORKS">KNOW THE FRAMEWORKS</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260617192018899.png" alt="image.png"></p>
+<h2 id="The-Friendly-Cat-Dances-Constantly">The Friendly Cat Dances Constantly</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260617194227235.png" alt="image.png"></p>
+<h2 id="视频链接">视频链接</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=4-89v26eTLw">普通人可以用AI做什麼？👩🏻‍💻 轉碼失敗，我卻從AI手中拿到了新世界的入場券</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>ai</tag>
+        <tag>vibe-coding</tag>
+        <tag>claude</tag>
+        <tag>mcp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iPhone14promax 有必要升到ios26吗？</title>
+    <url>/2026/06/11/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310143708973.png" alt="image-20260310143708973"></p>
+<span id="more"></span>
+<h1>写在前面</h1>
+<p>iPhone一直还停留在ios 18.7，很久没有自动更新过系统。、</p>
+<p>iPad已经更新到了ipad os26.3，前段时间iPhone和iPad使用接力功能发现很不好用，就想着是不是可能是系统跨度大的问题。</p>
+<p>iPhone要不要更新到ios 26.3？一直很犹豫，所以就写了这篇文章。</p>
+<h1>一些对比</h1>
+<p>最大的特点就是liquid glass的ui设计，整体的ui都变得圆润化，ui变成毛玻璃格式。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130236369.png" alt="image-20260310130236369"></p>
+<p>在视频里发现：ios26.3的电池最大容量是86%，ios18.7的电池最大容量是100%，这有点吓人，<strong>更新系统难道会让我的电池最大容量下降很多吗？</strong></p>
+<p>其实换个角度想想，右边的这个手机，不正好是我现在自己手机的电池最大容量吗？他既然可以很好的运行ios26，那我也不可以吗？哈哈哈</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130543136.png" alt="image-20260310130543136"></p>
+<p>从视频很明显还能看出，ios26系统会更加的流畅，退出软件不会有ios18的那种顿挫感，而且进入app，可以明显分辨出ios26会更快一点。</p>
+<p>除此之外，还有快捷指令方面的更新：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134747714.png" alt="image-20260310134747714"></p>
+<p>音乐会有中文翻译了：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134830898.png" alt="image-20260310134830898"></p>
+<p>提醒事项会介入ai：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134935291.png" alt="image-20260310134935291"></p>
+<p>其实有一个很好的功能加入了，就是apple intelligence，但是奈何iPhone14promax的芯片不支持apple intelligence，这是比较可惜的一点。</p>
+<h1>基本情况</h1>
+<p>Google了一下：更新系统让电池最大容量下降？发现类似的例子不是很多，有倒是有：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310132154327.png" alt="image-20260310132154327">、</p>
+<p>问了下gpt，他是这样说的：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133316889.png" alt="image-20260310133316889" style="zoom:150%;" />
+<p>查了查自己的电池最大容量是86%，电池情况是这样的：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133257792.png" alt="image-20260310133257792"></p>
+<p>从gpt得知，接近1000次的充电循环次数还有这样的电池健康，使用习惯是比较好的，电池体质是比较好的，哈，那想必我也不用担心更新后电池会崩掉，会出现问题。</p>
+<p>更何况，现在的手机续航就已经很废了…</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133915037.png" alt="image-20260310133915037"></p>
+<p>那什么时候推荐换电池呢？请看：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">當 iPhone電池健康度降到多少該考慮更換呢？一般來說，</span><br><span class="line"></span><br><span class="line">80%以上：電池健康度在80%以上都屬正常範圍。</span><br><span class="line">60%－80%：在此範圍時，可以開始考慮更換。</span><br><span class="line">低於60%：電池健康度iPhone小於60%則建議盡快更換電池，避免影響手機的正常使用。</span><br><span class="line">低於40%：iPhone電池健康不到40%的話，建議立即更換，以防出現更嚴重的問題！</span><br></pre></td></tr></table></figure>
+<h1>结论</h1>
+<p>对于我个人而言，还是决定更新ios26.3.1，原因如下：</p>
+<ul>
+<li>和iPad能够更好的兼容，接力功能可以更好的实现</li>
+<li>更流畅的操作体验</li>
+<li>ai在iPhone原生app里面的接入，可以一试</li>
+<li>音乐app有翻译歌词了，可以一试的功能</li>
+<li>图标的可以统一liquid glass化，挺好看的</li>
+<li>26.3.1已经修复了前面版本的一些bug的，是比较稳定的版本</li>
+</ul>
+<p>可能存在的雷点：</p>
+<ul>
+<li>电池续航会有明显的下降</li>
+<li>手机可能会异常发烫</li>
+</ul>
+<p>显然嘛，对于我来说，利大于弊。</p>
+<h1>升级以后的体验</h1>
+<p>我觉得可以啊！流畅的可以，而且电池最大容量一点没掉啊，好强的电池嘿嘿。</p>
+<p>但是接力功能感觉依旧很难受，估计是你是用的方法不太对。</p>
+<p>是的，之前之所以无法使用接力打开app功能，是因为没有打开相应app的iCloud同步功能。就比如说，你在iPad上编辑的备忘录想要在iPhone上打开，你就需要进入设置界面打开备忘录的iCloud同步，这样就行了。</p>
+]]></content>
+      <categories>
+        <category>Thoughts</category>
+      </categories>
+      <tags>
+        <tag>iphone</tag>
+        <tag>tech</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>jellyfin如何设置优雅的刮削？</title>
     <url>/2026/06/11/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/</url>
-    <content><![CDATA[<p>jellyfin如何设置优雅的刮削？<span id="more"></span><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403145425463.png" alt="image-20260403145425463"></p>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403145425463.png" alt="image-20260403145425463"></p>
+<span id="more"></span>
 <h1>MetaShark</h1>
 <p>需要的工具：</p>
 <p><a href="https://github.com/cxfksword/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库1</a></p>
@@ -662,85 +899,170 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>除此之外，还需要一个国外的节点（使用的是v2ray）</p>
 <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 是否启用代理</span></span><br><span class="line"><span class="attr">use_proxy</span> = <span class="literal">yes</span>（这里改为<span class="literal">yes</span>）</span><br><span class="line"><span class="comment"># 设置代理服务器地址，支持 http, socks5/socks5h 代理。示例格式如下：</span></span><br><span class="line"><span class="attr">proxy</span> = socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br></pre></td></tr></table></figure>
 <p>修改后，JavSP 应该能正常工作了</p>
+<h1>一些问题和解决方法</h1>
+<h2 id="metashark刮削演员图片不显示">metashark刮削演员图片不显示</h2>
+<p>日志是这样写的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[ERR] [28] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request. URL &quot;GET&quot; &quot;/Items/0d08a913c95b0996ba7aed19ec5a405d/Images/Primary&quot;.</span><br><span class="line">System.Net.Http.HttpRequestException: 由于目标计算机积极拒绝，无法连接。 (127.0.0.1:8096)</span><br></pre></td></tr></table></figure>
+<p>解决方法：Dashboard → Networking-&gt;清空 network address</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405210415758.png" alt="image-20260405210415758"></p>
+<p>插件通过url无法安装怎么办？</p>
+<p>可能需要我们把代理给关闭了，采取直连策略即可</p>
+<h2 id="Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据">Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据</h2>
+<p>打开config.ini，具体修改了以下几处发现就已经可以啦</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">enable_file_move = no</span><br><span class="line">...</span><br><span class="line">media_servers = jellyfin</span><br><span class="line">...</span><br><span class="line">save_dir = $censor/$actress/[$num]</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>方法</category>
+        <category>How-To</category>
       </categories>
       <tags>
-        <tag>Jellyfin</tag>
+        <tag>jellyfin</tag>
       </tags>
   </entry>
   <entry>
-    <title>iPhone14promax 有必要升到ios26吗？</title>
-    <url>/2026/06/11/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/</url>
-    <content><![CDATA[<p>iPhone14promax 有必要升到ios26吗？</p>
+    <title>怎么去优雅的转pt种？</title>
+    <url>/2026/06/11/pt/</url>
+    <content><![CDATA[<h1><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944"></h1>
 <span id="more"></span>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310143708973.png" alt="image-20260310143708973"></p>
-<h1>写在前面</h1>
-<p>iPhone一直还停留在ios 18.7，很久没有自动更新过系统。、</p>
-<p>iPad已经更新到了ipad os26.3，前段时间iPhone和iPad使用接力功能发现很不好用，就想着是不是可能是系统跨度大的问题。</p>
-<p>iPhone要不要更新到ios 26.3？一直很犹豫，所以就写了这篇文章。</p>
-<h1>一些对比</h1>
-<p>最大的特点就是liquid glass的ui设计，整体的ui都变得圆润化，ui变成毛玻璃格式。</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130236369.png" alt="image-20260310130236369"></p>
-<p>在视频里发现：ios26.3的电池最大容量是86%，ios18.7的电池最大容量是100%，这有点吓人，<strong>更新系统难道会让我的电池最大容量下降很多吗？</strong></p>
-<p>其实换个角度想想，右边的这个手机，不正好是我现在自己手机的电池最大容量吗？他既然可以很好的运行ios26，那我也不可以吗？哈哈哈</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130543136.png" alt="image-20260310130543136"></p>
-<p>从视频很明显还能看出，ios26系统会更加的流畅，退出软件不会有ios18的那种顿挫感，而且进入app，可以明显分辨出ios26会更快一点。</p>
-<p>除此之外，还有快捷指令方面的更新：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134747714.png" alt="image-20260310134747714"></p>
-<p>音乐会有中文翻译了：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134830898.png" alt="image-20260310134830898"></p>
-<p>提醒事项会介入ai：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134935291.png" alt="image-20260310134935291"></p>
-<p>其实有一个很好的功能加入了，就是apple intelligence，但是奈何iPhone14promax的芯片不支持apple intelligence，这是比较可惜的一点。</p>
-<h1>基本情况</h1>
-<p>Google了一下：更新系统让电池最大容量下降？发现类似的例子不是很多，有倒是有：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310132154327.png" alt="image-20260310132154327">、</p>
-<p>问了下gpt，他是这样说的：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133316889.png" alt="image-20260310133316889" style="zoom:150%;" />
-<p>查了查自己的电池最大容量是86%，电池情况是这样的：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133257792.png" alt="image-20260310133257792"></p>
-<p>从gpt得知，接近1000次的充电循环次数还有这样的电池健康，使用习惯是比较好的，电池体质是比较好的，哈，那想必我也不用担心更新后电池会崩掉，会出现问题。</p>
-<p>更何况，现在的手机续航就已经很废了…</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133915037.png" alt="image-20260310133915037"></p>
-<p>那什么时候推荐换电池呢？请看：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">當 iPhone電池健康度降到多少該考慮更換呢？一般來說，</span><br><span class="line"></span><br><span class="line">80%以上：電池健康度在80%以上都屬正常範圍。</span><br><span class="line">60%－80%：在此範圍時，可以開始考慮更換。</span><br><span class="line">低於60%：電池健康度iPhone小於60%則建議盡快更換電池，避免影響手機的正常使用。</span><br><span class="line">低於40%：iPhone電池健康不到40%的話，建議立即更換，以防出現更嚴重的問題！</span><br></pre></td></tr></table></figure>
-<h1>结论</h1>
-<p>对于我个人而言，还是决定更新ios26.3.1，原因如下：</p>
+<h2 id="北洋园pt自查">北洋园pt自查</h2>
+<h3 id="电影">电影</h3>
 <ul>
-<li>和iPad能够更好的兼容，接力功能可以更好的实现</li>
-<li>更流畅的操作体验</li>
-<li>ai在iPhone原生app里面的接入，可以一试</li>
-<li>音乐app有翻译歌词了，可以一试的功能</li>
-<li>图标的可以统一liquid glass化，挺好看的</li>
-<li>26.3.1已经修复了前面版本的一些bug的，是比较稳定的版本</li>
+<li>
+<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
+</li>
+<li>
+<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
+</li>
 </ul>
-<p>可能存在的雷点：</p>
+<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
 <ul>
-<li>电池续航会有明显的下降</li>
-<li>手机可能会异常发烫</li>
+<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
 </ul>
-<p>显然嘛，对于我来说，利大于弊。</p>
-<h1>升级以后的体验</h1>
-<p>我觉得可以啊！流畅的可以，而且电池最大容量一点没掉啊，好强的电池嘿嘿。</p>
-<p>但是接力功能感觉依旧很难受，估计是你是用的方法不太对。</p>
-<p>是的，之前之所以无法使用接力打开app功能，是因为没有打开相应app的iCloud同步功能。就比如说，你在iPad上编辑的备忘录想要在iPhone上打开，你就需要进入设置界面打开备忘录的iCloud同步，这样就行了。</p>
+<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
+<ul>
+<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
+</ul>
+<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
+<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
+<ul>
+<li>
+<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
+</li>
+<li>
+<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
+</li>
+<li>
+<p>[ ] 我确定站内没有更好的源</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
+</li>
+</ul>
+<h2 id="btschool自查">btschool自查</h2>
+<ul>
+<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
+<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
+</ul>
+<h1>发种</h1>
+<h2 id="手动发种">手动发种</h2>
+<h3 id="代码操作">代码操作</h3>
+<p><strong>引用内容</strong></p>
+<p>[quote]我是引用内容[/quote]</p>
+<p><strong>媒体信息隐藏显示</strong></p>
+<p>[hide=Mediainfo/媒体信息]</p>
+<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
+<p>[/hide]</p>
+<p><strong>图片显示</strong></p>
+<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
+<h3 id="不同站点">不同站点</h3>
+<h4 id="北洋园pt">北洋园pt</h4>
+<p><strong>基本步骤是：</strong></p>
+<ol>
+<li>从其他站点下载你想要转的资源</li>
+<li>填写发布页面（用引用id简单一点）</li>
+<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
+</ol>
+<p><strong>填写发布页面：</strong></p>
+<p>在上面那一行里面，点击候选</p>
+<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
+<p>如果要用引用种子id的话，这样去找：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
+<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
+<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
+<p>提交成功以后你会跳转到一个界面，显示：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
+<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
+<p>进入utorrent，选择添加种子文件</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
+<p>显示这样就是做种成功了</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
+<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
+<h4 id="btschool-52pt">btschool/52pt</h4>
+<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
+<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
+<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
+<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
+<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
+<h4 id="mt-ttg">mt/ttg</h4>
+<p>这两个都是大站，估摸着发种不会那么简单</p>
+<h2 id="自动发种">自动发种</h2>
+<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
+<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
+<h3 id="安装步骤">安装步骤</h3>
+<ol>
+<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
+<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
+</ol>
+<h3 id="使用流程">使用流程</h3>
+<ol>
+<li>
+<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
+</li>
+<li>
+<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
+<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
+</li>
+</ol>
+<h3 id="遇到的问题">遇到的问题</h3>
+<ol>
+<li>
+<p>如果发现转过去的图片无法显示怎么办？</p>
+<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
+</li>
+</ol>
+<h3 id="写在最后">写在最后</h3>
+<ul>
+<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
+<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
+<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
+<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
+</ul>
 ]]></content>
       <categories>
-        <category>思考</category>
+        <category>How-To</category>
       </categories>
       <tags>
-        <tag>iPhone</tag>
-        <tag>科技</tag>
+        <tag>pt</tag>
       </tags>
   </entry>
   <entry>
-    <title>matlab表面建模项目是怎么做好的？</title>
-    <url>/2026/06/11/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<p>matlab表面建模项目是怎么做好的？</p>
+    <title>从MATLAB零基础到用贝塞尔曲面做植物大战僵尸</title>
+    <url>/2026/03/14/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<p>从连 <code>surf()</code> 为什么要转置都搞不明白，到用贝塞尔曲面建模出豌豆射手、向日葵和僵尸的完整动画场景——这篇文章记录了整个学习过程。如果你也在学MATLAB的表面建模，希望这里面的踩坑记录能帮到你。</p>
 <span id="more"></span>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314195329042.png" alt="image-20260314195329042"></p>
 <h1>260314</h1>
 <p>不知道写什么了，写几个字凑凑数吧，不然显得太敷衍了</p>
 <h1>260315</h1>
@@ -1043,154 +1365,101 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260402195034483.png" alt="image-20260402195034483"></p>
 <p>写了这个代码，可以提取obj里面的顶点数据和面片数据</p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260402202020934.png" alt="image-20260402202020934"></p>
+<h1>260405</h1>
+<p>不想搞表面建模项目，随便写一点东西吧那就，今天是清明节，感觉人的心也随着节日飘走了</p>
+<p>这样问ai</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">我想要把一大堆的obj文件读取并在一个matlab图给出来，并且可以自己手动去调整模型的空间位置，如何去实现</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/1538032523_153490.jpg" alt="植物大战僵尸一共几关_植物大战僵尸关卡介绍_3DM单机"></p>
+<p>但是僵尸是倒着的，所以我们用symmetry函数给他正过来</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[vx, vy, vz] = Symmetry(vertices(:,<span class="number">1</span>), vertices(:,<span class="number">2</span>), vertices(:,<span class="number">3</span>), <span class="string">&#x27;xoy&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h1>260407</h1>
+<p>完成了向日葵的脸部完整建模、并且贴上了好看的贴图，好啊，好啊！</p>
+<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260408132927994.png" alt="image-20260408132927994"></p>
+<h1>260408</h1>
+<p>今天把向日葵、豌豆射手的茎秆部分后半部分空缺填上了，还给豌豆射手增加了嘴部面片的加厚设计。除此之外，还把文件夹整理了一下，非常不错的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/sunflower_static.png" alt="sunflower_static"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/Peashooter_static.png" alt="Peashooter_static"></p>
+<p>怎么样，是不是挺清爽的啦，之后的工作就是运动部分的啦！加油加油！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408172811688.png" alt="image-20260408172811688"></p>
+<h1>260409</h1>
+<p>会出现以下报错，如何解决</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">错误使用 matlab.graphics.primitive.Surface/set</span><br><span class="line">对象无效或已删除。</span><br><span class="line">出错 Peashooter_dynamic (第 521 行)</span><br><span class="line">    set(h1, &#x27;XData&#x27;, P1xr, &#x27;YData&#x27;, P1yr, &#x27;ZData&#x27;, P1zr);</span><br></pre></td></tr></table></figure>
+<p>ai给出的解决方法是：把所有surface创建语句全部移动到 while true 循环外面（只执行一次）。但我寻思我本来就是在外面创建的surface啊</p>
+<p>把豌豆射手的动态效果做出来了，很惊艳的效果！</p>
+<iframe src="https://private-user-images.githubusercontent.com/227099768/575922934-9a27e4a4-2ad5-43ce-8c09-d5c3a4ac46c9.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU5OTQ5MDQsIm5iZiI6MTc3NTk5NDYwNCwicGF0aCI6Ii8yMjcwOTk3NjgvNTc1OTIyOTM0LTlhMjdlNGE0LTJhZDUtNDNjZS04YzA5LWQ1YzNhNGFjNDZjOS5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMlQxMTUwMDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yMzNjOTU4YTUyNmE4MTZlNGJiNTQwYjBmZjE0MDk1OWRiM2M4NmIzYjczN2U3M2M0NTRhMjA3OTFjMzQ5NmQ5JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9dmlkZW8lMkZtcDQifQ.AJA9C2DGs6aczbBmussoqQI2RDpc05DCJZw8MTAazU0"scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" ></iframe>
+<h1>260410</h1>
+<p>优化了一下豌豆射手的茎秆摆动，让看起来更加同步了一些</p>
+<p>向日葵的花瓣更加密集，不会那么空虚啦</p>
+<p><img src="C:/Users/haozi/Desktop/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E5%A4%A7%E4%BD%9C%E4%B8%9A/%E4%BB%A3%E7%A0%81/sunflower_static.png" alt="sunflower_static"></p>
+<p>添加了向日葵的运动</p>
+<h1>260413</h1>
+<p>同时，因为循环一直在跑，也无法正常进行句柄移动操作</p>
+<p>把b p h xr一些变量重命名了一下，加上了前缀pea、sun，这样的话就可以在同一个面板下面画图了，这是做的最正确的一件事</p>
+<h1>250415</h1>
+<p>实在是锯齿看得我生理不适了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260415140758002.png" alt="image-20260415140758002"></p>
+<p>似乎面片会更加光滑，而且更有立体感</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260415143423879.png" alt="image-20260415143423879"></p>
+<p>具体更改如下，在向日葵、豌豆射手后面僵尸绘制前面加入了这段代码，具体功能是为了去除网格线，并实现平滑着色</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plant_surfaces = findobj(gca, &#x27;Type&#x27;, &#x27;surface&#x27;);</span><br><span class="line"></span><br><span class="line">for i = 1:length(plant_surfaces)</span><br><span class="line">    h = plant_surfaces(i);</span><br><span class="line">    if ishandle(h)</span><br><span class="line">        set(h, ...</span><br><span class="line">            &#x27;EdgeColor&#x27;, &#x27;none&#x27;, ...           % 彻底去掉网格线</span><br><span class="line">            &#x27;FaceColor&#x27;, &#x27;interp&#x27;, ...         % 平滑着色</span><br><span class="line">            &#x27;FaceLighting&#x27;, &#x27;gouraud&#x27;, ...</span><br><span class="line">            &#x27;SpecularStrength&#x27;, 0.7, ...</span><br><span class="line">            &#x27;DiffuseStrength&#x27;, 0.9, ...</span><br><span class="line">            &#x27;LineStyle&#x27;, &#x27;none&#x27;);</span><br><span class="line">    end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>修复了向日葵茎秆异常移动的情况</p>
+<h1>250416</h1>
+<p>移动了僵尸的位置到稍远处</p>
+<p>增加了僵尸被击杀以后自动消失的逻辑</p>
+<p>优化了僵尸的颜色</p>
+<p>锯齿问题解决（通过僵尸面片的消失）</p>
+<hr>
+<h1>经验提炼</h1>
+<p>从MATLAB零基础到做出完整的植物大战僵尸动画场景，最大的收获不是技术本身，而是学会了「怎么学一门新技术」：</p>
+<ol>
+<li>
+<p><strong>先跑起来，再理解为什么。</strong> 一开始不理解 <code>surf()</code> 为什么要转置，不理解贝塞尔曲面的数学原理——没关系，先把代码跑起来看看效果，有了直观感受之后再回头理解原理，效率高得多。</p>
+</li>
+<li>
+<p><strong>“感觉难是因为你没练。”</strong> 看教程觉得简单，自己动手全是bug。表面建模没有捷径，就是反复调控制点、反复试参数、反复看效果。</p>
+</li>
+<li>
+<p><strong>变量命名前缀是我做的最正确的事。</strong> <code>pea_</code>、<code>sun_</code>、<code>zombie_</code> 这种命名空间隔离，让多个角色能在同一个figure里独立动画。这不只是MATLAB技巧，是通用的软件工程思维。</p>
+</li>
+<li>
+<p><strong>审美驱动技术学习。</strong> “锯齿看得我生理不适”——正是这种对粗糙画面的不能忍受，驱动我去学了Gouraud光照、interp着色这些渲染优化技术。有时候，不舒服是最好的老师。</p>
+</li>
+<li>
+<p><strong>跨格式整合能力很重要。</strong> OBJ文件导入、面片解析、贝塞尔转换——最终项目不只是MATLAB原生建模，还整合了外部3D模型。学会处理不同格式的数据，比单纯会画曲面更有价值。</p>
+</li>
+<li>
+<p><strong>允许自己有低谷。</strong> “今天不想搞表面建模项目了，随便写点”——这种状态很正常。重要的是低谷之后还能回来继续干。</p>
+</li>
+<li>
+<p><strong>让AI互相评审。</strong> “让AI们互评互掐”——用多个AI工具交叉验证代码和方案，比只信一个AI的输出靠谱得多。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>项目</category>
+        <category>Project</category>
       </categories>
       <tags>
         <tag>matlab</tag>
+        <tag>bezier-surface</tag>
+        <tag>3d-modeling</tag>
+        <tag>animation</tag>
       </tags>
   </entry>
   <entry>
-    <title>怎么去优雅的转pt种？</title>
-    <url>/2026/06/11/pt/</url>
-    <content><![CDATA[<p>怎么去优雅的转pt种？</p>
+    <title>swiftfin如何设置优雅的刮削？</title>
+    <url>/2026/06/17/no_swiftfin%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%AD%97%E5%B9%95%E5%85%A8%E5%B1%8F%E7%9C%8B%E4%B8%8D%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>询问grok，发现把字幕烧录进视频文件是一个似乎可行的方案</p>
 <span id="more"></span>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944"></p>
-<h1>规则</h1>
-<h2 id="北洋园pt自查">北洋园pt自查</h2>
-<h3 id="电影">电影</h3>
-<ul>
-<li>
-<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
-</li>
-<li>
-<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
-</li>
-</ul>
-<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
-<ul>
-<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
-</ul>
-<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
-<ul>
-<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
-</ul>
-<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
-<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
-<ul>
-<li>
-<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
-</li>
-<li>
-<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
-</li>
-<li>
-<p>[ ] 我确定站内没有更好的源</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
-</li>
-</ul>
-<h2 id="btschool自查">btschool自查</h2>
-<ul>
-<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
-<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
-</ul>
-<h1>发种</h1>
-<h2 id="手动发种">手动发种</h2>
-<h3 id="代码操作">代码操作</h3>
-<p><strong>引用内容</strong></p>
-<p>[quote]我是引用内容[/quote]</p>
-<p><strong>媒体信息隐藏显示</strong></p>
-<p>[hide=Mediainfo/媒体信息]</p>
-<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
-<p>[/hide]</p>
-<p><strong>图片显示</strong></p>
-<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
-<h3 id="不同站点">不同站点</h3>
-<h4 id="北洋园pt">北洋园pt</h4>
-<p><strong>基本步骤是：</strong></p>
-<ol>
-<li>从其他站点下载你想要转的资源</li>
-<li>填写发布页面（用引用id简单一点）</li>
-<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
-</ol>
-<p><strong>填写发布页面：</strong></p>
-<p>在上面那一行里面，点击候选</p>
-<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
-<p>如果要用引用种子id的话，这样去找：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
-<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
-<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
-<p>提交成功以后你会跳转到一个界面，显示：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
-<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
-<p>进入utorrent，选择添加种子文件</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
-<p>显示这样就是做种成功了</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
-<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
-<h4 id="btschool-52pt">btschool/52pt</h4>
-<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
-<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
-<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
-<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
-<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
-<h4 id="mt-ttg">mt/ttg</h4>
-<p>这两个都是大站，估摸着发种不会那么简单</p>
-<h2 id="自动发种">自动发种</h2>
-<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
-<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
-<h3 id="安装步骤">安装步骤</h3>
-<ol>
-<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
-<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
-</ol>
-<h3 id="使用流程">使用流程</h3>
-<ol>
-<li>
-<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
-</li>
-<li>
-<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
-<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
-</li>
-<li>
-<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
-</li>
-<li>
-<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
-</li>
-</ol>
-<h3 id="遇到的问题">遇到的问题</h3>
-<ol>
-<li>
-<p>如果发现转过去的图片无法显示怎么办？</p>
-<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
-</li>
-</ol>
-<h3 id="写在最后">写在最后</h3>
-<ul>
-<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
-<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
-<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
-<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
-</ul>
+<p>问题的本质是我们视频缩放放大以后，字幕并没有跟随缩放以后的safe area，自己跑到框的外面去了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155304758.png" alt="image-20260405155304758"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155316101.png" alt="image-20260405155316101"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155333781.png" alt="image-20260405155333781"></p>
 ]]></content>
       <categories>
-        <category>方法</category>
+        <category>How-To</category>
       </categories>
       <tags>
-        <tag>pt</tag>
+        <tag>jellyfin</tag>
       </tags>
   </entry>
   <entry>
@@ -1206,8 +1475,50 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">惟江上之清风，与山间之明月</span><br><span class="line">耳得之而为声，目遇之而成色</span><br><span class="line">取之无禁，用之不竭</span><br><span class="line">是造物者之无尽藏也。</span><br><span class="line">而吾与子之所共适</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
+  </entry>
+  <entry>
+    <title>win10电脑如何拆分硬盘空间给另一个硬盘？</title>
+    <url>/2026/06/17/win10%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E6%8B%86%E5%88%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%A1%AC%E7%9B%98/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408171339123.png" alt="image-20260408171339123"></p>
+<span id="more"></span>
+<h1>怎么办？</h1>
+<p>win+R，输入diskmgmt.msc，进入磁盘管理界面</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408165624850.png" alt="image-20260408165624850"></p>
+<p>会看到一个类似于这样的界面</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408165709297.png" alt="image-20260408165709297"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408165951747.png" alt="image-20260408165951747"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170141660.png" alt="image-20260408170141660"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170217038.png" alt="image-20260408170217038"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170235741.png" alt="image-20260408170235741"></p>
+<p>在拓展卷步骤可能看到类似的界面，像这里我的磁盘由于是机械硬盘，不安装操作系统所以我就可以选择“是”，<strong>如果对于c盘不可以进行这样的操作的，因为里面是有操作系统的</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170313892.png" alt="image-20260408170313892"></p>
+<h1>遇到的问题</h1>
+<p>遇到了这个很抓马的问题，会卡在磁盘管理这个界面，没有什么反应</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408164813261.png" alt="image-20260408164813261"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408165434164.png" alt="image-20260408165434164"></p>
+<p>解决方法：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170546391.png" alt="image-20260408170546391"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170608484.png" alt="image-20260408170608484"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170621233.png" alt="image-20260408170621233"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170640560.png" alt="image-20260408170640560"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170653725.png" alt="image-20260408170653725"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170711736.png" alt="image-20260408170711736"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170733276.png" alt="image-20260408170733276"></p>
+<p>服务显示“正在运行”应该就行啦哈哈</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260408170942130.png" alt="image-20260408170942130"></p>
+<h1>参考教程</h1>
+<p><a href="https://jingyan.baidu.com/article/574c5219d91cde2d8d9dc18f.html">win10遇到无法连接虚拟磁盘服务解决方法</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Uj411f7wj/?spm_id_from=333.1391.0.0&amp;vd_source=f15209b32029e916ee473fe943d494ca">如何给已分区的磁盘进行扩容/拆分/合并的操作？新装硬盘如何显示在我的电脑内？</a></p>
+<p><a href="https://www.bilibili.com/video/BV1tG411v7of/?vd_source=f15209b32029e916ee473fe943d494ca">电脑磁盘管理无法连接虚拟磁盘服务？教你怎么解决</a></p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+      <tags>
+        <tag>disk-cleanup</tag>
+      </tags>
   </entry>
   <entry>
     <title>彩虹之后，我在想人间</title>
@@ -1223,7 +1534,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/qnyh3.png" alt=""></p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1278,7 +1589,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>听不见了，听 不 见 了，听  不  见  了…</p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1369,7 +1680,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>[北洋园PT :: 种子详情 &quot;<a href="https://www.tjupt.org/details.php?id=435241&amp;hit=1">PC][AVG][逆转裁判456：王泥喜精选集][Apollo.Justice.Ace.Attorney.Trilogy-RUNE][压缩包]&quot; - Powered by NexusPHP</a></p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1416,7 +1727,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>总的来说，《消失的爱人》是一部很深刻的反映了婚姻问题的电影，很好的刻画了控制欲过强的变态人格。当然，这些问题不是恐婚不婚的借口，婚姻没有错，有错的是人，正如我上面说的那样：<strong>婚姻是不可能没有虱子的，有虱子，我们就把他抓掉嘛。</strong></p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1436,7 +1747,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>这是何等完美的闭环和结尾啊…</p>
 ]]></content>
       <categories>
-        <category>阅读</category>
+        <category>Reading</category>
       </categories>
   </entry>
   <entry>
@@ -1457,7 +1768,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>这是一部值得二刷三刷，用显微镜去观察的悬疑电影！</p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1481,7 +1792,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p><strong>很好玩很有趣、后劲很足的一部电影。</strong></p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1500,7 +1811,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>上帝啊，让我再多救一个人吧…</p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1675,7 +1986,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>音乐链接：<a href="https://music.apple.com/cn/album/django-unchained-original-motion-picture-soundtrack/1440874044">https://music.apple.com/cn/album/django-unchained-original-motion-picture-soundtrack/1440874044</a></p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1733,7 +2044,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p><strong>我为自己是中华民族而自豪！</strong></p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1770,7 +2081,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p><a href="https://imgse.com/i/pVs5Pld"><img src="https://s21.ax1x.com/2025/08/24/pVs5Pld.png" alt="pVs5Pld.png"  /></a></p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1828,7 +2139,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p><a href="https://www.zhihu.com/question/21428583">美国的3D动画电影为什么都那么精致? - 知乎</a></p>
 ]]></content>
       <categories>
-        <category>影视</category>
+        <category>Movie &amp; TV</category>
       </categories>
   </entry>
   <entry>
@@ -1846,24 +2157,91 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>聪明的飞行员即使才华再过人，经验再丰富，也绝不会不使用检查清单。-查理.芒格</p>
 ]]></content>
       <categories>
-        <category>阅读</category>
+        <category>Reading</category>
       </categories>
   </entry>
   <entry>
-    <title>传感与测试技术 为考试而生</title>
-    <url>/2026/06/11/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314200044992.png" alt="image-20260314200044992"></p>
+    <title>丢掉手机，好好吃饭！</title>
+    <url>/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/</url>
+    <content><![CDATA[<p>手机等电子产品非常喜欢多管闲事，什么活动他都会插一嘴，踢一脚</p>
 <span id="more"></span>
+<p>今天吃饭尝试彻底丢掉手机，发现一个很大的变化：就是吃饭的时间缩短了一大堆，平常刷电子产品吃顿饭要半个小时，丢掉手机吃顿饭，只要十分钟，很吓人。</p>
+<p>除此之外，丢掉手机以后，我发现脑子似乎更加清醒，脑子里面似乎会有说不完的问题和想法等着去解答，有数不完的领域可以去探索，回想之前刷着手机吃着饭，似乎脑子根本不会想那么多，就连吃的饭是具体什么味道都不清楚。</p>
+<p>但今天不同，细细品味了吃的排骨玉米饭，注意到了里面的枸杞和葱花，注意到了入嘴的生姜，还在心里感触：小时候那个不吃葱不吃香料的孩子，现在长大了，不知道为什么想到这个，心里还有点酸酸的。</p>
+<p>丢掉电子产品，好好吃饭睡觉，说的轻巧，做起来好难的。</p>
+<p>不带手机吃饭，你怎么付钱？</p>
+<p>不带手机上床睡觉，你明天迟到了怎么办？谁来叫醒你？</p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>habits</tag>
+        <tag>digital-detox</tag>
+        <tag>mindfulness</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>两个电脑，what i can do？</title>
+    <url>/2026/06/14/%E4%B8%A4%E4%B8%AA%E7%94%B5%E8%84%91%EF%BC%8Cwhat%20i%20can%20do%EF%BC%9F/</url>
+    <content><![CDATA[<p>一个台式机，屏幕很大，配置更好；一个笔记本，屏幕很小，配置差一点，但是屏幕的分辨率高一些。能干啥才不会让其中一个电脑吃灰？</p>
+<span id="more"></span>
+<p>能干啥呢？有哪些场景可以发挥最大化作用呢？</p>
+<p>打游戏可以，一边看游戏攻略，一遍打关，听起来似乎不错，但是问题是，我不咋打游戏，pass。</p>
+<p>写代码，左边一个屏幕干啥？右边一个屏幕干啥？暂时想不到有什么好的。</p>
+<p>查文献，左边一个看文献，右边一个写文章？似乎可行。</p>
+<p>提供一个思路，就是你想要充分利用两个电脑，肯定是利用两个电脑的优点，也就是不能被替代的优点。</p>
+<p>其实不少，笔记本电脑可以带着跑，台式机总不能带着跑吧，欸，有了，既然你已经打通了 Tailscale + Sunshine + Moonlight，那你就可以带着跑了，可以带着笔记本电脑跑来跑去，只要保证台式机没有关机的情况下，你就可以使用远程串流进行台式机的访问，你看，这就是一个综合了笔记本电脑的便携性和台式机的高性能的极佳方案，只要网络环境不太差，效果还是不错的（我现在这段文字就是串流打上去的哈哈哈哈哈）。</p>
+<p>好了，用笔记本电脑串流台式机画面，实现远距离一体化系统，这是一个大用处。</p>
+<p>还有呢？再头脑风暴一下下？</p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>productivity</tag>
+        <tag>remote-desktop</tag>
+        <tag>tailscale</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为什么不想学习？</title>
+    <url>/2026/06/14/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%83%B3%E5%AD%A6%E4%B9%A0%EF%BC%9F/</url>
+    <content><![CDATA[<p>现在的时间是 2026 年 6 月 14 号，15:02 分，什么事情都想去干，但是就是不想去学习。这是为啥呢？想不出来，那就写出来吧</p>
+<span id="more"></span>
+<p>准确的来说，不是不想去学习，而是不想学机械工程工艺学这一门课程，说不想学习是有消极成分在里面的，学习如何写一个脚本去实现 hexo 框架下的自动上传部署就不是学习吗？学习如何去实现 obsidian 的多端同步并付诸实践就不是学习吗？学习如何去高效的使用 gemini 就不是学习吗？可以窥见，每一个你心底里说出来的话，开头都已经是&quot;学习&quot;了。所以，你一直在学习，你一直在进行广泛意义上的学习，学习，从来就不是狭义的，显然包含了课本里的知识，所以，不想去复习期末的那门课程，不代表你不好学，不是一个不爱学习的人。</p>
+<p>但是，上面的那段话不是你不去复习、一拖再拖的挡箭牌，万万不可以此为借口，就此放下期末，立地成佛，开始探索未知的广泛知识，开始捣鼓脑子里窜出来的随便一个念头。</p>
+<p>每一个想法的冒出和实现，都是需要你的时间和精力的，你就像一辆每天油量固定的汽车，每天的睡眠和一些特定的活动可以给你加油，给你增加你的精力指数，对应的，有能量的加入也就有能量的消耗，对于我来说，学习一些自己不感兴趣的东西就是会消耗自己的精力，去思考一些遥不可及的目标，设想一些灾难的结果就是会消耗我的精力。</p>
+<p>保证每天去复习，我不能保证给你一定的结果，但是，不保证一定的复习时间，每天想着一些灾难化的假设，天天空想，带来的后果确是已知的：你会在考场上看着名词解释题目，看着愣着发呆，脑子里似乎有印象，但是因为没有付出足够的时间去复习，你看着题目只能咬笔头，25 分连一半都拿不到；在简答题上，你发现自己虽然看过一遍，但丝毫不知道背诵的内容应该写哪些，怎么去表达和阐述，词穷的尴尬场景让你脚指头扣地；计算题虽然题型很固定，但是尺寸链的计算你丝毫没有思路，只记得几个基本的公式，正态分布的统计分析，你也不知道自己做的是不是完美，所以只能任由人摆布。</p>
+<p>写着这段杂谈，耳边还伴有打桩机的阵阵雷鸣，哎哟喂，要了我的老命了。</p>
+<p>所以啦，开始学一下期末课程，到时候如果忙起来的话，可能就没有时间来复习啦。当作是第一次学，也当做是最后一次学啦。</p>
+<p>（大概率是因为学的东西实在是没有意思，所以你不想学）</p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>motivation</tag>
+        <tag>study</tag>
+        <tag>self-reflection</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>传感与测试技术——从摆烂到找到锚点</title>
+    <url>/2026/03/14/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314200044992.png" alt="image-20260314200044992"></p>
 <p>不知道写什么了，写几个字凑凑数吧，不然显得太敷衍了</p>
+<span id="more"></span>
 <p>拖延了好久，都甚至没有开始写学习文档，这门课真的好惨…甚至不知道为啥，就是不想去学啊，真的很奇怪啊</p>
 <p>归根结底，是没有找到锚点，找到可以去抓住学习的点，欸，这一点，今天找到了，学姐的备考复习文档里面就有很多好东西啊哈哈哈，感觉希望又大大的了</p>
 <p>你看哈 这门课叫传感与测试技术<br>
 不管是传感还是测试 围绕的都是信号这个东西 测试也是测信号 传感器他是检测一些物理量然后给他转换成信号的</p>
 <p>所以第一章 就是带你认识信号到底是啥 它分为哪些？我们又怎样数学的去描述这个听起来很抽象的东西</p>
 <p>在知道了这是个什么东西也知道了怎么用一个公式去表示他之后 我们就可以用数学的方式去分析还有处理了 这就是第二章 告诉我们一个在看到一个信号的数学表示的时候 大概能了解到他的一些信息 或者两个信号之间的关系 以及怎样去处理一些不太好的收集到的信号</p>
-<p>然后 在拿到一个信号了 我们现在会分析了 也会处理了 处理完我们是不是就该测试了 第四章就是介绍测试系统的 分析一个测试系统的性能</p>
+<p>然后 在拿到一个信号了 我们现在会分析了 也会处理了 处理完我们是不是就该测试了 第三章就是介绍测试系统的 分析一个测试系统的性能</p>
 <p>第四章 传感器 他就把一些物理量转换成电信号 这里就有很多分类了 比如根据物理量去分 有温度传感器 位移传感器 根据电信号去分 有电容电感等等</p>
 <p>第五章 因为传感器输出的原始电信号他可能很微弱或者有噪声啥的 这是对他的调理</p>
+<p>课程先教你“测量要满足什么要求”（基础理论），再教你“有哪些工具可用”（传感器），最后教你“怎么组合工具完成任务”（测试系统与应用）</p>
 <h1>第一章 信号及其描述</h1>
 <h1>第二章 信号的分析和处理</h1>
 <h1>第三章 测试系统的特性</h1>
@@ -1910,7 +2288,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 </ul>
 </li>
 <li>
-<p>一些具体的传感器</p>
+<p>具体的传感器</p>
 <ul>
 <li>
 <p>电阻式传感器</p>
@@ -1931,7 +2309,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>电阻应变效应：指金属导体在外力作用下发生机械变形时，其电阻值随着所受机械变形（伸长或缩短）的变化而发生变化的现象</p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325212151455.png" alt="image-20260325212151455"></p>
 <p>通常S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>​=1.7~3.6</p>
-<p>一般用502胶粘应变片而不用胶布</p>
+<p><strong>一般用502胶粘应变片而不用胶布</strong></p>
 </li>
 </ul>
 </li>
@@ -1965,6 +2343,7 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 </li>
 <li>
 <p>电容传感器</p>
+<p>ε<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4511em;vertical-align:-0.15em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>=8.854*10<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mrow><mo>−</mo><mn>12</mn></mrow></msup></mrow><annotation encoding="application/x-tex">^{-12}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">12</span></span></span></span></span></span></span></span></span></span></span></span></p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325213418916.png" alt=""></p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214023161.png" alt="image-20260325214023161"></p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325214033208.png" alt="image-20260325214033208"></p>
@@ -1975,18 +2354,120 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 </li>
 <li>
 <p>压电式传感器</p>
+<ul>
+<li>
+<p>压电效应：某些电介质，在沿着一定方向对其加力而使其变形时，在一定表面上将会产生电荷，而外力去掉后又重新回到不带电状态</p>
+</li>
+<li>
+<p>纵向压电效应：沿x轴加力，电荷出现在垂直于x轴的表面</p>
+<p>横向压电效应：沿 y 轴加力，电荷仍出现在垂直于 x 轴的表面</p>
+<p>切向压电效应：沿x轴或y轴施加垂直于z轴的剪切力，在垂直于 x 轴的晶体表面产生电荷</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403171507567.png" alt="image-20260403171507567"></p>
+</li>
+<li>
+<p>压电元件等效电路</p>
+<p>1）电荷源Q和电容器Ca并联</p>
+<p>2）电压源U和电容器Ca串联</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172055487.png" alt="image-20260403172055487"></p>
+<p>由于存在电荷泄漏，<strong>压电式传感器适宜作动态测量</strong></p>
+</li>
+<li>
+<p>压电元件常用的结构形式</p>
+<p>连接方法有两种：并联连接和串联</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172356298.png" alt="image-20260403172356298"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172430884.png" alt="image-20260403172430884"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>磁电式传感器</p>
+<ul>
+<li>
+<p>工作原理</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172512079.png" alt="image-20260403172512079"></p>
+</li>
+<li>
+<p>分类</p>
+<p>1）恒定磁通式</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403172831326.png" alt="image-20260403172831326"></p>
+<p>2）变磁通式</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403173208296.png" alt="image-20260403173208296"></p>
+<p>3）霍尔式传感器</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403174656406.png" alt="image-20260403174656406"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>光电式传感器</p>
+<ul>
+<li>
+<p>工作原理：光电效应</p>
+</li>
+<li>
+<p>光电效应及光电器件</p>
+<ul>
+<li>
+<p>外光电效应</p>
+<p>在光线作用下，物质内的电子逸出物体表面向外发射的现象，称为外光电效应</p>
+</li>
+<li>
+<p>内光电效应</p>
+<p>受光照物体（通常为半导体材料）电导率发生变化或产生光电动势的效应称为内光电效应</p>
+<ul>
+<li>光电导效应：光照后电阻率发生变化的现象2</li>
+<li>光生伏特效应：光生伏特效应：半导体P-N结受光照后产生电动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>光电传感器的形式</p>
+<ul>
+<li>
+<p>模拟式光电传感器</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175654588.png" alt="image-20260403175654588"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175950668.png" alt="image-20260403175950668"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175706030.png" alt="image-20260403175706030"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403180000397.png" alt="image-20260403180000397"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175731870.png" alt="image-20260403175731870"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403180010955.png" alt="image-20260403180010955"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403175753887.png" alt="image-20260403175753887"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403180021139.png" alt="image-20260403180021139"></p>
+</li>
+<li>
+<p>脉冲式光电传感器</p>
+<p>光电元件的输出仅有两种稳定状态，就是“通”、“断”的开关状态。<strong>光电测速计、光电式转速计</strong>就是这方面的应用实例</p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1>经验提炼</h1>
+<ol>
+<li>
+<p><strong>找不到学习动力的时候，去找一个&quot;锚点&quot;。</strong> 这门课差点被我放弃，直到找到学姐的复习文档。有时候你缺的不是能力，而是一个能让你看到方向的外部资源。</p>
+</li>
+<li>
+<p><strong>理解课程的逻辑结构比死记硬背重要。</strong> 这门课的设计其实是：先教你&quot;测量要满足什么要求&quot;（理论基础），再教你&quot;有哪些工具可用&quot;（传感器），最后教你&quot;怎么组合工具完成任务&quot;（信号调理）。看清这个框架，学习就有章法了。</p>
+</li>
+<li>
+<p><strong>传感器选型是一个工程决策过程。</strong> 不是选&quot;最好的&quot;，而是选&quot;最合适的&quot;——要考虑灵敏度、线性范围、响应速度、稳定性、精度，还要考虑环境干扰和成本。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>考试</category>
+        <category>Exam</category>
       </categories>
       <tags>
-        <tag>传感与测试技术</tag>
+        <tag>sensor-testing</tag>
+        <tag>measurement</tag>
+        <tag>exam-notes</tag>
       </tags>
   </entry>
   <entry>
@@ -2013,10 +2494,10 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 </ol>
 ]]></content>
       <categories>
-        <category>生活哲学</category>
+        <category>Life Philosophy</category>
       </categories>
       <tags>
-        <tag>奶昔</tag>
+        <tag>smoothie</tag>
       </tags>
   </entry>
   <entry>
@@ -2082,17 +2563,17 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>别人说好不一定好，适合你的才是最好的。</p>
 ]]></content>
       <categories>
-        <category>游戏</category>
+        <category>Gaming</category>
       </categories>
   </entry>
   <entry>
     <title>复利究竟有什么魔力？</title>
     <url>/2026/06/11/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310220618481.png" alt="image-20260310220618481"></p>
-<span id="more"></span>
 <h1>复利是什么</h1>
+<span id="more"></span>
 <p>我们来看看wikipedia怎么说的吧：</p>
-<p><strong>复利率法</strong>[<a href="https://zh.wikipedia.org/zh-cn/%E5%A4%8D%E5%88%A9#cite_note-1">1]</a>（英文：compound interest），是一种计算<a href="https://zh.wikipedia.org/wiki/%E5%88%A9%E6%81%AF">利息</a>的方法。按照这种方法，利息除了会根据<a href="https://zh.wikipedia.org/wiki/%E6%9C%AC%E9%87%91">本金</a>计算外，新得到的利息同样可以生息，因此俗称“利滚利”、“驴打滚”或“利叠利”。只要计算利息的周期越密，财富增长越快，而随着年期越长，复利效应亦会越为明显。</p>
+<p><strong>复利率法</strong>，是一种计算<a href="https://zh.wikipedia.org/wiki/%E5%88%A9%E6%81%AF">利息</a>的方法。按照这种方法，利息除了会根据<a href="https://zh.wikipedia.org/wiki/%E6%9C%AC%E9%87%91">本金</a>计算外，新得到的利息同样可以生息，因此俗称“利滚利”、“驴打滚”或“利叠利”。只要计算利息的周期越密，财富增长越快，而随着年期越长，复利效应亦会越为明显。</p>
 <p>说人话，我的理解就是：你投资产生的收益，你要忍住不要直接花掉，而是要连本带利继续投资，这样的话，即使你的收益率不高，但是财富依然会有比较可观的增值。</p>
 <h1>复利怎么运作</h1>
 <p>复利和单利的区别在于，收益的那一部分钱是可以进行再投资的</p>
@@ -2146,10 +2627,10 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 </ol>
 ]]></content>
       <categories>
-        <category>知识</category>
+        <category>Knowledge</category>
       </categories>
       <tags>
-        <tag>投资术语</tag>
+        <tag>investing</tag>
       </tags>
   </entry>
   <entry>
@@ -2183,18 +2664,18 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p><a href="https://www.runoob.com/w3cnote/pip-cn-mirror.html">pip常用镜像源-博客园</a></p>
 ]]></content>
       <categories>
-        <category>方法</category>
+        <category>How-To</category>
       </categories>
       <tags>
-        <tag>Python</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
     <title>怎么去搭建一个适合自己的知识库？</title>
     <url>/2026/06/11/%E6%80%8E%E4%B9%88%E5%8E%BB%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9F/</url>
-    <content><![CDATA[<span id="more"></span>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310144243809.png" alt="image-20260310144243809"></p>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310144243809.png" alt="image-20260310144243809"></p>
 <h1>写在前面</h1>
+<span id="more"></span>
 <p>一直想着搭建一个自己的知识库，想着学习的知识不只是输入，不只是为了单纯的应付考试，因为这样我觉得就完全失去了学习的意义，这样的学习显得那么的索然无味和单调。</p>
 <p>那么问题来了，怎么去搭建一个属于自己的知识库呢？</p>
 <h1>要解决的问题</h1>
@@ -2267,10 +2748,10 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 </ul>
 ]]></content>
       <categories>
-        <category>方法</category>
+        <category>How-To</category>
       </categories>
       <tags>
-        <tag>知识库</tag>
+        <tag>Knowledge库</tag>
       </tags>
   </entry>
   <entry>
@@ -2352,16 +2833,45 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 <p>你要如何设计自己的人生，这件事完全取决于你自己。</p>
 ]]></content>
       <categories>
-        <category>知识</category>
+        <category>Knowledge</category>
       </categories>
       <tags>
-        <tag>企业</tag>
-        <tag>成长</tag>
+        <tag>business</tag>
+        <tag>growth</tag>
       </tags>
   </entry>
   <entry>
-    <title>数字化设计 为考试而生</title>
-    <url>/2026/06/11/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/</url>
+    <title>想买东西了？记得写在这</title>
+    <url>/2026/06/16/%E6%83%B3%E4%B9%B0%E4%B8%9C%E8%A5%BF%E4%BA%86%EF%BC%9F%E8%AE%B0%E5%BE%97%E5%86%99%E5%9C%A8%E8%BF%99/</url>
+    <content><![CDATA[<p>制定一个规则：写下来想要买的东西24h之后再买。延迟满足</p>
+<span id="more"></span>
+<h2 id="26-06-16">26.06.16</h2>
+<ul>
+<li>洗发水一瓶（实在是没了）</li>
+<li>滴露消毒水——洗内裤内衣袜子没有的话就太臭了</li>
+<li>买本书《硬汉技能手册》</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9642.png" alt="IMG_9642"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9641.png" alt="IMG_9641"></p>
+<p>Claude Code 实战指南</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9643.png" alt="IMG_9643"></p>
+<p>Vibe Coding 实战教程</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9644.png" alt="IMG_9644"></p>
+<p>下面这本书看起来也挺有意思</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_9645.png" alt="IMG_9645"></p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>habits</tag>
+        <tag>delayed-gratification</tag>
+        <tag>consumption</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数字化设计——贝塞尔曲面与有限元入门</title>
+    <url>/2026/03/14/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260314194845629.png" alt="image-20260314194845629"></p>
 <span id="more"></span>
 <h1>绪论</h1>
@@ -2632,15 +3142,15 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 <p>一维弹簧系统</p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326213135583.png" alt="image-20260326213135583"></p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326213155351.png" alt="image-20260326213155351"></p>
-<p>这里的矩阵本质上是每一部分刚度矩阵的叠加，节点数目随便你有多少，思路都是一样的，而且这个方法和编号无关（？）</p>
+<p>这里的矩阵本质上是每一部分刚度矩阵的叠加，节点数目随便你有多少，思路都是一样的，而且这个方法和编号无关（？），有一些节点如果没有相对运动，节点就是可以合并的</p>
 <p><strong>判断你的刚度矩阵写的对不对有三种方法：</strong></p>
 <ol>
 <li>
-<p>看节点 找弹簧k1k2k3…有多少弹簧连着，就一定有这些弹簧的k相加</p>
+<p>看节点 找弹簧k1k2k3…有多少弹簧连着，对角上就一定有这些弹簧的k相加</p>
 </li>
 <li>
-<p>看弹簧 找节点（这一点其实是不是很想的明白）</p>
-<p>每看到一根弹簧连接 i 和 j，就在总刚度矩阵里做以下四件事：</p>
+<p>看弹簧 找节点</p>
+<p>每看到一根弹簧k连接 i 和 j，就在总刚度矩阵里做以下四件事：</p>
 <ol>
 <li>K_{ii} 加上 +k</li>
 <li>K_{jj} 加上 +k</li>
@@ -2678,20 +3188,53 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 </li>
 </ul>
 </li>
+<li>
+<p>势能法</p>
+<p>感觉这一部分的是对于前面的推导过程的降维打击，可以通过一个很简单的总势能泛函就解决很复杂的一些问题，其中最典型的就是杆件如果受到线分布式力、体分布式力的情况了（至于一维杆单元能不能受到表面分布式力的话另说，总感觉哪里怪怪的）</p>
+</li>
 </ul>
+<hr>
+<h1>经验提炼</h1>
+<ol>
+<li>
+<p><strong>“有些事情拥有的时候觉得微不足道，用上的时候才发现不可或缺。”</strong> 学2D杆单元时悟到的——局部坐标系下为零的位移，在全局坐标系下可能不为零。生活中的很多知识也是这样，学的时候不知道有什么用，某天突然就用上了。</p>
+</li>
+<li>
+<p><strong>几何变换只作用于控制点，不作用于曲面本身。</strong> 这是贝塞尔曲面最优雅的性质之一。记住这一点，变换操作就不会搞混。</p>
+</li>
+<li>
+<p><strong>“解决受力问题不可以用受力分析”——用能量法。</strong> 势能法是对牛顿力学的&quot;降维打击&quot;，尤其在处理分布式载荷时，比受力分析简洁得多。</p>
+</li>
+<li>
+<p><strong>组合变换的矩阵乘法不满足交换律。</strong> 先旋转再平移 ≠ 先平移再旋转。操作顺序搞反了，结果完全不同。</p>
+</li>
+<li>
+<p><strong>对称变换矩阵的平方等于单位矩阵。</strong> 这个数学性质很美：做两次对称就回到原点。可以用来快速验证你的对称矩阵是否正确。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>考试</category>
+        <category>Exam</category>
       </categories>
       <tags>
-        <tag>数字化设计</tag>
+        <tag>bezier-surface</tag>
+        <tag>exam-notes</tag>
+        <tag>finite-element-analysis</tag>
+        <tag>cad</tag>
       </tags>
   </entry>
   <entry>
-    <title>智能加工装备设计 为考试而生</title>
-    <url>/2026/06/11/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/</url>
+    <title>智能加工装备设计——机床设计的核心知识</title>
+    <url>/2026/03/11/%E6%99%BA%E8%83%BD%E5%8A%A0%E5%B7%A5%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260311155619007.png" alt="image-20260311155619007"></p>
 <span id="more"></span>
+<h1>考试</h1>
+<h2 id="考查形式">考查形式</h2>
+<p>选择题 15分 10题</p>
+<p>判断题 15分 10题</p>
+<p>简答题 30分 6道 类似于：主轴结构参数（画一张图，让你去确定结构参数）、提高支承件性能等</p>
+<p>计算题 40分 5题</p>
+<p>计算题多关注作业原题（标红的必考）</p>
 <h1>第二章 金属切削机床设计</h1>
 <h2 id="基本要求和理论">基本要求和理论</h2>
 <h2 id="机床总体设计">机床总体设计</h2>
@@ -3269,274 +3812,538 @@ Z_{min}\geq\frac{2T}{m}+6.5\\
 </ul>
 </li>
 </ul>
+<hr>
+<h1>经验提炼</h1>
+<ol>
+<li>
+<p><strong>&quot;前缓后急&quot;这种设计原则，不是背下来就能理解的。</strong> 很多工程设计原则需要在实践中反复体会，暂时不懂没关系，先记住，做着做着就明白了。</p>
+</li>
+<li>
+<p><strong>主轴永远追求&quot;表面硬、心部韧&quot;的矛盾统一。</strong> 这不只是材料学的结论，更是一种工程思维——很多设计都是在矛盾中寻找平衡。</p>
+</li>
+<li>
+<p><strong>转速图是机床设计的&quot;地图&quot;。</strong> 看懂了转速图，就看懂了整台机床的传动逻辑。花时间把转速图的读法搞透，后面的齿轮设计、轴承选型都有了依据。</p>
+</li>
+<li>
+<p><strong>&quot;说实话不懂这个&quot;是一种力量。</strong> 承认自己不懂，才能去找答案。最怕的是似懂非懂却以为自己懂了。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>考试</category>
+        <category>Exam</category>
       </categories>
       <tags>
-        <tag>智能加工装备设计</tag>
+        <tag>exam-notes</tag>
+        <tag>machine-tool-design</tag>
+        <tag>spindle</tag>
+        <tag>transmission</tag>
       </tags>
   </entry>
   <entry>
-    <title>智能装备设计项目是怎么一步步成型的？</title>
-    <url>/2026/06/11/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318200351242.png" alt=""></p>
+    <title>从零开始设计一台直驱伺服数控刀架</title>
+    <url>/2026/04/16/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/</url>
+    <content><![CDATA[<p>这是一个关于「直驱伺服数控刀架」的完整设计记录——从最初连&quot;伺服&quot;是什么都说不清楚，到最终拿着装配图和PPT站在答辩台上。项目目标：8工位、中心高63mm、0.1秒换刀、4个动力刀位。</p>
+<p>如果你也在做机械设计类的项目，这篇文章或许能让你少走一些弯路。</p>
 <span id="more"></span>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318200021618.png" alt=""></p>
 <h1>项目要做什么</h1>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318200021618.png" alt="image-20260318200021618"></p>
+<h1>前期知识的学习</h1>
+<p>伺服刀架属于中高档数控刀架·，可以完成刀盘的转位、定位、锁紧以及选刀控制</p>
+<p>常见的伺服刀架系统：</p>
+<ol>
+<li>数控系统+刀架控制器+伺服驱动器+伺服电动机</li>
+<li>数控系统+伺服驱动器+伺服电动机</li>
+</ol>
+<p>数控刀架伺服系统趋向于第二种系统</p>
+<p>总体方案设计需要写很多部分：</p>
+<ol>
+<li>直驱电机的选型</li>
+<li>分度转位装置的设计</li>
+<li>定位装置方案选择</li>
+<li>松开和刹紧方案的选择</li>
+<li>刀盘的选择</li>
+</ol>
+<p>设计说明书是要涉及一些系统参数的计算的，可以参考一下机械制造与设计2的设计说明书</p>
+<h1>学习记录</h1>
+<h2 id="260416">260416</h2>
+<p>所以，“伺服”强调的是<strong>控制方式</strong>（闭环、精确跟随），而不是具体某一种电机类型</p>
+<p>伺服的核心是“闭环控制”，不是“电机长相”或“有无减速器”</p>
+<blockquote>
+<p>直驱式伺服电机采用的是力矩电动机吗？</p>
+</blockquote>
+<p><strong>是的。</strong> 在直驱应用中，所采用的伺服电机就是专门设计的<strong>力矩电动机</strong>（Torque Motor），它是伺服电机家族中的一个分支，针对低速大扭矩直驱场景优化。</p>
+<blockquote>
+<p>这还是伺服刀架？何谓伺服？</p>
+</blockquote>
+<p><strong>仍然是伺服刀架，而且是更高级的伺服刀架。</strong><br>
+“伺服”指的是<strong>闭环控制、精确跟随指令</strong>的能力。直驱力矩电机配合高分辨率编码器和驱动器，完全满足这一定义，且性能优于传统蜗轮蜗杆伺服刀架。</p>
+<p>“本刀架采用<strong>直驱伺服技术</strong>，以<strong>力矩电动机</strong>为执行元件，取消了传统蜗轮蜗杆传动。电机转子直接与刀盘轴固联，定子安装于箱体，后端装有高分辨率圆光栅编码器，构成<strong>全闭环位置伺服系统</strong>。该方案实现了<strong>零传动间隙、毫秒级动态响应、微弧度级定位精度</strong>，属于<strong>高性能伺服刀架</strong>的先进形式。”</p>
+<h3 id="实现0-1s换刀的关键技术路径（给你设计建议）">实现0.1s换刀的关键技术路径（给你设计建议）</h3>
+<ol>
+<li><strong>驱动</strong>：优先考虑<strong>力矩电机直驱</strong>（无减速机构），或大扭矩伺服 + 零背隙联轴器。</li>
+<li><strong>锁紧</strong>：端齿盘（96~108齿） + 多片碟簧常锁紧 + 高速液压松开（活塞行程2~3mm）。</li>
+<li><strong>支撑</strong>：交叉滚子轴承或三列滚柱轴承（高刚度、低摩擦）。</li>
+<li><strong>轻量化</strong>：刀盘采用铝合金，优化结构去除多余材料。</li>
+<li><strong>仿真验证</strong>：必须用<strong>ADAMS</strong>做运动学/动力学仿真，验证转位时间；用<strong>ANSYS</strong>做刚度与模态分析。</li>
+</ol>
+<p>绪论</p>
+<p>直驱伺服数控刀架的方案研究</p>
+<p>直驱伺服数控刀架的松开与锁紧技术</p>
+<p>直驱伺服数控刀架的转位控制技术</p>
+<p><strong>以下是为你整理的“直驱式伺服刀架”（Direct-Drive Servo Tool Turret）相关专利和论文资源</strong>（基于最新公开专利数据库和学术文献，2026年4月数据）。</p>
+<p>我优先筛选了<strong>直驱（力矩电机或伺服电机直接驱动，无蜗轮蜗杆）</strong>、<strong>卧式布局</strong>、<strong>端齿盘锁紧</strong>、<strong>带动力刀位</strong>的相关成果，与你的设计（8工位、中心高63mm、0.1s换刀）高度匹配。</p>
+<h3 id="1-推荐专利（最有参考价值，附图详细，可直接用于结构参考）">1. 推荐专利（最有参考价值，附图详细，可直接用于结构参考）</h3>
+<table>
+<thead>
+<tr>
+<th>专利号</th>
+<th>标题</th>
+<th>核心技术特点（对你最有用）</th>
+<th>公开/授权时间</th>
+<th>获取方式（推荐）</th>
+<th>推荐指数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CN102240917B</strong></td>
+<td>直驱式伺服刀架</td>
+<td>力矩电机直驱刀盘 + 端齿盘锁紧 + 液压松开，无任何中间传动链</td>
+<td>2011-11-16</td>
+<td>Google Patents（含完整结构图）</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>CN202162600U</strong></td>
+<td>直驱式伺服刀架</td>
+<td>实用新型，结构更简单，直驱+端齿盘，适合紧凑型刀架</td>
+<td>2011-07-14</td>
+<td>Google Patents</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>CN219293391U</strong></td>
+<td>一种卧式伺服刀塔刀架</td>
+<td>卧式布局、直驱伺服、端齿盘+碟簧锁紧，空间紧凑</td>
+<td>2023</td>
+<td>Google Patents</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>CN103846460B</strong></td>
+<td>伺服直驱换刀式机床刀架</td>
+<td>伺服直驱滑块式结构，可参考动力刀位传动方式</td>
+<td>2014</td>
+<td>Google Patents</td>
+<td>★★★★</td>
+</tr>
+<tr>
+<td><strong>CN203791643U</strong></td>
+<td>伺服直驱换刀式机床刀架</td>
+<td>实用新型版，伺服直驱+直线导轨，结构清晰</td>
+<td>2014</td>
+<td>Google Patents</td>
+<td>★★★★</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最推荐的两篇</strong>：</p>
+<ul>
+<li><strong>CN102240917B</strong>：最早也是最经典的直驱式伺服刀架专利，详细描述了力矩电机直驱、端齿盘锁紧、液压控制等核心结构，附图清晰，是你设计的最佳参考。</li>
+<li><strong>CN219293391U</strong>：近期卧式专用专利，更接近你的紧凑型（中心高限制）需求。</li>
+</ul>
+<p><strong>下载建议</strong>：直接在 <strong>Google Patents</strong> 搜索专利号，即可免费下载PDF（含全部说明书、权利要求书和结构图）。</p>
+<h3 id="2-推荐论文（理论分析-设计计算参考）">2. 推荐论文（理论分析 + 设计计算参考）</h3>
+<ul>
+<li>
+<p><strong>《直驱刀架的开发与技术应用》</strong>（边辉 等，2020，《金属加工（冷加工）》）</p>
+<ul>
+<li>重点：力矩电机直驱刀架的结构、端齿盘设计、锁紧机构、精度控制。</li>
+<li>适合你了解直驱方案的优势和实际开发经验。</li>
+</ul>
+</li>
+<li>
+<p><strong>《伺服直驱换刀式机床刀架的设计与研究》</strong>（多篇相关学位论文，可在CNKI搜索）</p>
+<ul>
+<li>重点：直驱方案的动态响应、惯量匹配、0.1s级换刀时间实现方法。</li>
+</ul>
+</li>
+<li>
+<p><strong>《基于直驱技术的数控刀架控制系统研究》</strong>（东北大学等机构论文）</p>
+<ul>
+<li>重点：力矩电机直驱控制策略、定位精度、锁紧可靠性。</li>
+</ul>
+</li>
+</ul>
+<p>这些论文大多可在 <strong>CNKI</strong>（中国知网）或 <strong>Google Scholar</strong> 免费/付费下载。</p>
+<h3 id="3-实际产品参考（可作为你的对标案例）">3. 实际产品参考（可作为你的对标案例）</h3>
+<ul>
+<li><strong>台湾联奇（Lianqi）T46L系列</strong>：中心高63mm、8工位、直驱+端齿盘、换刀时间0.1s级别，已有成熟产品。</li>
+<li><strong>意大利Duplomatic SM(A)系列</strong>：直驱伺服动力刀架，结构非常接近你的方案。</li>
+<li><strong>德国Sauter</strong>：部分高速型号也采用直驱+端齿盘。</li>
+</ul>
+<p>这些产品的技术参数和结构图可作为设计的重要参考。</p>
+<h1>260417</h1>
+<p>DDR 全称 Direct Drive Rotary Motor（直接驱动旋转电机）</p>
+<p><strong>前期设计</strong></p>
+<p>初步确定刀架主轴的最小直径</p>
+<p>42mm</p>
+<p>端齿盘的参数选择 本次设计刀架根据JB1999机械行业标准 采用标准直齿端齿盘</p>
+<p>p25</p>
+<p>设计要求以及直驱电机型号的选择</p>
+<p>活塞的设计</p>
+<p>流量的选择</p>
+<p>液压缸工作压力选择</p>
+<p>轴承的选型</p>
+<p>轴承的参数设计（标准件？）</p>
+<p><strong>后期校验</strong></p>
+<p>ddr直驱电机参数的校验</p>
+<p>轴承寿命计算</p>
+<h1>260419</h1>
+<p>今天完成了部分的装备设计二维装配图的设计，加油！进度很快啊，感觉马上就可以完成装配图的设计，开始画一些关键零部件的零件图了！</p>
+<p>初步确定了端齿盘内外径</p>
+<p>主轴直径&gt;=42mm</p>
+<p>装配图绘制已经完成第一版</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260419191027073.png" alt="image-20260419191027073"></p>
+<h1>260420</h1>
+<p>装配图里定子与转子之间那个很小的间隔，叫做气隙（Air Gap），这是力矩电机（DDR电机）设计中一个非常关键的参数。</p>
+<p>因为你的中心高只有63mm，空间极其紧张：</p>
+<ul>
+<li>
+<p>气隙设计得越小越好（推荐控制在</p>
+<p>0.5~0.8mm），这样可以：</p>
+<ul>
+<li>提高扭矩密度（在有限空间内输出更大扭矩）</li>
+<li>降低发热</li>
+<li>提升动态响应（有利于0.1s换刀）</li>
+</ul>
+</li>
+</ul>
+<p>基本完成了尺寸的设计，但是有很蛋疼的问题，感觉这些数据大部分都很缺少计算的依据</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260420114419575.png" alt=""></p>
+<p>后续的改进方面我认为是轴承、端齿盘部分，要保证有标准的轴承可以装上去</p>
+<p>想一想端齿盘有没有必要更改直径，想想轴承的内外圈直径要不要改</p>
+<p>更改定齿盘外径为160mm，内径为140mm，动齿盘外径为140mm，内径为120mm</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260420174026390.png" alt="image-20260420174026390"></p>
+<h1>260421</h1>
+<p>今日开始建模工作</p>
+<p>花键的深度那些如何确定？自己凭空想会不会有点偏差？</p>
+<p>花键是一个标准化的部分，可以去查手册</p>
+<p>在现代卧式伺服刀架中：</p>
+<ul>
+<li>
+<p>动齿盘 ←（矩形花键 + 螺栓）→ 主轴（周向定位 + 轴向固定）</p>
+</li>
+<li>
+<p>锁紧齿盘 ←（螺栓）→ 液压活塞（轴向移动控制锁紧）</p>
+</li>
+<li>
+<p>三联齿盘（动齿盘 + 定齿盘 + 锁紧齿盘）通过液压实现分离/啮合</p>
+<p><strong>关键设计参数</strong>（按重要性排序）：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>推荐值（主轴φ42mm）</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>齿数 z</strong></td>
+<td><strong>6齿 或 8齿</strong>（推荐6齿）</td>
+<td>6齿结构简单、强度高，8齿定位更平稳</td>
+</tr>
+<tr>
+<td><strong>齿宽 b</strong></td>
+<td><strong>8 ~ 10 mm</strong>（推荐9 mm）</td>
+<td>齿宽越宽，传递扭矩越大</td>
+</tr>
+<tr>
+<td><strong>齿高 h</strong></td>
+<td><strong>4 ~ 5 mm</strong>（推荐4.5 mm）</td>
+<td>太深会削弱轴强度，太浅传递扭矩不足</td>
+</tr>
+<tr>
+<td><strong>大径 D</strong></td>
+<td><strong>42 mm</strong>（与主轴直径一致）</td>
+<td>通常与主轴外径相同</td>
+</tr>
+<tr>
+<td><strong>小径 d</strong></td>
+<td><strong>33 ~ 34 mm</strong></td>
+<td>小径 = 大径 - 2×齿高</td>
+</tr>
+<tr>
+<td><strong>花键长度 L</strong></td>
+<td><strong>18 ~ 25 mm</strong>（推荐20 mm）</td>
+<td>长度太短扭矩不足，太长占用轴向空间</td>
+</tr>
+<tr>
+<td><strong>配合公差</strong></td>
+<td>H7/js6 或 H7/k6</td>
+<td>轻压配合或过渡配合，保证同心度</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最推荐规格</strong>（直接可用）：</p>
+<ul>
+<li><strong>6×42×9×4.5</strong>（齿数6、大径42mm、齿宽9mm、齿高4.5mm）</li>
+<li>花键长度：<strong>20 mm</strong></li>
+<li>公差：外花键 js6，内花键 H7</li>
+</ul>
+</li>
+</ul>
+<h1>260422</h1>
+<p>今天进行零件的装配工作，把已经初步建的零件进行装配核验是否存在问题</p>
+<p>花键部分尺寸存在干涉，需要再设计，其他部分没有大的干涉问题存在</p>
+<p>齿盘的设计 这是一个大部头，要搞懂</p>
+<p>主辅活塞之间的插销记得加上</p>
+<h1>260423</h1>
+<ul>
+<li>
+<p>[x] 完成端齿盘的建模</p>
+</li>
+<li>
+<p>[x] 花键细节完善</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423163918695.png" alt="image-20260423163918695"></p>
+<ul>
+<li>
+<p>[x] 主轴的尺寸优化 前端加粗一点</p>
+</li>
+<li>
+<p>[ ] 力矩电机选型完成</p>
+</li>
+<li>
+<p>[x] 主辅活塞之间的插销记得加上</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423200221447.png" alt="image-20260423200221447"></p>
+</li>
+<li>
+<p>[x] 环形冷却水套记得挖</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423195925520.png" alt="image-20260423195925520"></p>
+<ul>
+<li>
+<p>[ ] 轴承的选择 这一部分很难受啊</p>
+<p>因此，<strong>SKF的BTM系列或NSK的150BNR19S系列等高速超精密轴承</strong>是值得优先考虑的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423203419822.png" alt="image-20260423203419822"></p>
+<p>恍然大悟，其实可以把电机放到后面去，这样活塞的截面积会更大，明显结构更合理</p>
+</li>
+</ul>
+<h1>260424</h1>
+<ul>
+<li>
+<p>[x] 轴重画</p>
+</li>
+<li>
+<p>[x] 箱体重画</p>
+</li>
+<li>
+<p>[x] 主活塞重画</p>
+</li>
+<li>
+<p>[x] 辅活塞重画</p>
+</li>
+<li>
+<p>[x] 导入推力球轴承</p>
+</li>
+<li>
+<p>[x] 绘制端盖</p>
+</li>
+<li>
+<p>[x] 绘制轴瓦（分离式？一体式？）</p>
+</li>
+<li>
+<p>[x] 电机外壳绘制</p>
+</li>
+<li>
+<p>[x] 电机转子定子绘制</p>
+</li>
+<li>
+<p>[x] 连接架重画</p>
+</li>
+</ul>
+<p>末端的轴径32mm，有点危险其实</p>
+<p>花键加长一点 数目多一点</p>
+<h1>260426</h1>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260426204246563.png" alt="image-20260426204246563"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260426211845617.png" alt="image-20260426211845617"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260426211854319.png" alt="image-20260426211854319"></p>
+<h1>260427</h1>
+<ul>
+<li>[x] 加入了螺丝</li>
+<li>[x] 圆角处理</li>
+<li>[x] vdi刀盘尺寸优化</li>
+<li>[x] 箱体油孔</li>
+<li>[ ] 如何实现运动定位？</li>
+</ul>
+<p>VDI系统的命名规则很直接，系统名末尾的数字（如VDI<strong>40</strong>、VDI<strong>30</strong>）就代表了刀座柄部的公称直径（单位mm）。因此，<strong>你刀盘上的安装孔直径，必须与所选VDI系统的规格完全对应</strong>。</p>
+<h1>260428</h1>
+<ul>
+<li>
+<p>[x] 箱体油孔</p>
+</li>
+<li>
+<p>[x] 总体方案设计</p>
+</li>
+<li>
+<p>[ ] 设计校核计算</p>
+</li>
+<li>
+<p>[ ] 设计说明书</p>
+</li>
+<li>
+<p>[ ] 仿真拆装动画</p>
+</li>
+<li>
+<p>[ ] 运动动画</p>
+</li>
+<li>
+<p>[ ] 装配图</p>
+</li>
+<li>
+<p>[ ] 关键零件图</p>
+</li>
+<li>
+<p>[ ] 端齿盘软件仿真应力分析</p>
+</li>
+</ul>
+<h1>260511</h1>
+<h2 id="ppt-15min">ppt 15min</h2>
+<p><strong>第1页：标题页</strong></p>
+<ul>
+<li>课题名称、姓名、学号、指导教师、日期</li>
+</ul>
+<p><strong>第2-3页：目录</strong></p>
+<ul>
+<li>清晰分级目录</li>
+</ul>
+<p><strong>第4-6页：绪论与研究背景</strong></p>
+<ul>
+<li>数控刀架的重要性与应用场景</li>
+<li>国内外研究现状（传统 vs 直驱）</li>
+<li>现有刀架存在的问题（间隙、效率、维护等）</li>
+<li>本设计的研究意义与创新点</li>
+</ul>
+<p><strong>第7-12页：总体方案设计（核心部分）</strong></p>
+<ul>
+<li>7：设计要求与参数（8工位、中心高63mm、0.1s换刀、4个动力刀位）</li>
+<li>8：方案对比（蜗轮蜗杆 vs 直驱）</li>
+<li>9-10：总体结构组成（驱动系统、三联齿盘锁紧系统、液压系统、支撑系统等）</li>
+<li>11：工作原理与换刀流程图（动画推荐）</li>
+<li>12：三维装配模型总览</li>
+</ul>
+<p><strong>第13-20页：关键部件设计与计算</strong></p>
+<ul>
+<li>13：力矩电机（DDR）选型与布置</li>
+<li>14-15：三联齿盘设计（尺寸、齿数、外径178mm分析）</li>
+<li>16-17：主轴设计与校核（直径42mm计算）</li>
+<li>18-19：液压直接锁紧机构设计与计算（活塞、缸筒、锁紧力）</li>
+<li>20：轴承与密封选型</li>
+</ul>
+<p><strong>第21-24页：仿真分析与验证</strong></p>
+<ul>
+<li>21：转动惯量与0.1s换刀时间仿真（ADAMS）</li>
+<li>22：刚度与强度有限元分析（ANSYS）</li>
+<li>23：模态分析与热变形分析</li>
+<li>24：仿真结果总结与优化</li>
+</ul>
+<p><strong>第25-26页：结论与展望</strong></p>
+<ul>
+<li>主要创新点与成果</li>
+<li>存在的问题与改进方向</li>
+<li>未来应用前景</li>
+</ul>
+<p><strong>第27页：参考文献</strong> <strong>第28页：致谢</strong></p>
+<h2 id="ppt-5min">ppt 5min</h2>
+<p><strong>第1页：标题页</strong> （标题 + 姓名 + 班级 + 日期）</p>
+<p><strong>第2页：研究背景与意义</strong>（30秒）</p>
+<ul>
+<li>数控刀架的重要性</li>
+<li>传统刀架痛点（间隙、效率低、维护难）</li>
+<li>本设计目标：中心高63mm、0.1s换刀、8工位（4动力刀位）</li>
+</ul>
+<p><strong>第3页：总体方案创新点</strong>（45秒）</p>
+<ul>
+<li>采用<strong>直驱式</strong>（力矩电机直接驱动）</li>
+<li><strong>三联齿盘 + 液压直接锁紧</strong>机构</li>
+<li>取消蜗轮蜗杆，实现零背隙</li>
+</ul>
+<p><strong>第4-5页：总体结构与工作原理</strong>（1分钟）</p>
+<ul>
+<li>第4页：总体结构组成（驱动系统、三联齿盘、液压系统、支撑系统）</li>
+<li>第5页：换刀工作流程（动画或流程图：松开 → 转位 → 锁紧）</li>
+</ul>
+<p><strong>第6-7页：关键设计参数</strong>（1分钟）</p>
+<ul>
+<li>中心高63mm、刀盘直径220mm、端齿盘外径178mm</li>
+<li>主轴最小直径42mm</li>
+<li>动齿盘厚度42mm（当前设计）</li>
+<li>4个动力刀位（VDI40接口）</li>
+</ul>
+<p><strong>第8页：主要计算与校核</strong>（45秒）</p>
+<ul>
+<li>主轴直径计算</li>
+<li>锁紧力计算</li>
+<li>转动惯量估算</li>
+<li>液压缸参数</li>
+</ul>
+<p><strong>第9页：仿真验证</strong>（45秒）</p>
+<ul>
+<li>运动仿真（0.1s换刀验证）</li>
+<li>有限元分析（刚度、强度）</li>
+<li>关键结果展示（云图或数据）</li>
+</ul>
+<p><strong>第10页：结论与创新点</strong>（30秒）</p>
+<ul>
+<li>主要创新：直驱 + 三联齿盘液压锁紧</li>
+<li>达到的设计指标</li>
+<li>存在的问题与展望</li>
+</ul>
+<h2 id="总体方案设计">总体方案设计</h2>
+<h1>260518</h1>
+<p>“感谢老师的提问。确实，受限于时间和条件，我们的设计在<strong>热变形控制</strong>和<strong>液压系统的动态刚性</strong>上还有待完善。特别是在2026年这个时间节点，我们意识到<strong>智能化监测</strong>（如刀具磨损感知）是未来刀架的发展趋势，而我们的设计目前主要集中在机械结构的实现上，未来如果能加入数字孪生技术，对刀架的热误差进行实时补偿，产品竞争力会更强。”</p>
+<hr>
+<h1>经验提炼</h1>
+<p>回顾整个项目，有几个教训值得记下来：</p>
+<ol>
+<li>
+<p><strong>先调研再动手。</strong> 一开始我连”伺服”是什么都不清楚，花了一整天看专利和论文，才搞明白直驱方案的核心优势。如果直接开画，大概率会走弯路。专利（尤其是CN102240917B）是最好的结构参考，比自己空想靠谱得多。</p>
+</li>
+<li>
+<p><strong>尺寸估算不是丢人的事。</strong> 很多初始尺寸确实缺乏计算依据，但工程设计本来就是”先估算、再校核、再迭代”的过程。关键是要在后期逐步补上校核，而不是一直靠感觉。</p>
+</li>
+<li>
+<p><strong>建模时会发现设计问题。</strong> 画装配图时发现花键干涉、活塞截面积太小——这些问题在二维图纸上根本看不出来。三维建模不仅是出图的手段，更是设计验证的工具。</p>
+</li>
+<li>
+<p><strong>”恍然大悟”时刻来自动手。</strong> 把电机从侧面搬到后面，活塞截面积立刻变大，结构更合理——这种灵感只有在反复摆弄模型时才会出现。</p>
+</li>
+<li>
+<p><strong>答辩准备要诚实。</strong> 热变形控制和液压动态刚性确实没做好，与其遮遮掩掩，不如坦诚承认并指出未来的改进方向。老师反而更欣赏这种态度。</p>
+</li>
+<li>
+<p><strong>知识获取渠道要多元。</strong> 不要只依赖AI和学长的PPT，专利数据库、学术论文、商业产品手册都是宝贵的设计参考。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>项目</category>
+        <category>Project</category>
       </categories>
       <tags>
         <tag>cnc</tag>
+        <tag>servo-motor</tag>
+        <tag>solidworks</tag>
+        <tag>mechanical-design</tag>
       </tags>
   </entry>
   <entry>
-    <title>机电控制 为考试而生</title>
-    <url>/2026/06/11/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260312191936511.png" alt="image-20260312191936511"></p>
-<span id="more"></span>
-<h1>考试内容</h1>
-<p>题型：</p>
-<ol>
-<li>
-<p>选择题 20分 20题</p>
-</li>
-<li>
-<p>简答题 32分 8题</p>
-</li>
-<li>
-<p>编程题 13分 1题 考察铣削，书上方形中间有圆环的指令一定要学会，根据提示补程序，如：建立刀补、写起终点、写程序代号、左刀补/右刀补</p>
-</li>
-<li>
-<p>插补运算 15分 1题</p>
-</li>
-<li>
-<p>计算题 20分（15+5） 2题</p>
-<p>实践和平时研讨占40%，考试占60%</p>
-<p>有大作业，制作一个多自由度机电装置产品</p>
-</li>
-</ol>
-<h1>第二章 机电系统编程基础</h1>
-<ul>
-<li>
-<p>常用指令</p>
-<ul>
-<li>
-<p>一般格式：程序名+程序段+程序结束</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1567.jpg" alt="IMG_1567" style="zoom:33%;" />
-<ul>
-<li>
-<p>程序名：O1000 不要写成01000，可以理解为程序段的身份证号</p>
-</li>
-<li>
-<p>程序段：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1568.jpg" alt="IMG_1568" style="zoom: 50%;" />
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1569.jpg" alt="IMG_1569" style="zoom: 50%;" />
-<img src="C:/Users/haozi/Downloads/LANDrop/IMG_1570.jpg" style="zoom:50%;" />
-<p>常用的G代码指令解释：</p>
-<ul>
-<li>
-<p>G00（快速移动，不切啥东西）<strong>刀具的运动轨迹不一定是直线</strong></p>
-</li>
-<li>
-<p>G01/G02/G03/G04（直线切削/顺圆切/逆圆切/timeout）需要指定进给速度F</p>
-<p>注意，这些切的指令<strong>默认我们已经知道的是起点坐标</strong>，所以我们只要给出终点坐标、圆心相对于起点的坐标就可以了</p>
-<p><strong>圆弧角度大于180度时R值为负</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317202241220.png" alt="image-20260317202241220"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317202557425.png" alt="image-20260317202557425"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">G17 G02 X0 Y40 I0 J-40 F100;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>G17、G18、G19平面选择指令（XY平面、XZ平面、YZ平面）</p>
-</li>
-<li>
-<p>G28/G29/G30，G28 U0 W0是返回第一参考点，G30 U0 W0去第二参考点，U V W是不可以少的，不然指令会执行错误</p>
-</li>
-<li>
-<p>G41/G42/<strong>G40</strong>/G43/G44/G49（左补偿/右补偿/<strong>刀具补偿取消</strong>）实际上刀具是有半径值的，补偿相当于让刀具自己去思考、自己去调整，以消除刀具的半径在切削过程中的影响</p>
-</li>
-<li>
-<p>G90/G91/G92（绝对坐标/相对坐标/工件坐标系指定）</p>
-<p><strong>注意：G92是非模态代码，仅在那一行程序段以内有效</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317203033195.png" alt="image-20260317203033195"></p>
-<p>常用的M代码指令解释：</p>
-</li>
-<li>
-<p>只有开关 ON 时才暂停；如果开关 OFF，机床会完全忽略 M01，直接跳过继续跑后面的代码</p>
-</li>
-<li>
-<p>无论机床面板上的“Optional Stop”开关是 ON 还是 OFF，一执行到 M00 就立刻暂停</p>
-</li>
-<li>
-<p>M02可以理解为削弱版的M30，他不像M30会返回开始点</p>
-</li>
-<li>
-<p>M30可以理解为复位</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317204438098.png" alt="image-20260317204438098"></p>
-<p>常用的FST代码指令解释：</p>
-</li>
-</ul>
-</li>
-<li>
-<p>程序结束：N110 M30 在数控程序中，只要看到 <strong>M30</strong>，无论前面是 N100、N200 还是 N999，都代表整个程序的终点</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>数控编程中的工艺处理</p>
-<ul>
-<li>
-<p>典型零件的数控加工工艺分析</p>
-<p>1）加工方法：回转体轴类零件，轮廓表面有圆弧曲线，适合数控车床加工</p>
-<p>2）定位和夹紧：以φ85mm外圆及右中心孔为定位基准，用三爪自定心卡盘夹持φ85mm外圆，用机床尾座顶尖顶住右中心孔</p>
-<p>3）选择刀具和对刀：根据加工要求，需要3把刀具，车外圆，切槽，车螺纹。试切对刀，并测量出各刀具的相关数据，输入到系统参数里</p>
-<p>4）切削用量选择：</p>
-<p>工件材料为45钢，主轴转速500-750rpm，外圆进给速度F=100～200mm/min，</p>
-<p>M48X1.5螺纹深度约1.6mm，分4次循环加工完成</p>
-<p>5）加工路线：</p>
-<p>自右向左，1号刀精加工（倒角—车螺纹外圆—车圆锥—车圆锥左端圆柱—车台</p>
-<p>阶—倒角—车80mm外圆—车圆弧—车80mm外圆—换2号刀切槽—换3号刀车螺纹）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317194025582.png" alt="image-20260317194025582"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">O0003；</span><br><span class="line">N01 G50 X200.0 Z350.0；工件坐标系设定</span><br><span class="line">N02 G30 U0 W0 T0101；→ 刀具从当前位置直接快速去第二参考点（换刀安全位置），然后换1号刀（T0101：刀具 1 + 补偿 1）（u、v、w对应x、y、z）</span><br><span class="line">N03 S630 M03；</span><br><span class="line">N10 G00X48.0 Z295.0M08；</span><br><span class="line">N11 G01 G98 Z230.0 F300；</span><br><span class="line">N12 X50.0；</span><br><span class="line">N13 X62.0W-60.0；</span><br><span class="line">N14 Z155.0；</span><br><span class="line">N15 X78.0；</span><br><span class="line">N16 X80.0W-1.0；</span><br><span class="line">N17 W-19.0；</span><br><span class="line">N18 G02U0W-60.0R70.0；</span><br><span class="line">N19 G01Z65.0；</span><br><span class="line">N20 X85.0；</span><br><span class="line">精加工</span><br><span class="line">N30 G00 X41.8 Z292.0 M08；</span><br><span class="line">N40 G01 X47.8 Z289.0 F150；</span><br><span class="line">N50 Z230.0；</span><br><span class="line">N60 X50.0；</span><br><span class="line">N70 X62.0 W-60.0；</span><br><span class="line">N80 Z155.0；</span><br><span class="line">N90 X78.0；</span><br><span class="line">N100X80.0W-1.0；</span><br><span class="line">N110 W-19.0；</span><br><span class="line">N120 G02 W-60.0 R70；</span><br><span class="line">N130 G01 Z65.0；</span><br><span class="line">N140 X90.0；</span><br><span class="line">N150 G00 X200.0 Z350.0 T0100 M09；</span><br><span class="line">换刀、切槽</span><br><span class="line">N160 G30 U0 W0 T0202；</span><br><span class="line">N170 S315 M03；</span><br><span class="line">N180 G00 X51.0 Z230. M08；</span><br><span class="line">N190 G01 X45.0 F0.16；</span><br><span class="line">N200 G04 U5.0 ；</span><br><span class="line">N210 G00 X51.0；</span><br><span class="line">N220 X200.0 Z350.0 T0200 M09；</span><br><span class="line">换刀、车螺纹</span><br><span class="line">N230 G30 U0 W0 T0303； 换3号刀</span><br><span class="line">N240 S200 M03；</span><br><span class="line">N250 G00 X62.0 Z296.0 M08； 快速接近车螺纹进给刀起点</span><br><span class="line">N260 G92 G99 X47.54 Z231.5 F1.5；4次螺纹切削循环，螺距为1.5mm</span><br><span class="line">N270 X46.94；</span><br><span class="line">N280 X46.54；</span><br><span class="line">N290 X46.38；总共 4 刀，逐步切深，避免一刀切太多崩刀</span><br><span class="line">N300 G00 X200.0 Z350.0 T0300 M09；</span><br><span class="line">N310 M05；</span><br><span class="line">N320 M30；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>聪明的你可能发现了，好奇怪，和里面的G92/G99和你上面贴的那张图好像不是一个作用诶？问得好，<strong>你可以理解为有三个不同的体系</strong>，里面都有G92/G99指令，张三的G92和李四的G92，两个不一样的崽子，你说能一样吗？</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317205718350.png" alt="image-20260317205718350"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h1>第三章 机械系统部件设计</h1>
-<ul>
-<li>
-<p>机械系统部件的设计要求：<strong>稳快准三字诀</strong>（稳定性、响应快、较高的定位精度）</p>
-</li>
-<li>
-<p>如何实现稳快准？</p>
-<ul>
-<li>采用低摩擦阻力的传动部件和导向支承部件（气动就是一个很好的例子）</li>
-<li>缩短传动链，提高传动与支承刚度</li>
-<li>选用最佳传动比，以达到提高系统分辨率、减少等效到执行元件输出轴上的等效转动惯量，尽可能提高加速能力</li>
-<li>缩小反向死区误差，如采取消除传动间隙、减少支承变形的措施</li>
-<li>改进支承及架体的结构设计以提高刚性、减少振动、降低噪声（同向加工？）</li>
-</ul>
-</li>
-<li>
-<p>传动部件的选择和设计</p>
-<ul>
-<li>
-<p>谐波齿轮传动</p>
-<ul>
-<li>
-<p>三大件：波发生器、柔轮、刚轮</p>
-<p><a href="https://www.bilibili.com/video/BV1Zo4y197Xc/?vd_source=f15209b32029e916ee473fe943d494ca">谐波齿轮传动原理、结构与应用特点</a></p>
-<p>它是依靠柔性齿轮产生的可控变形引起齿间的相对错齿来传递动力和运动的</p>
-<p>谐波齿轮传动的波形发生器相当于行星轮系的转臂，柔轮相当于行星轮，刚轮则相当于中心轮</p>
-<p>当刚轮固定时，则柔轮的回转方向与波形发生器的回转方向相反。当柔轮固定时，则刚轮的回转方向与波形发生器的回转方向相同</p>
-</li>
-</ul>
-</li>
-<li>
-<p>齿轮传动间隙的调整方法</p>
-<ul>
-<li>
-<p>偏心调整法</p>
-<p>如果偏心量为e，则间隙调整范围就是-e到+e（可以向两个方向微调），但侧隙不能自动补偿</p>
-<p>使用偏心套</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324193733039.png" alt="image-20260324193733039"></p>
-</li>
-<li>
-<p>轴向垫片调整法</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324193957358.png" alt="image-20260324193957358"></p>
-</li>
-<li>
-<p>双片薄齿轮错齿调整法</p>
-</li>
-</ul>
-</li>
-<li>
-<p>挠性传动部件</p>
-</li>
-<li>
-<p>间歇传动部件</p>
-<ul>
-<li>
-<p>棘轮传动、槽轮传动、蜗形凸轮传动等</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194215990.png" alt="image-20260324194215990"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>导向支撑部件的选择和设计</p>
-<ul>
-<li>
-<p>作用：支承和限制运动部件按给定的运动要求和规定的运动方向运动</p>
-</li>
-<li>
-<p>分类、各类特点：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194306971.png" alt="image-20260324194306971"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194828229.png" alt="image-20260324194828229"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194848458.png" alt="image-20260324194848458"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194907038.png" alt="image-20260324194907038"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195026940.png" alt="image-20260324195026940"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195050237.png" alt="image-20260324195050237"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195119578.png" alt="image-20260324195119578"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195141939.png" alt="image-20260324195141939"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195156939.png" alt="image-20260324195156939"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195332451.png" alt="image-20260324195332451"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195342254.png" alt="image-20260324195342254"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195357437.png" alt="image-20260324195357437"></p>
-</li>
-<li>
-<p>基本要求：机电一体化系统对导轨的基本要求是<strong>导向精度高、刚性好、运动轻便平稳、耐磨性好、温度变化影响小以及结构工艺性好</strong>等</p>
-<ul>
-<li>
-<p><strong>导向精度</strong>是指动导轨按给定方向作直线运动的准确程度</p>
-<p>导向精度的高低，主要取决于：</p>
-<p>导轨的结构类型</p>
-<p>导轨的几何精度和接触精度</p>
-<p>导轨的配合间隙、油膜厚度和油膜刚度</p>
-<p>导轨和基础件的刚度和热变形等</p>
-</li>
-<li>
-<p><strong>导轨的刚度</strong>就是抵抗载荷的能力</p>
-<p>抵抗恒定载荷的能力称为<strong>静刚度</strong></p>
-<p>抵抗交变载荷的能力称为<strong>动刚度</strong></p>
-</li>
-<li>
-<p>精度的<strong>保持性</strong></p>
-<p>目前多采用多层金属薄板伸缩式防护罩进行防护</p>
-</li>
-<li>
-<p>运动的灵活性和低速运动的平稳性</p>
-<p>其主要原因是摩擦系数随运动速度的变化和传动系统刚性不足</p>
-<ul>
-<li>导轨的爬行现象机理</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>机电一体化系统的机座或机架</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>考试</category>
-      </categories>
-      <tags>
-        <tag>机电控制</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机械制造工程学 为考试而生</title>
-    <url>/2026/06/11/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/</url>
+    <title>机械制造工程学——工艺规程设计全笔记</title>
+    <url>/2026/03/10/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E5%B7%A5%E7%A8%8B%E5%AD%A6/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310172943186.png" alt="image-20260310172943186"></p>
 <span id="more"></span>
 <h1>考试内容</h1>
@@ -3557,6 +4364,7 @@ Z_{min}\geq\frac{2T}{m}+6.5\\
 <p>基本策略就是：使用学姐总结的文档，有目的性的过一遍书本知识，解决概念问题。</p>
 <p>计算题自己去写套路文档，多刷题，这门课就稳了。</p>
 <p>大作业的话还没有布置下来，可以先不急，等有安排了再进行思考。</p>
+<p>好吧，根本没有大作业的</p>
 <h1>第一章 绪论</h1>
 <ul>
 <li>
@@ -3936,19 +4744,304 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
 </ul>
 </li>
 </ul>
+<hr>
+<h1>经验提炼</h1>
+<ol>
+<li>
+<p><strong>“反过来想，总是反过来想。”</strong> 六点定位原理可以从&quot;哪些自由度没有被限制&quot;的角度来分析——查理·芒格的逆向思维在工程学里同样好用。</p>
+</li>
+<li>
+<p><strong>&quot;土豆削成苹果&quot;的比喻比任何定义都好用。</strong> 粗基准选择的四条原则，用这个比喻一想就通了。学习工程概念时，找到一个好比喻，效率翻倍。</p>
+</li>
+<li>
+<p><strong>热处理四把火的本质区别在于冷却速度。</strong> 退火（慢冷）→ 正火（空冷）→ 淬火（急冷）→ 回火（淬火后降低脆性）。抓住冷却速度这个核心变量，四把火就不会搞混。</p>
+</li>
+<li>
+<p><strong>尺寸链计算是&quot;套路题&quot;。</strong> 封闭环 = 增环之和 - 减环之和，记住公式、多刷题、注意&quot;假废品&quot;现象，这分就稳了。</p>
+</li>
+<li>
+<p><strong>工艺安排四原则：基准先行、先面后孔、先主后次、先粗后精。</strong> 背熟这16个字，工艺排序题基本不会错。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>考试</category>
+        <category>Exam</category>
       </categories>
       <tags>
-        <tag>机械制造工程学</tag>
+        <tag>exam-notes</tag>
+        <tag>manufacturing-engineering</tag>
+        <tag>process-planning</tag>
+        <tag>dimension-chain</tag>
       </tags>
   </entry>
   <entry>
-    <title>机电系统项目是怎么实践的？</title>
-    <url>/2026/06/11/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317173257528.png" alt="image-20260317173257528"></p>
-<p>作为组长，自然会有更多要更多做的。能力越大，责任越大嘛。</p>
+    <title>机电控制——从G代码到谐波齿轮</title>
+    <url>/2026/03/12/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260312191936511.png" alt="image-20260312191936511"></p>
+<span id="more"></span>
+<h1>考试内容</h1>
+<p>题型：</p>
+<ol>
+<li>
+<p>选择题 20分 20题</p>
+</li>
+<li>
+<p>简答题 32分 8题</p>
+</li>
+<li>
+<p>编程题 13分 1题 考察铣削，书上方形中间有圆环的指令一定要学会，根据提示补程序，如：建立刀补、写起终点、写程序代号、左刀补/右刀补</p>
+</li>
+<li>
+<p>插补运算 15分 1题</p>
+</li>
+<li>
+<p>计算题 20分（15+5） 2题</p>
+<p>实践和平时研讨占40%，考试占60%</p>
+<p>有大作业，制作一个多自由度机电装置产品</p>
+</li>
+</ol>
+<h1>第二章 机电系统编程基础</h1>
+<ul>
+<li>
+<p>常用指令</p>
+<ul>
+<li>
+<p>一般格式：程序名+程序段+程序结束</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1567.jpg" alt="IMG_1567" style="zoom:33%;" />
+<ul>
+<li>
+<p>程序名：O1000 不要写成01000，可以理解为程序段的身份证号</p>
+</li>
+<li>
+<p>程序段：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1568.jpg" alt="IMG_1568" style="zoom: 50%;" />
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_1569.jpg" alt="IMG_1569" style="zoom: 50%;" />
+<img src="C:/Users/haozi/Downloads/LANDrop/IMG_1570.jpg" style="zoom:50%;" />
+<p>常用的G代码指令解释：</p>
+<ul>
+<li>
+<p>G00（快速移动，不切啥东西）<strong>刀具的运动轨迹不一定是直线</strong></p>
+</li>
+<li>
+<p>G01/G02/G03/G04（直线切削/顺圆切/逆圆切/timeout）需要指定进给速度F</p>
+<p>注意，这些切的指令<strong>默认我们已经知道的是起点坐标</strong>，所以我们只要给出终点坐标、圆心相对于起点的坐标就可以了</p>
+<p><strong>圆弧角度大于180度时R值为负</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317202241220.png" alt="image-20260317202241220"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317202557425.png" alt="image-20260317202557425"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">G17 G02 X0 Y40 I0 J-40 F100;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>G17、G18、G19平面选择指令（XY平面、XZ平面、YZ平面）</p>
+</li>
+<li>
+<p>G28/G29/G30，G28 U0 W0是返回第一参考点，G30 U0 W0去第二参考点，U V W是不可以少的，不然指令会执行错误</p>
+</li>
+<li>
+<p>G41/G42/<strong>G40</strong>/G43/G44/G49（左补偿/右补偿/<strong>刀具补偿取消</strong>）实际上刀具是有半径值的，补偿相当于让刀具自己去思考、自己去调整，以消除刀具的半径在切削过程中的影响</p>
+</li>
+<li>
+<p>G90/G91/G92（绝对坐标/相对坐标/工件坐标系指定）</p>
+<p><strong>注意：G92是非模态代码，仅在那一行程序段以内有效</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317203033195.png" alt="image-20260317203033195"></p>
+<p>常用的M代码指令解释：</p>
+</li>
+<li>
+<p>只有开关 ON 时才暂停；如果开关 OFF，机床会完全忽略 M01，直接跳过继续跑后面的代码</p>
+</li>
+<li>
+<p>无论机床面板上的“Optional Stop”开关是 ON 还是 OFF，一执行到 M00 就立刻暂停</p>
+</li>
+<li>
+<p>M02可以理解为削弱版的M30，他不像M30会返回开始点</p>
+</li>
+<li>
+<p>M30可以理解为复位</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317204438098.png" alt="image-20260317204438098"></p>
+<p>常用的FST代码指令解释：</p>
+</li>
+</ul>
+</li>
+<li>
+<p>程序结束：N110 M30 在数控程序中，只要看到 <strong>M30</strong>，无论前面是 N100、N200 还是 N999，都代表整个程序的终点</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>数控编程中的工艺处理</p>
+<ul>
+<li>
+<p>典型零件的数控加工工艺分析</p>
+<p>1）加工方法：回转体轴类零件，轮廓表面有圆弧曲线，适合数控车床加工</p>
+<p>2）定位和夹紧：以φ85mm外圆及右中心孔为定位基准，用三爪自定心卡盘夹持φ85mm外圆，用机床尾座顶尖顶住右中心孔</p>
+<p>3）选择刀具和对刀：根据加工要求，需要3把刀具，车外圆，切槽，车螺纹。试切对刀，并测量出各刀具的相关数据，输入到系统参数里</p>
+<p>4）切削用量选择：</p>
+<p>工件材料为45钢，主轴转速500-750rpm，外圆进给速度F=100～200mm/min，</p>
+<p>M48X1.5螺纹深度约1.6mm，分4次循环加工完成</p>
+<p>5）加工路线：</p>
+<p>自右向左，1号刀精加工（倒角—车螺纹外圆—车圆锥—车圆锥左端圆柱—车台</p>
+<p>阶—倒角—车80mm外圆—车圆弧—车80mm外圆—换2号刀切槽—换3号刀车螺纹）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317194025582.png" alt="image-20260317194025582"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">O0003；</span><br><span class="line">N01 G50 X200.0 Z350.0；工件坐标系设定</span><br><span class="line">N02 G30 U0 W0 T0101；→ 刀具从当前位置直接快速去第二参考点（换刀安全位置），然后换1号刀（T0101：刀具 1 + 补偿 1）（u、v、w对应x、y、z）</span><br><span class="line">N03 S630 M03；</span><br><span class="line">N10 G00X48.0 Z295.0M08；</span><br><span class="line">N11 G01 G98 Z230.0 F300；</span><br><span class="line">N12 X50.0；</span><br><span class="line">N13 X62.0W-60.0；</span><br><span class="line">N14 Z155.0；</span><br><span class="line">N15 X78.0；</span><br><span class="line">N16 X80.0W-1.0；</span><br><span class="line">N17 W-19.0；</span><br><span class="line">N18 G02U0W-60.0R70.0；</span><br><span class="line">N19 G01Z65.0；</span><br><span class="line">N20 X85.0；</span><br><span class="line">精加工</span><br><span class="line">N30 G00 X41.8 Z292.0 M08；</span><br><span class="line">N40 G01 X47.8 Z289.0 F150；</span><br><span class="line">N50 Z230.0；</span><br><span class="line">N60 X50.0；</span><br><span class="line">N70 X62.0 W-60.0；</span><br><span class="line">N80 Z155.0；</span><br><span class="line">N90 X78.0；</span><br><span class="line">N100X80.0W-1.0；</span><br><span class="line">N110 W-19.0；</span><br><span class="line">N120 G02 W-60.0 R70；</span><br><span class="line">N130 G01 Z65.0；</span><br><span class="line">N140 X90.0；</span><br><span class="line">N150 G00 X200.0 Z350.0 T0100 M09；</span><br><span class="line">换刀、切槽</span><br><span class="line">N160 G30 U0 W0 T0202；</span><br><span class="line">N170 S315 M03；</span><br><span class="line">N180 G00 X51.0 Z230. M08；</span><br><span class="line">N190 G01 X45.0 F0.16；</span><br><span class="line">N200 G04 U5.0 ；</span><br><span class="line">N210 G00 X51.0；</span><br><span class="line">N220 X200.0 Z350.0 T0200 M09；</span><br><span class="line">换刀、车螺纹</span><br><span class="line">N230 G30 U0 W0 T0303； 换3号刀</span><br><span class="line">N240 S200 M03；</span><br><span class="line">N250 G00 X62.0 Z296.0 M08； 快速接近车螺纹进给刀起点</span><br><span class="line">N260 G92 G99 X47.54 Z231.5 F1.5；4次螺纹切削循环，螺距为1.5mm</span><br><span class="line">N270 X46.94；</span><br><span class="line">N280 X46.54；</span><br><span class="line">N290 X46.38；总共 4 刀，逐步切深，避免一刀切太多崩刀</span><br><span class="line">N300 G00 X200.0 Z350.0 T0300 M09；</span><br><span class="line">N310 M05；</span><br><span class="line">N320 M30；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>聪明的你可能发现了，好奇怪，和里面的G92/G99和你上面贴的那张图好像不是一个作用诶？问得好，<strong>你可以理解为有三个不同的体系</strong>，里面都有G92/G99指令，张三的G92和李四的G92，两个不一样的崽子，你说能一样吗？</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317205718350.png" alt="image-20260317205718350"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1>第三章 机械系统部件设计</h1>
+<ul>
+<li>
+<p>机械系统部件的设计要求：<strong>稳快准三字诀</strong>（稳定性、响应快、较高的定位精度）</p>
+</li>
+<li>
+<p>如何实现稳快准？</p>
+<ul>
+<li>采用低摩擦阻力的传动部件和导向支承部件（气动就是一个很好的例子）</li>
+<li>缩短传动链，提高传动与支承刚度</li>
+<li>选用最佳传动比，以达到提高系统分辨率、减少等效到执行元件输出轴上的等效转动惯量，尽可能提高加速能力</li>
+<li>缩小反向死区误差，如采取消除传动间隙、减少支承变形的措施</li>
+<li>改进支承及架体的结构设计以提高刚性、减少振动、降低噪声（同向加工？）</li>
+</ul>
+</li>
+<li>
+<p>传动部件的选择和设计</p>
+<ul>
+<li>
+<p>谐波齿轮传动</p>
+<ul>
+<li>
+<p>三大件：波发生器、柔轮、刚轮</p>
+<p><a href="https://www.bilibili.com/video/BV1Zo4y197Xc/?vd_source=f15209b32029e916ee473fe943d494ca">谐波齿轮传动原理、结构与应用特点</a></p>
+<p>它是依靠柔性齿轮产生的可控变形引起齿间的相对错齿来传递动力和运动的</p>
+<p>谐波齿轮传动的波形发生器相当于行星轮系的转臂，柔轮相当于行星轮，刚轮则相当于中心轮</p>
+<p>当刚轮固定时，则柔轮的回转方向与波形发生器的回转方向相反。当柔轮固定时，则刚轮的回转方向与波形发生器的回转方向相同</p>
+</li>
+</ul>
+</li>
+<li>
+<p>齿轮传动间隙的调整方法</p>
+<ul>
+<li>
+<p>偏心调整法</p>
+<p>如果偏心量为e，则间隙调整范围就是-e到+e（可以向两个方向微调），但侧隙不能自动补偿</p>
+<p>使用偏心套</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324193733039.png" alt="image-20260324193733039"></p>
+</li>
+<li>
+<p>轴向垫片调整法</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324193957358.png" alt="image-20260324193957358"></p>
+</li>
+<li>
+<p>双片薄齿轮错齿调整法</p>
+</li>
+</ul>
+</li>
+<li>
+<p>挠性传动部件</p>
+</li>
+<li>
+<p>间歇传动部件</p>
+<ul>
+<li>
+<p>棘轮传动、槽轮传动、蜗形凸轮传动等</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194215990.png" alt="image-20260324194215990"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>导向支撑部件的选择和设计</p>
+<ul>
+<li>
+<p>作用：支承和限制运动部件按给定的运动要求和规定的运动方向运动</p>
+</li>
+<li>
+<p>分类、各类特点：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194306971.png" alt="image-20260324194306971"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194828229.png" alt="image-20260324194828229"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194848458.png" alt="image-20260324194848458"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324194907038.png" alt="image-20260324194907038"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195026940.png" alt="image-20260324195026940"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195050237.png" alt="image-20260324195050237"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195119578.png" alt="image-20260324195119578"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195141939.png" alt="image-20260324195141939"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195156939.png" alt="image-20260324195156939"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195332451.png" alt="image-20260324195332451"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195342254.png" alt="image-20260324195342254"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260324195357437.png" alt="image-20260324195357437"></p>
+</li>
+<li>
+<p>基本要求：机电一体化系统对导轨的基本要求是<strong>导向精度高、刚性好、运动轻便平稳、耐磨性好、温度变化影响小以及结构工艺性好</strong>等</p>
+<ul>
+<li>
+<p><strong>导向精度</strong>是指动导轨按给定方向作直线运动的准确程度</p>
+<p>导向精度的高低，主要取决于：</p>
+<p>导轨的结构类型</p>
+<p>导轨的几何精度和接触精度</p>
+<p>导轨的配合间隙、油膜厚度和油膜刚度</p>
+<p>导轨和基础件的刚度和热变形等</p>
+</li>
+<li>
+<p><strong>导轨的刚度</strong>就是抵抗载荷的能力</p>
+<p>抵抗恒定载荷的能力称为<strong>静刚度</strong></p>
+<p>抵抗交变载荷的能力称为<strong>动刚度</strong></p>
+</li>
+<li>
+<p>精度的<strong>保持性</strong></p>
+<p>目前多采用多层金属薄板伸缩式防护罩进行防护</p>
+</li>
+<li>
+<p>运动的灵活性和低速运动的平稳性</p>
+<p>其主要原因是摩擦系数随运动速度的变化和传动系统刚性不足</p>
+<ul>
+<li>导轨的爬行现象机理</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>机电一体化系统的机座或机架</p>
+</li>
+</ul>
+<hr>
+<h1>经验提炼</h1>
+<ol>
+<li>
+<p><strong>G代码不是&quot;一个体系&quot;，而是&quot;多个体系&quot;。</strong> 不同的数控系统（FANUC、SIEMENS、三菱）对同一个G代码号可能有完全不同的定义。学习时要先搞清楚你面对的是哪个系统。</p>
+</li>
+<li>
+<p><strong>&quot;稳快准&quot;三个字概括了所有机械部件设计的目标。</strong> 稳定性、速度、精度——任何设计决策都可以从这三个维度去权衡。</p>
+</li>
+<li>
+<p><strong>谐波齿轮的类比记忆法：</strong> 波发生器=行星架，柔轮=行星轮，刚轮=太阳轮。把这个对应关系记住，传动方向就不会搞反。</p>
+</li>
+<li>
+<p><strong>爬行现象的本质是&quot;摩擦力随速度变化&quot;+“传动链刚性不足”。</strong> 理解了根因，消除方法就顺理成章了：提高传动刚性、降低静摩擦系数差异。</p>
+</li>
+<li>
+<p><strong>完整的CNC程序示例是最好的学习材料。</strong> 看十遍理论不如自己写一个完整的零件加工程序。从坐标系设定到换刀、从粗加工到精加工、从切削到螺纹——走一遍全流程，G代码就活了。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Exam</category>
+      </categories>
+      <tags>
+        <tag>exam-notes</tag>
+        <tag>cnc-programming</tag>
+        <tag>harmonic-drive</tag>
+        <tag>mechatronics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>当组长带机电项目：从踩坑到复盘</title>
+    <url>/2026/03/17/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/</url>
+    <content><![CDATA[<p>作为组长，自然会有更多要做的。能力越大，责任越大嘛。这篇文章记录了三个机电项目的全过程——从选软件、分工、踩坑，到用「人机料法环」框架做复盘。如果你也需要带团队做工程项目，里面的团队管理经验或许对你有用。</p>
 <span id="more"></span>
 <h1>项目一 零件的数控加工过程</h1>
 <h2 id="小组的分工">小组的分工</h2>
@@ -3973,7 +5066,7 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
 <h3 id="人">人</h3>
 <p>大家投入程度都不错</p>
 <p>个人心情最近不错</p>
-<p>有踏实干活的技术人</p>
+<p>有一个踏实干活的技术人</p>
 <p>上台演讲的人很踏实、很优秀</p>
 <h3 id="机">机</h3>
 <p>制作ppt投入了5h，时间投入成本足够</p>
@@ -3988,32 +5081,176 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
 <p><strong>没有制定明确的ddl</strong></p>
 <h3 id="环">环</h3>
 <p>采取线下讨论的方式，效率高</p>
-<p>在学校学习讨论，效率高</p>
 <h1>项目二 使用python进行上位机的开发</h1>
 <p>感觉这部分就是叫我们去搭建一个类似于isp的软件，可以去实现串口通信，比如发送一个文字信息，去指示单片机干一些什么事情，我觉得下面这个软件界面就是一个很好的模板，可以去参考参考需要有哪些模块，有哪些功能</p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326200520467.png" alt="image-20260326200520467"></p>
-<h1>最终大作业 完成一个小型多自由度机电装置产品</h1>
-<h2 id="前期工作">前期工作</h2>
-<p>使用什么软件、什么工具，找一下相关的项目图片、项目学习视频案例，制定任务分配（说明任务分配细节）</p>
+<h1>大作业 基于四轴海豚式机械臂的无人机空中操作平台设计</h1>
+<h2 id="260414">260414</h2>
+<p>今天是大作业的开题时间，今天的开题得了A+，其实还是不错的，但是还有一个组得到的是A++，所以我们需要去学习他们那一组好在哪里，怎么去向他们学习，有哪些方面可以去往他们那边靠近的，诸如此类等等。</p>
+<p>小组存在的问题很多</p>
+<p><strong>人</strong></p>
+<p>组员有部分干活不是很积极，属于摆烂的心态，这种会严重拖进度</p>
+<p><strong>机</strong></p>
+<p>投入的时间成本少，只用了一个下午的时间讨论如何开展工作</p>
+<p>大部分的内容依靠的是ai生成，尤其是软件方面，基本没有任何水平！</p>
+<p><strong>料</strong></p>
+<p>创意点不错，很扎实</p>
+<p>硬件方面，实质性的内容实在是太少，缺少一定的运动动画仿真诸如此类</p>
+<p>缺少爆炸视图、装配图之类必要图片</p>
+<p>建模不够完善，没有把夹爪和机械臂实质性的连接在一起</p>
+<p>软件方面过于笼统，全是文字性的说明，没有任何实际效果、代码，诸如此类</p>
+<p>缺少上位机制作，通过上位机输入一定的指令来实现抓取过程（？）</p>
+<p>电机类型的选择缺少，选型需要找出一定的依据（直流电机/舵机/伺服电机？）</p>
+<p>杆件的选型缺少，选型需要找出一定的依据</p>
+<p>传感器的选型可以有</p>
+<p>成本分析脱离现实，价格虚高</p>
+<p>ppt结构混乱，什么机械方案、方案设计，明显是包含关系，应该改为硬件方案、软件方案</p>
+<p>ppt页码过渡动画混乱，为啥是一坨纸飞走了，笑死我了</p>
+<p><strong>法</strong></p>
+<p>感觉现在太依赖学姐长的ppt原版，而忘记了其他渠道可以获取知识</p>
+<p>比如搜一些成形的论文、找一些相关的视频教学之类的</p>
+<p><strong>环</strong></p>
+<p>优化后的分工：</p>
+<table>
+<thead>
+<tr>
+<th>成员</th>
+<th>角色</th>
+<th>具体负责内容（必须产出）</th>
+<th>截止时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A（组长）</td>
+<td>汇报 + PPT</td>
+<td>整体协调、报告撰写、PPT最终排版、答辩彩排</td>
+<td>全程跟进</td>
+</tr>
+<tr>
+<td>B</td>
+<td>硬件建模 + 仿真</td>
+<td>完整装配体、爆炸视图、运动仿真视频（含夹爪连接）</td>
+<td>4月18日前</td>
+</tr>
+<tr>
+<td>C</td>
+<td>视觉识别 + 上位机</td>
+<td><strong>果实识别模块</strong>（OpenMV / Pi + YOLO）+ Python上位机（实时画面+指令发送）</td>
+<td>4月22日前</td>
+</tr>
+<tr>
+<td>D</td>
+<td>51单片机控制 + 选型</td>
+<td>51单片机主控代码（PCA9685 + 动作组 + 串口接收识别结果）+ 选型依据表</td>
+<td>4月21日前</td>
+</tr>
+<tr>
+<td>E</td>
+<td>各部分选型+ 成本+论文引用</td>
+<td>各部件选型、成本分析表、论文引用</td>
+<td>4月23日前</td>
+</tr>
+</tbody>
+</table>
+<p>每个人必须产出<strong>可验证的成果</strong>（文件/代码/图片），不能只提建议。</p>
+<p>每周日晚8点固定线上碰头，汇报进度（防止摆烂）。</p>
+<p>若有人连续2次未完成，组长有权调整分工并在报告中注明个人贡献。</p>
+<p>目标就是：把无人机开到要摘水果的地方，给他飞上去，无人机前面有一个相机，可以拍摄到有多少个水果，返回对应的水果位置，机械臂寻迹，抓取果实，相机返回实时画面，python上位机可以看到实时画面，我们还可以通过上位机实现指令的发送来控制四个舵机的运动状态，可以分别控制，也可以有一个连续的动作组进行控制</p>
+<p>看看优秀小组的基本思路是怎么样的，学习一下</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260414202539520.png" alt="image-20260414202539520"></p>
+<h1>260517</h1>
 <ul>
-<li>[ ] 什么软件 keilc51、solidworks、matlab opencv</li>
-<li>[ ] 什么硬件 51单片机、伺服电机若干 3d打印件</li>
-<li>[ ] 项目图片</li>
-<li>[ ] 知识渠道</li>
+<li><strong>核心控制器</strong>：树莓派 4B（运行 Python）</li>
+<li><strong>执行器</strong>：4 个舵机 → 控制机械臂 4 个关节</li>
+<li><strong>传感器</strong>：限位开关（每关节一个）、压力传感器（夹持器）、可选编码器（舵机内置或外置）</li>
+<li><strong>视觉</strong>：USB 摄像头 → 识别水果数量及位置</li>
+<li><strong>上位机</strong>：同一树莓派上运行 Python GUI，显示实时画面，支持单独/动作组控制舵机</li>
+<li><strong>电源</strong>：无人机锂电池（22.2V）→ 降压至 5V（树莓派）和 6V（舵机）</li>
+<li><strong>通讯</strong>：USB（摄像头）、GPIO PWM（舵机）、GPIO 数字输入（限位）、SPI/I²C（压力传感器）</li>
 </ul>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260407141250911.png" alt="image-20260407141250615"></p>
-<p>提出一个小型多自由度机电装置产品，分析产品的应用前景、结构组成、主要技术特点</p>
-<p>vscode需要安装一下这个环境</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260407140113894.png" alt="image-20260407140113564"></p>
-<p>安装一下拓展就行</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260407140503849.png" alt="image-20260407140503755"></p>
+<table>
+<thead>
+<tr>
+<th>你的主要需求</th>
+<th>首选模型</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>日常聊天 + 学习助手</strong></td>
+<td>豆包 2.0</td>
+<td>最像真人，反应快，情商高</td>
+</tr>
+<tr>
+<td><strong>写论文 / 长文档 / 总结</strong></td>
+<td>Kimi</td>
+<td>长上下文无敌</td>
+</tr>
+<tr>
+<td><strong>编程 / 算法 / 数学</strong></td>
+<td>DeepSeek V4</td>
+<td>代码能力极强，免费额度高</td>
+</tr>
+<tr>
+<td><strong>综合办公 + 文案</strong></td>
+<td>通义千问</td>
+<td>稳定 + 阿里生态</td>
+</tr>
+<tr>
+<td><strong>画图 / 多模态</strong></td>
+<td>豆包 或 文心一言</td>
+<td>生成质量较好</td>
+</tr>
+<tr>
+<td><strong>完全免费 + 高性价比</strong></td>
+<td>DeepSeek + 豆包组合</td>
+<td>两者免费额度都很大</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第一，在硬件上</strong>，我选用了Kollmorgen C063 DDR直驱伺服电机，它内置绝对式编码器，能实时反馈位置和速度，这是伺服闭环的基础。</p>
+<p><strong>第二，在控制架构上</strong>，伺服驱动器采用位置环、速度环、电流环三闭环PID控制。编码器反馈与指令比较后，驱动器自动调节电机的扭矩和转速，确保刀盘精确、快速地跟随指令，实现了±2弧秒的重复定位精度。</p>
+<p><strong>第三，在换刀逻辑上</strong>，我利用绝对编码器和PLC实现了双向就近选刀。系统能根据当前刀位和目标刀位，自动计算最短路径和转动方向，这体现了伺服系统‘智能决策’的能力。</p>
+<p><strong>第四，在参数优化上</strong>，我针对0.1s高速换刀的要求，调整了伺服驱动器的PID参数，并采用半余弦加速度曲线，让电机启停更平稳、无冲击，充分利用了伺服电机动态响应快的优势。</p>
+<p>总之，从电机选型、闭环控制到换刀逻辑再到参数优化，我的设计完整地体现了’伺服’的精髓——精确、快速、闭环跟随。”</p>
+<hr>
+<h1>经验提炼</h1>
+<p>做了三个项目，当了组长，踩了不少坑。总结几条最有用的：</p>
+<ol>
+<li>
+<p><strong>选队友比选技术更重要。</strong> “找一些要干活、会干活、有能力的人一起干”——这话听着简单，但只有亲身经历过摆烂队友拖进度，才能体会有多痛。</p>
+</li>
+<li>
+<p><strong>遇到卡壳别硬磨。</strong> 铣床的问题磨了一个下午没解决，最后找淘宝卖家请教才搞定。向外部求助不丢人，效率比面子重要。</p>
+</li>
+<li>
+<p><strong>用「人机料法环」做复盘。</strong> 这个框架把一团乱麻的项目经验拆成了五个维度，每个维度都能找到具体的改进点。比起”感觉做得还行”式的总结，结构化复盘才是真正有用的习惯。</p>
+</li>
+<li>
+<p><strong>AI是工具，不是拐杖。</strong> 大作业中”大部分内容依靠AI生成，基本没有任何水平”——AI可以帮你起草，但不能替你思考。技术深度只能来自真正的理解和实践。</p>
+</li>
+<li>
+<p><strong>A+不是终点，A++才是目标。</strong> 得了A+之后第一反应不是辩解，而是去研究A++那组好在哪里。这种心态比任何具体的技术知识都值钱。</p>
+</li>
+<li>
+<p><strong>知识获取渠道要多元化。</strong> 不要只依赖学长的PPT，论文、视频教程、产品手册、甚至淘宝卖家，都是有效的学习渠道。</p>
+</li>
+<li>
+<p><strong>团队管理要有明确的DDL和可验证的产出。</strong> “每个人必须产出可验证的成果（文件/代码/图片），不能只提建议”——这句话应该成为每个项目组的铁律。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>项目</category>
+        <category>Project</category>
       </categories>
       <tags>
-        <tag>数控</tag>
-        <tag>CAM</tag>
+        <tag>python</tag>
+        <tag>cnc</tag>
+        <tag>mechatronics</tag>
+        <tag>cam</tag>
+        <tag>team-management</tag>
       </tags>
   </entry>
   <entry>
@@ -4045,31 +5282,63 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
 <p>用她看世界</p>
 <p>一吞一吐好迷人</p>
 <p>两个大葡萄</p>
+<h1>《沐春光》</h1>
+<p>马兰沐春光</p>
+<p>心情如花竞开放</p>
+<p>我与春同长</p>
 ]]></content>
       <categories>
-        <category>生活哲学</category>
+        <category>Life Philosophy</category>
       </categories>
       <tags>
-        <tag>俳句</tag>
+        <tag>haiku</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>破解游戏无法进入游戏的解决方法</title>
+    <url>/2026/06/17/%E7%A0%B4%E8%A7%A3%E6%B8%B8%E6%88%8F%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>一些解决破解游戏无法进入游戏的解决方法</p>
+<span id="more"></span>
+<h1>场景一</h1>
+<h2 id="问题">问题</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/Snipaste_2026-05-06_20-12-35.png" alt="Snipaste_2026-05-06_20-12-35"></p>
+<p>下载到了某个学习版，但是发现不弹个info by FIxSNX 小窗</p>
+<p>游戏就会一直卡在一个加载界面无法进入</p>
+<h2 id="解决方法">解决方法</h2>
+<p>搜了搜网上有类似的情况出现，但是他们的问题描述是“但是发现会弹个info by FIxSNX 小窗就闪退了”</p>
+<p>问题的解决办法是“修改电脑系统时间为2025年6月27日”，即可正常启动</p>
+<p>这其中涉及到了单一启动程序的一个软件的下载，名字叫runasdate</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260508171931684.png" alt="image-20260508171931684"></p>
+<p>然而我发现，其实这个游戏的问题并不能够通过更改游戏的启动时间来解决，大概run 7次可以打开一次游戏，也是离谱了</p>
+<p>似乎和运行的时间并没有什么关系</p>
+<p>进游戏似乎一直考运气</p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+      <tags>
+        <tag>gaming</tag>
+        <tag>troubleshooting</tag>
       </tags>
   </entry>
   <entry>
     <title>耗子的生活模型</title>
     <url>/2026/06/11/%E8%80%97%E5%AD%90%E7%9A%84%E7%94%9F%E6%B4%BB%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<p>突发奇想的一期，也想学着大佬给自己生活来点模型</p>
+<span id="more"></span>
 <h1>财务</h1>
 <p>每周空出一天时间来进行购物评估，包括日用杂货、以及我们所需要的东西</p>
 <p>买东西之前问自己几个问题:1.你一周能用几次？2.功能是不是太多了？3.你真的缺这个商品吗？4.买这个东西是为了什么？5.如果真的买回来我会不会把他扔到壁橱里不用？6.如果我缺了这样东西我还能坚持多久？</p>
 <p>对于大额购物(&gt;=10%个人现有资金流)延迟购物至少2个星期</p>
 ]]></content>
       <categories>
-        <category>生活哲学</category>
+        <category>Life Philosophy</category>
       </categories>
   </entry>
   <entry>
     <title>耗子的记录日志</title>
-    <url>/2026/06/11/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>耗子的记录日志</p>
+    <url>/2026/06/17/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>耗子的记录日志，诶！</p>
 <span id="more"></span>
 <h1>状态记录</h1>
 <h2 id="260124">260124</h2>
@@ -4612,17 +5881,20 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
 </table>
 ]]></content>
       <categories>
-        <category>生活哲学</category>
+        <category>Life Philosophy</category>
       </categories>
+      <tags>
+        <tag>self-reflection</tag>
+        <tag>life-log</tag>
+      </tags>
   </entry>
   <entry>
     <title>使用GitHub仓库+PicGo+CDN服务搭建个人博客图床</title>
     <url>/2026/06/11/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/</url>
-    <content><![CDATA[<h1>使用 GitHub 仓库 + PicGo + CDN 服务搭建个人博客图床</h1>
-<h2 id="引言">引言</h2>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png" alt="image-20260305212844692"></p>
-<p>在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理上传，再通过 CDN 服务加速访问，搭建了一个长期可用、方便管理的个人博客图床。</p>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png" alt="image-20260305212844692">使用 GitHub 仓库 + PicGo + CDN 服务搭建个人博客图床</p>
 <span id="more"></span>
+<h2 id="引言">引言</h2>
+<p>在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理上传，再通过 CDN 服务加速访问，搭建了一个长期可用、方便管理的个人博客图床。</p>
 <h2 id="需要的工具">需要的工具</h2>
 <p>需要准备的工具和资源如下</p>
 <ol>
@@ -4728,11 +6000,60 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
 <p>使用ai是一门学问，用的好是好，用的不好，却是无益的</p>
 ]]></content>
       <categories>
-        <category>方法</category>
+        <category>How-To</category>
       </categories>
       <tags>
-        <tag>PicGo</tag>
-        <tag>GitHub</tag>
+        <tag>picgo</tag>
+        <tag>gitHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>陷入时间黑洞？一刷视频就停不下来？</title>
+    <url>/2026/06/14/%E9%99%B7%E5%85%A5%E6%97%B6%E9%97%B4%E9%BB%91%E6%B4%9E%EF%BC%9F%E4%B8%80%E5%88%B7%E8%A7%86%E9%A2%91%E5%B0%B1%E5%81%9C%E4%B8%8D%E4%B8%8B%E6%9D%A5%EF%BC%9F/</url>
+    <content><![CDATA[<p>每次学习完一些东西，想要休息，总是会不自觉的拿起手机，打开抖音，刷起来</p>
+<span id="more"></span>
+<h2 id="正文">正文</h2>
+<p>这周的屏幕使用时间比上周多得多了，上周的平均屏幕使用时间是4h5m，这周一下子跳到了7h10m，涨了75%（是一个很恐怖的事情了），其实有很多原因，因为上周一周就有三门考试，导致忙得其实都没有什么时间来刷机，但这周就不太一样，只剩一门考试了，还是在遥远的23号，时间的宽裕带来了心理上的松懈，心理上的松懈导致了时不时就会拿起那诱人的手机，获取那来之极易的快餐。</p>
+<p>心里还是很想改变的，过多的短视频文化以及小黑盒文章的输入其实对于个人没有太多的帮助，会让你丧失独立思考的能力（这一点我深有同感）。想要改变是真的，但是怎么改变是很有难度的。</p>
+<p>如何衡量消磨时间还是利用时间，这本就是一个很有难度的问题。</p>
+<p>想要减少电子设备的使用时间，就必须增加实际生活的运行时间，意味着我们日常的游戏、刷短视频的时间可以去社交、享受美食、旅游、逛博物馆、扫街等等，意味着我们要把现实生活过的更加充实，我认为，一切的电子设备时间的剧增，应该都不是大家发自内心的第一选择，但是似乎又没有比这种快餐文化更便宜的时间消磨方式了。</p>
+<p>所以问题就转换到了：我们如何用现实世界里面的活动去替代网络世界的部分活动了。</p>
+<p>看看 Ali Abdaal 的视频，其中有一个很有意思的观点：诸如油管、b站、抖音此类的视频平台，他们招募一些很厉害的算法工程师，就是为了抓住普通观众的眼球，保留用户的使用率，并且在上面挂广告（盈利靠的也正是这些），油管上的广告多的不得了，当然b站也不少。普通人如果没有意识到这一点，是很难戒掉短视频的，因为很恐怖的一点是你在对抗一些极其恐怖的算法、一些不想让你摆脱平台的高级算法工程师。</p>
+<p>Ali Abdaal 就推荐了：</p>
+<ol>
+<li>手机可以开启灰度模式，这样会让你刷机的频率大大下降</li>
+<li>借用时间管理类app，第三方监督化</li>
+<li>把你的手机放远一点，增加刷机的物理难度（这个感觉是真的可以）</li>
+</ol>
+<p>回到这个问题：我们如何用现实世界里面的活动去替代网络世界的部分活动了。</p>
+<p>Ali Abdaal 有一个视频很自然的给出了五种方式：</p>
+<ol start="4">
+<li>整理你面前的空间，环境越混乱，你的思绪也越混乱</li>
+<li>定时写日记，定时复盘，记录你一周以来哪些做的好、哪些做得差，哪些想要延续，哪些想要摒弃，下周前三优先级是什么，年度目标进度如何，月度目标进度如何，季度目标进度如何之类的，总之想到和成长有关的都能写</li>
+<li>建立个人CRM系统，customer relationship management，感觉这个不是很适合我，可以先放在一边，以后用得上再说，可以用obsidian来实现的</li>
+<li>可以和朋友开展一个博客节目</li>
+<li>对感激的人，发一条gratitude message，短信的力量比你想象的大得多</li>
+<li><strong>录制&quot;时间胶囊&quot;视频</strong>：用手机录制视频记录当下的成就、挣扎与终极目标。在未来陷入低谷、感觉毫无长进时，翻看这些视频能重新找回动力（这个我感觉真的不错，很有意思的）</li>
+<li>把手机捆上一个&quot;封锁手环&quot;</li>
+<li>每当感到无聊的时候可以打扫一下桌面、管理一下文件系统</li>
+<li>创造一个好的学习环境，放一些书在触手可及的位置</li>
+<li>不要一早上起来就刷手机，如果有一些必要活动可以在中午进行</li>
+</ol>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260615133446595.png" alt="image.png"></p>
+<h2 id="视频链接">视频链接</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=SjvsfBvfyvI">Stop Scrolling: How to Take Back Control from Your Phone</a></li>
+<li><a href="https://www.youtube.com/watch?v=zZ45ydPJg_U">5 Productive Things I Do Instead of Mindless Scrolling</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>digital-detox</tag>
+        <tag>productivity</tag>
+        <tag>ali-abdaal</tag>
+        <tag>time-management</tag>
       </tags>
   </entry>
 </search>

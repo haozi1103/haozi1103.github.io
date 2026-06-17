@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="三个机电项目的实战记录——数控加工仿真、Python上位机开发、无人机机械臂设计，附带详细的团队管理复盘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="当组长带机电项目：从踩坑到复盘">
+<meta property="og:url" content="http://haozi.space/2026/03/17/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="三个机电项目的实战记录——数控加工仿真、Python上位机开发、无人机机械臂设计，附带详细的团队管理复盘">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317172717774.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326200520467.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260414202539520.png">
+<meta property="article:published_time" content="2026-03-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-16T16:00:00.000Z">
+<meta property="article:author" content="haozi">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="cnc">
+<meta property="article:tag" content="mechatronics">
+<meta property="article:tag" content="cam">
+<meta property="article:tag" content="team-management">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317172717774.png">
+
+<link rel="canonical" href="http://haozi.space/2026/03/17/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- HarmonyOS Sans SC Font -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
+<style>
+  /* Fallback: If LXGW WenKai is used, override font-family */
+  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
+  /*
+  @font-face {
+    font-family: 'HarmonyOS Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
+  }
+  */
+</style>
+
+  <title>当组长带机电项目：从踩坑到复盘 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-future">
+
+    <a href="/future/" rel="section"><i class="fa fa-terminal fa-fw"></i>Future Self</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>tools</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/17/%E6%9C%BA%E7%94%B5%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E8%B7%B5%E7%9A%84%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          当组长带机电项目：从踩坑到复盘
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-17 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-17T00:00:00+08:00">2026-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-17 00:00:00" itemprop="dateModified" datetime="2026-05-17T00:00:00+08:00">2026-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Project/" itemprop="url" rel="index"><span itemprop="name">Project</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">三个机电项目的实战记录——数控加工仿真、Python上位机开发、无人机机械臂设计，附带详细的团队管理复盘</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>作为组长，自然会有更多要做的。能力越大，责任越大嘛。这篇文章记录了三个机电项目的全过程——从选软件、分工、踩坑，到用「人机料法环」框架做复盘。如果你也需要带团队做工程项目，里面的团队管理经验或许对你有用。</p>
+<span id="more"></span>
+<h1>项目一 零件的数控加工过程</h1>
+<h2 id="小组的分工">小组的分工</h2>
+<p>(隐性）整体协调+零件最终选定+PPT封面/目录/结论部分+最终整合检查</p>
+<ol>
+<li>（2人）CAM自动编程，后处理生成G代码文件，并进行G代码文件截图，录制完整仿真加工视频（边录边加简单解说）</li>
+<li>零件工艺分析（绘制机械加工工序卡片）</li>
+<li>收集大家的成果（G代码、仿真视频、工序卡片等），进行PPT制作</li>
+<li>上台汇报(说明自动编程过程)</li>
+</ol>
+<h2 id="仿真软件的选择：">仿真软件的选择：</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260317172717774.png" alt="image-20260317172717774"></p>
+<p>最后选择的是UG NX12，因为这个软件的知名度高，<strong>而且便于大家统一安装</strong></p>
+<h2 id="过程记录">过程记录</h2>
+<p>约一个研讨室，线下交流对于一个项目的开展很重要</p>
+<p>找一些要干活、会干活、有能力的人一起干，不要找一些不想干、懒的人当小组队员</p>
+<p>没想到开做的第一天进展就很顺利，已经把大部分的车床工作完成了，每天只需要完善一下铣床的工艺就可以了！</p>
+<p>加油加油</p>
+<p>260320</p>
+<p>然而，话还是说早了，草率地以为铣床遇到的问题很简单，但就是磨了我们一个下午，直到最后找淘宝解决了问题，你别说，向人去求助真的是一个好办法，不一定要花钱，找一些这方面很厉害的人去请教，这也是解决问题的一个好方法</p>
+<h2 id="复盘">复盘</h2>
+<h3 id="人">人</h3>
+<p>大家投入程度都不错</p>
+<p>个人心情最近不错</p>
+<p>有一个踏实干活的技术人</p>
+<p>上台演讲的人很踏实、很优秀</p>
+<h3 id="机">机</h3>
+<p>制作ppt投入了5h，时间投入成本足够</p>
+<p>零件的工艺完全由自己构思，参考设计方案较少</p>
+<h3 id="料">料</h3>
+<p>对于加工的过程知识大家其实都不是很清楚，都是采取询问ai的方式</p>
+<p>制作零件的质量一般</p>
+<p>获取知识的渠道过少，可以找一找一些<strong>成熟的案例</strong>、看看<strong>专业书籍</strong>来设计而不是自己空想</p>
+<h3 id="法">法</h3>
+<p>流程来看：先是初步商量下使用什么软件、什么工具，找一下相关的项目图片、项目学习视频案例，制定任务分配（说明任务分配细节），约定研讨室，开始项目工作，制定ddl，定时留下一些照片/视频记录</p>
+<p>分配任务还是存在不合理，比如写工艺分析的其实干的活就没有那么多</p>
+<p><strong>没有制定明确的ddl</strong></p>
+<h3 id="环">环</h3>
+<p>采取线下讨论的方式，效率高</p>
+<h1>项目二 使用python进行上位机的开发</h1>
+<p>感觉这部分就是叫我们去搭建一个类似于isp的软件，可以去实现串口通信，比如发送一个文字信息，去指示单片机干一些什么事情，我觉得下面这个软件界面就是一个很好的模板，可以去参考参考需要有哪些模块，有哪些功能</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326200520467.png" alt="image-20260326200520467"></p>
+<h1>大作业 基于四轴海豚式机械臂的无人机空中操作平台设计</h1>
+<h2 id="260414">260414</h2>
+<p>今天是大作业的开题时间，今天的开题得了A+，其实还是不错的，但是还有一个组得到的是A++，所以我们需要去学习他们那一组好在哪里，怎么去向他们学习，有哪些方面可以去往他们那边靠近的，诸如此类等等。</p>
+<p>小组存在的问题很多</p>
+<p><strong>人</strong></p>
+<p>组员有部分干活不是很积极，属于摆烂的心态，这种会严重拖进度</p>
+<p><strong>机</strong></p>
+<p>投入的时间成本少，只用了一个下午的时间讨论如何开展工作</p>
+<p>大部分的内容依靠的是ai生成，尤其是软件方面，基本没有任何水平！</p>
+<p><strong>料</strong></p>
+<p>创意点不错，很扎实</p>
+<p>硬件方面，实质性的内容实在是太少，缺少一定的运动动画仿真诸如此类</p>
+<p>缺少爆炸视图、装配图之类必要图片</p>
+<p>建模不够完善，没有把夹爪和机械臂实质性的连接在一起</p>
+<p>软件方面过于笼统，全是文字性的说明，没有任何实际效果、代码，诸如此类</p>
+<p>缺少上位机制作，通过上位机输入一定的指令来实现抓取过程（？）</p>
+<p>电机类型的选择缺少，选型需要找出一定的依据（直流电机/舵机/伺服电机？）</p>
+<p>杆件的选型缺少，选型需要找出一定的依据</p>
+<p>传感器的选型可以有</p>
+<p>成本分析脱离现实，价格虚高</p>
+<p>ppt结构混乱，什么机械方案、方案设计，明显是包含关系，应该改为硬件方案、软件方案</p>
+<p>ppt页码过渡动画混乱，为啥是一坨纸飞走了，笑死我了</p>
+<p><strong>法</strong></p>
+<p>感觉现在太依赖学姐长的ppt原版，而忘记了其他渠道可以获取知识</p>
+<p>比如搜一些成形的论文、找一些相关的视频教学之类的</p>
+<p><strong>环</strong></p>
+<p>优化后的分工：</p>
+<table>
+<thead>
+<tr>
+<th>成员</th>
+<th>角色</th>
+<th>具体负责内容（必须产出）</th>
+<th>截止时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A（组长）</td>
+<td>汇报 + PPT</td>
+<td>整体协调、报告撰写、PPT最终排版、答辩彩排</td>
+<td>全程跟进</td>
+</tr>
+<tr>
+<td>B</td>
+<td>硬件建模 + 仿真</td>
+<td>完整装配体、爆炸视图、运动仿真视频（含夹爪连接）</td>
+<td>4月18日前</td>
+</tr>
+<tr>
+<td>C</td>
+<td>视觉识别 + 上位机</td>
+<td><strong>果实识别模块</strong>（OpenMV / Pi + YOLO）+ Python上位机（实时画面+指令发送）</td>
+<td>4月22日前</td>
+</tr>
+<tr>
+<td>D</td>
+<td>51单片机控制 + 选型</td>
+<td>51单片机主控代码（PCA9685 + 动作组 + 串口接收识别结果）+ 选型依据表</td>
+<td>4月21日前</td>
+</tr>
+<tr>
+<td>E</td>
+<td>各部分选型+ 成本+论文引用</td>
+<td>各部件选型、成本分析表、论文引用</td>
+<td>4月23日前</td>
+</tr>
+</tbody>
+</table>
+<p>每个人必须产出<strong>可验证的成果</strong>（文件/代码/图片），不能只提建议。</p>
+<p>每周日晚8点固定线上碰头，汇报进度（防止摆烂）。</p>
+<p>若有人连续2次未完成，组长有权调整分工并在报告中注明个人贡献。</p>
+<p>目标就是：把无人机开到要摘水果的地方，给他飞上去，无人机前面有一个相机，可以拍摄到有多少个水果，返回对应的水果位置，机械臂寻迹，抓取果实，相机返回实时画面，python上位机可以看到实时画面，我们还可以通过上位机实现指令的发送来控制四个舵机的运动状态，可以分别控制，也可以有一个连续的动作组进行控制</p>
+<p>看看优秀小组的基本思路是怎么样的，学习一下</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260414202539520.png" alt="image-20260414202539520"></p>
+<h1>260517</h1>
+<ul>
+<li><strong>核心控制器</strong>：树莓派 4B（运行 Python）</li>
+<li><strong>执行器</strong>：4 个舵机 → 控制机械臂 4 个关节</li>
+<li><strong>传感器</strong>：限位开关（每关节一个）、压力传感器（夹持器）、可选编码器（舵机内置或外置）</li>
+<li><strong>视觉</strong>：USB 摄像头 → 识别水果数量及位置</li>
+<li><strong>上位机</strong>：同一树莓派上运行 Python GUI，显示实时画面，支持单独/动作组控制舵机</li>
+<li><strong>电源</strong>：无人机锂电池（22.2V）→ 降压至 5V（树莓派）和 6V（舵机）</li>
+<li><strong>通讯</strong>：USB（摄像头）、GPIO PWM（舵机）、GPIO 数字输入（限位）、SPI/I²C（压力传感器）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>你的主要需求</th>
+<th>首选模型</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>日常聊天 + 学习助手</strong></td>
+<td>豆包 2.0</td>
+<td>最像真人，反应快，情商高</td>
+</tr>
+<tr>
+<td><strong>写论文 / 长文档 / 总结</strong></td>
+<td>Kimi</td>
+<td>长上下文无敌</td>
+</tr>
+<tr>
+<td><strong>编程 / 算法 / 数学</strong></td>
+<td>DeepSeek V4</td>
+<td>代码能力极强，免费额度高</td>
+</tr>
+<tr>
+<td><strong>综合办公 + 文案</strong></td>
+<td>通义千问</td>
+<td>稳定 + 阿里生态</td>
+</tr>
+<tr>
+<td><strong>画图 / 多模态</strong></td>
+<td>豆包 或 文心一言</td>
+<td>生成质量较好</td>
+</tr>
+<tr>
+<td><strong>完全免费 + 高性价比</strong></td>
+<td>DeepSeek + 豆包组合</td>
+<td>两者免费额度都很大</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第一，在硬件上</strong>，我选用了Kollmorgen C063 DDR直驱伺服电机，它内置绝对式编码器，能实时反馈位置和速度，这是伺服闭环的基础。</p>
+<p><strong>第二，在控制架构上</strong>，伺服驱动器采用位置环、速度环、电流环三闭环PID控制。编码器反馈与指令比较后，驱动器自动调节电机的扭矩和转速，确保刀盘精确、快速地跟随指令，实现了±2弧秒的重复定位精度。</p>
+<p><strong>第三，在换刀逻辑上</strong>，我利用绝对编码器和PLC实现了双向就近选刀。系统能根据当前刀位和目标刀位，自动计算最短路径和转动方向，这体现了伺服系统‘智能决策’的能力。</p>
+<p><strong>第四，在参数优化上</strong>，我针对0.1s高速换刀的要求，调整了伺服驱动器的PID参数，并采用半余弦加速度曲线，让电机启停更平稳、无冲击，充分利用了伺服电机动态响应快的优势。</p>
+<p>总之，从电机选型、闭环控制到换刀逻辑再到参数优化，我的设计完整地体现了’伺服’的精髓——精确、快速、闭环跟随。”</p>
+<hr>
+<h1>经验提炼</h1>
+<p>做了三个项目，当了组长，踩了不少坑。总结几条最有用的：</p>
+<ol>
+<li>
+<p><strong>选队友比选技术更重要。</strong> “找一些要干活、会干活、有能力的人一起干”——这话听着简单，但只有亲身经历过摆烂队友拖进度，才能体会有多痛。</p>
+</li>
+<li>
+<p><strong>遇到卡壳别硬磨。</strong> 铣床的问题磨了一个下午没解决，最后找淘宝卖家请教才搞定。向外部求助不丢人，效率比面子重要。</p>
+</li>
+<li>
+<p><strong>用「人机料法环」做复盘。</strong> 这个框架把一团乱麻的项目经验拆成了五个维度，每个维度都能找到具体的改进点。比起”感觉做得还行”式的总结，结构化复盘才是真正有用的习惯。</p>
+</li>
+<li>
+<p><strong>AI是工具，不是拐杖。</strong> 大作业中”大部分内容依靠AI生成，基本没有任何水平”——AI可以帮你起草，但不能替你思考。技术深度只能来自真正的理解和实践。</p>
+</li>
+<li>
+<p><strong>A+不是终点，A++才是目标。</strong> 得了A+之后第一反应不是辩解，而是去研究A++那组好在哪里。这种心态比任何具体的技术知识都值钱。</p>
+</li>
+<li>
+<p><strong>知识获取渠道要多元化。</strong> 不要只依赖学长的PPT，论文、视频教程、产品手册、甚至淘宝卖家，都是有效的学习渠道。</p>
+</li>
+<li>
+<p><strong>团队管理要有明确的DDL和可验证的产出。</strong> “每个人必须产出可验证的成果（文件/代码/图片），不能只提建议”——这句话应该成为每个项目组的铁律。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 2rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="gruvbox"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/cnc/" rel="tag"># cnc</a>
+              <a href="/tags/mechatronics/" rel="tag"># mechatronics</a>
+              <a href="/tags/cam/" rel="tag"># cam</a>
+              <a href="/tags/team-management/" rel="tag"># team-management</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/03/14/matlab%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE/" rel="prev" title="从MATLAB零基础到用贝塞尔曲面做植物大战僵尸">
+      <i class="fa fa-chevron-left"></i> 从MATLAB零基础到用贝塞尔曲面做植物大战僵尸
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/04/16/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/" rel="next" title="从零开始设计一台直驱伺服数控刀架">
+      从零开始设计一台直驱伺服数控刀架 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">项目一 零件的数控加工过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%84%E7%9A%84%E5%88%86%E5%B7%A5"><span class="nav-number">1.1.</span> <span class="nav-text">小组的分工</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BF%E7%9C%9F%E8%BD%AF%E4%BB%B6%E7%9A%84%E9%80%89%E6%8B%A9%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">仿真软件的选择：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95"><span class="nav-number">1.3.</span> <span class="nav-text">过程记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%9B%98"><span class="nav-number">1.4.</span> <span class="nav-text">复盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA"><span class="nav-number">1.4.1.</span> <span class="nav-text">人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA"><span class="nav-number">1.4.2.</span> <span class="nav-text">机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%99"><span class="nav-number">1.4.3.</span> <span class="nav-text">料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%95"><span class="nav-number">1.4.4.</span> <span class="nav-text">法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF"><span class="nav-number">1.4.5.</span> <span class="nav-text">环</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">项目二 使用python进行上位机的开发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">大作业 基于四轴海豚式机械臂的无人机空中操作平台设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#260414"><span class="nav-number">3.1.</span> <span class="nav-text">260414</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">260517</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">经验提炼</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">Good morning, and in case I don't see you, good afternoon, good evening, and good night!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - ASCII Cat -->
+<div id="pet-toggle" class="pet-toggle" title="Click to open terminal pet">
+  <span class="pet-toggle-icon">>_</span>
+  <span class="pet-toggle-label">Pet</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet" style="display:none;">
+  <div class="terminal-header">
+    <span class="terminal-dot red"></span>
+    <span class="terminal-dot yellow"></span>
+    <span class="terminal-dot green"></span>
+    <span class="terminal-title">haozi's blog~</span>
+    <span class="terminal-close" id="pet-close">&times;</span>
+  </div>
+  <div class="terminal-body">
+    <pre id="pet-ascii" class="pet-ascii"></pre>
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #2d2d2d;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  opacity: 0.85;
+}
+.pet-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px #7e8027;
+}
+.pet-toggle-icon {
+  color: #7e8027;
+  font-family: 'Consolas', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+}
+.pet-toggle-label {
+  color: #888;
+  font-size: 8px;
+  margin-top: 2px;
+}
+
+/* Terminal Pet Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 260px;
+  background: #2d2d2d;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  z-index: 9999;
+  font-family: 'Consolas', 'Courier New', monospace;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0.95;
+}
+.terminal-pet:hover {
+  opacity: 1;
+  box-shadow: 0 2px 5px #7e8027;
+}
+.terminal-header {
+  background: #2d2d2d;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: move;
+  user-select: none;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+.terminal-title {
+  color: #aaa;
+  font-size: 11px;
+  margin-left: 8px;
+  flex: 1;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #888;
+  background: #e81123;
+}
+.terminal-body {
+  padding: 12px 14px 10px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pet-ascii {
+  color: #7e8027;
+  font-size: 11px;
+  line-height: 1.2;
+  margin: 0;
+  white-space: pre;
+  text-align: center;
+  transition: color 0.3s;
+  animation: catBreathe 3s ease-in-out infinite;
+}
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #ddd;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes catBreathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.02); }
+}
+/* Dark mode */
+.dark .terminal-pet,
+.dark .pet-toggle {
+  background: #1a1a1a;
+}
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 200px;
+    right: 10px;
+  }
+  .pet-toggle {
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .pet-toggle-icon {
+    font-size: 13px;
+  }
+  .pet-toggle-label {
+    font-size: 7px;
+  }
+  .pet-ascii {
+    font-size: 9px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var catFrames = [
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( -.- ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)']
+  ];
+
+  var messages = [
+    '> Welcome to the blog!',
+    '> Meow, nice to meet you!',
+    '> Just vibing here...',
+    '> Deploying purr-duction...',
+    '> git commit -m "feed cat"',
+    '> printf("meow\\n");',
+    '> 404: Treats not found',
+    '> while(true) { nap(); }',
+    '> sudo rm -rf belly_rub',
+    '> Cat > Dog // true',
+    '> Loading cuteness... 100%',
+    '> echo "Hello World!"',
+    '> Compiling... nyaaa~'
+  ];
+
+  var currentFrame = 0;
+  var currentMsg = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var header = container.querySelector('.terminal-header');
+  var isOpen = false;
+
+  function updateCat() {
+    if (!isOpen) return;
+    petEl.textContent = catFrames[currentFrame].join('\n');
+    currentFrame = (currentFrame + 1) % catFrames.length;
+  }
+
+  function typewriterEffect(text, el, speed) {
+    speed = speed || 50;
+    el.textContent = '';
+    var i = 0;
+    var interval = setInterval(function() {
+      if (i < text.length) {
+        el.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, speed);
+  }
+
+  function changeMessage() {
+    if (!isOpen) return;
+    currentMsg = (currentMsg + 1) % messages.length;
+    typewriterEffect(messages[currentMsg], msgEl, 40);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    updateCat();
+    typewriterEffect(messages[0], msgEl, 40);
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+  }
+
+  // Toggle button click
+  toggleBtn.addEventListener('click', openPet);
+
+  // Close button
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+
+  // Animation loops (only run when open)
+  setInterval(updateCat, 1000);
+  setInterval(changeMessage, 4000);
+
+  // Drag functionality
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  // Clear localStorage to reset pet state on page load
+  try {
+    localStorage.removeItem('terminal-pet-hidden');
+  } catch(e) {}
+
+  header.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+
+  // Touch support
+  header.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    var touch = e.touches[0];
+    dragOffsetX = touch.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = touch.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    var touch = e.touches[0];
+    var x = touch.clientX - dragOffsetX;
+    var y = touch.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  }, { passive: true });
+  document.addEventListener('touchend', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+})();
+</script>
+</body>
+</html>
