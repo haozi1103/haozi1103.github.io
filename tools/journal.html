@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Movie Journal — 个人影视日志</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            surface: { DEFAULT: '#1A1A1A', light: '#222222', dark: '#141414' },
+            border: { DEFAULT: '#2A2A2A', light: '#333333' },
+            accent: { DEFAULT: '#34D399', hover: '#2DD4A8', dim: '#065F46' },
+            bg: { DEFAULT: '#0F0F0F', card: '#1A1A1A' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0F0F0F;
+      color: #e4e4e7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+    /* Poster card hover effect */
+    .poster-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      aspect-ratio: 2/3;
+      background: #1A1A1A;
+    }
+    .poster-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      z-index: 10;
+    }
+    .poster-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .poster-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 40%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 12px;
+    }
+    .poster-card:hover .poster-overlay {
+      opacity: 1;
+    }
+    .poster-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444;
+      font-size: 2rem;
+    }
+
+    /* Hero section */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 50vh;
+      min-height: 300px;
+      max-height: 500px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center 20%;
+      filter: blur(20px) brightness(0.4);
+      transform: scale(1.1);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem 2rem 2.5rem;
+      background: linear-gradient(to top, #0F0F0F 0%, rgba(15,15,15,0.6) 50%, transparent 100%);
+    }
+
+    /* Search dropdown */
+    .search-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: 400px;
+      overflow-y: auto;
+      background: #1A1A1A;
+      border: 1px solid #2A2A2A;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      z-index: 100;
+      display: none;
+    }
+    .search-dropdown.active { display: block; }
+    .search-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .search-item:hover { background: #222; }
+    .search-item img {
+      width: 40px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Detail modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.active { display: flex; }
+    .modal-card {
+      background: #1A1A1A;
+      border: 1px solid #2A2A2A;
+      border-radius: 16px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    }
+
+    /* Rating stars */
+    .rating-input .star {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #333;
+      transition: color 0.15s;
+    }
+    .rating-input .star.active { color: #34D399; }
+    .rating-input .star:hover { color: #34D399; }
+
+    /* Filter pills */
+    .filter-pill {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid #2A2A2A;
+      background: transparent;
+      color: #a1a1aa;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .filter-pill:hover { border-color: #444; color: #e4e4e7; }
+    .filter-pill.active {
+      background: #34D399;
+      border-color: #34D399;
+      color: #000;
+    }
+
+    /* Fade in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.3s ease forwards; }
+
+    /* Loading skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, #1A1A1A 25%, #252525 50%, #1A1A1A 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Settings panel */
+    .settings-panel {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 380px;
+      max-width: 90vw;
+      height: 100vh;
+      background: #1A1A1A;
+      border-left: 1px solid #2A2A2A;
+      z-index: 300;
+      transition: right 0.3s ease;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .settings-panel.open { right: 0; }
+    .settings-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 290;
+      display: none;
+    }
+    .settings-overlay.open { display: block; }
+
+    /* Empty state */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
+      color: #555;
+      text-align: center;
+    }
+    .empty-state svg { margin-bottom: 16px; opacity: 0.3; }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #34D399;
+      color: #000;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 999;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body class="bg-bg text-zinc-200">
+
+  <!-- ===== TOP NAVIGATION BAR ===== -->
+  <nav class="sticky top-0 z-50 bg-bg/90 backdrop-blur-md border-b border-border">
+    <div class="max-w-[1600px] mx-auto px-4 h-14 flex items-center gap-4">
+      <!-- Brand -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <span class="text-xl">🎬</span>
+        <span class="font-bold text-sm tracking-tight hidden sm:inline">Movie Journal</span>
+      </div>
+
+      <!-- Filters (center) -->
+      <div class="flex items-center gap-2 flex-1 justify-center overflow-x-auto px-2">
+        <button class="filter-pill active" data-filter="all" onclick="setFilter('all')">全部</button>
+        <button class="filter-pill" data-filter="movie" onclick="setFilter('movie')">电影</button>
+        <button class="filter-pill" data-filter="tv" onclick="setFilter('tv')">剧集</button>
+        <button class="filter-pill" data-filter="anime" onclick="setFilter('anime')">动画</button>
+      </div>
+
+      <!-- Search + Settings -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <div class="relative">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="搜索影视..."
+            class="w-36 sm:w-52 h-9 px-3 pr-9 rounded-lg bg-surface border border-border text-sm text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-accent transition"
+            oninput="onSearchInput(this.value)"
+            onfocus="onSearchFocus()"
+            onblur="setTimeout(()=>closeSearch(), 200)"
+          >
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <!-- Search Dropdown -->
+          <div class="search-dropdown" id="searchDropdown"></div>
+        </div>
+        <button onclick="openSettings()" class="p-2 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-surface transition" title="设置">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <div class="hero-section" id="heroSection" style="display:none;">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-content">
+      <div class="flex items-end gap-6 max-w-[1600px] mx-auto w-full">
+        <div class="w-32 md:w-44 flex-shrink-0 rounded-lg overflow-hidden shadow-2xl" id="heroPoster"></div>
+        <div class="flex-1 min-w-0 pb-2">
+          <p class="text-accent text-xs font-semibold uppercase tracking-wider mb-1">最新收藏</p>
+          <h1 class="text-2xl md:text-4xl font-bold text-white mb-2 truncate" id="heroTitle"></h1>
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-accent font-bold text-lg" id="heroRating"></span>
+            <span class="text-zinc-400 text-sm" id="heroYear"></span>
+            <span class="px-2 py-0.5 rounded text-xs font-medium bg-accent/20 text-accent" id="heroType"></span>
+          </div>
+          <p class="text-zinc-400 text-sm line-clamp-2 max-w-xl" id="heroEmotion"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== STATS BAR ===== -->
+  <div class="max-w-[1600px] mx-auto px-4 mt-6 mb-2 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <h2 class="text-lg font-bold">我的影视墙</h2>
+      <span class="text-zinc-500 text-sm" id="statsText">0 部作品</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="sortMovies('newest')" class="text-xs text-zinc-500 hover:text-zinc-300 transition px-2 py-1 rounded" id="sortNewest">最新</button>
+      <button onclick="sortMovies('rating')" class="text-xs text-zinc-500 hover:text-zinc-300 transition px-2 py-1 rounded" id="sortRating">评分</button>
+    </div>
+  </div>
+
+  <!-- ===== POSTER GRID ===== -->
+  <div class="max-w-[1600px] mx-auto px-4 pb-12">
+    <div id="posterGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4"></div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState">
+      <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/>
+      </svg>
+      <p class="text-lg font-medium mb-2">还没有收藏任何影视</p>
+      <p class="text-sm text-zinc-600">在上方搜索框输入电影、剧集或动画名称开始添加</p>
+    </div>
+  </div>
+
+  <!-- ===== DETAIL MODAL ===== -->
+  <div class="modal-backdrop" id="detailModal">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="flex flex-col md:flex-row">
+        <!-- Poster -->
+        <div class="w-full md:w-72 flex-shrink-0">
+          <div class="aspect-[2/3] bg-surface" id="modalPoster"></div>
+        </div>
+        <!-- Info -->
+        <div class="flex-1 p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h2 class="text-xl font-bold mb-1" id="modalTitle"></h2>
+              <div class="flex items-center gap-2 text-sm text-zinc-400">
+                <span id="modalYear"></span>
+                <span>·</span>
+                <span class="px-2 py-0.5 rounded text-xs font-medium bg-accent/20 text-accent" id="modalType"></span>
+              </div>
+            </div>
+            <button onclick="closeDetailModal()" class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-surface transition">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- TMDB Overview -->
+          <div class="mb-4">
+            <p class="text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-1">简介</p>
+            <p class="text-sm text-zinc-300 leading-relaxed" id="modalOverview">暂无简介</p>
+          </div>
+
+          <!-- Rating -->
+          <div class="mb-4">
+            <p class="text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-2">我的评分</p>
+            <div class="rating-input flex items-center gap-1" id="modalRatingInput"></div>
+          </div>
+
+          <!-- Emotion Short -->
+          <div class="mb-4">
+            <p class="text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-1">一句话感受</p>
+            <input type="text" id="modalEmotionShort" placeholder="看完这部片子的感觉..."
+              class="w-full h-10 px-3 rounded-lg bg-bg border border-border text-sm text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-accent transition">
+          </div>
+
+          <!-- Emotion Long -->
+          <div class="mb-4">
+            <p class="text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-1">详细感想</p>
+            <textarea id="modalEmotionLong" rows="4" placeholder="写下你的详细观后感..."
+              class="w-full px-3 py-2 rounded-lg bg-bg border border-border text-sm text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-accent transition resize-none"></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-3 mt-6">
+            <button onclick="saveMovieEdits()" class="flex-1 h-10 rounded-lg bg-accent hover:bg-accent-hover text-black font-semibold text-sm transition">
+              保存
+            </button>
+            <button onclick="deleteMovie()" class="h-10 px-4 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 text-sm font-medium transition">
+              删除
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SETTINGS PANEL ===== -->
+  <div class="settings-overlay" id="settingsOverlay" onclick="closeSettings()"></div>
+  <div class="settings-panel" id="settingsPanel">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-lg font-bold">设置</h3>
+      <button onclick="closeSettings()" class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-surface transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-2">TMDB API Key</label>
+      <input type="password" id="apiKeyInput" placeholder="输入你的 TMDB API Key..."
+        class="w-full h-10 px-3 rounded-lg bg-bg border border-border text-sm text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-accent transition mb-2">
+      <p class="text-xs text-zinc-600">在 <a href="https://www.themoviedb.org/settings/api" target="_blank" class="text-accent hover:underline">themoviedb.org</a> 获取免费 API Key</p>
+      <button onclick="saveApiKey()" class="mt-3 w-full h-9 rounded-lg bg-accent hover:bg-accent-hover text-black font-semibold text-sm transition">
+        保存 Key
+      </button>
+    </div>
+
+    <hr class="border-border my-6">
+
+    <div class="mb-6">
+      <label class="block text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-2">数据管理</label>
+      <button onclick="exportData()" class="w-full h-9 rounded-lg border border-border text-zinc-300 hover:bg-surface text-sm font-medium transition mb-2">
+        导出数据 (JSON)
+      </button>
+      <label class="w-full h-9 rounded-lg border border-border text-zinc-300 hover:bg-surface text-sm font-medium transition mb-2 flex items-center justify-center cursor-pointer">
+        导入数据 (JSON)
+        <input type="file" accept=".json" onchange="importData(event)" class="hidden">
+      </label>
+      <button onclick="clearAllData()" class="w-full h-9 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 text-sm font-medium transition">
+        清空所有数据
+      </button>
+    </div>
+
+    <hr class="border-border my-6">
+
+    <div class="text-xs text-zinc-600 space-y-1">
+      <p>数据存储在浏览器本地 (localStorage)</p>
+      <p>TMDB API 用于搜索和获取影视信息</p>
+      <p>海报图片来自 themoviedb.org</p>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ===== APPLICATION LOGIC ===== -->
+  <script>
+    // ===== STATE =====
+    const STORAGE_KEY = 'movie_journal_data';
+    const API_KEY_STORAGE = 'movie_journal_api_key';
+    let movies = [];
+    let currentFilter = 'all';
+    let currentSort = 'newest';
+    let currentEditId = null;
+    let currentRating = 0;
+    let searchDebounce = null;
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', () => {
+      loadMovies();
+      renderGrid();
+      renderHero();
+      updateStats();
+    });
+
+    // ===== LOCAL STORAGE =====
+    function loadMovies() {
+      try {
+        const data = localStorage.getItem(STORAGE_KEY);
+        movies = data ? JSON.parse(data) : [];
+      } catch (e) {
+        movies = [];
+      }
+    }
+
+    function saveMovies() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(movies));
+    }
+
+    function getApiKey() {
+      return localStorage.getItem(API_KEY_STORAGE) || '';
+    }
+
+    // ===== TMDB API =====
+    async function searchTMDB(query) {
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        showToast('请先在设置中配置 TMDB API Key');
+        return [];
+      }
+      try {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${encodeURIComponent(query)}&language=zh-CN&page=1`
+        );
+        if (!res.ok) throw new Error('API request failed');
+        const data = await res.json();
+        return data.results
+          .filter(r => ['movie', 'tv'].includes(r.media_type))
+          .slice(0, 8)
+          .map(r => ({
+            id: r.id,
+            title: r.title || r.name || '未知',
+            original_title: r.original_title || r.original_name || '',
+            poster_path: r.poster_path,
+            backdrop_path: r.backdrop_path,
+            overview: r.overview || '',
+            year: (r.release_date || r.first_air_date || '').slice(0, 4),
+            type: r.media_type === 'tv' ? 'tv' : 'movie',
+            vote_average: r.vote_average || 0,
+          }));
+      } catch (e) {
+        console.error('TMDB search error:', e);
+        showToast('搜索失败，请检查 API Key');
+        return [];
+      }
+    }
+
+    async function fetchDetails(tmdbId, type) {
+      const apiKey = getApiKey();
+      if (!apiKey) return null;
+      try {
+        const endpoint = type === 'tv' ? 'tv' : 'movie';
+        const res = await fetch(
+          `https://api.themoviedb.org/3/${endpoint}/${tmdbId}?api_key=${apiKey}&language=zh-CN`
+        );
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (e) {
+        console.error('TMDB details error:', e);
+        return null;
+      }
+    }
+
+    function posterURL(path, size = 'w500') {
+      if (!path) return '';
+      return `https://image.tmdb.org/t/p/${size}${path}`;
+    }
+
+    // ===== SEARCH UI =====
+    let searchResultsCache = []; // store results so click handler can access them safely
+
+    function onSearchInput(value) {
+      clearTimeout(searchDebounce);
+      if (value.trim().length < 2) {
+        closeSearch();
+        return;
+      }
+      searchDebounce = setTimeout(async () => {
+        const results = await searchTMDB(value.trim());
+        searchResultsCache = results;
+        renderSearchResults(results);
+      }, 400);
+    }
+
+    function onSearchFocus() {
+      const input = document.getElementById('searchInput');
+      if (input.value.trim().length >= 2) {
+        onSearchInput(input.value);
+      }
+    }
+
+    function renderSearchResults(results) {
+      const dropdown = document.getElementById('searchDropdown');
+      if (!results.length) {
+        dropdown.innerHTML = '<div class="p-4 text-center text-zinc-500 text-sm">未找到结果</div>';
+        dropdown.classList.add('active');
+        return;
+      }
+
+      dropdown.innerHTML = results.map((r, idx) => `
+        <div class="search-item" data-idx="${idx}" onmousedown="event.preventDefault()" onclick="addFromSearchByIndex(${idx})">
+          ${r.poster_path
+            ? `<img src="${posterURL(r.poster_path, 'w92')}" alt="" loading="lazy">`
+            : `<div class="w-10 h-[60px] bg-surface rounded flex items-center justify-center text-zinc-600 text-xs">无图</div>`
+          }
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-zinc-200 truncate">${escapeHtml(r.title)}</div>
+            <div class="text-xs text-zinc-500 flex items-center gap-2">
+              <span>${r.year || '未知年份'}</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-accent/15 text-accent">${typeLabel(r.type)}</span>
+              ${r.vote_average ? `<span class="text-accent">★ ${(r.vote_average / 2).toFixed(1)}</span>` : ''}
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-zinc-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+          </svg>
+        </div>
+      `).join('');
+      dropdown.classList.add('active');
+    }
+
+    // Use index into cached results — avoids HTML-entity encoding issues in onclick
+    function addFromSearchByIndex(idx) {
+      const r = searchResultsCache[idx];
+      if (!r) return;
+      addFromSearch(r.id, r.type, r.title);
+    }
+
+    function closeSearch() {
+      document.getElementById('searchDropdown').classList.remove('active');
+    }
+
+    // ===== ADD MOVIE FROM SEARCH =====
+    async function addFromSearch(tmdbId, type, title) {
+      closeSearch();
+      document.getElementById('searchInput').value = '';
+
+      // Check if already added
+      if (movies.find(m => m.id === tmdbId)) {
+        showToast('这部已经在你的影视墙中了');
+        return;
+      }
+
+      // Show loading toast
+      showToast('正在添加...');
+
+      // Fetch full details
+      const details = await fetchDetails(tmdbId, type);
+      if (!details) {
+        showToast('获取详情失败');
+        return;
+      }
+
+      const movie = {
+        id: tmdbId,
+        title: details.title || details.name || title,
+        poster_path: details.poster_path || '',
+        backdrop_path: details.backdrop_path || '',
+        overview: details.overview || '',
+        year: (details.release_date || details.first_air_date || '').slice(0, 4),
+        type: type,
+        rating: Math.round(details.vote_average || 0),
+        emotion_short: '',
+        emotion_long: '',
+        added_at: new Date().toISOString(),
+      };
+
+      movies.unshift(movie);
+      saveMovies();
+      renderGrid();
+      renderHero();
+      updateStats();
+      showToast(`已添加「${movie.title}」`);
+    }
+
+    // ===== RENDER GRID =====
+    function renderGrid() {
+      const grid = document.getElementById('posterGrid');
+      const empty = document.getElementById('emptyState');
+      const filtered = getFilteredMovies();
+
+      if (!filtered.length) {
+        grid.innerHTML = '';
+        empty.style.display = 'flex';
+        return;
+      }
+      empty.style.display = 'none';
+
+      grid.innerHTML = filtered.map((m, i) => `
+        <div class="poster-card fade-in" style="animation-delay: ${Math.min(i * 30, 300)}ms" onclick="openDetail(${m.id})">
+          ${m.poster_path
+            ? `<img src="${posterURL(m.poster_path)}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'poster-placeholder\\'>🎬</div>'">`
+            : `<div class="poster-placeholder">🎬</div>`
+          }
+          <div class="poster-overlay">
+            <div class="text-white font-semibold text-sm mb-1 line-clamp-2">${escapeHtml(m.title)}</div>
+            <div class="flex items-center gap-2">
+              ${m.rating ? `<span class="text-accent font-bold text-sm">★ ${m.rating}</span>` : ''}
+              <span class="text-zinc-400 text-xs">${m.year || ''}</span>
+            </div>
+            ${m.emotion_short ? `<p class="text-zinc-400 text-xs mt-1 line-clamp-2 italic">"${escapeHtml(m.emotion_short)}"</p>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getFilteredMovies() {
+      let list = [...movies];
+      if (currentFilter !== 'all') {
+        list = list.filter(m => m.type === currentFilter);
+      }
+      if (currentSort === 'rating') {
+        list.sort((a, b) => b.rating - a.rating);
+      } else {
+        list.sort((a, b) => new Date(b.added_at) - new Date(a.added_at));
+      }
+      return list;
+    }
+
+    // ===== HERO SECTION =====
+    function renderHero() {
+      const hero = document.getElementById('heroSection');
+      if (!movies.length) {
+        hero.style.display = 'none';
+        return;
+      }
+
+      // Pick the latest or highest rated
+      const featured = [...movies].sort((a, b) => {
+        const scoreA = a.rating * 10 + (a.backdrop_path ? 5 : 0);
+        const scoreB = b.rating * 10 + (b.backdrop_path ? 5 : 0);
+        return scoreB - scoreA;
+      })[0];
+
+      hero.style.display = 'block';
+      const bgUrl = featured.backdrop_path
+        ? posterURL(featured.backdrop_path, 'w1280')
+        : (featured.poster_path ? posterURL(featured.poster_path, 'w500') : '');
+
+      document.getElementById('heroBg').style.backgroundImage = bgUrl ? `url(${bgUrl})` : 'none';
+      document.getElementById('heroPoster').innerHTML = featured.poster_path
+        ? `<img src="${posterURL(featured.poster_path, 'w342')}" alt="${escapeHtml(featured.title)}" class="w-full">`
+        : `<div class="w-full aspect-[2/3] bg-surface flex items-center justify-center text-4xl">🎬</div>`;
+      document.getElementById('heroTitle').textContent = featured.title;
+      document.getElementById('heroRating').textContent = featured.rating ? `★ ${featured.rating}` : '';
+      document.getElementById('heroYear').textContent = featured.year || '';
+      document.getElementById('heroType').textContent = typeLabel(featured.type);
+      document.getElementById('heroEmotion').textContent = featured.emotion_short || featured.overview?.slice(0, 100) || '';
+    }
+
+    // ===== DETAIL MODAL =====
+    function openDetail(id) {
+      const movie = movies.find(m => m.id === id);
+      if (!movie) return;
+
+      currentEditId = id;
+      currentRating = movie.rating || 0;
+
+      document.getElementById('modalPoster').innerHTML = movie.poster_path
+        ? `<img src="${posterURL(movie.poster_path, 'w342')}" alt="${escapeHtml(movie.title)}" class="w-full h-full object-cover">`
+        : `<div class="w-full h-full flex items-center justify-center text-5xl bg-surface">🎬</div>`;
+      document.getElementById('modalTitle').textContent = movie.title;
+      document.getElementById('modalYear').textContent = movie.year || '未知年份';
+      document.getElementById('modalType').textContent = typeLabel(movie.type);
+      document.getElementById('modalOverview').textContent = movie.overview || '暂无简介';
+      document.getElementById('modalEmotionShort').value = movie.emotion_short || '';
+      document.getElementById('modalEmotionLong').value = movie.emotion_long || '';
+
+      renderRatingStars(currentRating);
+
+      document.getElementById('detailModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetailModal() {
+      document.getElementById('detailModal').classList.remove('active');
+      document.body.style.overflow = '';
+      currentEditId = null;
+    }
+
+    function renderRatingStars(rating) {
+      const container = document.getElementById('modalRatingInput');
+      container.innerHTML = '';
+      for (let i = 1; i <= 10; i++) {
+        const star = document.createElement('span');
+        star.className = `star ${i <= rating ? 'active' : ''}`;
+        star.textContent = '★';
+        star.onclick = () => {
+          currentRating = i;
+          renderRatingStars(i);
+        };
+        star.onmouseenter = () => {
+          container.querySelectorAll('.star').forEach((s, idx) => {
+            s.classList.toggle('active', idx < i);
+          });
+        };
+        container.appendChild(star);
+      }
+      container.onmouseleave = () => renderRatingStars(currentRating);
+    }
+
+    function saveMovieEdits() {
+      if (!currentEditId) return;
+      const movie = movies.find(m => m.id === currentEditId);
+      if (!movie) return;
+
+      movie.rating = currentRating;
+      movie.emotion_short = document.getElementById('modalEmotionShort').value.trim();
+      movie.emotion_long = document.getElementById('modalEmotionLong').value.trim();
+
+      saveMovies();
+      renderGrid();
+      renderHero();
+      updateStats();
+      closeDetailModal();
+      showToast('已保存');
+    }
+
+    function deleteMovie() {
+      if (!currentEditId) return;
+      const movie = movies.find(m => m.id === currentEditId);
+      if (!movie) return;
+      if (!confirm(`确定删除「${movie.title}」吗？`)) return;
+
+      movies = movies.filter(m => m.id !== currentEditId);
+      saveMovies();
+      renderGrid();
+      renderHero();
+      updateStats();
+      closeDetailModal();
+      showToast('已删除');
+    }
+
+    // ===== FILTERS =====
+    function setFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+      });
+      renderGrid();
+    }
+
+    function sortMovies(sort) {
+      currentSort = sort;
+      document.getElementById('sortNewest').classList.toggle('text-accent', sort === 'newest');
+      document.getElementById('sortRating').classList.toggle('text-accent', sort === 'rating');
+      renderGrid();
+    }
+
+    // ===== SETTINGS =====
+    function openSettings() {
+      document.getElementById('settingsOverlay').classList.add('open');
+      document.getElementById('settingsPanel').classList.add('open');
+      document.getElementById('apiKeyInput').value = getApiKey();
+    }
+
+    function closeSettings() {
+      document.getElementById('settingsOverlay').classList.remove('open');
+      document.getElementById('settingsPanel').classList.remove('open');
+    }
+
+    function saveApiKey() {
+      const key = document.getElementById('apiKeyInput').value.trim();
+      if (!key) {
+        showToast('请输入 API Key');
+        return;
+      }
+      localStorage.setItem(API_KEY_STORAGE, key);
+      showToast('API Key 已保存');
+      closeSettings();
+    }
+
+    // ===== DATA MANAGEMENT =====
+    function exportData() {
+      const blob = new Blob([JSON.stringify(movies, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `movie-journal-${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('数据已导出');
+    }
+
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (!Array.isArray(imported)) throw new Error('Invalid format');
+          const existingIds = new Set(movies.map(m => m.id));
+          const newMovies = imported.filter(m => !existingIds.has(m.id));
+          movies = [...newMovies, ...movies];
+          saveMovies();
+          renderGrid();
+          renderHero();
+          updateStats();
+          showToast(`已导入 ${newMovies.length} 部影视`);
+        } catch (e) {
+          showToast('导入失败：文件格式错误');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    function clearAllData() {
+      if (!confirm('确定清空所有数据？此操作不可撤销。')) return;
+      movies = [];
+      saveMovies();
+      renderGrid();
+      renderHero();
+      updateStats();
+      showToast('数据已清空');
+    }
+
+    // ===== STATS =====
+    function updateStats() {
+      const total = movies.length;
+      const avgRating = total ? (movies.reduce((s, m) => s + (m.rating || 0), 0) / total).toFixed(1) : 0;
+      const statsEl = document.getElementById('statsText');
+      if (total === 0) {
+        statsEl.textContent = '0 部作品';
+      } else {
+        statsEl.textContent = `${total} 部作品 · 平均评分 ${avgRating}`;
+      }
+    }
+
+    // ===== UTILS =====
+    function typeLabel(type) {
+      const labels = { movie: '电影', tv: '剧集', anime: '动画' };
+      return labels[type] || type;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // ===== KEYBOARD SHORTCUTS =====
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeDetailModal();
+        closeSearch();
+        closeSettings();
+      }
+      if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        document.getElementById('searchInput').focus();
+      }
+    });
+
+    // Click outside modal to close
+    document.getElementById('detailModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('detailModal')) {
+        closeDetailModal();
+      }
+    });
+  </script>
+</body>
+</html>

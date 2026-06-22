@@ -245,6 +245,11 @@
         <span class="label-long">学习测验</span>
         <span class="label-short">测验</span>
       </button>
+      <button class="tools-nav-tab" data-tool="journal" onclick="switchTool('journal')">
+        <span class="icon">🎬</span>
+        <span class="label-long">影视日志</span>
+        <span class="label-short">影视</span>
+      </button>
     </div>
 
     <a href="/" class="tools-nav-back">
@@ -272,6 +277,15 @@
       </div>
       <iframe src="quiz/index.html" onload="document.getElementById('loading-quiz').style.display='none'" title="学习测验系统"></iframe>
     </div>
+
+    <!-- Movie Journal Panel -->
+    <div class="tool-panel" id="panel-journal">
+      <div class="tool-panel-loading" id="loading-journal">
+        <div class="spinner"></div>
+        <span>正在加载影视日志...</span>
+      </div>
+      <iframe src="journal.html" onload="document.getElementById('loading-journal').style.display='none'" title="影视日志"></iframe>
+    </div>
   </div>
 
   <script>
@@ -294,7 +308,7 @@
     // Check URL hash on load
     window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash && ['planner', 'quiz'].includes(hash)) {
+      if (hash && ['planner', 'quiz', 'journal'].includes(hash)) {
         switchTool(hash);
       }
     });

@@ -62,69 +62,6 @@
       </categories>
   </entry>
   <entry>
-    <title>C51的学习历程</title>
-    <url>/2026/06/11/C51-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>C51的学习历程</p>
-<span id="more"></span>
-<h1>250917</h1>
-<p>今天没干什么大事，就是仅仅从百度网盘上下载了很多的文件（甚至不知道有没有下载完全）<br>
-吐槽一下百度网盘的资源，真的烦死。</p>
-<p>今天还没有安装任何软件，对于单片机的认识也仅仅只有“难”只一个字。</p>
-<p>慢慢去实践探索吧。</p>
-<p>多干，干中学，记住老师的这句话。</p>
-<p><strong>我有预感这句话会改变你的生活。</strong></p>
-<h1>250918</h1>
-<p>安装了软件KEIL 5和stc-isp</p>
-<p>没遇到什么大问题</p>
-<h1>250920</h1>
-<p>单片机和计算机相比，是一个袖珍版计算机。</p>
-<p>但是成本低、体积小、结构简单，学习使用单片机是连接计算机原理和结构的最佳选择。</p>
-<p>8051单片机内核，所以叫51单片机</p>
-<p>RAM类似于电脑内存，会丢失</p>
-<p>ROM类似于电脑存储</p>
-<p>以为过程会有点难，没想到其实开始很简单</p>
-<p>首先，需要USB线把电脑和单片机连接起来</p>
-<p>win11电脑系统不需要额外安装驱动，可以直接使用</p>
-<p>遇到的一个问题：<strong>显示正在检测目标单片机</strong></p>
-<p><a href="https://imgse.com/i/pV4tY0U"><img src="https://s21.ax1x.com/2025/09/20/pV4tY0U.md.png" alt="pV4tY0U.png" border="0" /></a></p>
-<p>可以从以下角度来排查一下：</p>
-<ol>
-<li>
-<p>芯片型号要选对</p>
-<p><a href="https://imgse.com/i/pV4trX6"><img src="https://s21.ax1x.com/2025/09/20/pV4trX6.png" alt="pV4trX6.png" border="0" /></a></p>
-</li>
-<li>
-<p>冷启动(reset)</p>
-<p><a href="https://imgse.com/i/pV4trX6"><img src="https://s21.ax1x.com/2025/09/20/pV4trX6.png" alt="pV4trX6.png" border="0" /></a></p>
-</li>
-<li>
-<p>COM串口不要选错</p>
-<p>查看步骤：</p>
-<p>1.点击win徽标键</p>
-<p>2.搜索“设备管理器”</p>
-<p>3.获取端口信息（可以读出是COM7）</p>
-<p><a href="https://imgse.com/i/pV4tWhd"><img src="https://s21.ax1x.com/2025/09/20/pV4tWhd.md.png" alt="pV4tWhd.png" border="0" /></a></p>
-<p>4.在stc-isp中选择COM7串口</p>
-<p><a href="https://imgse.com/i/pV4th9A"><img src="https://s21.ax1x.com/2025/09/20/pV4th9A.md.png" alt="pV4th9A.png" border="0" /></a></p>
-</li>
-<li>
-<p>RX TX帽子盖上</p>
-<p><a href="https://imgse.com/i/pV4trX6"><img src="https://s21.ax1x.com/2025/09/20/pV4trX6.png" alt="pV4trX6.png" border="0" /></a></p>
-</li>
-</ol>
-<p>点亮LED的一瞬间还是很有成就感的。</p>
-<p>但是点亮的是四个而不是一个，后天可以调试一下程序。</p>
-<p>参考文章：</p>
-<p><a href="https://blog.csdn.net/Xiaoman_Senior/article/details/141751710">https://blog.csdn.net/Xiaoman_Senior/article/details/141751710</a></p>
-<h1>250923</h1>
-<p>今天搞定了LED的控制亮暗、流水灯、闪烁这三个实验。</p>
-<p>实验成功的一瞬间，其实心里还是很开心的！</p>
-]]></content>
-      <categories>
-        <category>Life Philosophy</category>
-      </categories>
-  </entry>
-  <entry>
     <title>使用Cloudflare Tunnel实现内网穿透访问Alist</title>
     <url>/2026/06/11/Cloudfare+Tunnel%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>使用Cloudflare Tunnel实现内网穿透访问Alist</p>
@@ -257,6 +194,69 @@
       </tags>
   </entry>
   <entry>
+    <title>C51的学习历程</title>
+    <url>/2026/06/11/C51-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>C51的学习历程</p>
+<span id="more"></span>
+<h1>250917</h1>
+<p>今天没干什么大事，就是仅仅从百度网盘上下载了很多的文件（甚至不知道有没有下载完全）<br>
+吐槽一下百度网盘的资源，真的烦死。</p>
+<p>今天还没有安装任何软件，对于单片机的认识也仅仅只有“难”只一个字。</p>
+<p>慢慢去实践探索吧。</p>
+<p>多干，干中学，记住老师的这句话。</p>
+<p><strong>我有预感这句话会改变你的生活。</strong></p>
+<h1>250918</h1>
+<p>安装了软件KEIL 5和stc-isp</p>
+<p>没遇到什么大问题</p>
+<h1>250920</h1>
+<p>单片机和计算机相比，是一个袖珍版计算机。</p>
+<p>但是成本低、体积小、结构简单，学习使用单片机是连接计算机原理和结构的最佳选择。</p>
+<p>8051单片机内核，所以叫51单片机</p>
+<p>RAM类似于电脑内存，会丢失</p>
+<p>ROM类似于电脑存储</p>
+<p>以为过程会有点难，没想到其实开始很简单</p>
+<p>首先，需要USB线把电脑和单片机连接起来</p>
+<p>win11电脑系统不需要额外安装驱动，可以直接使用</p>
+<p>遇到的一个问题：<strong>显示正在检测目标单片机</strong></p>
+<p><a href="https://imgse.com/i/pV4tY0U"><img src="https://s21.ax1x.com/2025/09/20/pV4tY0U.md.png" alt="pV4tY0U.png" border="0" /></a></p>
+<p>可以从以下角度来排查一下：</p>
+<ol>
+<li>
+<p>芯片型号要选对</p>
+<p><a href="https://imgse.com/i/pV4trX6"><img src="https://s21.ax1x.com/2025/09/20/pV4trX6.png" alt="pV4trX6.png" border="0" /></a></p>
+</li>
+<li>
+<p>冷启动(reset)</p>
+<p><a href="https://imgse.com/i/pV4trX6"><img src="https://s21.ax1x.com/2025/09/20/pV4trX6.png" alt="pV4trX6.png" border="0" /></a></p>
+</li>
+<li>
+<p>COM串口不要选错</p>
+<p>查看步骤：</p>
+<p>1.点击win徽标键</p>
+<p>2.搜索“设备管理器”</p>
+<p>3.获取端口信息（可以读出是COM7）</p>
+<p><a href="https://imgse.com/i/pV4tWhd"><img src="https://s21.ax1x.com/2025/09/20/pV4tWhd.md.png" alt="pV4tWhd.png" border="0" /></a></p>
+<p>4.在stc-isp中选择COM7串口</p>
+<p><a href="https://imgse.com/i/pV4th9A"><img src="https://s21.ax1x.com/2025/09/20/pV4th9A.md.png" alt="pV4th9A.png" border="0" /></a></p>
+</li>
+<li>
+<p>RX TX帽子盖上</p>
+<p><a href="https://imgse.com/i/pV4trX6"><img src="https://s21.ax1x.com/2025/09/20/pV4trX6.png" alt="pV4trX6.png" border="0" /></a></p>
+</li>
+</ol>
+<p>点亮LED的一瞬间还是很有成就感的。</p>
+<p>但是点亮的是四个而不是一个，后天可以调试一下程序。</p>
+<p>参考文章：</p>
+<p><a href="https://blog.csdn.net/Xiaoman_Senior/article/details/141751710">https://blog.csdn.net/Xiaoman_Senior/article/details/141751710</a></p>
+<h1>250923</h1>
+<p>今天搞定了LED的控制亮暗、流水灯、闪烁这三个实验。</p>
+<p>实验成功的一瞬间，其实心里还是很开心的！</p>
+]]></content>
+      <categories>
+        <category>Life Philosophy</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Git版本控制常用命令指南</title>
     <url>/2026/06/17/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%8C%87%E5%8D%97/</url>
     <content><![CDATA[<p>用多了就记住了，不用就会忘，所以写下来</p>
@@ -325,6 +325,36 @@
         <tag>git</tag>
         <tag>version-control</tag>
         <tag>cheatsheet</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Porn和masturbation，你得分清楚</title>
+    <url>/2026/06/15/Porn%E5%92%8Cmasturbation%EF%BC%8C%E4%BD%A0%E5%BE%97%E5%88%86%E6%B8%85%E6%A5%9A/</url>
+    <content><![CDATA[<p>pornography 的东西，我认为是百害无一益。masturbation 不一样，我认为他有他的好处</p>
+<span id="more"></span>
+<p>其实一直有一个困扰我很久的问题，就是为什么看 pornography 来 masturbation 这件事惯性这么大，这么难以改变。</p>
+<p>昨天看一个油管上的视频，获得了点启发：触发因素是压力和无聊，想不到干什么事情的时候就来，而且这件事给你的大脑带来的多巴胺还多的恐怖。</p>
+<p>所以现在的问题转换为，如何减少频率，如何减少你对于压力的态度，如何减少无聊这种生活状态的出现。</p>
+<p>其实我感觉戒除这个东西，光光靠意志力肯定是不够的，你如果让我一年不 masturbation，显然是扯蛋，因为我相信科学，明白定时规律的排出是对身体有益处的。当然，相比于科学，我更相信我自己的身体反应，2天一次的话对我来说是有点太频繁的，最近其实感觉人的精神就不是很好，专注力很差其实，身体状态还永远没有到最佳的状态。还有一个就是晨勃的现象可以作为一个很好的标准，如果连续2天出现很胀痛的情况，就是你的身体在提醒你要适时排出了。</p>
+<p>之所以你会去向往看 pornography，还有一个原因，就是你不注重于当下，你把排出这件事情和网络屏幕上的图像视频相关联，但往往忽视了自己身体的细微反应，一些排出前的信号，一些控制的能力。</p>
+<p>定期的 masturbation 是好的，有以下几点想法：</p>
+<ol>
+<li>为此设定目标和意图：比如你是想多长时间？你想不想排出？用什么方式？想要达到什么地步？</li>
+<li>增加呼吸频率，让你的身体感觉你在运动，供给充分的氧气，深呼吸</li>
+<li>抚摸你的各个身体部位，感受这种触觉</li>
+<li>频率不要过快，记住，你的目的不是排出，而是为了锻炼耐受力，享受这个过程</li>
+<li>可以更换姿势，增加新鲜感，而不是寻求荧幕上的新鲜刺激，那种刺激过于强烈</li>
+<li>可以发挥自己的想象，自行脑补</li>
+</ol>
+<p>2026年6月15日晚上，可以感受到的是：不依赖 pornography 的话，事后完全不会那么空虚，睡眠质量也非常不错，一夜之间只醒了一次，84分的睡眠，还是不错的。其实昨天晚上睡得好还有一个原因：就是睡前泡了个脚，可能也是比较有助于睡眠的。</p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>health</tag>
+        <tag>habits</tag>
+        <tag>self-awareness</tag>
       </tags>
   </entry>
   <entry>
@@ -423,36 +453,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </tags>
   </entry>
   <entry>
-    <title>Porn和masturbation，你得分清楚</title>
-    <url>/2026/06/15/Porn%E5%92%8Cmasturbation%EF%BC%8C%E4%BD%A0%E5%BE%97%E5%88%86%E6%B8%85%E6%A5%9A/</url>
-    <content><![CDATA[<p>pornography 的东西，我认为是百害无一益。masturbation 不一样，我认为他有他的好处</p>
-<span id="more"></span>
-<p>其实一直有一个困扰我很久的问题，就是为什么看 pornography 来 masturbation 这件事惯性这么大，这么难以改变。</p>
-<p>昨天看一个油管上的视频，获得了点启发：触发因素是压力和无聊，想不到干什么事情的时候就来，而且这件事给你的大脑带来的多巴胺还多的恐怖。</p>
-<p>所以现在的问题转换为，如何减少频率，如何减少你对于压力的态度，如何减少无聊这种生活状态的出现。</p>
-<p>其实我感觉戒除这个东西，光光靠意志力肯定是不够的，你如果让我一年不 masturbation，显然是扯蛋，因为我相信科学，明白定时规律的排出是对身体有益处的。当然，相比于科学，我更相信我自己的身体反应，2天一次的话对我来说是有点太频繁的，最近其实感觉人的精神就不是很好，专注力很差其实，身体状态还永远没有到最佳的状态。还有一个就是晨勃的现象可以作为一个很好的标准，如果连续2天出现很胀痛的情况，就是你的身体在提醒你要适时排出了。</p>
-<p>之所以你会去向往看 pornography，还有一个原因，就是你不注重于当下，你把排出这件事情和网络屏幕上的图像视频相关联，但往往忽视了自己身体的细微反应，一些排出前的信号，一些控制的能力。</p>
-<p>定期的 masturbation 是好的，有以下几点想法：</p>
-<ol>
-<li>为此设定目标和意图：比如你是想多长时间？你想不想排出？用什么方式？想要达到什么地步？</li>
-<li>增加呼吸频率，让你的身体感觉你在运动，供给充分的氧气，深呼吸</li>
-<li>抚摸你的各个身体部位，感受这种触觉</li>
-<li>频率不要过快，记住，你的目的不是排出，而是为了锻炼耐受力，享受这个过程</li>
-<li>可以更换姿势，增加新鲜感，而不是寻求荧幕上的新鲜刺激，那种刺激过于强烈</li>
-<li>可以发挥自己的想象，自行脑补</li>
-</ol>
-<p>2026年6月15日晚上，可以感受到的是：不依赖 pornography 的话，事后完全不会那么空虚，睡眠质量也非常不错，一夜之间只醒了一次，84分的睡眠，还是不错的。其实昨天晚上睡得好还有一个原因：就是睡前泡了个脚，可能也是比较有助于睡眠的。</p>
-]]></content>
-      <categories>
-        <category>Life</category>
-      </categories>
-      <tags>
-        <tag>health</tag>
-        <tag>habits</tag>
-        <tag>self-awareness</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora如何插入自己的云端视频？</title>
     <url>/2026/06/17/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409204348853.png" alt="image-20260409204348853"></p>
@@ -491,30 +491,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </categories>
       <tags>
         <tag>typora</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UG NX12怎么去安装？</title>
-    <url>/2026/06/11/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318140642944.png" alt="image-20260318140642944"></p>
-<span id="more"></span>
-<h1>需要的文件：</h1>
-<p><a href="https://www.123865.com/s/bBy8vd-gYwXv">123网盘UG12.0链接</a></p>
-<p>[天翼云盘UG12.0链接](<a href="https://cloud.189.cn/t/ArMFziyqmEre">https://cloud.189.cn/t/ArMFziyqmEre</a> （访问码：gn1q）)</p>
-<h1>安装步骤图文：</h1>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/%E5%86%85%E5%AE%B9.png" alt="preview image"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/1.png" alt="preview image"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/2.png" alt="preview image"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/3.png" alt=""></p>
-<p><img src="https://usercontent.tju.pt/4.png?file_id=a234b3cb3b0c209bd76c5c5c46225c3ea540b5b4ccd6565d8d0a2fd42330175a" alt="preview image"></p>
-<h1>视频教程</h1>
-<p><a href="https://www.bilibili.com/video/BV1rh411m7u6/?vd_source=be5a0b6c58eb0ef9b1da5603d170bc44">UG-NX12.0软件安装</a></p>
-]]></content>
-      <categories>
-        <category>How-To</category>
-      </categories>
-      <tags>
-        <tag>ug-nx</tag>
       </tags>
   </entry>
   <entry>
@@ -720,6 +696,30 @@ UG NX12如何进行数控仿真？</p>
       </tags>
   </entry>
   <entry>
+    <title>UG NX12怎么去安装？</title>
+    <url>/2026/06/11/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318140642944.png" alt="image-20260318140642944"></p>
+<span id="more"></span>
+<h1>需要的文件：</h1>
+<p><a href="https://www.123865.com/s/bBy8vd-gYwXv">123网盘UG12.0链接</a></p>
+<p>[天翼云盘UG12.0链接](<a href="https://cloud.189.cn/t/ArMFziyqmEre">https://cloud.189.cn/t/ArMFziyqmEre</a> （访问码：gn1q）)</p>
+<h1>安装步骤图文：</h1>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/%E5%86%85%E5%AE%B9.png" alt="preview image"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/1.png" alt="preview image"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/2.png" alt="preview image"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/3.png" alt=""></p>
+<p><img src="https://usercontent.tju.pt/4.png?file_id=a234b3cb3b0c209bd76c5c5c46225c3ea540b5b4ccd6565d8d0a2fd42330175a" alt="preview image"></p>
+<h1>视频教程</h1>
+<p><a href="https://www.bilibili.com/video/BV1rh411m7u6/?vd_source=be5a0b6c58eb0ef9b1da5603d170bc44">UG-NX12.0软件安装</a></p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+      <tags>
+        <tag>ug-nx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>c盘怎么去清理？</title>
     <url>/2026/06/11/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/</url>
     <content><![CDATA[<p>c盘怎么去清理？</p>
@@ -767,6 +767,70 @@ UG NX12如何进行数控仿真？</p>
         <tag>vibe-coding</tag>
         <tag>claude</tag>
         <tag>mcp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iPhone14promax 有必要升到ios26吗？</title>
+    <url>/2026/06/11/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310143708973.png" alt="image-20260310143708973"></p>
+<span id="more"></span>
+<h1>写在前面</h1>
+<p>iPhone一直还停留在ios 18.7，很久没有自动更新过系统。、</p>
+<p>iPad已经更新到了ipad os26.3，前段时间iPhone和iPad使用接力功能发现很不好用，就想着是不是可能是系统跨度大的问题。</p>
+<p>iPhone要不要更新到ios 26.3？一直很犹豫，所以就写了这篇文章。</p>
+<h1>一些对比</h1>
+<p>最大的特点就是liquid glass的ui设计，整体的ui都变得圆润化，ui变成毛玻璃格式。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130236369.png" alt="image-20260310130236369"></p>
+<p>在视频里发现：ios26.3的电池最大容量是86%，ios18.7的电池最大容量是100%，这有点吓人，<strong>更新系统难道会让我的电池最大容量下降很多吗？</strong></p>
+<p>其实换个角度想想，右边的这个手机，不正好是我现在自己手机的电池最大容量吗？他既然可以很好的运行ios26，那我也不可以吗？哈哈哈</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130543136.png" alt="image-20260310130543136"></p>
+<p>从视频很明显还能看出，ios26系统会更加的流畅，退出软件不会有ios18的那种顿挫感，而且进入app，可以明显分辨出ios26会更快一点。</p>
+<p>除此之外，还有快捷指令方面的更新：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134747714.png" alt="image-20260310134747714"></p>
+<p>音乐会有中文翻译了：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134830898.png" alt="image-20260310134830898"></p>
+<p>提醒事项会介入ai：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134935291.png" alt="image-20260310134935291"></p>
+<p>其实有一个很好的功能加入了，就是apple intelligence，但是奈何iPhone14promax的芯片不支持apple intelligence，这是比较可惜的一点。</p>
+<h1>基本情况</h1>
+<p>Google了一下：更新系统让电池最大容量下降？发现类似的例子不是很多，有倒是有：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310132154327.png" alt="image-20260310132154327">、</p>
+<p>问了下gpt，他是这样说的：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133316889.png" alt="image-20260310133316889" style="zoom:150%;" />
+<p>查了查自己的电池最大容量是86%，电池情况是这样的：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133257792.png" alt="image-20260310133257792"></p>
+<p>从gpt得知，接近1000次的充电循环次数还有这样的电池健康，使用习惯是比较好的，电池体质是比较好的，哈，那想必我也不用担心更新后电池会崩掉，会出现问题。</p>
+<p>更何况，现在的手机续航就已经很废了…</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133915037.png" alt="image-20260310133915037"></p>
+<p>那什么时候推荐换电池呢？请看：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">當 iPhone電池健康度降到多少該考慮更換呢？一般來說，</span><br><span class="line"></span><br><span class="line">80%以上：電池健康度在80%以上都屬正常範圍。</span><br><span class="line">60%－80%：在此範圍時，可以開始考慮更換。</span><br><span class="line">低於60%：電池健康度iPhone小於60%則建議盡快更換電池，避免影響手機的正常使用。</span><br><span class="line">低於40%：iPhone電池健康不到40%的話，建議立即更換，以防出現更嚴重的問題！</span><br></pre></td></tr></table></figure>
+<h1>结论</h1>
+<p>对于我个人而言，还是决定更新ios26.3.1，原因如下：</p>
+<ul>
+<li>和iPad能够更好的兼容，接力功能可以更好的实现</li>
+<li>更流畅的操作体验</li>
+<li>ai在iPhone原生app里面的接入，可以一试</li>
+<li>音乐app有翻译歌词了，可以一试的功能</li>
+<li>图标的可以统一liquid glass化，挺好看的</li>
+<li>26.3.1已经修复了前面版本的一些bug的，是比较稳定的版本</li>
+</ul>
+<p>可能存在的雷点：</p>
+<ul>
+<li>电池续航会有明显的下降</li>
+<li>手机可能会异常发烫</li>
+</ul>
+<p>显然嘛，对于我来说，利大于弊。</p>
+<h1>升级以后的体验</h1>
+<p>我觉得可以啊！流畅的可以，而且电池最大容量一点没掉啊，好强的电池嘿嘿。</p>
+<p>但是接力功能感觉依旧很难受，估计是你是用的方法不太对。</p>
+<p>是的，之前之所以无法使用接力打开app功能，是因为没有打开相应app的iCloud同步功能。就比如说，你在iPad上编辑的备忘录想要在iPhone上打开，你就需要进入设置界面打开备忘录的iCloud同步，这样就行了。</p>
+]]></content>
+      <categories>
+        <category>Thoughts</category>
+      </categories>
+      <tags>
+        <tag>iphone</tag>
+        <tag>tech</tag>
       </tags>
   </entry>
   <entry>
@@ -852,70 +916,6 @@ UG NX12如何进行数控仿真？</p>
       </categories>
       <tags>
         <tag>jellyfin</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iPhone14promax 有必要升到ios26吗？</title>
-    <url>/2026/06/11/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310143708973.png" alt="image-20260310143708973"></p>
-<span id="more"></span>
-<h1>写在前面</h1>
-<p>iPhone一直还停留在ios 18.7，很久没有自动更新过系统。、</p>
-<p>iPad已经更新到了ipad os26.3，前段时间iPhone和iPad使用接力功能发现很不好用，就想着是不是可能是系统跨度大的问题。</p>
-<p>iPhone要不要更新到ios 26.3？一直很犹豫，所以就写了这篇文章。</p>
-<h1>一些对比</h1>
-<p>最大的特点就是liquid glass的ui设计，整体的ui都变得圆润化，ui变成毛玻璃格式。</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130236369.png" alt="image-20260310130236369"></p>
-<p>在视频里发现：ios26.3的电池最大容量是86%，ios18.7的电池最大容量是100%，这有点吓人，<strong>更新系统难道会让我的电池最大容量下降很多吗？</strong></p>
-<p>其实换个角度想想，右边的这个手机，不正好是我现在自己手机的电池最大容量吗？他既然可以很好的运行ios26，那我也不可以吗？哈哈哈</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310130543136.png" alt="image-20260310130543136"></p>
-<p>从视频很明显还能看出，ios26系统会更加的流畅，退出软件不会有ios18的那种顿挫感，而且进入app，可以明显分辨出ios26会更快一点。</p>
-<p>除此之外，还有快捷指令方面的更新：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134747714.png" alt="image-20260310134747714"></p>
-<p>音乐会有中文翻译了：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134830898.png" alt="image-20260310134830898"></p>
-<p>提醒事项会介入ai：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310134935291.png" alt="image-20260310134935291"></p>
-<p>其实有一个很好的功能加入了，就是apple intelligence，但是奈何iPhone14promax的芯片不支持apple intelligence，这是比较可惜的一点。</p>
-<h1>基本情况</h1>
-<p>Google了一下：更新系统让电池最大容量下降？发现类似的例子不是很多，有倒是有：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310132154327.png" alt="image-20260310132154327">、</p>
-<p>问了下gpt，他是这样说的：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133316889.png" alt="image-20260310133316889" style="zoom:150%;" />
-<p>查了查自己的电池最大容量是86%，电池情况是这样的：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133257792.png" alt="image-20260310133257792"></p>
-<p>从gpt得知，接近1000次的充电循环次数还有这样的电池健康，使用习惯是比较好的，电池体质是比较好的，哈，那想必我也不用担心更新后电池会崩掉，会出现问题。</p>
-<p>更何况，现在的手机续航就已经很废了…</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310133915037.png" alt="image-20260310133915037"></p>
-<p>那什么时候推荐换电池呢？请看：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">當 iPhone電池健康度降到多少該考慮更換呢？一般來說，</span><br><span class="line"></span><br><span class="line">80%以上：電池健康度在80%以上都屬正常範圍。</span><br><span class="line">60%－80%：在此範圍時，可以開始考慮更換。</span><br><span class="line">低於60%：電池健康度iPhone小於60%則建議盡快更換電池，避免影響手機的正常使用。</span><br><span class="line">低於40%：iPhone電池健康不到40%的話，建議立即更換，以防出現更嚴重的問題！</span><br></pre></td></tr></table></figure>
-<h1>结论</h1>
-<p>对于我个人而言，还是决定更新ios26.3.1，原因如下：</p>
-<ul>
-<li>和iPad能够更好的兼容，接力功能可以更好的实现</li>
-<li>更流畅的操作体验</li>
-<li>ai在iPhone原生app里面的接入，可以一试</li>
-<li>音乐app有翻译歌词了，可以一试的功能</li>
-<li>图标的可以统一liquid glass化，挺好看的</li>
-<li>26.3.1已经修复了前面版本的一些bug的，是比较稳定的版本</li>
-</ul>
-<p>可能存在的雷点：</p>
-<ul>
-<li>电池续航会有明显的下降</li>
-<li>手机可能会异常发烫</li>
-</ul>
-<p>显然嘛，对于我来说，利大于弊。</p>
-<h1>升级以后的体验</h1>
-<p>我觉得可以啊！流畅的可以，而且电池最大容量一点没掉啊，好强的电池嘿嘿。</p>
-<p>但是接力功能感觉依旧很难受，估计是你是用的方法不太对。</p>
-<p>是的，之前之所以无法使用接力打开app功能，是因为没有打开相应app的iCloud同步功能。就比如说，你在iPad上编辑的备忘录想要在iPhone上打开，你就需要进入设置界面打开备忘录的iCloud同步，这样就行了。</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-      <tags>
-        <tag>iphone</tag>
-        <tag>tech</tag>
       </tags>
   </entry>
   <entry>
@@ -1306,23 +1306,6 @@ UG NX12如何进行数控仿真？</p>
       </tags>
   </entry>
   <entry>
-    <title>swiftfin如何设置优雅的刮削？</title>
-    <url>/2026/06/17/no_swiftfin%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%AD%97%E5%B9%95%E5%85%A8%E5%B1%8F%E7%9C%8B%E4%B8%8D%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>询问grok，发现把字幕烧录进视频文件是一个似乎可行的方案</p>
-<span id="more"></span>
-<p>问题的本质是我们视频缩放放大以后，字幕并没有跟随缩放以后的safe area，自己跑到框的外面去了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155304758.png" alt="image-20260405155304758"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155316101.png" alt="image-20260405155316101"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155333781.png" alt="image-20260405155333781"></p>
-]]></content>
-      <categories>
-        <category>How-To</category>
-      </categories>
-      <tags>
-        <tag>jellyfin</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>怎么去优雅的转pt种？</title>
     <url>/2026/06/11/pt/</url>
     <content><![CDATA[<h1><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944"></h1>
@@ -1460,6 +1443,23 @@ UG NX12如何进行数控仿真？</p>
       </categories>
       <tags>
         <tag>pt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>swiftfin如何设置优雅的刮削？</title>
+    <url>/2026/06/17/no_swiftfin%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%AD%97%E5%B9%95%E5%85%A8%E5%B1%8F%E7%9C%8B%E4%B8%8D%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>询问grok，发现把字幕烧录进视频文件是一个似乎可行的方案</p>
+<span id="more"></span>
+<p>问题的本质是我们视频缩放放大以后，字幕并没有跟随缩放以后的safe area，自己跑到框的外面去了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155304758.png" alt="image-20260405155304758"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155316101.png" alt="image-20260405155316101"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155333781.png" alt="image-20260405155333781"></p>
+]]></content>
+      <categories>
+        <category>How-To</category>
+      </categories>
+      <tags>
+        <tag>jellyfin</tag>
       </tags>
   </entry>
   <entry>
@@ -1751,27 +1751,6 @@ UG NX12如何进行数控仿真？</p>
       </categories>
   </entry>
   <entry>
-    <title>《禁闭岛》：值得用显微镜去观察的电影</title>
-    <url>/2026/06/11/%E3%80%8A%E7%A6%81%E9%97%AD%E5%B2%9B%E3%80%8B/</url>
-    <content><![CDATA[<p>你禁闭了吗？反正我是懵了</p>
-<span id="more"></span>
-<h2 id="懵逼">懵逼</h2>
-<p>第一遍我看完的最大感受，就是懵逼。</p>
-<p>懵逼的是，到底是什么鬼，Teddy到底是不是疯子？我是不是疯子？</p>
-<p>一开始看的时候丝毫没有觉得Teddy是个精神病，我甚至怀疑院长和其他人是坏的，这个想法根深蒂固，直到最后也没有改观。</p>
-<p>所以这部影片给我的第一印象是没太看懂。</p>
-<h2 id="解释">解释</h2>
-<p>豆瓣这个牛人老哥解释的非常清楚，可以去仔细的看看哈。</p>
-<p><a href="https://movie.douban.com/review/4189148/">还原故事的真相，《禁闭岛》剧情全解析。（禁闭岛）影评</a></p>
-<p>贴吧上居然有一个“关门岛吧”，专门来讨论这部电影的细节的，其中关于“RUN”的解释就有很多。</p>
-<p><a href="https://tieba.baidu.com/p/2558349844?share=9105&amp;fr=sharewise&amp;is_video=false&amp;unique=D92D4D3D566FEFB36574672D31407766&amp;st=1757211710&amp;client_type=1&amp;client_version=12.88.1.1&amp;sfc=weixin&amp;share_from=post">重整&quot;RUN&quot;字帖，RUN究竟是谁写的？（图文）_关门岛吧_百度贴吧</a></p>
-<p>这是一部值得二刷三刷，用显微镜去观察的悬疑电影！</p>
-]]></content>
-      <categories>
-        <category>Movie &amp; TV</category>
-      </categories>
-  </entry>
-  <entry>
     <title>《蝴蝶效应》：后劲很足的一部电影</title>
     <url>/2026/06/11/%E3%80%8A%E8%9D%B4%E8%9D%B6%E6%95%88%E5%BA%94%E3%80%8B/</url>
     <content><![CDATA[<p>一只南美洲的蝴蝶扇动翅膀，结果可能引发德克萨斯州的龙卷风</p>
@@ -1790,6 +1769,27 @@ UG NX12如何进行数控仿真？</p>
 <p>但是，游戏是可以修改的，是可以通过时间回溯来解决问题的，《蝴蝶效应》就告诉了我们：如果你拥有人生回溯的超能力，这也未尝不是一件好事。</p>
 <p>人生不比游戏，他不会有“增加和某某好感度”的提示，也不会有“前往某某地”的提示。人生是旷野，有太多未知等待你自己去探索。你不知道，可能你今天随手扔的一个易拉罐，哪天绊倒了一个七八十岁的老大爷，让他们一命呜呼。</p>
 <p><strong>很好玩很有趣、后劲很足的一部电影。</strong></p>
+]]></content>
+      <categories>
+        <category>Movie &amp; TV</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>《禁闭岛》：值得用显微镜去观察的电影</title>
+    <url>/2026/06/11/%E3%80%8A%E7%A6%81%E9%97%AD%E5%B2%9B%E3%80%8B/</url>
+    <content><![CDATA[<p>你禁闭了吗？反正我是懵了</p>
+<span id="more"></span>
+<h2 id="懵逼">懵逼</h2>
+<p>第一遍我看完的最大感受，就是懵逼。</p>
+<p>懵逼的是，到底是什么鬼，Teddy到底是不是疯子？我是不是疯子？</p>
+<p>一开始看的时候丝毫没有觉得Teddy是个精神病，我甚至怀疑院长和其他人是坏的，这个想法根深蒂固，直到最后也没有改观。</p>
+<p>所以这部影片给我的第一印象是没太看懂。</p>
+<h2 id="解释">解释</h2>
+<p>豆瓣这个牛人老哥解释的非常清楚，可以去仔细的看看哈。</p>
+<p><a href="https://movie.douban.com/review/4189148/">还原故事的真相，《禁闭岛》剧情全解析。（禁闭岛）影评</a></p>
+<p>贴吧上居然有一个“关门岛吧”，专门来讨论这部电影的细节的，其中关于“RUN”的解释就有很多。</p>
+<p><a href="https://tieba.baidu.com/p/2558349844?share=9105&amp;fr=sharewise&amp;is_video=false&amp;unique=D92D4D3D566FEFB36574672D31407766&amp;st=1757211710&amp;client_type=1&amp;client_version=12.88.1.1&amp;sfc=weixin&amp;share_from=post">重整&quot;RUN&quot;字帖，RUN究竟是谁写的？（图文）_关门岛吧_百度贴吧</a></p>
+<p>这是一部值得二刷三刷，用显微镜去观察的悬疑电影！</p>
 ]]></content>
       <categories>
         <category>Movie &amp; TV</category>
@@ -2048,24 +2048,6 @@ UG NX12如何进行数控仿真？</p>
       </categories>
   </entry>
   <entry>
-    <title>一些很有感触的话</title>
-    <url>/2026/06/11/%E4%B8%80%E4%BA%9B%E5%BE%88%E6%9C%89%E6%84%9F%E8%A7%A6%E7%9A%84%E8%AF%9D/</url>
-    <content><![CDATA[<span id="more"></span>
-<p>我只想知道将来我会死在什么地方，这样我就不会去那儿了。-《穷查理宝典》</p>
-<p>我的剑留给能够挥舞它的人。-《天路历程》</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307103832314.PNG" alt="IMG_7760" style="zoom: 33%;" />
-<p>但如果你确实在生活中与那些有杰出思想的已逝的故人成为朋友，那么我认为你会过上更好的生活，得到更好的教育。-《穷查理宝典》</p>
-<p>查理，你要是借了别人的车，别忘了加满油再还给人家。-《穷查理宝典》</p>
-<p>找出你最擅长的事情，然后持之以恒、乐此不疲地去把它做好。-查理.芒格</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307104016228.PNG" alt="IMG_7790" style="zoom:33%;" />
-<p>凡事往简单处想，往认真处行。-查理.芒格</p>
-<p>聪明的飞行员即使才华再过人，经验再丰富，也绝不会不使用检查清单。-查理.芒格</p>
-]]></content>
-      <categories>
-        <category>Reading</category>
-      </categories>
-  </entry>
-  <entry>
     <title>《里斯本丸沉没》：打捞起一个即将被遗忘的故事</title>
     <url>/2026/06/11/%E3%80%8A%E9%87%8C%E6%96%AF%E6%9C%AC%E4%B8%B8%E6%B2%89%E6%B2%A1%E3%80%8B/</url>
     <content><![CDATA[<p>在飞机上看了《里斯本丸沉没》这部电影，更确切的来说是一部纪录片，按我的直观感受，这是一部制作精良，具有深远意义的纪录片。</p>
@@ -2161,27 +2143,22 @@ UG NX12如何进行数控仿真？</p>
       </categories>
   </entry>
   <entry>
-    <title>两个电脑，what i can do？</title>
-    <url>/2026/06/14/%E4%B8%A4%E4%B8%AA%E7%94%B5%E8%84%91%EF%BC%8Cwhat%20i%20can%20do%EF%BC%9F/</url>
-    <content><![CDATA[<p>一个台式机，屏幕很大，配置更好；一个笔记本，屏幕很小，配置差一点，但是屏幕的分辨率高一些。能干啥才不会让其中一个电脑吃灰？</p>
-<span id="more"></span>
-<p>能干啥呢？有哪些场景可以发挥最大化作用呢？</p>
-<p>打游戏可以，一边看游戏攻略，一遍打关，听起来似乎不错，但是问题是，我不咋打游戏，pass。</p>
-<p>写代码，左边一个屏幕干啥？右边一个屏幕干啥？暂时想不到有什么好的。</p>
-<p>查文献，左边一个看文献，右边一个写文章？似乎可行。</p>
-<p>提供一个思路，就是你想要充分利用两个电脑，肯定是利用两个电脑的优点，也就是不能被替代的优点。</p>
-<p>其实不少，笔记本电脑可以带着跑，台式机总不能带着跑吧，欸，有了，既然你已经打通了 Tailscale + Sunshine + Moonlight，那你就可以带着跑了，可以带着笔记本电脑跑来跑去，只要保证台式机没有关机的情况下，你就可以使用远程串流进行台式机的访问，你看，这就是一个综合了笔记本电脑的便携性和台式机的高性能的极佳方案，只要网络环境不太差，效果还是不错的（我现在这段文字就是串流打上去的哈哈哈哈哈）。</p>
-<p>好了，用笔记本电脑串流台式机画面，实现远距离一体化系统，这是一个大用处。</p>
-<p>还有呢？再头脑风暴一下下？</p>
+    <title>一些很有感触的话</title>
+    <url>/2026/06/11/%E4%B8%80%E4%BA%9B%E5%BE%88%E6%9C%89%E6%84%9F%E8%A7%A6%E7%9A%84%E8%AF%9D/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>我只想知道将来我会死在什么地方，这样我就不会去那儿了。-《穷查理宝典》</p>
+<p>我的剑留给能够挥舞它的人。-《天路历程》</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307103832314.PNG" alt="IMG_7760" style="zoom: 33%;" />
+<p>但如果你确实在生活中与那些有杰出思想的已逝的故人成为朋友，那么我认为你会过上更好的生活，得到更好的教育。-《穷查理宝典》</p>
+<p>查理，你要是借了别人的车，别忘了加满油再还给人家。-《穷查理宝典》</p>
+<p>找出你最擅长的事情，然后持之以恒、乐此不疲地去把它做好。-查理.芒格</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260307104016228.PNG" alt="IMG_7790" style="zoom:33%;" />
+<p>凡事往简单处想，往认真处行。-查理.芒格</p>
+<p>聪明的飞行员即使才华再过人，经验再丰富，也绝不会不使用检查清单。-查理.芒格</p>
 ]]></content>
       <categories>
-        <category>Life</category>
+        <category>Reading</category>
       </categories>
-      <tags>
-        <tag>productivity</tag>
-        <tag>remote-desktop</tag>
-        <tag>tailscale</tag>
-      </tags>
   </entry>
   <entry>
     <title>丢掉手机，好好吃饭！</title>
@@ -2224,6 +2201,29 @@ UG NX12如何进行数控仿真？</p>
         <tag>motivation</tag>
         <tag>study</tag>
         <tag>self-reflection</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>两个电脑，what i can do？</title>
+    <url>/2026/06/14/%E4%B8%A4%E4%B8%AA%E7%94%B5%E8%84%91%EF%BC%8Cwhat%20i%20can%20do%EF%BC%9F/</url>
+    <content><![CDATA[<p>一个台式机，屏幕很大，配置更好；一个笔记本，屏幕很小，配置差一点，但是屏幕的分辨率高一些。能干啥才不会让其中一个电脑吃灰？</p>
+<span id="more"></span>
+<p>能干啥呢？有哪些场景可以发挥最大化作用呢？</p>
+<p>打游戏可以，一边看游戏攻略，一遍打关，听起来似乎不错，但是问题是，我不咋打游戏，pass。</p>
+<p>写代码，左边一个屏幕干啥？右边一个屏幕干啥？暂时想不到有什么好的。</p>
+<p>查文献，左边一个看文献，右边一个写文章？似乎可行。</p>
+<p>提供一个思路，就是你想要充分利用两个电脑，肯定是利用两个电脑的优点，也就是不能被替代的优点。</p>
+<p>其实不少，笔记本电脑可以带着跑，台式机总不能带着跑吧，欸，有了，既然你已经打通了 Tailscale + Sunshine + Moonlight，那你就可以带着跑了，可以带着笔记本电脑跑来跑去，只要保证台式机没有关机的情况下，你就可以使用远程串流进行台式机的访问，你看，这就是一个综合了笔记本电脑的便携性和台式机的高性能的极佳方案，只要网络环境不太差，效果还是不错的（我现在这段文字就是串流打上去的哈哈哈哈哈）。</p>
+<p>好了，用笔记本电脑串流台式机画面，实现远距离一体化系统，这是一个大用处。</p>
+<p>还有呢？再头脑风暴一下下？</p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>productivity</tag>
+        <tag>remote-desktop</tag>
+        <tag>tailscale</tag>
       </tags>
   </entry>
   <entry>
@@ -2501,6 +2501,72 @@ UG NX12如何进行数控仿真？</p>
       </tags>
   </entry>
   <entry>
+    <title>GTX1660调试欧卡2画质mod的感触</title>
+    <url>/2026/06/11/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135715820.png" alt="image-20260308135656767"></p>
+<span id="more"></span>
+<h1>前期排查</h1>
+<p>今天在折腾欧卡2的画质。和很多玩家一样，一开始就是一个思路：把能开的都开到最高。包括Nvidia app里面推荐的设置都是都是全开最高，我的gtx1660还怕一个12年的老游戏？</p>
+<p>很久之前，我就已经在本地下载了画质类的mod，像 JBX 3、PNG、Realistic Rain、Tree Improved 4K ，今天一时兴起，想玩一下很久没有碰的欧卡2，想着调一下画质，发现，无论是加入PNG，还是JBX 3，一进游戏画质是变好看的，但是帧率低的可怜，估计只有10帧左右，体验极差,这我还玩个寂寞啊…，还好，多亏了我之前看的乐观学书籍，没问题归结为长期性的、无法解决的，不然我估计不会去寻找新的解决方法，而是在寝室怪罪自己这无能的显卡了（泪目）。</p>
+<p>自己想了一下，问题可能有很多处：</p>
+<p>1.下载的PNG/JBX3画质mod毕竟不是官方的，可能存在问题？</p>
+<p>2.画质类mod之间可能存在一定的冲突，可能存在不兼容？</p>
+<p>3.最近显卡出了点毛病？</p>
+<p>对于1，找了半天发现，原来这些画质类的mod都是要付费的。算了，mod来源不明就这样吧，也挺好，毕竟mod都是免费的，哈哈哈（笑）</p>
+<p>对于2，我尝试把Realistic Rain、Tree Improved 4K这些比较吃显卡性能的mod都删掉，再次重新进游戏，发现然而并没有什么用，画质依旧10帧（哭了）</p>
+<p>对于3，显卡出了毛病吗？没有啊，昨天晚上打吃鸡还好好的呢，睡了一晚，显卡就废了难道？不可能不可能，绝对不可能</p>
+<p>还能怎么办，问问GPT老祖，死马当活马医呗，这句话，一语道破天机</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134317948.jpeg" alt="IMG_7800" style="zoom:33%;" />
+<p>GPT说：</p>
+<ul>
+<li>1080P + 100% = 正常渲染</li>
+<li>200% ≈ 接近 4K</li>
+<li><strong>300% 已经接近 6K 渲染</strong></li>
+</ul>
+<p>后来检查了一下设置才发现，缩放确实是开到了 300% ，但我想着，这有什么关系？我之前开300%不是照样玩的很顺？</p>
+<p>但并没有意识到的是，之前的300%是没有打PNG/JBX3这种大型画质mod</p>
+<p>死马当活马医，改一改缩放率呗，试一试总是好的咯</p>
+<h1>调整之后</h1>
+<p>把思路改成<strong>适合自己配置 &gt; 盲目堆画质</strong>，之后，发现打开了新世界的大门</p>
+<p>主要改动：</p>
+<ul>
+<li>
+<p>缩放：300% → <strong>100%</strong>（260309：缩放其实调整到200%都是可以的，100%还是有点太便宜显卡了）</p>
+</li>
+<li>
+<p>设置旁边有 菱形的，在不影响太多观感的前提下，能开多低开多低</p>
+</li>
+<li>
+<p>一些轻量MOD（灯光、雨滴、内饰、地图）尽量不去动他</p>
+</li>
+<li>
+<p>260309：抗锯齿可以选择 自适应清晰度，选择了SMAA,SMAA+TAA,自适应清晰度 后发现，</p>
+<p>自适应清晰度很真实，在静止的时候很清楚，运动的时候会有一定的运动模糊</p>
+</li>
+</ul>
+<p>帧率立刻稳定了很多，高速基本很顺，稳定在55帧左右，城市也不会明显卡顿。</p>
+<p>这里贴一下当时的设置：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134910393.png" alt="scs1" style="zoom:50%;" />
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134923740.png" alt="scs2" style="zoom: 50%;" />
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134951931.png" alt="scs3" style="zoom:50%;" />
+<p>使用的画质mod排序（rain效果类放在最前面，似乎才会有效果）：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135036856.png" alt="scs4"></p>
+<p>开了PNG之后：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135954275.jpg" alt="20260308125727_1" style="zoom:33%;" />
+<p>没开PNG:</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308140035237.jpg" alt="20260304154756_1" style="zoom:33%;" />
+<p>效果不错吧，哈哈</p>
+<h1>简单的感受</h1>
+<p>很多网上的“画质教程”其实默认的是高端显卡配置。如果照搬，很容易变成：</p>
+<p>画质提升一点，帧率下降很多。</p>
+<p>欧卡这种游戏，我更在意的是光照以及地面的纹理，把地面的纹理、天气质量调好一点，再配合 100% 缩放，观感已经很好了。有时候少装几个MOD、降低一点设置，反而更舒服。</p>
+<p>别人说好不一定好，适合你的才是最好的。</p>
+]]></content>
+      <categories>
+        <category>Gaming</category>
+      </categories>
+  </entry>
+  <entry>
     <title>复利究竟有什么魔力？</title>
     <url>/2026/06/11/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310220618481.png" alt="image-20260310220618481"></p>
@@ -2566,72 +2632,6 @@ UG NX12如何进行数控仿真？</p>
       <tags>
         <tag>investing</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>GTX1660调试欧卡2画质mod的感触</title>
-    <url>/2026/06/11/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135715820.png" alt="image-20260308135656767"></p>
-<span id="more"></span>
-<h1>前期排查</h1>
-<p>今天在折腾欧卡2的画质。和很多玩家一样，一开始就是一个思路：把能开的都开到最高。包括Nvidia app里面推荐的设置都是都是全开最高，我的gtx1660还怕一个12年的老游戏？</p>
-<p>很久之前，我就已经在本地下载了画质类的mod，像 JBX 3、PNG、Realistic Rain、Tree Improved 4K ，今天一时兴起，想玩一下很久没有碰的欧卡2，想着调一下画质，发现，无论是加入PNG，还是JBX 3，一进游戏画质是变好看的，但是帧率低的可怜，估计只有10帧左右，体验极差,这我还玩个寂寞啊…，还好，多亏了我之前看的乐观学书籍，没问题归结为长期性的、无法解决的，不然我估计不会去寻找新的解决方法，而是在寝室怪罪自己这无能的显卡了（泪目）。</p>
-<p>自己想了一下，问题可能有很多处：</p>
-<p>1.下载的PNG/JBX3画质mod毕竟不是官方的，可能存在问题？</p>
-<p>2.画质类mod之间可能存在一定的冲突，可能存在不兼容？</p>
-<p>3.最近显卡出了点毛病？</p>
-<p>对于1，找了半天发现，原来这些画质类的mod都是要付费的。算了，mod来源不明就这样吧，也挺好，毕竟mod都是免费的，哈哈哈（笑）</p>
-<p>对于2，我尝试把Realistic Rain、Tree Improved 4K这些比较吃显卡性能的mod都删掉，再次重新进游戏，发现然而并没有什么用，画质依旧10帧（哭了）</p>
-<p>对于3，显卡出了毛病吗？没有啊，昨天晚上打吃鸡还好好的呢，睡了一晚，显卡就废了难道？不可能不可能，绝对不可能</p>
-<p>还能怎么办，问问GPT老祖，死马当活马医呗，这句话，一语道破天机</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134317948.jpeg" alt="IMG_7800" style="zoom:33%;" />
-<p>GPT说：</p>
-<ul>
-<li>1080P + 100% = 正常渲染</li>
-<li>200% ≈ 接近 4K</li>
-<li><strong>300% 已经接近 6K 渲染</strong></li>
-</ul>
-<p>后来检查了一下设置才发现，缩放确实是开到了 300% ，但我想着，这有什么关系？我之前开300%不是照样玩的很顺？</p>
-<p>但并没有意识到的是，之前的300%是没有打PNG/JBX3这种大型画质mod</p>
-<p>死马当活马医，改一改缩放率呗，试一试总是好的咯</p>
-<h1>调整之后</h1>
-<p>把思路改成<strong>适合自己配置 &gt; 盲目堆画质</strong>，之后，发现打开了新世界的大门</p>
-<p>主要改动：</p>
-<ul>
-<li>
-<p>缩放：300% → <strong>100%</strong>（260309：缩放其实调整到200%都是可以的，100%还是有点太便宜显卡了）</p>
-</li>
-<li>
-<p>设置旁边有 菱形的，在不影响太多观感的前提下，能开多低开多低</p>
-</li>
-<li>
-<p>一些轻量MOD（灯光、雨滴、内饰、地图）尽量不去动他</p>
-</li>
-<li>
-<p>260309：抗锯齿可以选择 自适应清晰度，选择了SMAA,SMAA+TAA,自适应清晰度 后发现，</p>
-<p>自适应清晰度很真实，在静止的时候很清楚，运动的时候会有一定的运动模糊</p>
-</li>
-</ul>
-<p>帧率立刻稳定了很多，高速基本很顺，稳定在55帧左右，城市也不会明显卡顿。</p>
-<p>这里贴一下当时的设置：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134910393.png" alt="scs1" style="zoom:50%;" />
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134923740.png" alt="scs2" style="zoom: 50%;" />
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134951931.png" alt="scs3" style="zoom:50%;" />
-<p>使用的画质mod排序（rain效果类放在最前面，似乎才会有效果）：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135036856.png" alt="scs4"></p>
-<p>开了PNG之后：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135954275.jpg" alt="20260308125727_1" style="zoom:33%;" />
-<p>没开PNG:</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308140035237.jpg" alt="20260304154756_1" style="zoom:33%;" />
-<p>效果不错吧，哈哈</p>
-<h1>简单的感受</h1>
-<p>很多网上的“画质教程”其实默认的是高端显卡配置。如果照搬，很容易变成：</p>
-<p>画质提升一点，帧率下降很多。</p>
-<p>欧卡这种游戏，我更在意的是光照以及地面的纹理，把地面的纹理、天气质量调好一点，再配合 100% 缩放，观感已经很好了。有时候少装几个MOD、降低一点设置，反而更舒服。</p>
-<p>别人说好不一定好，适合你的才是最好的。</p>
-]]></content>
-      <categories>
-        <category>Gaming</category>
-      </categories>
   </entry>
   <entry>
     <title>怎么使用ptqt进行ui界面的开发？</title>
@@ -2781,6 +2781,92 @@ UG NX12如何进行数控仿真？</p>
         <tag>habits</tag>
         <tag>delayed-gratification</tag>
         <tag>consumption</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>护城河有什么用？</title>
+    <url>/2026/06/11/%E6%8A%A4%E5%9F%8E%E6%B2%B3/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315212130095.png" alt="image-20260315212130095"></p>
+<span id="more"></span>
+<h1>概念</h1>
+<p>我们来看看wikipedia怎么说的吧：</p>
+<p><strong>护城河</strong>，亦作<strong>城壕</strong>或<strong>城濠</strong>，是古时由人工挖凿，环绕整座<a href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E6%B1%A0">城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%AE%AE%E5%9F%8E">宫城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%AF%BA%E9%99%A2">寺院</a>等主要建筑的<a href="https://zh.wikipedia.org/wiki/%E6%B2%B3">河</a>，具有防御作用，可防止敌人或<a href="https://zh.wikipedia.org/wiki/%E5%8B%95%E7%89%A9">动物</a>入侵。</p>
+<p>世界各国在古代已有开凿护城河。在<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86">中国大陆</a><a href="https://zh.wikipedia.org/wiki/%E5%8C%97%E4%BA%AC%E5%B8%82">北京</a>的<a href="https://zh.wikipedia.org/wiki/%E6%95%85%E5%AE%AE">紫禁城</a>、<a href="https://zh.wikipedia.org/wiki/%E8%87%BA%E7%81%A3">台湾</a><a href="https://zh.wikipedia.org/wiki/%E7%AB%B9%E5%A1%B9%E5%9F%8E">新竹古城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%B7%A6%E7%87%9F%E8%88%8A%E5%9F%8E">左营旧城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%84%84%E8%BC%89%E9%87%91%E5%9F%8E">亿载金城</a>、<a href="https://zh.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC">日本</a>的古城如<a href="https://zh.wikipedia.org/wiki/%E6%9D%BE%E6%9C%AC%E5%9F%8E">松本城</a>、<a href="https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%88%B6">江户</a>（今<a href="https://zh.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC">东京</a>）的<a href="https://zh.wikipedia.org/wiki/%E7%9A%87%E5%B1%85">皇居</a>、以至<a href="https://zh.wikipedia.org/wiki/%E6%AD%90%E6%B4%B2">欧洲</a>各国的<a href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E5%A0%A1">城堡</a>及皇宫等等地方都建有护城河。欧洲不少城堡在护城河上建有可升起的木<a href="https://zh.wikipedia.org/wiki/%E6%A9%8B">桥</a>，以方便出入，亦可防止敌人进入。特别情况下，会选择湖泊作为城濠。如明初修建<a href="https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E5%9F%8E%E5%A2%99">南京城墙</a>时，放弃<a href="https://zh.wikipedia.org/wiki/%E9%87%91%E5%B7%9D%E6%B2%B3_(%E5%8D%97%E4%BA%AC)">金川河</a>，选择<a href="https://zh.wikipedia.org/wiki/%E7%8E%84%E6%AD%A6%E6%B9%96">玄武湖</a>。</p>
+<p>当然，这只是实际意义上的护城河，还有抽象意义上的护城河，巴菲特用生动的比喻描述了这一概念：“<strong>奇妙的、由很深、很危险的护城河环绕的城堡。城堡的主人是一个诚实而高雅的人。城堡最主要的力量源泉是主人天才的大脑；护城河永久地充当着那些试图袭击城堡的敌人的障碍</strong>。”</p>
+<h1>护城河怎么发挥作用？</h1>
+<p>那么，护城河具体是如何发挥作用的？让我们通过两个真实的企业案例来理解:</p>
+<p><strong>可口可乐</strong>：护城河核心是<strong>无与伦比的品牌认知</strong> + <strong>轻资产生态模式</strong>。</p>
+<p>消费者对口感形成心理忠诚，全球碳酸饮料市场份额46%，快餐与影院渠道覆盖率极高。公司只专注浓缩液生产与品牌，全球225家装瓶伙伴负责灌装分销，母公司掌控定价、包装与战术。这种模式带来60%+毛利率、连续60年股利增长。竞争者难以复制其全球品牌影响力和装瓶网络。</p>
+<p><strong>山姆会员商店</strong>：护城河建立在<strong>极致供应链精选</strong> + <strong>会员生态</strong>。</p>
+<p>SKU仅3500-5000个，每类只选1-2最佳单品，通过买断独家、自有品牌Member’s Mark（占比30%+）、规模采购实现品质与低价。会员数从2018年300万增至2024年近900万，续卡率86%，年费收入超23亿。消费者为“确定性”（随便选也高性价比）买单。但近期选品泛化、质量问题动摇信任，山姆通过全球直采（如独家孔泰奶酪、树顶到卖场榴莲）、“先仓后店”前置仓+电商（占比超50%）持续加宽护城河，2025Q2净销售额仍增长30.1%。</p>
+<p><strong>共性逻辑</strong>：</p>
+<ol>
+<li>创造定价权（高毛利或会员费）；</li>
+<li>提高进入壁垒（难以快速复制）；</li>
+<li>必须每年加宽（巴菲特强调：护城河不断拓宽，企业才能长期优秀）。</li>
+</ol>
+<p>在快速变化的时代，个人也需护城河来获得安全感与主动权。它让你不可替代，专注创造而非焦虑竞争。</p>
+<p>麦克利兰“冰山模型”揭示构成：</p>
+<ul>
+<li><strong>上层</strong>（显性）：知识与技能（如编程、英语）。</li>
+<li><strong>中层</strong>：能力（如沟通、结构化思维、情绪管理）。</li>
+<li><strong>底层</strong>（最稳固）：价值观、性格特质、动机，决定你独特优势与能做成什么。</li>
+</ul>
+<p>构建路径：从底层发掘优势 → 积累知识技能 → 形成难以撼动的核心竞争力。</p>
+<p>所以我们应该：</p>
+<ol>
+<li>
+<p><strong>发掘优势</strong> —— 德鲁克“回馈分析法”：每次重要决定前记录预期结果，9-12个月后对比实际，持续执行即可发现真正长处（也可回顾过去成功案例）。</p>
+</li>
+<li>
+<p><strong>优势与社会需求匹配</strong>：单纯擅长不够，必须问：这个优势如何创造价值？如何满足市场/趋势需求？如何与个人目标统一？三者交汇处才是护城河落脚点。</p>
+</li>
+<li>
+<p><strong>纵横积累模型</strong>：</p>
+<ul>
+<li><strong>横向</strong>：深耕当下价值创造（为客户/组织提供的核心输出），专注细节、持续1%优化。</li>
+<li><strong>纵向</strong>：为横面服务而积累相关知识/能力（直接相关优先，逐步扩展能力圈）。所有学习都围绕“能为他人创造的价值”展开，避免盲目杂学。</li>
+</ul>
+</li>
+<li>
+<p><strong>持续加宽</strong>（像企业一样）：</p>
+<ul>
+<li>终身学习，避免知识过时（如柯达胶卷被颠覆）。</li>
+<li>构建组合优势：单一元素难胜，排列组合形成独特性。</li>
+<li>建立反馈闭环：定期检视、根据环境调整方向。</li>
+</ul>
+</li>
+</ol>
+<h1>总结</h1>
+<p>护城河的终极意义在于<strong>创造的自由</strong>：企业无需时时防御，可专注为顾客创造更大价值；个人无需焦虑淘汰，可专注发挥独特优势。可口可乐与山姆的护城河皆经数十年沉淀，个人亦然。从今天开始，用回馈分析发掘长处，将优势对接社会需求，纵横积累、持续加宽——当你站起身回望，那条属于自己的宽阔护城河，将成为最值得骄傲的资产。</p>
+<h1>这才是文章的开始</h1>
+<p>是吧，文章写得很好，但并没有什么用，因为就是没有用啊，全是ai写出来的，辞藻华丽，逻辑很顺，但是似乎跟我真的没有什么关系啊。这也是ai的弊端，ai可以帮你写，但其实他自己也不是很理解这个概念，他也不知道你自己想要的是什么，不能代替你思考。</p>
+<p>所以写一篇文章、读一篇文章不要只是感动自己，改变自己才是最真的，自己理解才是重点。</p>
+<p>用我自己的话来说，护城河就是一个人（或一家企业）在这个世界里能够安全立足、别人暂时取代不了的那个“东西”。它从来不是单一的技能或天赋，而是一套多维度能力的组合拳——当几个看似普通的点叠加在一起，就形成了别人很难抄的独特壁垒。</p>
+<p>拿企业举例，可口可乐的护城河不是单纯的饮料好喝，而是“品牌认知度极高 + 轻资产模式”的组合：它只掌控最核心的配方和品牌，把生产、灌装、分销这些中低端环节外包给全球225家区域伙伴，自己专注定价权和生态掌控。这套模式让竞争者望尘莫及，毛利率常年60%以上，连续60年涨股息。山姆会员店则是另一套组合：极致精选SKU（3500–5000个，每类只挑1–2个最好）+ 自有品牌+ 会员付费买“确定性”+ 全球直采冷链。这种“少而精 + 会员锁仓”的模式，也让模仿者短期内跟不上。</p>
+<p>放到个人身上，我觉得道理是一样的。如果我只是一个会写代码的普通程序员，但社交能力弱、表达不行、动机也不强，那我的竞争力就很单薄，随时可能被更全面的人取代。但如果我把编程技能 + 良好的沟通表达 + 懂一点业务逻辑 + 强烈的成就动机 + 靠谱的性格叠加起来，这个组合就很难被快速复制——这就是我的护城河。</p>
+<p>作为大三学生，我现在的护城河其实还很浅，甚至可以说还没真正挖起来。主要有两个明显短板：</p>
+<ol>
+<li><strong>知识和技能还停在表面</strong>：学过的东西不少，但都浅尝辄止，没有真正做成过有分量的项目，也没有形成体系。</li>
+<li><strong>动机非常薄弱</strong>：我还没搞清楚自己到底想成为什么样的人、想为什么而努力。每天上课、刷题、像在完成任务，而不是在为某个清晰的方向积累。</li>
+</ol>
+<p>意识到这些后，我开始试着把“护城河”这个概念真正融入日常生活，而不是停留在想一想就结束的阶段。我给自己定了一些小而具体的行动：</p>
+<ul>
+<li>每天花10分钟写“动机日志”：今天什么事让我有点兴奋？什么事情让我很沮丧、无法集中注意力？为什么？慢慢找底层驱动力。</li>
+<li>每周挑一个技能做“项目驱动练习”：不是只看教程，而是逼自己输出一个小东西（比如建一个模型、设计一个产品），哪怕很粗糙。</li>
+<li>主动把技能“交叉”：比如写技术类博客，锻炼自己的表达能力的同时提升自己的技术素养、帮朋友解决实际问题，刻意练沟通等。</li>
+<li>记得复盘：列出当前的能力清单，问自己“这些点怎么组合才能让我更独特？”同时对比预期和实际结果，调整方向。</li>
+</ul>
+<p>护城河不是一夜之间建成的。可口可乐用了上百年，山姆也迭代了近30年。我现在才大三，时间是我最大的优势。也许几年后回头看，现在这些小小的刻意练习，就是那条河的起点。</p>
+<p>我希望未来的自己，能站在一条不算太宽但足够深的护城河边上，对着世界说： “来吧，我在这里，有我自己的位置。”</p>
+<p>你要如何设计自己的人生，这件事完全取决于你自己。</p>
+]]></content>
+      <categories>
+        <category>Knowledge</category>
+      </categories>
+      <tags>
+        <tag>business</tag>
+        <tag>growth</tag>
       </tags>
   </entry>
   <entry>
@@ -3135,594 +3221,6 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
         <tag>exam-notes</tag>
         <tag>finite-element-analysis</tag>
         <tag>cad</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>护城河有什么用？</title>
-    <url>/2026/06/11/%E6%8A%A4%E5%9F%8E%E6%B2%B3/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315212130095.png" alt="image-20260315212130095"></p>
-<span id="more"></span>
-<h1>概念</h1>
-<p>我们来看看wikipedia怎么说的吧：</p>
-<p><strong>护城河</strong>，亦作<strong>城壕</strong>或<strong>城濠</strong>，是古时由人工挖凿，环绕整座<a href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E6%B1%A0">城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%AE%AE%E5%9F%8E">宫城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%AF%BA%E9%99%A2">寺院</a>等主要建筑的<a href="https://zh.wikipedia.org/wiki/%E6%B2%B3">河</a>，具有防御作用，可防止敌人或<a href="https://zh.wikipedia.org/wiki/%E5%8B%95%E7%89%A9">动物</a>入侵。</p>
-<p>世界各国在古代已有开凿护城河。在<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86">中国大陆</a><a href="https://zh.wikipedia.org/wiki/%E5%8C%97%E4%BA%AC%E5%B8%82">北京</a>的<a href="https://zh.wikipedia.org/wiki/%E6%95%85%E5%AE%AE">紫禁城</a>、<a href="https://zh.wikipedia.org/wiki/%E8%87%BA%E7%81%A3">台湾</a><a href="https://zh.wikipedia.org/wiki/%E7%AB%B9%E5%A1%B9%E5%9F%8E">新竹古城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%B7%A6%E7%87%9F%E8%88%8A%E5%9F%8E">左营旧城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%84%84%E8%BC%89%E9%87%91%E5%9F%8E">亿载金城</a>、<a href="https://zh.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC">日本</a>的古城如<a href="https://zh.wikipedia.org/wiki/%E6%9D%BE%E6%9C%AC%E5%9F%8E">松本城</a>、<a href="https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%88%B6">江户</a>（今<a href="https://zh.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC">东京</a>）的<a href="https://zh.wikipedia.org/wiki/%E7%9A%87%E5%B1%85">皇居</a>、以至<a href="https://zh.wikipedia.org/wiki/%E6%AD%90%E6%B4%B2">欧洲</a>各国的<a href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E5%A0%A1">城堡</a>及皇宫等等地方都建有护城河。欧洲不少城堡在护城河上建有可升起的木<a href="https://zh.wikipedia.org/wiki/%E6%A9%8B">桥</a>，以方便出入，亦可防止敌人进入。特别情况下，会选择湖泊作为城濠。如明初修建<a href="https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E5%9F%8E%E5%A2%99">南京城墙</a>时，放弃<a href="https://zh.wikipedia.org/wiki/%E9%87%91%E5%B7%9D%E6%B2%B3_(%E5%8D%97%E4%BA%AC)">金川河</a>，选择<a href="https://zh.wikipedia.org/wiki/%E7%8E%84%E6%AD%A6%E6%B9%96">玄武湖</a>。</p>
-<p>当然，这只是实际意义上的护城河，还有抽象意义上的护城河，巴菲特用生动的比喻描述了这一概念：“<strong>奇妙的、由很深、很危险的护城河环绕的城堡。城堡的主人是一个诚实而高雅的人。城堡最主要的力量源泉是主人天才的大脑；护城河永久地充当着那些试图袭击城堡的敌人的障碍</strong>。”</p>
-<h1>护城河怎么发挥作用？</h1>
-<p>那么，护城河具体是如何发挥作用的？让我们通过两个真实的企业案例来理解:</p>
-<p><strong>可口可乐</strong>：护城河核心是<strong>无与伦比的品牌认知</strong> + <strong>轻资产生态模式</strong>。</p>
-<p>消费者对口感形成心理忠诚，全球碳酸饮料市场份额46%，快餐与影院渠道覆盖率极高。公司只专注浓缩液生产与品牌，全球225家装瓶伙伴负责灌装分销，母公司掌控定价、包装与战术。这种模式带来60%+毛利率、连续60年股利增长。竞争者难以复制其全球品牌影响力和装瓶网络。</p>
-<p><strong>山姆会员商店</strong>：护城河建立在<strong>极致供应链精选</strong> + <strong>会员生态</strong>。</p>
-<p>SKU仅3500-5000个，每类只选1-2最佳单品，通过买断独家、自有品牌Member’s Mark（占比30%+）、规模采购实现品质与低价。会员数从2018年300万增至2024年近900万，续卡率86%，年费收入超23亿。消费者为“确定性”（随便选也高性价比）买单。但近期选品泛化、质量问题动摇信任，山姆通过全球直采（如独家孔泰奶酪、树顶到卖场榴莲）、“先仓后店”前置仓+电商（占比超50%）持续加宽护城河，2025Q2净销售额仍增长30.1%。</p>
-<p><strong>共性逻辑</strong>：</p>
-<ol>
-<li>创造定价权（高毛利或会员费）；</li>
-<li>提高进入壁垒（难以快速复制）；</li>
-<li>必须每年加宽（巴菲特强调：护城河不断拓宽，企业才能长期优秀）。</li>
-</ol>
-<p>在快速变化的时代，个人也需护城河来获得安全感与主动权。它让你不可替代，专注创造而非焦虑竞争。</p>
-<p>麦克利兰“冰山模型”揭示构成：</p>
-<ul>
-<li><strong>上层</strong>（显性）：知识与技能（如编程、英语）。</li>
-<li><strong>中层</strong>：能力（如沟通、结构化思维、情绪管理）。</li>
-<li><strong>底层</strong>（最稳固）：价值观、性格特质、动机，决定你独特优势与能做成什么。</li>
-</ul>
-<p>构建路径：从底层发掘优势 → 积累知识技能 → 形成难以撼动的核心竞争力。</p>
-<p>所以我们应该：</p>
-<ol>
-<li>
-<p><strong>发掘优势</strong> —— 德鲁克“回馈分析法”：每次重要决定前记录预期结果，9-12个月后对比实际，持续执行即可发现真正长处（也可回顾过去成功案例）。</p>
-</li>
-<li>
-<p><strong>优势与社会需求匹配</strong>：单纯擅长不够，必须问：这个优势如何创造价值？如何满足市场/趋势需求？如何与个人目标统一？三者交汇处才是护城河落脚点。</p>
-</li>
-<li>
-<p><strong>纵横积累模型</strong>：</p>
-<ul>
-<li><strong>横向</strong>：深耕当下价值创造（为客户/组织提供的核心输出），专注细节、持续1%优化。</li>
-<li><strong>纵向</strong>：为横面服务而积累相关知识/能力（直接相关优先，逐步扩展能力圈）。所有学习都围绕“能为他人创造的价值”展开，避免盲目杂学。</li>
-</ul>
-</li>
-<li>
-<p><strong>持续加宽</strong>（像企业一样）：</p>
-<ul>
-<li>终身学习，避免知识过时（如柯达胶卷被颠覆）。</li>
-<li>构建组合优势：单一元素难胜，排列组合形成独特性。</li>
-<li>建立反馈闭环：定期检视、根据环境调整方向。</li>
-</ul>
-</li>
-</ol>
-<h1>总结</h1>
-<p>护城河的终极意义在于<strong>创造的自由</strong>：企业无需时时防御，可专注为顾客创造更大价值；个人无需焦虑淘汰，可专注发挥独特优势。可口可乐与山姆的护城河皆经数十年沉淀，个人亦然。从今天开始，用回馈分析发掘长处，将优势对接社会需求，纵横积累、持续加宽——当你站起身回望，那条属于自己的宽阔护城河，将成为最值得骄傲的资产。</p>
-<h1>这才是文章的开始</h1>
-<p>是吧，文章写得很好，但并没有什么用，因为就是没有用啊，全是ai写出来的，辞藻华丽，逻辑很顺，但是似乎跟我真的没有什么关系啊。这也是ai的弊端，ai可以帮你写，但其实他自己也不是很理解这个概念，他也不知道你自己想要的是什么，不能代替你思考。</p>
-<p>所以写一篇文章、读一篇文章不要只是感动自己，改变自己才是最真的，自己理解才是重点。</p>
-<p>用我自己的话来说，护城河就是一个人（或一家企业）在这个世界里能够安全立足、别人暂时取代不了的那个“东西”。它从来不是单一的技能或天赋，而是一套多维度能力的组合拳——当几个看似普通的点叠加在一起，就形成了别人很难抄的独特壁垒。</p>
-<p>拿企业举例，可口可乐的护城河不是单纯的饮料好喝，而是“品牌认知度极高 + 轻资产模式”的组合：它只掌控最核心的配方和品牌，把生产、灌装、分销这些中低端环节外包给全球225家区域伙伴，自己专注定价权和生态掌控。这套模式让竞争者望尘莫及，毛利率常年60%以上，连续60年涨股息。山姆会员店则是另一套组合：极致精选SKU（3500–5000个，每类只挑1–2个最好）+ 自有品牌+ 会员付费买“确定性”+ 全球直采冷链。这种“少而精 + 会员锁仓”的模式，也让模仿者短期内跟不上。</p>
-<p>放到个人身上，我觉得道理是一样的。如果我只是一个会写代码的普通程序员，但社交能力弱、表达不行、动机也不强，那我的竞争力就很单薄，随时可能被更全面的人取代。但如果我把编程技能 + 良好的沟通表达 + 懂一点业务逻辑 + 强烈的成就动机 + 靠谱的性格叠加起来，这个组合就很难被快速复制——这就是我的护城河。</p>
-<p>作为大三学生，我现在的护城河其实还很浅，甚至可以说还没真正挖起来。主要有两个明显短板：</p>
-<ol>
-<li><strong>知识和技能还停在表面</strong>：学过的东西不少，但都浅尝辄止，没有真正做成过有分量的项目，也没有形成体系。</li>
-<li><strong>动机非常薄弱</strong>：我还没搞清楚自己到底想成为什么样的人、想为什么而努力。每天上课、刷题、像在完成任务，而不是在为某个清晰的方向积累。</li>
-</ol>
-<p>意识到这些后，我开始试着把“护城河”这个概念真正融入日常生活，而不是停留在想一想就结束的阶段。我给自己定了一些小而具体的行动：</p>
-<ul>
-<li>每天花10分钟写“动机日志”：今天什么事让我有点兴奋？什么事情让我很沮丧、无法集中注意力？为什么？慢慢找底层驱动力。</li>
-<li>每周挑一个技能做“项目驱动练习”：不是只看教程，而是逼自己输出一个小东西（比如建一个模型、设计一个产品），哪怕很粗糙。</li>
-<li>主动把技能“交叉”：比如写技术类博客，锻炼自己的表达能力的同时提升自己的技术素养、帮朋友解决实际问题，刻意练沟通等。</li>
-<li>记得复盘：列出当前的能力清单，问自己“这些点怎么组合才能让我更独特？”同时对比预期和实际结果，调整方向。</li>
-</ul>
-<p>护城河不是一夜之间建成的。可口可乐用了上百年，山姆也迭代了近30年。我现在才大三，时间是我最大的优势。也许几年后回头看，现在这些小小的刻意练习，就是那条河的起点。</p>
-<p>我希望未来的自己，能站在一条不算太宽但足够深的护城河边上，对着世界说： “来吧，我在这里，有我自己的位置。”</p>
-<p>你要如何设计自己的人生，这件事完全取决于你自己。</p>
-]]></content>
-      <categories>
-        <category>Knowledge</category>
-      </categories>
-      <tags>
-        <tag>business</tag>
-        <tag>growth</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从零开始设计一台直驱伺服数控刀架</title>
-    <url>/2026/04/16/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/</url>
-    <content><![CDATA[<p>这是一个关于「直驱伺服数控刀架」的完整设计记录——从最初连&quot;伺服&quot;是什么都说不清楚，到最终拿着装配图和PPT站在答辩台上。项目目标：8工位、中心高63mm、0.1秒换刀、4个动力刀位。</p>
-<p>如果你也在做机械设计类的项目，这篇文章或许能让你少走一些弯路。</p>
-<span id="more"></span>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318200021618.png" alt=""></p>
-<h1>项目要做什么</h1>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318200021618.png" alt="image-20260318200021618"></p>
-<h1>前期知识的学习</h1>
-<p>伺服刀架属于中高档数控刀架·，可以完成刀盘的转位、定位、锁紧以及选刀控制</p>
-<p>常见的伺服刀架系统：</p>
-<ol>
-<li>数控系统+刀架控制器+伺服驱动器+伺服电动机</li>
-<li>数控系统+伺服驱动器+伺服电动机</li>
-</ol>
-<p>数控刀架伺服系统趋向于第二种系统</p>
-<p>总体方案设计需要写很多部分：</p>
-<ol>
-<li>直驱电机的选型</li>
-<li>分度转位装置的设计</li>
-<li>定位装置方案选择</li>
-<li>松开和刹紧方案的选择</li>
-<li>刀盘的选择</li>
-</ol>
-<p>设计说明书是要涉及一些系统参数的计算的，可以参考一下机械制造与设计2的设计说明书</p>
-<h1>学习记录</h1>
-<h2 id="260416">260416</h2>
-<p>所以，“伺服”强调的是<strong>控制方式</strong>（闭环、精确跟随），而不是具体某一种电机类型</p>
-<p>伺服的核心是“闭环控制”，不是“电机长相”或“有无减速器”</p>
-<blockquote>
-<p>直驱式伺服电机采用的是力矩电动机吗？</p>
-</blockquote>
-<p><strong>是的。</strong> 在直驱应用中，所采用的伺服电机就是专门设计的<strong>力矩电动机</strong>（Torque Motor），它是伺服电机家族中的一个分支，针对低速大扭矩直驱场景优化。</p>
-<blockquote>
-<p>这还是伺服刀架？何谓伺服？</p>
-</blockquote>
-<p><strong>仍然是伺服刀架，而且是更高级的伺服刀架。</strong><br>
-“伺服”指的是<strong>闭环控制、精确跟随指令</strong>的能力。直驱力矩电机配合高分辨率编码器和驱动器，完全满足这一定义，且性能优于传统蜗轮蜗杆伺服刀架。</p>
-<p>“本刀架采用<strong>直驱伺服技术</strong>，以<strong>力矩电动机</strong>为执行元件，取消了传统蜗轮蜗杆传动。电机转子直接与刀盘轴固联，定子安装于箱体，后端装有高分辨率圆光栅编码器，构成<strong>全闭环位置伺服系统</strong>。该方案实现了<strong>零传动间隙、毫秒级动态响应、微弧度级定位精度</strong>，属于<strong>高性能伺服刀架</strong>的先进形式。”</p>
-<h3 id="实现0-1s换刀的关键技术路径（给你设计建议）">实现0.1s换刀的关键技术路径（给你设计建议）</h3>
-<ol>
-<li><strong>驱动</strong>：优先考虑<strong>力矩电机直驱</strong>（无减速机构），或大扭矩伺服 + 零背隙联轴器。</li>
-<li><strong>锁紧</strong>：端齿盘（96~108齿） + 多片碟簧常锁紧 + 高速液压松开（活塞行程2~3mm）。</li>
-<li><strong>支撑</strong>：交叉滚子轴承或三列滚柱轴承（高刚度、低摩擦）。</li>
-<li><strong>轻量化</strong>：刀盘采用铝合金，优化结构去除多余材料。</li>
-<li><strong>仿真验证</strong>：必须用<strong>ADAMS</strong>做运动学/动力学仿真，验证转位时间；用<strong>ANSYS</strong>做刚度与模态分析。</li>
-</ol>
-<p>绪论</p>
-<p>直驱伺服数控刀架的方案研究</p>
-<p>直驱伺服数控刀架的松开与锁紧技术</p>
-<p>直驱伺服数控刀架的转位控制技术</p>
-<p><strong>以下是为你整理的“直驱式伺服刀架”（Direct-Drive Servo Tool Turret）相关专利和论文资源</strong>（基于最新公开专利数据库和学术文献，2026年4月数据）。</p>
-<p>我优先筛选了<strong>直驱（力矩电机或伺服电机直接驱动，无蜗轮蜗杆）</strong>、<strong>卧式布局</strong>、<strong>端齿盘锁紧</strong>、<strong>带动力刀位</strong>的相关成果，与你的设计（8工位、中心高63mm、0.1s换刀）高度匹配。</p>
-<h3 id="1-推荐专利（最有参考价值，附图详细，可直接用于结构参考）">1. 推荐专利（最有参考价值，附图详细，可直接用于结构参考）</h3>
-<table>
-<thead>
-<tr>
-<th>专利号</th>
-<th>标题</th>
-<th>核心技术特点（对你最有用）</th>
-<th>公开/授权时间</th>
-<th>获取方式（推荐）</th>
-<th>推荐指数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>CN102240917B</strong></td>
-<td>直驱式伺服刀架</td>
-<td>力矩电机直驱刀盘 + 端齿盘锁紧 + 液压松开，无任何中间传动链</td>
-<td>2011-11-16</td>
-<td>Google Patents（含完整结构图）</td>
-<td>★★★★★</td>
-</tr>
-<tr>
-<td><strong>CN202162600U</strong></td>
-<td>直驱式伺服刀架</td>
-<td>实用新型，结构更简单，直驱+端齿盘，适合紧凑型刀架</td>
-<td>2011-07-14</td>
-<td>Google Patents</td>
-<td>★★★★☆</td>
-</tr>
-<tr>
-<td><strong>CN219293391U</strong></td>
-<td>一种卧式伺服刀塔刀架</td>
-<td>卧式布局、直驱伺服、端齿盘+碟簧锁紧，空间紧凑</td>
-<td>2023</td>
-<td>Google Patents</td>
-<td>★★★★★</td>
-</tr>
-<tr>
-<td><strong>CN103846460B</strong></td>
-<td>伺服直驱换刀式机床刀架</td>
-<td>伺服直驱滑块式结构，可参考动力刀位传动方式</td>
-<td>2014</td>
-<td>Google Patents</td>
-<td>★★★★</td>
-</tr>
-<tr>
-<td><strong>CN203791643U</strong></td>
-<td>伺服直驱换刀式机床刀架</td>
-<td>实用新型版，伺服直驱+直线导轨，结构清晰</td>
-<td>2014</td>
-<td>Google Patents</td>
-<td>★★★★</td>
-</tr>
-</tbody>
-</table>
-<p><strong>最推荐的两篇</strong>：</p>
-<ul>
-<li><strong>CN102240917B</strong>：最早也是最经典的直驱式伺服刀架专利，详细描述了力矩电机直驱、端齿盘锁紧、液压控制等核心结构，附图清晰，是你设计的最佳参考。</li>
-<li><strong>CN219293391U</strong>：近期卧式专用专利，更接近你的紧凑型（中心高限制）需求。</li>
-</ul>
-<p><strong>下载建议</strong>：直接在 <strong>Google Patents</strong> 搜索专利号，即可免费下载PDF（含全部说明书、权利要求书和结构图）。</p>
-<h3 id="2-推荐论文（理论分析-设计计算参考）">2. 推荐论文（理论分析 + 设计计算参考）</h3>
-<ul>
-<li>
-<p><strong>《直驱刀架的开发与技术应用》</strong>（边辉 等，2020，《金属加工（冷加工）》）</p>
-<ul>
-<li>重点：力矩电机直驱刀架的结构、端齿盘设计、锁紧机构、精度控制。</li>
-<li>适合你了解直驱方案的优势和实际开发经验。</li>
-</ul>
-</li>
-<li>
-<p><strong>《伺服直驱换刀式机床刀架的设计与研究》</strong>（多篇相关学位论文，可在CNKI搜索）</p>
-<ul>
-<li>重点：直驱方案的动态响应、惯量匹配、0.1s级换刀时间实现方法。</li>
-</ul>
-</li>
-<li>
-<p><strong>《基于直驱技术的数控刀架控制系统研究》</strong>（东北大学等机构论文）</p>
-<ul>
-<li>重点：力矩电机直驱控制策略、定位精度、锁紧可靠性。</li>
-</ul>
-</li>
-</ul>
-<p>这些论文大多可在 <strong>CNKI</strong>（中国知网）或 <strong>Google Scholar</strong> 免费/付费下载。</p>
-<h3 id="3-实际产品参考（可作为你的对标案例）">3. 实际产品参考（可作为你的对标案例）</h3>
-<ul>
-<li><strong>台湾联奇（Lianqi）T46L系列</strong>：中心高63mm、8工位、直驱+端齿盘、换刀时间0.1s级别，已有成熟产品。</li>
-<li><strong>意大利Duplomatic SM(A)系列</strong>：直驱伺服动力刀架，结构非常接近你的方案。</li>
-<li><strong>德国Sauter</strong>：部分高速型号也采用直驱+端齿盘。</li>
-</ul>
-<p>这些产品的技术参数和结构图可作为设计的重要参考。</p>
-<h1>260417</h1>
-<p>DDR 全称 Direct Drive Rotary Motor（直接驱动旋转电机）</p>
-<p><strong>前期设计</strong></p>
-<p>初步确定刀架主轴的最小直径</p>
-<p>42mm</p>
-<p>端齿盘的参数选择 本次设计刀架根据JB1999机械行业标准 采用标准直齿端齿盘</p>
-<p>p25</p>
-<p>设计要求以及直驱电机型号的选择</p>
-<p>活塞的设计</p>
-<p>流量的选择</p>
-<p>液压缸工作压力选择</p>
-<p>轴承的选型</p>
-<p>轴承的参数设计（标准件？）</p>
-<p><strong>后期校验</strong></p>
-<p>ddr直驱电机参数的校验</p>
-<p>轴承寿命计算</p>
-<h1>260419</h1>
-<p>今天完成了部分的装备设计二维装配图的设计，加油！进度很快啊，感觉马上就可以完成装配图的设计，开始画一些关键零部件的零件图了！</p>
-<p>初步确定了端齿盘内外径</p>
-<p>主轴直径&gt;=42mm</p>
-<p>装配图绘制已经完成第一版</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260419191027073.png" alt="image-20260419191027073"></p>
-<h1>260420</h1>
-<p>装配图里定子与转子之间那个很小的间隔，叫做气隙（Air Gap），这是力矩电机（DDR电机）设计中一个非常关键的参数。</p>
-<p>因为你的中心高只有63mm，空间极其紧张：</p>
-<ul>
-<li>
-<p>气隙设计得越小越好（推荐控制在</p>
-<p>0.5~0.8mm），这样可以：</p>
-<ul>
-<li>提高扭矩密度（在有限空间内输出更大扭矩）</li>
-<li>降低发热</li>
-<li>提升动态响应（有利于0.1s换刀）</li>
-</ul>
-</li>
-</ul>
-<p>基本完成了尺寸的设计，但是有很蛋疼的问题，感觉这些数据大部分都很缺少计算的依据</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260420114419575.png" alt=""></p>
-<p>后续的改进方面我认为是轴承、端齿盘部分，要保证有标准的轴承可以装上去</p>
-<p>想一想端齿盘有没有必要更改直径，想想轴承的内外圈直径要不要改</p>
-<p>更改定齿盘外径为160mm，内径为140mm，动齿盘外径为140mm，内径为120mm</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260420174026390.png" alt="image-20260420174026390"></p>
-<h1>260421</h1>
-<p>今日开始建模工作</p>
-<p>花键的深度那些如何确定？自己凭空想会不会有点偏差？</p>
-<p>花键是一个标准化的部分，可以去查手册</p>
-<p>在现代卧式伺服刀架中：</p>
-<ul>
-<li>
-<p>动齿盘 ←（矩形花键 + 螺栓）→ 主轴（周向定位 + 轴向固定）</p>
-</li>
-<li>
-<p>锁紧齿盘 ←（螺栓）→ 液压活塞（轴向移动控制锁紧）</p>
-</li>
-<li>
-<p>三联齿盘（动齿盘 + 定齿盘 + 锁紧齿盘）通过液压实现分离/啮合</p>
-<p><strong>关键设计参数</strong>（按重要性排序）：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>推荐值（主轴φ42mm）</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>齿数 z</strong></td>
-<td><strong>6齿 或 8齿</strong>（推荐6齿）</td>
-<td>6齿结构简单、强度高，8齿定位更平稳</td>
-</tr>
-<tr>
-<td><strong>齿宽 b</strong></td>
-<td><strong>8 ~ 10 mm</strong>（推荐9 mm）</td>
-<td>齿宽越宽，传递扭矩越大</td>
-</tr>
-<tr>
-<td><strong>齿高 h</strong></td>
-<td><strong>4 ~ 5 mm</strong>（推荐4.5 mm）</td>
-<td>太深会削弱轴强度，太浅传递扭矩不足</td>
-</tr>
-<tr>
-<td><strong>大径 D</strong></td>
-<td><strong>42 mm</strong>（与主轴直径一致）</td>
-<td>通常与主轴外径相同</td>
-</tr>
-<tr>
-<td><strong>小径 d</strong></td>
-<td><strong>33 ~ 34 mm</strong></td>
-<td>小径 = 大径 - 2×齿高</td>
-</tr>
-<tr>
-<td><strong>花键长度 L</strong></td>
-<td><strong>18 ~ 25 mm</strong>（推荐20 mm）</td>
-<td>长度太短扭矩不足，太长占用轴向空间</td>
-</tr>
-<tr>
-<td><strong>配合公差</strong></td>
-<td>H7/js6 或 H7/k6</td>
-<td>轻压配合或过渡配合，保证同心度</td>
-</tr>
-</tbody>
-</table>
-<p><strong>最推荐规格</strong>（直接可用）：</p>
-<ul>
-<li><strong>6×42×9×4.5</strong>（齿数6、大径42mm、齿宽9mm、齿高4.5mm）</li>
-<li>花键长度：<strong>20 mm</strong></li>
-<li>公差：外花键 js6，内花键 H7</li>
-</ul>
-</li>
-</ul>
-<h1>260422</h1>
-<p>今天进行零件的装配工作，把已经初步建的零件进行装配核验是否存在问题</p>
-<p>花键部分尺寸存在干涉，需要再设计，其他部分没有大的干涉问题存在</p>
-<p>齿盘的设计 这是一个大部头，要搞懂</p>
-<p>主辅活塞之间的插销记得加上</p>
-<h1>260423</h1>
-<ul>
-<li>
-<p>[x] 完成端齿盘的建模</p>
-</li>
-<li>
-<p>[x] 花键细节完善</p>
-</li>
-</ul>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423163918695.png" alt="image-20260423163918695"></p>
-<ul>
-<li>
-<p>[x] 主轴的尺寸优化 前端加粗一点</p>
-</li>
-<li>
-<p>[ ] 力矩电机选型完成</p>
-</li>
-<li>
-<p>[x] 主辅活塞之间的插销记得加上</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423200221447.png" alt="image-20260423200221447"></p>
-</li>
-<li>
-<p>[x] 环形冷却水套记得挖</p>
-</li>
-</ul>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423195925520.png" alt="image-20260423195925520"></p>
-<ul>
-<li>
-<p>[ ] 轴承的选择 这一部分很难受啊</p>
-<p>因此，<strong>SKF的BTM系列或NSK的150BNR19S系列等高速超精密轴承</strong>是值得优先考虑的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423203419822.png" alt="image-20260423203419822"></p>
-<p>恍然大悟，其实可以把电机放到后面去，这样活塞的截面积会更大，明显结构更合理</p>
-</li>
-</ul>
-<h1>260424</h1>
-<ul>
-<li>
-<p>[x] 轴重画</p>
-</li>
-<li>
-<p>[x] 箱体重画</p>
-</li>
-<li>
-<p>[x] 主活塞重画</p>
-</li>
-<li>
-<p>[x] 辅活塞重画</p>
-</li>
-<li>
-<p>[x] 导入推力球轴承</p>
-</li>
-<li>
-<p>[x] 绘制端盖</p>
-</li>
-<li>
-<p>[x] 绘制轴瓦（分离式？一体式？）</p>
-</li>
-<li>
-<p>[x] 电机外壳绘制</p>
-</li>
-<li>
-<p>[x] 电机转子定子绘制</p>
-</li>
-<li>
-<p>[x] 连接架重画</p>
-</li>
-</ul>
-<p>末端的轴径32mm，有点危险其实</p>
-<p>花键加长一点 数目多一点</p>
-<h1>260426</h1>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260426204246563.png" alt="image-20260426204246563"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260426211845617.png" alt="image-20260426211845617"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260426211854319.png" alt="image-20260426211854319"></p>
-<h1>260427</h1>
-<ul>
-<li>[x] 加入了螺丝</li>
-<li>[x] 圆角处理</li>
-<li>[x] vdi刀盘尺寸优化</li>
-<li>[x] 箱体油孔</li>
-<li>[ ] 如何实现运动定位？</li>
-</ul>
-<p>VDI系统的命名规则很直接，系统名末尾的数字（如VDI<strong>40</strong>、VDI<strong>30</strong>）就代表了刀座柄部的公称直径（单位mm）。因此，<strong>你刀盘上的安装孔直径，必须与所选VDI系统的规格完全对应</strong>。</p>
-<h1>260428</h1>
-<ul>
-<li>
-<p>[x] 箱体油孔</p>
-</li>
-<li>
-<p>[x] 总体方案设计</p>
-</li>
-<li>
-<p>[ ] 设计校核计算</p>
-</li>
-<li>
-<p>[ ] 设计说明书</p>
-</li>
-<li>
-<p>[ ] 仿真拆装动画</p>
-</li>
-<li>
-<p>[ ] 运动动画</p>
-</li>
-<li>
-<p>[ ] 装配图</p>
-</li>
-<li>
-<p>[ ] 关键零件图</p>
-</li>
-<li>
-<p>[ ] 端齿盘软件仿真应力分析</p>
-</li>
-</ul>
-<h1>260511</h1>
-<h2 id="ppt-15min">ppt 15min</h2>
-<p><strong>第1页：标题页</strong></p>
-<ul>
-<li>课题名称、姓名、学号、指导教师、日期</li>
-</ul>
-<p><strong>第2-3页：目录</strong></p>
-<ul>
-<li>清晰分级目录</li>
-</ul>
-<p><strong>第4-6页：绪论与研究背景</strong></p>
-<ul>
-<li>数控刀架的重要性与应用场景</li>
-<li>国内外研究现状（传统 vs 直驱）</li>
-<li>现有刀架存在的问题（间隙、效率、维护等）</li>
-<li>本设计的研究意义与创新点</li>
-</ul>
-<p><strong>第7-12页：总体方案设计（核心部分）</strong></p>
-<ul>
-<li>7：设计要求与参数（8工位、中心高63mm、0.1s换刀、4个动力刀位）</li>
-<li>8：方案对比（蜗轮蜗杆 vs 直驱）</li>
-<li>9-10：总体结构组成（驱动系统、三联齿盘锁紧系统、液压系统、支撑系统等）</li>
-<li>11：工作原理与换刀流程图（动画推荐）</li>
-<li>12：三维装配模型总览</li>
-</ul>
-<p><strong>第13-20页：关键部件设计与计算</strong></p>
-<ul>
-<li>13：力矩电机（DDR）选型与布置</li>
-<li>14-15：三联齿盘设计（尺寸、齿数、外径178mm分析）</li>
-<li>16-17：主轴设计与校核（直径42mm计算）</li>
-<li>18-19：液压直接锁紧机构设计与计算（活塞、缸筒、锁紧力）</li>
-<li>20：轴承与密封选型</li>
-</ul>
-<p><strong>第21-24页：仿真分析与验证</strong></p>
-<ul>
-<li>21：转动惯量与0.1s换刀时间仿真（ADAMS）</li>
-<li>22：刚度与强度有限元分析（ANSYS）</li>
-<li>23：模态分析与热变形分析</li>
-<li>24：仿真结果总结与优化</li>
-</ul>
-<p><strong>第25-26页：结论与展望</strong></p>
-<ul>
-<li>主要创新点与成果</li>
-<li>存在的问题与改进方向</li>
-<li>未来应用前景</li>
-</ul>
-<p><strong>第27页：参考文献</strong> <strong>第28页：致谢</strong></p>
-<h2 id="ppt-5min">ppt 5min</h2>
-<p><strong>第1页：标题页</strong> （标题 + 姓名 + 班级 + 日期）</p>
-<p><strong>第2页：研究背景与意义</strong>（30秒）</p>
-<ul>
-<li>数控刀架的重要性</li>
-<li>传统刀架痛点（间隙、效率低、维护难）</li>
-<li>本设计目标：中心高63mm、0.1s换刀、8工位（4动力刀位）</li>
-</ul>
-<p><strong>第3页：总体方案创新点</strong>（45秒）</p>
-<ul>
-<li>采用<strong>直驱式</strong>（力矩电机直接驱动）</li>
-<li><strong>三联齿盘 + 液压直接锁紧</strong>机构</li>
-<li>取消蜗轮蜗杆，实现零背隙</li>
-</ul>
-<p><strong>第4-5页：总体结构与工作原理</strong>（1分钟）</p>
-<ul>
-<li>第4页：总体结构组成（驱动系统、三联齿盘、液压系统、支撑系统）</li>
-<li>第5页：换刀工作流程（动画或流程图：松开 → 转位 → 锁紧）</li>
-</ul>
-<p><strong>第6-7页：关键设计参数</strong>（1分钟）</p>
-<ul>
-<li>中心高63mm、刀盘直径220mm、端齿盘外径178mm</li>
-<li>主轴最小直径42mm</li>
-<li>动齿盘厚度42mm（当前设计）</li>
-<li>4个动力刀位（VDI40接口）</li>
-</ul>
-<p><strong>第8页：主要计算与校核</strong>（45秒）</p>
-<ul>
-<li>主轴直径计算</li>
-<li>锁紧力计算</li>
-<li>转动惯量估算</li>
-<li>液压缸参数</li>
-</ul>
-<p><strong>第9页：仿真验证</strong>（45秒）</p>
-<ul>
-<li>运动仿真（0.1s换刀验证）</li>
-<li>有限元分析（刚度、强度）</li>
-<li>关键结果展示（云图或数据）</li>
-</ul>
-<p><strong>第10页：结论与创新点</strong>（30秒）</p>
-<ul>
-<li>主要创新：直驱 + 三联齿盘液压锁紧</li>
-<li>达到的设计指标</li>
-<li>存在的问题与展望</li>
-</ul>
-<h2 id="总体方案设计">总体方案设计</h2>
-<h1>260518</h1>
-<p>“感谢老师的提问。确实，受限于时间和条件，我们的设计在<strong>热变形控制</strong>和<strong>液压系统的动态刚性</strong>上还有待完善。特别是在2026年这个时间节点，我们意识到<strong>智能化监测</strong>（如刀具磨损感知）是未来刀架的发展趋势，而我们的设计目前主要集中在机械结构的实现上，未来如果能加入数字孪生技术，对刀架的热误差进行实时补偿，产品竞争力会更强。”</p>
-<hr>
-<h1>经验提炼</h1>
-<p>回顾整个项目，有几个教训值得记下来：</p>
-<ol>
-<li>
-<p><strong>先调研再动手。</strong> 一开始我连”伺服”是什么都不清楚，花了一整天看专利和论文，才搞明白直驱方案的核心优势。如果直接开画，大概率会走弯路。专利（尤其是CN102240917B）是最好的结构参考，比自己空想靠谱得多。</p>
-</li>
-<li>
-<p><strong>尺寸估算不是丢人的事。</strong> 很多初始尺寸确实缺乏计算依据，但工程设计本来就是”先估算、再校核、再迭代”的过程。关键是要在后期逐步补上校核，而不是一直靠感觉。</p>
-</li>
-<li>
-<p><strong>建模时会发现设计问题。</strong> 画装配图时发现花键干涉、活塞截面积太小——这些问题在二维图纸上根本看不出来。三维建模不仅是出图的手段，更是设计验证的工具。</p>
-</li>
-<li>
-<p><strong>”恍然大悟”时刻来自动手。</strong> 把电机从侧面搬到后面，活塞截面积立刻变大，结构更合理——这种灵感只有在反复摆弄模型时才会出现。</p>
-</li>
-<li>
-<p><strong>答辩准备要诚实。</strong> 热变形控制和液压动态刚性确实没做好，与其遮遮掩掩，不如坦诚承认并指出未来的改进方向。老师反而更欣赏这种态度。</p>
-</li>
-<li>
-<p><strong>知识获取渠道要多元。</strong> 不要只依赖AI和学长的PPT，专利数据库、学术论文、商业产品手册都是宝贵的设计参考。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Project</category>
-      </categories>
-      <tags>
-        <tag>cnc</tag>
-        <tag>servo-motor</tag>
-        <tag>solidworks</tag>
-        <tag>mechanical-design</tag>
       </tags>
   </entry>
   <entry>
@@ -4339,6 +3837,508 @@ Z_{min}\geq\frac{2T}{m}+6.5\\
         <tag>machine-tool-design</tag>
         <tag>spindle</tag>
         <tag>transmission</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从零开始设计一台直驱伺服数控刀架</title>
+    <url>/2026/04/16/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/</url>
+    <content><![CDATA[<p>这是一个关于「直驱伺服数控刀架」的完整设计记录——从最初连&quot;伺服&quot;是什么都说不清楚，到最终拿着装配图和PPT站在答辩台上。项目目标：8工位、中心高63mm、0.1秒换刀、4个动力刀位。</p>
+<p>如果你也在做机械设计类的项目，这篇文章或许能让你少走一些弯路。</p>
+<span id="more"></span>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318200021618.png" alt=""></p>
+<h1>项目要做什么</h1>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260318200021618.png" alt="image-20260318200021618"></p>
+<h1>前期知识的学习</h1>
+<p>伺服刀架属于中高档数控刀架·，可以完成刀盘的转位、定位、锁紧以及选刀控制</p>
+<p>常见的伺服刀架系统：</p>
+<ol>
+<li>数控系统+刀架控制器+伺服驱动器+伺服电动机</li>
+<li>数控系统+伺服驱动器+伺服电动机</li>
+</ol>
+<p>数控刀架伺服系统趋向于第二种系统</p>
+<p>总体方案设计需要写很多部分：</p>
+<ol>
+<li>直驱电机的选型</li>
+<li>分度转位装置的设计</li>
+<li>定位装置方案选择</li>
+<li>松开和刹紧方案的选择</li>
+<li>刀盘的选择</li>
+</ol>
+<p>设计说明书是要涉及一些系统参数的计算的，可以参考一下机械制造与设计2的设计说明书</p>
+<h1>学习记录</h1>
+<h2 id="260416">260416</h2>
+<p>所以，“伺服”强调的是<strong>控制方式</strong>（闭环、精确跟随），而不是具体某一种电机类型</p>
+<p>伺服的核心是“闭环控制”，不是“电机长相”或“有无减速器”</p>
+<blockquote>
+<p>直驱式伺服电机采用的是力矩电动机吗？</p>
+</blockquote>
+<p><strong>是的。</strong> 在直驱应用中，所采用的伺服电机就是专门设计的<strong>力矩电动机</strong>（Torque Motor），它是伺服电机家族中的一个分支，针对低速大扭矩直驱场景优化。</p>
+<blockquote>
+<p>这还是伺服刀架？何谓伺服？</p>
+</blockquote>
+<p><strong>仍然是伺服刀架，而且是更高级的伺服刀架。</strong><br>
+“伺服”指的是<strong>闭环控制、精确跟随指令</strong>的能力。直驱力矩电机配合高分辨率编码器和驱动器，完全满足这一定义，且性能优于传统蜗轮蜗杆伺服刀架。</p>
+<p>“本刀架采用<strong>直驱伺服技术</strong>，以<strong>力矩电动机</strong>为执行元件，取消了传统蜗轮蜗杆传动。电机转子直接与刀盘轴固联，定子安装于箱体，后端装有高分辨率圆光栅编码器，构成<strong>全闭环位置伺服系统</strong>。该方案实现了<strong>零传动间隙、毫秒级动态响应、微弧度级定位精度</strong>，属于<strong>高性能伺服刀架</strong>的先进形式。”</p>
+<h3 id="实现0-1s换刀的关键技术路径（给你设计建议）">实现0.1s换刀的关键技术路径（给你设计建议）</h3>
+<ol>
+<li><strong>驱动</strong>：优先考虑<strong>力矩电机直驱</strong>（无减速机构），或大扭矩伺服 + 零背隙联轴器。</li>
+<li><strong>锁紧</strong>：端齿盘（96~108齿） + 多片碟簧常锁紧 + 高速液压松开（活塞行程2~3mm）。</li>
+<li><strong>支撑</strong>：交叉滚子轴承或三列滚柱轴承（高刚度、低摩擦）。</li>
+<li><strong>轻量化</strong>：刀盘采用铝合金，优化结构去除多余材料。</li>
+<li><strong>仿真验证</strong>：必须用<strong>ADAMS</strong>做运动学/动力学仿真，验证转位时间；用<strong>ANSYS</strong>做刚度与模态分析。</li>
+</ol>
+<p>绪论</p>
+<p>直驱伺服数控刀架的方案研究</p>
+<p>直驱伺服数控刀架的松开与锁紧技术</p>
+<p>直驱伺服数控刀架的转位控制技术</p>
+<p><strong>以下是为你整理的“直驱式伺服刀架”（Direct-Drive Servo Tool Turret）相关专利和论文资源</strong>（基于最新公开专利数据库和学术文献，2026年4月数据）。</p>
+<p>我优先筛选了<strong>直驱（力矩电机或伺服电机直接驱动，无蜗轮蜗杆）</strong>、<strong>卧式布局</strong>、<strong>端齿盘锁紧</strong>、<strong>带动力刀位</strong>的相关成果，与你的设计（8工位、中心高63mm、0.1s换刀）高度匹配。</p>
+<h3 id="1-推荐专利（最有参考价值，附图详细，可直接用于结构参考）">1. 推荐专利（最有参考价值，附图详细，可直接用于结构参考）</h3>
+<table>
+<thead>
+<tr>
+<th>专利号</th>
+<th>标题</th>
+<th>核心技术特点（对你最有用）</th>
+<th>公开/授权时间</th>
+<th>获取方式（推荐）</th>
+<th>推荐指数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CN102240917B</strong></td>
+<td>直驱式伺服刀架</td>
+<td>力矩电机直驱刀盘 + 端齿盘锁紧 + 液压松开，无任何中间传动链</td>
+<td>2011-11-16</td>
+<td>Google Patents（含完整结构图）</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>CN202162600U</strong></td>
+<td>直驱式伺服刀架</td>
+<td>实用新型，结构更简单，直驱+端齿盘，适合紧凑型刀架</td>
+<td>2011-07-14</td>
+<td>Google Patents</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>CN219293391U</strong></td>
+<td>一种卧式伺服刀塔刀架</td>
+<td>卧式布局、直驱伺服、端齿盘+碟簧锁紧，空间紧凑</td>
+<td>2023</td>
+<td>Google Patents</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>CN103846460B</strong></td>
+<td>伺服直驱换刀式机床刀架</td>
+<td>伺服直驱滑块式结构，可参考动力刀位传动方式</td>
+<td>2014</td>
+<td>Google Patents</td>
+<td>★★★★</td>
+</tr>
+<tr>
+<td><strong>CN203791643U</strong></td>
+<td>伺服直驱换刀式机床刀架</td>
+<td>实用新型版，伺服直驱+直线导轨，结构清晰</td>
+<td>2014</td>
+<td>Google Patents</td>
+<td>★★★★</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最推荐的两篇</strong>：</p>
+<ul>
+<li><strong>CN102240917B</strong>：最早也是最经典的直驱式伺服刀架专利，详细描述了力矩电机直驱、端齿盘锁紧、液压控制等核心结构，附图清晰，是你设计的最佳参考。</li>
+<li><strong>CN219293391U</strong>：近期卧式专用专利，更接近你的紧凑型（中心高限制）需求。</li>
+</ul>
+<p><strong>下载建议</strong>：直接在 <strong>Google Patents</strong> 搜索专利号，即可免费下载PDF（含全部说明书、权利要求书和结构图）。</p>
+<h3 id="2-推荐论文（理论分析-设计计算参考）">2. 推荐论文（理论分析 + 设计计算参考）</h3>
+<ul>
+<li>
+<p><strong>《直驱刀架的开发与技术应用》</strong>（边辉 等，2020，《金属加工（冷加工）》）</p>
+<ul>
+<li>重点：力矩电机直驱刀架的结构、端齿盘设计、锁紧机构、精度控制。</li>
+<li>适合你了解直驱方案的优势和实际开发经验。</li>
+</ul>
+</li>
+<li>
+<p><strong>《伺服直驱换刀式机床刀架的设计与研究》</strong>（多篇相关学位论文，可在CNKI搜索）</p>
+<ul>
+<li>重点：直驱方案的动态响应、惯量匹配、0.1s级换刀时间实现方法。</li>
+</ul>
+</li>
+<li>
+<p><strong>《基于直驱技术的数控刀架控制系统研究》</strong>（东北大学等机构论文）</p>
+<ul>
+<li>重点：力矩电机直驱控制策略、定位精度、锁紧可靠性。</li>
+</ul>
+</li>
+</ul>
+<p>这些论文大多可在 <strong>CNKI</strong>（中国知网）或 <strong>Google Scholar</strong> 免费/付费下载。</p>
+<h3 id="3-实际产品参考（可作为你的对标案例）">3. 实际产品参考（可作为你的对标案例）</h3>
+<ul>
+<li><strong>台湾联奇（Lianqi）T46L系列</strong>：中心高63mm、8工位、直驱+端齿盘、换刀时间0.1s级别，已有成熟产品。</li>
+<li><strong>意大利Duplomatic SM(A)系列</strong>：直驱伺服动力刀架，结构非常接近你的方案。</li>
+<li><strong>德国Sauter</strong>：部分高速型号也采用直驱+端齿盘。</li>
+</ul>
+<p>这些产品的技术参数和结构图可作为设计的重要参考。</p>
+<h1>260417</h1>
+<p>DDR 全称 Direct Drive Rotary Motor（直接驱动旋转电机）</p>
+<p><strong>前期设计</strong></p>
+<p>初步确定刀架主轴的最小直径</p>
+<p>42mm</p>
+<p>端齿盘的参数选择 本次设计刀架根据JB1999机械行业标准 采用标准直齿端齿盘</p>
+<p>p25</p>
+<p>设计要求以及直驱电机型号的选择</p>
+<p>活塞的设计</p>
+<p>流量的选择</p>
+<p>液压缸工作压力选择</p>
+<p>轴承的选型</p>
+<p>轴承的参数设计（标准件？）</p>
+<p><strong>后期校验</strong></p>
+<p>ddr直驱电机参数的校验</p>
+<p>轴承寿命计算</p>
+<h1>260419</h1>
+<p>今天完成了部分的装备设计二维装配图的设计，加油！进度很快啊，感觉马上就可以完成装配图的设计，开始画一些关键零部件的零件图了！</p>
+<p>初步确定了端齿盘内外径</p>
+<p>主轴直径&gt;=42mm</p>
+<p>装配图绘制已经完成第一版</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260419191027073.png" alt="image-20260419191027073"></p>
+<h1>260420</h1>
+<p>装配图里定子与转子之间那个很小的间隔，叫做气隙（Air Gap），这是力矩电机（DDR电机）设计中一个非常关键的参数。</p>
+<p>因为你的中心高只有63mm，空间极其紧张：</p>
+<ul>
+<li>
+<p>气隙设计得越小越好（推荐控制在</p>
+<p>0.5~0.8mm），这样可以：</p>
+<ul>
+<li>提高扭矩密度（在有限空间内输出更大扭矩）</li>
+<li>降低发热</li>
+<li>提升动态响应（有利于0.1s换刀）</li>
+</ul>
+</li>
+</ul>
+<p>基本完成了尺寸的设计，但是有很蛋疼的问题，感觉这些数据大部分都很缺少计算的依据</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260420114419575.png" alt=""></p>
+<p>后续的改进方面我认为是轴承、端齿盘部分，要保证有标准的轴承可以装上去</p>
+<p>想一想端齿盘有没有必要更改直径，想想轴承的内外圈直径要不要改</p>
+<p>更改定齿盘外径为160mm，内径为140mm，动齿盘外径为140mm，内径为120mm</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260420174026390.png" alt="image-20260420174026390"></p>
+<h1>260421</h1>
+<p>今日开始建模工作</p>
+<p>花键的深度那些如何确定？自己凭空想会不会有点偏差？</p>
+<p>花键是一个标准化的部分，可以去查手册</p>
+<p>在现代卧式伺服刀架中：</p>
+<ul>
+<li>
+<p>动齿盘 ←（矩形花键 + 螺栓）→ 主轴（周向定位 + 轴向固定）</p>
+</li>
+<li>
+<p>锁紧齿盘 ←（螺栓）→ 液压活塞（轴向移动控制锁紧）</p>
+</li>
+<li>
+<p>三联齿盘（动齿盘 + 定齿盘 + 锁紧齿盘）通过液压实现分离/啮合</p>
+<p><strong>关键设计参数</strong>（按重要性排序）：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>推荐值（主轴φ42mm）</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>齿数 z</strong></td>
+<td><strong>6齿 或 8齿</strong>（推荐6齿）</td>
+<td>6齿结构简单、强度高，8齿定位更平稳</td>
+</tr>
+<tr>
+<td><strong>齿宽 b</strong></td>
+<td><strong>8 ~ 10 mm</strong>（推荐9 mm）</td>
+<td>齿宽越宽，传递扭矩越大</td>
+</tr>
+<tr>
+<td><strong>齿高 h</strong></td>
+<td><strong>4 ~ 5 mm</strong>（推荐4.5 mm）</td>
+<td>太深会削弱轴强度，太浅传递扭矩不足</td>
+</tr>
+<tr>
+<td><strong>大径 D</strong></td>
+<td><strong>42 mm</strong>（与主轴直径一致）</td>
+<td>通常与主轴外径相同</td>
+</tr>
+<tr>
+<td><strong>小径 d</strong></td>
+<td><strong>33 ~ 34 mm</strong></td>
+<td>小径 = 大径 - 2×齿高</td>
+</tr>
+<tr>
+<td><strong>花键长度 L</strong></td>
+<td><strong>18 ~ 25 mm</strong>（推荐20 mm）</td>
+<td>长度太短扭矩不足，太长占用轴向空间</td>
+</tr>
+<tr>
+<td><strong>配合公差</strong></td>
+<td>H7/js6 或 H7/k6</td>
+<td>轻压配合或过渡配合，保证同心度</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最推荐规格</strong>（直接可用）：</p>
+<ul>
+<li><strong>6×42×9×4.5</strong>（齿数6、大径42mm、齿宽9mm、齿高4.5mm）</li>
+<li>花键长度：<strong>20 mm</strong></li>
+<li>公差：外花键 js6，内花键 H7</li>
+</ul>
+</li>
+</ul>
+<h1>260422</h1>
+<p>今天进行零件的装配工作，把已经初步建的零件进行装配核验是否存在问题</p>
+<p>花键部分尺寸存在干涉，需要再设计，其他部分没有大的干涉问题存在</p>
+<p>齿盘的设计 这是一个大部头，要搞懂</p>
+<p>主辅活塞之间的插销记得加上</p>
+<h1>260423</h1>
+<ul>
+<li>
+<p>[x] 完成端齿盘的建模</p>
+</li>
+<li>
+<p>[x] 花键细节完善</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423163918695.png" alt="image-20260423163918695"></p>
+<ul>
+<li>
+<p>[x] 主轴的尺寸优化 前端加粗一点</p>
+</li>
+<li>
+<p>[ ] 力矩电机选型完成</p>
+</li>
+<li>
+<p>[x] 主辅活塞之间的插销记得加上</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423200221447.png" alt="image-20260423200221447"></p>
+</li>
+<li>
+<p>[x] 环形冷却水套记得挖</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423195925520.png" alt="image-20260423195925520"></p>
+<ul>
+<li>
+<p>[ ] 轴承的选择 这一部分很难受啊</p>
+<p>因此，<strong>SKF的BTM系列或NSK的150BNR19S系列等高速超精密轴承</strong>是值得优先考虑的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260423203419822.png" alt="image-20260423203419822"></p>
+<p>恍然大悟，其实可以把电机放到后面去，这样活塞的截面积会更大，明显结构更合理</p>
+</li>
+</ul>
+<h1>260424</h1>
+<ul>
+<li>
+<p>[x] 轴重画</p>
+</li>
+<li>
+<p>[x] 箱体重画</p>
+</li>
+<li>
+<p>[x] 主活塞重画</p>
+</li>
+<li>
+<p>[x] 辅活塞重画</p>
+</li>
+<li>
+<p>[x] 导入推力球轴承</p>
+</li>
+<li>
+<p>[x] 绘制端盖</p>
+</li>
+<li>
+<p>[x] 绘制轴瓦（分离式？一体式？）</p>
+</li>
+<li>
+<p>[x] 电机外壳绘制</p>
+</li>
+<li>
+<p>[x] 电机转子定子绘制</p>
+</li>
+<li>
+<p>[x] 连接架重画</p>
+</li>
+</ul>
+<p>末端的轴径32mm，有点危险其实</p>
+<p>花键加长一点 数目多一点</p>
+<h1>260426</h1>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260426204246563.png" alt="image-20260426204246563"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260426211845617.png" alt="image-20260426211845617"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260426211854319.png" alt="image-20260426211854319"></p>
+<h1>260427</h1>
+<ul>
+<li>[x] 加入了螺丝</li>
+<li>[x] 圆角处理</li>
+<li>[x] vdi刀盘尺寸优化</li>
+<li>[x] 箱体油孔</li>
+<li>[ ] 如何实现运动定位？</li>
+</ul>
+<p>VDI系统的命名规则很直接，系统名末尾的数字（如VDI<strong>40</strong>、VDI<strong>30</strong>）就代表了刀座柄部的公称直径（单位mm）。因此，<strong>你刀盘上的安装孔直径，必须与所选VDI系统的规格完全对应</strong>。</p>
+<h1>260428</h1>
+<ul>
+<li>
+<p>[x] 箱体油孔</p>
+</li>
+<li>
+<p>[x] 总体方案设计</p>
+</li>
+<li>
+<p>[ ] 设计校核计算</p>
+</li>
+<li>
+<p>[ ] 设计说明书</p>
+</li>
+<li>
+<p>[ ] 仿真拆装动画</p>
+</li>
+<li>
+<p>[ ] 运动动画</p>
+</li>
+<li>
+<p>[ ] 装配图</p>
+</li>
+<li>
+<p>[ ] 关键零件图</p>
+</li>
+<li>
+<p>[ ] 端齿盘软件仿真应力分析</p>
+</li>
+</ul>
+<h1>260511</h1>
+<h2 id="ppt-15min">ppt 15min</h2>
+<p><strong>第1页：标题页</strong></p>
+<ul>
+<li>课题名称、姓名、学号、指导教师、日期</li>
+</ul>
+<p><strong>第2-3页：目录</strong></p>
+<ul>
+<li>清晰分级目录</li>
+</ul>
+<p><strong>第4-6页：绪论与研究背景</strong></p>
+<ul>
+<li>数控刀架的重要性与应用场景</li>
+<li>国内外研究现状（传统 vs 直驱）</li>
+<li>现有刀架存在的问题（间隙、效率、维护等）</li>
+<li>本设计的研究意义与创新点</li>
+</ul>
+<p><strong>第7-12页：总体方案设计（核心部分）</strong></p>
+<ul>
+<li>7：设计要求与参数（8工位、中心高63mm、0.1s换刀、4个动力刀位）</li>
+<li>8：方案对比（蜗轮蜗杆 vs 直驱）</li>
+<li>9-10：总体结构组成（驱动系统、三联齿盘锁紧系统、液压系统、支撑系统等）</li>
+<li>11：工作原理与换刀流程图（动画推荐）</li>
+<li>12：三维装配模型总览</li>
+</ul>
+<p><strong>第13-20页：关键部件设计与计算</strong></p>
+<ul>
+<li>13：力矩电机（DDR）选型与布置</li>
+<li>14-15：三联齿盘设计（尺寸、齿数、外径178mm分析）</li>
+<li>16-17：主轴设计与校核（直径42mm计算）</li>
+<li>18-19：液压直接锁紧机构设计与计算（活塞、缸筒、锁紧力）</li>
+<li>20：轴承与密封选型</li>
+</ul>
+<p><strong>第21-24页：仿真分析与验证</strong></p>
+<ul>
+<li>21：转动惯量与0.1s换刀时间仿真（ADAMS）</li>
+<li>22：刚度与强度有限元分析（ANSYS）</li>
+<li>23：模态分析与热变形分析</li>
+<li>24：仿真结果总结与优化</li>
+</ul>
+<p><strong>第25-26页：结论与展望</strong></p>
+<ul>
+<li>主要创新点与成果</li>
+<li>存在的问题与改进方向</li>
+<li>未来应用前景</li>
+</ul>
+<p><strong>第27页：参考文献</strong> <strong>第28页：致谢</strong></p>
+<h2 id="ppt-5min">ppt 5min</h2>
+<p><strong>第1页：标题页</strong> （标题 + 姓名 + 班级 + 日期）</p>
+<p><strong>第2页：研究背景与意义</strong>（30秒）</p>
+<ul>
+<li>数控刀架的重要性</li>
+<li>传统刀架痛点（间隙、效率低、维护难）</li>
+<li>本设计目标：中心高63mm、0.1s换刀、8工位（4动力刀位）</li>
+</ul>
+<p><strong>第3页：总体方案创新点</strong>（45秒）</p>
+<ul>
+<li>采用<strong>直驱式</strong>（力矩电机直接驱动）</li>
+<li><strong>三联齿盘 + 液压直接锁紧</strong>机构</li>
+<li>取消蜗轮蜗杆，实现零背隙</li>
+</ul>
+<p><strong>第4-5页：总体结构与工作原理</strong>（1分钟）</p>
+<ul>
+<li>第4页：总体结构组成（驱动系统、三联齿盘、液压系统、支撑系统）</li>
+<li>第5页：换刀工作流程（动画或流程图：松开 → 转位 → 锁紧）</li>
+</ul>
+<p><strong>第6-7页：关键设计参数</strong>（1分钟）</p>
+<ul>
+<li>中心高63mm、刀盘直径220mm、端齿盘外径178mm</li>
+<li>主轴最小直径42mm</li>
+<li>动齿盘厚度42mm（当前设计）</li>
+<li>4个动力刀位（VDI40接口）</li>
+</ul>
+<p><strong>第8页：主要计算与校核</strong>（45秒）</p>
+<ul>
+<li>主轴直径计算</li>
+<li>锁紧力计算</li>
+<li>转动惯量估算</li>
+<li>液压缸参数</li>
+</ul>
+<p><strong>第9页：仿真验证</strong>（45秒）</p>
+<ul>
+<li>运动仿真（0.1s换刀验证）</li>
+<li>有限元分析（刚度、强度）</li>
+<li>关键结果展示（云图或数据）</li>
+</ul>
+<p><strong>第10页：结论与创新点</strong>（30秒）</p>
+<ul>
+<li>主要创新：直驱 + 三联齿盘液压锁紧</li>
+<li>达到的设计指标</li>
+<li>存在的问题与展望</li>
+</ul>
+<h2 id="总体方案设计">总体方案设计</h2>
+<h1>260518</h1>
+<p>“感谢老师的提问。确实，受限于时间和条件，我们的设计在<strong>热变形控制</strong>和<strong>液压系统的动态刚性</strong>上还有待完善。特别是在2026年这个时间节点，我们意识到<strong>智能化监测</strong>（如刀具磨损感知）是未来刀架的发展趋势，而我们的设计目前主要集中在机械结构的实现上，未来如果能加入数字孪生技术，对刀架的热误差进行实时补偿，产品竞争力会更强。”</p>
+<hr>
+<h1>经验提炼</h1>
+<p>回顾整个项目，有几个教训值得记下来：</p>
+<ol>
+<li>
+<p><strong>先调研再动手。</strong> 一开始我连”伺服”是什么都不清楚，花了一整天看专利和论文，才搞明白直驱方案的核心优势。如果直接开画，大概率会走弯路。专利（尤其是CN102240917B）是最好的结构参考，比自己空想靠谱得多。</p>
+</li>
+<li>
+<p><strong>尺寸估算不是丢人的事。</strong> 很多初始尺寸确实缺乏计算依据，但工程设计本来就是”先估算、再校核、再迭代”的过程。关键是要在后期逐步补上校核，而不是一直靠感觉。</p>
+</li>
+<li>
+<p><strong>建模时会发现设计问题。</strong> 画装配图时发现花键干涉、活塞截面积太小——这些问题在二维图纸上根本看不出来。三维建模不仅是出图的手段，更是设计验证的工具。</p>
+</li>
+<li>
+<p><strong>”恍然大悟”时刻来自动手。</strong> 把电机从侧面搬到后面，活塞截面积立刻变大，结构更合理——这种灵感只有在反复摆弄模型时才会出现。</p>
+</li>
+<li>
+<p><strong>答辩准备要诚实。</strong> 热变形控制和液压动态刚性确实没做好，与其遮遮掩掩，不如坦诚承认并指出未来的改进方向。老师反而更欣赏这种态度。</p>
+</li>
+<li>
+<p><strong>知识获取渠道要多元。</strong> 不要只依赖AI和学长的PPT，专利数据库、学术论文、商业产品手册都是宝贵的设计参考。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Project</category>
+      </categories>
+      <tags>
+        <tag>cnc</tag>
+        <tag>servo-motor</tag>
+        <tag>solidworks</tag>
+        <tag>mechanical-design</tag>
       </tags>
   </entry>
   <entry>
@@ -6050,8 +6050,8 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
         <category>Life</category>
       </categories>
       <tags>
-        <tag>productivity</tag>
         <tag>digital-detox</tag>
+        <tag>productivity</tag>
         <tag>ali-abdaal</tag>
         <tag>time-management</tag>
       </tags>

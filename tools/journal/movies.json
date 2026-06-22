@@ -1,0 +1,80 @@
+[
+  {
+    "id": 550,
+    "title": "搏击俱乐部",
+    "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+    "backdrop_path": "/hZkgoQYus5dXo3H8T7Uef6DNknx.jpg",
+    "overview": "一个绝望的白领与一个肥皂销售员组建了一个地下搏击俱乐部，引发了一场不可控制的反叛运动。",
+    "year": "1999",
+    "type": "movie",
+    "rating": 9,
+    "emotion_short": "规则之外，才是真正的自由",
+    "emotion_long": "第一次看的时候完全被反转震撼到了。它不仅仅是一部关于打架的电影，更是对消费主义和现代人精神空虚的深刻反思。",
+    "added_at": "2024-01-15T10:00:00Z"
+  },
+  {
+    "id": 1396,
+    "title": "绝命毒师",
+    "poster_path": "/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+    "backdrop_path": "/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg",
+    "overview": "一位高中化学老师被诊断出癌症晚期，为了给家人留下足够的钱，他与前学生合作制造冰毒。",
+    "year": "2008",
+    "type": "tv",
+    "rating": 10,
+    "emotion_short": "善恶之间只有一念之差",
+    "emotion_long": "从第一季到第五季，看着Walter White一步步堕落，你会发现自己竟然在为一个反派加油。这就是这部剧最厉害的地方。",
+    "added_at": "2024-02-20T10:00:00Z"
+  },
+  {
+    "id": 15260,
+    "title": "千与千寻",
+    "poster_path": "/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+    "backdrop_path": "/Ab8mkHmkYADjU7wQiOkia9BzGvS.jpg",
+    "overview": "10岁的千寻和父母一起搬家，途中误入了一个神秘的世界，父母被变成了猪，千寻必须在汤婆婆的澡堂里工作来拯救他们。",
+    "year": "2001",
+    "type": "anime",
+    "rating": 10,
+    "emotion_short": "成长就是学会说再见",
+    "emotion_long": "每次重看都会有不同的感悟。小时候觉得是个奇幻冒险故事，长大后才明白宫崎骏想说的是关于迷失与找回自我的旅程。",
+    "added_at": "2024-03-10T10:00:00Z"
+  },
+  {
+    "id": 27205,
+    "title": "盗梦空间",
+    "poster_path": "/9gk7adHYeDvHkCSEhniuQz3kPyy.jpg",
+    "backdrop_path": "/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg",
+    "overview": "一位专门在人们梦境中窃取秘密的专家，接受了一项几乎不可能完成的任务——在目标的潜意识中植入一个想法。",
+    "year": "2010",
+    "type": "movie",
+    "rating": 9,
+    "emotion_short": "梦中梦中梦，现实是哪一层",
+    "emotion_long": "诺兰的想象力令人叹为观止。陀螺最后到底倒没倒？这个问题我思考了很久很久。",
+    "added_at": "2024-04-05T10:00:00Z"
+  },
+  {
+    "id": 95557,
+    "title": "铃芽之旅",
+    "poster_path": "/5UkzjAVPXT0QoEgpHBnTSYiST2R.jpg",
+    "backdrop_path": "/b62zQRKRdP0MIFqIiIIZNGBGlJZ.jpg",
+    "overview": "少女铃芽偶然遇到了一位寻找「门」的青年，追随他来到了山中废墟，她打开了一扇古老的门，从此踏上了一段关闭灾难之门的旅程。",
+    "year": "2022",
+    "type": "anime",
+    "rating": 8,
+    "emotion_short": "废墟之下是思念的记忆",
+    "emotion_long": "新海诚的每一帧都美得像壁纸。这个关于关门的故事，其实是在讲如何面对失去和告别。铃芽最后对小时候的自己说的那句话，让我哭了很久。",
+    "added_at": "2024-05-18T10:00:00Z"
+  },
+  {
+    "id": 1399,
+    "title": "权力的游戏",
+    "poster_path": "/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+    "backdrop_path": "/suopoADq0k8YZr4dQXcU6pToj6s.jpg",
+    "overview": "在维斯特洛大陆上，几个贵族家族为了铁王座展开了残酷的权力斗争，而北方一个古老的威胁正在苏醒。",
+    "year": "2011",
+    "type": "tv",
+    "rating": 8,
+    "emotion_short": "凛冬将至，人心更寒",
+    "emotion_long": "前六季是神作级别，每一场权谋博弈都让人拍案叫绝。虽然结局有些争议，但无法否认这部剧重新定义了电视剧的天花板。",
+    "added_at": "2024-06-22T10:00:00Z"
+  }
+]
