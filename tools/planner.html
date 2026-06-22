@@ -24,7 +24,7 @@
       }
     }
   </script>
-  <!-- Font Configuration -->
+  <!-- Font Configuration -->「方案选单」
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -502,10 +502,16 @@
         <div>
           <div class="flex items-center justify-between mb-1.5">
             <label class="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">事项详情 / 备注</label>
-            <button type="button" onclick="triggerAITaskDecompose()" id="aiDecomposeBtn" class="text-xs font-bold text-brand-600 dark:text-brand-400 flex items-center space-x-1 hover:underline transition">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-              <span>AI 智能细化拆解</span>
-            </button>
+            <div class="flex items-center space-x-2">
+              <button type="button" onclick="clearTaskNotes()" id="clearNotesBtn" class="text-xs font-bold text-rose-500 dark:text-rose-400 flex items-center space-x-1 hover:underline transition">
+                <i data-lucide="trash-2" class="w-3 h-3"></i>
+                <span>清空备注</span>
+              </button>
+              <button type="button" onclick="triggerAITaskDecompose()" id="aiDecomposeBtn" class="text-xs font-bold text-brand-600 dark:text-brand-400 flex items-center space-x-1 hover:underline transition">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                <span>AI 智能细化拆解</span>
+              </button>
+            </div>
           </div>
           <textarea id="taskNotes" rows="3" placeholder="补充一些注意事项、细化的小任务或子计划清单..." class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"></textarea>
         </div>
@@ -558,6 +564,19 @@
               <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">个人访问令牌 (Personal Access Token)</label>
               <input type="password" id="githubTokenInput" placeholder="ghp_ 开头的密钥" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
             </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5">自动同步间隔</label>
+            <select id="autoSyncIntervalSelect" class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white">
+              <option value="0">关闭自动同步</option>
+              <option value="1">每 1 分钟</option>
+              <option value="2">每 2 分钟</option>
+              <option value="5">每 5 分钟（推荐）</option>
+              <option value="10">每 10 分钟</option>
+              <option value="15">每 15 分钟</option>
+              <option value="30">每 30 分钟</option>
+            </select>
+            <p class="text-[10px] text-zinc-400 mt-1">上次同步时间：<span id="lastSyncTimeDisplay">从未同步</span></p>
           </div>
         </div>
 
@@ -622,7 +641,8 @@
       ai_provider: "deepseek",
       ai_api_key: "",
       ai_endpoint: "https://api.deepseek.com/v1/chat/completions",
-      ai_model: "deepseek-chat"
+      ai_model: "deepseek-chat",
+      auto_sync_interval: 5  // 自动同步间隔（分钟），0 表示关闭
     };
 
     const appId = 'personal-planner-app';
@@ -630,6 +650,7 @@
     // Application state
     const state = {
       tasks: [],
+      deletedTaskIds: [],  // 追踪已删除的任务 ID，防止同步时复活
       notes: {},
       selectedDate: '',
       selectedCategoryFilter: 'all',
@@ -683,12 +704,15 @@
 
     let scratchpadDebounceTimer = null;
     let profileDebounceTimer = null;
+    let autoSyncTimer = null;
+    let lastSyncTimestamp = null;
 
     // 1. Initialise and load local settings
     window.addEventListener('DOMContentLoaded', () => {
       const now = new Date();
       state.selectedDate = formatDate(now);
       loadLocalFallbackData();
+      lastSyncTimestamp = parseInt(safeGetItem('last_sync_timestamp')) || null;
       const isLocalDark = safeGetItem('zen_planner_theme') === 'dark';
       if (isLocalDark || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !safeGetItem('zen_planner_theme'))) {
         setTheme(true);
@@ -698,6 +722,9 @@
       renderWeeklyDatePicker();
       renderCategoryFilters();
       initializeGithubStorageSync();
+
+      // 每 30 秒刷新一次"上次同步时间"显示
+      setInterval(refreshLastSyncTimeDisplay, 30000);
 
       // Init mobile tab view
       if (window.innerWidth < 1024) {
@@ -734,11 +761,50 @@
         document.getElementById('githubRepoDisplay').textContent = owner + '/' + repo;
         updateSyncIndicator('connecting', '正在与 GitHub 同步中');
         await syncToGithub();
+        initAutoSync();
       } else {
         state.isCloudActive = false;
         document.getElementById('githubRepoDisplay').textContent = "未配置同步端";
         updateSyncIndicator('local', '本地单机存储模式');
       }
+    }
+
+    function initAutoSync() {
+      if (autoSyncTimer) clearInterval(autoSyncTimer);
+      const interval = parseInt(getSetting('auto_sync_interval', HARDCODED_CONFIG.auto_sync_interval.toString())) || 0;
+      if (interval > 0 && state.isCloudActive) {
+        autoSyncTimer = setInterval(async function() {
+          if (state.isCloudActive && !syncQueueActive) {
+            console.log('[自动同步] 执行定时同步，间隔 ' + interval + ' 分钟');
+            await syncToGithub();
+          }
+        }, interval * 60 * 1000);
+        console.log('[自动同步] 已启动，间隔 ' + interval + ' 分钟');
+      } else {
+        console.log('[自动同步] 已关闭');
+      }
+    }
+
+    function updateLastSyncTime() {
+      lastSyncTimestamp = Date.now();
+      safeSetItem('last_sync_timestamp', lastSyncTimestamp.toString());
+      refreshLastSyncTimeDisplay();
+    }
+
+    function refreshLastSyncTimeDisplay() {
+      const display = document.getElementById('lastSyncTimeDisplay');
+      if (!display) return;
+      const ts = lastSyncTimestamp || parseInt(safeGetItem('last_sync_timestamp')) || 0;
+      if (!ts) {
+        display.textContent = '从未同步';
+        return;
+      }
+      const now = Date.now();
+      const diff = Math.floor((now - ts) / 1000);
+      if (diff < 60) display.textContent = '刚刚';
+      else if (diff < 3600) display.textContent = Math.floor(diff / 60) + ' 分钟前';
+      else if (diff < 86400) display.textContent = Math.floor(diff / 3600) + ' 小时前';
+      else display.textContent = Math.floor(diff / 86400) + ' 天前';
     }
 
     async function getGithubData(token, owner, repo, path) {
@@ -781,7 +847,13 @@
         const { content: cloud, sha } = await getGithubData(token, owner, repo, path);
         let mergedTasks = [].concat(state.tasks);
         let mergedNotes = Object.assign({}, state.notes);
+        // 合并本地和云端的已删除 ID 列表
+        let mergedDeletedIds = [].concat(state.deletedTaskIds);
         if (cloud) {
+          const cloudDeleted = cloud.deletedTaskIds || [];
+          cloudDeleted.forEach(function(id) {
+            if (!mergedDeletedIds.includes(id)) mergedDeletedIds.push(id);
+          });
           const cloudTasks = cloud.tasks || [];
           const taskMap = new Map();
           cloudTasks.forEach(function(t) { taskMap.set(t.id, t); });
@@ -789,11 +861,20 @@
             const existing = taskMap.get(t.id);
             if (!existing || (t.updatedAt && t.updatedAt > existing.updatedAt)) taskMap.set(t.id, t);
           });
-          mergedTasks = Array.from(taskMap.values());
+          // 过滤掉已删除的任务
+          mergedTasks = Array.from(taskMap.values()).filter(function(t) {
+            return !mergedDeletedIds.includes(t.id);
+          });
           mergedNotes = Object.assign({}, cloud.notes || {}, state.notes);
+        } else {
+          // 本地也过滤一下
+          mergedTasks = mergedTasks.filter(function(t) {
+            return !mergedDeletedIds.includes(t.id);
+          });
         }
+        state.deletedTaskIds = mergedDeletedIds;
         const mergedData = {
-          tasks: mergedTasks, notes: mergedNotes,
+          tasks: mergedTasks, notes: mergedNotes, deletedTaskIds: mergedDeletedIds,
           profileGoals: state.profileGoals || (cloud ? cloud.profileGoals : ''),
           profileHabits: state.profileHabits || (cloud ? cloud.profileHabits : ''),
           lastSyncTime: Date.now()
@@ -808,6 +889,7 @@
           document.getElementById('profileHabits').value = state.profileHabits;
         }
         safeSetItem('tasks_local', JSON.stringify(state.tasks));
+        safeSetItem('deleted_task_ids', JSON.stringify(state.deletedTaskIds));
         safeSetItem('notes_local', JSON.stringify(state.notes));
         safeSetItem('profile_goals_local', state.profileGoals);
         safeSetItem('profile_habits_local', state.profileHabits);
@@ -815,6 +897,7 @@
         renderScratchpad();
         updateProgress();
         updateSyncIndicator('connected', '云端实时同步已就绪');
+        updateLastSyncTime();
         showToast('多端数据同步完成', 'success');
       } catch (err) {
         console.error(err);
@@ -830,9 +913,11 @@
     function loadLocalFallbackData() {
       const cachedTasks = safeGetItem('tasks_local');
       const cachedNotes = safeGetItem('notes_local');
+      const cachedDeleted = safeGetItem('deleted_task_ids');
       const cachedGoals = safeGetItem('profile_goals_local') || '';
       const cachedHabits = safeGetItem('profile_habits_local') || '';
       state.tasks = cachedTasks ? JSON.parse(cachedTasks) : [];
+      state.deletedTaskIds = cachedDeleted ? JSON.parse(cachedDeleted) : [];
       state.notes = cachedNotes ? JSON.parse(cachedNotes) : {};
       state.profileGoals = cachedGoals;
       state.profileHabits = cachedHabits;
@@ -866,6 +951,9 @@
       document.getElementById('aiApiKeyInput').value = aiConfig.apiKey;
       document.getElementById('aiEndpointInput').value = aiConfig.apiEndpoint;
       document.getElementById('aiModelInput').value = aiConfig.model;
+      const savedInterval = getSetting('auto_sync_interval', HARDCODED_CONFIG.auto_sync_interval.toString());
+      document.getElementById('autoSyncIntervalSelect').value = savedInterval;
+      refreshLastSyncTimeDisplay();
     }
 
     async function saveSettingsFromForm(event) {
@@ -883,12 +971,15 @@
       const endpoint = document.getElementById('aiEndpointInput').value.trim();
       const model = document.getElementById('aiModelInput').value.trim();
       safeSetItem('zen_planner_ai_settings', JSON.stringify({ provider: provider, apiKey: apiKeyInput, apiEndpoint: endpoint, model: model }));
+      const autoSyncInterval = document.getElementById('autoSyncIntervalSelect').value;
+      safeSetItem('auto_sync_interval', autoSyncInterval);
       closeSyncModal();
       if (username && token && repo) {
         state.isCloudActive = true;
         document.getElementById('githubRepoDisplay').textContent = username + '/' + repo;
         updateSyncIndicator('connecting', '正在尝试连接 GitHub');
         await syncToGithub();
+        initAutoSync();
       } else {
         state.isCloudActive = false;
         document.getElementById('githubRepoDisplay').textContent = '未配置同步端';
@@ -1224,7 +1315,11 @@
     async function deleteTask(id) {
       if (!confirm('确定要删除这项日程规划吗？')) return;
       state.tasks = state.tasks.filter(function(t) { return t.id !== id; });
+      if (!state.deletedTaskIds.includes(id)) {
+        state.deletedTaskIds.push(id);
+      }
       safeSetItem('tasks_local', JSON.stringify(state.tasks));
+      safeSetItem('deleted_task_ids', JSON.stringify(state.deletedTaskIds));
       renderTasks();
       updateProgress();
       showToast('日程计划已删除', 'success');
@@ -1317,6 +1412,12 @@
       document.getElementById('modalTitle').textContent = '编辑已有计划事项';
       modal.classList.remove('hidden');
       setTimeout(function() { content.classList.remove('scale-95', 'opacity-0'); content.classList.add('scale-100', 'opacity-100'); }, 10);
+    }
+
+    function clearTaskNotes() {
+      if (!confirm('确定要清空所有备注内容吗？')) return;
+      document.getElementById('taskNotes').value = '';
+      showToast('备注已清空', 'success');
     }
 
     function closeTaskModal() {
