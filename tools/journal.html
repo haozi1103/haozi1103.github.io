@@ -300,7 +300,6 @@
             class="w-36 sm:w-52 h-9 px-3 pr-9 rounded-lg bg-surface border border-border text-sm text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-accent transition"
             oninput="onSearchInput(this.value)"
             onfocus="onSearchFocus()"
-            onblur="setTimeout(()=>closeSearch(), 200)"
           >
           <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -526,15 +525,21 @@
         return [];
       }
       try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${encodeURIComponent(query)}&language=zh-CN&page=1`
-        );
-        if (!res.ok) throw new Error('API request failed');
+        const url = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${encodeURIComponent(query)}&language=zh-CN&page=1`;
+        console.log('[MovieJournal] Searching:', url);
+        const res = await fetch(url);
+        console.log('[MovieJournal] Response status:', res.status);
+        if (!res.ok) {
+          const errBody = await res.text();
+          console.error('[MovieJournal] API error body:', errBody);
+          throw new Error(`API ${res.status}: ${errBody}`);
+        }
         const data = await res.json();
-        return data.results
-          .filter(r => ['movie', 'tv'].includes(r.media_type))
-          .slice(0, 8)
-          .map(r => ({
+        console.log('[MovieJournal] Raw results count:', data.results?.length);
+        const filtered = (data.results || [])
+          .filter(r => ['movie', 'tv'].includes(r.media_type));
+        console.log('[MovieJournal] After filter:', filtered.length);
+        return filtered.slice(0, 8).map(r => ({
             id: r.id,
             title: r.title || r.name || '未知',
             original_title: r.original_title || r.original_name || '',
@@ -546,8 +551,8 @@
             vote_average: r.vote_average || 0,
           }));
       } catch (e) {
-        console.error('TMDB search error:', e);
-        showToast('搜索失败，请检查 API Key');
+        console.error('[MovieJournal] TMDB search error:', e);
+        showToast('搜索失败: ' + e.message);
         return [];
       }
     }
@@ -972,6 +977,14 @@
     document.getElementById('detailModal').addEventListener('click', (e) => {
       if (e.target === document.getElementById('detailModal')) {
         closeDetailModal();
+      }
+    });
+
+    // Click outside search to close dropdown
+    document.addEventListener('click', (e) => {
+      const searchWrap = document.getElementById('searchInput').parentElement;
+      if (!searchWrap.contains(e.target)) {
+        closeSearch();
       }
     });
   </script>
