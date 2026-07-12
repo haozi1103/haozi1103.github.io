@@ -213,7 +213,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -227,7 +227,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/11/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">GTX1660调试欧卡2画质mod的感触</a>
+            <a href="/2026/06/11/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/" class="post-title-link" itemprop="url">怎么使用ptqt进行ui界面的开发？</a>
         </h2>
 
         <div class="post-meta">
@@ -244,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-06-17 20:22:24" itemprop="dateModified" datetime="2026-06-17T20:22:24+08:00">2026-06-17</time>
+                <time title="修改时间：2026-06-17 21:00:48" itemprop="dateModified" datetime="2026-06-17T21:00:48+08:00">2026-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,7 +252,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Gaming/" itemprop="url" rel="index"><span itemprop="name">Gaming</span></a>
+                  <a href="/categories/How-To/" itemprop="url" rel="index"><span itemprop="name">How-To</span></a>
                 </span>
             </span>
 
@@ -267,10 +267,110 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135715820.png" alt="image-20260308135656767"></p>
+          <span id="more"></span>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260403151904697.png" alt="image-20260403151904606"></p>
+<h1>Python qt简介</h1>
+<p>pyside2包装的是Qt5库，pyside6包装的是Qt6库</p>
+<p>PyQt5包装的是Qt5库，PyQt6包装的是Qt6库</p>
+<p>pyside2/pyside6是Qt的亲儿子，而pyqt5/pyqt6是义子</p>
+<p>Qt库是用C++语言开发的，是因为python使用的人实在是太多了，所以python就从C++搬过来这个库了</p>
+<h1>一个好玩的案例</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app = QApplication()</span><br></pre></td></tr></table></figure>
+<p>放在主窗口的控件，要能全部显示在界面上，必须加上下面这行代码，不然你会看不到自己的控件去哪儿了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.show()</span><br></pre></td></tr></table></figure>
+<p>最后一定有一句这个，让程序进入死循环（可以试试去掉这一句会有什么变化）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="built_in">exec</span>() <span class="comment"># 这是pyside6的代码； pyside2 是 app.exec_()</span></span><br></pre></td></tr></table></figure>
+<h1>遇到的问题和解决方法</h1>
+<p>我的Python 3.12 无法正常安装 PySide2（至少在2026.3.28号是不可行的），<strong>所以我选择 PySide6</strong></p>
+<p>一般来说，在python终端输入以下命令就可以安装库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyside6</span><br></pre></td></tr></table></figure>
+<p>但是国内下载速度很慢，如果上述指令不行，我们可以采用镜像源下载</p>
+<p>（-i表示从后面的镜像源下载安装pyside6）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyside6 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<p><strong>一些常用的镜像源</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">清华大学TUNA镜像源： https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">阿里云镜像源： http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">中国科学技术大学镜像源： https://mirrors.ustc.edu.cn/pypi/simple/</span><br><span class="line">华为云镜像源： https://repo.huaweicloud.com/repository/pypi/simple/</span><br><span class="line">腾讯云镜像源：https://mirrors.cloud.tencent.com/pypi/simple/</span><br></pre></td></tr></table></figure>
+<p>显示以下内容就是安装好了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260328173851329.png" alt="image-20260328173851246"></p>
+<h1>参考文章</h1>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/pip-cn-mirror.html">pip常用镜像源-博客园</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/11/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/" class="post-title-link" itemprop="url">复利究竟有什么魔力？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-11 15:01:15" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-17 20:56:35" itemprop="dateModified" datetime="2026-06-17T20:56:35+08:00">2026-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Knowledge/" itemprop="url" rel="index"><span itemprop="name">Knowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310220618481.png" alt="image-20260310220618481"></p>
+<h1>复利是什么</h1>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/06/11/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/#more" rel="contents">
+              <a class="btn" href="/2026/06/11/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -946,88 +1046,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/11/%E3%80%8A%E7%94%9F%E6%AD%BB%E7%96%B2%E5%8A%B3%E3%80%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Haozi's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/06/11/%E3%80%8A%E7%94%9F%E6%AD%BB%E7%96%B2%E5%8A%B3%E3%80%8B/" class="post-title-link" itemprop="url">《生死疲劳》</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-06-11 15:01:15" itemprop="dateCreated datePublished" datetime="2026-06-11T15:01:15+08:00">2026-06-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-06-17 20:22:05" itemprop="dateModified" datetime="2026-06-17T20:22:05+08:00">2026-06-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reading/" itemprop="url" rel="index"><span itemprop="name">Reading</span></a>
-                </span>
-            </span>
-
-          
-            <div class="post-description">看完久久不能释怀 还想再看一遍.......</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>看完这本《生死疲劳》，前前后后花了大几个月的时间，一直在拖延，一直没有时间看完这本著作。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/06/11/%E3%80%8A%E7%94%9F%E6%AD%BB%E7%96%B2%E5%8A%B3%E3%80%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1097,20 +1115,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">72</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

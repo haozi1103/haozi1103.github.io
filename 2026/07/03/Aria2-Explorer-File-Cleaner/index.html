@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在大数据与 PT 下载的时代，Aria2 凭借其轻量级、无图形界面低资源消耗，以及强大的 RPC 远程调用能力，成为了无数 NAS 玩家、Home Lab 爱好者以及下载狂热者的“万金油”神器。 然而，凡是使用过 Aria2 的朋友，几乎都遇到过一个极其头疼的痛点：在前端网页或浏览器扩展（如 Aria2-Explorer、AriaNg）中点击“删除任务”，仅仅是将该任务从 Aria2 的下载队列中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Aria2 进阶：如何安全地为 Aria2-Explorer 扩展增加「删除任务并清理本地文件」功能">
+<meta property="og:url" content="http://haozi.space/2026/07/03/Aria2-Explorer-File-Cleaner/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="在大数据与 PT 下载的时代，Aria2 凭借其轻量级、无图形界面低资源消耗，以及强大的 RPC 远程调用能力，成为了无数 NAS 玩家、Home Lab 爱好者以及下载狂热者的“万金油”神器。 然而，凡是使用过 Aria2 的朋友，几乎都遇到过一个极其头疼的痛点：在前端网页或浏览器扩展（如 Aria2-Explorer、AriaNg）中点击“删除任务”，仅仅是将该任务从 Aria2 的下载队列中">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-03T07:41:00.000Z">
+<meta property="article:modified_time" content="2026-07-03T07:45:43.327Z">
+<meta property="article:author" content="haozi">
+<meta property="article:tag" content="Aria2">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="WebExtension">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://haozi.space/2026/07/03/Aria2-Explorer-File-Cleaner/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- HarmonyOS Sans SC Font -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
+<style>
+  /* Fallback: If LXGW WenKai is used, override font-family */
+  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
+  /*
+  @font-face {
+    font-family: 'HarmonyOS Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
+  }
+  */
+</style>
+
+  <title>Aria2 进阶：如何安全地为 Aria2-Explorer 扩展增加「删除任务并清理本地文件」功能 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-future">
+
+    <a href="/future/" rel="section"><i class="fa fa-terminal fa-fw"></i>探索</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/07/03/Aria2-Explorer-File-Cleaner/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="Good morning, and in case I don't see you, good afternoon, good evening, and good night!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Aria2 进阶：如何安全地为 Aria2-Explorer 扩展增加「删除任务并清理本地文件」功能
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-07-03 15:41:00 / 修改时间：15:45:43" itemprop="dateCreated datePublished" datetime="2026-07-03T15:41:00+08:00">2026-07-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">实战教程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在大数据与 PT 下载的时代，<strong>Aria2</strong> 凭借其轻量级、无图形界面低资源消耗，以及强大的 RPC 远程调用能力，成为了无数 NAS 玩家、Home Lab 爱好者以及下载狂热者的“万金油”神器。</p>
+<p>然而，凡是使用过 Aria2 的朋友，几乎都遇到过一个极其头疼的痛点：<strong>在前端网页或浏览器扩展（如 Aria2-Explorer、AriaNg）中点击“删除任务”，仅仅是将该任务从 Aria2 的下载队列中抹去。原本下载在本地磁盘的大文件、分块碎片，以及伴随的 <code>.aria2</code> 控制文件，依然纹丝不动地躺在硬盘里。</strong> 日积月累，磁盘空间悄无声息地被这堆“幽灵文件”吞噬殆尽。</p>
+<p>虽然该需求在 Aria2-Explorer 的 GitHub Issue 列表中高悬已久（例如经典的 #52「求添加删除任务时同时删除对应文件功能」），但由于各平台权限限制，官方至今没有提供原生支持。</p>
+<p>今天，我们将从 <strong>Full-Stack 安全开发与系统防提权</strong> 的视角出发，彻底打通浏览器扩展与本地操作系统的壁垒，实现一套<strong>极度安全、防止命令注入、界面不卡死</strong>的本地文件自动清理方案。</p>
+<hr>
+<h2 id="第一部分：架构破局-——-为什么需要本地-Helper-服务？">第一部分：架构破局 —— 为什么需要本地 Helper 服务？</h2>
+<h3 id="1-浏览器的“楚河汉界”：沙箱限制">1. 浏览器的“楚河汉界”：沙箱限制</h3>
+<p>现代浏览器扩展（WebExtension）运行在一个被严格隔离的沙箱（Sandbox）环境中。即使我们在前端拿到了下载文件的绝对路径，扩展也绝对无法直接调用操作系统的裸文件系统接口（File System API）去执行物理删除。这在安全策略上被称为“最小权限原则”，防范恶意扩展随意抹除用户磁盘。</p>
+<h3 id="2-破局思路：本地轻量级桥梁">2. 破局思路：本地轻量级桥梁</h3>
+<p>既然扩展出不去，操作系统进不来，我们就在本地架设一座安全的桥梁。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[Aria2-Explorer 前端UI] -- 1. 触发删除 --&gt; B(Aria2 RPC 服务)</span><br><span class="line">    A -- 2. tellStatus 获取最新文件路径 --&gt; B</span><br><span class="line">    A -- 3. Fetch POST 请求携带 Token --&gt; C[本地 Helper 接口 6801]</span><br><span class="line">    C -- 4. Whitelist 校验 / PS 安全转义 --&gt; D[Windows 回收站]</span><br><span class="line">    C -- 5. 返回 200 OK --&gt; A</span><br><span class="line">    A -- 6. 发送真正删除任务 RPC --&gt; B</span><br></pre></td></tr></table></figure>
+<p>通过这套异步链路，我们在删除任务的瞬间完成本地文件和临时控制文件的精准清理，随后再将删除指令送达 Aria2 服务。</p>
+<h3 id="3-前端改造：放弃油猴，直攻反混淆源码">3. 前端改造：放弃油猴，直攻反混淆源码</h3>
+<p>常见的用户脚本（油猴）在 <code>chrome-extension://</code> 协议下的内部页面注入极不稳定。因此，我们选择直接对 Aria2-Explorer 扩展的本地前端代码下手。<br>
+由于扩展的编译产物 <code>aria-ng-xxx.min.js</code> 是高度混淆压缩的，直接打正则补丁不仅难以调试，且极易在升级时引入隐蔽 Bug。我们使用 <code>js-beautify</code> 将其彻底<strong>反混淆还原为可读版本</strong>，直接在格式化后的代码上插入菜单模板、绑定 UI 控制器并拦截 RPC 交互。</p>
+<hr>
+<h2 id="第二部分：安全防线-——-如何让本地-Helper-监控服务坚不可摧？">第二部分：安全防线 —— 如何让本地 Helper 监控服务坚不可摧？</h2>
+<p>本地运行一个具有文件删除权限的 HTTP 服务（通常长驻于 <code>127.0.0.1:6801</code>）是极其危险的。一旦防护不当，任何恶意网页均可以通过跨域网络请求（CORS）或者接口扫描，提权抹除您的整块硬盘。</p>
+<p>为了实现工业级的防御，我们在本地 Node.js 清理服务中实施了 <strong>5 重安全加固策略</strong>：</p>
+<h3 id="1-真随机-UUID-令牌与时间安全比较">1. 真随机 UUID 令牌与时间安全比较</h3>
+<p>服务接口强制采用令牌鉴权。在初始化时，通过加密安全的伪随机数生成器生成 UUID，写入隐蔽的 <code>.env</code> 配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">AUTH_TOKEN</span>=<span class="string">617a2eda-5cd2-40e9-9ad7-2418296e693b</span></span><br></pre></td></tr></table></figure>
+<p>为了防止黑客通过追踪微秒级的网络延迟判定 Token 相似度（即<strong>时间差攻击/定时攻击</strong>），我们使用 Node.js 的 <code>crypto.timingSafeEqual</code> 保证常量时间比较：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">secureCompare</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> a !== <span class="string">&#x27;string&#x27;</span> || <span class="keyword">typeof</span> b !== <span class="string">&#x27;string&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">const</span> bufA = <span class="title class_">Buffer</span>.<span class="title function_">from</span>(a);</span><br><span class="line">  <span class="keyword">const</span> bufB = <span class="title class_">Buffer</span>.<span class="title function_">from</span>(b);</span><br><span class="line">  <span class="keyword">if</span> (bufA.<span class="property">length</span> !== bufB.<span class="property">length</span>) &#123;</span><br><span class="line">    crypto.<span class="title function_">timingSafeEqual</span>(bufA, bufA); <span class="comment">// 保持相似的CPU处理耗时</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> crypto.<span class="title function_">timingSafeEqual</span>(bufA, bufB);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-严格的-CORS-域白名单审查">2. 严格的 CORS 域白名单审查</h3>
+<p>本地服务绝不能对所有人开放。除了最基础的 <code>OPTIONS</code> 预检拦截外，服务强制验证请求头中的 <code>Origin</code> 属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">ALLOWED_ORIGIN</span> = <span class="string">&#x27;chrome-extension://lpbdggolpnhmefhcmagmoapjnbdpffef&#x27;</span>; <span class="comment">// 您的扩展真实ID</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> origin = req.<span class="property">headers</span>.<span class="property">origin</span>;</span><br><span class="line">  <span class="keyword">if</span> (!origin || origin !== <span class="variable constant_">ALLOWED_ORIGIN</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">`[Blocked] Request from unauthorized origin: <span class="subst">$&#123;origin || <span class="string">&#x27;none&#x27;</span>&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">403</span>).<span class="title function_">json</span>(&#123; <span class="attr">ok</span>: <span class="literal">false</span>, <span class="attr">msg</span>: <span class="string">&#x27;Forbidden&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="variable constant_">ALLOWED_ORIGIN</span>);</span><br><span class="line">  <span class="title function_">next</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>任何源自非白名单扩展或普通网页的跨域 Fetch 请求，都会被浏览器和 Helper 在预检阶段直接抛出 <strong>403 Forbidden</strong> 并记录拦截日志。</p>
+<h3 id="3-规范化路径白名单限制（防止目录遍历）">3. 规范化路径白名单限制（防止目录遍历）</h3>
+<p>攻击者可能传入如 <code>../../Windows/System32</code> 之类的相对路径。我们通过 <code>path.resolve</code> 对路径强制进行绝对路径解析，并校验其前缀是否属于被允许的下载目录白名单：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">DOWNLOAD_DIRS</span> = [</span><br><span class="line">  path.<span class="title function_">resolve</span>(<span class="string">&#x27;G:\\Downloads&#x27;</span>),</span><br><span class="line">  path.<span class="title function_">resolve</span>(<span class="string">&#x27;C:\\Users\\haozi\\Downloads&#x27;</span>)</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> resolved = path.<span class="title function_">resolve</span>(requestedPath);</span><br><span class="line"><span class="keyword">const</span> isWhitelisted = <span class="variable constant_">DOWNLOAD_DIRS</span>.<span class="title function_">some</span>(<span class="function"><span class="params">dir</span> =&gt;</span> resolved.<span class="title function_">startsWith</span>(dir));</span><br><span class="line"><span class="keyword">if</span> (!isWhitelisted) &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">`Path is outside whitelisted download directories.`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-命令注入防御与“安全移至回收站”">4. 命令注入防御与“安全移至回收站”</h3>
+<p>许多初学者在执行系统级删除时会直接调用 <code>child_process.exec('rm -rf ...')</code>，这极易引入<strong>命令注入漏洞</strong>（例如文件名中带有分号 <code>;</code> 或 <code>&amp;</code>）。<br>
+我们通过使用 PowerShell 的 <strong>单引号字符串</strong>（<code>'&#123;path&#125;'</code>）闭包来传递参数，并对文件名中的所有单引号进行双单引号逃逸（<code>replace(/'/g, &quot;''&quot;)</code>），同时引入 Windows Shell 原生 API 将文件移入<strong>系统回收站（Recycle Bin）</strong>，既防止了提权注入，又留有后悔药：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">moveToTrash</span>(<span class="params">filePath</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!fs.<span class="title function_">existsSync</span>(filePath)) <span class="keyword">return</span> <span class="title function_">resolve</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 对单引号进行双单引号转义，防止跳出PowerShell单引号闭包</span></span><br><span class="line">    <span class="keyword">const</span> escapedPath = filePath.<span class="title function_">replace</span>(<span class="regexp">/&#x27;/g</span>, <span class="string">&quot;&#x27;&#x27;&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> isDir = fs.<span class="title function_">statSync</span>(filePath).<span class="title function_">isDirectory</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> psCommand = <span class="string">`Add-Type -AssemblyName Microsoft.VisualBasic; `</span>;</span><br><span class="line">    <span class="keyword">if</span> (isDir) &#123;</span><br><span class="line">      psCommand += <span class="string">`[Microsoft.VisualBasic.FileIO.FileSystem]::DeleteDirectory(&#x27;<span class="subst">$&#123;escapedPath&#125;</span>&#x27;, &#x27;OnlyErrorDialogs&#x27;, &#x27;SendToRecycleBin&#x27;)`</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      psCommand += <span class="string">`[Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile(&#x27;<span class="subst">$&#123;escapedPath&#125;</span>&#x27;, &#x27;OnlyErrorDialogs&#x27;, &#x27;SendToRecycleBin&#x27;)`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">exec</span>(<span class="string">`powershell -NoProfile -Command &quot;<span class="subst">$&#123;psCommand&#125;</span>&quot;`</span>, <span class="function">(<span class="params">error, stdout, stderr</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (error) <span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(stderr || error.<span class="property">message</span>));</span><br><span class="line">      <span class="keyword">else</span> <span class="title function_">resolve</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-日志审计安全脱敏">5. 日志审计安全脱敏</h3>
+<p>在操作审计日志 <code>operation.log</code> 中，我们记录请求被拦截的事件，但<strong>绝不打印</strong>请求体中携带的 Token 明文，确保日志文件的合规安全性。</p>
+<hr>
+<h2 id="第三部分：踩坑实录-——-排查并解决“正在加载”卡死天坑">第三部分：踩坑实录 —— 排查并解决“正在加载”卡死天坑</h2>
+<p>在将方案前端接入的实际测试中，我们遇到了一个经典悬挂 Bug：点击删除后，界面会永久卡在 AriaNg 自带的“正在加载…”半透明遮罩层中。</p>
+<h3 id="1-tellStatus-的“第二参数”天坑">1. <code>tellStatus</code> 的“第二参数”天坑</h3>
+<p>为了在文件被销毁前获取它，我们在服务层拦截了 <code>removeTasks</code>，并调用了 RPC 获取最新文件列表：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误写法</span></span><br><span class="line">i.<span class="title function_">tellStatus</span>(&#123; <span class="attr">gid</span>: task.<span class="property">gid</span>, <span class="attr">callback</span>: <span class="keyword">function</span>(<span class="params">res</span>)&#123;...&#125; &#125;, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>根因剖析</strong>：AriaNg 服务框架内部，<code>i.tellStatus(options, isMulticall)</code> 函数的第二个参数表示“是否为批量 multicall 构造元素”。当传入 <code>true</code> 时，该方法<strong>仅仅返回封装好的请求 JSON 结构，根本不会真正建立网络请求发送出去</strong>！因此回调永远不会执行，Promise 链无限挂起，遮罩层彻底卡死。<br>
+<strong>解决方案</strong>：直接移除第二个参数 <code>true</code>。</p>
+<h3 id="2-界面遮罩层（cg-busy）的生命周期兜底控制">2. 界面遮罩层（cg-busy）的生命周期兜底控制</h3>
+<p>AriaNg 使用了 AngularJS 的 <code>cg-busy</code> 动画挂载组件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-view</span> <span class="attr">cg-busy</span>=<span class="string">&quot;&#123; promise: loadPromise, message: (&#x27;Loading&#x27; | translate) &#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这意味着遮罩层的显隐完全依赖于挂载在 Scope 上的 <code>loadPromise</code> 什么时候被 Settle（即被 Resolve 或 Reject）。<br>
+为了防范本地 Helper 崩溃、下线或删除操作被卡住，我们为其引入了 <code>AbortController</code>，进行 6 秒超时强制兜底，并在 <code>.catch</code> 链中显式返回 rejected 状态：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> controller = <span class="keyword">new</span> <span class="title class_">AbortController</span>();</span><br><span class="line"><span class="keyword">var</span> timeoutId = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123; controller.<span class="title function_">abort</span>(); &#125;, <span class="number">6000</span>); <span class="comment">// 6秒无响应自动熔断</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">    <span class="attr">headers</span>: &#123; <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span> &#125;,</span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">paths</span>: paths, <span class="attr">token</span>: token &#125;),</span><br><span class="line">    <span class="attr">signal</span>: controller.<span class="property">signal</span></span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> res.<span class="title function_">json</span>())</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeoutId);</span><br><span class="line">    <span class="keyword">if</span> (data &amp;&amp; data.<span class="property">ok</span>) <span class="keyword">return</span> <span class="title function_">l</span>(); <span class="comment">// 正常触发Aria2 RPC队列删除</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        s.<span class="title function_">showError</span>(<span class="string">&quot;清理本地文件失败&quot;</span>);</span><br><span class="line">        <span class="keyword">var</span> d = e.<span class="title function_">defer</span>();</span><br><span class="line">        d.<span class="title function_">reject</span>(<span class="string">&quot;helper returned error&quot;</span>); <span class="comment">// 触发遮罩层关闭</span></span><br><span class="line">        <span class="keyword">return</span> d.<span class="property">promise</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeoutId);</span><br><span class="line">    s.<span class="title function_">showError</span>(err.<span class="property">name</span> === <span class="string">&quot;AbortError&quot;</span> ? <span class="string">&quot;请求超时&quot;</span> : <span class="string">&quot;连接清理服务失败&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> d = e.<span class="title function_">defer</span>();</span><br><span class="line">    d.<span class="title function_">reject</span>(err); <span class="comment">// 触发遮罩层关闭</span></span><br><span class="line">    <span class="keyword">return</span> d.<span class="property">promise</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="3-BT-多文件与-aria2-控制文件清除逻辑">3. BT 多文件与 <code>.aria2</code> 控制文件清除逻辑</h3>
+<ul>
+<li><strong>BT 多文件</strong>：在多文件任务中，<code>task.files</code> 会列出所有具体的文件路径，我们在清单中同时推入这些具体路径与它们共同的父下载文件夹：<code>task.dir + &quot;/&quot; + task.taskName</code>。Helper 将对该文件夹进行递归移入回收站处理。</li>
+<li><strong><code>.aria2</code> 控制文件</strong>：无论单文件下载还是 BT 下载，Aria2 均会在下载目录下创建一个以文件/文件夹命名的同名控制文件。我们一并推入 <code>task.dir + &quot;/&quot; + task.taskName + &quot;.aria2&quot;</code> 进行销毁，完美解决垃圾碎片的残留。</li>
+</ul>
+<hr>
+<h2 id="第四部分：自启动部署与健康状态检测">第四部分：自启动部署与健康状态检测</h2>
+<p>为了让这套服务在 Windows 启动时静默长驻后台，我们为其配置了无窗口启动机制。</p>
+<h3 id="1-静默自启动脚本配置">1. 静默自启动脚本配置</h3>
+<p>在 Windows 系统中，新建一个后缀为 <code>.vbs</code> 的脚本，存放在开机启动文件夹中（可使用快捷键 <code>Win+R</code> 输入 <code>shell:startup</code> 快速打开）：</p>
+<p><strong>start-aria2-file-helper.vbs</strong></p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Set</span> WshShell = <span class="built_in">CreateObject</span>(<span class="string">&quot;WScript.Shell&quot;</span>)</span><br><span class="line">WshShell.Run <span class="string">&quot;node C:\Users\haozi\aria2-file-helper\server.js&quot;</span>, <span class="number">0</span>, <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p><em>注：这里的参数 <code>0</code> 代表隐藏控制台黑窗口，<code>false</code> 表示异步执行不阻塞系统开机。</em></p>
+<h3 id="2-轻量级健康状态检测-health">2. 轻量级健康状态检测 <code>/health</code></h3>
+<p>我们在 <code>server.js</code> 中开发了轻量级健康检测路由，不进行 Origin CORS 限制，方便我们日常使用 PowerShell 或浏览器地址栏直接排查状态：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/health&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.<span class="title function_">json</span>(&#123; <span class="attr">ok</span>: <span class="literal">true</span>, <span class="attr">msg</span>: <span class="string">&#x27;aria2-file-helper is alive&#x27;</span> &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在控制台中运行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Invoke-RestMethod</span> <span class="literal">-Uri</span> <span class="string">&quot;http://127.0.0.1:6801/health&quot;</span> <span class="literal">-Method</span> Get</span><br></pre></td></tr></table></figure>
+<p>当看到以下输出时，证明您的后台辅助服务已经万无一失、正在安静地保护您的磁盘空间了！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  ok msg                       </span><br><span class="line">  -- ---                       </span><br><span class="line">True aria2-file-helper is alive</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="💡-结语">💡 结语</h2>
+<p>通过这次架构改造，我们不仅填补了 Aria2 网页端多年来无法清理本地文件的空白，而且深刻实践了“打破沙箱与安全防御并重”的研发原则。希望本篇博客的排雷与加固思路，能够对经常需要对接本地底层系统的全栈开发者和 Home Lab 玩家带来切实的帮助！</p>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 2rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="gruvbox"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Aria2/" rel="tag"># Aria2</a>
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/WebExtension/" rel="tag"># WebExtension</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/06/17/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/" rel="prev" title="耗子的记录日志">
+      <i class="fa fa-chevron-left"></i> 耗子的记录日志
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/07/04/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/" rel="next" title="GTX1660调试欧卡2画质mod的感触">
+      GTX1660调试欧卡2画质mod的感触 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%A0%B4%E5%B1%80-%E2%80%94%E2%80%94-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%9C%AC%E5%9C%B0-Helper-%E6%9C%8D%E5%8A%A1%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">第一部分：架构破局 —— 为什么需要本地 Helper 服务？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E2%80%9C%E6%A5%9A%E6%B2%B3%E6%B1%89%E7%95%8C%E2%80%9D%EF%BC%9A%E6%B2%99%E7%AE%B1%E9%99%90%E5%88%B6"><span class="nav-number">1.1.</span> <span class="nav-text">1. 浏览器的“楚河汉界”：沙箱限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%A0%B4%E5%B1%80%E6%80%9D%E8%B7%AF%EF%BC%9A%E6%9C%AC%E5%9C%B0%E8%BD%BB%E9%87%8F%E7%BA%A7%E6%A1%A5%E6%A2%81"><span class="nav-number">1.2.</span> <span class="nav-text">2. 破局思路：本地轻量级桥梁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%89%8D%E7%AB%AF%E6%94%B9%E9%80%A0%EF%BC%9A%E6%94%BE%E5%BC%83%E6%B2%B9%E7%8C%B4%EF%BC%8C%E7%9B%B4%E6%94%BB%E5%8F%8D%E6%B7%B7%E6%B7%86%E6%BA%90%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">3. 前端改造：放弃油猴，直攻反混淆源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E5%AE%89%E5%85%A8%E9%98%B2%E7%BA%BF-%E2%80%94%E2%80%94-%E5%A6%82%E4%BD%95%E8%AE%A9%E6%9C%AC%E5%9C%B0-Helper-%E7%9B%91%E6%8E%A7%E6%9C%8D%E5%8A%A1%E5%9D%9A%E4%B8%8D%E5%8F%AF%E6%91%A7%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">第二部分：安全防线 —— 如何让本地 Helper 监控服务坚不可摧？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%9C%9F%E9%9A%8F%E6%9C%BA-UUID-%E4%BB%A4%E7%89%8C%E4%B8%8E%E6%97%B6%E9%97%B4%E5%AE%89%E5%85%A8%E6%AF%94%E8%BE%83"><span class="nav-number">2.1.</span> <span class="nav-text">1. 真随机 UUID 令牌与时间安全比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%A5%E6%A0%BC%E7%9A%84-CORS-%E5%9F%9F%E7%99%BD%E5%90%8D%E5%8D%95%E5%AE%A1%E6%9F%A5"><span class="nav-number">2.2.</span> <span class="nav-text">2. 严格的 CORS 域白名单审查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%A7%84%E8%8C%83%E5%8C%96%E8%B7%AF%E5%BE%84%E7%99%BD%E5%90%8D%E5%8D%95%E9%99%90%E5%88%B6%EF%BC%88%E9%98%B2%E6%AD%A2%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">3. 规范化路径白名单限制（防止目录遍历）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E9%98%B2%E5%BE%A1%E4%B8%8E%E2%80%9C%E5%AE%89%E5%85%A8%E7%A7%BB%E8%87%B3%E5%9B%9E%E6%94%B6%E7%AB%99%E2%80%9D"><span class="nav-number">2.4.</span> <span class="nav-text">4. 命令注入防御与“安全移至回收站”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8%E8%84%B1%E6%95%8F"><span class="nav-number">2.5.</span> <span class="nav-text">5. 日志审计安全脱敏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9A%E8%B8%A9%E5%9D%91%E5%AE%9E%E5%BD%95-%E2%80%94%E2%80%94-%E6%8E%92%E6%9F%A5%E5%B9%B6%E8%A7%A3%E5%86%B3%E2%80%9C%E6%AD%A3%E5%9C%A8%E5%8A%A0%E8%BD%BD%E2%80%9D%E5%8D%A1%E6%AD%BB%E5%A4%A9%E5%9D%91"><span class="nav-number">3.</span> <span class="nav-text">第三部分：踩坑实录 —— 排查并解决“正在加载”卡死天坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-tellStatus-%E7%9A%84%E2%80%9C%E7%AC%AC%E4%BA%8C%E5%8F%82%E6%95%B0%E2%80%9D%E5%A4%A9%E5%9D%91"><span class="nav-number">3.1.</span> <span class="nav-text">1. tellStatus 的“第二参数”天坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%95%8C%E9%9D%A2%E9%81%AE%E7%BD%A9%E5%B1%82%EF%BC%88cg-busy%EF%BC%89%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%85%9C%E5%BA%95%E6%8E%A7%E5%88%B6"><span class="nav-number">3.2.</span> <span class="nav-text">2. 界面遮罩层（cg-busy）的生命周期兜底控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-BT-%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8E-aria2-%E6%8E%A7%E5%88%B6%E6%96%87%E4%BB%B6%E6%B8%85%E9%99%A4%E9%80%BB%E8%BE%91"><span class="nav-number">3.3.</span> <span class="nav-text">3. BT 多文件与 .aria2 控制文件清除逻辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%EF%BC%9A%E8%87%AA%E5%90%AF%E5%8A%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%81%A5%E5%BA%B7%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B"><span class="nav-number">4.</span> <span class="nav-text">第四部分：自启动部署与健康状态检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%9D%99%E9%BB%98%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">1. 静默自启动脚本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%81%A5%E5%BA%B7%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B-health"><span class="nav-number">4.2.</span> <span class="nav-text">2. 轻量级健康状态检测 &#x2F;health</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%A1-%E7%BB%93%E8%AF%AD"><span class="nav-number">5.</span> <span class="nav-text">💡 结语</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">Good morning, and in case I don't see you, good afternoon, good evening, and good night!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - ASCII Cat -->
+<div id="pet-toggle" class="pet-toggle" title="Click to open terminal pet">
+  <span class="pet-toggle-icon">>_</span>
+  <span class="pet-toggle-label">Pet</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet" style="display:none;">
+  <div class="terminal-header">
+    <span class="terminal-dot red"></span>
+    <span class="terminal-dot yellow"></span>
+    <span class="terminal-dot green"></span>
+    <span class="terminal-title">haozi's blog~</span>
+    <span class="terminal-close" id="pet-close">&times;</span>
+  </div>
+  <div class="terminal-body">
+    <pre id="pet-ascii" class="pet-ascii"></pre>
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #2d2d2d;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  opacity: 0.85;
+}
+.pet-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px #7e8027;
+}
+.pet-toggle-icon {
+  color: #7e8027;
+  font-family: 'Consolas', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+}
+.pet-toggle-label {
+  color: #888;
+  font-size: 8px;
+  margin-top: 2px;
+}
+
+/* Terminal Pet Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 260px;
+  background: #2d2d2d;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  z-index: 9999;
+  font-family: 'Consolas', 'Courier New', monospace;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0.95;
+}
+.terminal-pet:hover {
+  opacity: 1;
+  box-shadow: 0 2px 5px #7e8027;
+}
+.terminal-header {
+  background: #2d2d2d;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: move;
+  user-select: none;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+.terminal-title {
+  color: #aaa;
+  font-size: 11px;
+  margin-left: 8px;
+  flex: 1;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #888;
+  background: #e81123;
+}
+.terminal-body {
+  padding: 12px 14px 10px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pet-ascii {
+  color: #7e8027;
+  font-size: 11px;
+  line-height: 1.2;
+  margin: 0;
+  white-space: pre;
+  text-align: center;
+  transition: color 0.3s;
+  animation: catBreathe 3s ease-in-out infinite;
+}
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #ddd;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes catBreathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.02); }
+}
+/* Dark mode */
+.dark .terminal-pet,
+.dark .pet-toggle {
+  background: #1a1a1a;
+}
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 200px;
+    right: 10px;
+  }
+  .pet-toggle {
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .pet-toggle-icon {
+    font-size: 13px;
+  }
+  .pet-toggle-label {
+    font-size: 7px;
+  }
+  .pet-ascii {
+    font-size: 9px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var catFrames = [
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( -.- ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)'],
+    ['  /\\_/\\  ',' ( o.o ) ','  > ^ <  ',' /|   |\\ ','(_|   |_)']
+  ];
+
+  var messages = [
+    '> Welcome to the blog!',
+    '> Meow, nice to meet you!',
+    '> Just vibing here...',
+    '> Deploying purr-duction...',
+    '> git commit -m "feed cat"',
+    '> printf("meow\\n");',
+    '> 404: Treats not found',
+    '> while(true) { nap(); }',
+    '> sudo rm -rf belly_rub',
+    '> Cat > Dog // true',
+    '> Loading cuteness... 100%',
+    '> echo "Hello World!"',
+    '> Compiling... nyaaa~'
+  ];
+
+  var currentFrame = 0;
+  var currentMsg = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var header = container.querySelector('.terminal-header');
+  var isOpen = false;
+
+  function updateCat() {
+    if (!isOpen) return;
+    petEl.textContent = catFrames[currentFrame].join('\n');
+    currentFrame = (currentFrame + 1) % catFrames.length;
+  }
+
+  function typewriterEffect(text, el, speed) {
+    speed = speed || 50;
+    el.textContent = '';
+    var i = 0;
+    var interval = setInterval(function() {
+      if (i < text.length) {
+        el.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, speed);
+  }
+
+  function changeMessage() {
+    if (!isOpen) return;
+    currentMsg = (currentMsg + 1) % messages.length;
+    typewriterEffect(messages[currentMsg], msgEl, 40);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    updateCat();
+    typewriterEffect(messages[0], msgEl, 40);
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+  }
+
+  // Toggle button click
+  toggleBtn.addEventListener('click', openPet);
+
+  // Close button
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+
+  // Animation loops (only run when open)
+  setInterval(updateCat, 1000);
+  setInterval(changeMessage, 4000);
+
+  // Drag functionality
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  // Clear localStorage to reset pet state on page load
+  try {
+    localStorage.removeItem('terminal-pet-hidden');
+  } catch(e) {}
+
+  header.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+
+  // Touch support
+  header.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    var touch = e.touches[0];
+    dragOffsetX = touch.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = touch.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    var touch = e.touches[0];
+    var x = touch.clientX - dragOffsetX;
+    var y = touch.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  }, { passive: true });
+  document.addEventListener('touchend', function() {
+    isDragging = false;
+    container.style.transition = 'all 0.3s ease';
+  });
+})();
+</script>
+</body>
+</html>
