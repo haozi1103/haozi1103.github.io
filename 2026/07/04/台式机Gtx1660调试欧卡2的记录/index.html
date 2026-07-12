@@ -22,10 +22,12 @@
     var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="前期排查 今天在折腾欧卡2的画质。和很多玩家一样，一开始就是一个思路：把能开的都开到最高。包括Nvidia app里面推荐的设置都是都是全开最高，我的gtx1660还怕一个12年的老游戏？ 很久之前，我就已经在本地下载了画质类的mod，像 JBX 3、PNG、Realistic Rain、Tree Improved 4K ，今天一时兴起，想玩一下很久没有碰的欧卡2，想着调一下画质，发现，无论是加">
+<meta property="og:type" content="article">
 <meta property="og:title" content="GTX1660调试欧卡2画质mod的感触">
 <meta property="og:url" content="http://haozi.space/2026/07/04/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="前期排查 今天在折腾欧卡2的画质。和很多玩家一样，一开始就是一个思路：把能开的都开到最高。包括Nvidia app里面推荐的设置都是都是全开最高，我的gtx1660还怕一个12年的老游戏？ 很久之前，我就已经在本地下载了画质类的mod，像 JBX 3、PNG、Realistic Rain、Tree Improved 4K ，今天一时兴起，想玩一下很久没有碰的欧卡2，想着调一下画质，发现，无论是加">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135715820.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308134317948.jpeg">
@@ -45,7 +47,7 @@
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260710205213507.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260710233826917.png">
 <meta property="article:published_time" content="2026-07-04T09:55:22.979Z">
-<meta property="article:modified_time" content="2026-07-10T15:38:28.908Z">
+<meta property="article:modified_time" content="2026-07-12T16:04:55.493Z">
 <meta property="article:author" content="haozi">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135715820.png">
@@ -262,7 +264,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-10 23:38:28" itemprop="dateModified" datetime="2026-07-10T23:38:28+08:00">2026-07-10</time>
+                <time title="修改时间：2026-07-13 00:04:55" itemprop="dateModified" datetime="2026-07-13T00:04:55+08:00">2026-07-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -293,7 +295,6 @@
 
       
         <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135715820.png" alt="image-20260308135656767"></p>
-<span id="more"></span>
 <h1>前期排查</h1>
 <p>今天在折腾欧卡2的画质。和很多玩家一样，一开始就是一个思路：把能开的都开到最高。包括Nvidia app里面推荐的设置都是都是全开最高，我的gtx1660还怕一个12年的老游戏？</p>
 <p>很久之前，我就已经在本地下载了画质类的mod，像 JBX 3、PNG、Realistic Rain、Tree Improved 4K ，今天一时兴起，想玩一下很久没有碰的欧卡2，想着调一下画质，发现，无论是加入PNG，还是JBX 3，一进游戏画质是变好看的，但是帧率低的可怜，估计只有10帧左右，体验极差,这我还玩个寂寞啊…，还好，多亏了我之前看的乐观学书籍，没问题归结为长期性的、无法解决的，不然我估计不会去寻找新的解决方法，而是在寝室怪罪自己这无能的显卡了（泪目）。</p>
