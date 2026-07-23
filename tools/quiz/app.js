@@ -9,11 +9,11 @@ const QuizEngine = (() => {
   // 配置
   // =====================================
   const STORAGE_PREFIX = 'quiz_';
-  const HEATMAP_KEY    = STORAGE_PREFIX + 'heatmap';
-  const WRONG_PREFIX   = STORAGE_PREFIX + 'wrong_';
-  const CUSTOM_PREFIX  = STORAGE_PREFIX + 'custom_';
-  const CUSTOM_INDEX   = STORAGE_PREFIX + 'custom_index';
-  const RECORD_PREFIX  = STORAGE_PREFIX + 'record_';
+  const HEATMAP_KEY = STORAGE_PREFIX + 'heatmap';
+  const WRONG_PREFIX = STORAGE_PREFIX + 'wrong_';
+  const CUSTOM_PREFIX = STORAGE_PREFIX + 'custom_';
+  const CUSTOM_INDEX = STORAGE_PREFIX + 'custom_index';
+  const RECORD_PREFIX = STORAGE_PREFIX + 'record_';
 
   // =====================================
   // 题库管理
@@ -54,7 +54,7 @@ const QuizEngine = (() => {
   function getBuiltinLibraries() {
     return [
       { id: 'math', title: '数学', desc: '高等数学基础题', color: '#58a6ff', builtin: true },
-      { id: 'cnc',  title: '数控技术', desc: '数控编程与操作', color: '#3fb950', builtin: true },
+      { id: 'cnc', title: '数控技术', desc: '数控编程与操作', color: '#3fb950', builtin: true },
       { id: 'mech', title: '机械设计', desc: '机械原理与设计', color: '#d29922', builtin: true }
     ];
   }
@@ -258,8 +258,10 @@ const QuizEngine = (() => {
       d.setDate(d.getDate() + w * 7 + 3); // 中间一天
       const month = d.getMonth();
       if (month !== currentMonth) {
-        monthLabels.push({ week: w, label: ['', 'Jan','Feb','Mar','Apr','May','Jun',
-                                             'Jul','Aug','Sep','Oct','Nov','Dec'][month] });
+        monthLabels.push({
+          week: w, label: ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month]
+        });
         currentMonth = month;
       }
     }

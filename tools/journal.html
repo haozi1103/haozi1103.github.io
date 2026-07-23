@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN" class="dark">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -13,7 +14,7 @@
           colors: {
             surface: { DEFAULT: '#1A1A1A', light: '#222222', dark: '#141414' },
             border: { DEFAULT: '#2A2A2A', light: '#333333' },
-            accent: { DEFAULT: '#34D399', hover: '#2DD4A8', dim: '#065F46' },
+            accent: { DEFAULT: '#4f46e5', hover: '#4338ca', dim: '#312e81' },
             bg: { DEFAULT: '#0F0F0F', card: '#1A1A1A' }
           }
         }
@@ -24,7 +25,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: #0F0F0F;
@@ -32,10 +38,23 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #444;
+    }
 
     /* Poster card hover effect */
     .poster-card {
@@ -47,21 +66,24 @@
       aspect-ratio: 2/3;
       background: #1A1A1A;
     }
+
     .poster-card:hover {
       transform: scale(1.05);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
       z-index: 10;
     }
+
     .poster-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
+
     .poster-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 40%, transparent 70%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 40%, transparent 70%);
       opacity: 0;
       transition: opacity 0.25s ease;
       display: flex;
@@ -69,9 +91,11 @@
       justify-content: flex-end;
       padding: 12px;
     }
+
     .poster-card:hover .poster-overlay {
       opacity: 1;
     }
+
     .poster-placeholder {
       width: 100%;
       height: 100%;
@@ -92,22 +116,23 @@
       max-height: 500px;
       overflow: hidden;
     }
+
     .hero-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
-      background-position: center 20%;
-      filter: blur(20px) brightness(0.4);
+      background-position: center;
+      filter: blur(20px) brightness(0.3);
       transform: scale(1.1);
     }
+
     .hero-content {
-      position: relative;
-      z-index: 2;
-      height: 100%;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #0F0F0F 0%, transparent 60%);
       display: flex;
       align-items: flex-end;
-      padding: 2rem 2rem 2.5rem;
-      background: linear-gradient(to top, #0F0F0F 0%, rgba(15,15,15,0.6) 50%, transparent 100%);
+      background: linear-gradient(to top, #0F0F0F 0%, rgba(15, 15, 15, 0.6) 50%, transparent 100%);
     }
 
     /* Search dropdown */
@@ -121,11 +146,15 @@
       background: #1A1A1A;
       border: 1px solid #2A2A2A;
       border-radius: 0 0 12px 12px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
       z-index: 100;
       display: none;
     }
-    .search-dropdown.active { display: block; }
+
+    .search-dropdown.active {
+      display: block;
+    }
+
     .search-item {
       display: flex;
       align-items: center;
@@ -134,7 +163,11 @@
       cursor: pointer;
       transition: background 0.15s;
     }
-    .search-item:hover { background: #222; }
+
+    .search-item:hover {
+      background: #222;
+    }
+
     .search-item img {
       width: 40px;
       height: 60px;
@@ -147,7 +180,7 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(8px);
       z-index: 200;
       display: none;
@@ -155,7 +188,11 @@
       justify-content: center;
       padding: 20px;
     }
-    .modal-backdrop.active { display: flex; }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
     .modal-card {
       background: #1A1A1A;
       border: 1px solid #2A2A2A;
@@ -164,7 +201,7 @@
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
     }
 
     /* Rating stars */
@@ -174,8 +211,11 @@
       color: #333;
       transition: color 0.15s;
     }
-    .rating-input .star.active { color: #34D399; }
-    .rating-input .star:hover { color: #34D399; }
+
+    .rating-input .star.active,
+    .rating-input .star:hover {
+      color: #4f46e5;
+    }
 
     /* Filter pills */
     .filter-pill {
@@ -190,19 +230,35 @@
       transition: all 0.15s;
       white-space: nowrap;
     }
-    .filter-pill:hover { border-color: #444; color: #e4e4e7; }
+
+    .filter-pill:hover {
+      border-color: #444;
+      color: #e4e4e7;
+    }
+
     .filter-pill.active {
-      background: #34D399;
-      border-color: #34D399;
-      color: #000;
+      background: #4f46e5;
+      border-color: #4f46e5;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
     }
 
     /* Fade in animation */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    .fade-in { animation: fadeIn 0.3s ease forwards; }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease forwards;
+    }
 
     /* Loading skeleton */
     .skeleton {
@@ -210,9 +266,15 @@
       background-size: 200% 100%;
       animation: shimmer 1.5s infinite;
     }
+
     @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
+      0% {
+        background-position: -200% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
     }
 
     /* Settings panel */
@@ -230,15 +292,22 @@
       padding: 24px;
       overflow-y: auto;
     }
-    .settings-panel.open { right: 0; }
+
+    .settings-panel.open {
+      right: 0;
+    }
+
     .settings-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 290;
       display: none;
     }
-    .settings-overlay.open { display: block; }
+
+    .settings-overlay.open {
+      display: block;
+    }
 
     /* Empty state */
     .empty-state {
@@ -250,7 +319,11 @@
       color: #555;
       text-align: center;
     }
-    .empty-state svg { margin-bottom: 16px; opacity: 0.3; }
+
+    .empty-state svg {
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
 
     /* Toast notification */
     .toast {
@@ -268,54 +341,14 @@
       transition: transform 0.3s ease;
       pointer-events: none;
     }
-    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
+
 <body class="bg-bg text-zinc-200">
-
-  <!-- ===== TOP NAVIGATION BAR ===== -->
-  <nav class="sticky top-0 z-50 bg-bg/90 backdrop-blur-md border-b border-border">
-    <div class="max-w-[1600px] mx-auto px-4 h-14 flex items-center gap-4">
-      <!-- Brand -->
-      <div class="flex items-center gap-2 flex-shrink-0">
-        <span class="text-xl">🎬</span>
-        <span class="font-bold text-sm tracking-tight hidden sm:inline">Movie Journal</span>
-      </div>
-
-      <!-- Filters (center) -->
-      <div class="flex items-center gap-2 flex-1 justify-center overflow-x-auto px-2">
-        <button class="filter-pill active" data-filter="all" onclick="setFilter('all')">全部</button>
-        <button class="filter-pill" data-filter="movie" onclick="setFilter('movie')">电影</button>
-        <button class="filter-pill" data-filter="tv" onclick="setFilter('tv')">剧集</button>
-        <button class="filter-pill" data-filter="anime" onclick="setFilter('anime')">动画</button>
-      </div>
-
-      <!-- Search + Settings -->
-      <div class="flex items-center gap-2 flex-shrink-0">
-        <div class="relative">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="搜索影视..."
-            class="w-36 sm:w-52 h-9 px-3 pr-9 rounded-lg bg-surface border border-border text-sm text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-accent transition"
-            oninput="onSearchInput(this.value)"
-            onfocus="onSearchFocus()"
-          >
-          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-          </svg>
-          <!-- Search Dropdown -->
-          <div class="search-dropdown" id="searchDropdown"></div>
-        </div>
-        <button onclick="openSettings()" class="p-2 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-surface transition" title="设置">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </nav>
 
   <!-- ===== HERO SECTION ===== -->
   <div class="hero-section" id="heroSection" style="display:none;">
@@ -337,26 +370,68 @@
     </div>
   </div>
 
-  <!-- ===== STATS BAR ===== -->
-  <div class="max-w-[1600px] mx-auto px-4 mt-6 mb-2 flex items-center justify-between">
-    <div class="flex items-center gap-4">
+  <!-- ===== UNIFIED TOOLBAR ===== -->
+  <div class="max-w-[1600px] mx-auto px-4 mt-4 mb-3 flex flex-wrap items-center justify-between gap-4">
+    <!-- Left: Title + Count + Category Filters -->
+    <div class="flex items-center gap-4 flex-wrap">
       <h2 class="text-lg font-bold">我的影视墙</h2>
       <span class="text-zinc-500 text-sm" id="statsText">0 部作品</span>
+      <!-- Category Filter Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto ml-2">
+        <button class="filter-pill active" data-filter="all" onclick="setFilter('all')">全部</button>
+        <button class="filter-pill" data-filter="movie" onclick="setFilter('movie')">电影</button>
+        <button class="filter-pill" data-filter="tv" onclick="setFilter('tv')">剧集</button>
+        <button class="filter-pill" data-filter="anime" onclick="setFilter('anime')">动画</button>
+      </div>
     </div>
-    <div class="flex items-center gap-2">
-      <button onclick="sortMovies('newest')" class="text-xs text-zinc-500 hover:text-zinc-300 transition px-2 py-1 rounded" id="sortNewest">最新</button>
-      <button onclick="sortMovies('rating')" class="text-xs text-zinc-500 hover:text-zinc-300 transition px-2 py-1 rounded" id="sortRating">评分</button>
+
+    <!-- Right: Search Box + Sort + Settings -->
+    <div class="flex items-center gap-3 flex-wrap">
+      <!-- Search Input -->
+      <div class="relative">
+        <input type="text" id="searchInput" placeholder="搜索影视..."
+          class="w-36 sm:w-52 h-9 px-3 pr-9 rounded-lg bg-surface border border-border text-sm text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-accent transition"
+          oninput="onSearchInput(this.value)" onfocus="onSearchFocus()">
+        <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 pointer-events-none" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <!-- Search Dropdown -->
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+
+      <!-- Sorting -->
+      <div class="flex items-center gap-1 bg-surface border border-border rounded-lg p-0.5">
+        <button onclick="sortMovies('newest')"
+          class="text-xs text-zinc-400 hover:text-zinc-200 transition px-2.5 py-1.5 rounded font-medium" id="sortNewest">最新</button>
+        <button onclick="sortMovies('rating')"
+          class="text-xs text-zinc-400 hover:text-zinc-200 transition px-2.5 py-1.5 rounded font-medium" id="sortRating">评分</button>
+      </div>
+
+      <!-- Settings Button -->
+      <button onclick="openSettings()"
+        class="p-2 rounded-lg text-zinc-400 hover:text-zinc-200 bg-surface border border-border hover:border-zinc-700 transition" title="设置">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </button>
     </div>
   </div>
 
   <!-- ===== POSTER GRID ===== -->
   <div class="max-w-[1600px] mx-auto px-4 pb-12">
-    <div id="posterGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4"></div>
+    <div id="posterGrid"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4"></div>
 
     <!-- Empty State -->
     <div class="empty-state" id="emptyState">
       <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+          d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
       </svg>
       <p class="text-lg font-medium mb-2">还没有收藏任何影视</p>
       <p class="text-sm text-zinc-600">在上方搜索框输入电影、剧集或动画名称开始添加</p>
@@ -382,9 +457,10 @@
                 <span class="px-2 py-0.5 rounded text-xs font-medium bg-accent/20 text-accent" id="modalType"></span>
               </div>
             </div>
-            <button onclick="closeDetailModal()" class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-surface transition">
+            <button onclick="closeDetailModal()"
+              class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-surface transition">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
@@ -417,10 +493,12 @@
 
           <!-- Actions -->
           <div class="flex items-center gap-3 mt-6">
-            <button onclick="saveMovieEdits()" class="flex-1 h-10 rounded-lg bg-accent hover:bg-accent-hover text-black font-semibold text-sm transition">
+            <button onclick="saveMovieEdits()"
+              class="flex-1 h-10 rounded-lg bg-accent hover:bg-accent-hover text-black font-semibold text-sm transition">
               保存
             </button>
-            <button onclick="deleteMovie()" class="h-10 px-4 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 text-sm font-medium transition">
+            <button onclick="deleteMovie()"
+              class="h-10 px-4 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 text-sm font-medium transition">
               删除
             </button>
           </div>
@@ -434,9 +512,10 @@
   <div class="settings-panel" id="settingsPanel">
     <div class="flex items-center justify-between mb-6">
       <h3 class="text-lg font-bold">设置</h3>
-      <button onclick="closeSettings()" class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-surface transition">
+      <button onclick="closeSettings()"
+        class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-surface transition">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
@@ -445,8 +524,10 @@
       <label class="block text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-2">TMDB API Key</label>
       <input type="password" id="apiKeyInput" placeholder="输入你的 TMDB API Key..."
         class="w-full h-10 px-3 rounded-lg bg-bg border border-border text-sm text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-accent transition mb-2">
-      <p class="text-xs text-zinc-600">在 <a href="https://www.themoviedb.org/settings/api" target="_blank" class="text-accent hover:underline">themoviedb.org</a> 获取免费 API Key</p>
-      <button onclick="saveApiKey()" class="mt-3 w-full h-9 rounded-lg bg-accent hover:bg-accent-hover text-black font-semibold text-sm transition">
+      <p class="text-xs text-zinc-600">在 <a href="https://www.themoviedb.org/settings/api" target="_blank"
+          class="text-accent hover:underline">themoviedb.org</a> 获取免费 API Key</p>
+      <button onclick="saveApiKey()"
+        class="mt-3 w-full h-9 rounded-lg bg-accent hover:bg-accent-hover text-black font-semibold text-sm transition">
         保存 Key
       </button>
     </div>
@@ -455,14 +536,17 @@
 
     <div class="mb-6">
       <label class="block text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-2">数据管理</label>
-      <button onclick="exportData()" class="w-full h-9 rounded-lg border border-border text-zinc-300 hover:bg-surface text-sm font-medium transition mb-2">
+      <button onclick="exportData()"
+        class="w-full h-9 rounded-lg border border-border text-zinc-300 hover:bg-surface text-sm font-medium transition mb-2">
         导出数据 (JSON)
       </button>
-      <label class="w-full h-9 rounded-lg border border-border text-zinc-300 hover:bg-surface text-sm font-medium transition mb-2 flex items-center justify-center cursor-pointer">
+      <label
+        class="w-full h-9 rounded-lg border border-border text-zinc-300 hover:bg-surface text-sm font-medium transition mb-2 flex items-center justify-center cursor-pointer">
         导入数据 (JSON)
         <input type="file" accept=".json" onchange="importData(event)" class="hidden">
       </label>
-      <button onclick="clearAllData()" class="w-full h-9 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 text-sm font-medium transition">
+      <button onclick="clearAllData()"
+        class="w-full h-9 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 text-sm font-medium transition">
         清空所有数据
       </button>
     </div>
@@ -540,16 +624,16 @@
           .filter(r => ['movie', 'tv'].includes(r.media_type));
         console.log('[MovieJournal] After filter:', filtered.length);
         return filtered.slice(0, 8).map(r => ({
-            id: r.id,
-            title: r.title || r.name || '未知',
-            original_title: r.original_title || r.original_name || '',
-            poster_path: r.poster_path,
-            backdrop_path: r.backdrop_path,
-            overview: r.overview || '',
-            year: (r.release_date || r.first_air_date || '').slice(0, 4),
-            type: r.media_type === 'tv' ? 'tv' : 'movie',
-            vote_average: r.vote_average || 0,
-          }));
+          id: r.id,
+          title: r.title || r.name || '未知',
+          original_title: r.original_title || r.original_name || '',
+          poster_path: r.poster_path,
+          backdrop_path: r.backdrop_path,
+          overview: r.overview || '',
+          year: (r.release_date || r.first_air_date || '').slice(0, 4),
+          type: r.media_type === 'tv' ? 'tv' : 'movie',
+          vote_average: r.vote_average || 0,
+        }));
       } catch (e) {
         console.error('[MovieJournal] TMDB search error:', e);
         showToast('搜索失败: ' + e.message);
@@ -612,9 +696,9 @@
       dropdown.innerHTML = results.map((r, idx) => `
         <div class="search-item" data-idx="${idx}" onmousedown="event.preventDefault()" onclick="addFromSearchByIndex(${idx})">
           ${r.poster_path
-            ? `<img src="${posterURL(r.poster_path, 'w92')}" alt="" loading="lazy">`
-            : `<div class="w-10 h-[60px] bg-surface rounded flex items-center justify-center text-zinc-600 text-xs">无图</div>`
-          }
+          ? `<img src="${posterURL(r.poster_path, 'w92')}" alt="" loading="lazy">`
+          : `<div class="w-10 h-[60px] bg-surface rounded flex items-center justify-center text-zinc-600 text-xs">无图</div>`
+        }
           <div class="flex-1 min-w-0">
             <div class="text-sm font-medium text-zinc-200 truncate">${escapeHtml(r.title)}</div>
             <div class="text-xs text-zinc-500 flex items-center gap-2">
@@ -701,9 +785,9 @@
       grid.innerHTML = filtered.map((m, i) => `
         <div class="poster-card fade-in" style="animation-delay: ${Math.min(i * 30, 300)}ms" onclick="openDetail(${m.id})">
           ${m.poster_path
-            ? `<img src="${posterURL(m.poster_path)}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'poster-placeholder\\'>🎬</div>'">`
-            : `<div class="poster-placeholder">🎬</div>`
-          }
+          ? `<img src="${posterURL(m.poster_path)}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'poster-placeholder\\'>🎬</div>'">`
+          : `<div class="poster-placeholder">🎬</div>`
+        }
           <div class="poster-overlay">
             <div class="text-white font-semibold text-sm mb-1 line-clamp-2">${escapeHtml(m.title)}</div>
             <div class="flex items-center gap-2">
@@ -888,7 +972,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `movie-journal-${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `movie-journal-${new Date().toISOString().slice(0, 10)}.json`;
       a.click();
       URL.revokeObjectURL(url);
       showToast('数据已导出');
@@ -989,4 +1073,5 @@
     });
   </script>
 </body>
+
 </html>

@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>工具集 — Haozi's Blog</title>
+  <script>
+    // 防嵌套防护：若工具集主页被误嵌入 iframe 中，自动跳出嵌套重定向至顶层窗口
+    if (window.top !== window.self) {
+      window.top.location.href = window.location.href;
+    }
+  </script>
   <style>
     /* ===== Reset & Base ===== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
       --bg: #f8f9fa;
       --surface: #ffffff;
@@ -18,8 +31,8 @@
       --accent-hover: #4338ca;
       --accent-light: #eef2ff;
       --radius: 12px;
-      --shadow: 0 1px 3px rgba(0,0,0,0.08);
-      --shadow-hover: 0 4px 12px rgba(0,0,0,0.12);
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
     body {
@@ -32,8 +45,15 @@
       flex-direction: column;
     }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { color: var(--accent-hover); text-decoration: underline; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
 
     /* ===== Top Navigation Bar ===== */
     .tools-nav {
@@ -48,7 +68,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     .tools-nav-brand {
@@ -108,17 +128,19 @@
     }
 
     .tools-nav-tab:hover {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.1);
       color: #ffffff;
     }
 
     .tools-nav-tab.active {
       background: var(--accent);
       color: #fff;
-      box-shadow: 0 2px 8px rgba(79,70,229,0.25);
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
     }
 
-    .tools-nav-tab .icon { font-size: 16px; }
+    .tools-nav-tab .icon {
+      font-size: 16px;
+    }
 
     .tools-nav-back {
       display: flex;
@@ -138,7 +160,7 @@
     }
 
     .tools-nav-back:hover {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.1);
       color: #ffffff;
       text-decoration: none;
     }
@@ -193,7 +215,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* ===== Responsive ===== */
@@ -203,50 +227,82 @@
         height: 48px;
         gap: 4px;
       }
-      .tools-nav-brand { margin-right: 8px; }
-      .tools-nav-brand .logo { width: 28px; height: 28px; font-size: 14px; }
-      .tools-nav-brand .title { font-size: 13px; }
-      .tools-nav-brand .subtitle { display: none; }
+
+      .tools-nav-brand {
+        margin-right: 8px;
+      }
+
+      .tools-nav-brand .logo {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+      }
+
+      .tools-nav-brand .title {
+        font-size: 13px;
+      }
+
+      .tools-nav-brand .subtitle {
+        display: none;
+      }
+
       .tools-nav-tab {
         padding: 6px 10px;
         font-size: 12px;
       }
-      .tools-nav-tab .label-short { display: inline; }
-      .tools-nav-tab .label-long { display: none; }
-      .tools-nav-back { padding: 6px 10px; font-size: 12px; }
-      .tools-nav-back .back-text { display: none; }
+
+      .tools-nav-tab .label-short {
+        display: inline;
+      }
+
+      .tools-nav-tab .label-long {
+        display: none;
+      }
+
+      .tools-nav-back {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+
+      .tools-nav-back .back-text {
+        display: none;
+      }
     }
 
     @media (min-width: 641px) {
-      .tools-nav-tab .label-short { display: none; }
-      .tools-nav-tab .label-long { display: inline; }
+      .tools-nav-tab .label-short {
+        display: none;
+      }
+      .tools-nav-tab .label-long {
+        display: inline;
+      }
     }
   </style>
 </head>
+
 <body>
   <!-- Top Navigation Bar -->
   <nav class="tools-nav">
-    <div class="tools-nav-brand">
-      <div class="logo">🔧</div>
+    <div class="tools-nav-brand" id="nav-brand">
+      <div class="logo" id="nav-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
       <div>
-        <div class="title">工具集</div>
-        <div class="subtitle">Tools Hub</div>
+        <div class="title" id="nav-title">逸程计划</div>
+        <div class="subtitle" id="nav-subtitle">ZEN PLANNER</div>
       </div>
     </div>
 
     <div class="tools-nav-tabs">
       <button class="tools-nav-tab active" data-tool="planner" onclick="switchTool('planner')">
-        <span class="icon" data-lucide="calendar"></span>
         <span class="label-long">日程计划</span>
         <span class="label-short">日程</span>
       </button>
       <button class="tools-nav-tab" data-tool="quiz" onclick="switchTool('quiz')">
-        <span class="icon" data-lucide="book-open"></span>
         <span class="label-long">学习测验</span>
         <span class="label-short">测验</span>
       </button>
       <button class="tools-nav-tab" data-tool="journal" onclick="switchTool('journal')">
-        <span class="icon">🎬</span>
         <span class="label-long">影视日志</span>
         <span class="label-short">影视</span>
       </button>
@@ -266,7 +322,8 @@
         <div class="spinner"></div>
         <span>正在加载日程计划...</span>
       </div>
-      <iframe src="planner.html" onload="document.getElementById('loading-planner').style.display='none'" title="逸程计划 - 日程管理"></iframe>
+      <iframe src="planner.html" onload="document.getElementById('loading-planner').style.display='none'"
+        title="逸程计划 - 日程管理"></iframe>
     </div>
 
     <!-- Quiz Panel -->
@@ -275,7 +332,8 @@
         <div class="spinner"></div>
         <span>正在加载学习测验...</span>
       </div>
-      <iframe src="quiz/index.html" onload="document.getElementById('loading-quiz').style.display='none'" title="学习测验系统"></iframe>
+      <iframe src="quiz/index.html" onload="document.getElementById('loading-quiz').style.display='none'"
+        title="学习测验系统"></iframe>
     </div>
 
     <!-- Movie Journal Panel -->
@@ -284,11 +342,30 @@
         <div class="spinner"></div>
         <span>正在加载影视日志...</span>
       </div>
-      <iframe src="journal.html" onload="document.getElementById('loading-journal').style.display='none'" title="影视日志"></iframe>
+      <iframe src="journal.html" onload="document.getElementById('loading-journal').style.display='none'"
+        title="影视日志"></iframe>
     </div>
   </div>
 
   <script>
+    const TOOL_BRANDS = {
+      planner: {
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+        title: '逸程计划',
+        subtitle: 'ZEN PLANNER'
+      },
+      quiz: {
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',
+        title: '学习面板',
+        subtitle: 'QUIZ SYSTEM'
+      },
+      journal: {
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4"/></svg>',
+        title: '影视日志',
+        subtitle: 'MOVIE JOURNAL'
+      }
+    };
+
     function switchTool(toolName) {
       // Update tab buttons
       document.querySelectorAll('.tools-nav-tab').forEach(btn => {
@@ -299,7 +376,21 @@
       document.querySelectorAll('.tool-panel').forEach(panel => {
         panel.classList.remove('active');
       });
-      document.getElementById('panel-' + toolName).classList.add('active');
+      const targetPanel = document.getElementById('panel-' + toolName);
+      if (targetPanel) targetPanel.classList.add('active');
+
+      // 动态品牌融合更新 (Unified Blue Background Box + White SVG Icon)
+      const brand = TOOL_BRANDS[toolName] || TOOL_BRANDS.planner;
+      const navBrand = document.getElementById('nav-brand');
+      if (navBrand) {
+        navBrand.style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('nav-logo').innerHTML = brand.svg;
+          document.getElementById('nav-title').textContent = brand.title;
+          document.getElementById('nav-subtitle').textContent = brand.subtitle;
+          navBrand.style.opacity = '1';
+        }, 150);
+      }
 
       // Update URL hash
       window.location.hash = toolName;
@@ -310,8 +401,11 @@
       const hash = window.location.hash.replace('#', '');
       if (hash && ['planner', 'quiz', 'journal'].includes(hash)) {
         switchTool(hash);
+      } else {
+        switchTool('planner');
       }
     });
   </script>
 </body>
+
 </html>
