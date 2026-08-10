@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
   <link rel="manifest" href="/images/manifest.json">
   <meta name="msapplication-config" content="/images/browserconfig.xml">
@@ -44,21 +44,33 @@
     lang   : 'zh-CN'
   };
 </script>
-<!-- HarmonyOS Sans SC Font -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
-<style>
-  /* Fallback: If LXGW WenKai is used, override font-family */
-  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
-  /*
-  @font-face {
-    font-family: 'HarmonyOS Sans SC';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
+
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
   }
-  */
-</style>
+});
+</script>
 
   <title>归档 | Haozi's Blog</title>
   
@@ -91,6 +103,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -207,7 +220,7 @@
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">不错! 目前共计 58 篇日志。 继续努力。</span>
+        <span class="collection-header">不错! 目前共计 59 篇日志。 继续努力。</span>
       </div>
 
       
@@ -220,7 +233,7 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2026-01-24T09:22:35+08:00"
+              datetime="2026-01-24T00:00:00+08:00"
               content="2026-01-24">
           01-24
         </time>
@@ -228,7 +241,7 @@
 
       <div class="post-title">
           <a class="post-title-link" href="/2026/01/24/%E8%80%97%E5%AD%90%E7%9A%84%E8%AE%B0%E5%BD%95/" itemprop="url">
-            <span itemprop="name">耗子的记录日志</span>
+            <span itemprop="name">耗子的日常状态复盘与习惯记录</span>
           </a>
       </div>
 
@@ -309,14 +322,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -326,7 +339,10 @@
         <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
       </span>
   </div>
 
@@ -337,44 +353,119 @@
   <!-- Category Quick Nav Widget -->
   <div class="sidebar-custom-section">
     <div class="sidebar-custom-title">
-      <i class="fa fa-folder"></i> 分类导航
+      <i class="far fa-folder"></i> 分类导航
     </div>
     <ul class="sidebar-category-list">
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E6%95%99%E7%A8%8B/">
-          <span class="cat-name"><i class="fa fa-code cat-icon"></i> 教程</span>
-          <span class="cat-count">19</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">18</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E7%94%9F%E6%B4%BB/">
-          <span class="cat-name"><i class="fa fa-coffee cat-icon"></i> 生活</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-sun cat-icon"></i> 生活
+          </span>
           <span class="cat-count">13</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E5%BD%B1%E8%A7%86/">
-          <span class="cat-name"><i class="fa fa-film cat-icon"></i> 影视</span>
-          <span class="cat-count">12</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E5%B7%A5%E7%A8%8B/">
-          <span class="cat-name"><i class="fa fa-cogs cat-icon"></i> 工程</span>
-          <span class="cat-count">8</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">9</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E9%98%85%E8%AF%BB/">
-          <span class="cat-name"><i class="fa fa-book cat-icon"></i> 阅读</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 阅读
+          </span>
           <span class="cat-count">4</span>
         </a>
       </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B0%8F%E8%AE%B0/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 生活哲学
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
     </ul>
   </div>
 
 </div>
-
       </div>
 
     </div>

@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
   <link rel="manifest" href="/images/manifest.json">
   <meta name="msapplication-config" content="/images/browserconfig.xml">
@@ -44,21 +44,33 @@
     lang   : 'zh-CN'
   };
 </script>
-<!-- HarmonyOS Sans SC Font -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
-<style>
-  /* Fallback: If LXGW WenKai is used, override font-family */
-  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
-  /*
-  @font-face {
-    font-family: 'HarmonyOS Sans SC';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
+
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
   }
-  */
-</style>
+});
+</script>
 
   <title>Haozi's Blog</title>
   
@@ -91,6 +103,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -217,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/15/haozi%E7%9A%84vibe%20coding%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">haozi的vibe coding笔记</a>
+            <a href="/2026/06/15/haozi%E7%9A%84vibe%20coding%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">新手期的AI探索与实践</a>
         </h2>
 
         <div class="post-meta">
@@ -227,8 +240,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-06-15 09:35:31" itemprop="dateCreated datePublished" datetime="2026-06-15T09:35:31+08:00">2026-06-15</time>
+              <time title="创建时间：2026-06-15 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-15T00:00:00+08:00">2026-06-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:54:13" itemprop="dateModified" datetime="2026-08-10T10:54:13+08:00">2026-08-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -240,7 +260,7 @@
             </span>
 
           
-            <div class="post-description">新手期的嘗試才是最珍貴的——关于 vibe coding、MCP、Agent Skill 和 PRD 的学习笔记</div>
+            <div class="post-description">记录作者在AI新手期的真实探索与实践，深入解析MCP与Agent Skill区别、Vibe Coding理念、PRD撰写及核心框架，帮助读者掌握AI工具，拿到通往新世界的入场券。</div>
 
         </div>
       </header>
@@ -282,7 +302,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/14/%E9%99%B7%E5%85%A5%E6%97%B6%E9%97%B4%E9%BB%91%E6%B4%9E%EF%BC%9F%E4%B8%80%E5%88%B7%E8%A7%86%E9%A2%91%E5%B0%B1%E5%81%9C%E4%B8%8D%E4%B8%8B%E6%9D%A5%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -296,7 +316,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/14/%E9%99%B7%E5%85%A5%E6%97%B6%E9%97%B4%E9%BB%91%E6%B4%9E%EF%BC%9F%E4%B8%80%E5%88%B7%E8%A7%86%E9%A2%91%E5%B0%B1%E5%81%9C%E4%B8%8D%E4%B8%8B%E6%9D%A5%EF%BC%9F/" class="post-title-link" itemprop="url">陷入时间黑洞？一刷视频就停不下来？</a>
+            <a href="/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/" class="post-title-link" itemprop="url">放下手机，认真吃一顿饭</a>
         </h2>
 
         <div class="post-meta">
@@ -306,8 +326,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-06-14 20:26:20" itemprop="dateCreated datePublished" datetime="2026-06-14T20:26:20+08:00">2026-06-14</time>
+              <time title="创建时间：2026-06-15 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-15T00:00:00+08:00">2026-06-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:52:41" itemprop="dateModified" datetime="2026-08-10T10:52:41+08:00">2026-08-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -319,7 +346,7 @@
             </span>
 
           
-            <div class="post-description">屏幕使用时间暴涨75%后的反思——如何用现实世界的活动替代网络世界的快餐</div>
+            <div class="post-description">尝试在用餐时彻底放下手机，不仅能大幅缩短吃饭时间，更能让人找回对食物本味的敏锐感知与深层思考。本文分享了一次丢掉电子产品的专注用餐体验，带你细味生活细节与情绪共鸣，并引发对现代人手机依赖症的真实反思。</div>
 
         </div>
       </header>
@@ -330,14 +357,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>每次学习完一些东西，想要休息，总是会不自觉的拿起手机，打开抖音，刷起来</p>
-<h2 id="正文">正文</h2>
-<p>这周的屏幕使用时间比上周多得多了，上周的平均屏幕使用时间是4h5m，这周一下子跳到了7h10m，涨了75%（是一个很恐怖的事情了），其实有很多原因，因为上周一周就有三门考试，导致忙得其实都没有什么时间来刷机，但这周就不太一样，只剩一门考试了，还是在遥远的23号，时间的宽裕带来了心理上的松懈，心理上的松懈导致了时不时就会拿起那诱人的手机，获取那来之极易的快餐。</p>
-<p>心里还是很想改变的，过多的短视频文化以及小黑盒文章的输入其实对于个人没有太多的帮助，会让你丧失独立思考的能力（这一点我深有同感）。想要改变是真的，但是怎么改变是很有难度的。</p>
-<p>如何衡量消磨时间还是利用时间，这本就是一个很有难度的问题。</p>
+          <p>手机等电子产品非常喜欢多管闲事，什么活动他都会插一嘴，踢一脚<br>
+今天吃饭尝试彻底丢掉手机，发现一个很大的变化：就是吃饭的时间缩短了一大堆，平常刷电子产品吃顿饭要半个小时，丢掉手机吃顿饭，只要十分钟，很吓人。</p>
+<p>除此之外，丢掉手机以后，我发现脑子似乎更加清醒，脑子里面似乎会有说不完的问题和想法等着去解答，有数不完的领域可以去探索，回想之前刷着手机吃着饭，似乎脑子根本不会想那么多，就连吃的饭是具体什么味道都不清楚。</p>
+<p>但今天不同，细细品味了吃的排骨玉米饭，注意到了里面的枸杞和葱花，注意到了入嘴的生姜，还在心里感触：小时候那个不吃葱不吃香料的孩子，现在长大了，不知道为什么想到这个，心里还有点酸酸的。</p>
+<p>丢掉电子产品，好好吃饭睡觉，说的轻巧，做起来好难的。</p>
+<p>不带手机吃饭，你怎么付钱？</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/06/14/%E9%99%B7%E5%85%A5%E6%97%B6%E9%97%B4%E9%BB%91%E6%B4%9E%EF%BC%9F%E4%B8%80%E5%88%B7%E8%A7%86%E9%A2%91%E5%B0%B1%E5%81%9C%E4%B8%8D%E4%B8%8B%E6%9D%A5%EF%BC%9F/#more" rel="contents">
+              <a class="btn" href="/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -375,7 +403,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/14/%E4%B8%A4%E4%B8%AA%E7%94%B5%E8%84%91%EF%BC%8Cwhat%20i%20can%20do%EF%BC%9F/" class="post-title-link" itemprop="url">两个电脑，what i can do？</a>
+            <a href="/2026/06/14/%E4%B8%A4%E4%B8%AA%E7%94%B5%E8%84%91%EF%BC%8Cwhat%20i%20can%20do%EF%BC%9F/" class="post-title-link" itemprop="url">笔记本串流台式机：兼顾便携与高性能的双机联动方案</a>
         </h2>
 
         <div class="post-meta">
@@ -385,8 +413,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-06-14 15:47:26" itemprop="dateCreated datePublished" datetime="2026-06-14T15:47:26+08:00">2026-06-14</time>
+              <time title="创建时间：2026-06-14 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-14T00:00:00+08:00">2026-06-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:52:37" itemprop="dateModified" datetime="2026-08-10T10:52:37+08:00">2026-08-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -398,7 +433,7 @@
             </span>
 
           
-            <div class="post-description">一个台式机屏幕大配置好，一个笔记本便携分辨率高——如何让两台电脑都不吃灰？</div>
+            <div class="post-description">本文针对闲置设备的高效利用痛点，分享了基于 Tailscale、Sunshine 与 Moonlight 的远程串流方案。让你在外出时也能用笔记本随时调取台式机的高强算力，真正实现便携性与高性能兼得的双机协同体验。</div>
 
         </div>
       </header>
@@ -455,7 +490,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/14/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%83%B3%E5%AD%A6%E4%B9%A0%EF%BC%9F/" class="post-title-link" itemprop="url">为什么不想学习？</a>
+            <a href="/2026/06/14/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%83%B3%E5%AD%A6%E4%B9%A0%EF%BC%9F/" class="post-title-link" itemprop="url">广义学习不是逃避期末复习的挡箭牌</a>
         </h2>
 
         <div class="post-meta">
@@ -464,10 +499,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-06-14 15:00:05 / 修改时间：15:40:38" itemprop="dateCreated datePublished" datetime="2026-06-14T15:00:05+08:00">2026-06-14</time>
+              <time title="创建时间：2026-06-14 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-14T00:00:00+08:00">2026-06-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:52:34" itemprop="dateModified" datetime="2026-08-10T10:52:34+08:00">2026-08-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -479,7 +520,7 @@
             </span>
 
           
-            <div class="post-description">什么事情都想去干，但是就是不想去学习——其实你一直在学习，只是不想学不感兴趣的东西而已</div>
+            <div class="post-description">本文深入剖析了以探索新技术等广义学习为由拖延期末复习的心理机制。作者警示切勿把兴趣学习当做逃避枯燥课程的借口，直观揭示了未充分备考可能面临的考场尴尬后果，呼吁大家合理分配有限精力，切勿空想，及时回归期末复习。</div>
 
         </div>
       </header>
@@ -522,6 +563,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/14/%E9%99%B7%E5%85%A5%E6%97%B6%E9%97%B4%E9%BB%91%E6%B4%9E%EF%BC%9F%E4%B8%80%E5%88%B7%E8%A7%86%E9%A2%91%E5%B0%B1%E5%81%9C%E4%B8%8D%E4%B8%8B%E6%9D%A5%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/14/%E9%99%B7%E5%85%A5%E6%97%B6%E9%97%B4%E9%BB%91%E6%B4%9E%EF%BC%9F%E4%B8%80%E5%88%B7%E8%A7%86%E9%A2%91%E5%B0%B1%E5%81%9C%E4%B8%8D%E4%B8%8B%E6%9D%A5%EF%BC%9F/" class="post-title-link" itemprop="url">如何用现实生活替代网络活动</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-14 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-14T00:00:00+08:00">2026-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:42:00" itemprop="dateModified" datetime="2026-08-10T10:42:00+08:00">2026-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">分享戒掉短视频成瘾的心得与Ali Abdaal推荐的实用方法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>每次学习完一些东西，想要休息，总是会不自觉的拿起手机，打开抖音，刷起来</p>
+<h2 id="正文">正文</h2>
+<p>这周的屏幕使用时间比上周多得多了，上周的平均屏幕使用时间是4h5m，这周一下子跳到了7h10m，涨了75%（是一个很恐怖的事情了），其实有很多原因，因为上周一周就有三门考试，导致忙得其实都没有什么时间来刷机，但这周就不太一样，只剩一门考试了，还是在遥远的23号，时间的宽裕带来了心理上的松懈，心理上的松懈导致了时不时就会拿起那诱人的手机，获取那来之极易的快餐。</p>
+<p>心里还是很想改变的，过多的短视频文化以及小黑盒文章的输入其实对于个人没有太多的帮助，会让你丧失独立思考的能力（这一点我深有同感）。想要改变是真的，但是怎么改变是很有难度的。</p>
+<p>如何衡量消磨时间还是利用时间，这本就是一个很有难度的问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/14/%E9%99%B7%E5%85%A5%E6%97%B6%E9%97%B4%E9%BB%91%E6%B4%9E%EF%BC%9F%E4%B8%80%E5%88%B7%E8%A7%86%E9%A2%91%E5%B0%B1%E5%81%9C%E4%B8%8D%E4%B8%8B%E6%9D%A5%EF%BC%9F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/04/16/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -536,7 +663,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/16/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/" class="post-title-link" itemprop="url">从零开始设计一台直驱伺服数控刀架</a>
+            <a href="/2026/04/16/%E6%99%BA%E8%83%BD%E8%A3%85%E5%A4%87%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%88%90%E5%9E%8B%E7%9A%84%EF%BC%9F/" class="post-title-link" itemprop="url">直驱伺服数控刀架设计全记录</a>
         </h2>
 
         <div class="post-meta">
@@ -553,7 +680,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-05-18 00:00:00" itemprop="dateModified" datetime="2026-05-18T00:00:00+08:00">2026-05-18</time>
+                <time title="修改时间：2026-08-10 10:51:49" itemprop="dateModified" datetime="2026-08-10T10:51:49+08:00">2026-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -566,7 +693,7 @@
             </span>
 
           
-            <div class="post-description">从专利调研到三维建模，从尺寸估算到答辩准备——一个完整的工程设计项目复盘</div>
+            <div class="post-description">记录8工位、中心高63mm、0.1秒换刀的直驱伺服数控刀架完整设计过程。涵盖DDR力矩电机选型、端齿盘锁紧与液压系统设计、关键参数校验、二维装配图绘制及实用专利文献参考，为机械设计项目提供实战借鉴。</div>
 
         </div>
       </header>
@@ -623,7 +750,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/" class="post-title-link" itemprop="url">jellyfin如何设置优雅的刮削？</a>
+            <a href="/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/" class="post-title-link" itemprop="url">Jellyfin MetaShark插件安装与配置指南</a>
         </h2>
 
         <div class="post-meta">
@@ -633,14 +760,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-04-03 14:56:36" itemprop="dateCreated datePublished" datetime="2026-04-03T14:56:36+08:00">2026-04-03</time>
+              <time title="创建时间：2026-04-03 00:00:00" itemprop="dateCreated datePublished" datetime="2026-04-03T00:00:00+08:00">2026-04-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
+                <time title="修改时间：2026-08-10 10:54:00" itemprop="dateModified" datetime="2026-08-10T10:54:00+08:00">2026-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -653,6 +780,7 @@
             </span>
 
           
+            <div class="post-description">本文详细介绍Jellyfin在线安装MetaShark与手动部署Metatube刮削插件的完整步骤，包含元数据设置、中文信息优化及Metatube后端服务器搭建与端口冲突排查，助你轻松提升影视墙刮削体验。</div>
 
         </div>
       </header>
@@ -708,7 +836,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/" class="post-title-link" itemprop="url">耗子的奶昔方案设计记录</a>
+            <a href="/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/" class="post-title-link" itemprop="url">香蕉芒果西梅奶昔</a>
         </h2>
 
         <div class="post-meta">
@@ -718,14 +846,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-04-03 14:56:36" itemprop="dateCreated datePublished" datetime="2026-04-03T14:56:36+08:00">2026-04-03</time>
+              <time title="创建时间：2026-04-03 00:00:00" itemprop="dateCreated datePublished" datetime="2026-04-03T00:00:00+08:00">2026-04-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
+                <time title="修改时间：2026-08-10 10:52:25" itemprop="dateModified" datetime="2026-08-10T10:52:25+08:00">2026-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -738,6 +866,7 @@
             </span>
 
           
+            <div class="post-description">记录香蕉、芒果与西梅混合酸奶制作奶昔的实操过程。针对成品过于浓稠、香蕉味过重等问题，总结出用鲜奶代替酸奶、控制香蕉用量以及保证榨汁机电量等3条实用的自制奶昔避坑技巧。</div>
 
         </div>
       </header>
@@ -793,7 +922,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/" class="post-title-link" itemprop="url">耗子的生活俳句</a>
+            <a href="/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/" class="post-title-link" itemprop="url">珞珈寝室日常随感诗辑</a>
         </h2>
 
         <div class="post-meta">
@@ -803,14 +932,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-04-03 14:56:36" itemprop="dateCreated datePublished" datetime="2026-04-03T14:56:36+08:00">2026-04-03</time>
+              <time title="创建时间：2026-04-03 00:00:00" itemprop="dateCreated datePublished" datetime="2026-04-03T00:00:00+08:00">2026-04-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
+                <time title="修改时间：2026-08-10 10:51:39" itemprop="dateModified" datetime="2026-08-10T10:51:39+08:00">2026-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -823,6 +952,7 @@
             </span>
 
           
+            <div class="post-description">本辑收录了珞珈山下大学寝室生活的真实随感与趣味俳句。从品尝樱花拿铁的快意、室友喧闹的微烦，到沉迷手机与硬盘焦虑，用诙谐灵动的诗句定格当代大学生的日常细节与真实心境。</div>
 
         </div>
       </header>
@@ -878,7 +1008,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/" class="post-title-link" itemprop="url">怎么使用ptqt进行ui界面的开发？</a>
+            <a href="/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/" class="post-title-link" itemprop="url">Python Qt 简介与 PySide6 安装指南</a>
         </h2>
 
         <div class="post-meta">
@@ -888,14 +1018,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-03-28 15:25:27" itemprop="dateCreated datePublished" datetime="2026-03-28T15:25:27+08:00">2026-03-28</time>
+              <time title="创建时间：2026-03-28 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-28T00:00:00+08:00">2026-03-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
+                <time title="修改时间：2026-08-10 10:52:11" itemprop="dateModified" datetime="2026-08-10T10:52:11+08:00">2026-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -908,6 +1038,7 @@
             </span>
 
           
+            <div class="post-description">本文解析PySide与PyQt的核心区别及PySide6基础运行逻辑，并针对Python 3.12环境下网络慢等问题，提供使用清华、阿里等国内镜像源快速安装PySide6的实战指南。</div>
 
         </div>
       </header>
@@ -926,92 +1057,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="折腾是理解世界的一种方式">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Haozi's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/03/22/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/" class="post-title-link" itemprop="url">c盘怎么去清理？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-03-22 21:21:19" itemprop="dateCreated datePublished" datetime="2026-03-22T21:21:19+08:00">2026-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>c盘怎么去清理？<br>
-</p>
-<h1>清理缓存文件</h1>
-<p>这一步网上有很多教程，可以去搜搜</p>
-<h1>wx文件管理</h1>
-<p>可以转移一下微信文件位置，不要放在c盘目录下</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/03/22/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1102,14 +1147,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1119,7 +1164,10 @@
         <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
       </span>
   </div>
 
@@ -1130,44 +1178,119 @@
   <!-- Category Quick Nav Widget -->
   <div class="sidebar-custom-section">
     <div class="sidebar-custom-title">
-      <i class="fa fa-folder"></i> 分类导航
+      <i class="far fa-folder"></i> 分类导航
     </div>
     <ul class="sidebar-category-list">
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E6%95%99%E7%A8%8B/">
-          <span class="cat-name"><i class="fa fa-code cat-icon"></i> 教程</span>
-          <span class="cat-count">19</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">18</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E7%94%9F%E6%B4%BB/">
-          <span class="cat-name"><i class="fa fa-coffee cat-icon"></i> 生活</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-sun cat-icon"></i> 生活
+          </span>
           <span class="cat-count">13</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E5%BD%B1%E8%A7%86/">
-          <span class="cat-name"><i class="fa fa-film cat-icon"></i> 影视</span>
-          <span class="cat-count">12</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E5%B7%A5%E7%A8%8B/">
-          <span class="cat-name"><i class="fa fa-cogs cat-icon"></i> 工程</span>
-          <span class="cat-count">8</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">9</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E9%98%85%E8%AF%BB/">
-          <span class="cat-name"><i class="fa fa-book cat-icon"></i> 阅读</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 阅读
+          </span>
           <span class="cat-count">4</span>
         </a>
       </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B0%8F%E8%AE%B0/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 生活哲学
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
     </ul>
   </div>
 
 </div>
-
       </div>
 
     </div>

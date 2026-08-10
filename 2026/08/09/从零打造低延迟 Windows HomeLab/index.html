@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="针对传统内网穿透方案高延迟、受限的痛点，本文介绍如何在 Windows 11 环境下利用原生公网 IPv6，结合 DDNS-GO、路由器转发与 Docker 版 Nginx Proxy Manager (NPM)，实现 Jellyfin、Sunshine 等本地服务的高速低延迟外网直连与 HTTPS 安全访问。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露">
+<meta property="og:url" content="http://haozi.space/2026/08/09/%E4%BB%8E%E9%9B%B6%E6%89%93%E9%80%A0%E4%BD%8E%E5%BB%B6%E8%BF%9F%20Windows%20HomeLab/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="针对传统内网穿透方案高延迟、受限的痛点，本文介绍如何在 Windows 11 环境下利用原生公网 IPv6，结合 DDNS-GO、路由器转发与 Docker 版 Nginx Proxy Manager (NPM)，实现 Jellyfin、Sunshine 等本地服务的高速低延迟外网直连与 HTTPS 安全访问。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809112059746.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120707014.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728618.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120933184.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728620.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728614.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728615.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728616.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728617.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105811616.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105901952.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922140.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922141.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922142.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105942558.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105952935.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110013436.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110023352.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110046985.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110210514.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110227660.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105901952.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922142.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922140.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809132326392.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110413625.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110642220.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110642221.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110642222.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110642223.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110716213.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751523.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751524.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751525.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751526.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751527.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110953406.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260810164319523.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110916519.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110927411.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110937383.png">
+<meta property="article:published_time" content="2026-08-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-10T08:52:12.319Z">
+<meta property="article:author" content="haozi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809112059746.png">
+
+<link rel="canonical" href="http://haozi.space/2026/08/09/%E4%BB%8E%E9%9B%B6%E6%89%93%E9%80%A0%E4%BD%8E%E5%BB%B6%E8%BF%9F%20Windows%20HomeLab/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
+
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
+  }
+});
+</script>
+
+  <title>基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/08/09/%E4%BB%8E%E9%9B%B6%E6%89%93%E9%80%A0%E4%BD%8E%E5%BB%B6%E8%BF%9F%20Windows%20HomeLab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-08-09 00:00:00" itemprop="dateCreated datePublished" datetime="2026-08-09T00:00:00+08:00">2026-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 16:52:12" itemprop="dateModified" datetime="2026-08-10T16:52:12+08:00">2026-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">工程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">针对传统内网穿透方案高延迟、受限的痛点，本文介绍如何在 Windows 11 环境下利用原生公网 IPv6，结合 DDNS-GO、路由器转发与 Docker 版 Nginx Proxy Manager (NPM)，实现 Jellyfin、Sunshine 等本地服务的高速低延迟外网直连与 HTTPS 安全访问。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在以往的 HomeLab 搭建中，本地服务的公网暴露往往依赖 Cloudflare Tunnel 或各类内网穿透工具。然而，由于中转服务器大多位于海外，这种方案普遍存在<strong>高延迟、带宽受限以及连接不稳定</strong>等痛点。<br>
+随着国内运营商家庭宽带普遍普及原生 IPv6，光猫改桥接后由路由器进行 PPPoE 拨号，设备即可获取到直连公网的 IPv6 地址。本文将详细介绍如何在 Windows 11 环境下，利用公网 IPv6、DDNS-GO 以及 Docker 版 Nginx Proxy Manager (NPM)，实现低延迟、安全且带 HTTPS 证书的本地服务外网暴露。</p>
+<blockquote>
+<p><strong>前提条件</strong>：本文方案建立在拥有<strong>原生公网 IPv6</strong> 的基础之上。在开始前，请先前往 <a target="_blank" rel="noopener" href="https://test-ipv6.com">test-ipv6.com</a> 检测你的网络环境是否符合要求。</p>
+</blockquote>
+<hr>
+<h1>背景与痛点</h1>
+<ul>
+<li><strong>原始方案</strong>：使用 Cloudflare Tunnel，导致高延迟、连接不稳定。</li>
+<li>具备一个个人域名：拥有一个个人域名（本文以 <code>haozi.space</code> 为例）。</li>
+<li><strong>网络条件</strong>：宽带提供原生公网 IPv6，光猫已桥接，路由器负责 PPPoE 拨号。</li>
+<li><strong>目标</strong>：利用真实 IPv6 直接把 Windows 上的 Jellyfin、Sunshine（Moonlight）等服务暴露到外网，保持最小的网络转发层数，从而获得几乎零延迟的体验。<br>
+再次强调，本文的一切前提都在于拥有一个公网IPv6，如果你不知道你自己有没有，可以前往 <a target="_blank" rel="noopener" href="https://test-ipv6.com">test-ipv6.com</a> 检测一下你的网络环境。</li>
+</ul>
+<hr>
+<h1>架构总览</h1>
+<p>适配睿易 (Ruiyi) EW1300 路由器环境的整体架构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Internet</span><br><span class="line">   │</span><br><span class="line">   └─ IPv6 AAAA DNS (Cloudflare) ──► Ruiyi EW1300 (OpenWrt)</span><br><span class="line">                                             │</span><br><span class="line">                       ┌─────────────────────┴─────────────────────┐</span><br><span class="line">                       │                                            │</span><br><span class="line">		  IPv6 转发     │                                            │</span><br><span class="line">                       ▼                                            ▼</span><br><span class="line">Docker 主机 (Windows 11) — Nginx Proxy Manager (Docker) —► Windows 本机服务</span><br><span class="line">   (Docker Desktop)          (端口 8080/8443)                 (Jellyfin 8096, Sunshine ...)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>DDNS‑GO（Windows 原生）</strong>：每 5 分钟将本机的公网 IPv6 写入 Cloudflare 的 <code>*.haozi.space</code> AAAA 记录。</li>
+<li><strong>Nginx Proxy Manager (NPM)</strong>：运行在 Docker 中，负责 HTTPS 终止、域名匹配、Let’s Encrypt 泛域名证书。</li>
+<li><strong>Ruiyi EW1300</strong>：直接放行需要的 IPv6 端口，并把外部流量转发到 Windows 主机的局域网 IP。</li>
+<li><strong>Windows 防火墙</strong>：同样放行对应端口，避免本机对 Docker 虚拟网卡的流量拦截。</li>
+</ul>
+<hr>
+<h1>部署步骤</h1>
+<h2 id="在-Windows-上部署-DDNS‑GO（-exe）">在 Windows 上部署 DDNS‑GO（ exe）</h2>
+<p>DDNS‑GO（exe）的下载链接：<a target="_blank" rel="noopener" href="https://github.com/jeessy2/ddns-go/releases/download/v6.17.5/ddns-go_6.17.5_windows_x86_64.zip">DDNS-GO</a><br>
+DDNS-GO的GitHub releases界面：<a target="_blank" rel="noopener" href="https://github.com/jeessy2/ddns-go/releases/tag/v6.17.5">GitHub releases</a>，下载界面截图：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809112059746.png" alt="image.png|591"></p>
+<p>之后，我们需要在 Windows 中将 <code>ddns-go</code> 注册为系统服务开机自启，只需以管理员身份打开PowerShell，在ddns-go.exe所在目录下，执行 <code>.\ddns-go.exe -s install</code> 命令即可。<br>
+ddns-go.exe所在目录：<code>D:\ddns-go_6.17.4_windows_x86_64\ddns-go_6.17.4_windows_x86_64</code>（可自行下载并置于你想要的路径）。<br>
+Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120707014.png" alt="1lab6.png|608"></p>
+<p>输入命令安装为系统服务：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\ddns<span class="literal">-go</span>.exe <span class="literal">-s</span> install</span><br></pre></td></tr></table></figure>
+<p>通过以下指令验证安装为系统服务是否成功：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-Service</span> ddns<span class="literal">-go</span></span><br></pre></td></tr></table></figure>
+<p>如果Status显示为Running，说明ddns-go系统服务安装成功！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728618.png" alt="1lab10.png|605"></p>
+<p>但是如果遇到了Stopped的情况，通过以下方式解决：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120933184.png" alt="1lab8.png|603"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728620.png" alt="1lab10.png|434"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728614.png" alt="1lab10.png|537"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728615.png" alt="1lab10.png|455"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728616.png" alt="1lab10.png|455"></p>
+<p>再次输入：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-Service</span> ddns<span class="literal">-go</span></span><br></pre></td></tr></table></figure>
+<p>验证启动是否生效。发现：Status显示为Running，说明ddns-go系统服务手动启动成功！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809120728617.png" alt="1lab10.png|560"></p>
+<p>之后，我们登录 <a target="_blank" rel="noopener" href="http://localhost:9876">http://localhost:9876</a> 访问DDNS-GO的Web UI（初次登录似乎密码自行配置即可？）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105811616.png" alt="1lab1.png|579"></p>
+<p>在配置DDNS-GO之前，需要先获取一个Cloudflare的API Token。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105901952.png" alt="3lab2.png|594"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922140.png" alt="3lab3.png|594"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922141.png" alt="3lab3.png|595"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922142.png" alt="3lab3.png|598"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105942558.png" alt="1lab2.png|578"></p>
+<p>匹配正则表达式这样写：<code>^([0-9a-fA-F]&#123;1,4&#125;:)&#123;7&#125;[0-9a-fA-F]&#123;1,4&#125;$</code> [注1]。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105952935.png" alt="1lab3.png|573"></p>
+<p>查看日志，显示域名解析成功即可：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110013436.png" alt="1lab4.png|605"></p>
+<p>也可以前往Cloudflare的dashboard查看DNS配置是否生效：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110023352.png" alt="1lab5.png|604"></p>
+<h2 id="Docker‑Compose-部署-Nginx-Proxy-Manager">Docker‑Compose 部署 Nginx Proxy Manager</h2>
+<p>中国大陆用户记得去Docker Engine里面修改镜像：<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110046985.png" alt="2lab4.png|626"></p>
+<p>更改的配置文件如下:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;gc&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;defaultKeepStorage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;20GB&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;experimental&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;https://docker.1ms.run&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;https://dockerproxy.net&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;https://proxy.vvvv.ee&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;https://dockerproxy.link&quot;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>在路径<code>D:\docker\homelab</code> 下建立 <code>docker-compose.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">npm:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;jc21/nginx-proxy-manager:latest&#x27;</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">npm</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;8080:80&#x27;</span>    <span class="comment"># 避开内部 80 冲突</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;8443:443&#x27;</span>   <span class="comment"># 外部用 8443，内部对应 NPM 的 443</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;81:81&#x27;</span>      <span class="comment"># 管理后台</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./npm/data:/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./npm/letsencrypt:/etc/letsencrypt</span></span><br></pre></td></tr></table></figure>
+<p>（<code>8443:443</code>和<code>8080：80</code>这两行是因为电脑上的80和443已经被占用，所以进行了端口映射）<br>
+在<code>docker-compose.yml</code>目录下，运行cmd，运行 <code>docker compose up -d</code> 命令：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+<p>静静等待一段时间（可能较长），拉取镜像完成后，打开 <a target="_blank" rel="noopener" href="http://localhost:8080">http://localhost:8080</a> ，显示以下界面说明NPM的配置和拉取已经成功啦：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110210514.png" alt="2lab3.png|599"></p>
+<p>也可以通过cmd命令行，输入：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p>终端输出，确保容器名称 <code>npm</code>、端口映射 <code>0.0.0.0:8080-&gt;80/tcp</code>、<code>0.0.0.0:8443-&gt;443/tcp</code></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110227660.png" alt="2lab5.png|608"></p>
+<h2 id="Let’s-Encrypt-泛域名证书">Let’s Encrypt 泛域名证书</h2>
+<p>先要获取API Token，操作和部署DDNS-GO时，获取Cloudflare的API Tokens的步骤一致：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105901952.png" alt="3lab2.png|550"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922142.png" alt="3lab3.png|544"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809105922140.png" alt="3lab3.png|556">!</p>
+<p>进入 <a target="_blank" rel="noopener" href="http://localhost:81">http://localhost:81</a>（NPM UI）→ 证书列表 → 添加证书 → 添加 Let’s Encrypt DNS 验证</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809132326392.png" alt="3lab6.png"></p>
+<p>类型选 <code>DNS Challenge</code> → Provider 选 <code>Cloudflare</code> → 填入 <strong>API Token</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110413625.png" alt="3lab1.png|369"></p>
+<p>域名填写泛域名 <code>*.haozi.space</code>，保存。<br>
+证书显示生效就可以进行后续的步骤了。</p>
+<h2 id="在-NPM-中添加反向代理-Host（示例：Jellyfin）">在 NPM 中添加反向代理 Host（示例：Jellyfin）</h2>
+<p>主机列表→ 代理服务列表 → 添加 代理服务：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110642220.png" alt="3lab7.png|600"></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>取值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Domain Names</strong></td>
+<td><code>vd.haozi.space</code></td>
+</tr>
+<tr>
+<td><strong>Scheme</strong></td>
+<td><code>http</code></td>
+</tr>
+<tr>
+<td><strong>Forward Hostname / IP</strong></td>
+<td><code>host.docker.internal</code>(Windows 主机在局域网的固定 IP)</td>
+</tr>
+<tr>
+<td><strong>Forward Port</strong></td>
+<td><code>8096</code></td>
+</tr>
+<tr>
+<td><strong>WebSocket Support</strong></td>
+<td>勾选（Jellyfin 需要）</td>
+</tr>
+<tr>
+<td><strong>SSL</strong></td>
+<td>“Force SSL” 并选用上一步创建的 <em>Wildcard Haozi</em> 证书</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110642221.png" alt="3lab7.png"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110642222.png" alt="3lab7.png"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110642223.png" alt="3lab7.png"></p>
+<h2 id="Ruiyi-EW1300防火墙放行-IPv6-端口">Ruiyi EW1300防火墙放行 IPv6 端口</h2>
+<p><a target="_blank" rel="noopener" href="http://192.168.110.1">http://192.168.110.1</a> → 更多位置 → 高级管理 → 其他设置 → 关闭 开启高级防火墙+关闭 禁止ICMPv6发包。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110716213.png" alt="4lab1.png"></p>
+<h2 id="Windows-Defender-防火墙放行对应端口">Windows Defender 防火墙放行对应端口</h2>
+<p>PowerShell 脚本<code>setup-fw.ps1</code>（一次性放行 NPM、Jellyfin、Sunshine 所需端口）：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 放行 NPM HTTPS 端口</span></span><br><span class="line"><span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;NPM HTTPS&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> TCP <span class="literal">-LocalPort</span> <span class="number">8443</span> <span class="literal">-Action</span> Allow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放行 Jellyfin</span></span><br><span class="line"><span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Jellyfin&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> TCP <span class="literal">-LocalPort</span> <span class="number">8096</span> <span class="literal">-Action</span> Allow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放行 Sunshine（TCP 端口示例）</span></span><br><span class="line"><span class="variable">$sunshineTcp</span> = <span class="selector-tag">@</span>(<span class="number">47984</span>,<span class="number">47989</span>,<span class="number">48010</span>)</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$p</span> <span class="keyword">in</span> <span class="variable">$sunshineTcp</span>) &#123;</span><br><span class="line">    <span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Sunshine TCP <span class="variable">$p</span>&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> TCP <span class="literal">-LocalPort</span> <span class="variable">$p</span> <span class="literal">-Action</span> Allow</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放行 Sunshine UDP 端口</span></span><br><span class="line"><span class="variable">$sunshineUdp</span> = <span class="selector-tag">@</span>(<span class="number">47998</span>,<span class="number">47999</span>,<span class="number">48000</span>,<span class="number">48002</span>,<span class="number">48010</span>)</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$p</span> <span class="keyword">in</span> <span class="variable">$sunshineUdp</span>) &#123;</span><br><span class="line">    <span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Sunshine UDP <span class="variable">$p</span>&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> UDP <span class="literal">-LocalPort</span> <span class="variable">$p</span> <span class="literal">-Action</span> Allow</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751523.png" alt="5lab1.png"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751524.png" alt="5lab1.png"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751525.png" alt="5lab1.png"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751526.png" alt="5lab1.png"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110751527.png" alt="5lab1.png"></p>
+<h2 id="验证外网访问">验证外网访问</h2>
+<p>使用中国电信5G流量进行外网访问的测试：<br>
+关闭手机 Wi-Fi，切换至蜂窝网络（5G）：</p>
+<ol>
+<li><strong>Jellyfin 影音访问</strong>：
+<ul>
+<li>在手机浏览器打开 <code>https://vd.haozi.space:8443</code>。</li>
+<li>确认 SSL 证书绿锁生效，成功加载 Jellyfin 登录界面并实现流畅播放。</li>
+</ul>
+</li>
+</ol>
+<div class="mobile-image-row">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110953406.png">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260810164319523.png">
+</div>
+<ol start="2">
+<li><strong>Moonlight 串流游戏</strong>：
+<ul>
+<li>打开 Moonlight 客户端，点击“手动添加主机”。</li>
+<li>主机地址填写纯域名：<code>sunshine.haozi.space</code>（注意：<strong>切勿带</strong> <code>http://</code> 或端口号）[注2]。</li>
+<li>配对成功后，即可在公网下获得延迟低的远程桌面与游戏串流体验。</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110916519.png" alt="7lab1.png"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110927411.png" alt="7lab2.png"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260809110937383.png" alt="7lab3.png"></p>
+<hr>
+<h1>架构维护清单</h1>
+<ul>
+<li>[x] 公网IPv6（服务器端和客户端均需要有公网IPv6）</li>
+<li>[x] DDNS-GO windows 服务启动成功（前往 <a target="_blank" rel="noopener" href="http://localhost:9876">http://localhost:9876</a> 维护）</li>
+<li>[x] Docker NPM 服务启动成功（前往 <a target="_blank" rel="noopener" href="http://localhost:81">http://localhost:81</a> 维护）</li>
+<li>[x] Let’s Encrypt 泛域名证书未到期 （前往 <a target="_blank" rel="noopener" href="http://localhost:81">http://localhost:81</a> 维护）</li>
+<li>[x] Windows Defender 防火墙指定端口开放：
+<ul>
+<li>[x] Jellyfin(8096)</li>
+<li>[x] Sunshine(TCP:47984,47989,48010、UDP:47998,47999,48000,48002,48010)</li>
+<li>[x] NPM(8443)</li>
+</ul>
+</li>
+<li>[x] 公网IPv6连通性测试（可以通过 <a target="_blank" rel="noopener" href="https://test-ipv6.com">https://test-ipv6.com</a> 进行检验）</li>
+</ul>
+<hr>
+<h1>适用场景与拓展</h1>
+<h2 id="方案适用场景">方案适用场景</h2>
+<ul>
+<li><strong>4K 原画家庭影音</strong>：无需经过中转服务器，直接以全速宽带上行播放 Jellyfin / Emby / Plex 中的高清视频。</li>
+<li><strong>超低延迟云游戏</strong>：结合 Sunshine + Moonlight 实现随地远程串流 Windows 3A 大作。</li>
+<li><strong>私有云存储与同步</strong>：搭配 Nextcloud、Obsidian (CouchDB / Remotely Save) 等服务实现全端快速同步。</li>
+<li><strong>远程运维与桌面</strong>：借助已有的公网 IPv6 + DDNS 解析，可直接通过 RDP（Windows 远程桌面协议）实现低延迟的远程桌面控制，无需中继服务器。对于同时管理多台设备的场景，也可部署 RustDesk 自建Server（需要一台具有公网 IP 的 VPS），统一管理家庭网络内所有无公网 IP 的设备。</li>
+</ul>
+<h2 id="后续拓展方向">后续拓展方向</h2>
+<ul>
+<li><strong>安全防护强化</strong>：在 NPM 中为敏感服务（如管理后台）开启 <strong>Access List</strong>（ HTTP 基本认证 / IP 白名单），防止公网暴力破解。</li>
+<li><strong>动态 IP 变动熔断与通知</strong>：利用 DDNS-GO 内置的 Webhook 功能，在 IPv6 地址变更时推送到 Server 酱、Telegram 机器人或 Server 酱。</li>
+<li><strong>全局 Fallback 备用方案</strong>：由于部分公司网或公共场所 Wi-Fi 可能未开启 IPv6，建议搭配 <strong>Tailscale / Netbird</strong> 自建 DERP 中继作为纯 IPv4 环境下的备用通道。</li>
+</ul>
+<h1>参考文章</h1>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/jeessy/ddns-go#%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%BD%BF%E7%94%A8">jeessy/ddns-go - Docker Image</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/NginxProxyManager/nginx-proxy-manager">NginxProxyManager/nginx-proxy-manager</a><br>
+<a target="_blank" rel="noopener" href="https://www.wangdu.site/course/2109.html">国内可用Docker镜像源加速器/DockerHub镜像汇总(2026年6月13日) - 文武科技柜</a><br>
+<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/5770756070">为什么Windows上会有很多IPv6地址？ - 知乎</a></p>
+<hr>
+<p><strong>注1：正则表达式的解释</strong><br>
+<code>^([0-9a-fA-F]&#123;1,4&#125;:)&#123;7&#125;[0-9a-fA-F]&#123;1,4&#125;$</code>，这个正则表达式的意思是：“<em>严格匹配一个由 8 段、用冒号隔开的、每段包含 1 到 4 位十六进制数字的完整 IPv6 地址</em>”。</p>
+<ol>
+<li>边界锚定：<code>^</code> 和 <code>$</code></li>
+</ol>
+<ul>
+<li><code>^</code>：匹配字符串的开始位置。</li>
+<li><code>$</code>：匹配字符串的结束位置。</li>
+<li>作用：确保整个字符串只能包含符合条件的 IPv6 地址，前后不能有任何其他多余的字符。</li>
+</ul>
+<ol start="2">
+<li>核心段落：<code>[a-fA-F0-9]&#123;1,4&#125;</code></li>
+</ol>
+<ul>
+<li><code>[...]</code>：字符集，表示允许出现的字符。</li>
+<li><code>a-fA-F0-9</code>：表示允许出现小写字母 <code>a-f</code>、大写字母 <code>A-F</code>、以及数字 <code>0-9</code>（即合法的十六进制字符）。</li>
+<li><code>&#123;1,4&#125;</code>：量词，表示前面的字符集必须出现 1 到 4 次。</li>
+<li>作用：匹配 IPv6 地址中的单个数群（例如：<code>2001</code>、<code>0db8</code>、<code>85a3</code> 甚至简写的 <code>1</code>）。</li>
+</ul>
+<ol start="3">
+<li>前 7 段的循环：<code>([a-fA-F0-9]&#123;1,4&#125;:)&#123;7&#125;</code></li>
+</ol>
+<ul>
+<li><code>(...)</code>：分组，把里面包含的内容看作一个整体。</li>
+<li><code>:</code>：普通的冒号，表示段与段之间的分隔符。</li>
+<li><code>&#123;7&#125;</code>：量词，表示括号内的整体（即“1-4位十六进制数+冒号”）必须恰好重复出现 7 次。</li>
+<li>作用：匹配前 7 段地址。形如：<code>2001:0db8:85a3:0000:0000:8a2e:0370:</code></li>
+</ul>
+<ol start="4">
+<li>最后一段：<code>[a-fA-F0-9]&#123;1,4&#125;</code></li>
+</ol>
+<ul>
+<li>作用：匹配最后一段不带冒号的十六进制数（第 8 段）。形如：<code>7334</code></li>
+</ul>
+<p><strong>匹配成功示例</strong></p>
+<ul>
+<li><code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code> （完美匹配）</li>
+<li><code>2001:db8:85a3:0:0:8a2e:370:7334</code> （成功，因为每段 1 到 4 位都算合规）</li>
+</ul>
+<p><strong>匹配失败示例</strong></p>
+<ul>
+<li><code>2001:db8::1</code> （失败，因为使用了 <code>::</code> 缩写，总段数不足 8 段，无法通过 <code>&#123;7&#125;</code> 的硬性计数）</li>
+<li><code>2001:0db8:85a3:0000:0000:8a2e:0370:7334/64</code> （失败，因为末尾带有 <code>$</code>, 无法匹配 <code>/64</code> 子网掩码）</li>
+</ul>
+<hr>
+<p><strong>注2：关于填写 Moonlight客户端的注意事项</strong></p>
+<ol>
+<li>为什么 Web 界面和串流是两码事？</li>
+</ol>
+<ul>
+<li><strong>Sunshine 的 Web UI (配置页面)</strong>：这是一个纯网页服务（HTTP）。所以你可以把它挂在 NPM（Nginx Proxy Manager）后面，通过 <code>https://sunshine.haozi.space:8443</code> 访问。它的作用仅仅是让你在外面能打开页面，进行“配对(PIN)”或者修改分辨率等设置。</li>
+<li><strong>Moonlight 实际串流 (打游戏)</strong>：游戏画面传输使用的是一套非常底层的私有协议，主要依赖 <strong>UDP 端口 (如 47998)</strong> 来保证超低延迟。NPM 默认只代理 HTTP/TCP 流量，<strong>NPM 根本无法也不应该去代理游戏串流的 UDP 流量</strong>（如果强行用 Nginx 代理 UDP，延迟会激增，失去串流的意义）。</li>
+</ul>
+<ol start="2">
+<li>
+<p>那么 Moonlight 客户端到底怎么填？<br>
+因为 Moonlight 必须<strong>直连</strong>你的 Windows 电脑，所以它的逻辑是：<br>
+输入一个地址 → Moonlight 通过 DNS 查到你电脑的真实 IPv6 → 直接向这个 IPv6 的 47998 等端口发起连接。<br>
+所以：<br>
+<strong>错误填法</strong>：<code>http://vpn.haozi.space</code> 或者 <code>https://sunshine.haozi.space:8443</code><br>
+（Moonlight 客户端的“添加主机”框里<strong>不能带 <code>http://</code> 或端口号</strong>，它不是浏览器，它不认识网址格式）。<br>
+<strong>正确填法</strong>：<code>vpn.haozi.space</code> 或者 <code>sunshine.haozi.space</code><br>
+（只需填<strong>纯域名</strong>。只要这个域名在 DDNS 里绑定了你 Windows 的公网 IPv6 即可）。</p>
+</li>
+<li>
+<p>你的疑问解答</p>
+</li>
+</ol>
+<blockquote>
+<p>“这对吗？我之前认为只要输入 <a target="_blank" rel="noopener" href="http://vpn.haozi.space">http://vpn.haozi.space</a> 获取了主机的 IPv6 地址就可以串流了”</p>
+</blockquote>
+<p><strong>你的核心思路是对的</strong>：确实是靠域名获取主机的 IPv6 地址来进行串流。<br>
+不管是叫 <code>sunshine.haozi.space</code> 还是 <code>vpn.haozi.space</code>，只要这个域名在 Cloudflare 的 DNS 记录里（通过 DDNS-GO）指向了你电脑当前的真实 IPv6 地址，Moonlight 就能顺藤摸瓜找到你的电脑。</p>
+<ol start="4">
+<li>串流成功的绝对前提（敲黑板）<br>
+既然 Moonlight 是<strong>直连</strong>你的电脑，绕过了 Nginx (NPM)，那么：<br>
+你必须在 <strong>路由器防火墙 (ip6tables)</strong> 和 <strong>Windows Defender 防火墙</strong> 中，<strong>真实地放行 Sunshine 所需的所有端口</strong>。仅仅在 NPM 里配置反代是没用的。<br>
+你需要放行的端口列表：</li>
+</ol>
+<ul>
+<li><strong>TCP</strong>: <code>47984, 47989, 48010</code></li>
+<li><strong>UDP</strong>: <code>47998, 47999, 48000, 48002, 48010</code></li>
+</ul>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 2rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="gruvbox"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+        <div class="reward-container">
+  <div>如果这篇文章对你有帮助，请我喝杯咖啡吧 ☕</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="haozi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="haozi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/01/%E5%88%9B%E4%BD%9C%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BF%A1%E6%81%AF%E6%BA%90%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%95%BF%E6%9C%9F%E7%AE%A1%E7%90%86%EF%BC%9F/" rel="prev" title="基于Obsidian的本地资料归档与知识管理工作流">
+      <i class="fa fa-chevron-left"></i> 基于Obsidian的本地资料归档与知识管理工作流
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">背景与痛点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">架构总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">部署步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-Windows-%E4%B8%8A%E9%83%A8%E7%BD%B2-DDNS%E2%80%91GO%EF%BC%88-exe%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">在 Windows 上部署 DDNS‑GO（ exe）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker%E2%80%91Compose-%E9%83%A8%E7%BD%B2-Nginx-Proxy-Manager"><span class="nav-number">3.2.</span> <span class="nav-text">Docker‑Compose 部署 Nginx Proxy Manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Let%E2%80%99s-Encrypt-%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6"><span class="nav-number">3.3.</span> <span class="nav-text">Let’s Encrypt 泛域名证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-NPM-%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-Host%EF%BC%88%E7%A4%BA%E4%BE%8B%EF%BC%9AJellyfin%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">在 NPM 中添加反向代理 Host（示例：Jellyfin）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruiyi-EW1300%E9%98%B2%E7%81%AB%E5%A2%99%E6%94%BE%E8%A1%8C-IPv6-%E7%AB%AF%E5%8F%A3"><span class="nav-number">3.5.</span> <span class="nav-text">Ruiyi EW1300防火墙放行 IPv6 端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Defender-%E9%98%B2%E7%81%AB%E5%A2%99%E6%94%BE%E8%A1%8C%E5%AF%B9%E5%BA%94%E7%AB%AF%E5%8F%A3"><span class="nav-number">3.6.</span> <span class="nav-text">Windows Defender 防火墙放行对应端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE"><span class="nav-number">3.7.</span> <span class="nav-text">验证外网访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">架构维护清单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">适用场景与拓展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">5.1.</span> <span class="nav-text">方案适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E6%8B%93%E5%B1%95%E6%96%B9%E5%90%91"><span class="nav-number">5.2.</span> <span class="nav-text">后续拓展方向</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="haozi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">折腾是理解世界的一种方式</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+<!-- Custom Sidebar Widgets -->
+<div class="sidebar-custom-wrap">
+
+  <!-- Category Quick Nav Widget -->
+  <div class="sidebar-custom-section">
+    <div class="sidebar-custom-title">
+      <i class="far fa-folder"></i> 分类导航
+    </div>
+    <ul class="sidebar-category-list">
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E6%95%99%E7%A8%8B/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">18</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E7%94%9F%E6%B4%BB/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-sun cat-icon"></i> 生活
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E5%BD%B1%E8%A7%86/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E5%B7%A5%E7%A8%8B/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">9</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E9%98%85%E8%AF%BB/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 阅读
+          </span>
+          <span class="cat-count">4</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B0%8F%E8%AE%B0/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 生活哲学
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+</div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - Aesthetic Interactive Mouse (鼠鼠) -->
+<div id="pet-toggle" class="pet-toggle" title="点击召唤终端小鼠鼠">
+  <span class="pet-toggle-icon"><i class="fa fa-terminal"></i></span>
+  <span class="pet-toggle-label">PET</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet">
+  <div class="terminal-header">
+    <div class="terminal-dots">
+      <span class="terminal-dot red" id="pet-close-dot" title="关闭宠物"></span>
+      <span class="terminal-dot yellow" title="最小化"></span>
+      <span class="terminal-dot green" title="展开"></span>
+    </div>
+    <span class="terminal-title">haozi@blog:~</span>
+    <span class="terminal-close" id="pet-close" title="收起">&minus;</span>
+  </div>
+
+  <div class="terminal-body">
+    <!-- Heart & Status animation container -->
+    <div id="pet-hearts-container" class="pet-hearts-container"></div>
+
+    <!-- Centered Container for Perfectly Aligned Mouse -->
+    <div class="pet-ascii-wrap">
+      <span id="pet-status-badge" class="pet-status-badge"></span>
+      <pre id="pet-ascii" class="pet-ascii"></pre>
+    </div>
+
+    <!-- Interactive Buttons (Vector Line Icons) -->
+    <div class="pet-actions">
+      <button class="pet-btn" id="btn-pat" title="摸摸鼠鼠"><i class="fa fa-heart-o"></i> 抚摸</button>
+      <button class="pet-btn" id="btn-feed" title="喂食物"><i class="fa fa-coffee"></i> 投喂</button>
+      <button class="pet-btn" id="btn-sleep" title="小憩一会儿"><i class="fa fa-moon-o"></i> 睡觉</button>
+    </div>
+
+    <!-- Terminal Prompt Line -->
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  background: rgba(35, 35, 35, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.pet-toggle:hover {
+  transform: scale(1.12);
+  border-color: #7e8027;
+  box-shadow: 0 0 15px rgba(126, 128, 39, 0.6);
+}
+.pet-toggle-icon {
+  font-size: 16px;
+  line-height: 1;
+  color: #7e8027;
+}
+.pet-toggle-label {
+  color: #a4a638;
+  font-family: 'Consolas', monospace;
+  font-size: 8px;
+  font-weight: bold;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Terminal Window Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  width: 270px;
+  background: rgba(28, 28, 30, 0.94) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2);
+  z-index: 9999;
+  font-family: 'Consolas', 'Cascadia Code', 'Courier New', monospace;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.terminal-header {
+  background: rgba(40, 40, 43, 0.95);
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: move;
+  user-select: none;
+}
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+
+.terminal-title {
+  color: #88888d;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #fff;
+  background: rgba(232, 17, 35, 0.7);
+}
+
+.terminal-body {
+  position: relative;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Mouse ASCII Outer Centered Wrapper */
+.pet-ascii-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 4px 0 10px 0;
+}
+
+/* Fix ASCII Pre element alignment & line-height to connect tail & center feet */
+.pet-ascii {
+  display: inline-block !important;
+  text-align: left !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #b0b439 !important;
+  font-family: 'Consolas', 'Courier New', 'MS Gothic', monospace !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: pre !important;
+  user-select: none;
+  text-shadow: 0 0 8px rgba(126, 128, 39, 0.3);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Floating status emoji badge */
+.pet-status-badge {
+  position: absolute;
+  top: -8px;
+  right: 45px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.pet-status-badge.active {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Interactive Action Buttons */
+.pet-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  justify-content: center;
+}
+.pet-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ddd;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pet-btn:hover {
+  background: rgba(126, 128, 39, 0.3);
+  border-color: #7e8027;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.pet-btn:active {
+  transform: translateY(1px);
+}
+
+/* Terminal Input Prompt */
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #d1d1d6;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Floating Hearts Effect Container */
+.pet-hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.floating-heart {
+  position: absolute;
+  font-size: 14px;
+  animation: floatUp 1.2s ease-out forwards;
+  opacity: 0.9;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(80px) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px) scale(1.2);
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 230px;
+    right: 12px;
+    bottom: 70px;
+  }
+  .pet-toggle {
+    bottom: 15px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+  }
+  .pet-toggle-icon {
+    font-size: 14px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  // Connected tail \(  ) and right-shifted feet " " under belly
+  var petStates = {
+    idle: {
+      frames: [
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: ""
+    },
+    happy: {
+      frames: [
+        ["  C^プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C>プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-heart' style='color:#ff5f56;'></i>"
+    },
+    feed: {
+      frames: [
+        ["  C~プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  Cvプ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-coffee' style='color:#ffbd2e;'></i>"
+    },
+    sleep: {
+      frames: [
+        ["  C-プ°", " \\(uu)", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(..)", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-moon-o' style='color:#27c93f;'></i>"
+    }
+  };
+
+  var defaultMessages = [
+    "欢迎来到 Haozi's Blog！鼠鼠我呀~",
+    "git commit -m '投喂鼠鼠'",
+    "鼠鼠正在认真看博客...",
+    "折腾是理解世界的一种方式！",
+    "404: 奶酪未找到，急需投喂 🧀",
+    "while(true) { nap(); }",
+    "sudo belly_rub --user=visitor",
+    "编译中... 吱吱吱~ 100%"
+  ];
+
+  var currentState = 'idle';
+  var frameIndex = 0;
+  var msgIndex = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var badgeEl = document.getElementById('pet-status-badge');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var closeDot = document.getElementById('pet-close-dot');
+  var header = container.querySelector('.terminal-header');
+  var heartsContainer = document.getElementById('pet-hearts-container');
+  var isOpen = true;
+  var stateTimer = null;
+
+  function renderMouse() {
+    if (!isOpen) return;
+    var stateObj = petStates[currentState] || petStates.idle;
+    var frames = stateObj.frames;
+    petEl.textContent = frames[frameIndex % frames.length];
+    
+    if (stateObj.badge) {
+      badgeEl.innerHTML = stateObj.badge;
+      badgeEl.classList.add('active');
+    } else {
+      badgeEl.classList.remove('active');
+    }
+    frameIndex++;
+  }
+
+  function typewriter(text, speed) {
+    speed = speed || 40;
+    msgEl.textContent = '';
+    var i = 0;
+    var timer = setInterval(function() {
+      if (i < text.length) {
+        msgEl.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+  }
+
+  function spawnHearts(emoji) {
+    emoji = emoji || '❤️';
+    for (var i = 0; i < 3; i++) {
+      (function(delay) {
+        setTimeout(function() {
+          var heart = document.createElement('span');
+          heart.className = 'floating-heart';
+          heart.textContent = emoji;
+          heart.style.left = (35 + Math.random() * 30) + '%';
+          heartsContainer.appendChild(heart);
+          setTimeout(function() {
+            if (heart.parentNode) heart.parentNode.removeChild(heart);
+          }, 1200);
+        }, delay);
+      })(i * 200);
+    }
+  }
+
+  function setTemporaryState(state, message, emoji, duration) {
+    currentState = state;
+    frameIndex = 0;
+    renderMouse();
+    if (message) typewriter(message);
+    if (emoji) spawnHearts(emoji);
+
+    if (stateTimer) clearTimeout(stateTimer);
+    stateTimer = setTimeout(function() {
+      currentState = 'idle';
+      renderMouse();
+    }, duration || 4000);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    renderMouse();
+    typewriter(defaultMessages[0]);
+    try { localStorage.setItem('terminal-pet-closed', 'false'); } catch(e){}
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+    try { localStorage.setItem('terminal-pet-closed', 'true'); } catch(e){}
+  }
+
+  // Check initial state from localStorage
+  try {
+    if (localStorage.getItem('terminal-pet-closed') === 'true') {
+      closePet();
+    } else {
+      openPet();
+    }
+  } catch(e) {
+    openPet();
+  }
+
+  // Event Listeners
+  toggleBtn.addEventListener('click', openPet);
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+  if (closeDot) {
+    closeDot.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closePet();
+    });
+  }
+
+  // Action Buttons
+  var btnPat = document.getElementById('btn-pat');
+  var btnFeed = document.getElementById('btn-feed');
+  var btnSleep = document.getElementById('btn-sleep');
+
+  if (btnPat) {
+    btnPat.addEventListener('click', function() {
+      setTemporaryState('happy', '吱吱~ 被摸摸头很舒服！开心值+100', '❤️', 4000);
+    });
+  }
+  if (btnFeed) {
+    btnFeed.addEventListener('click', function() {
+      setTemporaryState('feed', '美味的奶酪！鼠鼠能量满格 🧀', '🧀', 4000);
+    });
+  }
+  if (btnSleep) {
+    btnSleep.addEventListener('click', function() {
+      setTemporaryState('sleep', '呼呼... 鼠鼠进入小憩模式 zZ', '💤', 5000);
+    });
+  }
+
+  // Click directly on ASCII Mouse
+  petEl.addEventListener('click', function() {
+    setTemporaryState('happy', '吱！你戳了戳鼠鼠~ 🐾', '✨', 3000);
+  });
+
+  // Animation Loop (Update mouse frame every 1.2s)
+  setInterval(renderMouse, 1200);
+
+  // Message Loop (Rotate default quotes every 6s if idle)
+  setInterval(function() {
+    if (!isOpen || currentState !== 'idle') return;
+    msgIndex = (msgIndex + 1) % defaultMessages.length;
+    typewriter(defaultMessages[msgIndex]);
+  }, 6000);
+
+  // Drag functionality for Terminal Header
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target === closeBtn || e.target === closeDot) return;
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  });
+})();
+</script>
+
+</body>
+</html>

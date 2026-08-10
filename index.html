@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
   <link rel="manifest" href="/images/manifest.json">
   <meta name="msapplication-config" content="/images/browserconfig.xml">
@@ -44,21 +44,33 @@
     lang   : 'zh-CN'
   };
 </script>
-<!-- HarmonyOS Sans SC Font -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
-<style>
-  /* Fallback: If LXGW WenKai is used, override font-family */
-  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
-  /*
-  @font-face {
-    font-family: 'HarmonyOS Sans SC';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
+
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
   }
-  */
-</style>
+});
+</script>
 
   <title>Haozi's Blog</title>
   
@@ -91,6 +103,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -203,6 +216,363 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/08/09/%E4%BB%8E%E9%9B%B6%E6%89%93%E9%80%A0%E4%BD%8E%E5%BB%B6%E8%BF%9F%20Windows%20HomeLab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/09/%E4%BB%8E%E9%9B%B6%E6%89%93%E9%80%A0%E4%BD%8E%E5%BB%B6%E8%BF%9F%20Windows%20HomeLab/" class="post-title-link" itemprop="url">基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-08-09 00:00:00" itemprop="dateCreated datePublished" datetime="2026-08-09T00:00:00+08:00">2026-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 16:52:12" itemprop="dateModified" datetime="2026-08-10T16:52:12+08:00">2026-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">工程</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">针对传统内网穿透方案高延迟、受限的痛点，本文介绍如何在 Windows 11 环境下利用原生公网 IPv6，结合 DDNS-GO、路由器转发与 Docker 版 Nginx Proxy Manager (NPM)，实现 Jellyfin、Sunshine 等本地服务的高速低延迟外网直连与 HTTPS 安全访问。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在以往的 HomeLab 搭建中，本地服务的公网暴露往往依赖 Cloudflare Tunnel 或各类内网穿透工具。然而，由于中转服务器大多位于海外，这种方案普遍存在<strong>高延迟、带宽受限以及连接不稳定</strong>等痛点。<br>
+随着国内运营商家庭宽带普遍普及原生 IPv6，光猫改桥接后由路由器进行 PPPoE 拨号，设备即可获取到直连公网的 IPv6 地址。本文将详细介绍如何在 Windows 11 环境下，利用公网 IPv6、DDNS-GO 以及 Docker 版 Nginx Proxy Manager (NPM)，实现低延迟、安全且带 HTTPS 证书的本地服务外网暴露。</p>
+<blockquote>
+<p><strong>前提条件</strong>：本文方案建立在拥有<strong>原生公网 IPv6</strong> 的基础之上。在开始前，请先前往 <a target="_blank" rel="noopener" href="https://test-ipv6.com">test-ipv6.com</a> 检测你的网络环境是否符合要求。</p>
+</blockquote>
+<hr>
+<h1>背景与痛点</h1>
+<ul>
+<li><strong>原始方案</strong>：使用 Cloudflare Tunnel，导致高延迟、连接不稳定。</li>
+<li>具备一个个人域名：拥有一个个人域名（本文以 <code>haozi.space</code> 为例）。</li>
+<li><strong>网络条件</strong>：宽带提供原生公网 IPv6，光猫已桥接，路由器负责 PPPoE 拨号。</li>
+<li><strong>目标</strong>：利用真实 IPv6 直接把 Windows 上的 Jellyfin、Sunshine（Moonlight）等服务暴露到外网，保持最小的网络转发层数，从而获得几乎零延迟的体验。<br>
+再次强调，本文的一切前提都在于拥有一个公网IPv6，如果你不知道你自己有没有，可以前往 <a target="_blank" rel="noopener" href="https://test-ipv6.com">test-ipv6.com</a> 检测一下你的网络环境。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/08/09/%E4%BB%8E%E9%9B%B6%E6%89%93%E9%80%A0%E4%BD%8E%E5%BB%B6%E8%BF%9F%20Windows%20HomeLab/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/08/01/%E5%88%9B%E4%BD%9C%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BF%A1%E6%81%AF%E6%BA%90%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%95%BF%E6%9C%9F%E7%AE%A1%E7%90%86%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/01/%E5%88%9B%E4%BD%9C%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BF%A1%E6%81%AF%E6%BA%90%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%95%BF%E6%9C%9F%E7%AE%A1%E7%90%86%EF%BC%9F/" class="post-title-link" itemprop="url">基于Obsidian的本地资料归档与知识管理工作流</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-08-01 00:00:00" itemprop="dateCreated datePublished" datetime="2026-08-01T00:00:00+08:00">2026-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:52:22" itemprop="dateModified" datetime="2026-08-10T10:52:22+08:00">2026-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B0%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">软件小记</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">本文详细介绍以Obsidian为核心的本地资料归档方案。配合Web Clipper、PDF++及yt-dlp等工具，手把手教你分步安装配置，完成网页、视频与论文的长期存档与高效引用。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>总体策略</h1>
+<p>以创作文章题目为文件夹，将有关改话题的论文、网页文章、视频统一放置在该文件夹下。<br>
+以Obsidian为核心工具，以本地Obsidian仓库为载体，以本地存储为主。<br>
+将信息源都转换为<code>md</code> <code>pdf</code>的形式统一管理。<br>
+尽量采用开源工具。</p>
+<h1>产生的价值</h1>
+<p>有一些好用的教程文章，由于一些原因会被下架，所以需要本地化存储，进行长期存档。<br>
+文章一旦本地化，我们就可以在自己的文章里，进行信息源文章部分文字的引用。抛弃我之前的Adobe Acrobat DC阅读，Obsidian写作的工作流，优化了工作流程。</p>
+<hr>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/08/01/%E5%88%9B%E4%BD%9C%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BF%A1%E6%81%AF%E6%BA%90%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%95%BF%E6%9C%9F%E7%AE%A1%E7%90%86%EF%BC%9F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/07/21/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/21/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/" class="post-title-link" itemprop="url">利用 GitHub Issue 免费托管本地视频教程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-07-21 00:00:00" itemprop="dateCreated datePublished" datetime="2026-07-21T00:00:00+08:00">2026-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:53:47" itemprop="dateModified" datetime="2026-08-10T10:53:47+08:00">2026-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">本文详细介绍如何利用 GitHub Issue 免费获取视频外链，并结合 HTML iframe 标签将本地视频嵌入到 Typora 等 Markdown 编辑器中播放。适合托管 10MB 左右的演示短视频，省去图床与云存储费用。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p></p>
+<h1>怎么做</h1>
+<h2 id="建立一个github仓库">建立一个github仓库</h2>
+<p>访问github，点击个人头像，点击<strong>github仓库</strong>repository</p>
+<p></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/07/21/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/07/21/win10%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E6%8B%86%E5%88%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%A1%AC%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/21/win10%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E6%8B%86%E5%88%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%A1%AC%E7%9B%98/" class="post-title-link" itemprop="url">Windows磁盘管理拓展卷教程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-07-21 00:00:00" itemprop="dateCreated datePublished" datetime="2026-07-21T00:00:00+08:00">2026-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:53:30" itemprop="dateModified" datetime="2026-08-10T10:53:30+08:00">2026-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">本文详细介绍使用Windows磁盘管理（diskmgmt.msc）进行分区拓展与磁盘扩容的图文步骤及注意事项。同时针对操作中常见的磁盘管理卡死、无法连接或无响应“虚拟磁盘服务”等故障，提供启动服务与排查解决的方法。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p></p>
+<h1>怎么办？</h1>
+<p>win+R，输入diskmgmt.msc，进入磁盘管理界面</p>
+<p></p>
+<p>会看到一个类似于这样的界面</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/07/21/win10%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E6%8B%86%E5%88%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%A1%AC%E7%9B%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/07/21/%E8%80%97%E5%AD%90%E7%9A%84%E7%94%9F%E6%B4%BB%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -217,7 +587,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/21/%E8%80%97%E5%AD%90%E7%9A%84%E7%94%9F%E6%B4%BB%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">耗子的生活模型</a>
+            <a href="/2026/07/21/%E8%80%97%E5%AD%90%E7%9A%84%E7%94%9F%E6%B4%BB%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">个人理性消费模型</a>
         </h2>
 
         <div class="post-meta">
@@ -227,14 +597,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-07-21 16:10:26" itemprop="dateCreated datePublished" datetime="2026-07-21T16:10:26+08:00">2026-07-21</time>
+              <time title="创建时间：2026-07-21 00:00:00" itemprop="dateCreated datePublished" datetime="2026-07-21T00:00:00+08:00">2026-07-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
+                <time title="修改时间：2026-08-10 10:51:30" itemprop="dateModified" datetime="2026-08-10T10:51:30+08:00">2026-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,6 +617,7 @@
             </span>
 
           
+            <div class="post-description">分享一套实用的防剁手指南：通过每周购物评估、购物前6问自查必要性，以及大额支出强制执行2周延迟冷却机制，帮助你有效克制冲动购物，建立理性的个人财务管理模型。</div>
 
         </div>
       </header>
@@ -302,7 +673,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/21/%E7%A0%B4%E8%A7%A3%E6%B8%B8%E6%88%8F%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">破解游戏无法进入游戏的解决方法</a>
+            <a href="/2026/07/21/%E7%A0%B4%E8%A7%A3%E6%B8%B8%E6%88%8F%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">破解游戏无法进入的解决方法</a>
         </h2>
 
         <div class="post-meta">
@@ -312,14 +683,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-07-21 16:10:26" itemprop="dateCreated datePublished" datetime="2026-07-21T16:10:26+08:00">2026-07-21</time>
+              <time title="创建时间：2026-07-21 00:00:00" itemprop="dateCreated datePublished" datetime="2026-07-21T00:00:00+08:00">2026-07-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
+                <time title="修改时间：2026-08-10 10:51:33" itemprop="dateModified" datetime="2026-08-10T10:51:33+08:00">2026-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -332,6 +703,7 @@
             </span>
 
           
+            <div class="post-description">本文针对破解学习版游戏卡在加载界面、无法正常启动的故障，实测分析了修改系统时间及使用RunAsDate工具的效果，并分享应对非固定闪退与概率性进游戏的实操避坑经验。</div>
 
         </div>
       </header>
@@ -373,254 +745,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/07/21/win10%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E6%8B%86%E5%88%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%A1%AC%E7%9B%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="折腾是理解世界的一种方式">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Haozi's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/21/win10%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E6%8B%86%E5%88%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%A1%AC%E7%9B%98/" class="post-title-link" itemprop="url">win10电脑如何拆分硬盘空间给另一个硬盘？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-07-21 16:10:26" itemprop="dateCreated datePublished" datetime="2026-07-21T16:10:26+08:00">2026-07-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p></p>
-<h1>怎么办？</h1>
-<p>win+R，输入diskmgmt.msc，进入磁盘管理界面</p>
-<p></p>
-<p>会看到一个类似于这样的界面</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/07/21/win10%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E6%8B%86%E5%88%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%A1%AC%E7%9B%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/07/21/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="折腾是理解世界的一种方式">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Haozi's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/21/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/" class="post-title-link" itemprop="url">Typora如何插入自己的云端视频？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-07-21 16:10:26" itemprop="dateCreated datePublished" datetime="2026-07-21T16:10:26+08:00">2026-07-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p></p>
-<h1>怎么做</h1>
-<h2 id="建立一个github仓库">建立一个github仓库</h2>
-<p>访问github，点击个人头像，点击<strong>github仓库</strong>repository</p>
-<p></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/07/21/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/07/21/no_swiftfin%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%AD%97%E5%B9%95%E5%85%A8%E5%B1%8F%E7%9C%8B%E4%B8%8D%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="折腾是理解世界的一种方式">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Haozi's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/21/no_swiftfin%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%AD%97%E5%B9%95%E5%85%A8%E5%B1%8F%E7%9C%8B%E4%B8%8D%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">swiftfin如何设置优雅的刮削？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-07-21 16:10:26" itemprop="dateCreated datePublished" datetime="2026-07-21T16:10:26+08:00">2026-07-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>询问grok，发现把字幕烧录进视频文件是一个似乎可行的方案<br>
-问题的本质是我们视频缩放放大以后，字幕并没有跟随缩放以后的safe area，自己跑到框的外面去了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155304758.png" alt="image-20260405155304758"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155316101.png" alt="image-20260405155316101"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405155333781.png" alt="image-20260405155333781"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/07/03/Aria2-Explorer-File-Cleaner/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -635,7 +759,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/03/Aria2-Explorer-File-Cleaner/" class="post-title-link" itemprop="url">Aria2 进阶：如何安全地为 Aria2-Explorer 扩展增加「删除任务并清理本地文件」功能</a>
+            <a href="/2026/07/03/Aria2-Explorer-File-Cleaner/" class="post-title-link" itemprop="url">彻底解决 Aria2 删除任务不删文件痛点：全栈安全本地文件清理方案</a>
         </h2>
 
         <div class="post-meta">
@@ -645,14 +769,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-07-03 15:41:00" itemprop="dateCreated datePublished" datetime="2026-07-03T15:41:00+08:00">2026-07-03</time>
+              <time title="创建时间：2026-07-03 00:00:00" itemprop="dateCreated datePublished" datetime="2026-07-03T00:00:00+08:00">2026-07-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
+                <time title="修改时间：2026-08-10 10:54:30" itemprop="dateModified" datetime="2026-08-10T10:54:30+08:00">2026-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -665,6 +789,7 @@
             </span>
 
           
+            <div class="post-description">针对Aria2删除任务无法同步清理本地磁盘文件与.aria2控制文件的痛点，本文提供了一套全栈安全解决方案。通过反混淆Aria2-Explorer扩展前端代码，结合具备Token鉴权、CORS白名单防护及命令注入防御的Node.js本地Helper服务，实现一键安全将废弃下载文件移入系统回收站。</div>
 
         </div>
       </header>
@@ -720,7 +845,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/17/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Git版本控制常用命令指南</a>
+            <a href="/2026/06/17/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Git常用命令备忘清单</a>
         </h2>
 
         <div class="post-meta">
@@ -730,8 +855,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-06-17 19:45:00" itemprop="dateCreated datePublished" datetime="2026-06-17T19:45:00+08:00">2026-06-17</time>
+              <time title="创建时间：2026-06-17 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-17T00:00:00+08:00">2026-06-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:54:16" itemprop="dateModified" datetime="2026-08-10T10:54:16+08:00">2026-08-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -743,7 +875,7 @@
             </span>
 
           
-            <div class="post-description">总结Git最常用的命令，方便日后快速查阅和使用</div>
+            <div class="post-description">针对日常开发高频使用的 Git 命令速查手册，覆盖项目配置、提交发布、分支管理、撤销恢复及多人协作场景。附带经典开发流程速查表与避坑教训，帮你快速检索、高效处理各项代码版本控制难题。</div>
 
         </div>
       </header>
@@ -799,7 +931,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/16/%E6%83%B3%E4%B9%B0%E4%B8%9C%E8%A5%BF%E4%BA%86%EF%BC%9F%E8%AE%B0%E5%BE%97%E5%86%99%E5%9C%A8%E8%BF%99/" class="post-title-link" itemprop="url">想买东西了？记得写在这</a>
+            <a href="/2026/06/16/%E6%83%B3%E4%B9%B0%E4%B8%9C%E8%A5%BF%E4%BA%86%EF%BC%9F%E8%AE%B0%E5%BE%97%E5%86%99%E5%9C%A8%E8%BF%99/" class="post-title-link" itemprop="url">24小时延迟满足购物清单</a>
         </h2>
 
         <div class="post-meta">
@@ -809,8 +941,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-06-16 17:39:00" itemprop="dateCreated datePublished" datetime="2026-06-16T17:39:00+08:00">2026-06-16</time>
+              <time title="创建时间：2026-06-16 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-16T00:00:00+08:00">2026-06-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:52:05" itemprop="dateModified" datetime="2026-08-10T10:52:05+08:00">2026-08-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -822,7 +961,7 @@
             </span>
 
           
-            <div class="post-description">给自己立一个规则：写下来想要买的东西，24小时之后再决定买不买——延迟满足</div>
+            <div class="post-description">通过“欲买物品写下后冷静24小时”的简单规则，记录真实消费决策过程。文章展示了如何有效区分日用刚需与书籍、技术教程等冲动消费，分享利用延迟满足机制克服购买冲动、建立个人消费自律的实用心得。</div>
 
         </div>
       </header>
@@ -868,86 +1007,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="haozi">
-      <meta itemprop="description" content="折腾是理解世界的一种方式">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Haozi's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/" class="post-title-link" itemprop="url">丢掉手机，好好吃饭！</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-06-15 17:58:26" itemprop="dateCreated datePublished" datetime="2026-06-15T17:58:26+08:00">2026-06-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
-                </span>
-            </span>
-
-          
-            <div class="post-description">尝试吃饭时彻底丢掉手机，发现吃饭时间从半小时缩短到十分钟，脑子也更清醒了</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>手机等电子产品非常喜欢多管闲事，什么活动他都会插一嘴，踢一脚<br>
-今天吃饭尝试彻底丢掉手机，发现一个很大的变化：就是吃饭的时间缩短了一大堆，平常刷电子产品吃顿饭要半个小时，丢掉手机吃顿饭，只要十分钟，很吓人。</p>
-<p>除此之外，丢掉手机以后，我发现脑子似乎更加清醒，脑子里面似乎会有说不完的问题和想法等着去解答，有数不完的领域可以去探索，回想之前刷着手机吃着饭，似乎脑子根本不会想那么多，就连吃的饭是具体什么味道都不清楚。</p>
-<p>但今天不同，细细品味了吃的排骨玉米饭，注意到了里面的枸杞和葱花，注意到了入嘴的生姜，还在心里感触：小时候那个不吃葱不吃香料的孩子，现在长大了，不知道为什么想到这个，心里还有点酸酸的。</p>
-<p>丢掉电子产品，好好吃饭睡觉，说的轻巧，做起来好难的。</p>
-<p>不带手机吃饭，你怎么付钱？</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/06/15/Porn%E5%92%8Cmasturbation%EF%BC%8C%E4%BD%A0%E5%BE%97%E5%88%86%E6%B8%85%E6%A5%9A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -962,7 +1021,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/15/Porn%E5%92%8Cmasturbation%EF%BC%8C%E4%BD%A0%E5%BE%97%E5%88%86%E6%B8%85%E6%A5%9A/" class="post-title-link" itemprop="url">Porn和masturbation，你得分清楚</a>
+            <a href="/2026/06/15/Porn%E5%92%8Cmasturbation%EF%BC%8C%E4%BD%A0%E5%BE%97%E5%88%86%E6%B8%85%E6%A5%9A/" class="post-title-link" itemprop="url">关于摆脱色情依赖与健康自慰的思考</a>
         </h2>
 
         <div class="post-meta">
@@ -972,8 +1031,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-06-15 17:06:13" itemprop="dateCreated datePublished" datetime="2026-06-15T17:06:13+08:00">2026-06-15</time>
+              <time title="创建时间：2026-06-15 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-15T00:00:00+08:00">2026-06-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-10 10:53:51" itemprop="dateModified" datetime="2026-08-10T10:53:51+08:00">2026-08-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -985,7 +1051,7 @@
             </span>
 
           
-            <div class="post-description">关于个人健康管理的一点思考——区分有害的习惯和有益的自我认知</div>
+            <div class="post-description">色情依赖常源于压力与无聊，单靠意志力难以戒除。本文分享如何摒弃屏幕刺激、解绑色情与自慰，通过关注身体真实信号、调节呼吸与掌控节奏，建立健康有节制的自慰习惯，重获良好的精神状态与睡眠质量。</div>
 
         </div>
       </header>
@@ -1095,14 +1161,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1112,7 +1178,10 @@
         <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
       </span>
   </div>
 
@@ -1123,44 +1192,119 @@
   <!-- Category Quick Nav Widget -->
   <div class="sidebar-custom-section">
     <div class="sidebar-custom-title">
-      <i class="fa fa-folder"></i> 分类导航
+      <i class="far fa-folder"></i> 分类导航
     </div>
     <ul class="sidebar-category-list">
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E6%95%99%E7%A8%8B/">
-          <span class="cat-name"><i class="fa fa-code cat-icon"></i> 教程</span>
-          <span class="cat-count">19</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">18</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E7%94%9F%E6%B4%BB/">
-          <span class="cat-name"><i class="fa fa-coffee cat-icon"></i> 生活</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-sun cat-icon"></i> 生活
+          </span>
           <span class="cat-count">13</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E5%BD%B1%E8%A7%86/">
-          <span class="cat-name"><i class="fa fa-film cat-icon"></i> 影视</span>
-          <span class="cat-count">12</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E5%B7%A5%E7%A8%8B/">
-          <span class="cat-name"><i class="fa fa-cogs cat-icon"></i> 工程</span>
-          <span class="cat-count">8</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">9</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E9%98%85%E8%AF%BB/">
-          <span class="cat-name"><i class="fa fa-book cat-icon"></i> 阅读</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 阅读
+          </span>
           <span class="cat-count">4</span>
         </a>
       </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B0%8F%E8%AE%B0/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 生活哲学
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
     </ul>
   </div>
 
 </div>
-
       </div>
 
     </div>

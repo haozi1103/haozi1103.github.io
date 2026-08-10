@@ -435,8 +435,8 @@ td {
 }
 .highlight,
 pre {
-  background: #f7f7f7;
-  color: #4d4d4c;
+  background: #2d2d2d;
+  color: #ccc;
   line-height: 1.6;
   margin: 0 auto 20px;
 }
@@ -453,7 +453,7 @@ code {
   word-wrap: break-word;
 }
 .highlight *::selection {
-  background: #d6d6d6;
+  background: #515151;
 }
 .highlight pre {
   border: 0;
@@ -470,8 +470,8 @@ code {
   padding: 0;
 }
 .highlight figcaption {
-  background: #eff2f3;
-  color: #4d4d4c;
+  background: #1b1b1b;
+  color: #ccc;
   display: flex;
   font-size: 0.875em;
   justify-content: space-between;
@@ -479,10 +479,10 @@ code {
   padding: 0.5em;
 }
 .highlight figcaption a {
-  color: #4d4d4c;
+  color: #ccc;
 }
 .highlight figcaption a:hover {
-  border-bottom-color: #4d4d4c;
+  border-bottom-color: #ccc;
 }
 .highlight .gutter {
   -moz-user-select: none;
@@ -491,14 +491,14 @@ code {
   user-select: none;
 }
 .highlight .gutter pre {
-  background: #eff2f3;
-  color: #869194;
+  background: #1b1b1b;
+  color: #999;
   padding-left: 10px;
   padding-right: 10px;
   text-align: right;
 }
 .highlight .code pre {
-  background: #f7f7f7;
+  background: #2d2d2d;
   padding-left: 10px;
   width: 100%;
 }
@@ -514,26 +514,26 @@ pre {
 }
 pre code {
   background: none;
-  color: #4d4d4c;
+  color: #ccc;
   font-size: 0.875em;
   padding: 0;
   text-shadow: none;
 }
 pre .deletion {
-  background: #fdd;
+  background: #800000;
 }
 pre .addition {
-  background: #dfd;
+  background: #008000;
 }
 pre .meta {
-  color: #eab700;
+  color: #fc6;
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
 }
 pre .comment {
-  color: #8e908c;
+  color: #999;
 }
 pre .variable,
 pre .attribute,
@@ -548,7 +548,7 @@ pre .html .doctype,
 pre .css .id,
 pre .css .class,
 pre .css .pseudo {
-  color: #c82829;
+  color: #f2777a;
 }
 pre .number,
 pre .preprocessor,
@@ -558,7 +558,7 @@ pre .literal,
 pre .params,
 pre .constant,
 pre .command {
-  color: #f5871f;
+  color: #f99157;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute,
@@ -571,11 +571,11 @@ pre .ruby .symbol,
 pre .xml .cdata,
 pre .special,
 pre .formula {
-  color: #718c00;
+  color: #9c9;
 }
 pre .title,
 pre .css .hexcolor {
-  color: #3e999f;
+  color: #6cc;
 }
 pre .function,
 pre .python .decorator,
@@ -585,11 +585,11 @@ pre .ruby .title .keyword,
 pre .perl .sub,
 pre .javascript .title,
 pre .coffeescript .title {
-  color: #4271ae;
+  color: #69c;
 }
 pre .keyword,
 pre .javascript .function {
-  color: #8959a8;
+  color: #c9c;
 }
 .blockquote-center {
   border-left: none;
@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #fff;
+  background: #296605;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1561,7 +1561,7 @@ pre .javascript .function {
   }
 }
 .reading-progress-bar {
-  background: #7e8027;
+  background: #28d4a0;
   display: block;
   height: 3px;
   left: 0;
@@ -2548,98 +2548,68 @@ hr {
 .sub-menu .menu-item {
   display: inline-block;
 }
-/* LXGW WenKai Font Override */
-body,
-.post-body,
-.post-body h1,
-.post-body h2,
-.post-body h3,
-.post-body h4,
-.post-body h5,
-.post-body h6,
-.post-body p,
-.post-body li,
-.post-body blockquote,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.site-title,
-.site-subtitle,
-.menu-item a,
-.sidebar,
-.post-meta,
-.post-title,
-.comments,
-.footer,
-.header-inner,
-.sidebar-inner,
-.post-header,
-.post-footer,
-.tag-cloud a,
-.category-list a,
-.archive-posts a {
-  font-family: 'LXGW WenKai SC', 'HarmonyOS Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+/* Font Override */
+body {
+  font-family: 'Noto Sans SC', 'HarmonyOS Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
 }
 code,
 pre,
 .code-block,
 .highlight,
-kbd {
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+kbd,
+.hljs {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace !important;
 }
 /* Hover highlight for left-bottom controls: back-to-top + sidebar toggle */
 .back-to-top:hover,
 .back-to-top span:hover,
 .sidebar-toggle:hover {
-  color: #7e8027 !important;
+  color: #28d4a0 !important;
 }
 .sidebar-toggle:hover .toggle-line,
 .toggle:hover .toggle-line {
-  background: #7e8027 !important;
+  background: #28d4a0 !important;
 }
 /* Hide footer bottom divider */
 .footer .post-meta-divider {
   display: none;
 }
-/* 移除文章底部标签的背景色和边框 */
+/* Remove background color and border of tags at the bottom of the post */
 .posts-expand .post-tags a {
   background: transparent !important;
   border-bottom: none !important;
 }
-/* 移除侧边栏或其他位置标签云的背景色（视具体情况） */
+/* Remove background color of tag clouds in sidebar or other locations */
 .tag-cloud-tags a {
   background: transparent !important;
 }
-/* 修改页面顶部横幅的颜色 */
+/* Top headband bar color */
 .headband {
-  background: #7e8027 !important;
+  background: #28d4a0 !important;
 }
-/* 修改侧边栏目录 (TOC) 激活项的文字和下划线颜色 */
+/* Sidebar TOC active item text and underline color */
 .post-toc .nav .active > a,
 .post-toc .nav .active-current > a {
-  color: #7e8027 !important; /* 修改文字颜色 */
-  border-bottom-color: #7e8027 !important; /* 修改下划线颜色以保持统一 */
+  color: #28d4a0 !important; /* Change text color */
+  border-bottom-color: #28d4a0 !important; /* Change underline color to keep consistent */
 }
-/* 鼠标悬停在激活项上时的颜色（可选配置） */
+/* Hover color for active TOC items */
 .post-toc .nav .active > a:hover,
 .post-toc .nav .active-current > a:hover {
-  color: #7e8027 !important;
+  color: #28d4a0 !important;
 }
-/* 修改侧边栏顶部导航标签（文章目录 / 站点概览）激活时的颜色 */
+/* Sidebar top navigation tabs (TOC / Site Overview) active color */
 .sidebar-nav li.sidebar-nav-active {
-  color: #7e8027 !important;
-  border-bottom-color: #7e8027 !important;
+  color: #28d4a0 !important;
+  border-bottom-color: #28d4a0 !important;
 }
-/* 鼠标悬停在未激活标签上时的文字颜色（可选配置） */
+/* Hover text color for inactive sidebar navigation tabs */
 .sidebar-nav li:hover {
-  color: #7e8027 !important;
+  color: #28d4a0 !important;
 }
 /* 2) Reading progress bar color override */
-.reading-progress {
-  background: #7e8027 !important;
+.reading-progress-bar {
+  background: #28d4a0 !important;
 }
 /* 3) Hide footer post-meta (contains vertical divider) */
 .footer .post-meta {
@@ -2651,8 +2621,10 @@ kbd {
 }
 /* 5) Custom Sidebar Widgets (Categories & Status Card) */
 .sidebar-custom-wrap {
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 0 4px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 25px;
 }
 .sidebar-custom-section {
   background: rgba(255,255,255,0.03);
@@ -2663,7 +2635,7 @@ kbd {
   text-align: left;
 }
 .sidebar-custom-title {
-  color: #7e8027;
+  color: #28d4a0;
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 8px;
@@ -2696,7 +2668,7 @@ kbd {
   border-bottom: none !important;
 }
 .sidebar-category-item a:hover {
-  background: rgba(126,128,39,0.2);
+  background: rgba(40,212,160,0.15);
   color: #fff !important;
   transform: translateX(2px);
 }
@@ -2708,7 +2680,7 @@ kbd {
   border-radius: 10px;
 }
 .sidebar-category-item a:hover .cat-count {
-  background: #7e8027;
+  background: #28d4a0;
   color: #fff;
 }
 /* Status Card */
@@ -2738,4 +2710,257 @@ kbd {
   color: #ddd;
   font-size: 11px;
   font-weight: 500;
+}
+/* Force override inline code block colors with !important */
+p code,
+li code,
+td code {
+  color: #2d2d2d !important;
+  background: #ccc !important;
+  border-radius: 6px !important;
+  padding: 2px 4px !important;
+}
+/* 260810 Dark mode override for inline code blocks */
+@media (prefers-color-scheme: dark) {
+  p code,
+  li code,
+  td code {
+    color: #ccc !important;
+    background: rgba(65,65,65,0.631) !important;
+    border-radius: 12px !important;
+    padding: 2px 4px !important;
+  }
+}
+/* Multi-line code block border radius setting */
+figure.highlight {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  border: 1px solid #e1e4e8;
+}
+@media (prefers-color-scheme: dark) {
+  figure.highlight {
+    border-color: #333;
+  }
+}
+/* 260810 Pagination: remove focus outline and fix active page style */
+.pagination .prev,
+.pagination .next,
+.pagination .page-number {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.pagination .page-number:focus,
+.pagination .page-number:active,
+.pagination .prev:focus,
+.pagination .prev:active,
+.pagination .next:focus,
+.pagination .next:active {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+.pagination .page-number:hover {
+  color: #28d4a0 !important;
+  border-color: #28d4a0 !important;
+}
+.pagination {
+  border-top: 1px solid rgba(255,255,255,0.1) !important;
+  border-bottom: none !important;
+  outline: none !important;
+}
+/* 260810 Pagination style fix */
+nav.pagination {
+  border: none !important;
+  outline: none !important;
+}
+nav.pagination a.page-number:hover,
+nav.pagination a.extend:hover,
+nav.pagination a.extend:hover i {
+  color: #1fa882 !important;
+  border-color: #1fa882 !important;
+}
+nav.pagination a.page-number:focus,
+nav.pagination a.page-number:active,
+nav.pagination a.extend:focus,
+nav.pagination a.extend:active {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+/* Text selection color */
+::selection {
+  background: rgba(40,212,160,0.15) !important;
+  color: #fff !important;
+}
+::-moz-selection {
+  background: rgba(40,212,160,0.15) !important;
+  color: #fff !important;
+}
+/* =========================================
+   UI Breathing Room & Rhythm Adjustments
+   ========================================= */
+/* 1. Header & Navigation Spacing */
+.header-inner {
+  padding-top: 20px !important;
+  padding-bottom: 25px !important;
+}
+.menu-item {
+  margin: 0 1.25em !important;
+}
+.site-nav .menu .menu-item a,
+.site-nav .menu .menu-item a i {
+  font-size: 15px !important;
+}
+/* 2. Typography Rhythm (Line-height, Paragraphs, Headings) */
+.post-body {
+  line-height: 1.7 !important;
+}
+.post-body p {
+  margin-bottom: 1.2em !important;
+}
+.post-body h2,
+.post-body h3,
+.post-body h4 {
+  margin-top: 1.2em !important;
+  margin-bottom: 1.2em !important;
+}
+/* 3. Visual Noise Reduction (Meta Info) */
+.post-meta {
+  opacity: 0.55 !important;
+  margin-bottom: 25px !important;
+}
+/* 4. Soft Boundaries for Media & Code */
+figure.highlight,
+.post-body img {
+  margin: 25px 0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02) !important;
+}
+/* 5. Typography Scale (Title & Headings) */
+.post-title {
+  font-size: 2.1em !important;
+  font-weight: 550 !important;
+}
+.post-body h1 {
+  font-size: 1.75em !important;
+  font-weight: 500 !important;
+}
+.post-body h2 {
+  font-size: 1.5em !important;
+  font-weight: 500 !important;
+}
+.post-body h3 {
+  font-size: 1.25em !important;
+  font-weight: 500 !important;
+}
+.post-body h4 {
+  font-size: 1.1em !important;
+  font-weight: 500 !important;
+}
+/* 6. Remove Underlines and Use Theme Color for Links */
+.post-body p a,
+.post-body li a,
+.post-body table a {
+  color: #28d4a0 !important;
+  border-bottom: none !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+}
+.post-body p a:hover,
+.post-body li a:hover,
+.post-body table a:hover {
+  color: #1fa882 !important;
+}
+/* 7. Remove Pagination Straight Lines */
+.pagination,
+nav.pagination {
+  border: none !important;
+}
+.pagination a,
+.pagination span,
+.pagination .page-number {
+  border: none !important;
+}
+/* 8. Restore Archive (posts-collapse) Title Size */
+.posts-collapse .post-title {
+  font-size: 1.1em !important;
+  font-weight: 500 !important;
+  margin-bottom: 0 !important;
+}
+.posts-collapse .post-title a {
+  font-size: inherit !important;
+}
+/* 9. Pagination Breathing Room & Spacing */
+.pagination {
+  margin-top: 50px !important;
+  margin-bottom: 50px !important;
+}
+.pagination .page-number,
+.pagination .space,
+.pagination .extend {
+  margin: 0 8px !important; /* 缩小数字之间的间距 */
+  padding: 10px 22px !important; /* 扩大内部空间，增加呼吸感 */
+  border-radius: 6px !important; /* 圆角按钮设计 */
+  display: inline-block !important;
+  line-height: 1.2 !important;
+  transition: all 0.2s ease !important;
+}
+/* 当前页码使用薄荷绿主题色 */
+.pagination .page-number.current {
+  background: #28d4a0 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(40,212,160,0.3) !important;
+}
+/* 悬浮其他页码时的浅色背景 */
+.pagination a.page-number:hover,
+.pagination a.extend:hover {
+  background: rgba(40,212,160,0.15) !important;
+  color: #28d4a0 !important;
+  transform: translateY(-2px); /* 增加一点悬浮的轻盈感 */
+}
+/* 10. Site Title (Logo Area) Customization */
+.site-title {
+  font-size: 1.5em !important; /* 字体大小 */
+  font-weight: 600 !important; /* 加粗字重 */
+  letter-spacing: 0.5px !important; /* 增加字母间距，提升级感 */
+  transition: all 0.3s ease-in-out !important; /* 平滑过渡动画 */
+}
+/* 鼠标悬浮时变为薄荷绿 */
+.brand:hover .site-title,
+.site-title:hover {
+  color: #28d4a0 !important;
+}
+/* 11. Limit Image Height for Mobile Screenshots (Auto Scale) */
+.post-body img {
+  max-height: 600px !important; /* 限制最大高度，防止手机截图霸屏 */
+  width: auto !important; /* 强制等比例缩放，防止图片变形 */
+  object-fit: contain !important;
+}
+/* 12. Side-by-side Mobile Images */
+.mobile-image-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px; /* 两张图片中间的留白距离 */
+  margin: 30px 0;
+}
+.mobile-image-row img {
+  margin: 0 !important; /* 清除默认的上下边距 */
+  flex: 1 1 0%;
+  max-width: calc(50% - 10px); /* 如果放两张，自动占一半；放三张也会自动压缩 */
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05); /* 增加一点立体悬浮感 */
+}
+@media (max-width: 767px) {
+  .mobile-image-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mobile-image-row img {
+    max-width: 90%;
+    margin-bottom: 20px !important;
+  }
 }

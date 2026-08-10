@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
   <link rel="manifest" href="/images/manifest.json">
   <meta name="msapplication-config" content="/images/browserconfig.xml">
@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="使用Cloudflare Tunnel实现内网穿透访问Alist  写在前面 最开始只是想让自己的电脑能够被远程访问，后来逐渐开始把一些服务放在本地运行，比如下载工具、文件管理工具等。其中一个很好用的工具就是 AList，它可以把本地磁盘或者各种网盘统一挂载，通过网页来管理文件。 问题是 AList 默认只运行在本地，例如 1http:&#x2F;&#x2F;localhost:5244">
+  <meta name="description" content="本文详细介绍了使用 Cloudflare Tunnel 实现本地 AList 服务公网远程访问的完整步骤。涵盖 cloudflared 客户端配置、DNS 域名解析绑定、常见问题排查以及通过 VBS 脚本实现服务开机后台自启的实用技巧。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Cloudflare Tunnel实现内网穿透访问Alist">
+<meta property="og:title" content="使用 Cloudflare Tunnel 实现 AList 远程访问">
 <meta property="og:url" content="http://haozi.space/2026/03/07/Cloudfare+Tunnel%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Haozi&#39;s Blog">
-<meta property="og:description" content="使用Cloudflare Tunnel实现内网穿透访问Alist  写在前面 最开始只是想让自己的电脑能够被远程访问，后来逐渐开始把一些服务放在本地运行，比如下载工具、文件管理工具等。其中一个很好用的工具就是 AList，它可以把本地磁盘或者各种网盘统一挂载，通过网页来管理文件。 问题是 AList 默认只运行在本地，例如 1http:&#x2F;&#x2F;localhost:5244">
+<meta property="og:description" content="本文详细介绍了使用 Cloudflare Tunnel 实现本地 AList 服务公网远程访问的完整步骤。涵盖 cloudflared 客户端配置、DNS 域名解析绑定、常见问题排查以及通过 VBS 脚本实现服务开机后台自启的实用技巧。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308101314643.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308140747806.png">
@@ -40,11 +40,9 @@
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135343494.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png">
-<meta property="article:published_time" content="2026-03-07T12:26:10.611Z">
-<meta property="article:modified_time" content="2026-07-20T08:46:04.000Z">
+<meta property="article:published_time" content="2026-03-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-10T02:54:24.617Z">
 <meta property="article:author" content="haozi">
-<meta property="article:tag" content="cloudflare">
-<meta property="article:tag" content="alist">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308101314643.png">
 
@@ -60,23 +58,35 @@
     lang   : 'zh-CN'
   };
 </script>
-<!-- HarmonyOS Sans SC Font -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
-<style>
-  /* Fallback: If LXGW WenKai is used, override font-family */
-  /* To use HarmonyOS Sans SC, download font files to /fonts/ directory and uncomment below */
-  /*
-  @font-face {
-    font-family: 'HarmonyOS Sans SC';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/HarmonyOS_Sans_SC_400.woff2') format('woff2');
-  }
-  */
-</style>
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
 
-  <title>使用Cloudflare Tunnel实现内网穿透访问Alist | Haozi's Blog</title>
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
+  }
+});
+</script>
+
+  <title>使用 Cloudflare Tunnel 实现 AList 远程访问 | Haozi's Blog</title>
   
 
 
@@ -107,6 +117,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -233,7 +244,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用Cloudflare Tunnel实现内网穿透访问Alist
+          使用 Cloudflare Tunnel 实现 AList 远程访问
         </h1>
 
         <div class="post-meta">
@@ -243,14 +254,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-03-07 20:26:10" itemprop="dateCreated datePublished" datetime="2026-03-07T20:26:10+08:00">2026-03-07</time>
+              <time title="创建时间：2026-03-07 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-07T00:00:00+08:00">2026-03-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-07-20 16:46:04" itemprop="dateModified" datetime="2026-07-20T16:46:04+08:00">2026-07-20</time>
+                <time title="修改时间：2026-08-10 10:54:24" itemprop="dateModified" datetime="2026-08-10T10:54:24+08:00">2026-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,6 +281,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">本文详细介绍了使用 Cloudflare Tunnel 实现本地 AList 服务公网远程访问的完整步骤。涵盖 cloudflared 客户端配置、DNS 域名解析绑定、常见问题排查以及通过 VBS 脚本实现服务开机后台自启的实用技巧。</div>
 
         </div>
       </header>
@@ -280,11 +292,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>使用Cloudflare Tunnel实现内网穿透访问Alist<br>
+        <p>最开始只是想让自己的电脑能够被远程访问，后来逐渐开始把一些服务放在本地运行，比如下载工具、文件管理工具等。其中一个很好用的工具就是 AList，它可以把本地磁盘或者各种网盘统一挂载，通过网页来管理文件。<br>
 <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308101314643.png" alt="image-20260307204327371"></p>
-<h1>写在前面</h1>
-<p>最开始只是想让自己的电脑能够被远程访问，后来逐渐开始把一些服务放在本地运行，比如下载工具、文件管理工具等。其中一个很好用的工具就是 AList，它可以把本地磁盘或者各种网盘统一挂载，通过网页来管理文件。</p>
-<p>问题是 AList 默认只运行在本地，例如</p>
+<h1>解决的问题</h1>
+<p>问题是 AList 默认只运行在本地</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:5244</span><br></pre></td></tr></table></figure>
 <p>如果不在电脑旁边，就无法访问。发现可以用 Cloudflare Tunnel 来实现远程访问 AList，怕自己忘了怎么配置的了，就记录下整个配置过程。</p>
 <h1>整体架构</h1>
@@ -292,47 +303,51 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">本地电脑</span><br><span class="line">AList 服务</span><br><span class="line">localhost:5244</span><br><span class="line">↓</span><br><span class="line">cloudflared</span><br><span class="line">↓</span><br><span class="line">Cloudflare Tunnel</span><br><span class="line">↓</span><br><span class="line">域名访问</span><br><span class="line">alist.haozi.space</span><br></pre></td></tr></table></figure>
 <p>访问 alist.haozi.space 时，Cloudflare 会通过 Tunnel 转发请求到本地电脑的 5244 端口。这样就实现了远程访问。</p>
 <h1>准备工作</h1>
-<p>在开始之前需要准备以下内容</p>
-<p>一个 Cloudflare 账号</p>
-<p>一个已经接入 Cloudflare 的域名</p>
-<p>一台电脑</p>
-<p>已经运行的 AList 服务</p>
+<p>在开始之前需要准备以下内容：</p>
+<ol>
+<li>一个 Cloudflare 账号</li>
+<li>一个已经接入 Cloudflare 的域名</li>
+<li>一台电脑</li>
+<li>已经运行的 AList 服务</li>
+</ol>
 <p>AList 默认端口是</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5244</span><br></pre></td></tr></table></figure>
 <p>本地访问地址为</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:5244</span><br></pre></td></tr></table></figure>
-<p>在配置 Tunnel 之前，需要确保本地访问是正常的。</p>
-<p><strong>可以通过登陆127.0.0.1:5244来检验本地访问是否正常</strong></p>
+<p>在配置 Tunnel 之前，需要确保本地访问是正常的。<br>
+<strong>可以通过登陆127.0.0.1:5244来检验本地访问是否正常</strong>。</p>
 <h1>开始搭建</h1>
-<p>Cloudflare Tunnel 需要通过 cloudflared 程序来运行。</p>
-<p>可以从 Cloudflare 官方下载 Windows 版本</p>
-<p><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/">https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/</a></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308140747806.png" alt="image-20260306125950289"></p>
+<p>Cloudflare Tunnel 需要通过 cloudflared 程序来运行。<br>
+可以从 Cloudflare 官方下载 Windows 版本<br>
+<a target="_blank" rel="noopener" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/">https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/</a><br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308140747806.png" alt="image-20260306125950289"></p>
 <p>下载完成后，将程序放在一个固定目录，例如</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F:\cloudflared</span><br></pre></td></tr></table></figure>
 <p>然后在终端中运行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared --version</span><br></pre></td></tr></table></figure>
 <p>如果可以看到版本号，说明安装成功。</p>
 <h2 id="登录-Cloudflare">登录 Cloudflare</h2>
-<p>为了让本地程序能够创建 Tunnel，需要先登录 Cloudflare。</p>
-<p>执行</p>
+<p>为了让本地程序能够创建 Tunnel，需要先登录 Cloudflare。<br>
+执行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel login</span><br></pre></td></tr></table></figure>
-<p>记得在哪个盘里面，就要在哪里开始cmd操作（如果你之前跟我一样下载在F盘，就要在F盘进行cmd操作，以此类推）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141535776.png" alt="image-20260308141535725"></p>
-<p>浏览器会自动打开 Cloudflare 登录页面。登录后选择需要绑定的域名。完成后本地会生成一个认证文件：<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141752734.png" alt="image-20260306131456755">网页会显示以下界面：</p>
+<p>记得在哪个盘里面，就要在哪里开始cmd操作（如果你之前跟我一样下载在F盘，就要在F盘进行cmd操作，以此类推）<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141535776.png" alt="image-20260308141535725"></p>
+<p>浏览器会自动打开 Cloudflare 登录页面。登录后选择需要绑定的域名。完成后本地会生成一个认证文件：<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141752734.png" alt="image-20260306131456755"></p>
+<p>网页会显示以下界面：</p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141719378.png" alt="image-20260306131132603"></p>
 <h2 id="创建-Tunnel">创建 Tunnel</h2>
 <p>接下来创建一个新的 Tunnel。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel create alist-tunnel</span><br></pre></td></tr></table></figure>
-<p>其中 alist-tunnel 是 Tunnel 名称，可以自己修改。</p>
-<p>执行成功后会生成Tunnel ID,credentials 文件</p>
+<p>其中 alist-tunnel 是 Tunnel 名称，可以自己修改。<br>
+执行成功后会生成Tunnel ID,credentials 文件。</p>
 <h2 id="创建配置文件">创建配置文件</h2>
-<p>接下来需要创建配置文件 config.yml。</p>
-<p>示例配置</p>
+<p>接下来需要创建配置文件 config.yml。<br>
+示例配置</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tunnel: Tunnel_ID</span><br><span class="line">credentials-file: C:\Users\用户名\.cloudflared\Tunnel_ID.json</span><br><span class="line"></span><br><span class="line">ingress:</span><br><span class="line">  - hostname: alist.yourdomain</span><br><span class="line">    service: http://localhost:5244</span><br><span class="line">  - service: http_status:404</span><br></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141903486.png" alt="image-20260308141903442"></p>
-<p>Tunnel_ID是 C:\Users\用户名.cloudflared 文件夹里面json文件的名称</p>
-<p>访问 alist.yourdomain 时转发到本地 localhost:5244，如果访问其他地址,返回 404</p>
+<p>Tunnel_ID是 C:\Users\用户名.cloudflared 文件夹里面json文件的名称<br>
+访问 alist.yourdomain 时转发到本地 localhost:5244，如果访问其他地址,返回 404</p>
 <h2 id="DNS">DNS</h2>
 <p>进入 Cloudflare 的 DNS 管理页面。添加一条记录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类型 CNAME</span><br><span class="line">名称 alist</span><br><span class="line">目标 Tunnel_ID.cfargotunnel.com</span><br></pre></td></tr></table></figure>
@@ -344,8 +359,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://alist.yourdomain</span><br></pre></td></tr></table></figure>
 <p>页面会直接打开 AList</p>
 <h1>问题记录</h1>
-<p>在配置过程中可能遇到一些问题。</p>
-<p>排查顺序一般是</p>
+<p>在配置过程中可能遇到一些问题。<br>
+排查顺序一般是：</p>
 <ol>
 <li>
 <p>先确认 AList 本地是否可以访问</p>
@@ -354,51 +369,51 @@
 <p>再确认 cloudflared 是否在运行，如何检验是否生效？</p>
 <p>如下，终端输入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /d F:\cloudflare</span><br><span class="line">cloudflared tunnel list</span><br></pre></td></tr></table></figure>
-<p>显示了connections就是有效的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310145620762.png" alt="image-20260306142146235"></p>
+<p>显示有connections就是有效的<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310145620762.png" alt="image-20260306142146235"></p>
 </li>
 <li>
 <p>确认 Cloudflare DNS 是否正确，这一步需要去cloudflare管理界面排查</p>
 </li>
 </ol>
-<p>alist如果挂载的是天翼云盘，发现上传可能出现显示 invalid session key</p>
-<p>解决方法：去alist界面设置一下上传方式为 旧版，解决问题</p>
+<p>alist如果挂载的是天翼云盘，发现上传可能出现显示 invalid session key<br>
+解决方法：去alist界面设置一下上传方式为 旧版，解决问题</p>
 <h1>后续扩展</h1>
 <h2 id="Alist-开机启动">Alist 开机启动</h2>
 <p>在桌面建一个VBS文件</p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306134649623.png" alt="image-20260306134649623"></p>
 <p>在里面添加</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.run &quot;F:\alist-windows-amd64\alist.exe server&quot;, vbHide</span><br></pre></td></tr></table></figure>
-<p>把这个vbs文件拖到alist.exe所在的文件夹里面</p>
-<p>并且右键创建快捷方式</p>
-<p>win+R输入 shell:startup</p>
+<p>把这个vbs文件拖到alist.exe所在的文件夹里面<br>
+并且右键创建快捷方式<br>
+win+R输入 shell:startup</p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
 <p>把快捷指令拖进去就可以了</p>
 <h2 id="Cloudflare开机启动">Cloudflare开机启动</h2>
 <p>手动启动</p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135343494.png" alt="image-20260306135343494"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel run alist</span><br></pre></td></tr></table></figure>
-<p><strong>自动启动设置</strong></p>
-<p>在桌面建一个VBS文件，命名为 start-alist-tunnel.vbs</p>
-<p>在里面添加</p>
+<p><strong>自动启动设置</strong><br>
+在桌面建一个VBS文件，命名为 start-alist-tunnel.vbs<br>
+在里面添加</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.Run &quot;cmd /c F:\cloudflare\cloudflared tunnel run alist&quot;,0</span><br></pre></td></tr></table></figure>
 <p>win+R输入 shell:startup</p>
 <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
 <p>把vbs拖进去就可以了</p>
 <h2 id="更多域名">更多域名</h2>
-<p>例如</p>
+<p>例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist.haozi.space</span><br><span class="line">img.haozi.space</span><br><span class="line">qb.haozi.space</span><br></pre></td></tr></table></figure>
-<p>每个子域名对应不同的本地服务。这样一台普通电脑就可以逐渐变成一个小型家庭服务器。</p>
-<p>操作很简单，在配置文件里面加上</p>
+<p>每个子域名对应不同的本地服务。这样一台普通电脑就可以逐渐变成一个小型家庭服务器。<br>
+操作很简单，在配置文件里面加上：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- hostname: qb.haozi.space</span><br><span class="line">  service: http://localhost:8081</span><br></pre></td></tr></table></figure>
 <p>config.yml变成：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tunnel: 你的tunnel-id</span><br><span class="line">credentials-file: C:\Users\你的用户名\.cloudflared\你的tunnel-id.json</span><br><span class="line"></span><br><span class="line">ingress:</span><br><span class="line">  - hostname: qb.haozi.space</span><br><span class="line">    service: http://localhost:8081</span><br><span class="line">  - hostname: alist.haozi.space</span><br><span class="line">    service: http://localhost:5244</span><br><span class="line">  - service: http_status:404</span><br></pre></td></tr></table></figure>
 <p>之后进行DNS配置即可：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Type: CNAME</span><br><span class="line">Name: qb</span><br><span class="line">Target: &lt;你的tunnel-id&gt;.cfargotunnel.com</span><br><span class="line">Proxy: 开启（橙色云）</span><br></pre></td></tr></table></figure>
 <h1>回顾</h1>
-<p>回顾整个过程，其实一开始只是想解决一个很小的问题，如何远程访问自己的电脑。但在解决问题的过程中，又接触到了Cloudflare Tunnel、AList、域名管理、内网服务暴露</p>
-<p>技术学习往往就是这样，从一个实际需求出发，一步一步扩展。</p>
-<p>也许过一段时间再回来看，会发现自己已经学会了很多当时觉得复杂的东西。</p>
+<p>回顾整个过程，其实一开始只是想解决一个很小的问题，如何远程访问自己的电脑。但在解决问题的过程中，又接触到了Cloudflare Tunnel、AList、域名管理、内网服务暴露<br>
+技术学习往往就是这样，从一个实际需求出发，一步一步扩展。<br>
+也许过一段时间再回来看，会发现自己已经学会了很多当时觉得复杂的东西。</p>
 
     </div>
 
@@ -422,12 +437,28 @@
     async>
   </script>
 </div>
+        <div class="reward-container">
+  <div>如果这篇文章对你有帮助，请我喝杯咖啡吧 ☕</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="haozi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="haozi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/cloudflare/" rel="tag"># cloudflare</a>
-              <a href="/tags/alist/" rel="tag"># alist</a>
-          </div>
 
         
 
@@ -435,12 +466,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/" rel="prev" title="彩虹之后，我在想人间">
-      <i class="fa fa-chevron-left"></i> 彩虹之后，我在想人间
+    <a href="/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/" rel="prev" title="借《倩女幽魂》，说出心中的善良与勇气">
+      <i class="fa fa-chevron-left"></i> 借《倩女幽魂》，说出心中的善良与勇气
     </a></div>
       <div class="post-nav-item">
-    <a href="/2026/03/08/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/" rel="next" title="GTX1660调试欧卡2画质mod的感触">
-      GTX1660调试欧卡2画质mod的感触 <i class="fa fa-chevron-right"></i>
+    <a href="/2026/03/08/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/" rel="next" title="欧卡2画质调优与帧率卡顿排查记录">
+      欧卡2画质调优与帧率卡顿排查记录 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -500,7 +531,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">整体架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">开始搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95-Cloudflare"><span class="nav-number">4.1.</span> <span class="nav-text">登录 Cloudflare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-Tunnel"><span class="nav-number">4.2.</span> <span class="nav-text">创建 Tunnel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">创建配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS"><span class="nav-number">4.4.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8-Tunnel"><span class="nav-number">4.5.</span> <span class="nav-text">启动 Tunnel</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">问题记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">后续扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Alist-%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8"><span class="nav-number">6.1.</span> <span class="nav-text">Alist 开机启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cloudflare%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8"><span class="nav-number">6.2.</span> <span class="nav-text">Cloudflare开机启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E5%9F%9F%E5%90%8D"><span class="nav-number">6.3.</span> <span class="nav-text">更多域名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">回顾</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">解决的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">整体架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">开始搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95-Cloudflare"><span class="nav-number">4.1.</span> <span class="nav-text">登录 Cloudflare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-Tunnel"><span class="nav-number">4.2.</span> <span class="nav-text">创建 Tunnel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">创建配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS"><span class="nav-number">4.4.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8-Tunnel"><span class="nav-number">4.5.</span> <span class="nav-text">启动 Tunnel</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">问题记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">后续扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Alist-%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8"><span class="nav-number">6.1.</span> <span class="nav-text">Alist 开机启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cloudflare%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8"><span class="nav-number">6.2.</span> <span class="nav-text">Cloudflare开机启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E5%9F%9F%E5%90%8D"><span class="nav-number">6.3.</span> <span class="nav-text">更多域名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">回顾</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -516,14 +547,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -533,7 +564,10 @@
         <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:haozicurry@gmail.com" title="E-Mail → mailto:haozicurry@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
       </span>
   </div>
 
@@ -544,44 +578,119 @@
   <!-- Category Quick Nav Widget -->
   <div class="sidebar-custom-section">
     <div class="sidebar-custom-title">
-      <i class="fa fa-folder"></i> 分类导航
+      <i class="far fa-folder"></i> 分类导航
     </div>
     <ul class="sidebar-category-list">
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E6%95%99%E7%A8%8B/">
-          <span class="cat-name"><i class="fa fa-code cat-icon"></i> 教程</span>
-          <span class="cat-count">19</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">18</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E7%94%9F%E6%B4%BB/">
-          <span class="cat-name"><i class="fa fa-coffee cat-icon"></i> 生活</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-sun cat-icon"></i> 生活
+          </span>
           <span class="cat-count">13</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E5%BD%B1%E8%A7%86/">
-          <span class="cat-name"><i class="fa fa-film cat-icon"></i> 影视</span>
-          <span class="cat-count">12</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E5%B7%A5%E7%A8%8B/">
-          <span class="cat-name"><i class="fa fa-cogs cat-icon"></i> 工程</span>
-          <span class="cat-count">8</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">9</span>
         </a>
       </li>
+      
       <li class="sidebar-category-item">
         <a href="/categories/%E9%98%85%E8%AF%BB/">
-          <span class="cat-name"><i class="fa fa-book cat-icon"></i> 阅读</span>
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 阅读
+          </span>
           <span class="cat-count">4</span>
         </a>
       </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B0%8F%E8%AE%B0/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/%E7%94%9F%E6%B4%BB%E5%93%B2%E5%AD%A6/">
+          <span class="cat-name">
+            
+            
+            
+            
+            
+            
+            <i class="far fa-folder cat-icon"></i> 生活哲学
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
     </ul>
   </div>
 
 </div>
-
       </div>
 
     </div>
