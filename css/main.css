@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #7e09d2;
+  background: #a412ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2653,21 +2653,17 @@ kbd,
   gap: 6px;
 }
 .sidebar-category-list {
-  margin: 0;
-  padding: 0;
-}
-.sidebar-category-list .sidebar-cat-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.sidebar-category-list .sidebar-cat-list-item {
+.sidebar-category-item {
   margin-bottom: 4px;
 }
-.sidebar-category-list .sidebar-cat-list-item:last-child {
+.sidebar-category-item:last-child {
   margin-bottom: 0;
 }
-.sidebar-category-list .sidebar-cat-list-link {
+.sidebar-category-item a {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2678,23 +2674,15 @@ kbd,
   transition: all 0.2s ease;
   border-bottom: none !important;
 }
-.sidebar-category-list .sidebar-cat-list-link:hover {
+.sidebar-category-item a:hover {
   background: rgba(40,212,160,0.15);
   color: #fff !important;
   transform: translateX(2px);
 }
-.sidebar-category-list .sidebar-cat-list-count {
-  background: rgba(255,255,255,0.08);
-  color: #888;
-  font-size: 10px;
-  padding: 1px 6px;
-  border-radius: 10px;
-  margin-left: auto;
-}
-.sidebar-category-list .sidebar-cat-list-link:hover .sidebar-cat-list-count,
-.sidebar-category-list .sidebar-cat-list-item:hover .sidebar-cat-list-count {
-  background: #28d4a0;
-  color: #fff;
+.sidebar-category-item .cat-icon {
+  margin-right: 5px;
+  width: 14px;
+  text-align: center;
 }
 /* Status Card */
 .status-content {

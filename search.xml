@@ -1,66 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C51使用技巧与注意事项</title>
-    <url>/2025/09/23/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<p>C51的使用技巧</p>
-<h1>键位</h1>
-<table>
-<thead>
-<tr>
-<th>位置</th>
-<th>键位</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>键盘</td>
-<td>tab</td>
-<td>缩进，使得代码可读性增强</td>
-</tr>
-<tr>
-<td>键盘</td>
-<td>ctrl+home</td>
-<td>跳转到开头</td>
-</tr>
-<tr>
-<td>键盘</td>
-<td>ctrl+end</td>
-<td>跳转到结尾</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>configuration</td>
-<td>调整字体样式</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>build translate rebuild</td>
-<td>类似于编译（？）</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>output</td>
-<td>需要输出isp可以编译的文件，需要调整这个</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h1>注意事项</h1>
-<p>while循环后面的括号不能为空，要让他循环可以在里面写上&quot;1&quot;</p>
-<p>#include &lt;intrins.h&gt;	//“nop” need this</p>
-<p>对于发光二极管，1111 1110而不是0000 0001的时候，一个灯亮，只有当输入数字为0的时候，灯才会亮，你可以理解为只有为0的时候才有电位差，二极管才会发光</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
     <title>彻底解决 Aria2 删除任务不删文件痛点：全栈安全本地文件清理方案</title>
     <url>/2026/07/03/Aria2-Explorer-File-Cleaner/</url>
     <content><![CDATA[<p>在大数据与 PT 下载的时代，<strong>Aria2</strong> 凭借其轻量级、无图形界面低资源消耗，以及强大的 RPC 远程调用能力，成为了无数 NAS 玩家、Home Lab 爱好者以及下载狂热者的“万金油”神器。</p>
@@ -143,6 +83,66 @@
       </categories>
   </entry>
   <entry>
+    <title>C51使用技巧与注意事项</title>
+    <url>/2025/09/23/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>C51的使用技巧</p>
+<h1>键位</h1>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>键位</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>键盘</td>
+<td>tab</td>
+<td>缩进，使得代码可读性增强</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+home</td>
+<td>跳转到开头</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+end</td>
+<td>跳转到结尾</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>configuration</td>
+<td>调整字体样式</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>build translate rebuild</td>
+<td>类似于编译（？）</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>output</td>
+<td>需要输出isp可以编译的文件，需要调整这个</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1>注意事项</h1>
+<p>while循环后面的括号不能为空，要让他循环可以在里面写上&quot;1&quot;</p>
+<p>#include &lt;intrins.h&gt;	//“nop” need this</p>
+<p>对于发光二极管，1111 1110而不是0000 0001的时候，一个灯亮，只有当输入数字为0的时候，灯才会亮，你可以理解为只有为0的时候才有电位差，二极管才会发光</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
     <title>C51单片机入门学习日志与故障排查</title>
     <url>/2025/09/17/C51-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>C51的学习历程</p>
@@ -202,6 +202,71 @@
 ]]></content>
       <categories>
         <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Git常用命令备忘清单</title>
+    <url>/2026/06/17/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<p>用多了就记住了，不用就会忘，所以写下来</p>
+<h2 id="为什么写这篇？">为什么写这篇？</h2>
+<p>Git 命令真的太多了，每次用的时候都要去搜，很烦。今天好好整理一下，把最常用的那些记下来，以后忘了就来翻翻。</p>
+<hr>
+<h2 id="一、配置（第一次用必须搞）">一、配置（第一次用必须搞）</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置你的名字和邮箱，提交代码时会显示</span></span><br><span class="line">git config --global user.name <span class="string">&quot;你的名字&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的邮箱@example.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化一个新仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆别人的仓库</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/用户名/仓库名.git</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="二、日常三板斧（最最最常用）">二、日常三板斧（最最最常用）</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1. 看看当前状态（改了啥、有没有新文件）</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 把修改添加到暂存区</span></span><br><span class="line">git add 文件名        <span class="comment"># 添加单个文件</span></span><br><span class="line">git add .            <span class="comment"># 添加所有修改（懒人专用）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 提交到本地仓库</span></span><br><span class="line">git commit -m <span class="string">&quot;写清楚你改了啥&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 推送到远程（GitHub等）</span></span><br><span class="line">git push origin 分支名</span><br></pre></td></tr></table></figure>
+<p><strong>记住这个流程：改代码 → add → commit → push</strong></p>
+<hr>
+<h2 id="三、拉取更新">三、拉取更新</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从远程拉取最新代码并合并</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line">git fetch origin</span><br><span class="line">git merge origin/main</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="四、分支操作（多人协作必备）">四、分支操作（多人协作必备）</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch 新分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git checkout 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建并切换（最常用！）</span></span><br><span class="line">git checkout -b 新分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支（先切回主分支）</span></span><br><span class="line">git checkout main</span><br><span class="line">git merge 要合并的分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">git branch -d 分支名    <span class="comment"># 已合并的</span></span><br><span class="line">git branch -D 分支名    <span class="comment"># 强制删除</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="五、查看历史">五、查看历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看提交记录</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line">git <span class="built_in">log</span> --oneline        <span class="comment"># 简洁版，一行一条</span></span><br><span class="line">git <span class="built_in">log</span> --oneline -10    <span class="comment"># 只看最近10条</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看具体改了啥</span></span><br><span class="line">git diff 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某次提交的详情</span></span><br><span class="line">git show 提交哈希值</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="六、撤销操作（救命用）">六、撤销操作（救命用）</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 撤销工作区的修改（还没add的时候）</span></span><br><span class="line">git checkout -- 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销已add的文件（从暂存区拿出来）</span></span><br><span class="line">git reset HEAD 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销最近一次commit，保留修改</span></span><br><span class="line">git reset --soft HEAD~1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销最近一次commit，丢弃修改（慎用！）</span></span><br><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="七、远程仓库操作">七、远程仓库操作</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看远程仓库信息</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加远程仓库</span></span><br><span class="line">git remote add origin https://github.com/用户名/仓库名.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一次推送时设置上游分支</span></span><br><span class="line">git push -u origin 分支名</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="八、常用场景速查">八、常用场景速查</h2>
+<h3 id="场景1：日常开发流程">场景1：日常开发流程</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status                <span class="comment"># 看看改了啥</span></span><br><span class="line">git add .                 <span class="comment"># 全部添加</span></span><br><span class="line">git commit -m <span class="string">&quot;feat: 新功能&quot;</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h3 id="场景2：开发新功能">场景2：开发新功能</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -b feature/新功能</span><br><span class="line"><span class="comment"># ... 写代码 ...</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;feat: 完成新功能&quot;</span></span><br><span class="line">git push -u origin feature/新功能</span><br><span class="line"><span class="comment"># 去GitHub创建Pull Request</span></span><br></pre></td></tr></table></figure>
+<h3 id="场景3：拉取最新代码">场景3：拉取最新代码</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
+<h3 id="场景4：放弃本地修改，用远程的">场景4：放弃本地修改，用远程的</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch origin</span><br><span class="line">git reset --hard origin/main</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="九、-gitignore-文件">九、.gitignore 文件</h2>
+<p>在项目根目录创建 <code>.gitignore</code> 文件，列出不想被 git 追踪的文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 示例</span><br><span class="line">node_modules/</span><br><span class="line">.env</span><br><span class="line">.DS_Store</span><br><span class="line">*.log</span><br><span class="line">build/</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="十、小技巧">十、小技巧</h2>
+<ol>
+<li><strong>多用 <code>git status</code></strong>：不确定状态时，先看看</li>
+<li><strong>commit 信息要写清楚</strong>：<code>feat:</code>、<code>fix:</code>、<code>docs:</code> 这样开头，方便看</li>
+<li><strong>分支命名规范</strong>：<code>feature/xxx</code>、<code>bugfix/xxx</code>、<code>hotfix/xxx</code></li>
+<li><strong>不会就 <code>git status</code></strong>：它会告诉你下一步该干啥</li>
+</ol>
+<hr>
+<h2 id="十一、血泪教训">十一、血泪教训</h2>
+<ol>
+<li><strong>不要在 main 分支上直接开发</strong>：先建分支！</li>
+<li><strong>push 之前先 pull</strong>：不然容易冲突</li>
+<li><strong>不要用 <code>git push --force</code></strong>：除非你真的知道自己在干嘛</li>
+<li><strong>commit 前看看 <code>git diff</code></strong>：确认改了啥再提交</li>
+</ol>
+<hr>
+<p>写于 2026 年 6 月 17 日，为了以后不再到处搜 Git 命令</p>
+]]></content>
+      <categories>
+        <category>教程</category>
       </categories>
   </entry>
   <entry>
@@ -335,71 +400,6 @@ win+R输入 shell:startup</p>
       </categories>
   </entry>
   <entry>
-    <title>Git常用命令备忘清单</title>
-    <url>/2026/06/17/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%8C%87%E5%8D%97/</url>
-    <content><![CDATA[<p>用多了就记住了，不用就会忘，所以写下来</p>
-<h2 id="为什么写这篇？">为什么写这篇？</h2>
-<p>Git 命令真的太多了，每次用的时候都要去搜，很烦。今天好好整理一下，把最常用的那些记下来，以后忘了就来翻翻。</p>
-<hr>
-<h2 id="一、配置（第一次用必须搞）">一、配置（第一次用必须搞）</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置你的名字和邮箱，提交代码时会显示</span></span><br><span class="line">git config --global user.name <span class="string">&quot;你的名字&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的邮箱@example.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化一个新仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆别人的仓库</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/用户名/仓库名.git</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="二、日常三板斧（最最最常用）">二、日常三板斧（最最最常用）</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1. 看看当前状态（改了啥、有没有新文件）</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 把修改添加到暂存区</span></span><br><span class="line">git add 文件名        <span class="comment"># 添加单个文件</span></span><br><span class="line">git add .            <span class="comment"># 添加所有修改（懒人专用）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 提交到本地仓库</span></span><br><span class="line">git commit -m <span class="string">&quot;写清楚你改了啥&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 推送到远程（GitHub等）</span></span><br><span class="line">git push origin 分支名</span><br></pre></td></tr></table></figure>
-<p><strong>记住这个流程：改代码 → add → commit → push</strong></p>
-<hr>
-<h2 id="三、拉取更新">三、拉取更新</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从远程拉取最新代码并合并</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line">git fetch origin</span><br><span class="line">git merge origin/main</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="四、分支操作（多人协作必备）">四、分支操作（多人协作必备）</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch 新分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git checkout 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建并切换（最常用！）</span></span><br><span class="line">git checkout -b 新分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支（先切回主分支）</span></span><br><span class="line">git checkout main</span><br><span class="line">git merge 要合并的分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">git branch -d 分支名    <span class="comment"># 已合并的</span></span><br><span class="line">git branch -D 分支名    <span class="comment"># 强制删除</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="五、查看历史">五、查看历史</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看提交记录</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line">git <span class="built_in">log</span> --oneline        <span class="comment"># 简洁版，一行一条</span></span><br><span class="line">git <span class="built_in">log</span> --oneline -10    <span class="comment"># 只看最近10条</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看具体改了啥</span></span><br><span class="line">git diff 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某次提交的详情</span></span><br><span class="line">git show 提交哈希值</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="六、撤销操作（救命用）">六、撤销操作（救命用）</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 撤销工作区的修改（还没add的时候）</span></span><br><span class="line">git checkout -- 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销已add的文件（从暂存区拿出来）</span></span><br><span class="line">git reset HEAD 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销最近一次commit，保留修改</span></span><br><span class="line">git reset --soft HEAD~1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销最近一次commit，丢弃修改（慎用！）</span></span><br><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="七、远程仓库操作">七、远程仓库操作</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看远程仓库信息</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加远程仓库</span></span><br><span class="line">git remote add origin https://github.com/用户名/仓库名.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一次推送时设置上游分支</span></span><br><span class="line">git push -u origin 分支名</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="八、常用场景速查">八、常用场景速查</h2>
-<h3 id="场景1：日常开发流程">场景1：日常开发流程</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status                <span class="comment"># 看看改了啥</span></span><br><span class="line">git add .                 <span class="comment"># 全部添加</span></span><br><span class="line">git commit -m <span class="string">&quot;feat: 新功能&quot;</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-<h3 id="场景2：开发新功能">场景2：开发新功能</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -b feature/新功能</span><br><span class="line"><span class="comment"># ... 写代码 ...</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;feat: 完成新功能&quot;</span></span><br><span class="line">git push -u origin feature/新功能</span><br><span class="line"><span class="comment"># 去GitHub创建Pull Request</span></span><br></pre></td></tr></table></figure>
-<h3 id="场景3：拉取最新代码">场景3：拉取最新代码</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
-<h3 id="场景4：放弃本地修改，用远程的">场景4：放弃本地修改，用远程的</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch origin</span><br><span class="line">git reset --hard origin/main</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="九、-gitignore-文件">九、.gitignore 文件</h2>
-<p>在项目根目录创建 <code>.gitignore</code> 文件，列出不想被 git 追踪的文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 示例</span><br><span class="line">node_modules/</span><br><span class="line">.env</span><br><span class="line">.DS_Store</span><br><span class="line">*.log</span><br><span class="line">build/</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="十、小技巧">十、小技巧</h2>
-<ol>
-<li><strong>多用 <code>git status</code></strong>：不确定状态时，先看看</li>
-<li><strong>commit 信息要写清楚</strong>：<code>feat:</code>、<code>fix:</code>、<code>docs:</code> 这样开头，方便看</li>
-<li><strong>分支命名规范</strong>：<code>feature/xxx</code>、<code>bugfix/xxx</code>、<code>hotfix/xxx</code></li>
-<li><strong>不会就 <code>git status</code></strong>：它会告诉你下一步该干啥</li>
-</ol>
-<hr>
-<h2 id="十一、血泪教训">十一、血泪教训</h2>
-<ol>
-<li><strong>不要在 main 分支上直接开发</strong>：先建分支！</li>
-<li><strong>push 之前先 pull</strong>：不然容易冲突</li>
-<li><strong>不要用 <code>git push --force</code></strong>：除非你真的知道自己在干嘛</li>
-<li><strong>commit 前看看 <code>git diff</code></strong>：确认改了啥再提交</li>
-</ol>
-<hr>
-<p>写于 2026 年 6 月 17 日，为了以后不再到处搜 Git 命令</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
     <title>基于AList和天翼云盘实现Notability笔记自动备份</title>
     <url>/2026/03/03/Notability+Alist+%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD/</url>
     <content><![CDATA[<p>Notability+Alist+天翼云盘实现笔记的自动备份</p>
@@ -490,6 +490,142 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </categories>
   </entry>
   <entry>
+    <title>北洋园PT电影发布自查指南</title>
+    <url>/2026/03/22/PT%E7%AB%99%E7%82%B9%E8%BD%AC%E7%A7%8D%E5%8F%91%E5%B8%83/</url>
+    <content><![CDATA[<h1><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944"></h1>
+<h2 id="北洋园pt自查">北洋园pt自查</h2>
+<h3 id="电影">电影</h3>
+<ul>
+<li>
+<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
+</li>
+<li>
+<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
+</li>
+</ul>
+<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
+<ul>
+<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
+</ul>
+<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
+<ul>
+<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
+</ul>
+<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
+<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
+<ul>
+<li>
+<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
+</li>
+<li>
+<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
+</li>
+<li>
+<p>[ ] 我确定站内没有更好的源</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
+</li>
+</ul>
+<h2 id="btschool自查">btschool自查</h2>
+<ul>
+<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
+<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
+</ul>
+<h1>发种</h1>
+<h2 id="手动发种">手动发种</h2>
+<h3 id="代码操作">代码操作</h3>
+<p><strong>引用内容</strong></p>
+<p>[quote]我是引用内容[/quote]</p>
+<p><strong>媒体信息隐藏显示</strong></p>
+<p>[hide=Mediainfo/媒体信息]</p>
+<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
+<p>[/hide]</p>
+<p><strong>图片显示</strong></p>
+<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
+<h3 id="不同站点">不同站点</h3>
+<h4 id="北洋园pt">北洋园pt</h4>
+<p><strong>基本步骤是：</strong></p>
+<ol>
+<li>从其他站点下载你想要转的资源</li>
+<li>填写发布页面（用引用id简单一点）</li>
+<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
+</ol>
+<p><strong>填写发布页面：</strong></p>
+<p>在上面那一行里面，点击候选</p>
+<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
+<p>如果要用引用种子id的话，这样去找：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
+<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
+<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
+<p>提交成功以后你会跳转到一个界面，显示：</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
+<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
+<p>进入utorrent，选择添加种子文件</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
+<p>显示这样就是做种成功了</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
+<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
+<h4 id="btschool-52pt">btschool/52pt</h4>
+<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
+<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
+<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
+<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
+<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
+<h4 id="mt-ttg">mt/ttg</h4>
+<p>这两个都是大站，估摸着发种不会那么简单</p>
+<h2 id="自动发种">自动发种</h2>
+<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
+<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
+<h3 id="安装步骤">安装步骤</h3>
+<ol>
+<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
+<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
+</ol>
+<h3 id="使用流程">使用流程</h3>
+<ol>
+<li>
+<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
+</li>
+<li>
+<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
+<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
+</li>
+</ol>
+<h3 id="遇到的问题">遇到的问题</h3>
+<ol>
+<li>
+<p>如果发现转过去的图片无法显示怎么办？</p>
+<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
+</li>
+</ol>
+<h3 id="写在最后">写在最后</h3>
+<ul>
+<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
+<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
+<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
+<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
+</ul>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
     <title>利用 GitHub Issue 免费托管本地视频教程</title>
     <url>/2026/07/21/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260409204348853.png" alt="image-20260409204348853"></p>
@@ -524,6 +660,30 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
 ]]></content>
       <categories>
         <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>关于摆脱色情依赖与健康自慰的思考</title>
+    <url>/2026/06/15/Porn%E5%92%8Cmasturbation%EF%BC%8C%E4%BD%A0%E5%BE%97%E5%88%86%E6%B8%85%E6%A5%9A/</url>
+    <content><![CDATA[<p>pornography 的东西，我认为是百害无一益。masturbation 不一样，我认为他有他的好处<br>
+其实一直有一个困扰我很久的问题，就是为什么看 pornography 来 masturbation 这件事惯性这么大，这么难以改变。</p>
+<p>昨天看一个油管上的视频，获得了点启发：触发因素是压力和无聊，想不到干什么事情的时候就来，而且这件事给你的大脑带来的多巴胺还多的恐怖。</p>
+<p>所以现在的问题转换为，如何减少频率，如何减少你对于压力的态度，如何减少无聊这种生活状态的出现。</p>
+<p>其实我感觉戒除这个东西，光光靠意志力肯定是不够的，你如果让我一年不 masturbation，显然是扯蛋，因为我相信科学，明白定时规律的排出是对身体有益处的。当然，相比于科学，我更相信我自己的身体反应，2天一次的话对我来说是有点太频繁的，最近其实感觉人的精神就不是很好，专注力很差其实，身体状态还永远没有到最佳的状态。还有一个就是晨勃的现象可以作为一个很好的标准，如果连续2天出现很胀痛的情况，就是你的身体在提醒你要适时排出了。</p>
+<p>之所以你会去向往看 pornography，还有一个原因，就是你不注重于当下，你把排出这件事情和网络屏幕上的图像视频相关联，但往往忽视了自己身体的细微反应，一些排出前的信号，一些控制的能力。</p>
+<p>定期的 masturbation 是好的，有以下几点想法：</p>
+<ol>
+<li>为此设定目标和意图：比如你是想多长时间？你想不想排出？用什么方式？想要达到什么地步？</li>
+<li>增加呼吸频率，让你的身体感觉你在运动，供给充分的氧气，深呼吸</li>
+<li>抚摸你的各个身体部位，感受这种触觉</li>
+<li>频率不要过快，记住，你的目的不是排出，而是为了锻炼耐受力，享受这个过程</li>
+<li>可以更换姿势，增加新鲜感，而不是寻求荧幕上的新鲜刺激，那种刺激过于强烈</li>
+<li>可以发挥自己的想象，自行脑补</li>
+</ol>
+<p>2026年6月15日晚上，可以感受到的是：不依赖 pornography 的话，事后完全不会那么空虚，睡眠质量也非常不错，一夜之间只醒了一次，84分的睡眠，还是不错的。其实昨天晚上睡得好还有一个原因：就是睡前泡了个脚，可能也是比较有助于睡眠的。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
       </categories>
   </entry>
   <entry>
@@ -697,163 +857,30 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </categories>
   </entry>
   <entry>
-    <title>北洋园PT电影发布自查指南</title>
-    <url>/2026/03/22/PT%E7%AB%99%E7%82%B9%E8%BD%AC%E7%A7%8D%E5%8F%91%E5%B8%83/</url>
-    <content><![CDATA[<h1><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315152503944.png" alt="image-20260315152503944"></h1>
-<h2 id="北洋园pt自查">北洋园pt自查</h2>
-<h3 id="电影">电影</h3>
-<ul>
-<li>
-<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
-</li>
-<li>
-<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
-</li>
-</ul>
-<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
-<ul>
-<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
-</ul>
-<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
-<ul>
-<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
-</ul>
-<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
-<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
-<ul>
-<li>
-<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
-</li>
-<li>
-<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
-</li>
-<li>
-<p>[ ] 我确定站内没有更好的源</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
-</li>
-</ul>
-<h2 id="btschool自查">btschool自查</h2>
-<ul>
-<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
-<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
-</ul>
-<h1>发种</h1>
-<h2 id="手动发种">手动发种</h2>
-<h3 id="代码操作">代码操作</h3>
-<p><strong>引用内容</strong></p>
-<p>[quote]我是引用内容[/quote]</p>
-<p><strong>媒体信息隐藏显示</strong></p>
-<p>[hide=Mediainfo/媒体信息]</p>
-<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
-<p>[/hide]</p>
-<p><strong>图片显示</strong></p>
-<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
-<h3 id="不同站点">不同站点</h3>
-<h4 id="北洋园pt">北洋园pt</h4>
-<p><strong>基本步骤是：</strong></p>
-<ol>
-<li>从其他站点下载你想要转的资源</li>
-<li>填写发布页面（用引用id简单一点）</li>
-<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
-</ol>
-<p><strong>填写发布页面：</strong></p>
-<p>在上面那一行里面，点击候选</p>
-<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
-<p>如果要用引用种子id的话，这样去找：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
-<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
-<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
-<p>提交成功以后你会跳转到一个界面，显示：</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
-<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
-<p>进入utorrent，选择添加种子文件</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
-<p>显示这样就是做种成功了</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
-<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
-<h4 id="btschool-52pt">btschool/52pt</h4>
-<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
-<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
-<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
-<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
-<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
-<h4 id="mt-ttg">mt/ttg</h4>
-<p>这两个都是大站，估摸着发种不会那么简单</p>
-<h2 id="自动发种">自动发种</h2>
-<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
-<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
-<h3 id="安装步骤">安装步骤</h3>
-<ol>
-<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
-<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
-</ol>
-<h3 id="使用流程">使用流程</h3>
-<ol>
-<li>
-<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
-</li>
-<li>
-<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
-<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
-</li>
-<li>
-<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
-</li>
-<li>
-<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
-</li>
-</ol>
-<h3 id="遇到的问题">遇到的问题</h3>
-<ol>
-<li>
-<p>如果发现转过去的图片无法显示怎么办？</p>
-<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
-</li>
-</ol>
-<h3 id="写在最后">写在最后</h3>
-<ul>
-<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
-<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
-<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
-<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
-</ul>
+    <title>UG NX12数控车床仿真与参数设置指南</title>
+    <url>/2026/03/18/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" alt="ugnx1"><br>
+UG NX12如何进行数控仿真？<br>
+数控车床</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221511401.png" alt="image-20260318221511286"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221633130.png" alt="image-20260318221633079"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318223143227.png" alt="image-20260318223143171"></p>
+<p>非切削参数里面修改<strong>逼近、退刀点</strong></p>
+<p>切削参数里面设置<strong>切削余量</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224403913.png" alt="image-20260318224403844"></p>
+<p>显示T0101的方法：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318230934810.png" alt="image-20260318230934759"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224620067.png" alt="image-20260318224620007"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224638708.png" alt="image-20260318224638679"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**我不能 100% 保证刀片“绝对不会崩”**（任何切断操作都有风险，尤其是你这个 Ø220 mm 切到 Ø60 mm 的大切深），但**用我下面调整后的参数 + 正确刀具，崩刀概率会降到非常低**（实际工厂里 95% 以上都不会崩）。</span><br><span class="line"></span><br><span class="line">我根据你的工件尺寸（大直径铝件）和 NX 12 的 Parting 操作，专门给你**最保守、最安全的参数**（比我之前推荐的还更保守）。</span><br><span class="line"></span><br><span class="line">### 1. 必须换一把“长 + 强”切断刀（这是防崩基础）</span><br><span class="line">- 刀片宽度：**3 mm**（不要用 4 mm，窄一点刚性更好）</span><br><span class="line">- 刀杆总长（Shank Length）：**至少 70–80 mm**（你之前那把太短了）</span><br><span class="line">- 刀片要求：**带断屑槽 + 涂层**（推荐 Kennametal N123 或 Sandvik CoroCut，铝专用等级）</span><br><span class="line">- NX 12 操作：在 Parting 操作里新建刀具 → Turning Tool → Parting Tool → 把长度改成 80 mm</span><br><span class="line"></span><br><span class="line">### 2. 最安全的 Parting 参数设置（直接复制）</span><br><span class="line">双击你的 PART_OFF 操作后，按下面填（这是防崩最关键的 3 个地方）：</span><br><span class="line"></span><br><span class="line">**Cut Parameters（切削参数）标签页**</span><br><span class="line">- Multiple Passes：**必须勾选**</span><br><span class="line">- Depth per Pass（每层切深）：**0.8 ~ 1.0 mm**（我现在给你降到 1 mm 以内，比之前更保守）</span><br><span class="line">- Stock（最终余量）：**0.3 mm**</span><br><span class="line">- Feed（进给）：**0.05 ~ 0.07 mm/rev**（非常慢，防止崩刃）</span><br><span class="line">- Speed（转速）：**1500 ~ 1800 rpm**（铝件不要太快）</span><br><span class="line"></span><br><span class="line">**Non-Cutting Moves（非切削移动）标签页**</span><br><span class="line">- Approach（进刀）：**Ramp**（斜进刀）</span><br><span class="line">- Retract（退刀）：</span><br><span class="line">  - Retract Distance：**X +12 mm**（先把刀从槽里拉出来）</span><br><span class="line">  - **必须先退 X，再退 Z**</span><br><span class="line">- Clearance Plane：**Z +100 mm**（抬得更高一点）</span><br><span class="line"></span><br><span class="line">**额外防崩开关**：</span><br><span class="line">- 在 Cut Parameters 里勾选 **Use Fixed Cycle** → 选 **G75**（自动 peck 退刀断屑，最防崩！）</span><br><span class="line"></span><br><span class="line">### 3. 额外两招几乎零崩刀（强烈建议做）</span><br><span class="line">**招式1（最推荐）**：先车一个**退刀槽**</span><br><span class="line">- 在切断位置前方 3 mm 处，先做一个 Groove Turning 操作：</span><br><span class="line">  - 宽度 5 mm，深度 3 mm</span><br><span class="line">- 然后再做 Parting 操作，刀具直接进到这个槽里切，崩刀风险几乎为 0。</span><br><span class="line"></span><br><span class="line">**招式2**：中心前减速</span><br><span class="line">- 在切到直径 Ø80 mm 左右时，手动把进给降到 **0.03 mm/rev**（接近中心时切削力最大，最容易崩）</span><br><span class="line"></span><br><span class="line">### 4. 实际操作前的最后检查（必须做！）</span><br><span class="line">1. 生成刀路后 → 右键 **Verify → Machine Simulation**</span><br><span class="line">2. 勾选 Holder Collision + Fixture Collision</span><br><span class="line">3. 播放完整仿真：</span><br><span class="line">   - 看刀片是否一直保持 0.8–1.0 mm 每层切</span><br><span class="line">   - 看退刀是否“先拉 X 再抬 Z”</span><br><span class="line">   - 如果全程无红色报警 → 基本安全</span><br><span class="line"></span><br><span class="line">### 总结一句话</span><br><span class="line">**用上面参数（每层 ≤1.0 mm + 先退 X + G75 + 长刀杆），刀片崩的概率极低**（我教过的学生用这个方法切 Ø200+ 铝件都没崩过）。</span><br><span class="line"></span><br><span class="line">**现在你直接做**：</span><br><span class="line">1. 把切深改成 **0.8–1.0 mm**</span><br><span class="line">2. 进给改成 **0.05–0.07 mm/rev**</span><br><span class="line">3. 新建一把 80 mm 长的切断刀</span><br><span class="line">4. 勾选 G75 + 生成刀路</span><br><span class="line">5. 仿真一次</span><br><span class="line"></span><br><span class="line">做完**仿真截图**发我（尤其是刀路播放到中心位置的时候），我帮你最后看一眼是否安全。  </span><br><span class="line">或者你现在就把当前 Depth per Pass 和 Feed 值告诉我，我再给你精确数字。</span><br><span class="line"></span><br><span class="line">放心，按这个保守参数走，刀片不会轻易崩的！  </span><br><span class="line">继续操作，有问题随时截图问我。</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260319213946556.png" alt="image-20260319213946453"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260320134843281.png" alt="image-20260320134843073"></p>
+<p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
+<p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
+<p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
 ]]></content>
       <categories>
         <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>关于摆脱色情依赖与健康自慰的思考</title>
-    <url>/2026/06/15/Porn%E5%92%8Cmasturbation%EF%BC%8C%E4%BD%A0%E5%BE%97%E5%88%86%E6%B8%85%E6%A5%9A/</url>
-    <content><![CDATA[<p>pornography 的东西，我认为是百害无一益。masturbation 不一样，我认为他有他的好处<br>
-其实一直有一个困扰我很久的问题，就是为什么看 pornography 来 masturbation 这件事惯性这么大，这么难以改变。</p>
-<p>昨天看一个油管上的视频，获得了点启发：触发因素是压力和无聊，想不到干什么事情的时候就来，而且这件事给你的大脑带来的多巴胺还多的恐怖。</p>
-<p>所以现在的问题转换为，如何减少频率，如何减少你对于压力的态度，如何减少无聊这种生活状态的出现。</p>
-<p>其实我感觉戒除这个东西，光光靠意志力肯定是不够的，你如果让我一年不 masturbation，显然是扯蛋，因为我相信科学，明白定时规律的排出是对身体有益处的。当然，相比于科学，我更相信我自己的身体反应，2天一次的话对我来说是有点太频繁的，最近其实感觉人的精神就不是很好，专注力很差其实，身体状态还永远没有到最佳的状态。还有一个就是晨勃的现象可以作为一个很好的标准，如果连续2天出现很胀痛的情况，就是你的身体在提醒你要适时排出了。</p>
-<p>之所以你会去向往看 pornography，还有一个原因，就是你不注重于当下，你把排出这件事情和网络屏幕上的图像视频相关联，但往往忽视了自己身体的细微反应，一些排出前的信号，一些控制的能力。</p>
-<p>定期的 masturbation 是好的，有以下几点想法：</p>
-<ol>
-<li>为此设定目标和意图：比如你是想多长时间？你想不想排出？用什么方式？想要达到什么地步？</li>
-<li>增加呼吸频率，让你的身体感觉你在运动，供给充分的氧气，深呼吸</li>
-<li>抚摸你的各个身体部位，感受这种触觉</li>
-<li>频率不要过快，记住，你的目的不是排出，而是为了锻炼耐受力，享受这个过程</li>
-<li>可以更换姿势，增加新鲜感，而不是寻求荧幕上的新鲜刺激，那种刺激过于强烈</li>
-<li>可以发挥自己的想象，自行脑补</li>
-</ol>
-<p>2026年6月15日晚上，可以感受到的是：不依赖 pornography 的话，事后完全不会那么空虚，睡眠质量也非常不错，一夜之间只醒了一次，84分的睡眠，还是不错的。其实昨天晚上睡得好还有一个原因：就是睡前泡了个脚，可能也是比较有助于睡眠的。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
       </categories>
   </entry>
   <entry>
@@ -916,33 +943,6 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </categories>
   </entry>
   <entry>
-    <title>UG NX12数控车床仿真与参数设置指南</title>
-    <url>/2026/03/18/UG%20NX12%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8E%A7%E4%BB%BF%E7%9C%9F%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260327174038012.png" alt="ugnx1"><br>
-UG NX12如何进行数控仿真？<br>
-数控车床</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221511401.png" alt="image-20260318221511286"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318221633130.png" alt="image-20260318221633079"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318223143227.png" alt="image-20260318223143171"></p>
-<p>非切削参数里面修改<strong>逼近、退刀点</strong></p>
-<p>切削参数里面设置<strong>切削余量</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224403913.png" alt="image-20260318224403844"></p>
-<p>显示T0101的方法：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318230934810.png" alt="image-20260318230934759"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224620067.png" alt="image-20260318224620007"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260318224638708.png" alt="image-20260318224638679"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**我不能 100% 保证刀片“绝对不会崩”**（任何切断操作都有风险，尤其是你这个 Ø220 mm 切到 Ø60 mm 的大切深），但**用我下面调整后的参数 + 正确刀具，崩刀概率会降到非常低**（实际工厂里 95% 以上都不会崩）。</span><br><span class="line"></span><br><span class="line">我根据你的工件尺寸（大直径铝件）和 NX 12 的 Parting 操作，专门给你**最保守、最安全的参数**（比我之前推荐的还更保守）。</span><br><span class="line"></span><br><span class="line">### 1. 必须换一把“长 + 强”切断刀（这是防崩基础）</span><br><span class="line">- 刀片宽度：**3 mm**（不要用 4 mm，窄一点刚性更好）</span><br><span class="line">- 刀杆总长（Shank Length）：**至少 70–80 mm**（你之前那把太短了）</span><br><span class="line">- 刀片要求：**带断屑槽 + 涂层**（推荐 Kennametal N123 或 Sandvik CoroCut，铝专用等级）</span><br><span class="line">- NX 12 操作：在 Parting 操作里新建刀具 → Turning Tool → Parting Tool → 把长度改成 80 mm</span><br><span class="line"></span><br><span class="line">### 2. 最安全的 Parting 参数设置（直接复制）</span><br><span class="line">双击你的 PART_OFF 操作后，按下面填（这是防崩最关键的 3 个地方）：</span><br><span class="line"></span><br><span class="line">**Cut Parameters（切削参数）标签页**</span><br><span class="line">- Multiple Passes：**必须勾选**</span><br><span class="line">- Depth per Pass（每层切深）：**0.8 ~ 1.0 mm**（我现在给你降到 1 mm 以内，比之前更保守）</span><br><span class="line">- Stock（最终余量）：**0.3 mm**</span><br><span class="line">- Feed（进给）：**0.05 ~ 0.07 mm/rev**（非常慢，防止崩刃）</span><br><span class="line">- Speed（转速）：**1500 ~ 1800 rpm**（铝件不要太快）</span><br><span class="line"></span><br><span class="line">**Non-Cutting Moves（非切削移动）标签页**</span><br><span class="line">- Approach（进刀）：**Ramp**（斜进刀）</span><br><span class="line">- Retract（退刀）：</span><br><span class="line">  - Retract Distance：**X +12 mm**（先把刀从槽里拉出来）</span><br><span class="line">  - **必须先退 X，再退 Z**</span><br><span class="line">- Clearance Plane：**Z +100 mm**（抬得更高一点）</span><br><span class="line"></span><br><span class="line">**额外防崩开关**：</span><br><span class="line">- 在 Cut Parameters 里勾选 **Use Fixed Cycle** → 选 **G75**（自动 peck 退刀断屑，最防崩！）</span><br><span class="line"></span><br><span class="line">### 3. 额外两招几乎零崩刀（强烈建议做）</span><br><span class="line">**招式1（最推荐）**：先车一个**退刀槽**</span><br><span class="line">- 在切断位置前方 3 mm 处，先做一个 Groove Turning 操作：</span><br><span class="line">  - 宽度 5 mm，深度 3 mm</span><br><span class="line">- 然后再做 Parting 操作，刀具直接进到这个槽里切，崩刀风险几乎为 0。</span><br><span class="line"></span><br><span class="line">**招式2**：中心前减速</span><br><span class="line">- 在切到直径 Ø80 mm 左右时，手动把进给降到 **0.03 mm/rev**（接近中心时切削力最大，最容易崩）</span><br><span class="line"></span><br><span class="line">### 4. 实际操作前的最后检查（必须做！）</span><br><span class="line">1. 生成刀路后 → 右键 **Verify → Machine Simulation**</span><br><span class="line">2. 勾选 Holder Collision + Fixture Collision</span><br><span class="line">3. 播放完整仿真：</span><br><span class="line">   - 看刀片是否一直保持 0.8–1.0 mm 每层切</span><br><span class="line">   - 看退刀是否“先拉 X 再抬 Z”</span><br><span class="line">   - 如果全程无红色报警 → 基本安全</span><br><span class="line"></span><br><span class="line">### 总结一句话</span><br><span class="line">**用上面参数（每层 ≤1.0 mm + 先退 X + G75 + 长刀杆），刀片崩的概率极低**（我教过的学生用这个方法切 Ø200+ 铝件都没崩过）。</span><br><span class="line"></span><br><span class="line">**现在你直接做**：</span><br><span class="line">1. 把切深改成 **0.8–1.0 mm**</span><br><span class="line">2. 进给改成 **0.05–0.07 mm/rev**</span><br><span class="line">3. 新建一把 80 mm 长的切断刀</span><br><span class="line">4. 勾选 G75 + 生成刀路</span><br><span class="line">5. 仿真一次</span><br><span class="line"></span><br><span class="line">做完**仿真截图**发我（尤其是刀路播放到中心位置的时候），我帮你最后看一眼是否安全。  </span><br><span class="line">或者你现在就把当前 Depth per Pass 和 Feed 值告诉我，我再给你精确数字。</span><br><span class="line"></span><br><span class="line">放心，按这个保守参数走，刀片不会轻易崩的！  </span><br><span class="line">继续操作，有问题随时截图问我。</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260319213946556.png" alt="image-20260319213946453"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260320134843281.png" alt="image-20260320134843073"></p>
-<p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
-<p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
-<p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
     <title>iPhone要不要升级到iOS 26？iOS 18与iOS 26对比体验</title>
     <url>/2026/03/22/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310143708973.png" alt="image-20260310143708973"></p>
@@ -999,6 +999,87 @@ UG NX12如何进行数控仿真？<br>
 ]]></content>
       <categories>
         <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Jellyfin MetaShark插件安装与配置指南</title>
+    <url>/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403145425463.png" alt="image-20260403145425463"></p>
+<h1>MetaShark</h1>
+<p>需要的工具：</p>
+<p><a href="https://github.com/cxfksword/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库1</a></p>
+<p><a href="http://gitee.com/cwhzy/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库2</a></p>
+<p>添加存储库</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123438052.png" alt="image-20260329123438052"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123458168.png" alt="image-20260329123458168"></p>
+<p>安装metashark插件</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327223744061.png" alt="image-20260327223744061"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327223812350.png" alt="image-20260327223812350"></p>
+<p>选择一个资料库，点击管理媒体库</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123548948.png" alt="image-20260329123548948"></p>
+<p>更改元数据加载器、图片下载器为metashark</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224115477.png" alt="image-20260327224115477"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224128867.png" alt="image-20260327224128867"></p>
+<p>如果之前已经有元数据，我们需要刷新一下元数据，覆盖掉原来的元数据</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224440699.png" alt="image-20260327224440699"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224500621.png" alt="image-20260327224500621"></p>
+<p>对于不满意的封面和元数据，还可以手动去调整，找到刮削不满意的电影，选择刮削元数据</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123936663.png" alt="image-20260329123936663"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329124012225.png" alt="image-20260329124012225"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329124032265.png" alt="image-20260329124032265"></p>
+<p><strong>插件效果还是不错的</strong></p>
+<p>会显示简介、演员头像、中文标题的，比原来的好了不少</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224647909.png" alt="image-20260327224647909"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328114650032.png" alt="image-20260328114650032"></p>
+<h1>Metatube</h1>
+<p>这个刮削插件主要是针对一些番号类资源的</p>
+<p>在安装的过程中，发现无法通过url安装，但是我们还可以通过手动拖dll进行安装</p>
+<p>先从github下载</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329122734246.png" alt="image-20260329122734246"></p>
+<p>解压出ddl文件</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329122756076.png" alt="image-20260329122756076"></p>
+<p>打开everything，搜索jellyfin，找到jellyfin的插件plugins文件夹，并且右键，打开路径</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329122918477.png" alt="image-20260329122918477"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123055978.png" alt="image-20260329123055978"></p>
+<p>重启jellyfin，发现插件是安装上了的</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329124611492.png" alt="image-20260329124611492"></p>
+<p>到这里还没有结束配置，刮削源有地域限制，而且还得部署服务器后端，官网有很多教程，很多<a href="https://metatube-community.github.io/wiki/server-deployment/">后端部署方案</a>可以去参考</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329125831393.png" alt="image-20260329125831393"></p>
+<p><strong>我采取的后端配置：</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329142154958.png" alt="image-20260329142154958"></p>
+<p>exe名称要更改一下，从metatube-server-windows-amd64.exe改为metatube-server.exe</p>
+<p>不然会出现这个问题</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">PS</span> F:\metatube&gt; .\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db</span><br><span class="line">./metatube<span class="literal">-server</span> : 无法将“./metatube<span class="literal">-server</span>”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如</span><br><span class="line">果包括路径，请确保路径正确，然后再试一次。</span><br><span class="line">所在位置 行:<span class="number">1</span> 字符: <span class="number">1</span></span><br><span class="line">./metatube<span class="literal">-server</span></span><br><span class="line">    + CategoryInfo : ObjectNotFound: (./metatube<span class="literal">-server</span>:String) [], CommandNotFoundException</span><br><span class="line">    + FullyQualifiedErrorId : CommandNotFoundException出现了这个问题</span><br></pre></td></tr></table></figure>
+<p>这样更改以后，浏览器打开127.0.0.1:8080，如果显示404，说明端口大概率是被占用了，可以通过以下命令更改端口</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">.\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db <span class="literal">--port</span> <span class="number">8100</span></span><br></pre></td></tr></table></figure>
+<p>然后访问127.0.0.1:8100，显示这样说明后端服务器就搭建好了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329144330787.png" alt="image-20260329144330787"></p>
+<p>如果想要翻译标题和概要，去插件设计里面修改即可</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329151505248.png" alt="image-20260329151505248"></p>
+<h1>JavSP</h1>
+<p>发现会出现 要求出口ip为日本节点，怎么去解决呢？</p>
+<p><strong>找到配置文件中的这一段</strong></p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[CrawlerSelect]</span></span><br><span class="line"><span class="attr">normal</span> = airav,avsox,javbus,javdb,javlib,jav321,mgstage,prestige</span><br><span class="line"><span class="attr">fc2</span> = fc2,avsox,javdb,javmenu,fc2ppvdb</span><br><span class="line"><span class="attr">cid</span> = fanza</span><br><span class="line"><span class="attr">getchu</span> = dl_getchu</span><br><span class="line"><span class="attr">gyutto</span> = gyutto</span><br></pre></td></tr></table></figure>
+<p>删除 <code>mgstage</code> 和 <code>prestige</code>，改成</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">normal</span> = avsox,javbus,javdb,javlib,jav321</span><br></pre></td></tr></table></figure>
+<p>因为<code>mgstage</code> 和 <code>prestige</code> 是日本官方或半官方源，强制要求日本 IP，我的网络节点无法满足，所以必须移除</p>
+<p>除此之外，还需要一个国外的节点（使用的是v2ray）</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 是否启用代理</span></span><br><span class="line"><span class="attr">use_proxy</span> = <span class="literal">yes</span>（这里改为<span class="literal">yes</span>）</span><br><span class="line"><span class="comment"># 设置代理服务器地址，支持 http, socks5/socks5h 代理。示例格式如下：</span></span><br><span class="line"><span class="attr">proxy</span> = socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br></pre></td></tr></table></figure>
+<p>修改后，JavSP 应该能正常工作了</p>
+<h1>一些问题和解决方法</h1>
+<h2 id="metashark刮削演员图片不显示">metashark刮削演员图片不显示</h2>
+<p>日志是这样写的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[ERR] [28] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request. URL &quot;GET&quot; &quot;/Items/0d08a913c95b0996ba7aed19ec5a405d/Images/Primary&quot;.</span><br><span class="line">System.Net.Http.HttpRequestException: 由于目标计算机积极拒绝，无法连接。 (127.0.0.1:8096)</span><br></pre></td></tr></table></figure>
+<p>解决方法：Dashboard → Networking-&gt;清空 network address</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405210415758.png" alt="image-20260405210415758"></p>
+<p>插件通过url无法安装怎么办？</p>
+<p>可能需要我们把代理给关闭了，采取直连策略即可</p>
+<h2 id="Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据">Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据</h2>
+<p>打开config.ini，具体修改了以下几处发现就已经可以啦</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">enable_file_move = no</span><br><span class="line">...</span><br><span class="line">media_servers = jellyfin</span><br><span class="line">...</span><br><span class="line">save_dir = $censor/$actress/[$num]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>教程</category>
       </categories>
   </entry>
   <entry>
@@ -1420,84 +1501,19 @@ UG NX12如何进行数控仿真？<br>
       </categories>
   </entry>
   <entry>
-    <title>Jellyfin MetaShark插件安装与配置指南</title>
-    <url>/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260403145425463.png" alt="image-20260403145425463"></p>
-<h1>MetaShark</h1>
-<p>需要的工具：</p>
-<p><a href="https://github.com/cxfksword/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库1</a></p>
-<p><a href="http://gitee.com/cwhzy/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库2</a></p>
-<p>添加存储库</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123438052.png" alt="image-20260329123438052"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123458168.png" alt="image-20260329123458168"></p>
-<p>安装metashark插件</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327223744061.png" alt="image-20260327223744061"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327223812350.png" alt="image-20260327223812350"></p>
-<p>选择一个资料库，点击管理媒体库</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123548948.png" alt="image-20260329123548948"></p>
-<p>更改元数据加载器、图片下载器为metashark</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224115477.png" alt="image-20260327224115477"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224128867.png" alt="image-20260327224128867"></p>
-<p>如果之前已经有元数据，我们需要刷新一下元数据，覆盖掉原来的元数据</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224440699.png" alt="image-20260327224440699"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224500621.png" alt="image-20260327224500621"></p>
-<p>对于不满意的封面和元数据，还可以手动去调整，找到刮削不满意的电影，选择刮削元数据</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123936663.png" alt="image-20260329123936663"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329124012225.png" alt="image-20260329124012225"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329124032265.png" alt="image-20260329124032265"></p>
-<p><strong>插件效果还是不错的</strong></p>
-<p>会显示简介、演员头像、中文标题的，比原来的好了不少</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327224647909.png" alt="image-20260327224647909"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328114650032.png" alt="image-20260328114650032"></p>
-<h1>Metatube</h1>
-<p>这个刮削插件主要是针对一些番号类资源的</p>
-<p>在安装的过程中，发现无法通过url安装，但是我们还可以通过手动拖dll进行安装</p>
-<p>先从github下载</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329122734246.png" alt="image-20260329122734246"></p>
-<p>解压出ddl文件</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329122756076.png" alt="image-20260329122756076"></p>
-<p>打开everything，搜索jellyfin，找到jellyfin的插件plugins文件夹，并且右键，打开路径</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329122918477.png" alt="image-20260329122918477"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329123055978.png" alt="image-20260329123055978"></p>
-<p>重启jellyfin，发现插件是安装上了的</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329124611492.png" alt="image-20260329124611492"></p>
-<p>到这里还没有结束配置，刮削源有地域限制，而且还得部署服务器后端，官网有很多教程，很多<a href="https://metatube-community.github.io/wiki/server-deployment/">后端部署方案</a>可以去参考</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329125831393.png" alt="image-20260329125831393"></p>
-<p><strong>我采取的后端配置：</strong></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329142154958.png" alt="image-20260329142154958"></p>
-<p>exe名称要更改一下，从metatube-server-windows-amd64.exe改为metatube-server.exe</p>
-<p>不然会出现这个问题</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">PS</span> F:\metatube&gt; .\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db</span><br><span class="line">./metatube<span class="literal">-server</span> : 无法将“./metatube<span class="literal">-server</span>”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如</span><br><span class="line">果包括路径，请确保路径正确，然后再试一次。</span><br><span class="line">所在位置 行:<span class="number">1</span> 字符: <span class="number">1</span></span><br><span class="line">./metatube<span class="literal">-server</span></span><br><span class="line">    + CategoryInfo : ObjectNotFound: (./metatube<span class="literal">-server</span>:String) [], CommandNotFoundException</span><br><span class="line">    + FullyQualifiedErrorId : CommandNotFoundException出现了这个问题</span><br></pre></td></tr></table></figure>
-<p>这样更改以后，浏览器打开127.0.0.1:8080，如果显示404，说明端口大概率是被占用了，可以通过以下命令更改端口</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">.\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db <span class="literal">--port</span> <span class="number">8100</span></span><br></pre></td></tr></table></figure>
-<p>然后访问127.0.0.1:8100，显示这样说明后端服务器就搭建好了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329144330787.png" alt="image-20260329144330787"></p>
-<p>如果想要翻译标题和概要，去插件设计里面修改即可</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260329151505248.png" alt="image-20260329151505248"></p>
-<h1>JavSP</h1>
-<p>发现会出现 要求出口ip为日本节点，怎么去解决呢？</p>
-<p><strong>找到配置文件中的这一段</strong></p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[CrawlerSelect]</span></span><br><span class="line"><span class="attr">normal</span> = airav,avsox,javbus,javdb,javlib,jav321,mgstage,prestige</span><br><span class="line"><span class="attr">fc2</span> = fc2,avsox,javdb,javmenu,fc2ppvdb</span><br><span class="line"><span class="attr">cid</span> = fanza</span><br><span class="line"><span class="attr">getchu</span> = dl_getchu</span><br><span class="line"><span class="attr">gyutto</span> = gyutto</span><br></pre></td></tr></table></figure>
-<p>删除 <code>mgstage</code> 和 <code>prestige</code>，改成</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">normal</span> = avsox,javbus,javdb,javlib,jav321</span><br></pre></td></tr></table></figure>
-<p>因为<code>mgstage</code> 和 <code>prestige</code> 是日本官方或半官方源，强制要求日本 IP，我的网络节点无法满足，所以必须移除</p>
-<p>除此之外，还需要一个国外的节点（使用的是v2ray）</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 是否启用代理</span></span><br><span class="line"><span class="attr">use_proxy</span> = <span class="literal">yes</span>（这里改为<span class="literal">yes</span>）</span><br><span class="line"><span class="comment"># 设置代理服务器地址，支持 http, socks5/socks5h 代理。示例格式如下：</span></span><br><span class="line"><span class="attr">proxy</span> = socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br></pre></td></tr></table></figure>
-<p>修改后，JavSP 应该能正常工作了</p>
-<h1>一些问题和解决方法</h1>
-<h2 id="metashark刮削演员图片不显示">metashark刮削演员图片不显示</h2>
-<p>日志是这样写的</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[ERR] [28] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request. URL &quot;GET&quot; &quot;/Items/0d08a913c95b0996ba7aed19ec5a405d/Images/Primary&quot;.</span><br><span class="line">System.Net.Http.HttpRequestException: 由于目标计算机积极拒绝，无法连接。 (127.0.0.1:8096)</span><br></pre></td></tr></table></figure>
-<p>解决方法：Dashboard → Networking-&gt;清空 network address</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260405210415758.png" alt="image-20260405210415758"></p>
-<p>插件通过url无法安装怎么办？</p>
-<p>可能需要我们把代理给关闭了，采取直连策略即可</p>
-<h2 id="Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据">Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据</h2>
-<p>打开config.ini，具体修改了以下几处发现就已经可以啦</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">enable_file_move = no</span><br><span class="line">...</span><br><span class="line">media_servers = jellyfin</span><br><span class="line">...</span><br><span class="line">save_dir = $censor/$actress/[$num]</span><br></pre></td></tr></table></figure>
+    <title>借《倩女幽魂》，说出心中的善良与勇气</title>
+    <url>/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/qnyh1.png" alt=""><br>
+当小倩一溜烟钻进金罐，当采臣迎着彩虹骑马远去，当屏幕上跳出“剧终”两个字，我的心忽然咯噔了一下。电影戛然而止，想象却汹涌而来：她会投向怎样的人间？他是否还能在某个街角认出她？彩虹停在那里，故事停在那里，可我的思绪没有停。那一刻我才明白，有些结尾不是结束，而是一种留白。</p>
+<p>跳出电影再看，里面的人物其实都复杂得像真实的人。“我不管，我就要带你离开这里。”宁采臣明明胆小，在荒山听到狼叫都会吓得念诗壮胆，可当危险真正来临，他却选择向前。那一刻我忽然意识到，真正的勇敢不是不害怕，而是明明害怕，却仍然不退。或许我一直以为自己是个理性的人，习惯权衡利弊、计算后果，可有些选择不需要逻辑，甚至也来不及逻辑。</p>
+<p>“其实有些鬼，比人还善良得多。”聂小倩是鬼，却比许多人更温柔、更真诚；“有时候，人害人比鬼还残忍。”燕赤霞粗鲁却通透。原来最像鬼的，从来不是鬼。善恶从来不是身份决定的，鬼未必冷，人未必暖。褪去身份与外壳，真正站得住的，只有人心。</p>
+<p>我后来想明白，我写下这些，并不是为了分析镜头、光影或叙事技巧。我不是在写电影，我是在借电影确认自己的价值观。在这个有些混乱的世界里，我依然愿意相信善良、相信勇气、相信有人会在明知危险时说一句“我不管”。</p>
+<p>也许导演故意把故事停在彩虹那里。重要的不是他们后来是否重逢，而是在那一刻，他们把彼此当作全部。彩虹短暂，但它存在过；人心复杂，但光也真实。</p>
+<p>故事停在彩虹，宁采臣最后满脸惆怅，带着哭腔说出的这句“小倩，你要好好的做人”，给了我们最好的留白…</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/qnyh3.png" alt=""></p>
 ]]></content>
       <categories>
-        <category>教程</category>
+        <category>影视</category>
       </categories>
   </entry>
   <entry>
@@ -1516,16 +1532,26 @@ UG NX12如何进行数控仿真？<br>
       </categories>
   </entry>
   <entry>
-    <title>借《倩女幽魂》，说出心中的善良与勇气</title>
-    <url>/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/qnyh1.png" alt=""><br>
-当小倩一溜烟钻进金罐，当采臣迎着彩虹骑马远去，当屏幕上跳出“剧终”两个字，我的心忽然咯噔了一下。电影戛然而止，想象却汹涌而来：她会投向怎样的人间？他是否还能在某个街角认出她？彩虹停在那里，故事停在那里，可我的思绪没有停。那一刻我才明白，有些结尾不是结束，而是一种留白。</p>
-<p>跳出电影再看，里面的人物其实都复杂得像真实的人。“我不管，我就要带你离开这里。”宁采臣明明胆小，在荒山听到狼叫都会吓得念诗壮胆，可当危险真正来临，他却选择向前。那一刻我忽然意识到，真正的勇敢不是不害怕，而是明明害怕，却仍然不退。或许我一直以为自己是个理性的人，习惯权衡利弊、计算后果，可有些选择不需要逻辑，甚至也来不及逻辑。</p>
-<p>“其实有些鬼，比人还善良得多。”聂小倩是鬼，却比许多人更温柔、更真诚；“有时候，人害人比鬼还残忍。”燕赤霞粗鲁却通透。原来最像鬼的，从来不是鬼。善恶从来不是身份决定的，鬼未必冷，人未必暖。褪去身份与外壳，真正站得住的，只有人心。</p>
-<p>我后来想明白，我写下这些，并不是为了分析镜头、光影或叙事技巧。我不是在写电影，我是在借电影确认自己的价值观。在这个有些混乱的世界里，我依然愿意相信善良、相信勇气、相信有人会在明知危险时说一句“我不管”。</p>
-<p>也许导演故意把故事停在彩虹那里。重要的不是他们后来是否重逢，而是在那一刻，他们把彼此当作全部。彩虹短暂，但它存在过；人心复杂，但光也真实。</p>
-<p>故事停在彩虹，宁采臣最后满脸惆怅，带着哭腔说出的这句“小倩，你要好好的做人”，给了我们最好的留白…</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/qnyh3.png" alt=""></p>
+    <title>揭露细菌战暴行与人性困局：剧集分集观影随感</title>
+    <url>/2026/03/08/%E3%80%8A%E5%8F%8D%E4%BA%BA%E7%B1%BB%E6%9A%B4%E8%A1%8C%E3%80%8B/</url>
+    <content><![CDATA[<h1>第一集</h1>
+<p>第一集给我的最大感受是，这个电视剧的镜头很有质感，光影很细节。</p>
+<p>佟长富真的是常宇演的吗？感觉神似但是又不像，很神奇</p>
+<p>反人类暴行，到底怎么去表现呢？第一集感觉只是一个引子，二条的死只是开端。二条身上带着的，一定是某种致命的病毒，日本人干了什么好事？</p>
+<p>还有一个疑问，长富的妹妹是什么身份？</p>
+<p>“他们把二条挖出来吃了”，这句话一出来，真是，人在那时候，活得不像一条狗。</p>
+<p>片尾的历史真实录音让人听起来很难受：他们把注射了细菌的瓜给中国人吃，中国人吃了怎么样了？</p>
+<p>“全部感染！”</p>
+<h1>第二集</h1>
+<p>这集把荒川良平引出来了，和前面长富的剧情接上了，从荒川良平的眼中，我看到的只有恐惧和慌乱，似乎体力还不太行，做着做着实验就到过去了，他和那群作恶多端的日本军官格格不入。</p>
+<p>印象很深的一句话：“比敌人更可怕的，也许只是一个得不到治疗的伤口”</p>
+<h1>第八集</h1>
+<p>川口聪这是黑化了啊，之前还觉得他是个有良知的日本人，这集咋还去抢银行了呢。</p>
+<p>感觉是被舞子的死逼疯了。</p>
+<p>王道乐土 五族协和这句口号之下的牺牲品。</p>
+<p>我想要逃，却怎么也逃不出监牢的环抱。荒川良平</p>
+<h1>第九集</h1>
+<p>进入探秘篇，这集活体解剖很是血腥</p>
 ]]></content>
       <categories>
         <category>影视</category>
@@ -1651,49 +1677,90 @@ UG NX12如何进行数控仿真？<br>
       </categories>
   </entry>
   <entry>
-    <title>《蝴蝶效应》：人生没有回溯键，你做不了上帝</title>
-    <url>/2025/08/25/%E3%80%8A%E8%9D%B4%E8%9D%B6%E6%95%88%E5%BA%94%E3%80%8B/</url>
-    <content><![CDATA[<p>一只南美洲的蝴蝶扇动翅膀，结果可能引发德克萨斯州的龙卷风</p>
-<h2 id="完美悖论">完美悖论</h2>
-<p>豆瓣上这个老哥的评论感觉观点很新奇，也很有想象力：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">剧情中最关键的点其实是男主和他爸的关系</span><br><span class="line">全片中，男主修改时间线是为了救身边的人</span><br><span class="line">那么他爸修改时间线是为了什么？答案就在最后</span><br><span class="line">因为男主的胎死腹中，一定会导致他妈的抑郁，抽烟，肺癌</span><br><span class="line">所以他爸会为了救他妈</span><br><span class="line">一遍遍回到他出生前，去修改这个结局</span><br><span class="line">但是这就会导致一个结果：</span><br><span class="line">只要男主出生，他就一定会遭遇后来的所有</span><br><span class="line">他也一定会像父亲一样修改时间线</span><br><span class="line">而最后的结局</span><br><span class="line">也一定是他再次扼死自己一而这个结局又会被他爸再次修改</span><br><span class="line">如此循环往复。</span><br><span class="line">所以，终结这个循环的方法只有一个：他爸不再修改他胎死腹中的结局</span><br><span class="line">接受这个事实</span><br><span class="line">因为他明白了：这个儿子的死是必然的</span><br><span class="line">任何努力都没用，都会让一切回到原点。</span><br><span class="line">这就是为什么男主爸爸会说：你做不了上帝，孩子。</span><br><span class="line">这句话，才是电影的题眼</span><br></pre></td></tr></table></figure>
-<p>豆瓣上有三派人，一派人很悲：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">或许，我也应该用脐带勒死自己</span><br></pre></td></tr></table></figure>
-<p>还有一派人很乐观：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">每一次的选择已经是最好的选择了。改变未必是优化</span><br></pre></td></tr></table></figure>
-<p>还有一派人很客观：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">命中注定的事 释然去面对吧</span><br><span class="line">放下过去，才有未来...</span><br><span class="line">即使你握着人生遥控器</span><br><span class="line">也未能遥出一个完美的人生</span><br></pre></td></tr></table></figure>
-<h2 id="互动游戏">互动游戏</h2>
-<p>感觉很像玩了一个具有丰富故事线的游戏，就好像《飞跃13号房》里，你的每一句话和每一次选择都会影响别人对你的看法，以及对待你的态度，也自然就影响了故事的走向和发展。</p>
-<p>但是，游戏是可以修改的，是可以通过时间回溯来解决问题的，《蝴蝶效应》就告诉了我们：如果你拥有人生回溯的超能力，这也未尝不是一件好事。</p>
-<p>人生不比游戏，他不会有“增加和某某好感度”的提示，也不会有“前往某某地”的提示。人生是旷野，有太多未知等待你自己去探索。你不知道，可能你今天随手扔的一个易拉罐，哪天绊倒了一个七八十岁的老大爷，让他们一命呜呼。</p>
-<p><strong>很好玩很有趣、后劲很足的一部电影。</strong></p>
-]]></content>
-      <categories>
-        <category>影视</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>揭露细菌战暴行与人性困局：剧集分集观影随感</title>
-    <url>/2026/03/08/%E3%80%8A%E5%8F%8D%E4%BA%BA%E7%B1%BB%E6%9A%B4%E8%A1%8C%E3%80%8B/</url>
-    <content><![CDATA[<h1>第一集</h1>
-<p>第一集给我的最大感受是，这个电视剧的镜头很有质感，光影很细节。</p>
-<p>佟长富真的是常宇演的吗？感觉神似但是又不像，很神奇</p>
-<p>反人类暴行，到底怎么去表现呢？第一集感觉只是一个引子，二条的死只是开端。二条身上带着的，一定是某种致命的病毒，日本人干了什么好事？</p>
-<p>还有一个疑问，长富的妹妹是什么身份？</p>
-<p>“他们把二条挖出来吃了”，这句话一出来，真是，人在那时候，活得不像一条狗。</p>
-<p>片尾的历史真实录音让人听起来很难受：他们把注射了细菌的瓜给中国人吃，中国人吃了怎么样了？</p>
-<p>“全部感染！”</p>
-<h1>第二集</h1>
-<p>这集把荒川良平引出来了，和前面长富的剧情接上了，从荒川良平的眼中，我看到的只有恐惧和慌乱，似乎体力还不太行，做着做着实验就到过去了，他和那群作恶多端的日本军官格格不入。</p>
-<p>印象很深的一句话：“比敌人更可怕的，也许只是一个得不到治疗的伤口”</p>
-<h1>第八集</h1>
-<p>川口聪这是黑化了啊，之前还觉得他是个有良知的日本人，这集咋还去抢银行了呢。</p>
-<p>感觉是被舞子的死逼疯了。</p>
-<p>王道乐土 五族协和这句口号之下的牺牲品。</p>
-<p>我想要逃，却怎么也逃不出监牢的环抱。荒川良平</p>
-<h1>第九集</h1>
-<p>进入探秘篇，这集活体解剖很是血腥</p>
+    <title>经典老电影《控方证人》观后感</title>
+    <url>/2025/08/20/%E3%80%8A%E6%8E%A7%E6%96%B9%E8%AF%81%E4%BA%BA%E3%80%8B/</url>
+    <content><![CDATA[<p>闲的没事，找个电影看看。诶，控方证人这部1957的老电影，在某瓣上排名挺高的，好了，就你了，**《控方证人》**😃😃😃</p>
+<h2 id="个人感受">个人感受</h2>
+<h3 id="画面">画面</h3>
+<p>1957年的，<strong>巨老巨老的电影</strong>，画面是黑白的，Torrent Kitty下载的资源，尽管是720P，但画质还看得过去😏</p>
+<h3 id="剧情">剧情</h3>
+<p>故事发生在<strong>英国</strong>，开篇是英国当地的一个法庭开庭的镜头，也就是后面大部分精彩环节发生的地点</p>
+<p>故事一开始，映入眼帘的是一个胖胖的老头儿和一个女人，老头儿叫威佛列，因为治疗心脏病住院，现在出院，他愁容不展，从后面的情节我们得知，他是一名英国出了名的刑事律师（注意，不是初级律师，初级律师是没有本事可以打刑事案件的）；女人名为普林索，是威佛列爵士的私人医生，这个女人满脸笑容，可以看出是一个很乐观的人😃</p>
+<p>情节很紧凑，紧接着就有一个男子为了解决自己身上的嫌疑慕名而来，男子名叫连那德.Vol（外国人名真tm难记，看了一整部电影居然没记下来名字），Vol的案子不是那么好处理，他的嫌疑是杀害了French女士，10月15号那天晚上，Vol和French女士是在一起，Vol无法提供不在场证明</p>
+<p>从动机来问，威佛列像审问犯人一样，用光照着Vol，来检验他有没有说慌，事实证明，他通过了威佛列的考验。但这时，一个不利的消息传来，有八万英镑的遗嘱留给了Vol，这很难不让人怀疑Vol</p>
+<p>至于不在场证明，唯一的证明，是他的妻子——克里斯蒂.Vol，她向警察声称：当天21:25分看到Vol在家。但威佛列提出，妻子的作证在法庭上难成呈堂证供。除此之外，从克里斯蒂的陈述我们可以得知，Vol有很好的女人缘，和French有密切关系并不奇怪。克里斯蒂性格极其刚烈，极其坚强，甚至透露自己的丈夫不是Vol（惊天大瓜啊）</p>
+<p><strong>所以，威佛列就更不能让她来作证了</strong></p>
+<p>威佛列作为久经沙场的刑事律师，自然得想办法为自己的客户洗脱嫌疑，他提出来有没有可能可以找到路上的行人来为他做证，在Vol进入看守所看守的时间里，老头儿就一直在做这个事情</p>
+<p>时间很快来到庭审的阶段，老头儿威佛列冒着心脏病的危险，出席了自己职业生涯可能最后一场官司，法庭上的检方逐一出招，但都被经验老道的威佛列击破，检方将证人带入预设陷阱，老头儿就向法官大人告状；当证人出现了语言逻辑上的纰漏，老头儿就充分利用这个弱点；看起来这张官司，威佛列没有输的道理</p>
+<p>你以为这个过程有这么简单，那你就错了。常规的证人审问阶段结束，王炸出现，检方打了一张出奇意料的牌，似乎要置老头于死地——是Vol的妻子克里斯蒂</p>
+<p>克里斯蒂的作证让老头心儿一惊，老头儿可能心想：这娘们打的是什么牌，之前还给自己的丈夫作清白证明，现在怎么反水了？</p>
+<p>克里斯蒂的指控很出人意料：Vol一直要挟她欺骗警察，其实事实是：Vol 10月15日晚上21:25分不在家，10点10分他才回到家，外套上还沾满血啊啥的。总之，balabala了一大堆，就是说：老娘之前跟你一起骗警察是因为你之前带老娘来英国，老娘有点感激你，现在老娘回心转意了，改邪归正了，不能再让你这个杀人犯祸害世界了</p>
+<p><strong>检方这张牌打的妙啊，打的辩方那是措手不及</strong></p>
+<p>老头儿看着心里很慌，其实依旧稳如老狗：老头儿质问，大概是这个意思：当初在婚礼上白头偕老的是你，口口声声说爱你的也是你，结婚证领了的也是你。你个死婊子，你这娘们的话也能信？？？</p>
+<p>这一仗，不算胜利，只能算是个鱼死网破，还不能影响整个案件的判决走向</p>
+<p>正当老头儿这边一筹莫展的时候，一个电话来了，一个声称有着克里斯蒂那个臭婊子的黑料的女人打来的。有什么办法呢，死马当活马医呗</p>
+<p>来到约定的休斯顿车站，那个女人拿出厚厚的一沓信，信的内容无非说是：臭婊子吃里扒外，准备甩掉老公，拿走八万，远走高飞</p>
+<p>时间很快来到最后一天庭审，在案件马上结案的时候，老头儿闪出杀手锏——一沓信，不对，大招不能这么早放。老头儿堪称老狐狸，他先诈了克里斯蒂一招，读着自己的药处方，质问克里斯蒂在外面是不是有情人了，有鼻子有眼的陈述，结果克里斯蒂急了，赶忙说：你这个这个证据假的要死，老娘当时写信用的是蓝色的德国信纸，你搁这骗人呢？</p>
+<p>老狐狸邪魅一笑，把刚刚藏在书以下一沓蓝色的信纸抽了出来，露出了胜利者的笑容</p>
+<p><strong>辩论的艺术，让证人自证有罪，高，实在是高</strong></p>
+<p>庭审的结果很显而易见了，Vol是无罪的，克里斯蒂估计要因为伪证罪入狱</p>
+<p>很快，Vol就被释放，克里斯蒂被当庭人员咒骂、殴打</p>
+<p>当你还在惊叹于老狐狸的辩论艺术时，然而，故事远远还没有那么简单</p>
+<p>老头儿显然是高兴的，但他的经验告诉他，这个结果的反转来的太简单了。老头儿郁闷啊，到底是为啥啊？</p>
+<p>还是那句话，反派死于话多。正当老头儿思忖的时候，克里斯蒂走进只有威佛列一人的法庭，露出了胜利者的微笑：嘿嘿，你以为自己在大气层，其实老娘的操作在平流层</p>
+<p>反派开始自爆：哈哈想不到吧，在车站的那个其实是老娘扮的（嘿嘿，没想到吧）</p>
+<p><strong>你以为你很厉害，其实老娘更厉害，老娘是个演员，会演戏！</strong></p>
+<p>Vol猫在庭院偷听，笑眯眯走了过来，耀武扬威，一副小人得志的样子：我的wife可真不错</p>
+<p>克里斯蒂高兴着呢：等老娘找个好律师，早点出来，老娘跟你白头偕老！</p>
+<p>不等克里斯蒂高兴多久，突然窜出来一个面容姣好的女子，和Vol搂搂抱抱</p>
+<p>震惊，克里斯蒂气的脸都青咯</p>
+<p>气急败坏之下，克里斯蒂拿出一把刀，呲溜，刀子直窜到Vol的要害</p>
+<p><strong>原地，Vol领盒饭~</strong></p>
+<p>故事接近尾声，威佛列笑着说：又有案子来咯，去外面度假的计划又泡汤了（女医生被老头儿耍的第N次 嘿嘿）</p>
+<h3 id="复盘">复盘</h3>
+<ol>
+<li>
+<p>电影中多次给了面容姣好的女子镜头，而且在审被告人Vol的时候，有Vol和一个陌生女子去询问出国旅行的事实，陌生女子就是她！</p>
+<p><img src="/images/kfzr4.png" alt=""></p>
+<p><img src="/images/kfzr5.png" alt=""></p>
+<p><img src="/images/kfzr6.png" alt=""></p>
+</li>
+<li>
+<p>这两个人，真的是一个人吗？</p>
+<p><img src="/images/kfzr7.png" alt=""></p>
+<p><img src="/images/kfzr8.png" alt=""></p>
+</li>
+</ol>
+<h3 id="故事背后">故事背后</h3>
+<ol>
+<li>
+<p>审讯的艺术</p>
+<p><strong>通过攻击证人的人格，来降低对方的可信度</strong></p>
+<p>1997年的辛普森案，辩方使用了本电影很类似的方法：辩护梦之队先是通过攻击证人的人格问题，让证人的公信力大大降低，自然一定程度上增加了胜辩的机会。和中国不同，在英美法系中，一直有“品格证据”的传统。在审判时，检辩双方律师都可能在证人的人格上大作文章</p>
+<p><strong>辩护的最高境界，是让对方自证为伪</strong></p>
+<p>辛普森案中，辩方话里话外之间，都指摘警方不可信，有栽赃陷害的意图，手套与辛普森无关，控方怒了，要求辛普森带上手套，结果却很惊人，连控方律师都承认：这个手套有点太小了，控方再一次落了下风</p>
+<p>辛普森的经纪人在接受采访时才透漏：辛普森患有关节炎，但当时已经停了两周药，致使手指关节肿大，难以戴入手套。<strong>这完全是辩方律师的激将计，早就挖好圈套等着控方跳进来</strong></p>
+<p><strong>辩护应该注重细节，细节决定成败</strong></p>
+<p>本电影中，威佛列对French女士家女佣的诘问中，就敏锐的捕捉了女佣听力很差的事实，加上助听器事实的佐证，推翻了“听见过被告人那时在房间里说话”的证词。辛普森案也是同样如此，在此不赘述罢</p>
+<p><a href="https://zhuanlan.zhihu.com/p/616432919">美国司法史世纪大案：杀妻的辛普森，凭什么无罪？ - 知乎</a></p>
+</li>
+<li>
+<p>一罪不二审</p>
+<p>一罪不二审其实是大陆法系的说法，英美法院一般称之为<strong>禁止双重危险</strong>，基本含义是一个人不能因同一行为或同一罪名受到两次或多次审判或处罚。主要功能是<strong>防止国家滥用追诉权</strong>，从而保障公民合法权益</p>
+<p><a href="https://www.zhihu.com/question/22081648">如何评价“一罪不二审”这一司法原则？ - 知乎</a></p>
+</li>
+<li>
+<p>不同国家的案件审理制度</p>
+<p>总的来说，世界上在法庭上进行案件的审理可以分成<strong>两大类</strong>：一种是<strong>抗辩制</strong>，那就是通过正方和反方的辩论来厘清事实；另一种则是<strong>纠问制</strong>，那就是由专家型的法官，通过不断地追问来寻求事实的真相。<strong>本电影中故事的发生点——英国，采取的是抗辩制，嫌疑犯有没有罪，陪审团投票决定；我国实行的是纠问制</strong></p>
+<p>1997年，著名的辛普森案分别由一个刑事法庭和一个民事法庭来审理，案件的结果是：辛普森被宣判无罪，这是美国抗辩制的结果。重中之重的陪审团有12名普通市民组成，10女2男，其中有9名黑人，2名白人和1名西班牙裔白人</p>
+<p><a href="https://zhuanlan.zhihu.com/p/99108009">英美的陪审团制度，带不来真相和公正 - 知乎</a><br>
+<a href="https://zhuanlan.zhihu.com/p/616432919">美国司法史世纪大案：杀妻的辛普森，凭什么无罪？ - 知乎</a></p>
+</li>
+</ol>
+<h3 id="其他">其他</h3>
+<p>对辩论相关有兴趣的话，可以试试《逆转裁判》这款游戏</p>
+<p>[北洋园PT :: 种子详情 &quot;<a href="https://www.tjupt.org/details.php?id=366089&amp;hit=1">PC][AVG][逆转裁判123：成步堂合辑][Phoenix Wright Ace Attorney Trilogy][压缩包][v20230710 游侠破解版]&quot; - Powered by NexusPHP</a></p>
+<p>[北洋园PT :: 种子详情 &quot;<a href="https://www.tjupt.org/details.php?id=435241&amp;hit=1">PC][AVG][逆转裁判456：王泥喜精选集][Apollo.Justice.Ace.Attorney.Trilogy-RUNE][压缩包]&quot; - Powered by NexusPHP</a></p>
 ]]></content>
       <categories>
         <category>影视</category>
@@ -1720,18 +1787,23 @@ UG NX12如何进行数控仿真？<br>
       </categories>
   </entry>
   <entry>
-    <title>不拿枪的真正战士</title>
-    <url>/2025/09/07/%E3%80%8A%E8%A1%80%E6%88%98%E9%92%A2%E9%94%AF%E5%B2%AD%E3%80%8B/</url>
-    <content><![CDATA[<p>谁说不拿抢，不是好战士</p>
-<h2 id="懦夫">懦夫</h2>
-<p>一个懦夫，连枪都不敢拿，上什么战场。</p>
-<p>我也是这样想的。</p>
-<p>最后看来，我和glover军官，都看走眼了。</p>
-<h2 id="soldier">soldier</h2>
-<p>glover军官对于doss的称呼，从原本的竹节虫变成“soldier”</p>
-<p>doss无愧于这个称呼，他是真正的战士，不，他更像是个斗士。</p>
-<h3 id="信仰">信仰</h3>
-<p>上帝啊，让我再多救一个人吧…</p>
+    <title>《蝴蝶效应》：人生没有回溯键，你做不了上帝</title>
+    <url>/2025/08/25/%E3%80%8A%E8%9D%B4%E8%9D%B6%E6%95%88%E5%BA%94%E3%80%8B/</url>
+    <content><![CDATA[<p>一只南美洲的蝴蝶扇动翅膀，结果可能引发德克萨斯州的龙卷风</p>
+<h2 id="完美悖论">完美悖论</h2>
+<p>豆瓣上这个老哥的评论感觉观点很新奇，也很有想象力：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">剧情中最关键的点其实是男主和他爸的关系</span><br><span class="line">全片中，男主修改时间线是为了救身边的人</span><br><span class="line">那么他爸修改时间线是为了什么？答案就在最后</span><br><span class="line">因为男主的胎死腹中，一定会导致他妈的抑郁，抽烟，肺癌</span><br><span class="line">所以他爸会为了救他妈</span><br><span class="line">一遍遍回到他出生前，去修改这个结局</span><br><span class="line">但是这就会导致一个结果：</span><br><span class="line">只要男主出生，他就一定会遭遇后来的所有</span><br><span class="line">他也一定会像父亲一样修改时间线</span><br><span class="line">而最后的结局</span><br><span class="line">也一定是他再次扼死自己一而这个结局又会被他爸再次修改</span><br><span class="line">如此循环往复。</span><br><span class="line">所以，终结这个循环的方法只有一个：他爸不再修改他胎死腹中的结局</span><br><span class="line">接受这个事实</span><br><span class="line">因为他明白了：这个儿子的死是必然的</span><br><span class="line">任何努力都没用，都会让一切回到原点。</span><br><span class="line">这就是为什么男主爸爸会说：你做不了上帝，孩子。</span><br><span class="line">这句话，才是电影的题眼</span><br></pre></td></tr></table></figure>
+<p>豆瓣上有三派人，一派人很悲：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">或许，我也应该用脐带勒死自己</span><br></pre></td></tr></table></figure>
+<p>还有一派人很乐观：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">每一次的选择已经是最好的选择了。改变未必是优化</span><br></pre></td></tr></table></figure>
+<p>还有一派人很客观：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">命中注定的事 释然去面对吧</span><br><span class="line">放下过去，才有未来...</span><br><span class="line">即使你握着人生遥控器</span><br><span class="line">也未能遥出一个完美的人生</span><br></pre></td></tr></table></figure>
+<h2 id="互动游戏">互动游戏</h2>
+<p>感觉很像玩了一个具有丰富故事线的游戏，就好像《飞跃13号房》里，你的每一句话和每一次选择都会影响别人对你的看法，以及对待你的态度，也自然就影响了故事的走向和发展。</p>
+<p>但是，游戏是可以修改的，是可以通过时间回溯来解决问题的，《蝴蝶效应》就告诉了我们：如果你拥有人生回溯的超能力，这也未尝不是一件好事。</p>
+<p>人生不比游戏，他不会有“增加和某某好感度”的提示，也不会有“前往某某地”的提示。人生是旷野，有太多未知等待你自己去探索。你不知道，可能你今天随手扔的一个易拉罐，哪天绊倒了一个七八十岁的老大爷，让他们一命呜呼。</p>
+<p><strong>很好玩很有趣、后劲很足的一部电影。</strong></p>
 ]]></content>
       <categories>
         <category>影视</category>
@@ -1912,132 +1984,6 @@ UG NX12如何进行数控仿真？<br>
       </categories>
   </entry>
   <entry>
-    <title>《里斯本丸沉没》：用真诚的视角，记录动人的历史群像</title>
-    <url>/2025/08/24/%E3%80%8A%E9%87%8C%E6%96%AF%E6%9C%AC%E4%B8%B8%E6%B2%89%E6%B2%A1%E3%80%8B/</url>
-    <content><![CDATA[<p>在飞机上看了《里斯本丸沉没》这部电影，更确切的来说是一部纪录片，按我的直观感受，这是一部制作精良，具有深远意义的纪录片。</p>
-<h2 id="导演会拍摄">导演会拍摄</h2>
-<p>导演方励不仅仅是一个导演，同时还是一个地理海洋学家，天生的职业属性赋予了《里斯本丸沉没》格外的魅力。一次偶然的机会，当导演方励在东极岛拍摄的时候，听说了东极岛的故事，于是他利用现代的声呐技术来寻找这沉睡的里斯本丸号，经过一番不为人知的努力，沉默了八十年的里斯本丸号，终于揭开了面纱。如今，是时候由我们中国人来讲述这段不为人知的历史了。</p>
-<p>影片导演有一句自白，让我印象很深刻：现在经历过里斯本丸沉没的人大多都去世了，我不敢想，如果当年的亲历者都已经去世，那么这段历史将有谁来讲述？<strong>我不敢怠慢，更要加紧采访和调查的步伐，在影片的最后，很不幸的是，这一幕还是出现了</strong>。</p>
-<p><strong>导演是一个肯吃苦的实干派导演</strong>。方励走遍了英国、美国、加拿大、日本，只为更全面的向大众讲述1942年10月1日发生的故事：当年里斯本丸号沉没的故事；<strong>导演是一个温情的人</strong>。在面对老人时，方励充当的是一个积极的倾听者，这份温情，被带到了电影里。</p>
-<p><strong>中国不缺导演，但缺少的是像方励一样，愿意以社会为题材、反映社会现实，发自内心想要让观众了解历史的导演。</strong></p>
-<h2 id="群像会说话">群像会说话</h2>
-<p>影片中无论是一等兵、二等兵亦或是上将，导演总能抓住他们身上的独特的点，让我们觉得，他们和我们的距离这么近。他们也是普通人，<strong>他们也有人性</strong>，美军的炮手在得知自己职业生涯的第一炮，毁了那么多本该幸福美满的家庭以后，用自己的一生来赎罪；<strong>他们也有爱情</strong>，影片中一个米德尔塞克斯士兵在香港爱上了一个这个女孩，写信给自己的妈妈告诉这件喜事，他们结了婚，但她再也没等到自己的郎；<strong>他们也有亲情</strong>，士兵奋不顾身的冲进燃烧的火堆，抢救出自己妻子的照片，并且用镜片制作成一个精美的相框，时刻看着，只为警醒自己还活着，自己还有故乡的亲人在等着自己回家；<strong>他们也有友情</strong>，军官在逃亡的危难之际，仍然不管自己的死活，安慰自己并肩作战的战友，和他们喝一杯酒、叙一叙旧，让他们体面的去见上帝…</p>
-<p><strong>里斯本丸沉没事件中，有关“他”的故事太多太多，虽然他们的名字我无法一个个记住，但是他们的故事，只要有一个人看了，便不会忘记。</strong></p>
-<p><strong>讲故事嘛，不要高高在上，从大众的视角出发，才是真正的好电影。</strong></p>
-<h2 id="眼泪会流出">眼泪会流出</h2>
-<p>后半段很感人，尤其是最后林阿根和来自异国他乡的素未莫面的“亲人”握手寒暄，似乎他们之间的关系已经超越了语言和地界，产生了非凡的联结。</p>
-<p>后半段我哭的稀里哗啦，既是代入遇难者亲人视角而感到深深的悲痛，也是代入亲历者的故事而感到深深悲痛。</p>
-<p><strong>里斯本丸的沉没，就这样啊，影响了他们的一生</strong>。即使事情已经过去很多年，他们依然PTSD，会有很强烈的创伤应激综合症：他们中，有的每晚睡觉都会说日语，只为乞求日本军官给他们一口水喝、一口饭吃；有的吃饭都根本不敢上桌，因为他们怕啊，怕上桌吃饭会挨打；有的脾气暴跳如雷，暴躁的让自己的子女都感觉陌生的可怕；有的对孩子一句“快要饿死了”的闲话极为反感，因为在他们看来，孩子根本就不知道“什么是真正的快要被饿死了，也根本不希望他们知道”。</p>
-<p><strong>那我问你，为什么明明是日军犯下的滔天大罪，要受害的家庭来用一生来偿还？</strong></p>
-<p>如果只是沉沦在过去，无意会积累仇恨，那我们应该怎么做呢？</p>
-<p><strong>就像威廉.班尼菲福德（比尔1号）说的一样，我们要&quot;I don’t live in the past,I live for future…&quot;</strong></p>
-<p><a href="https://imgse.com/i/pVs5FOI"><img src="https://s21.ax1x.com/2025/08/24/pVs5FOI.png" alt="pVs5FOI.png" border="0" /></a></p>
-<h2 id="战争会吃人">战争会吃人</h2>
-<p>里斯本丸沉没，只是众多战争事件的冰山一角，可以想到，这个世界还有多少埋藏在地下的故事，在等待着人们去讲述…</p>
-<p>经历过山河破碎、家国蹂躏的我们，更加渴望和平。</p>
-<p><strong>因为没有人比我们更懂战争的危害和恐怖。</strong></p>
-<p><strong>战争，真的会吃人！</strong></p>
-<p>让我们再看一眼他们…</p>
-<p>让我们铭记参与救援的中国渔民…</p>
-<p>30° 13’ 44.42&quot;N，122° 45’ 31.14&quot;E</p>
-<p><strong>历史，将会永远记住这个坐标！</strong></p>
-<p><a href="https://imgse.com/i/pVs5Pld"><img src="https://s21.ax1x.com/2025/08/24/pVs5Pld.png" alt="pVs5Pld.png"  /></a></p>
-]]></content>
-      <categories>
-        <category>影视</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>经典老电影《控方证人》观后感</title>
-    <url>/2025/08/20/%E3%80%8A%E6%8E%A7%E6%96%B9%E8%AF%81%E4%BA%BA%E3%80%8B/</url>
-    <content><![CDATA[<p>闲的没事，找个电影看看。诶，控方证人这部1957的老电影，在某瓣上排名挺高的，好了，就你了，**《控方证人》**😃😃😃</p>
-<h2 id="个人感受">个人感受</h2>
-<h3 id="画面">画面</h3>
-<p>1957年的，<strong>巨老巨老的电影</strong>，画面是黑白的，Torrent Kitty下载的资源，尽管是720P，但画质还看得过去😏</p>
-<h3 id="剧情">剧情</h3>
-<p>故事发生在<strong>英国</strong>，开篇是英国当地的一个法庭开庭的镜头，也就是后面大部分精彩环节发生的地点</p>
-<p>故事一开始，映入眼帘的是一个胖胖的老头儿和一个女人，老头儿叫威佛列，因为治疗心脏病住院，现在出院，他愁容不展，从后面的情节我们得知，他是一名英国出了名的刑事律师（注意，不是初级律师，初级律师是没有本事可以打刑事案件的）；女人名为普林索，是威佛列爵士的私人医生，这个女人满脸笑容，可以看出是一个很乐观的人😃</p>
-<p>情节很紧凑，紧接着就有一个男子为了解决自己身上的嫌疑慕名而来，男子名叫连那德.Vol（外国人名真tm难记，看了一整部电影居然没记下来名字），Vol的案子不是那么好处理，他的嫌疑是杀害了French女士，10月15号那天晚上，Vol和French女士是在一起，Vol无法提供不在场证明</p>
-<p>从动机来问，威佛列像审问犯人一样，用光照着Vol，来检验他有没有说慌，事实证明，他通过了威佛列的考验。但这时，一个不利的消息传来，有八万英镑的遗嘱留给了Vol，这很难不让人怀疑Vol</p>
-<p>至于不在场证明，唯一的证明，是他的妻子——克里斯蒂.Vol，她向警察声称：当天21:25分看到Vol在家。但威佛列提出，妻子的作证在法庭上难成呈堂证供。除此之外，从克里斯蒂的陈述我们可以得知，Vol有很好的女人缘，和French有密切关系并不奇怪。克里斯蒂性格极其刚烈，极其坚强，甚至透露自己的丈夫不是Vol（惊天大瓜啊）</p>
-<p><strong>所以，威佛列就更不能让她来作证了</strong></p>
-<p>威佛列作为久经沙场的刑事律师，自然得想办法为自己的客户洗脱嫌疑，他提出来有没有可能可以找到路上的行人来为他做证，在Vol进入看守所看守的时间里，老头儿就一直在做这个事情</p>
-<p>时间很快来到庭审的阶段，老头儿威佛列冒着心脏病的危险，出席了自己职业生涯可能最后一场官司，法庭上的检方逐一出招，但都被经验老道的威佛列击破，检方将证人带入预设陷阱，老头儿就向法官大人告状；当证人出现了语言逻辑上的纰漏，老头儿就充分利用这个弱点；看起来这张官司，威佛列没有输的道理</p>
-<p>你以为这个过程有这么简单，那你就错了。常规的证人审问阶段结束，王炸出现，检方打了一张出奇意料的牌，似乎要置老头于死地——是Vol的妻子克里斯蒂</p>
-<p>克里斯蒂的作证让老头心儿一惊，老头儿可能心想：这娘们打的是什么牌，之前还给自己的丈夫作清白证明，现在怎么反水了？</p>
-<p>克里斯蒂的指控很出人意料：Vol一直要挟她欺骗警察，其实事实是：Vol 10月15日晚上21:25分不在家，10点10分他才回到家，外套上还沾满血啊啥的。总之，balabala了一大堆，就是说：老娘之前跟你一起骗警察是因为你之前带老娘来英国，老娘有点感激你，现在老娘回心转意了，改邪归正了，不能再让你这个杀人犯祸害世界了</p>
-<p><strong>检方这张牌打的妙啊，打的辩方那是措手不及</strong></p>
-<p>老头儿看着心里很慌，其实依旧稳如老狗：老头儿质问，大概是这个意思：当初在婚礼上白头偕老的是你，口口声声说爱你的也是你，结婚证领了的也是你。你个死婊子，你这娘们的话也能信？？？</p>
-<p>这一仗，不算胜利，只能算是个鱼死网破，还不能影响整个案件的判决走向</p>
-<p>正当老头儿这边一筹莫展的时候，一个电话来了，一个声称有着克里斯蒂那个臭婊子的黑料的女人打来的。有什么办法呢，死马当活马医呗</p>
-<p>来到约定的休斯顿车站，那个女人拿出厚厚的一沓信，信的内容无非说是：臭婊子吃里扒外，准备甩掉老公，拿走八万，远走高飞</p>
-<p>时间很快来到最后一天庭审，在案件马上结案的时候，老头儿闪出杀手锏——一沓信，不对，大招不能这么早放。老头儿堪称老狐狸，他先诈了克里斯蒂一招，读着自己的药处方，质问克里斯蒂在外面是不是有情人了，有鼻子有眼的陈述，结果克里斯蒂急了，赶忙说：你这个这个证据假的要死，老娘当时写信用的是蓝色的德国信纸，你搁这骗人呢？</p>
-<p>老狐狸邪魅一笑，把刚刚藏在书以下一沓蓝色的信纸抽了出来，露出了胜利者的笑容</p>
-<p><strong>辩论的艺术，让证人自证有罪，高，实在是高</strong></p>
-<p>庭审的结果很显而易见了，Vol是无罪的，克里斯蒂估计要因为伪证罪入狱</p>
-<p>很快，Vol就被释放，克里斯蒂被当庭人员咒骂、殴打</p>
-<p>当你还在惊叹于老狐狸的辩论艺术时，然而，故事远远还没有那么简单</p>
-<p>老头儿显然是高兴的，但他的经验告诉他，这个结果的反转来的太简单了。老头儿郁闷啊，到底是为啥啊？</p>
-<p>还是那句话，反派死于话多。正当老头儿思忖的时候，克里斯蒂走进只有威佛列一人的法庭，露出了胜利者的微笑：嘿嘿，你以为自己在大气层，其实老娘的操作在平流层</p>
-<p>反派开始自爆：哈哈想不到吧，在车站的那个其实是老娘扮的（嘿嘿，没想到吧）</p>
-<p><strong>你以为你很厉害，其实老娘更厉害，老娘是个演员，会演戏！</strong></p>
-<p>Vol猫在庭院偷听，笑眯眯走了过来，耀武扬威，一副小人得志的样子：我的wife可真不错</p>
-<p>克里斯蒂高兴着呢：等老娘找个好律师，早点出来，老娘跟你白头偕老！</p>
-<p>不等克里斯蒂高兴多久，突然窜出来一个面容姣好的女子，和Vol搂搂抱抱</p>
-<p>震惊，克里斯蒂气的脸都青咯</p>
-<p>气急败坏之下，克里斯蒂拿出一把刀，呲溜，刀子直窜到Vol的要害</p>
-<p><strong>原地，Vol领盒饭~</strong></p>
-<p>故事接近尾声，威佛列笑着说：又有案子来咯，去外面度假的计划又泡汤了（女医生被老头儿耍的第N次 嘿嘿）</p>
-<h3 id="复盘">复盘</h3>
-<ol>
-<li>
-<p>电影中多次给了面容姣好的女子镜头，而且在审被告人Vol的时候，有Vol和一个陌生女子去询问出国旅行的事实，陌生女子就是她！</p>
-<p><img src="/images/kfzr4.png" alt=""></p>
-<p><img src="/images/kfzr5.png" alt=""></p>
-<p><img src="/images/kfzr6.png" alt=""></p>
-</li>
-<li>
-<p>这两个人，真的是一个人吗？</p>
-<p><img src="/images/kfzr7.png" alt=""></p>
-<p><img src="/images/kfzr8.png" alt=""></p>
-</li>
-</ol>
-<h3 id="故事背后">故事背后</h3>
-<ol>
-<li>
-<p>审讯的艺术</p>
-<p><strong>通过攻击证人的人格，来降低对方的可信度</strong></p>
-<p>1997年的辛普森案，辩方使用了本电影很类似的方法：辩护梦之队先是通过攻击证人的人格问题，让证人的公信力大大降低，自然一定程度上增加了胜辩的机会。和中国不同，在英美法系中，一直有“品格证据”的传统。在审判时，检辩双方律师都可能在证人的人格上大作文章</p>
-<p><strong>辩护的最高境界，是让对方自证为伪</strong></p>
-<p>辛普森案中，辩方话里话外之间，都指摘警方不可信，有栽赃陷害的意图，手套与辛普森无关，控方怒了，要求辛普森带上手套，结果却很惊人，连控方律师都承认：这个手套有点太小了，控方再一次落了下风</p>
-<p>辛普森的经纪人在接受采访时才透漏：辛普森患有关节炎，但当时已经停了两周药，致使手指关节肿大，难以戴入手套。<strong>这完全是辩方律师的激将计，早就挖好圈套等着控方跳进来</strong></p>
-<p><strong>辩护应该注重细节，细节决定成败</strong></p>
-<p>本电影中，威佛列对French女士家女佣的诘问中，就敏锐的捕捉了女佣听力很差的事实，加上助听器事实的佐证，推翻了“听见过被告人那时在房间里说话”的证词。辛普森案也是同样如此，在此不赘述罢</p>
-<p><a href="https://zhuanlan.zhihu.com/p/616432919">美国司法史世纪大案：杀妻的辛普森，凭什么无罪？ - 知乎</a></p>
-</li>
-<li>
-<p>一罪不二审</p>
-<p>一罪不二审其实是大陆法系的说法，英美法院一般称之为<strong>禁止双重危险</strong>，基本含义是一个人不能因同一行为或同一罪名受到两次或多次审判或处罚。主要功能是<strong>防止国家滥用追诉权</strong>，从而保障公民合法权益</p>
-<p><a href="https://www.zhihu.com/question/22081648">如何评价“一罪不二审”这一司法原则？ - 知乎</a></p>
-</li>
-<li>
-<p>不同国家的案件审理制度</p>
-<p>总的来说，世界上在法庭上进行案件的审理可以分成<strong>两大类</strong>：一种是<strong>抗辩制</strong>，那就是通过正方和反方的辩论来厘清事实；另一种则是<strong>纠问制</strong>，那就是由专家型的法官，通过不断地追问来寻求事实的真相。<strong>本电影中故事的发生点——英国，采取的是抗辩制，嫌疑犯有没有罪，陪审团投票决定；我国实行的是纠问制</strong></p>
-<p>1997年，著名的辛普森案分别由一个刑事法庭和一个民事法庭来审理，案件的结果是：辛普森被宣判无罪，这是美国抗辩制的结果。重中之重的陪审团有12名普通市民组成，10女2男，其中有9名黑人，2名白人和1名西班牙裔白人</p>
-<p><a href="https://zhuanlan.zhihu.com/p/99108009">英美的陪审团制度，带不来真相和公正 - 知乎</a><br>
-<a href="https://zhuanlan.zhihu.com/p/616432919">美国司法史世纪大案：杀妻的辛普森，凭什么无罪？ - 知乎</a></p>
-</li>
-</ol>
-<h3 id="其他">其他</h3>
-<p>对辩论相关有兴趣的话，可以试试《逆转裁判》这款游戏</p>
-<p>[北洋园PT :: 种子详情 &quot;<a href="https://www.tjupt.org/details.php?id=366089&amp;hit=1">PC][AVG][逆转裁判123：成步堂合辑][Phoenix Wright Ace Attorney Trilogy][压缩包][v20230710 游侠破解版]&quot; - Powered by NexusPHP</a></p>
-<p>[北洋园PT :: 种子详情 &quot;<a href="https://www.tjupt.org/details.php?id=435241&amp;hit=1">PC][AVG][逆转裁判456：王泥喜精选集][Apollo.Justice.Ace.Attorney.Trilogy-RUNE][压缩包]&quot; - Powered by NexusPHP</a></p>
-]]></content>
-      <categories>
-        <category>影视</category>
-      </categories>
-  </entry>
-  <entry>
     <title>以凡人之躯比肩神明：《辛德勒的名单》中的救援智慧与人性光辉</title>
     <url>/2025/08/25/%E3%80%8A%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95%E3%80%8B/</url>
     <content><![CDATA[<p>以凡人之躯比肩神明</p>
@@ -2095,57 +2041,54 @@ UG NX12如何进行数控仿真？<br>
       </categories>
   </entry>
   <entry>
-    <title>驯龙高手：在电影与宠物中寻找治愈</title>
-    <url>/2025/08/22/%E3%80%8A%E9%A9%AF%E9%BE%99%E9%AB%98%E6%89%8B%E3%80%8B/</url>
-    <content><![CDATA[<p>创作的灵感有点枯竭，得去豆瓣上看一看别人是怎么看的。<br>
-看到豆瓣上有个评论是这样说的：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">《驯龙记》不需要再像皮克斯作品那样捎上现实的残酷，</span><br><span class="line">只需创造一个属于儿童，却同时能让成年人感到愉悦甚至感动的梦，</span><br><span class="line">那么它就成功了。</span><br></pre></td></tr></table></figure>
-<p>看完豆瓣上大家的影评，自己想想，其实一直被自己的思维给困住了。看电影嘛，不就图一轻松，非得找些什么意义干啥呢？现实已经很残酷，又何必在电影中找苦吃呢？</p>
-<h2 id="妙蛙种子龙">妙蛙种子龙</h2>
-<p>无牙仔几乎满足了我们大众对于宠物的所有需求：在你伤心的时候，无牙仔会俯下身子，侧着脸，用他那卡姿兰葡萄大眼睛，望着你；在你饿了的时候，无牙仔会将自己的一条鱼，一分为二，给你分享珍贵的另一半；在你想环游世界的时候，无牙仔会展翅高飞，直溜溜地冲向云霄，愿意成为你的专属座驾兰博基尼，带你认识不一样的龙族奇妙世界。</p>
-<p>无牙仔，集成了我印象中所有宠物的优点：他有妙蛙种子龙的卡哇伊，有妙蛙种子龙的双下巴，嘟啊嘟啊；他有喷火龙的威猛，闪电喷射好不帅气，勇敢，这是无牙仔的本性；他像一只大狗狗，忠诚，永远忠于主人。</p>
-<p>此处应有配图！！！</p>
-<p><a href="https://imgse.com/i/pVD41Z8"><img src="https://s21.ax1x.com/2025/08/22/pVD41Z8.png" alt="pVD41Z8.png"  /></a></p>
-<p>看看一个博主是怎么形容自己的宠物的，好宠溺啊哈哈，好羡慕有一只宠物，即使他远远比不上无牙仔那么体贴。但你在他的眼里，已经是他的全部！</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">写到这里，不禁想到我家的龙猫李大头，</span><br><span class="line">我不指望他能从嘴巴里吐出火球或是闪电，</span><br><span class="line">更不指望它可以用小小的身躯驮着我飞，</span><br><span class="line">只希望在我给他挠痒痒的时候，他别再突然抽风蹦到一边儿去了。</span><br><span class="line">如果像动画里的龙那样，在脖子底下稍微挠几下，</span><br><span class="line">突然就吧嗒摔倒了，那该有多好玩啊。</span><br></pre></td></tr></table></figure>
-<p><a href="https://movie.douban.com/review/3271424/">我需要一部《驯龙猫高手》（驯龙高手）影评</a></p>
-<p><a href="https://movie.douban.com/review/3161994/">喷火闪电皆不重要，能卖萌才是王道（驯龙高手）影评</a></p>
-<h2 id="3d技术">3d技术</h2>
-<p>在家里看着2d版本，感觉画面效果一般，看网上的评论才发现，这部作品去电影院看3d版本，也许真的体验不一样。</p>
-<p><strong>当无牙仔载着小嗝嗝，在龙之峡谷向下俯冲的时候，3d带来的震撼感，绝对是2d无法企及的。</strong></p>
-<p>这部2010年的电影，无知的我还以为是3d技术的早起代表作品，其实不然，<strong>3d技术在遥远的上个世纪20年代就已经存在</strong>，第一部3D电影是1922年9月27日在洛杉矶大使饭店戏院放映的《爱的力量》(The Power of Love)，不过很好玩的一点是，当时只有一个人看了这部电影，现在已经完全看不到这个原片了。</p>
-<p>3d技术的发展，在上个世纪经历了大起大落。<strong>但是，在21世纪的10年代，3d技术又焕发了他的生机，就像草原上的星星之火，虽小但是燎原</strong>。原因我揣测有很多:21世纪盗版资源横生，制片公司急需一个方案来绑定用户；另一方面，3d技术虽然不算是一个新技术，但是若应用的好，可以给观影者锦上添花的观影体验。迪士尼和梦工厂在10年制作出了很多3d作品，其中不乏传世佳作，《驯龙高手》就是这一时期的产物。</p>
-<p><strong>不出意外的话，梦工厂和迪士尼2010年之后的动画作品都是会有3d版本的，以后有机会可以用3d眼镜看看</strong>。</p>
-<p><a href="https://www.douban.com/doulist/151927813/">梦工厂（DreamWorks）主要作品列表</a></p>
-<p><a href="https://www.douban.com/doulist/153753970/">所有迪士尼动画长篇电影（1937-2024）</a></p>
-<p><a href="https://ent.sina.cn/film/2009-08-12/detail-iavxeafr7959505.d.html">3d技术发展史</a></p>
-<h2 id="d-u-d-p">d u d p</h2>
-<p><strong>分别指的是：dreamworks universe disney pixar</strong></p>
-<p>之前去过北京环球影城，里面的ip有变形金刚、功夫熊猫、哈利波特、侏罗纪世界。一直对梦工厂、迪士尼、环球三者的关系很是迷糊。这里来做一个sum。</p>
-<p><strong>先阐述一下关系：迪士尼2006年收购了皮克斯，环球2016年收购了梦工厂。</strong></p>
-<p>环球和迪士尼都是老牌公司，在上个世纪2、30s就成立了；梦工厂和皮克斯在和前面两个老大叔比起来就显得稚嫩。<strong>他们，可以说是撑起了美国的动画作品的半壁江山。</strong></p>
-<p>之所以环球影城会有哈利波特、变形金刚，是因为环球影城的理念开放，环球斥巨资和华纳兄弟合作，获得了哈利波特的版权；2005年派拉蒙收购了梦工厂，梦工厂于2007年和派拉蒙合作拍摄了《变形金刚》，即使后面梦工厂和派拉蒙分道扬镳，但是环球影城砸钱，和派拉蒙公司合作，所以，北京环球影城使用变形金刚为主题来建设也不为奇。</p>
-<p><strong>有钱就是好啊，你有钱你也可以用这个ip哈哈🤑。</strong></p>
-<p><a href="https://www.zhihu.com/question/23146896">怎么评价迪士尼 梦工厂 皮克斯（三者的关系和区别）？ - 知乎</a></p>
-<p><a href="https://zhidao.baidu.com/question/1504491496381163859/answer/4209864021.html">梦工厂和环球影城的关系_百度知道</a></p>
-<p><a href="https://www.zhihu.com/question/41220823">众所周知《哈利波特》是华纳兄弟的电影，为什么在美国环球影城里会有《哈利波特》主题的区域？ - 知乎</a></p>
-<h2 id="ip塑造">ip塑造</h2>
-<p>去年在环球影城看演出的时候，就看到过“无牙仔”的剧场演出，当时还没有看过驯龙高手，只是觉得剧情一般，但是那场演出给我的印象最深刻的就是：在演出的最后，小嗝嗝骑着无牙仔，在空中飞行和盘旋，剧场的内容和电影想要表达的主题基本一致，都是保卫Berk岛，在和龙对抗的过程中，从抵触，到中立，最后到接纳，甚至喜爱。</p>
-<p>一直有疑问，为什么环球可以塑造出这么多家喻户晓的ip？熊猫是中国国宝，却让美国人造出了功夫熊猫这个ip；中国龙的传说很多，但为什么中国有关龙的动画ip这么少？</p>
-<p>创新力不足。</p>
-<p>文化土壤不适合太新奇的ip出现。</p>
-<p>传统ip的力量太大，以至于那些创新的ip吸引不了观众，没赚钱，都是空谈。</p>
-<p>好了，这个问题我们不多说，换个角度来看吧。</p>
-<p><strong>美国的动画ip凭啥忒好？</strong></p>
-<p>首先我们明确一个问题，国漫不等于国产动画，美漫不等于美国动画。</p>
-<p>这里的一切回答对象都不是美漫，而是美国动画作品。</p>
-<p>原因大致有几个：</p>
-<p><strong>制片公司牛逼，没有盗版出版商，都是大牌，制作资源垄断了，各个公司都是apple级别的。</strong></p>
-<p><strong>加上国内垃圾盗版制片很多，一对比，就更显得美国动画牛逼了。</strong></p>
-<p><strong>国内看不到垃圾的美国动画作品，因为有广电总局的审查。</strong></p>
-<p>暂时想不到说什么了。罢了~ 罢了~</p>
-<p><a href="https://www.zhihu.com/question/507258038/answer/2313379878">中国动画还要多久可以摆脱西游记，封神榜，哪吒这些传统IP？ - 知乎</a></p>
-<p><a href="https://www.zhihu.com/question/21428583">美国的3D动画电影为什么都那么精致? - 知乎</a></p>
+    <title>不拿枪的真正战士</title>
+    <url>/2025/09/07/%E3%80%8A%E8%A1%80%E6%88%98%E9%92%A2%E9%94%AF%E5%B2%AD%E3%80%8B/</url>
+    <content><![CDATA[<p>谁说不拿抢，不是好战士</p>
+<h2 id="懦夫">懦夫</h2>
+<p>一个懦夫，连枪都不敢拿，上什么战场。</p>
+<p>我也是这样想的。</p>
+<p>最后看来，我和glover军官，都看走眼了。</p>
+<h2 id="soldier">soldier</h2>
+<p>glover军官对于doss的称呼，从原本的竹节虫变成“soldier”</p>
+<p>doss无愧于这个称呼，他是真正的战士，不，他更像是个斗士。</p>
+<h3 id="信仰">信仰</h3>
+<p>上帝啊，让我再多救一个人吧…</p>
+]]></content>
+      <categories>
+        <category>影视</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>《里斯本丸沉没》：用真诚的视角，记录动人的历史群像</title>
+    <url>/2025/08/24/%E3%80%8A%E9%87%8C%E6%96%AF%E6%9C%AC%E4%B8%B8%E6%B2%89%E6%B2%A1%E3%80%8B/</url>
+    <content><![CDATA[<p>在飞机上看了《里斯本丸沉没》这部电影，更确切的来说是一部纪录片，按我的直观感受，这是一部制作精良，具有深远意义的纪录片。</p>
+<h2 id="导演会拍摄">导演会拍摄</h2>
+<p>导演方励不仅仅是一个导演，同时还是一个地理海洋学家，天生的职业属性赋予了《里斯本丸沉没》格外的魅力。一次偶然的机会，当导演方励在东极岛拍摄的时候，听说了东极岛的故事，于是他利用现代的声呐技术来寻找这沉睡的里斯本丸号，经过一番不为人知的努力，沉默了八十年的里斯本丸号，终于揭开了面纱。如今，是时候由我们中国人来讲述这段不为人知的历史了。</p>
+<p>影片导演有一句自白，让我印象很深刻：现在经历过里斯本丸沉没的人大多都去世了，我不敢想，如果当年的亲历者都已经去世，那么这段历史将有谁来讲述？<strong>我不敢怠慢，更要加紧采访和调查的步伐，在影片的最后，很不幸的是，这一幕还是出现了</strong>。</p>
+<p><strong>导演是一个肯吃苦的实干派导演</strong>。方励走遍了英国、美国、加拿大、日本，只为更全面的向大众讲述1942年10月1日发生的故事：当年里斯本丸号沉没的故事；<strong>导演是一个温情的人</strong>。在面对老人时，方励充当的是一个积极的倾听者，这份温情，被带到了电影里。</p>
+<p><strong>中国不缺导演，但缺少的是像方励一样，愿意以社会为题材、反映社会现实，发自内心想要让观众了解历史的导演。</strong></p>
+<h2 id="群像会说话">群像会说话</h2>
+<p>影片中无论是一等兵、二等兵亦或是上将，导演总能抓住他们身上的独特的点，让我们觉得，他们和我们的距离这么近。他们也是普通人，<strong>他们也有人性</strong>，美军的炮手在得知自己职业生涯的第一炮，毁了那么多本该幸福美满的家庭以后，用自己的一生来赎罪；<strong>他们也有爱情</strong>，影片中一个米德尔塞克斯士兵在香港爱上了一个这个女孩，写信给自己的妈妈告诉这件喜事，他们结了婚，但她再也没等到自己的郎；<strong>他们也有亲情</strong>，士兵奋不顾身的冲进燃烧的火堆，抢救出自己妻子的照片，并且用镜片制作成一个精美的相框，时刻看着，只为警醒自己还活着，自己还有故乡的亲人在等着自己回家；<strong>他们也有友情</strong>，军官在逃亡的危难之际，仍然不管自己的死活，安慰自己并肩作战的战友，和他们喝一杯酒、叙一叙旧，让他们体面的去见上帝…</p>
+<p><strong>里斯本丸沉没事件中，有关“他”的故事太多太多，虽然他们的名字我无法一个个记住，但是他们的故事，只要有一个人看了，便不会忘记。</strong></p>
+<p><strong>讲故事嘛，不要高高在上，从大众的视角出发，才是真正的好电影。</strong></p>
+<h2 id="眼泪会流出">眼泪会流出</h2>
+<p>后半段很感人，尤其是最后林阿根和来自异国他乡的素未莫面的“亲人”握手寒暄，似乎他们之间的关系已经超越了语言和地界，产生了非凡的联结。</p>
+<p>后半段我哭的稀里哗啦，既是代入遇难者亲人视角而感到深深的悲痛，也是代入亲历者的故事而感到深深悲痛。</p>
+<p><strong>里斯本丸的沉没，就这样啊，影响了他们的一生</strong>。即使事情已经过去很多年，他们依然PTSD，会有很强烈的创伤应激综合症：他们中，有的每晚睡觉都会说日语，只为乞求日本军官给他们一口水喝、一口饭吃；有的吃饭都根本不敢上桌，因为他们怕啊，怕上桌吃饭会挨打；有的脾气暴跳如雷，暴躁的让自己的子女都感觉陌生的可怕；有的对孩子一句“快要饿死了”的闲话极为反感，因为在他们看来，孩子根本就不知道“什么是真正的快要被饿死了，也根本不希望他们知道”。</p>
+<p><strong>那我问你，为什么明明是日军犯下的滔天大罪，要受害的家庭来用一生来偿还？</strong></p>
+<p>如果只是沉沦在过去，无意会积累仇恨，那我们应该怎么做呢？</p>
+<p><strong>就像威廉.班尼菲福德（比尔1号）说的一样，我们要&quot;I don’t live in the past,I live for future…&quot;</strong></p>
+<p><a href="https://imgse.com/i/pVs5FOI"><img src="https://s21.ax1x.com/2025/08/24/pVs5FOI.png" alt="pVs5FOI.png" border="0" /></a></p>
+<h2 id="战争会吃人">战争会吃人</h2>
+<p>里斯本丸沉没，只是众多战争事件的冰山一角，可以想到，这个世界还有多少埋藏在地下的故事，在等待着人们去讲述…</p>
+<p>经历过山河破碎、家国蹂躏的我们，更加渴望和平。</p>
+<p><strong>因为没有人比我们更懂战争的危害和恐怖。</strong></p>
+<p><strong>战争，真的会吃人！</strong></p>
+<p>让我们再看一眼他们…</p>
+<p>让我们铭记参与救援的中国渔民…</p>
+<p>30° 13’ 44.42&quot;N，122° 45’ 31.14&quot;E</p>
+<p><strong>历史，将会永远记住这个坐标！</strong></p>
+<p><a href="https://imgse.com/i/pVs5Pld"><img src="https://s21.ax1x.com/2025/08/24/pVs5Pld.png" alt="pVs5Pld.png"  /></a></p>
 ]]></content>
       <categories>
         <category>影视</category>
@@ -2181,23 +2124,6 @@ UG NX12如何进行数控仿真？<br>
 ]]></content>
       <categories>
         <category>阅读</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>笔记本串流台式机：兼顾便携与高性能的双机联动方案</title>
-    <url>/2026/06/14/%E4%B8%A4%E4%B8%AA%E7%94%B5%E8%84%91%EF%BC%8Cwhat%20i%20can%20do%EF%BC%9F/</url>
-    <content><![CDATA[<p>一个台式机，屏幕很大，配置更好；一个笔记本，屏幕很小，配置差一点，但是屏幕的分辨率高一些。能干啥才不会让其中一个电脑吃灰？<br>
-能干啥呢？有哪些场景可以发挥最大化作用呢？</p>
-<p>打游戏可以，一边看游戏攻略，一遍打关，听起来似乎不错，但是问题是，我不咋打游戏，pass。</p>
-<p>写代码，左边一个屏幕干啥？右边一个屏幕干啥？暂时想不到有什么好的。</p>
-<p>查文献，左边一个看文献，右边一个写文章？似乎可行。</p>
-<p>提供一个思路，就是你想要充分利用两个电脑，肯定是利用两个电脑的优点，也就是不能被替代的优点。</p>
-<p>其实不少，笔记本电脑可以带着跑，台式机总不能带着跑吧，欸，有了，既然你已经打通了 Tailscale + Sunshine + Moonlight，那你就可以带着跑了，可以带着笔记本电脑跑来跑去，只要保证台式机没有关机的情况下，你就可以使用远程串流进行台式机的访问，你看，这就是一个综合了笔记本电脑的便携性和台式机的高性能的极佳方案，只要网络环境不太差，效果还是不错的（我现在这段文字就是串流打上去的哈哈哈哈哈）。</p>
-<p>好了，用笔记本电脑串流台式机画面，实现远距离一体化系统，这是一个大用处。</p>
-<p>还有呢？再头脑风暴一下下？</p>
-]]></content>
-      <categories>
-        <category>生活</category>
       </categories>
   </entry>
   <entry>
@@ -2498,6 +2424,80 @@ Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
       </categories>
   </entry>
   <entry>
+    <title>驯龙高手：在电影与宠物中寻找治愈</title>
+    <url>/2025/08/22/%E3%80%8A%E9%A9%AF%E9%BE%99%E9%AB%98%E6%89%8B%E3%80%8B/</url>
+    <content><![CDATA[<p>创作的灵感有点枯竭，得去豆瓣上看一看别人是怎么看的。<br>
+看到豆瓣上有个评论是这样说的：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">《驯龙记》不需要再像皮克斯作品那样捎上现实的残酷，</span><br><span class="line">只需创造一个属于儿童，却同时能让成年人感到愉悦甚至感动的梦，</span><br><span class="line">那么它就成功了。</span><br></pre></td></tr></table></figure>
+<p>看完豆瓣上大家的影评，自己想想，其实一直被自己的思维给困住了。看电影嘛，不就图一轻松，非得找些什么意义干啥呢？现实已经很残酷，又何必在电影中找苦吃呢？</p>
+<h2 id="妙蛙种子龙">妙蛙种子龙</h2>
+<p>无牙仔几乎满足了我们大众对于宠物的所有需求：在你伤心的时候，无牙仔会俯下身子，侧着脸，用他那卡姿兰葡萄大眼睛，望着你；在你饿了的时候，无牙仔会将自己的一条鱼，一分为二，给你分享珍贵的另一半；在你想环游世界的时候，无牙仔会展翅高飞，直溜溜地冲向云霄，愿意成为你的专属座驾兰博基尼，带你认识不一样的龙族奇妙世界。</p>
+<p>无牙仔，集成了我印象中所有宠物的优点：他有妙蛙种子龙的卡哇伊，有妙蛙种子龙的双下巴，嘟啊嘟啊；他有喷火龙的威猛，闪电喷射好不帅气，勇敢，这是无牙仔的本性；他像一只大狗狗，忠诚，永远忠于主人。</p>
+<p>此处应有配图！！！</p>
+<p><a href="https://imgse.com/i/pVD41Z8"><img src="https://s21.ax1x.com/2025/08/22/pVD41Z8.png" alt="pVD41Z8.png"  /></a></p>
+<p>看看一个博主是怎么形容自己的宠物的，好宠溺啊哈哈，好羡慕有一只宠物，即使他远远比不上无牙仔那么体贴。但你在他的眼里，已经是他的全部！</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">写到这里，不禁想到我家的龙猫李大头，</span><br><span class="line">我不指望他能从嘴巴里吐出火球或是闪电，</span><br><span class="line">更不指望它可以用小小的身躯驮着我飞，</span><br><span class="line">只希望在我给他挠痒痒的时候，他别再突然抽风蹦到一边儿去了。</span><br><span class="line">如果像动画里的龙那样，在脖子底下稍微挠几下，</span><br><span class="line">突然就吧嗒摔倒了，那该有多好玩啊。</span><br></pre></td></tr></table></figure>
+<p><a href="https://movie.douban.com/review/3271424/">我需要一部《驯龙猫高手》（驯龙高手）影评</a></p>
+<p><a href="https://movie.douban.com/review/3161994/">喷火闪电皆不重要，能卖萌才是王道（驯龙高手）影评</a></p>
+<h2 id="3d技术">3d技术</h2>
+<p>在家里看着2d版本，感觉画面效果一般，看网上的评论才发现，这部作品去电影院看3d版本，也许真的体验不一样。</p>
+<p><strong>当无牙仔载着小嗝嗝，在龙之峡谷向下俯冲的时候，3d带来的震撼感，绝对是2d无法企及的。</strong></p>
+<p>这部2010年的电影，无知的我还以为是3d技术的早起代表作品，其实不然，<strong>3d技术在遥远的上个世纪20年代就已经存在</strong>，第一部3D电影是1922年9月27日在洛杉矶大使饭店戏院放映的《爱的力量》(The Power of Love)，不过很好玩的一点是，当时只有一个人看了这部电影，现在已经完全看不到这个原片了。</p>
+<p>3d技术的发展，在上个世纪经历了大起大落。<strong>但是，在21世纪的10年代，3d技术又焕发了他的生机，就像草原上的星星之火，虽小但是燎原</strong>。原因我揣测有很多:21世纪盗版资源横生，制片公司急需一个方案来绑定用户；另一方面，3d技术虽然不算是一个新技术，但是若应用的好，可以给观影者锦上添花的观影体验。迪士尼和梦工厂在10年制作出了很多3d作品，其中不乏传世佳作，《驯龙高手》就是这一时期的产物。</p>
+<p><strong>不出意外的话，梦工厂和迪士尼2010年之后的动画作品都是会有3d版本的，以后有机会可以用3d眼镜看看</strong>。</p>
+<p><a href="https://www.douban.com/doulist/151927813/">梦工厂（DreamWorks）主要作品列表</a></p>
+<p><a href="https://www.douban.com/doulist/153753970/">所有迪士尼动画长篇电影（1937-2024）</a></p>
+<p><a href="https://ent.sina.cn/film/2009-08-12/detail-iavxeafr7959505.d.html">3d技术发展史</a></p>
+<h2 id="d-u-d-p">d u d p</h2>
+<p><strong>分别指的是：dreamworks universe disney pixar</strong></p>
+<p>之前去过北京环球影城，里面的ip有变形金刚、功夫熊猫、哈利波特、侏罗纪世界。一直对梦工厂、迪士尼、环球三者的关系很是迷糊。这里来做一个sum。</p>
+<p><strong>先阐述一下关系：迪士尼2006年收购了皮克斯，环球2016年收购了梦工厂。</strong></p>
+<p>环球和迪士尼都是老牌公司，在上个世纪2、30s就成立了；梦工厂和皮克斯在和前面两个老大叔比起来就显得稚嫩。<strong>他们，可以说是撑起了美国的动画作品的半壁江山。</strong></p>
+<p>之所以环球影城会有哈利波特、变形金刚，是因为环球影城的理念开放，环球斥巨资和华纳兄弟合作，获得了哈利波特的版权；2005年派拉蒙收购了梦工厂，梦工厂于2007年和派拉蒙合作拍摄了《变形金刚》，即使后面梦工厂和派拉蒙分道扬镳，但是环球影城砸钱，和派拉蒙公司合作，所以，北京环球影城使用变形金刚为主题来建设也不为奇。</p>
+<p><strong>有钱就是好啊，你有钱你也可以用这个ip哈哈🤑。</strong></p>
+<p><a href="https://www.zhihu.com/question/23146896">怎么评价迪士尼 梦工厂 皮克斯（三者的关系和区别）？ - 知乎</a></p>
+<p><a href="https://zhidao.baidu.com/question/1504491496381163859/answer/4209864021.html">梦工厂和环球影城的关系_百度知道</a></p>
+<p><a href="https://www.zhihu.com/question/41220823">众所周知《哈利波特》是华纳兄弟的电影，为什么在美国环球影城里会有《哈利波特》主题的区域？ - 知乎</a></p>
+<h2 id="ip塑造">ip塑造</h2>
+<p>去年在环球影城看演出的时候，就看到过“无牙仔”的剧场演出，当时还没有看过驯龙高手，只是觉得剧情一般，但是那场演出给我的印象最深刻的就是：在演出的最后，小嗝嗝骑着无牙仔，在空中飞行和盘旋，剧场的内容和电影想要表达的主题基本一致，都是保卫Berk岛，在和龙对抗的过程中，从抵触，到中立，最后到接纳，甚至喜爱。</p>
+<p>一直有疑问，为什么环球可以塑造出这么多家喻户晓的ip？熊猫是中国国宝，却让美国人造出了功夫熊猫这个ip；中国龙的传说很多，但为什么中国有关龙的动画ip这么少？</p>
+<p>创新力不足。</p>
+<p>文化土壤不适合太新奇的ip出现。</p>
+<p>传统ip的力量太大，以至于那些创新的ip吸引不了观众，没赚钱，都是空谈。</p>
+<p>好了，这个问题我们不多说，换个角度来看吧。</p>
+<p><strong>美国的动画ip凭啥忒好？</strong></p>
+<p>首先我们明确一个问题，国漫不等于国产动画，美漫不等于美国动画。</p>
+<p>这里的一切回答对象都不是美漫，而是美国动画作品。</p>
+<p>原因大致有几个：</p>
+<p><strong>制片公司牛逼，没有盗版出版商，都是大牌，制作资源垄断了，各个公司都是apple级别的。</strong></p>
+<p><strong>加上国内垃圾盗版制片很多，一对比，就更显得美国动画牛逼了。</strong></p>
+<p><strong>国内看不到垃圾的美国动画作品，因为有广电总局的审查。</strong></p>
+<p>暂时想不到说什么了。罢了~ 罢了~</p>
+<p><a href="https://www.zhihu.com/question/507258038/answer/2313379878">中国动画还要多久可以摆脱西游记，封神榜，哪吒这些传统IP？ - 知乎</a></p>
+<p><a href="https://www.zhihu.com/question/21428583">美国的3D动画电影为什么都那么精致? - 知乎</a></p>
+]]></content>
+      <categories>
+        <category>影视</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>笔记本串流台式机：兼顾便携与高性能的双机联动方案</title>
+    <url>/2026/06/14/%E4%B8%A4%E4%B8%AA%E7%94%B5%E8%84%91%EF%BC%8Cwhat%20i%20can%20do%EF%BC%9F/</url>
+    <content><![CDATA[<p>一个台式机，屏幕很大，配置更好；一个笔记本，屏幕很小，配置差一点，但是屏幕的分辨率高一些。能干啥才不会让其中一个电脑吃灰？<br>
+能干啥呢？有哪些场景可以发挥最大化作用呢？</p>
+<p>打游戏可以，一边看游戏攻略，一遍打关，听起来似乎不错，但是问题是，我不咋打游戏，pass。</p>
+<p>写代码，左边一个屏幕干啥？右边一个屏幕干啥？暂时想不到有什么好的。</p>
+<p>查文献，左边一个看文献，右边一个写文章？似乎可行。</p>
+<p>提供一个思路，就是你想要充分利用两个电脑，肯定是利用两个电脑的优点，也就是不能被替代的优点。</p>
+<p>其实不少，笔记本电脑可以带着跑，台式机总不能带着跑吧，欸，有了，既然你已经打通了 Tailscale + Sunshine + Moonlight，那你就可以带着跑了，可以带着笔记本电脑跑来跑去，只要保证台式机没有关机的情况下，你就可以使用远程串流进行台式机的访问，你看，这就是一个综合了笔记本电脑的便携性和台式机的高性能的极佳方案，只要网络环境不太差，效果还是不错的（我现在这段文字就是串流打上去的哈哈哈哈哈）。</p>
+<p>好了，用笔记本电脑串流台式机画面，实现远距离一体化系统，这是一个大用处。</p>
+<p>还有呢？再头脑风暴一下下？</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
     <title>广义学习不是逃避期末复习的挡箭牌</title>
     <url>/2026/06/14/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%83%B3%E5%AD%A6%E4%B9%A0%EF%BC%9F/</url>
     <content><![CDATA[<p>现在的时间是 2026 年 6 月 14 号，15:02 分，什么事情都想去干，但是就是不想去学习。这是为啥呢？想不出来，那就写出来吧<br>
@@ -2752,6 +2752,210 @@ Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
       </categories>
   </entry>
   <entry>
+    <title>基于Obsidian的本地资料归档与知识管理工作流</title>
+    <url>/2026/08/01/%E5%88%9B%E4%BD%9C%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BF%A1%E6%81%AF%E6%BA%90%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%95%BF%E6%9C%9F%E7%AE%A1%E7%90%86%EF%BC%9F/</url>
+    <content><![CDATA[<h1>总体策略</h1>
+<p>以创作文章题目为文件夹，将有关改话题的论文、网页文章、视频统一放置在该文件夹下。<br>
+以Obsidian为核心工具，以本地Obsidian仓库为载体，以本地存储为主。<br>
+将信息源都转换为<code>md</code> <code>pdf</code>的形式统一管理。<br>
+尽量采用开源工具。</p>
+<h1>产生的价值</h1>
+<p>有一些好用的教程文章，由于一些原因会被下架，所以需要本地化存储，进行长期存档。<br>
+文章一旦本地化，我们就可以在自己的文章里，进行信息源文章部分文字的引用。抛弃我之前的Adobe Acrobat DC阅读，Obsidian写作的工作流，优化了工作流程。</p>
+<hr>
+<h1>需要的工具</h1>
+<p>Obsidian的插件PDF++、Copy Block Link<br>
+yt-dlp、ffmpeg、deno等开源工具<br>
+Google Chrome插件Obsidian web Clipper<br>
+Google Chrome收藏文件夹</p>
+<h1>如何安装工具</h1>
+<h2 id="Obsidian插件的安装">Obsidian插件的安装</h2>
+<p>在Obsidian设置界面进入第三方插件界面，进行以下插件的搜索：<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141758942.png" alt="q1.png|800"><br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141809789.png" alt="q2.png|800"><br>
+记得在设置 第三方插件里面开启这两个插件。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731151651630.png" alt="image.png"></p>
+<h2 id="yt-dlp、ffmpeg、deno的下载">yt-dlp、ffmpeg、deno的下载</h2>
+<p>进入yt-dlp的GitHub界面：<a href="https://github.com/yt-dlp/yt-dlp/releases">yt-dlp的GitHub Releases界面</a>。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141830855.png" alt="q3.png"><br>
+点击yt-dlp.exe进行下载。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142025586.png" alt="q4.png"><br>
+进入ffmpeg的GitHub界面：<a href="https://github.com/BtbN/FFmpeg-Builds/releases">ffmpeg的Github Releases界面</a>，进行ffmpeg的下载。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142317994.png" alt="w8.png"><br>
+对于win系统用户来说，以上ffmpeg的不同版本区别如下：<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142327613.png" alt="w9.png"><br>
+针对我们的日常使用，推荐下载gpl版本，功能最全。<br>
+deno的下载：<a href="https://github.com/denoland/deno/releases/tag/v2.9.4">deno的Github Releases界面</a><br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731162931562.png" alt="image.png"></p>
+<h2 id="Google拓展Obsidian-Web-Clipper的安装">Google拓展Obsidian Web Clipper的安装</h2>
+<p>进入Chrome应用商店。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141915555.png" alt="q5.png"><br>
+搜索Obsidian Web Clipper。进行Obsidian官方剪藏插件的安装。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141923059.png" alt="q6.png"><br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141931674.png" alt="q7.png"><br>
+强烈推荐自定义一个快速剪藏的按钮，这样可以极大的提高效率。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731161029456.png" alt="image.png"></p>
+<h2 id="yt-dlp、ffmpeg、deno的安装与配置">yt-dlp、ffmpeg、deno的安装与配置</h2>
+<p>如果按照前面的步骤做下来的话，你的下载文件夹里面应该已经有以下三个文件：（如果你的下载文件夹里面还没有这三个文件，可以往前看看<a href="#yt-dlp%E3%80%81ffmpeg%E3%80%81deno%E7%9A%84%E4%B8%8B%E8%BD%BD">yt-dlp、ffmpeg、deno的下载</a>）。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731144052762.png" alt="e1.png"><br>
+之后，我们在电脑的某个盘符下建立一个新的文件夹，命名为yt-dlp。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142356747.png" alt="e2.png"><br>
+将exe全部解压缩进入新建立的文件夹下面（注意：ffmpeg.exe在压缩包里的bin的文件夹目录下，藏得比较深，如下图：）。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731152940632.png" alt="image.png"><br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142402006.png" alt="e3.png"><br>
+之后，cmd+R运行sysdm.cpl命令，进行系统环境变量的设定s这一步是为了后续我们可以从任意一个终端启动yt-dlp）<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142231241.png" alt="w5.png|414"><br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142236612.png" alt="w6.png|378"><br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731153341721.png" alt="image.png"><br>
+添加我们之前新建立的yt-dlp文件夹到path变量下：<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731153149809.png" alt="w7.png"><br>
+之后我们通过终端输入<code>yt-dlp</code> <code>deno</code> <code>ffmpeg</code>指令，检验path变量是否生效：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">yt-dlp</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142414733.png" alt="e4.png|586"></p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">deno</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142414734.png" alt="e4.png|587"></p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ffmpeg</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142414735.png" alt="e4.png|583"></p>
+<hr>
+<h1>一个实际的运行案例</h1>
+<p>这里阐述不同的信息源使用Obsidian进行管理de一个实际例子。</p>
+<h2 id="论文">论文</h2>
+<p>论文的获取过程在这里不过多赘述，不是本文的重点内容。<br>
+论文存放在Obsidian本地仓库下的Clippings文件夹，进行统一的管理。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142903299.png" alt="e7.png"><br>
+展示使用pdf++插件，进行pdf原文的引用的效果：<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143514905.png" alt="w3.png"><br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143514906.png" alt="w3.png"></p>
+<h2 id="网页文章">网页文章</h2>
+<p>我的策略是：先粗略的阅读，感觉文章好的话，再把读到的好文章（可能对写作有帮助的文章）收藏进一个该话题下面的文件夹。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143054136.png" alt="q9.png"><br>
+等到觉得写作参考素材收集的差不多了之后，再进行统一的剪藏。这样不会打扰我们正常的阅读过程，很好的将信息的输入和信息的处理进行分离开来。使用浏览器插件Obsidian web Clipper进行剪藏，储存到本地仓库的Clippings文件夹。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731155853076.png" alt="image.png|504"><br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143202209.png" alt="e8.png|665"><br>
+文章经过剪藏，下载到本地之后，我们可以细看文章，标注文章，高亮文章的一些部分。<br>
+我们使用cope block link插件进行文章内容的引用。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143633857.png" alt="w2.png|621"><br>
+一般我对剪藏进笔记的文章都会添加可信度标识：（高参考价值的不需要标识），可以加入一句话总结概括，以及标签，让自己以后看到这篇文章还能回忆起一些东西。</p>
+<h2 id="视频（以bilibili视频为例）">视频（以bilibili视频为例）</h2>
+<p>在命令行唤醒yt-dlp：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">yt-dlp https://www.bilibili.com/video/BV1DhpseMEtf/</span><br></pre></td></tr></table></figure>
+<p>yt-dlp bilibili视频链接，即可自动下载。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731144837061.png" alt="e9.png|609"><br>
+下载的视频，放在Clippings文件夹下面统一管理。<br>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731215919176.png" alt="r1.png"></p>
+<p>希望对你有帮助！</p>
+<h1>需要注意</h1>
+<p>参考链接的文章只能写参考链接，不能全文加入，因为那是抄袭。<br>
+学术论文可以引用，但是绝对不允许加入博客文章，有极高的法律风险。<br>
+本地保存学术论文是被允许的，本地保存参考链接文章也是被允许的。</p>
+<h1>后续的坑</h1>
+<p>在这里主要说几点优化文章的角度：</p>
+<ol>
+<li>可以通过在文章里面加入引用块来优化文章。</li>
+<li>增加一些本地视频引用的方法（文章里面还没有写）。</li>
+<li>似乎<code>md</code>格式的文章的块引用还不是弄得太明白，可以在后续文章改善一下。</li>
+</ol>
+<h1>参考文章</h1>
+<p><a href="https://juejin.cn/post/7145351315705577485#heading-1">Obsidian 的高级玩法|打造能跳转到任何格式文件的笔记</a><br>
+<a href="https://zhuanlan.zhihu.com/p/411484717?utm_id=0">几招教你提高 Obsidian 中块引用的操作体验 - 知乎</a><br>
+<a href="https://juejin.cn/post/7414128839863566355#heading-11">一个程序员是怎么做个人知识管理（PKM）的今天我跟大家说说我知识管理的心路历程。 本文会从我所遇到知识管理的困境以及如何 - 掘金</a><br>
+<a href="https://www.zhihu.com/question/23427617">如何构建自己的笔记系统？ - 知乎</a><br>
+<a href="https://blog.salesflare.com/zh/%E5%86%85%E5%AE%B9%E5%88%9B%E4%BD%9C">内容创作：创建优秀内容的 4 条规则和步骤</a></p>
+]]></content>
+      <categories>
+        <category>软件小记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>香蕉芒果西梅奶昔</title>
+    <url>/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328224552025.png" alt="image-20260328224552025"></p>
+<h1>香蕉、芒果、西梅奶昔</h1>
+<p>一根香蕉、一个芒果（其实是半个）、三个西梅（其实只切了两个😄）</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7986.jpeg" alt="IMG_7986"></p>
+<p>水果躺板板咯，切得有点凌乱哈</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7987.jpeg" alt="IMG_7987"></p>
+<p>榨汁杯里面的，是安慕希草莓酸奶150ml</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7988.jpeg" alt="IMG_7988"></p>
+<p>大概榨汁榨了2min左右，出来的奶昔是这样的</p>
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7989.jpeg" alt="IMG_7989" style="zoom: 25%;" />
+<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7990.jpeg" alt="IMG_7990" style="zoom:25%;" />
+<p>感觉味道还是不错的，仔细喝喝，可以喝出来西梅的颗粒，芒果的味道没咋感觉到，不过颜色上有一些体现（变得很黄），香蕉的味道有点太重了，还有就是酸奶实在是太浓了，感觉本来就很浓的酸奶，加上一大堆的颗粒，浓的有点不像样的，不像是饮料，像是浓粥了哈哈</p>
+<p>以后做奶昔，可以试着：</p>
+<ol>
+<li>尽量用稀一点的牛奶，酸奶太浓稠了</li>
+<li>搅拌机要保证有足够的电量来榨，榨到一半没电了会很崩溃的</li>
+<li>像香蕉这种气味极重的水果，不要放的过量，因为这样会让你根本吃不到其他水果的味道</li>
+</ol>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>复利的概念与运作原理</title>
+    <url>/2026/03/22/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310220618481.png" alt="image-20260310220618481"></p>
+<h1>复利是什么</h1>
+<p>我们来看看wikipedia怎么说的吧：</p>
+<p><strong>复利率法</strong>，是一种计算<a href="https://zh.wikipedia.org/wiki/%E5%88%A9%E6%81%AF">利息</a>的方法。按照这种方法，利息除了会根据<a href="https://zh.wikipedia.org/wiki/%E6%9C%AC%E9%87%91">本金</a>计算外，新得到的利息同样可以生息，因此俗称“利滚利”、“驴打滚”或“利叠利”。只要计算利息的周期越密，财富增长越快，而随着年期越长，复利效应亦会越为明显。</p>
+<p>说人话，我的理解就是：你投资产生的收益，你要忍住不要直接花掉，而是要连本带利继续投资，这样的话，即使你的收益率不高，但是财富依然会有比较可观的增值。</p>
+<h1>复利怎么运作</h1>
+<p>复利和单利的区别在于，收益的那一部分钱是可以进行再投资的</p>
+<ul>
+<li>单利：假设你每年投入10000元，年利率是10%，那么十年以后的收益是10X10000X10%=10000元</li>
+<li>复利：同样的条件下，你的十年收益是 10000X(1+10%)^10-10000=15937元</li>
+</ul>
+<p>相比下来，整整多了5937元！</p>
+<p>诶你有可能会说，这也太少了吧，十年，整整十年我才赚了5937元，累死累活，挣个毛线啊…</p>
+<p>说得对，复利的魅力，在这个举的例子里面体现的还不够好。</p>
+<p>你想想，如果你把里面的投入本金换成10000万（也就是1亿元），你想想你多赚了多少，不出意外的话，复利比单利多了接近六千万吧</p>
+<p>我们不妨把视线放长一点，假设我们是一个很老练的投资人，能够保持年利率10%下去30年，我们再算一算这笔账：</p>
+<ul>
+<li>单利：30年收益是30000元</li>
+<li>复利：30年收益是10000X(1+10%)^30-10000=164494元</li>
+</ul>
+<p>可以窥见的是，随着时间愈长，雪球滚得越大，这是美丽的“雪球效应”</p>
+<p>以上还是基于年复利率的前提下，你想想，如果是月复利率、日负利率，是不是不用30年就能大赚一笔？</p>
+<p>总结一下，影响复利效应的关键因素</p>
+<ul>
+<li>投资期限长短：资金滚得越多，复利效应就越明显</li>
+<li>收益率的高低：自然是越高越好</li>
+<li>本金大小：本金越多，自然赚的越多</li>
+<li>再投资频率：年复利、月复利、日负利，再投资频率越高，复利效益就越明显</li>
+</ul>
+<h1>天使和魔鬼</h1>
+<h2 id="复利能让你变得很富有">复利能让你变得很富有</h2>
+<p>以<a href="https://zh.wikipedia.org/wiki/%E7%A6%8F%E5%B8%83%E6%96%AF%E9%A6%99%E6%B8%AF%E5%AF%8C%E8%B1%AA%E6%A6%9C">香港首富</a><a href="https://zh.wikipedia.org/wiki/%E6%9D%8E%E5%98%89%E8%AA%A0">李嘉诚</a>为例，1950年以7,000美元成立<a href="https://zh.wikipedia.org/wiki/%E9%95%B7%E6%B1%9F%E5%A1%91%E8%86%A0%E5%BB%A0">长江塑胶厂</a>，在2006年拥有约188亿美元身家计算，撇开其他因素，他的财富在57年增长268.6万倍</p>
+<h2 id="也能让你被薅得很穷">也能让你被薅得很穷</h2>
+<p>高利贷就是很好的例子，现时世界各国普遍都有对放债人所收取的利息有最高限制，一般都以30%年息为上限，在此以上的都被视为进行<a href="https://zh.wikipedia.org/wiki/%E9%AB%98%E5%88%A9%E8%B2%B8">高利贷</a>活动而加以取缔。而现时<a href="https://zh.wikipedia.org/wiki/%E4%BF%A1%E7%94%A8%E5%8D%A1">信用卡</a>欠账的年息往往高于20%甚至30%</p>
+<h1>延伸</h1>
+<p>对于投资的初学者来说，复利是一个很好的认识投资的工具，他让我们意识到投资世界的魔力，复利是核心的财富增值工具。</p>
+<p>可以从以下几个方面去运用好这个工具：</p>
+<ol>
+<li>
+<p>拒绝借高利贷等一切涉及复利的吃人的东西</p>
+</li>
+<li>
+<p>不要追求过高的投资回报率，往往稳定的投资回报率更加重要</p>
+</li>
+<li>
+<p>复利最青睐的就是时间，年轻的时候投入的一笔钱，如果可以保证稳定可观的回报率，在时间的见证下也能积累一笔很可观的财富</p>
+</li>
+<li>
+<p>买一些优质的投资项目，能够保证复利有长期的时间可以去发挥作用而不会突然崩塌</p>
+<p>这一点和《穷查理宝典》里的“我们偏向于把大量的钱投在我们不用在另作决策的地方”不谋而合</p>
+</li>
+<li>
+<p>尤其注意的是，复利的基础是你的本金，所以，当你的收益已经到达一定数目的时候，我们就可以留出自己的本金，保证自己不至于在钱桌上全盘皆输</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>阅读</category>
+      </categories>
+  </entry>
+  <entry>
     <title>欧卡2画质调优与帧率卡顿排查记录</title>
     <url>/2026/03/08/%E5%8F%B0%E5%BC%8F%E6%9C%BAGtx1660%E8%B0%83%E8%AF%95%E6%AC%A7%E5%8D%A12%E7%9A%84%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308135715820.png" alt="image-20260308135656767"></p>
@@ -2893,128 +3097,6 @@ GTX 1660 (6GB) 搭载 PNG（基础/植被）和 JBX 8K 高清天空等重度画�
       </categories>
   </entry>
   <entry>
-    <title>复利的概念与运作原理</title>
-    <url>/2026/03/22/%E5%A4%8D%E5%88%A9%E7%9A%84%E9%AD%94%E5%8A%9B/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310220618481.png" alt="image-20260310220618481"></p>
-<h1>复利是什么</h1>
-<p>我们来看看wikipedia怎么说的吧：</p>
-<p><strong>复利率法</strong>，是一种计算<a href="https://zh.wikipedia.org/wiki/%E5%88%A9%E6%81%AF">利息</a>的方法。按照这种方法，利息除了会根据<a href="https://zh.wikipedia.org/wiki/%E6%9C%AC%E9%87%91">本金</a>计算外，新得到的利息同样可以生息，因此俗称“利滚利”、“驴打滚”或“利叠利”。只要计算利息的周期越密，财富增长越快，而随着年期越长，复利效应亦会越为明显。</p>
-<p>说人话，我的理解就是：你投资产生的收益，你要忍住不要直接花掉，而是要连本带利继续投资，这样的话，即使你的收益率不高，但是财富依然会有比较可观的增值。</p>
-<h1>复利怎么运作</h1>
-<p>复利和单利的区别在于，收益的那一部分钱是可以进行再投资的</p>
-<ul>
-<li>单利：假设你每年投入10000元，年利率是10%，那么十年以后的收益是10X10000X10%=10000元</li>
-<li>复利：同样的条件下，你的十年收益是 10000X(1+10%)^10-10000=15937元</li>
-</ul>
-<p>相比下来，整整多了5937元！</p>
-<p>诶你有可能会说，这也太少了吧，十年，整整十年我才赚了5937元，累死累活，挣个毛线啊…</p>
-<p>说得对，复利的魅力，在这个举的例子里面体现的还不够好。</p>
-<p>你想想，如果你把里面的投入本金换成10000万（也就是1亿元），你想想你多赚了多少，不出意外的话，复利比单利多了接近六千万吧</p>
-<p>我们不妨把视线放长一点，假设我们是一个很老练的投资人，能够保持年利率10%下去30年，我们再算一算这笔账：</p>
-<ul>
-<li>单利：30年收益是30000元</li>
-<li>复利：30年收益是10000X(1+10%)^30-10000=164494元</li>
-</ul>
-<p>可以窥见的是，随着时间愈长，雪球滚得越大，这是美丽的“雪球效应”</p>
-<p>以上还是基于年复利率的前提下，你想想，如果是月复利率、日负利率，是不是不用30年就能大赚一笔？</p>
-<p>总结一下，影响复利效应的关键因素</p>
-<ul>
-<li>投资期限长短：资金滚得越多，复利效应就越明显</li>
-<li>收益率的高低：自然是越高越好</li>
-<li>本金大小：本金越多，自然赚的越多</li>
-<li>再投资频率：年复利、月复利、日负利，再投资频率越高，复利效益就越明显</li>
-</ul>
-<h1>天使和魔鬼</h1>
-<h2 id="复利能让你变得很富有">复利能让你变得很富有</h2>
-<p>以<a href="https://zh.wikipedia.org/wiki/%E7%A6%8F%E5%B8%83%E6%96%AF%E9%A6%99%E6%B8%AF%E5%AF%8C%E8%B1%AA%E6%A6%9C">香港首富</a><a href="https://zh.wikipedia.org/wiki/%E6%9D%8E%E5%98%89%E8%AA%A0">李嘉诚</a>为例，1950年以7,000美元成立<a href="https://zh.wikipedia.org/wiki/%E9%95%B7%E6%B1%9F%E5%A1%91%E8%86%A0%E5%BB%A0">长江塑胶厂</a>，在2006年拥有约188亿美元身家计算，撇开其他因素，他的财富在57年增长268.6万倍</p>
-<h2 id="也能让你被薅得很穷">也能让你被薅得很穷</h2>
-<p>高利贷就是很好的例子，现时世界各国普遍都有对放债人所收取的利息有最高限制，一般都以30%年息为上限，在此以上的都被视为进行<a href="https://zh.wikipedia.org/wiki/%E9%AB%98%E5%88%A9%E8%B2%B8">高利贷</a>活动而加以取缔。而现时<a href="https://zh.wikipedia.org/wiki/%E4%BF%A1%E7%94%A8%E5%8D%A1">信用卡</a>欠账的年息往往高于20%甚至30%</p>
-<h1>延伸</h1>
-<p>对于投资的初学者来说，复利是一个很好的认识投资的工具，他让我们意识到投资世界的魔力，复利是核心的财富增值工具。</p>
-<p>可以从以下几个方面去运用好这个工具：</p>
-<ol>
-<li>
-<p>拒绝借高利贷等一切涉及复利的吃人的东西</p>
-</li>
-<li>
-<p>不要追求过高的投资回报率，往往稳定的投资回报率更加重要</p>
-</li>
-<li>
-<p>复利最青睐的就是时间，年轻的时候投入的一笔钱，如果可以保证稳定可观的回报率，在时间的见证下也能积累一笔很可观的财富</p>
-</li>
-<li>
-<p>买一些优质的投资项目，能够保证复利有长期的时间可以去发挥作用而不会突然崩塌</p>
-<p>这一点和《穷查理宝典》里的“我们偏向于把大量的钱投在我们不用在另作决策的地方”不谋而合</p>
-</li>
-<li>
-<p>尤其注意的是，复利的基础是你的本金，所以，当你的收益已经到达一定数目的时候，我们就可以留出自己的本金，保证自己不至于在钱桌上全盘皆输</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>阅读</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>香蕉芒果西梅奶昔</title>
-    <url>/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260328224552025.png" alt="image-20260328224552025"></p>
-<h1>香蕉、芒果、西梅奶昔</h1>
-<p>一根香蕉、一个芒果（其实是半个）、三个西梅（其实只切了两个😄）</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7986.jpeg" alt="IMG_7986"></p>
-<p>水果躺板板咯，切得有点凌乱哈</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7987.jpeg" alt="IMG_7987"></p>
-<p>榨汁杯里面的，是安慕希草莓酸奶150ml</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7988.jpeg" alt="IMG_7988"></p>
-<p>大概榨汁榨了2min左右，出来的奶昔是这样的</p>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7989.jpeg" alt="IMG_7989" style="zoom: 25%;" />
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/IMG_7990.jpeg" alt="IMG_7990" style="zoom:25%;" />
-<p>感觉味道还是不错的，仔细喝喝，可以喝出来西梅的颗粒，芒果的味道没咋感觉到，不过颜色上有一些体现（变得很黄），香蕉的味道有点太重了，还有就是酸奶实在是太浓了，感觉本来就很浓的酸奶，加上一大堆的颗粒，浓的有点不像样的，不像是饮料，像是浓粥了哈哈</p>
-<p>以后做奶昔，可以试着：</p>
-<ol>
-<li>尽量用稀一点的牛奶，酸奶太浓稠了</li>
-<li>搅拌机要保证有足够的电量来榨，榨到一半没电了会很崩溃的</li>
-<li>像香蕉这种气味极重的水果，不要放的过量，因为这样会让你根本吃不到其他水果的味道</li>
-</ol>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Python Qt 简介与 PySide6 安装指南</title>
-    <url>/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260403151904697.png" alt="image-20260403151904606"></p>
-<h1>Python qt简介</h1>
-<p>pyside2包装的是Qt5库，pyside6包装的是Qt6库</p>
-<p>PyQt5包装的是Qt5库，PyQt6包装的是Qt6库</p>
-<p>pyside2/pyside6是Qt的亲儿子，而pyqt5/pyqt6是义子</p>
-<p>Qt库是用C++语言开发的，是因为python使用的人实在是太多了，所以python就从C++搬过来这个库了</p>
-<h1>一个好玩的案例</h1>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">app = QApplication()</span><br></pre></td></tr></table></figure>
-<p>放在主窗口的控件，要能全部显示在界面上，必须加上下面这行代码，不然你会看不到自己的控件去哪儿了</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">window.show()</span><br></pre></td></tr></table></figure>
-<p>最后一定有一句这个，让程序进入死循环（可以试试去掉这一句会有什么变化）</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">app.<span class="built_in">exec</span>() <span class="comment"># 这是pyside6的代码； pyside2 是 app.exec_()</span></span><br></pre></td></tr></table></figure>
-<h1>遇到的问题和解决方法</h1>
-<p>我的Python 3.12 无法正常安装 PySide2（至少在2026.3.28号是不可行的），<strong>所以我选择 PySide6</strong></p>
-<p>一般来说，在python终端输入以下命令就可以安装库</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install pyside6</span><br></pre></td></tr></table></figure>
-<p>但是国内下载速度很慢，如果上述指令不行，我们可以采用镜像源下载</p>
-<p>（-i表示从后面的镜像源下载安装pyside6）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install pyside6 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
-<p><strong>一些常用的镜像源</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">清华大学TUNA镜像源： https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">阿里云镜像源： http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">中国科学技术大学镜像源： https://mirrors.ustc.edu.cn/pypi/simple/</span><br><span class="line">华为云镜像源： https://repo.huaweicloud.com/repository/pypi/simple/</span><br><span class="line">腾讯云镜像源：https://mirrors.cloud.tencent.com/pypi/simple/</span><br></pre></td></tr></table></figure>
-<p>显示以下内容就是安装好了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260328173851329.png" alt="image-20260328173851246"></p>
-<h1>参考文章</h1>
-<p><a href="https://www.runoob.com/w3cnote/pip-cn-mirror.html">pip常用镜像源-博客园</a></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
     <title>如何搭建属于自己的个人知识库</title>
     <url>/2026/03/22/%E6%80%8E%E4%B9%88%E5%8E%BB%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9F/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260310144243809.png" alt="image-20260310144243809"></p>
@@ -3095,118 +3177,36 @@ GTX 1660 (6GB) 搭载 PNG（基础/植被）和 JBX 8K 高清天空等重度画�
       </categories>
   </entry>
   <entry>
-    <title>基于Obsidian的本地资料归档与知识管理工作流</title>
-    <url>/2026/08/01/%E5%88%9B%E4%BD%9C%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BF%A1%E6%81%AF%E6%BA%90%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%95%BF%E6%9C%9F%E7%AE%A1%E7%90%86%EF%BC%9F/</url>
-    <content><![CDATA[<h1>总体策略</h1>
-<p>以创作文章题目为文件夹，将有关改话题的论文、网页文章、视频统一放置在该文件夹下。<br>
-以Obsidian为核心工具，以本地Obsidian仓库为载体，以本地存储为主。<br>
-将信息源都转换为<code>md</code> <code>pdf</code>的形式统一管理。<br>
-尽量采用开源工具。</p>
-<h1>产生的价值</h1>
-<p>有一些好用的教程文章，由于一些原因会被下架，所以需要本地化存储，进行长期存档。<br>
-文章一旦本地化，我们就可以在自己的文章里，进行信息源文章部分文字的引用。抛弃我之前的Adobe Acrobat DC阅读，Obsidian写作的工作流，优化了工作流程。</p>
-<hr>
-<h1>需要的工具</h1>
-<p>Obsidian的插件PDF++、Copy Block Link<br>
-yt-dlp、ffmpeg、deno等开源工具<br>
-Google Chrome插件Obsidian web Clipper<br>
-Google Chrome收藏文件夹</p>
-<h1>如何安装工具</h1>
-<h2 id="Obsidian插件的安装">Obsidian插件的安装</h2>
-<p>在Obsidian设置界面进入第三方插件界面，进行以下插件的搜索：<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141758942.png" alt="q1.png|800"><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141809789.png" alt="q2.png|800"><br>
-记得在设置 第三方插件里面开启这两个插件。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731151651630.png" alt="image.png"></p>
-<h2 id="yt-dlp、ffmpeg、deno的下载">yt-dlp、ffmpeg、deno的下载</h2>
-<p>进入yt-dlp的GitHub界面：<a href="https://github.com/yt-dlp/yt-dlp/releases">yt-dlp的GitHub Releases界面</a>。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141830855.png" alt="q3.png"><br>
-点击yt-dlp.exe进行下载。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142025586.png" alt="q4.png"><br>
-进入ffmpeg的GitHub界面：<a href="https://github.com/BtbN/FFmpeg-Builds/releases">ffmpeg的Github Releases界面</a>，进行ffmpeg的下载。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142317994.png" alt="w8.png"><br>
-对于win系统用户来说，以上ffmpeg的不同版本区别如下：<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142327613.png" alt="w9.png"><br>
-针对我们的日常使用，推荐下载gpl版本，功能最全。<br>
-deno的下载：<a href="https://github.com/denoland/deno/releases/tag/v2.9.4">deno的Github Releases界面</a><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731162931562.png" alt="image.png"></p>
-<h2 id="Google拓展Obsidian-Web-Clipper的安装">Google拓展Obsidian Web Clipper的安装</h2>
-<p>进入Chrome应用商店。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141915555.png" alt="q5.png"><br>
-搜索Obsidian Web Clipper。进行Obsidian官方剪藏插件的安装。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141923059.png" alt="q6.png"><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731141931674.png" alt="q7.png"><br>
-强烈推荐自定义一个快速剪藏的按钮，这样可以极大的提高效率。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731161029456.png" alt="image.png"></p>
-<h2 id="yt-dlp、ffmpeg、deno的安装与配置">yt-dlp、ffmpeg、deno的安装与配置</h2>
-<p>如果按照前面的步骤做下来的话，你的下载文件夹里面应该已经有以下三个文件：（如果你的下载文件夹里面还没有这三个文件，可以往前看看<a href="#yt-dlp%E3%80%81ffmpeg%E3%80%81deno%E7%9A%84%E4%B8%8B%E8%BD%BD">yt-dlp、ffmpeg、deno的下载</a>）。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731144052762.png" alt="e1.png"><br>
-之后，我们在电脑的某个盘符下建立一个新的文件夹，命名为yt-dlp。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142356747.png" alt="e2.png"><br>
-将exe全部解压缩进入新建立的文件夹下面（注意：ffmpeg.exe在压缩包里的bin的文件夹目录下，藏得比较深，如下图：）。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731152940632.png" alt="image.png"><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142402006.png" alt="e3.png"><br>
-之后，cmd+R运行sysdm.cpl命令，进行系统环境变量的设定s这一步是为了后续我们可以从任意一个终端启动yt-dlp）<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142231241.png" alt="w5.png|414"><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142236612.png" alt="w6.png|378"><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731153341721.png" alt="image.png"><br>
-添加我们之前新建立的yt-dlp文件夹到path变量下：<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731153149809.png" alt="w7.png"><br>
-之后我们通过终端输入<code>yt-dlp</code> <code>deno</code> <code>ffmpeg</code>指令，检验path变量是否生效：</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">yt-dlp</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142414733.png" alt="e4.png|586"></p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">deno</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142414734.png" alt="e4.png|587"></p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ffmpeg</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142414735.png" alt="e4.png|583"></p>
-<hr>
-<h1>一个实际的运行案例</h1>
-<p>这里阐述不同的信息源使用Obsidian进行管理de一个实际例子。</p>
-<h2 id="论文">论文</h2>
-<p>论文的获取过程在这里不过多赘述，不是本文的重点内容。<br>
-论文存放在Obsidian本地仓库下的Clippings文件夹，进行统一的管理。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731142903299.png" alt="e7.png"><br>
-展示使用pdf++插件，进行pdf原文的引用的效果：<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143514905.png" alt="w3.png"><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143514906.png" alt="w3.png"></p>
-<h2 id="网页文章">网页文章</h2>
-<p>我的策略是：先粗略的阅读，感觉文章好的话，再把读到的好文章（可能对写作有帮助的文章）收藏进一个该话题下面的文件夹。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143054136.png" alt="q9.png"><br>
-等到觉得写作参考素材收集的差不多了之后，再进行统一的剪藏。这样不会打扰我们正常的阅读过程，很好的将信息的输入和信息的处理进行分离开来。使用浏览器插件Obsidian web Clipper进行剪藏，储存到本地仓库的Clippings文件夹。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731155853076.png" alt="image.png|504"><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143202209.png" alt="e8.png|665"><br>
-文章经过剪藏，下载到本地之后，我们可以细看文章，标注文章，高亮文章的一些部分。<br>
-我们使用cope block link插件进行文章内容的引用。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731143633857.png" alt="w2.png|621"><br>
-一般我对剪藏进笔记的文章都会添加可信度标识：（高参考价值的不需要标识），可以加入一句话总结概括，以及标签，让自己以后看到这篇文章还能回忆起一些东西。</p>
-<h2 id="视频（以bilibili视频为例）">视频（以bilibili视频为例）</h2>
-<p>在命令行唤醒yt-dlp：</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">yt-dlp https://www.bilibili.com/video/BV1DhpseMEtf/</span><br></pre></td></tr></table></figure>
-<p>yt-dlp bilibili视频链接，即可自动下载。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731144837061.png" alt="e9.png|609"><br>
-下载的视频，放在Clippings文件夹下面统一管理。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260731215919176.png" alt="r1.png"></p>
-<p>希望对你有帮助！</p>
-<h1>需要注意</h1>
-<p>参考链接的文章只能写参考链接，不能全文加入，因为那是抄袭。<br>
-学术论文可以引用，但是绝对不允许加入博客文章，有极高的法律风险。<br>
-本地保存学术论文是被允许的，本地保存参考链接文章也是被允许的。</p>
-<h1>后续的坑</h1>
-<p>在这里主要说几点优化文章的角度：</p>
-<ol>
-<li>可以通过在文章里面加入引用块来优化文章。</li>
-<li>增加一些本地视频引用的方法（文章里面还没有写）。</li>
-<li>似乎<code>md</code>格式的文章的块引用还不是弄得太明白，可以在后续文章改善一下。</li>
-</ol>
+    <title>Python Qt 简介与 PySide6 安装指南</title>
+    <url>/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260403151904697.png" alt="image-20260403151904606"></p>
+<h1>Python qt简介</h1>
+<p>pyside2包装的是Qt5库，pyside6包装的是Qt6库</p>
+<p>PyQt5包装的是Qt5库，PyQt6包装的是Qt6库</p>
+<p>pyside2/pyside6是Qt的亲儿子，而pyqt5/pyqt6是义子</p>
+<p>Qt库是用C++语言开发的，是因为python使用的人实在是太多了，所以python就从C++搬过来这个库了</p>
+<h1>一个好玩的案例</h1>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">app = QApplication()</span><br></pre></td></tr></table></figure>
+<p>放在主窗口的控件，要能全部显示在界面上，必须加上下面这行代码，不然你会看不到自己的控件去哪儿了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">window.show()</span><br></pre></td></tr></table></figure>
+<p>最后一定有一句这个，让程序进入死循环（可以试试去掉这一句会有什么变化）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">app.<span class="built_in">exec</span>() <span class="comment"># 这是pyside6的代码； pyside2 是 app.exec_()</span></span><br></pre></td></tr></table></figure>
+<h1>遇到的问题和解决方法</h1>
+<p>我的Python 3.12 无法正常安装 PySide2（至少在2026.3.28号是不可行的），<strong>所以我选择 PySide6</strong></p>
+<p>一般来说，在python终端输入以下命令就可以安装库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install pyside6</span><br></pre></td></tr></table></figure>
+<p>但是国内下载速度很慢，如果上述指令不行，我们可以采用镜像源下载</p>
+<p>（-i表示从后面的镜像源下载安装pyside6）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install pyside6 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<p><strong>一些常用的镜像源</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">清华大学TUNA镜像源： https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">阿里云镜像源： http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">中国科学技术大学镜像源： https://mirrors.ustc.edu.cn/pypi/simple/</span><br><span class="line">华为云镜像源： https://repo.huaweicloud.com/repository/pypi/simple/</span><br><span class="line">腾讯云镜像源：https://mirrors.cloud.tencent.com/pypi/simple/</span><br></pre></td></tr></table></figure>
+<p>显示以下内容就是安装好了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260328173851329.png" alt="image-20260328173851246"></p>
 <h1>参考文章</h1>
-<p><a href="https://juejin.cn/post/7145351315705577485#heading-1">Obsidian 的高级玩法|打造能跳转到任何格式文件的笔记</a><br>
-<a href="https://zhuanlan.zhihu.com/p/411484717?utm_id=0">几招教你提高 Obsidian 中块引用的操作体验 - 知乎</a><br>
-<a href="https://juejin.cn/post/7414128839863566355#heading-11">一个程序员是怎么做个人知识管理（PKM）的今天我跟大家说说我知识管理的心路历程。 本文会从我所遇到知识管理的困境以及如何 - 掘金</a><br>
-<a href="https://www.zhihu.com/question/23427617">如何构建自己的笔记系统？ - 知乎</a><br>
-<a href="https://blog.salesflare.com/zh/%E5%86%85%E5%AE%B9%E5%88%9B%E4%BD%9C">内容创作：创建优秀内容的 4 条规则和步骤</a></p>
+<p><a href="https://www.runoob.com/w3cnote/pip-cn-mirror.html">pip常用镜像源-博客园</a></p>
 ]]></content>
       <categories>
-        <category>软件小记</category>
+        <category>教程</category>
       </categories>
   </entry>
   <entry>
@@ -3230,87 +3230,6 @@ deno的下载：<a href="https://github.com/denoland/deno/releases/tag/v2.9.4">d
 ]]></content>
       <categories>
         <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>护城河的概念与历史</title>
-    <url>/2026/03/22/%E6%8A%A4%E5%9F%8E%E6%B2%B3/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315212130095.png" alt="image-20260315212130095"></p>
-<h1>概念</h1>
-<p>我们来看看wikipedia怎么说的吧：</p>
-<p><strong>护城河</strong>，亦作<strong>城壕</strong>或<strong>城濠</strong>，是古时由人工挖凿，环绕整座<a href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E6%B1%A0">城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%AE%AE%E5%9F%8E">宫城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%AF%BA%E9%99%A2">寺院</a>等主要建筑的<a href="https://zh.wikipedia.org/wiki/%E6%B2%B3">河</a>，具有防御作用，可防止敌人或<a href="https://zh.wikipedia.org/wiki/%E5%8B%95%E7%89%A9">动物</a>入侵。</p>
-<p>世界各国在古代已有开凿护城河。在<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86">中国大陆</a><a href="https://zh.wikipedia.org/wiki/%E5%8C%97%E4%BA%AC%E5%B8%82">北京</a>的<a href="https://zh.wikipedia.org/wiki/%E6%95%85%E5%AE%AE">紫禁城</a>、<a href="https://zh.wikipedia.org/wiki/%E8%87%BA%E7%81%A3">台湾</a><a href="https://zh.wikipedia.org/wiki/%E7%AB%B9%E5%A1%B9%E5%9F%8E">新竹古城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%B7%A6%E7%87%9F%E8%88%8A%E5%9F%8E">左营旧城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%84%84%E8%BC%89%E9%87%91%E5%9F%8E">亿载金城</a>、<a href="https://zh.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC">日本</a>的古城如<a href="https://zh.wikipedia.org/wiki/%E6%9D%BE%E6%9C%AC%E5%9F%8E">松本城</a>、<a href="https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%88%B6">江户</a>（今<a href="https://zh.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC">东京</a>）的<a href="https://zh.wikipedia.org/wiki/%E7%9A%87%E5%B1%85">皇居</a>、以至<a href="https://zh.wikipedia.org/wiki/%E6%AD%90%E6%B4%B2">欧洲</a>各国的<a href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E5%A0%A1">城堡</a>及皇宫等等地方都建有护城河。欧洲不少城堡在护城河上建有可升起的木<a href="https://zh.wikipedia.org/wiki/%E6%A9%8B">桥</a>，以方便出入，亦可防止敌人进入。特别情况下，会选择湖泊作为城濠。如明初修建<a href="https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E5%9F%8E%E5%A2%99">南京城墙</a>时，放弃<a href="https://zh.wikipedia.org/wiki/%E9%87%91%E5%B7%9D%E6%B2%B3_(%E5%8D%97%E4%BA%AC)">金川河</a>，选择<a href="https://zh.wikipedia.org/wiki/%E7%8E%84%E6%AD%A6%E6%B9%96">玄武湖</a>。</p>
-<p>当然，这只是实际意义上的护城河，还有抽象意义上的护城河，巴菲特用生动的比喻描述了这一概念：“<strong>奇妙的、由很深、很危险的护城河环绕的城堡。城堡的主人是一个诚实而高雅的人。城堡最主要的力量源泉是主人天才的大脑；护城河永久地充当着那些试图袭击城堡的敌人的障碍</strong>。”</p>
-<h1>护城河怎么发挥作用？</h1>
-<p>那么，护城河具体是如何发挥作用的？让我们通过两个真实的企业案例来理解:</p>
-<p><strong>可口可乐</strong>：护城河核心是<strong>无与伦比的品牌认知</strong> + <strong>轻资产生态模式</strong>。</p>
-<p>消费者对口感形成心理忠诚，全球碳酸饮料市场份额46%，快餐与影院渠道覆盖率极高。公司只专注浓缩液生产与品牌，全球225家装瓶伙伴负责灌装分销，母公司掌控定价、包装与战术。这种模式带来60%+毛利率、连续60年股利增长。竞争者难以复制其全球品牌影响力和装瓶网络。</p>
-<p><strong>山姆会员商店</strong>：护城河建立在<strong>极致供应链精选</strong> + <strong>会员生态</strong>。</p>
-<p>SKU仅3500-5000个，每类只选1-2最佳单品，通过买断独家、自有品牌Member’s Mark（占比30%+）、规模采购实现品质与低价。会员数从2018年300万增至2024年近900万，续卡率86%，年费收入超23亿。消费者为“确定性”（随便选也高性价比）买单。但近期选品泛化、质量问题动摇信任，山姆通过全球直采（如独家孔泰奶酪、树顶到卖场榴莲）、“先仓后店”前置仓+电商（占比超50%）持续加宽护城河，2025Q2净销售额仍增长30.1%。</p>
-<p><strong>共性逻辑</strong>：</p>
-<ol>
-<li>创造定价权（高毛利或会员费）；</li>
-<li>提高进入壁垒（难以快速复制）；</li>
-<li>必须每年加宽（巴菲特强调：护城河不断拓宽，企业才能长期优秀）。</li>
-</ol>
-<p>在快速变化的时代，个人也需护城河来获得安全感与主动权。它让你不可替代，专注创造而非焦虑竞争。</p>
-<p>麦克利兰“冰山模型”揭示构成：</p>
-<ul>
-<li><strong>上层</strong>（显性）：知识与技能（如编程、英语）。</li>
-<li><strong>中层</strong>：能力（如沟通、结构化思维、情绪管理）。</li>
-<li><strong>底层</strong>（最稳固）：价值观、性格特质、动机，决定你独特优势与能做成什么。</li>
-</ul>
-<p>构建路径：从底层发掘优势 → 积累知识技能 → 形成难以撼动的核心竞争力。</p>
-<p>所以我们应该：</p>
-<ol>
-<li>
-<p><strong>发掘优势</strong> —— 德鲁克“回馈分析法”：每次重要决定前记录预期结果，9-12个月后对比实际，持续执行即可发现真正长处（也可回顾过去成功案例）。</p>
-</li>
-<li>
-<p><strong>优势与社会需求匹配</strong>：单纯擅长不够，必须问：这个优势如何创造价值？如何满足市场/趋势需求？如何与个人目标统一？三者交汇处才是护城河落脚点。</p>
-</li>
-<li>
-<p><strong>纵横积累模型</strong>：</p>
-<ul>
-<li><strong>横向</strong>：深耕当下价值创造（为客户/组织提供的核心输出），专注细节、持续1%优化。</li>
-<li><strong>纵向</strong>：为横面服务而积累相关知识/能力（直接相关优先，逐步扩展能力圈）。所有学习都围绕“能为他人创造的价值”展开，避免盲目杂学。</li>
-</ul>
-</li>
-<li>
-<p><strong>持续加宽</strong>（像企业一样）：</p>
-<ul>
-<li>终身学习，避免知识过时（如柯达胶卷被颠覆）。</li>
-<li>构建组合优势：单一元素难胜，排列组合形成独特性。</li>
-<li>建立反馈闭环：定期检视、根据环境调整方向。</li>
-</ul>
-</li>
-</ol>
-<h1>总结</h1>
-<p>护城河的终极意义在于<strong>创造的自由</strong>：企业无需时时防御，可专注为顾客创造更大价值；个人无需焦虑淘汰，可专注发挥独特优势。可口可乐与山姆的护城河皆经数十年沉淀，个人亦然。从今天开始，用回馈分析发掘长处，将优势对接社会需求，纵横积累、持续加宽——当你站起身回望，那条属于自己的宽阔护城河，将成为最值得骄傲的资产。</p>
-<h1>这才是文章的开始</h1>
-<p>是吧，文章写得很好，但并没有什么用，因为就是没有用啊，全是ai写出来的，辞藻华丽，逻辑很顺，但是似乎跟我真的没有什么关系啊。这也是ai的弊端，ai可以帮你写，但其实他自己也不是很理解这个概念，他也不知道你自己想要的是什么，不能代替你思考。</p>
-<p>所以写一篇文章、读一篇文章不要只是感动自己，改变自己才是最真的，自己理解才是重点。</p>
-<p>用我自己的话来说，护城河就是一个人（或一家企业）在这个世界里能够安全立足、别人暂时取代不了的那个“东西”。它从来不是单一的技能或天赋，而是一套多维度能力的组合拳——当几个看似普通的点叠加在一起，就形成了别人很难抄的独特壁垒。</p>
-<p>拿企业举例，可口可乐的护城河不是单纯的饮料好喝，而是“品牌认知度极高 + 轻资产模式”的组合：它只掌控最核心的配方和品牌，把生产、灌装、分销这些中低端环节外包给全球225家区域伙伴，自己专注定价权和生态掌控。这套模式让竞争者望尘莫及，毛利率常年60%以上，连续60年涨股息。山姆会员店则是另一套组合：极致精选SKU（3500–5000个，每类只挑1–2个最好）+ 自有品牌+ 会员付费买“确定性”+ 全球直采冷链。这种“少而精 + 会员锁仓”的模式，也让模仿者短期内跟不上。</p>
-<p>放到个人身上，我觉得道理是一样的。如果我只是一个会写代码的普通程序员，但社交能力弱、表达不行、动机也不强，那我的竞争力就很单薄，随时可能被更全面的人取代。但如果我把编程技能 + 良好的沟通表达 + 懂一点业务逻辑 + 强烈的成就动机 + 靠谱的性格叠加起来，这个组合就很难被快速复制——这就是我的护城河。</p>
-<p>作为大三学生，我现在的护城河其实还很浅，甚至可以说还没真正挖起来。主要有两个明显短板：</p>
-<ol>
-<li><strong>知识和技能还停在表面</strong>：学过的东西不少，但都浅尝辄止，没有真正做成过有分量的项目，也没有形成体系。</li>
-<li><strong>动机非常薄弱</strong>：我还没搞清楚自己到底想成为什么样的人、想为什么而努力。每天上课、刷题、像在完成任务，而不是在为某个清晰的方向积累。</li>
-</ol>
-<p>意识到这些后，我开始试着把“护城河”这个概念真正融入日常生活，而不是停留在想一想就结束的阶段。我给自己定了一些小而具体的行动：</p>
-<ul>
-<li>每天花10分钟写“动机日志”：今天什么事让我有点兴奋？什么事情让我很沮丧、无法集中注意力？为什么？慢慢找底层驱动力。</li>
-<li>每周挑一个技能做“项目驱动练习”：不是只看教程，而是逼自己输出一个小东西（比如建一个模型、设计一个产品），哪怕很粗糙。</li>
-<li>主动把技能“交叉”：比如写技术类博客，锻炼自己的表达能力的同时提升自己的技术素养、帮朋友解决实际问题，刻意练沟通等。</li>
-<li>记得复盘：列出当前的能力清单，问自己“这些点怎么组合才能让我更独特？”同时对比预期和实际结果，调整方向。</li>
-</ul>
-<p>护城河不是一夜之间建成的。可口可乐用了上百年，山姆也迭代了近30年。我现在才大三，时间是我最大的优势。也许几年后回头看，现在这些小小的刻意练习，就是那条河的起点。</p>
-<p>我希望未来的自己，能站在一条不算太宽但足够深的护城河边上，对着世界说： “来吧，我在这里，有我自己的位置。”</p>
-<p>你要如何设计自己的人生，这件事完全取决于你自己。</p>
-]]></content>
-      <categories>
-        <category>阅读</category>
       </categories>
   </entry>
   <entry>
@@ -3658,6 +3577,87 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 ]]></content>
       <categories>
         <category>工程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>护城河的概念与历史</title>
+    <url>/2026/03/22/%E6%8A%A4%E5%9F%8E%E6%B2%B3/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260315212130095.png" alt="image-20260315212130095"></p>
+<h1>概念</h1>
+<p>我们来看看wikipedia怎么说的吧：</p>
+<p><strong>护城河</strong>，亦作<strong>城壕</strong>或<strong>城濠</strong>，是古时由人工挖凿，环绕整座<a href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E6%B1%A0">城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%AE%AE%E5%9F%8E">宫城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%AF%BA%E9%99%A2">寺院</a>等主要建筑的<a href="https://zh.wikipedia.org/wiki/%E6%B2%B3">河</a>，具有防御作用，可防止敌人或<a href="https://zh.wikipedia.org/wiki/%E5%8B%95%E7%89%A9">动物</a>入侵。</p>
+<p>世界各国在古代已有开凿护城河。在<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86">中国大陆</a><a href="https://zh.wikipedia.org/wiki/%E5%8C%97%E4%BA%AC%E5%B8%82">北京</a>的<a href="https://zh.wikipedia.org/wiki/%E6%95%85%E5%AE%AE">紫禁城</a>、<a href="https://zh.wikipedia.org/wiki/%E8%87%BA%E7%81%A3">台湾</a><a href="https://zh.wikipedia.org/wiki/%E7%AB%B9%E5%A1%B9%E5%9F%8E">新竹古城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%B7%A6%E7%87%9F%E8%88%8A%E5%9F%8E">左营旧城</a>、<a href="https://zh.wikipedia.org/wiki/%E5%84%84%E8%BC%89%E9%87%91%E5%9F%8E">亿载金城</a>、<a href="https://zh.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC">日本</a>的古城如<a href="https://zh.wikipedia.org/wiki/%E6%9D%BE%E6%9C%AC%E5%9F%8E">松本城</a>、<a href="https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%88%B6">江户</a>（今<a href="https://zh.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC">东京</a>）的<a href="https://zh.wikipedia.org/wiki/%E7%9A%87%E5%B1%85">皇居</a>、以至<a href="https://zh.wikipedia.org/wiki/%E6%AD%90%E6%B4%B2">欧洲</a>各国的<a href="https://zh.wikipedia.org/wiki/%E5%9F%8E%E5%A0%A1">城堡</a>及皇宫等等地方都建有护城河。欧洲不少城堡在护城河上建有可升起的木<a href="https://zh.wikipedia.org/wiki/%E6%A9%8B">桥</a>，以方便出入，亦可防止敌人进入。特别情况下，会选择湖泊作为城濠。如明初修建<a href="https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E5%9F%8E%E5%A2%99">南京城墙</a>时，放弃<a href="https://zh.wikipedia.org/wiki/%E9%87%91%E5%B7%9D%E6%B2%B3_(%E5%8D%97%E4%BA%AC)">金川河</a>，选择<a href="https://zh.wikipedia.org/wiki/%E7%8E%84%E6%AD%A6%E6%B9%96">玄武湖</a>。</p>
+<p>当然，这只是实际意义上的护城河，还有抽象意义上的护城河，巴菲特用生动的比喻描述了这一概念：“<strong>奇妙的、由很深、很危险的护城河环绕的城堡。城堡的主人是一个诚实而高雅的人。城堡最主要的力量源泉是主人天才的大脑；护城河永久地充当着那些试图袭击城堡的敌人的障碍</strong>。”</p>
+<h1>护城河怎么发挥作用？</h1>
+<p>那么，护城河具体是如何发挥作用的？让我们通过两个真实的企业案例来理解:</p>
+<p><strong>可口可乐</strong>：护城河核心是<strong>无与伦比的品牌认知</strong> + <strong>轻资产生态模式</strong>。</p>
+<p>消费者对口感形成心理忠诚，全球碳酸饮料市场份额46%，快餐与影院渠道覆盖率极高。公司只专注浓缩液生产与品牌，全球225家装瓶伙伴负责灌装分销，母公司掌控定价、包装与战术。这种模式带来60%+毛利率、连续60年股利增长。竞争者难以复制其全球品牌影响力和装瓶网络。</p>
+<p><strong>山姆会员商店</strong>：护城河建立在<strong>极致供应链精选</strong> + <strong>会员生态</strong>。</p>
+<p>SKU仅3500-5000个，每类只选1-2最佳单品，通过买断独家、自有品牌Member’s Mark（占比30%+）、规模采购实现品质与低价。会员数从2018年300万增至2024年近900万，续卡率86%，年费收入超23亿。消费者为“确定性”（随便选也高性价比）买单。但近期选品泛化、质量问题动摇信任，山姆通过全球直采（如独家孔泰奶酪、树顶到卖场榴莲）、“先仓后店”前置仓+电商（占比超50%）持续加宽护城河，2025Q2净销售额仍增长30.1%。</p>
+<p><strong>共性逻辑</strong>：</p>
+<ol>
+<li>创造定价权（高毛利或会员费）；</li>
+<li>提高进入壁垒（难以快速复制）；</li>
+<li>必须每年加宽（巴菲特强调：护城河不断拓宽，企业才能长期优秀）。</li>
+</ol>
+<p>在快速变化的时代，个人也需护城河来获得安全感与主动权。它让你不可替代，专注创造而非焦虑竞争。</p>
+<p>麦克利兰“冰山模型”揭示构成：</p>
+<ul>
+<li><strong>上层</strong>（显性）：知识与技能（如编程、英语）。</li>
+<li><strong>中层</strong>：能力（如沟通、结构化思维、情绪管理）。</li>
+<li><strong>底层</strong>（最稳固）：价值观、性格特质、动机，决定你独特优势与能做成什么。</li>
+</ul>
+<p>构建路径：从底层发掘优势 → 积累知识技能 → 形成难以撼动的核心竞争力。</p>
+<p>所以我们应该：</p>
+<ol>
+<li>
+<p><strong>发掘优势</strong> —— 德鲁克“回馈分析法”：每次重要决定前记录预期结果，9-12个月后对比实际，持续执行即可发现真正长处（也可回顾过去成功案例）。</p>
+</li>
+<li>
+<p><strong>优势与社会需求匹配</strong>：单纯擅长不够，必须问：这个优势如何创造价值？如何满足市场/趋势需求？如何与个人目标统一？三者交汇处才是护城河落脚点。</p>
+</li>
+<li>
+<p><strong>纵横积累模型</strong>：</p>
+<ul>
+<li><strong>横向</strong>：深耕当下价值创造（为客户/组织提供的核心输出），专注细节、持续1%优化。</li>
+<li><strong>纵向</strong>：为横面服务而积累相关知识/能力（直接相关优先，逐步扩展能力圈）。所有学习都围绕“能为他人创造的价值”展开，避免盲目杂学。</li>
+</ul>
+</li>
+<li>
+<p><strong>持续加宽</strong>（像企业一样）：</p>
+<ul>
+<li>终身学习，避免知识过时（如柯达胶卷被颠覆）。</li>
+<li>构建组合优势：单一元素难胜，排列组合形成独特性。</li>
+<li>建立反馈闭环：定期检视、根据环境调整方向。</li>
+</ul>
+</li>
+</ol>
+<h1>总结</h1>
+<p>护城河的终极意义在于<strong>创造的自由</strong>：企业无需时时防御，可专注为顾客创造更大价值；个人无需焦虑淘汰，可专注发挥独特优势。可口可乐与山姆的护城河皆经数十年沉淀，个人亦然。从今天开始，用回馈分析发掘长处，将优势对接社会需求，纵横积累、持续加宽——当你站起身回望，那条属于自己的宽阔护城河，将成为最值得骄傲的资产。</p>
+<h1>这才是文章的开始</h1>
+<p>是吧，文章写得很好，但并没有什么用，因为就是没有用啊，全是ai写出来的，辞藻华丽，逻辑很顺，但是似乎跟我真的没有什么关系啊。这也是ai的弊端，ai可以帮你写，但其实他自己也不是很理解这个概念，他也不知道你自己想要的是什么，不能代替你思考。</p>
+<p>所以写一篇文章、读一篇文章不要只是感动自己，改变自己才是最真的，自己理解才是重点。</p>
+<p>用我自己的话来说，护城河就是一个人（或一家企业）在这个世界里能够安全立足、别人暂时取代不了的那个“东西”。它从来不是单一的技能或天赋，而是一套多维度能力的组合拳——当几个看似普通的点叠加在一起，就形成了别人很难抄的独特壁垒。</p>
+<p>拿企业举例，可口可乐的护城河不是单纯的饮料好喝，而是“品牌认知度极高 + 轻资产模式”的组合：它只掌控最核心的配方和品牌，把生产、灌装、分销这些中低端环节外包给全球225家区域伙伴，自己专注定价权和生态掌控。这套模式让竞争者望尘莫及，毛利率常年60%以上，连续60年涨股息。山姆会员店则是另一套组合：极致精选SKU（3500–5000个，每类只挑1–2个最好）+ 自有品牌+ 会员付费买“确定性”+ 全球直采冷链。这种“少而精 + 会员锁仓”的模式，也让模仿者短期内跟不上。</p>
+<p>放到个人身上，我觉得道理是一样的。如果我只是一个会写代码的普通程序员，但社交能力弱、表达不行、动机也不强，那我的竞争力就很单薄，随时可能被更全面的人取代。但如果我把编程技能 + 良好的沟通表达 + 懂一点业务逻辑 + 强烈的成就动机 + 靠谱的性格叠加起来，这个组合就很难被快速复制——这就是我的护城河。</p>
+<p>作为大三学生，我现在的护城河其实还很浅，甚至可以说还没真正挖起来。主要有两个明显短板：</p>
+<ol>
+<li><strong>知识和技能还停在表面</strong>：学过的东西不少，但都浅尝辄止，没有真正做成过有分量的项目，也没有形成体系。</li>
+<li><strong>动机非常薄弱</strong>：我还没搞清楚自己到底想成为什么样的人、想为什么而努力。每天上课、刷题、像在完成任务，而不是在为某个清晰的方向积累。</li>
+</ol>
+<p>意识到这些后，我开始试着把“护城河”这个概念真正融入日常生活，而不是停留在想一想就结束的阶段。我给自己定了一些小而具体的行动：</p>
+<ul>
+<li>每天花10分钟写“动机日志”：今天什么事让我有点兴奋？什么事情让我很沮丧、无法集中注意力？为什么？慢慢找底层驱动力。</li>
+<li>每周挑一个技能做“项目驱动练习”：不是只看教程，而是逼自己输出一个小东西（比如建一个模型、设计一个产品），哪怕很粗糙。</li>
+<li>主动把技能“交叉”：比如写技术类博客，锻炼自己的表达能力的同时提升自己的技术素养、帮朋友解决实际问题，刻意练沟通等。</li>
+<li>记得复盘：列出当前的能力清单，问自己“这些点怎么组合才能让我更独特？”同时对比预期和实际结果，调整方向。</li>
+</ul>
+<p>护城河不是一夜之间建成的。可口可乐用了上百年，山姆也迭代了近30年。我现在才大三，时间是我最大的优势。也许几年后回头看，现在这些小小的刻意练习，就是那条河的起点。</p>
+<p>我希望未来的自己，能站在一条不算太宽但足够深的护城河边上，对着世界说： “来吧，我在这里，有我自己的位置。”</p>
+<p>你要如何设计自己的人生，这件事完全取决于你自己。</p>
+]]></content>
+      <categories>
+        <category>阅读</category>
       </categories>
   </entry>
   <entry>
@@ -5398,6 +5398,43 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
       </categories>
   </entry>
   <entry>
+    <title>珞珈寝室日常随感诗辑</title>
+    <url>/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327194952695.png" alt="image-20260327194952695"></p>
+<h1>《月夜感寝室》</h1>
+<p>赤橘金霞美</p>
+<p>珞珈樱花拿铁甜</p>
+<p>快意心中生</p>
+<h1>《叭叭叫》</h1>
+<p>室友叭叭叫</p>
+<p>吾桌凌乱心烦躁</p>
+<p>心中苦恼恼</p>
+<h1>《咕叽咕叽》</h1>
+<p>咕叽咕叽咕</p>
+<p>咕叽咕叽咕叽咕</p>
+<p>咕叽咕叽咕</p>
+<h1>《状态》</h1>
+<p>涩涩干眼睛</p>
+<p>手机拿着刷不停</p>
+<p>久坐不要起</p>
+<h1>《谈硬盘》</h1>
+<p>硬盘焦虑大</p>
+<p>心想来个几万G</p>
+<p>其实都不看</p>
+<h1>《眼睛》</h1>
+<p>用她看世界</p>
+<p>一吞一吐好迷人</p>
+<p>两个大葡萄</p>
+<h1>《沐春光》</h1>
+<p>马兰沐春光</p>
+<p>心情如花竞开放</p>
+<p>我与春同长</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
     <title>机电系统编程基础与考试复习大纲</title>
     <url>/2026/03/12/%E6%9C%BA%E7%94%B5%E6%8E%A7%E5%88%B6/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260312191936511.png" alt="image-20260312191936511"></p>
@@ -5655,151 +5692,22 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
       </categories>
   </entry>
   <entry>
-    <title>珞珈寝室日常随感诗辑</title>
-    <url>/2026/04/03/%E7%94%9F%E6%B4%BB%E4%BF%B3%E5%8F%A5/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260327194952695.png" alt="image-20260327194952695"></p>
-<h1>《月夜感寝室》</h1>
-<p>赤橘金霞美</p>
-<p>珞珈樱花拿铁甜</p>
-<p>快意心中生</p>
-<h1>《叭叭叫》</h1>
-<p>室友叭叭叫</p>
-<p>吾桌凌乱心烦躁</p>
-<p>心中苦恼恼</p>
-<h1>《咕叽咕叽》</h1>
-<p>咕叽咕叽咕</p>
-<p>咕叽咕叽咕叽咕</p>
-<p>咕叽咕叽咕</p>
-<h1>《状态》</h1>
-<p>涩涩干眼睛</p>
-<p>手机拿着刷不停</p>
-<p>久坐不要起</p>
-<h1>《谈硬盘》</h1>
-<p>硬盘焦虑大</p>
-<p>心想来个几万G</p>
-<p>其实都不看</p>
-<h1>《眼睛》</h1>
-<p>用她看世界</p>
-<p>一吞一吐好迷人</p>
-<p>两个大葡萄</p>
-<h1>《沐春光》</h1>
-<p>马兰沐春光</p>
-<p>心情如花竞开放</p>
-<p>我与春同长</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>基于 GitHub + PicGo + CDN 搭建个人博客图床</title>
-    <url>/2026/03/22/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/</url>
-    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png" alt="image-20260305212844692"></p>
-<h2 id="引言">引言</h2>
-<p>在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理上传，再通过 CDN 服务加速访问，搭建了一个长期可用、方便管理的个人博客图床。</p>
-<h2 id="需要的工具">需要的工具</h2>
-<p>需要准备的工具和资源如下</p>
-<ol>
-<li>GitHub 账号以及一个新的仓库，例如 img-bed</li>
-<li>PicGo</li>
-<li>CDN 服务，例如 jsDelivr 或其他支持 GitHub 仓库加速的服务</li>
-<li>Typora(日常写博客使用的软件，用于检验图床是否生效)</li>
-</ol>
-<h2 id="GitHub-仓库搭建">GitHub 仓库搭建</h2>
-<ol>
-<li>
-<p>登录 GitHub，创建一个新仓库，建议名称为 img-bed</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305200944050.png" alt="image-20260305200944050"></p>
-</li>
-<li>
-<p>将仓库设置为 Public，仓库建议使用公开仓库，方便 CDN 访问</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201149616.png" alt="image-20260305201149616"></p>
-<p>这样就是创建成功，就可以了</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201409082.png" alt="image-20260305201409082"></p>
-</li>
-</ol>
-<h2 id="PicGo-下载与配置">PicGo 下载与配置</h2>
-<h3 id="前置操作">前置操作</h3>
-<ol>
-<li>
-<p>安装 PicGo 应用并启动</p>
-<p><a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201552890.png" alt="image-20260305201552890"></p>
-<p>可能遇到的问题：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260307095315759.png" alt="image-20260307095315759"></p>
-</li>
-<li>
-<p>配置仓库信息：仓库名、分支、上传路径</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201654797.png" alt="image-20260305201654797"></p>
-<p>点击添加图床</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201748322.png" alt="image-20260305201748322"></p>
-</li>
-</ol>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202156876.png" alt="image-20260305202156876"></p>
-<h3 id="设定存储路径">设定存储路径</h3>
-<p>建议在仓库中创建 img 文件夹专门存放图片（可以用年份来区分，比如我是2026年上传的，就可以命名为img2026）</p>
-<p>仓库结构示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img-bed</span><br><span class="line"> └ img2026</span><br><span class="line">     ├ example1.png</span><br><span class="line">     ├ example2.jpg</span><br></pre></td></tr></table></figure>
-<h3 id="token的获取">token的获取</h3>
-<p>打开以下链接：</p>
-<p><a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
-<p>进行以下操作</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202811377.png" alt="image-20260305202811377"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202942889.png" alt="image-20260305202942889"></p>
-<p>记得打开repo</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203033192.png" alt="image-20260305203033192"></p>
-<p>之后会生成一个token，复制进PicGo配置即可</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203223281.png" alt="image-20260305203223281"></p>
-<h3 id="自定义域名（CDN服务）">自定义域名（CDN服务）</h3>
-<p>如果不使用CDN服务的话，你就可能这样</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203624484.png" alt="image-20260305203624484"></p>
-<p>为了加速访问和解决跨域问题，可以使用 jsDelivr 这样的服务,操作很简单</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">把一坨 https://cdn.jsdmirror.com/gh/用户名/仓库名@分支 复制进PicGo即可</span><br></pre></td></tr></table></figure>
-<h3 id="上传">上传</h3>
-<p>上传操作超级简单，不难</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305204522411.png" alt="image-20260305204522411"></p>
-<p>例如你上传了 pic1.png，你的剪贴板会有这一串信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/pic1.png</span><br></pre></td></tr></table></figure>
-<p>用这个url链接复制进浏览器，看看能不能打开访问你上传的图片，能的话就说明配置成功了。恭喜你已经快成功了</p>
-<h2 id="集成到Typora">集成到Typora</h2>
-<h3 id="Typora的下载">Typora的下载</h3>
-<p><a href="https://cloud.189.cn/t/fqE3Af6nq6vi">https://cloud.189.cn/t/fqE3Af6nq6vi</a> （访问码：jkk9）</p>
-<p>分享了链接，不用自己去破解</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205655868.png" alt="image-20260305205655868"></p>
-<h3 id="Typora配置图床服务">Typora配置图床服务</h3>
-<p>进去设置-偏好设置-图像-进行以下操作：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205944672.png" alt="image-20260305205944672"></p>
-<p>显示以下画面就是成功啦！</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/tc7.png" alt="tc7"></p>
-<p>使用截图软件先截图，ctrl+c进入你的博客文章里面去，直接上传的感觉，太爽！</p>
-<p>好啦，可以去玩了，这个功能好好玩的，嘿嘿</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210510004.png" alt="image-20260305210510004"></p>
-<h2 id="头脑风暴">头脑风暴</h2>
-<h3 id="自定义子域名">自定义子域名</h3>
-<ul>
-<li>将自己的域名，例如 <a href="http://img.mydomain.com">img.mydomain.com</a>，直接绑定到 CDN 地址，</li>
-</ul>
-<h3 id="博客的相册功能">博客的相册功能</h3>
-<ul>
-<li>很久没用的博客相册功能可以用上了</li>
-</ul>
-<h3 id="多设备上传到github图床">多设备上传到github图床</h3>
-<p>比如你有一个笔记本电脑，也想要通过picgo来上传图片，只需要按照教程来（仓库如果已经建了img-bed就不需要建一个新的），在笔记本电脑上下载PicGo，按照步骤进行PicGo配置，获取一个新的token授权，typora的设置也如出一辙。</p>
-<h2 id="总结">总结</h2>
-<p>本文介绍了一个稳定可控的个人博客图床搭建方案，使用 GitHub 仓库存储图片，PicGo 管理上传，CDN 加速访问，实现跨域友好、快速加载、长期可维护。</p>
-<p>笔者在使用ai的过程中，一开始ai告诉我的方案是picgo+github+cloudfare方案，但是捣鼓了很久都没有搞出来，其中有一步我按照他说的来配置，是这样的：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210400758.png" alt="image-20260305210400758"></p>
-<p>搞了很久，我都怀疑是这里出了问题，可是ai是这样的，你不去怀疑他，他死活不知道自己错了这里，直到我指出他这里可能有问题，他跟我说，这是不能用的！</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210837538.png" alt="image-20260305210837538"></p>
-<p>算是把这一步推倒重来了，气死我了！</p>
-<p>AI 可以帮你生成脚本和优化步骤，但是会出现很致命的错误，不能代替的，是你的思考。操作细节仍需我们去把控。</p>
-<p>以后可以去做的：</p>
-<p>1.让ai互相挑刺，这样可以保证不要被ai的一面之词蒙蔽，要做一个擦亮眼睛的皇上，ai只不过是帮你出谋划策的太监。</p>
-<p>2.ai要用，但是不要滥用，像这样技术类的方案，google可以搜到很成熟的案例，这样可以少走很多弯路。</p>
-<p>3.不要高估ai的分析判断能力，有时候它自己都不知道自己在说什么，不要盲目相信ai</p>
-<p>4.对ai的提问要具体，当问题描述清楚时，AI 往往可以成为一个效率很高的技术助手</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.提供完整背景</span><br><span class="line">如何配置图床-&gt;我正在使用 GitHub 仓库作为图床，仓库名为 img-bed，使用 PicGo 上传图片，通过 jsDelivr 作为 CDN，现在访问图片时返回 404，这种情况可能是什么原因</span><br><span class="line"></span><br><span class="line">2.提供具体的路径或代码</span><br><span class="line">网页404-&gt;我访问的地址是</span><br><span class="line">https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img/tc2.png</span><br><span class="line">但是浏览器返回 404 GitHub 仓库路径是img-bed/img/tc2.png</span><br><span class="line"></span><br><span class="line">3.描述已经尝试过的步骤</span><br><span class="line"></span><br><span class="line">4.一次只问一个核心问题</span><br></pre></td></tr></table></figure>
-<p>使用ai是一门学问，用的好是好，用的不好，却是无益的</p>
+    <title>破解游戏无法进入的解决方法</title>
+    <url>/2026/07/21/%E7%A0%B4%E8%A7%A3%E6%B8%B8%E6%88%8F%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>一些解决破解游戏无法进入游戏的解决方法</p>
+<h1>场景一</h1>
+<h2 id="问题">问题</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/Snipaste_2026-05-06_20-12-35.png" alt="Snipaste_2026-05-06_20-12-35"></p>
+<p>下载到了某个学习版，但是发现不弹个info by FIxSNX 小窗</p>
+<p>游戏就会一直卡在一个加载界面无法进入</p>
+<h2 id="解决方法">解决方法</h2>
+<p>搜了搜网上有类似的情况出现，但是他们的问题描述是“但是发现会弹个info by FIxSNX 小窗就闪退了”</p>
+<p>问题的解决办法是“修改电脑系统时间为2025年6月27日”，即可正常启动</p>
+<p>这其中涉及到了单一启动程序的一个软件的下载，名字叫runasdate</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260508171931684.png" alt="image-20260508171931684"></p>
+<p>然而我发现，其实这个游戏的问题并不能够通过更改游戏的启动时间来解决，大概run 7次可以打开一次游戏，也是离谱了</p>
+<p>似乎和运行的时间并没有什么关系</p>
+<p>进游戏似乎一直考运气</p>
 ]]></content>
       <categories>
         <category>教程</category>
@@ -6367,28 +6275,6 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
       </categories>
   </entry>
   <entry>
-    <title>破解游戏无法进入的解决方法</title>
-    <url>/2026/07/21/%E7%A0%B4%E8%A7%A3%E6%B8%B8%E6%88%8F%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>一些解决破解游戏无法进入游戏的解决方法</p>
-<h1>场景一</h1>
-<h2 id="问题">问题</h2>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/Snipaste_2026-05-06_20-12-35.png" alt="Snipaste_2026-05-06_20-12-35"></p>
-<p>下载到了某个学习版，但是发现不弹个info by FIxSNX 小窗</p>
-<p>游戏就会一直卡在一个加载界面无法进入</p>
-<h2 id="解决方法">解决方法</h2>
-<p>搜了搜网上有类似的情况出现，但是他们的问题描述是“但是发现会弹个info by FIxSNX 小窗就闪退了”</p>
-<p>问题的解决办法是“修改电脑系统时间为2025年6月27日”，即可正常启动</p>
-<p>这其中涉及到了单一启动程序的一个软件的下载，名字叫runasdate</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260508171931684.png" alt="image-20260508171931684"></p>
-<p>然而我发现，其实这个游戏的问题并不能够通过更改游戏的启动时间来解决，大概run 7次可以打开一次游戏，也是离谱了</p>
-<p>似乎和运行的时间并没有什么关系</p>
-<p>进游戏似乎一直考运气</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
     <title>理性消费与购物评估指南</title>
     <url>/2025/09/12/%E8%8A%82%E6%97%A5/</url>
     <content><![CDATA[<h1>财务</h1>
@@ -6440,6 +6326,120 @@ l<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1
 ]]></content>
       <categories>
         <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>基于 GitHub + PicGo + CDN 搭建个人博客图床</title>
+    <url>/2026/03/22/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305212844692.png" alt="image-20260305212844692"></p>
+<h2 id="引言">引言</h2>
+<p>在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理上传，再通过 CDN 服务加速访问，搭建了一个长期可用、方便管理的个人博客图床。</p>
+<h2 id="需要的工具">需要的工具</h2>
+<p>需要准备的工具和资源如下</p>
+<ol>
+<li>GitHub 账号以及一个新的仓库，例如 img-bed</li>
+<li>PicGo</li>
+<li>CDN 服务，例如 jsDelivr 或其他支持 GitHub 仓库加速的服务</li>
+<li>Typora(日常写博客使用的软件，用于检验图床是否生效)</li>
+</ol>
+<h2 id="GitHub-仓库搭建">GitHub 仓库搭建</h2>
+<ol>
+<li>
+<p>登录 GitHub，创建一个新仓库，建议名称为 img-bed</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305200944050.png" alt="image-20260305200944050"></p>
+</li>
+<li>
+<p>将仓库设置为 Public，仓库建议使用公开仓库，方便 CDN 访问</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201149616.png" alt="image-20260305201149616"></p>
+<p>这样就是创建成功，就可以了</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201409082.png" alt="image-20260305201409082"></p>
+</li>
+</ol>
+<h2 id="PicGo-下载与配置">PicGo 下载与配置</h2>
+<h3 id="前置操作">前置操作</h3>
+<ol>
+<li>
+<p>安装 PicGo 应用并启动</p>
+<p><a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201552890.png" alt="image-20260305201552890"></p>
+<p>可能遇到的问题：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260307095315759.png" alt="image-20260307095315759"></p>
+</li>
+<li>
+<p>配置仓库信息：仓库名、分支、上传路径</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201654797.png" alt="image-20260305201654797"></p>
+<p>点击添加图床</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305201748322.png" alt="image-20260305201748322"></p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202156876.png" alt="image-20260305202156876"></p>
+<h3 id="设定存储路径">设定存储路径</h3>
+<p>建议在仓库中创建 img 文件夹专门存放图片（可以用年份来区分，比如我是2026年上传的，就可以命名为img2026）</p>
+<p>仓库结构示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img-bed</span><br><span class="line"> └ img2026</span><br><span class="line">     ├ example1.png</span><br><span class="line">     ├ example2.jpg</span><br></pre></td></tr></table></figure>
+<h3 id="token的获取">token的获取</h3>
+<p>打开以下链接：</p>
+<p><a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
+<p>进行以下操作</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202811377.png" alt="image-20260305202811377"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305202942889.png" alt="image-20260305202942889"></p>
+<p>记得打开repo</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203033192.png" alt="image-20260305203033192"></p>
+<p>之后会生成一个token，复制进PicGo配置即可</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203223281.png" alt="image-20260305203223281"></p>
+<h3 id="自定义域名（CDN服务）">自定义域名（CDN服务）</h3>
+<p>如果不使用CDN服务的话，你就可能这样</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305203624484.png" alt="image-20260305203624484"></p>
+<p>为了加速访问和解决跨域问题，可以使用 jsDelivr 这样的服务,操作很简单</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">把一坨 https://cdn.jsdmirror.com/gh/用户名/仓库名@分支 复制进PicGo即可</span><br></pre></td></tr></table></figure>
+<h3 id="上传">上传</h3>
+<p>上传操作超级简单，不难</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305204522411.png" alt="image-20260305204522411"></p>
+<p>例如你上传了 pic1.png，你的剪贴板会有这一串信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/pic1.png</span><br></pre></td></tr></table></figure>
+<p>用这个url链接复制进浏览器，看看能不能打开访问你上传的图片，能的话就说明配置成功了。恭喜你已经快成功了</p>
+<h2 id="集成到Typora">集成到Typora</h2>
+<h3 id="Typora的下载">Typora的下载</h3>
+<p><a href="https://cloud.189.cn/t/fqE3Af6nq6vi">https://cloud.189.cn/t/fqE3Af6nq6vi</a> （访问码：jkk9）</p>
+<p>分享了链接，不用自己去破解</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205655868.png" alt="image-20260305205655868"></p>
+<h3 id="Typora配置图床服务">Typora配置图床服务</h3>
+<p>进去设置-偏好设置-图像-进行以下操作：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305205944672.png" alt="image-20260305205944672"></p>
+<p>显示以下画面就是成功啦！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/tc7.png" alt="tc7"></p>
+<p>使用截图软件先截图，ctrl+c进入你的博客文章里面去，直接上传的感觉，太爽！</p>
+<p>好啦，可以去玩了，这个功能好好玩的，嘿嘿</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210510004.png" alt="image-20260305210510004"></p>
+<h2 id="头脑风暴">头脑风暴</h2>
+<h3 id="自定义子域名">自定义子域名</h3>
+<ul>
+<li>将自己的域名，例如 <a href="http://img.mydomain.com">img.mydomain.com</a>，直接绑定到 CDN 地址，</li>
+</ul>
+<h3 id="博客的相册功能">博客的相册功能</h3>
+<ul>
+<li>很久没用的博客相册功能可以用上了</li>
+</ul>
+<h3 id="多设备上传到github图床">多设备上传到github图床</h3>
+<p>比如你有一个笔记本电脑，也想要通过picgo来上传图片，只需要按照教程来（仓库如果已经建了img-bed就不需要建一个新的），在笔记本电脑上下载PicGo，按照步骤进行PicGo配置，获取一个新的token授权，typora的设置也如出一辙。</p>
+<h2 id="总结">总结</h2>
+<p>本文介绍了一个稳定可控的个人博客图床搭建方案，使用 GitHub 仓库存储图片，PicGo 管理上传，CDN 加速访问，实现跨域友好、快速加载、长期可维护。</p>
+<p>笔者在使用ai的过程中，一开始ai告诉我的方案是picgo+github+cloudfare方案，但是捣鼓了很久都没有搞出来，其中有一步我按照他说的来配置，是这样的：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210400758.png" alt="image-20260305210400758"></p>
+<p>搞了很久，我都怀疑是这里出了问题，可是ai是这样的，你不去怀疑他，他死活不知道自己错了这里，直到我指出他这里可能有问题，他跟我说，这是不能用的！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260305210837538.png" alt="image-20260305210837538"></p>
+<p>算是把这一步推倒重来了，气死我了！</p>
+<p>AI 可以帮你生成脚本和优化步骤，但是会出现很致命的错误，不能代替的，是你的思考。操作细节仍需我们去把控。</p>
+<p>以后可以去做的：</p>
+<p>1.让ai互相挑刺，这样可以保证不要被ai的一面之词蒙蔽，要做一个擦亮眼睛的皇上，ai只不过是帮你出谋划策的太监。</p>
+<p>2.ai要用，但是不要滥用，像这样技术类的方案，google可以搜到很成熟的案例，这样可以少走很多弯路。</p>
+<p>3.不要高估ai的分析判断能力，有时候它自己都不知道自己在说什么，不要盲目相信ai</p>
+<p>4.对ai的提问要具体，当问题描述清楚时，AI 往往可以成为一个效率很高的技术助手</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.提供完整背景</span><br><span class="line">如何配置图床-&gt;我正在使用 GitHub 仓库作为图床，仓库名为 img-bed，使用 PicGo 上传图片，通过 jsDelivr 作为 CDN，现在访问图片时返回 404，这种情况可能是什么原因</span><br><span class="line"></span><br><span class="line">2.提供具体的路径或代码</span><br><span class="line">网页404-&gt;我访问的地址是</span><br><span class="line">https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img/tc2.png</span><br><span class="line">但是浏览器返回 404 GitHub 仓库路径是img-bed/img/tc2.png</span><br><span class="line"></span><br><span class="line">3.描述已经尝试过的步骤</span><br><span class="line"></span><br><span class="line">4.一次只问一个核心问题</span><br></pre></td></tr></table></figure>
+<p>使用ai是一门学问，用的好是好，用的不好，却是无益的</p>
+]]></content>
+      <categories>
+        <category>教程</category>
       </categories>
   </entry>
 </search>
