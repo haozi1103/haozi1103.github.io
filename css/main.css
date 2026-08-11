@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #815977;
+  background: #ff36e8;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2020,6 +2020,13 @@ pre .javascript .function {
 }
 #qr p {
   text-align: center;
+}
+.post-copyright {
+  background: var(--card-bg-color);
+  border-left: 3px solid #ff2a2a;
+  list-style: none;
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
 }
 .category-all-page .category-all-title {
   text-align: center;
@@ -2840,7 +2847,7 @@ figure.highlight,
 }
 /* 5. Typography Scale (Title & Headings) */
 .post-title {
-  font-size: 2.1em !important;
+  font-size: 1.9em !important;
   font-weight: 550 !important;
 }
 .post-body h1 {
