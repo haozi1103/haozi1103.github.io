@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #2eff3d;
+  background: #468814;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2792,11 +2792,11 @@ nav.pagination a.extend:active {
 }
 /* Text selection color */
 ::selection {
-  background: rgba(40,212,160,0.15) !important;
+  background-color: rgba(40,212,160,0.15) !important;
   color: #fff !important;
 }
 ::-moz-selection {
-  background: rgba(40,212,160,0.15) !important;
+  background-color: rgba(40,212,160,0.15) !important;
   color: #fff !important;
 }
 /* =========================================
