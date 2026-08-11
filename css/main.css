@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff36e8;
+  background: #7e09d2;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2653,17 +2653,21 @@ kbd,
   gap: 6px;
 }
 .sidebar-category-list {
+  margin: 0;
+  padding: 0;
+}
+.sidebar-category-list .sidebar-cat-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.sidebar-category-item {
+.sidebar-category-list .sidebar-cat-list-item {
   margin-bottom: 4px;
 }
-.sidebar-category-item:last-child {
+.sidebar-category-list .sidebar-cat-list-item:last-child {
   margin-bottom: 0;
 }
-.sidebar-category-item a {
+.sidebar-category-list .sidebar-cat-list-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2674,19 +2678,21 @@ kbd,
   transition: all 0.2s ease;
   border-bottom: none !important;
 }
-.sidebar-category-item a:hover {
+.sidebar-category-list .sidebar-cat-list-link:hover {
   background: rgba(40,212,160,0.15);
   color: #fff !important;
   transform: translateX(2px);
 }
-.sidebar-category-item .cat-count {
+.sidebar-category-list .sidebar-cat-list-count {
   background: rgba(255,255,255,0.08);
   color: #888;
   font-size: 10px;
   padding: 1px 6px;
   border-radius: 10px;
+  margin-left: auto;
 }
-.sidebar-category-item a:hover .cat-count {
+.sidebar-category-list .sidebar-cat-list-link:hover .sidebar-cat-list-count,
+.sidebar-category-list .sidebar-cat-list-item:hover .sidebar-cat-list-count {
   background: #28d4a0;
   color: #fff;
 }
