@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="无光猫超密限制下，老毛子 K2 配置 IPv6 的踩坑过程：实现公网 IPv6 与 Tailscale P2P 直连后，因入站失败与双前缀异常，最终转为 AP 模式并用 Tailscale 兜底远程访问。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="老毛子 Padavan 路由器 IPv6 踩坑全记录与 Tailscale 直连优化">
+<meta property="og:url" content="http://haozi.space/2026/08/13/%E8%80%81%E6%AF%9B%E5%AD%90%20Padavan%20%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%20IPv6%20%E8%B8%A9%E5%9D%91%E5%85%A8%E8%AE%B0%E5%BD%95%E4%B8%8E%20Tailscale%20%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="无光猫超密限制下，老毛子 K2 配置 IPv6 的踩坑过程：实现公网 IPv6 与 Tailscale P2P 直连后，因入站失败与双前缀异常，最终转为 AP 模式并用 Tailscale 兜底远程访问。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143752454.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142457841.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142517378.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813161542593.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143124696.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142714657.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813172115230.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142752747.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813160750675.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142854749.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142911811.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143124696.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260815173551495.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260815175357538.png">
+<meta property="article:published_time" content="2026-08-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-16T08:32:58.954Z">
+<meta property="article:author" content="haozi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143752454.png">
+
+<link rel="canonical" href="http://haozi.space/2026/08/13/%E8%80%81%E6%AF%9B%E5%AD%90%20Padavan%20%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%20IPv6%20%E8%B8%A9%E5%9D%91%E5%85%A8%E8%AE%B0%E5%BD%95%E4%B8%8E%20Tailscale%20%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
+
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
+  }
+});
+</script>
+
+  <title>老毛子 Padavan 路由器 IPv6 踩坑全记录与 Tailscale 直连优化 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="far fa-window-maximize fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="far fa-calendar-alt fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="far fa-folder-open fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="far fa-keyboard fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/08/13/%E8%80%81%E6%AF%9B%E5%AD%90%20Padavan%20%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%20IPv6%20%E8%B8%A9%E5%9D%91%E5%85%A8%E8%AE%B0%E5%BD%95%E4%B8%8E%20Tailscale%20%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          老毛子 Padavan 路由器 IPv6 踩坑全记录与 Tailscale 直连优化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-08-13 00:00:00" itemprop="dateCreated datePublished" datetime="2026-08-13T00:00:00+08:00">2026-08-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-16 16:32:58" itemprop="dateModified" datetime="2026-08-16T16:32:58+08:00">2026-08-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">工程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">无光猫超密限制下，老毛子 K2 配置 IPv6 的踩坑过程：实现公网 IPv6 与 Tailscale P2P 直连后，因入站失败与双前缀异常，最终转为 AP 模式并用 Tailscale 兜底远程访问。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在上篇文章 <a href="/2026/08/09/win11-ipv6-npm/" title="基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露">基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露</a> 中，我们讨论了在主路由器能够进行 PPPoE 拨号的理想环境下部署 HomeLab 的全流程。然而在现实的复杂网络中，很多朋友（包括我自己）常会遇到更为棘手的客观限制——没有光猫的超级管理员密码，光猫保持默认路由模式，而自己折腾的路由器（如刷了老毛子 Padavan 固件的斐讯 K2 ）只能充当<strong>二级路由</strong>。</p>
+<p>本文并不是一次 IPv6 配置失败后的修复，而是在已经实现公网 IPv6 获取和 Tailscale P2P 直连之后，对家庭网络结构进行重新优化的一次排查记录。</p>
+<p>在江西移动宽带 + 老毛子 K2 二级路由环境下，我先是成功拿到了原生公网 IPv6 出口，并实现了 Tailscale P2P 直连——然而长期使用下来，稳定性和公网入站能力却始终不尽如人意：ddns-go 一直能拿到 IPv6 地址，却无法与 <code>api.cloudflare.com</code> 正常通信、域名记录迟迟更新不了；Tailscale 打洞时好时坏，失败时流量被迫退回位于海外的高延迟 DERP 中转节点（如 <code>sfo</code> 旧金山，延迟高达 400~500ms）。本文将完整还原这段“成功后继续踩坑、最终重构家庭网络结构”的排查全过程。</p>
+<blockquote>
+<p><strong>背景与诉求</strong>：没有光猫超级管理员密码，光猫保持默认路由模式。在不修改光猫模式的前提下，让挂载在老毛子 K2 下的 Windows 11 主机获得可用的公网 IPv6，并保证远程访问的长期稳定。</p>
+</blockquote>
+<hr>
+<h1>排查时间线总览</h1>
+<p>先给出本次排查的完整时间线，方便读者把握全文脉络：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">尝试二级路由方案</span><br><span class="line">        ↓</span><br><span class="line">成功获取公网 IPv6</span><br><span class="line">        ↓</span><br><span class="line">Tailscale 成功 IPv6 P2P 直连</span><br><span class="line">        ↓</span><br><span class="line">长期使用发现稳定性不足</span><br><span class="line">        ↓</span><br><span class="line">发现 Windows 存在两个 IPv6 前缀</span><br><span class="line">        ↓</span><br><span class="line">当时无法解释来源</span><br><span class="line">        ↓</span><br><span class="line">偶然连接移动光猫 CMCC WiFi</span><br><span class="line">        ↓</span><br><span class="line">发现光猫与老毛子分别产生 IPv6 前缀</span><br><span class="line">        ↓</span><br><span class="line">重新理解家庭 IPv6 结构</span><br><span class="line">        ↓</span><br><span class="line">调整为 AP 模式</span><br><span class="line">        ↓</span><br><span class="line">Tailscale 作为远程访问 fallback</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这不是一条“失败 → 修复”的路径，而是一条“跑通 → 发现问题 → 认知升级 → 架构降维”的路径。下文按五个阶段依次展开。</p>
+</blockquote>
+<hr>
+<h1>第一阶段：二级路由 IPv6 实验</h1>
+<h2 id="初始方案">初始方案</h2>
+<p>初始方案下，老毛子 K2 作为 IPv6 二级路由。<br>
+在重构之前，我的网络采用二级路由方案，拓扑与流量走向如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">江西移动光猫</span><br><span class="line">(路由模式 / IPv6 RA 广播)</span><br><span class="line">       │</span><br><span class="line">       ▼</span><br><span class="line">老毛子 Padavan K2</span><br><span class="line">(IPv6 二级路由 / Stateless Native)</span><br><span class="line">       │</span><br><span class="line">       ▼</span><br><span class="line">Windows HomeLab 与终端设备</span><br></pre></td></tr></table></figure>
+<p>这个初始方案的目标有三个：</p>
+<ul>
+<li>获取公网 IPv6 地址</li>
+<li>支持 Tailscale IPv6 打洞</li>
+<li>尝试公网访问家庭服务</li>
+</ul>
+<p>第一阶段的具体排查路线：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">升级老毛子固件 ──► 开启 Stateless Native ──► 放行防火墙 ──► 排查 Windows 网卡与更换 DNS ──► 成功获取公网 IPv6 ──► Tailscale P2P 直连</span><br></pre></td></tr></table></figure>
+<h2 id="斐讯-K2-设备说明">斐讯 K2 设备说明</h2>
+<p>刷机之前，先确认手里的硬件版本。斐讯 K2 的平台代号是 <strong>PSG1218</strong>，市面上存在两个内存版本：</p>
+<ul>
+<li><strong>64M 内存版本</strong></li>
+<li><strong>256M 内存版本</strong></li>
+</ul>
+<p>固件兼容性需要与具体硬件版本核对，刷错固件轻则功能缺失、重则变砖。此外，长期运行 Padavan、插件和各种网络服务时，内存差异会直接影响稳定性表现，选购和刷机时需要格外注意。</p>
+<h2 id="刷固件与后台-IPv6-配置">刷固件与后台 IPv6 配置</h2>
+<blockquote>
+<p><strong>说明</strong>：以下配置记录的是排查过程中的实验方案，并非最终的家庭网络结构。这一阶段的目标是验证老毛子作为二级路由时能否传递公网 IPv6。</p>
+</blockquote>
+<p>首先将老毛子 Padavan 固件更新至较新版本（替换掉了 2017 年的遗留老固件）。<br>
+前往老毛子Padavan固件的下载地址：<a target="_blank" rel="noopener" href="https://opt.cn2qq.com/padavan/">Padavan</a>，找到斐讯K2路由器可以使用的最新固件版本进行更新</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143752454.png" alt="13IPv6.png|569"></p>
+<p>进入老毛子后台（<code>192.168.123.1</code>），在 <strong>高级设置 → 外部网络 (WAN) → IPv6 设置</strong>中做如下调整：</p>
+<ol>
+<li>IPv6 服务连接类型：选择 <strong>Stateless Native / DHCPv6</strong> 模式。</li>
+<li>关闭路由内置的一系列 IPv6 防火墙阻拦规则。</li>
+<li>关闭 NAPT66 服务、IPv6广播中继服务。</li>
+</ol>
+<p>左边是第一次尝试的路由配置，右边是第二次尝试的路由配置（均为二级路由实验阶段截图）。<br>
+相比之下，第二次配置将路由器 WAN/LAN 的 DNS 均指引至阿里云公共 DNS（<code>2400:3200:baba::1</code> 和 <code>2400:3200::1</code>），并将 <code>启用 LAN DHCPv6 服务器</code> 切换为 Stateless 模式，成功让下级设备打通了 IPv6。<br>
+结果是：第一次的路由配置无法正常使用 IPv6 进行上网，第二次的路由配置可以获得公网的 IPv6。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142457841.png" alt="1IPv6.png|530"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142517378.png" alt="3IPv6.png|525"></p>
+<p>这里还踩过一个典型的坑：曾尝试开启 <strong>NAPT66</strong>，结果它把公网 IPv6 强行转换成了内网私有 IPv6。IPv6 的本质是端到端直连，开启 NAPT66 属于典型的“画蛇添足”。（在最终 AP 模式下，K2 不再承担 IPv6 出口职责，因此 NAPT66、防火墙转发等功能也不再成为关键因素。）</p>
+<h2 id="Windows-网卡排查">Windows 网卡排查</h2>
+<p>在完成路由器设置后，Windows 依然打不通 <code>curl.exe -6 https://api64.ipify.org</code>。在 PowerShell 中运行以下诊断命令查看网卡状态：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-NetIPInterface</span> <span class="literal">-AddressFamily</span> IPv6</span><br></pre></td></tr></table></figure>
+<p>终端回显结果如下：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813161542593.png" alt="14IPv6.png|580"></p>
+<p>再使用 <code>ipconfig</code> 查看网卡的具体配置：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143124696.png" alt="4IPv6.png|578"></p>
+<blockquote>
+<p><strong>延伸阅读</strong>：本文主要针对 IPv6 与 Tailscale 相关的特定诊断命令进行排查。如果你需要更全面地排查 Windows / Linux 环境下的网卡路由、DNS 污染及端口连通性，可以参考单独整理的：<a href="/2026/08/13/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E5%91%BD%E4%BB%A4%E6%B8%85%E5%8D%95/" title="家庭服务器网络诊断命令清单">家庭服务器网络诊断命令清单</a> 。</p>
+</blockquote>
+<h2 id="解决旧-DNS-缓存与地址超时">解决旧 DNS 缓存与地址超时</h2>
+<p>即使改了路由器 DNS，如果 Windows 本地网卡先前<strong>手动指定过 IPv6 DNS</strong>，依然会因为配置冲突或保留无效 DNS 而导致域名 AAAA 解析全部超时。在 PowerShell 中测试解析：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup <span class="literal">-type</span>=AAAA api64.ipify.org</span><br></pre></td></tr></table></figure>
+<p>终端输出超时异常：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142714657.png" alt="6IPv6.png"></p>
+<p>排查时发现，我此前的确在 Windows 网卡属性中手动指定过固定 DNS 地址，与老毛子路由器通过 RA/DHCPv6 下发给网卡的 DNS 发生了冲突。将 Windows 本地的 IPv6 DNS 修改为 <strong>DHCP 自动获取</strong>：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813172115230.png" alt="5IPv6.png|561"></p>
+<p>并清理缓存：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /flushdns</span><br></pre></td></tr></table></figure>
+<p>确认 Windows 改为自动获取并生效后，执行公网路由追踪命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tracert <span class="literal">-6</span> <span class="number">2606</span>:<span class="number">4700</span>:<span class="number">4700</span>::<span class="number">1111</span></span><br></pre></td></tr></table></figure>
+<p>发现打通外网，终端回显完整的跳跃路径：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142752747.png" alt="7IPv6.png|585"></p>
+<h2 id="验证-IPv6-出站">验证 IPv6 出站</h2>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl.exe <span class="literal">-6</span> https://api64.ipify.org</span><br></pre></td></tr></table></figure>
+<p>可以正常返回公网 IPv6 地址，说明设备具备公网 IPv6 出口：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813160750675.png" alt="10IPv6.png"></p>
+<h2 id="Tailscale-P2P-验证成功">Tailscale P2P 验证成功</h2>
+<p>实验初期运行 <code>tailscale netcheck</code> 时一直提示 <code>IPv6: no, but OS has support</code>——网卡拿到了地址，却无法真正连接外网 IPv6。修复之后，用以下命令做验证：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tailscale netcheck</span><br><span class="line">tailscale ping iphone<span class="literal">-14-pro-max</span></span><br></pre></td></tr></table></figure>
+<p><code>tailscale netcheck</code> 的输出里，<code>IPv6: no</code> 终于变成了 <code>IPv6: yes</code>：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142854749.png" alt="11IPv6.png|566"></p>
+<p>再用手机（切换为中国电信 5G 移动网络，关闭 Wi-Fi）做打洞测试，成功实现了电信 5G ↔ 移动宽带下的 <strong>原生 IPv6 端到端 P2P 直连</strong>，摆脱了原本高达 400~500ms 的美国 <code>sfo</code> DERP 转发节点 [注1]：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142911811.png" alt="12IPv6.png|588"></p>
+<p>以上流程打通了 IPv6 出站与 P2P 直连——但正如时间线所示，这只是故事的上半场：长期使用中打洞频繁失败，稳定性存疑。接下来是成功之后暴露的问题。</p>
+<hr>
+<h1>第二阶段：成功之后暴露的问题</h1>
+<blockquote>
+<p>第一阶段的方案，全部推倒重来！</p>
+</blockquote>
+<p>实验阶段的成果并不是一劳永逸的。IPv6 基本功能已经实现，但长期测试发现，不同访问场景的表现各不相同——把连通性拆成三个层级来看，结论完全不同：</p>
+<ul>
+<li>第一层，IPv6 出站：成功（第一阶段已验证）；</li>
+<li>第二层，Tailscale P2P：能建立直连，但长期打洞不稳定；</li>
+<li>第三层，IPv6 原生入站：失败。</li>
+</ul>
+<p>下面分别记录这些问题。</p>
+<h2 id="IPv6-原生入站失败">IPv6 原生入站失败</h2>
+<p>用手机 5G 流量直接访问 <code>http://[IPv6 地址]:指定端口</code>，发现无法访问家庭服务。<br>
+<strong>获取公网 IPv6 地址，并不等于拥有完整的 IPv6 入站能力。</strong></p>
+<h2 id="DDNS-更新与打洞不稳定">DDNS 更新与打洞不稳定</h2>
+<ul>
+<li><strong>ddns-go</strong>：一直能获取到 IPv6 地址，但无法与 <code>api.cloudflare.com</code> 正常通信，域名记录更新失败；</li>
+<li><strong>Tailscale</strong>：打洞反复失败，流量退回高延迟的 <code>sfo</code> DERP 中转节点。</li>
+</ul>
+<h2 id="双前缀异常">双前缀异常</h2>
+<p>在 Windows 排查阶段还记录到一个当时无法解释的现象：WLAN 无线网卡处于 Connected 激活状态，而在第一阶段的实验记录中曾经出现过两个不同的 IPv6 前缀：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143124696.png" alt="4IPv6.png|578"></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2409:8a38:8430:xxxx</span><br><span class="line">2409:8a38:8431:xxxx</span><br></pre></td></tr></table></figure>
+<p>但在当时的测试阶段，我并没有意识到这两个前缀分别对应什么网络环境，也无法确定具体来源，只能先列出几个猜想：</p>
+<ul>
+<li>是否运营商为家庭宽带分配了多个前缀？</li>
+<li>是否多网卡同时接入（WLAN 与以太网）导致？</li>
+<li>是否老毛子路由器产生了新的 IPv6 网络？</li>
+</ul>
+<p><strong>当时的处理方式</strong>：重新断开并重新连接主上网网卡，清理旧的前缀绑定，确保网络出口路径单一清晰。但这只是暂时缓解，并没有真正回答“第二个前缀从哪来”的问题——谜底直到后文才被意外揭开。</p>
+<hr>
+<h1>第三阶段：发现 IPv6 真实拓扑</h1>
+<h2 id="意外发现">意外发现</h2>
+<p>双前缀的谜底，在一次偶然操作中被揭开。</p>
+<p>后续某次测试中，我无意连接到了江西移动光猫自带的 WiFi（SSID 类似 <code>CMCC-xxxx</code>）。查看 IPv6 地址后，发现它使用的前缀与之前老毛子网络环境下记录的 IPv6 并不一致：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">光猫 WiFi 下：2409:8a38:8430:xxxx</span><br><span class="line">老毛子 WiFi 下：2409:8a38:8431:xxxx</span><br></pre></td></tr></table></figure>
+<p>回头重新整理之前的测试记录，才逐渐确认：之前出现的两个 IPv6 前缀，<strong>很可能分别对应光猫 WiFi 与老毛子 WiFi 这两套 IPv6 网络环境</strong>——两个网络出口各自产生了一套前缀，地址分配路径完全不同。</p>
+<p>这也解释了长期使用中“时通时不通”的不稳定现象：终端同时连接两个网络时，可能拿到两套前缀，路由选择变得不可预测。</p>
+<hr>
+<h1>第四阶段：降低架构复杂度</h1>
+<h2 id="选择-AP-模式">选择 AP 模式</h2>
+<p>在理清双前缀的来源、重新理解家庭 IPv6 结构后，我决定不再继续优化二级 IPv6 路由，而是把老毛子 K2 转为 AP 模式：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260815173551495.png" alt="image.png|585"></p>
+<p>切换到 AP 模式后，需要先为老毛子设置一个固定的内网 IP——否则地址由光猫动态分配，后台管理入口随时可能漂移。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260815175357538.png" alt="image.png|598"></p>
+<blockquote>
+<p>需要注意的是：如果老毛子的 NAT、防火墙、UPnP、DHCP 服务你是必须需要使用的话，不建议更改为 AP 模式。</p>
+</blockquote>
+<p>之所以选择 AP 模式，不是因为这些：</p>
+<ul>
+<li>K2 性能不足</li>
+<li>Padavan 固件不好</li>
+</ul>
+<p>而是因为当前环境下存在太多不可控变量：</p>
+<ul>
+<li>光猫无法获取超级管理员权限，内部配置完全是黑盒</li>
+<li>无法确认移动光猫的 IPv6 防火墙策略</li>
+<li>老毛子二级路由的 IPv6 防火墙状态不透明</li>
+<li>IPv6 链路存在多个控制节点（光猫、老毛子各管一段）</li>
+</ul>
+<p>在这样的前提下继续调参，等于在多个黑盒之上做调试。而 AP 模式可以一次性地：</p>
+<ul>
+<li>减少 RA 广播来源（链路中只剩光猫一个）</li>
+<li>消除 IPv6 默认路由竞争</li>
+<li>减少 IPv6 防火墙节点（链路中只剩光猫一个控制点）</li>
+<li>降低地址分配复杂度（IPv6 前缀只有一个来源）</li>
+</ul>
+<p>所以，AP 模式的意义不是“解决 IPv6”——IPv6 出站与 P2P 打洞在实验阶段早就通了——而是<strong>降低 IPv6 架构复杂度</strong>。在无法控制运营商光猫配置时，减少 IPv6 中间节点比继续复杂调参更加可靠。</p>
+<h2 id="光猫负责-IPv6，K2-转为-AP-模式">光猫负责 IPv6，K2 转为 AP 模式</h2>
+<p>经过这一轮排查与架构降维，最终的网络结构为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">江西移动光猫</span><br><span class="line">(IPv6 出口 / RA 广播)</span><br><span class="line">       │</span><br><span class="line">       ▼</span><br><span class="line">老毛子 K2</span><br><span class="line">(AP 模式 / WiFi)</span><br><span class="line">       │</span><br><span class="line">       ▼</span><br><span class="line">终端设备</span><br></pre></td></tr></table></figure>
+<h2 id="一个现象：Windows-保留旧-IPv6-地址">一个现象：Windows 保留旧 IPv6 地址</h2>
+<p>在调整为 AP 模式、确认链路中只剩光猫一个 IPv6 出口后，继续测试 IPv6 状态时又发现了一个新现象：<strong>电脑长时间不关机、持续连接老毛子 K2 的 WiFi，第二天查看 <code>ipconfig</code> 时，发现存在两个 IPv6 地址</strong>。</p>
+<p>现象：</p>
+<ul>
+<li>其中一个 IPv6 地址无法进行公网访问；</li>
+<li>它不是临时 IPv6 地址（RFC 4941 隐私扩展地址）；</li>
+<li>看起来像前一天网络环境留下的旧地址。</li>
+</ul>
+<p>进一步测试：</p>
+<ol>
+<li>切换连接江西移动光猫自带 WiFi（<code>CMCC-xxxx</code>），查看 IPv6：只剩一个 IPv6 地址。</li>
+<li>再重新连接老毛子 K2 WiFi：IPv6 地址恢复正常，只剩一个当前网络使用的 IPv6 地址。</li>
+</ol>
+<p>由此推测：</p>
+<blockquote>
+<p>该现象更可能是 Windows 在网络切换过程中保留了旧 IPv6 地址，而不是当前网络同时存在两个 IPv6 出口。</p>
+</blockquote>
+<p>从机制上看，IPv6 地址不一定会随网络切换立即消失：地址存在生命周期，系统可能暂时保留旧地址——旧地址虽然仍显示在网卡信息中，但已经无法作为有效的公网地址使用。</p>
+<p>至于这与第二阶段记录的&quot;双前缀异常&quot;是否同源，目前无法下结论：当时观测到的两个前缀，在第三阶段被推断为光猫与老毛子两套网络环境各自产生；但当时的测试记录并不完整，无法排除其中同样混有旧地址残留的可能。反之，本次现象发生在单一网络环境下，也无法据此断言它与之前的异常无关。二者表面相似、成因未明，本文选择分开记录、不做归并，留待更严谨的对照测试来确认。</p>
+<p><strong>排查意义</strong>：这个现象提醒，在 IPv6 排查过程中，不能仅根据 <code>ipconfig</code> 中出现多个 IPv6 地址就直接判断存在多个 IPv6 网络来源，需要进一步结合以下信息综合判断：</p>
+<ul>
+<li>当前连接的 WiFi 网络；</li>
+<li>IPv6 地址是否可达（<code>curl.exe -6 https://api64.ipify.org</code>）；</li>
+<li>默认路由（<code>Get-NetRoute -AddressFamily IPv6</code>）；<br>
+jj- 地址有效状态（<code>Get-NetIPAddress</code> 中 State 为 Preferred 还是 Deprecated）；</li>
+<li>切换网络后的变化（断开重连后旧地址是否消失）。</li>
+</ul>
+<p>在 AP 模式下，链路中只有一个前缀来源，&quot;出现多个 IPv6 地址&quot;更大概率是地址保留残留，而不是多了一个 IPv6 出口——不必因此再开启一轮&quot;双网络来源&quot;排查。</p>
+<hr>
+<h1>第五阶段：Tailscale fallback 方案</h1>
+<p>前两个阶段的记录已经说明了问题：IPv6 出站稳定可用，P2P 打洞能建立直连但长期不稳定，原生入站不可控。在这样的环境下保证远程访问，需要一个<strong>不依赖 IPv6 入站开放</strong>的方案——这正是 Tailscale 最终被选为 fallback 的原因：出站可达即可建立连接，打洞成功走 P2P 直连，失败则退回 DERP 中转，访问通道始终存在。</p>
+<p>由此，两篇文章构成了一个完整的系列：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">上一篇：理想环境（主路由可 PPPoE 拨号）下的原生 IPv6 公网服务暴露</span><br><span class="line">本文：运营商光猫不可控环境下的 IPv6 优化 与 Tailscale fallback</span><br></pre></td></tr></table></figure>
+<hr>
+<h1>整体架构方案总结</h1>
+<p>从“二级路由跑通 IPv6”到“AP 模式降低复杂度”，这轮重构最终形成的家庭网络结构是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">江西移动光猫</span><br><span class="line">(IPv6 出口 / RA 广播 / WiFi)</span><br><span class="line">       │</span><br><span class="line">       ▼</span><br><span class="line">老毛子 K2</span><br><span class="line">(AP 模式 / WiFi)</span><br><span class="line">       │</span><br><span class="line">       ▼</span><br><span class="line">Windows HomeLab 与终端设备</span><br></pre></td></tr></table></figure>
+<p>在<strong>不改动光猫桥接、不获取光猫超密</strong>的前提下，远程访问由 Tailscale 兜底：能打洞时 P2P 直连，打洞失败时退回 DERP 中转——无论如何，家中的服务始终可达。</p>
+<p>回头看这轮排查，有三条经验值得记住：</p>
+<ol>
+<li><strong>获取公网 IPv6 地址，不代表拥有完整的 IPv6 入站能力。</strong> 出站、P2P 打洞、原生入站是三个层级，需要分别验证，任何一层成功都不等于全部成功。</li>
+<li><strong>在无法控制运营商光猫配置时，减少 IPv6 中间节点比继续复杂调参更加可靠。</strong> 光猫是黑盒，就让链路里只留它一个控制点。</li>
+<li><strong>Tailscale 不只是穿透工具，也可以作为家庭 IPv6 服务暴露失败时的可靠 fallback。</strong> 当入站不可控时，把远程访问交给 Tailscale 兜底，比持续和光猫搏斗更省心。</li>
+</ol>
+<p>如果还要复用这套排查路径，两个实操细节值得记下：</p>
+<ul>
+<li><strong>IPv6 能力分层验证</strong>：出站（<code>curl -6</code>）、P2P 打洞（<code>tailscale netcheck</code> / <code>tailscale ping</code>）、原生入站分别验证——本文的结果是前两层成功、入站失败。</li>
+<li><strong>刷新 DNS 缓存</strong>：修改路由配置后及时在 Windows 执行 <code>ipconfig /flushdns</code>，否则旧的 DNS 租约可能让 AAAA 解析持续超时。</li>
+</ul>
+<hr>
+<h1>参考文章</h1>
+<a href="/2026/08/09/win11-ipv6-npm/" title="基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露">基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露</a>
+<p><a target="_blank" rel="noopener" href="https://tailscale.com/kb/1232/derp-servers">Tailscale 官方文档 - DERP Servers</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/chongshengB/rt-n56u">Padavan 老毛子固件 IPv6 配置指南</a><br>
+<a target="_blank" rel="noopener" href="https://www.chinadsl.net/thread-169942-1-1.html">h2-3 新版本开telnet的有会的吗？『 光猫FTTx技术交流区 』</a><br>
+<a target="_blank" rel="noopener" href="https://post.smzdm.com/p/a4pkngvl/?sort_tab=hot/">运营商不给公网IP，外网访问成奢望？IPv6了解一下！</a></p>
+<hr>
+<p><strong>注1：为什么在 Tailscale 中原生 IPv6 打洞比 DERP 快这么多？</strong><br>
+DERP (Designated Encrypted Relay for Packets) 是 Tailscale 的中继节点。当通信双方均处于复杂的 NAT 后且缺乏公网 IPv4/v6 时，流量必须绕道公网中继服务器传输；而一旦双方拥有公网 IPv6，Tailscale 即可直接基于 UDP 端口建立端到端的点对点加密通道，省去中间所有中转节点。</p>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 2rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="gruvbox"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+        <div class="reward-container">
+  <div>如果这篇文章对你有帮助，请我喝杯咖啡吧 ☕</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="haozi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="haozi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>haozi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://haozi.space/2026/08/13/%E8%80%81%E6%AF%9B%E5%AD%90%20Padavan%20%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%20IPv6%20%E8%B8%A9%E5%9D%91%E5%85%A8%E8%AE%B0%E5%BD%95%E4%B8%8E%20Tailscale%20%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96/" title="老毛子 Padavan 路由器 IPv6 踩坑全记录与 Tailscale 直连优化">http://haozi.space/2026/08/13/老毛子 Padavan 路由器配置 IPv6 踩坑全记录与 Tailscale 直连优化/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/09/win11-ipv6-npm/" rel="prev" title="基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露">
+      <i class="fa fa-chevron-left"></i> 基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/13/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E5%91%BD%E4%BB%A4%E6%B8%85%E5%8D%95/" rel="next" title="家庭服务器网络诊断命令清单">
+      家庭服务器网络诊断命令清单 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">排查时间线总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">第一阶段：二级路由 IPv6 实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E6%96%B9%E6%A1%88"><span class="nav-number">2.1.</span> <span class="nav-text">初始方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%90%E8%AE%AF-K2-%E8%AE%BE%E5%A4%87%E8%AF%B4%E6%98%8E"><span class="nav-number">2.2.</span> <span class="nav-text">斐讯 K2 设备说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B7%E5%9B%BA%E4%BB%B6%E4%B8%8E%E5%90%8E%E5%8F%B0-IPv6-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">刷固件与后台 IPv6 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-%E7%BD%91%E5%8D%A1%E6%8E%92%E6%9F%A5"><span class="nav-number">2.4.</span> <span class="nav-text">Windows 网卡排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%97%A7-DNS-%E7%BC%93%E5%AD%98%E4%B8%8E%E5%9C%B0%E5%9D%80%E8%B6%85%E6%97%B6"><span class="nav-number">2.5.</span> <span class="nav-text">解决旧 DNS 缓存与地址超时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81-IPv6-%E5%87%BA%E7%AB%99"><span class="nav-number">2.6.</span> <span class="nav-text">验证 IPv6 出站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tailscale-P2P-%E9%AA%8C%E8%AF%81%E6%88%90%E5%8A%9F"><span class="nav-number">2.7.</span> <span class="nav-text">Tailscale P2P 验证成功</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">第二阶段：成功之后暴露的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IPv6-%E5%8E%9F%E7%94%9F%E5%85%A5%E7%AB%99%E5%A4%B1%E8%B4%A5"><span class="nav-number">3.1.</span> <span class="nav-text">IPv6 原生入站失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDNS-%E6%9B%B4%E6%96%B0%E4%B8%8E%E6%89%93%E6%B4%9E%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="nav-number">3.2.</span> <span class="nav-text">DDNS 更新与打洞不稳定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%89%8D%E7%BC%80%E5%BC%82%E5%B8%B8"><span class="nav-number">3.3.</span> <span class="nav-text">双前缀异常</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">第三阶段：发现 IPv6 真实拓扑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%84%8F%E5%A4%96%E5%8F%91%E7%8E%B0"><span class="nav-number">4.1.</span> <span class="nav-text">意外发现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">第四阶段：降低架构复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9-AP-%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">选择 AP 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%89%E7%8C%AB%E8%B4%9F%E8%B4%A3-IPv6%EF%BC%8CK2-%E8%BD%AC%E4%B8%BA-AP-%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.2.</span> <span class="nav-text">光猫负责 IPv6，K2 转为 AP 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E7%8E%B0%E8%B1%A1%EF%BC%9AWindows-%E4%BF%9D%E7%95%99%E6%97%A7-IPv6-%E5%9C%B0%E5%9D%80"><span class="nav-number">5.3.</span> <span class="nav-text">一个现象：Windows 保留旧 IPv6 地址</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">第五阶段：Tailscale fallback 方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">整体架构方案总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="haozi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">折腾是理解世界的一种方式</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- Custom Sidebar Widgets -->
+<div class="sidebar-custom-wrap">
+
+  <!-- Category Quick Nav Widget -->
+    <div class="sidebar-custom-section">
+      <div class="sidebar-custom-title">
+        <i class="fas fa-code-branch"></i> 分类导航
+      </div>
+        <ul class="sidebar-category-list">
+      
+      
+        
+      
+      
+            
+      <li class="sidebar-category-item">
+        <a href="/categories/教程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-keyboard cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">18</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/生活/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="fas fa-coffee cat-icon"></i> 生活
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/工程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">10</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/影视/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/阅读/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-bookmark cat-icon"></i> 阅读
+          </span>
+          <span class="cat-count">4</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/软件小记/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-window-restore cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">2</span>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+</div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - Aesthetic Interactive Mouse (鼠鼠) -->
+<div id="pet-toggle" class="pet-toggle" title="点击召唤终端小鼠鼠">
+  <span class="pet-toggle-icon"><i class="fa fa-terminal"></i></span>
+  <span class="pet-toggle-label">PET</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet">
+  <div class="terminal-header">
+    <div class="terminal-dots">
+      <span class="terminal-dot red" id="pet-close-dot" title="关闭宠物"></span>
+      <span class="terminal-dot yellow" title="最小化"></span>
+      <span class="terminal-dot green" title="展开"></span>
+    </div>
+    <span class="terminal-title">haozi@blog:~</span>
+    <span class="terminal-close" id="pet-close" title="收起">&minus;</span>
+  </div>
+
+  <div class="terminal-body">
+    <!-- Heart & Status animation container -->
+    <div id="pet-hearts-container" class="pet-hearts-container"></div>
+
+    <!-- Centered Container for Perfectly Aligned Mouse -->
+    <div class="pet-ascii-wrap">
+      <span id="pet-status-badge" class="pet-status-badge"></span>
+      <pre id="pet-ascii" class="pet-ascii"></pre>
+    </div>
+
+    <!-- Interactive Buttons (Vector Line Icons) -->
+    <div class="pet-actions">
+      <button class="pet-btn" id="btn-pat" title="摸摸鼠鼠"><i class="fa fa-heart-o"></i> 抚摸</button>
+      <button class="pet-btn" id="btn-feed" title="喂食物"><i class="fa fa-coffee"></i> 投喂</button>
+      <button class="pet-btn" id="btn-sleep" title="小憩一会儿"><i class="fa fa-moon-o"></i> 睡觉</button>
+    </div>
+
+    <!-- Terminal Prompt Line -->
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  background: rgba(35, 35, 35, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.pet-toggle:hover {
+  transform: scale(1.12);
+  border-color: #7e8027;
+  box-shadow: 0 0 15px rgba(126, 128, 39, 0.6);
+}
+.pet-toggle-icon {
+  font-size: 16px;
+  line-height: 1;
+  color: #7e8027;
+}
+.pet-toggle-label {
+  color: #a4a638;
+  font-family: 'Consolas', monospace;
+  font-size: 8px;
+  font-weight: bold;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Terminal Window Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  width: 270px;
+  background: rgba(28, 28, 30, 0.94) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2);
+  z-index: 9999;
+  font-family: 'Consolas', 'Cascadia Code', 'Courier New', monospace;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.terminal-header {
+  background: rgba(40, 40, 43, 0.95);
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: move;
+  user-select: none;
+}
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+
+.terminal-title {
+  color: #88888d;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #fff;
+  background: rgba(232, 17, 35, 0.7);
+}
+
+.terminal-body {
+  position: relative;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Mouse ASCII Outer Centered Wrapper */
+.pet-ascii-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 4px 0 10px 0;
+}
+
+/* Fix ASCII Pre element alignment & line-height to connect tail & center feet */
+.pet-ascii {
+  display: inline-block !important;
+  text-align: left !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #b0b439 !important;
+  font-family: 'Consolas', 'Courier New', 'MS Gothic', monospace !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: pre !important;
+  user-select: none;
+  text-shadow: 0 0 8px rgba(126, 128, 39, 0.3);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Floating status emoji badge */
+.pet-status-badge {
+  position: absolute;
+  top: -8px;
+  right: 45px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.pet-status-badge.active {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Interactive Action Buttons */
+.pet-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  justify-content: center;
+}
+.pet-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ddd;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pet-btn:hover {
+  background: rgba(126, 128, 39, 0.3);
+  border-color: #7e8027;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.pet-btn:active {
+  transform: translateY(1px);
+}
+
+/* Terminal Input Prompt */
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #d1d1d6;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Floating Hearts Effect Container */
+.pet-hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.floating-heart {
+  position: absolute;
+  font-size: 14px;
+  animation: floatUp 1.2s ease-out forwards;
+  opacity: 0.9;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(80px) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px) scale(1.2);
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 230px;
+    right: 12px;
+    bottom: 70px;
+  }
+  .pet-toggle {
+    bottom: 15px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+  }
+  .pet-toggle-icon {
+    font-size: 14px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  // Connected tail \(  ) and right-shifted feet " " under belly
+  var petStates = {
+    idle: {
+      frames: [
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: ""
+    },
+    happy: {
+      frames: [
+        ["  C^プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C>プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-heart' style='color:#ff5f56;'></i>"
+    },
+    feed: {
+      frames: [
+        ["  C~プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  Cvプ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-coffee' style='color:#ffbd2e;'></i>"
+    },
+    sleep: {
+      frames: [
+        ["  C-プ°", " \\(uu)", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(..)", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-moon-o' style='color:#27c93f;'></i>"
+    }
+  };
+
+  var defaultMessages = [
+    "欢迎来到 Haozi's Blog！鼠鼠我呀~",
+    "git commit -m '投喂鼠鼠'",
+    "鼠鼠正在认真看博客...",
+    "折腾是理解世界的一种方式！",
+    "404: 奶酪未找到，急需投喂 🧀",
+    "while(true) { nap(); }",
+    "sudo belly_rub --user=visitor",
+    "编译中... 吱吱吱~ 100%"
+  ];
+
+  var currentState = 'idle';
+  var frameIndex = 0;
+  var msgIndex = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var badgeEl = document.getElementById('pet-status-badge');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var closeDot = document.getElementById('pet-close-dot');
+  var header = container.querySelector('.terminal-header');
+  var heartsContainer = document.getElementById('pet-hearts-container');
+  var isOpen = true;
+  var stateTimer = null;
+
+  function renderMouse() {
+    if (!isOpen) return;
+    var stateObj = petStates[currentState] || petStates.idle;
+    var frames = stateObj.frames;
+    petEl.textContent = frames[frameIndex % frames.length];
+    
+    if (stateObj.badge) {
+      badgeEl.innerHTML = stateObj.badge;
+      badgeEl.classList.add('active');
+    } else {
+      badgeEl.classList.remove('active');
+    }
+    frameIndex++;
+  }
+
+  function typewriter(text, speed) {
+    speed = speed || 40;
+    msgEl.textContent = '';
+    var i = 0;
+    var timer = setInterval(function() {
+      if (i < text.length) {
+        msgEl.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+  }
+
+  function spawnHearts(emoji) {
+    emoji = emoji || '❤️';
+    for (var i = 0; i < 3; i++) {
+      (function(delay) {
+        setTimeout(function() {
+          var heart = document.createElement('span');
+          heart.className = 'floating-heart';
+          heart.textContent = emoji;
+          heart.style.left = (35 + Math.random() * 30) + '%';
+          heartsContainer.appendChild(heart);
+          setTimeout(function() {
+            if (heart.parentNode) heart.parentNode.removeChild(heart);
+          }, 1200);
+        }, delay);
+      })(i * 200);
+    }
+  }
+
+  function setTemporaryState(state, message, emoji, duration) {
+    currentState = state;
+    frameIndex = 0;
+    renderMouse();
+    if (message) typewriter(message);
+    if (emoji) spawnHearts(emoji);
+
+    if (stateTimer) clearTimeout(stateTimer);
+    stateTimer = setTimeout(function() {
+      currentState = 'idle';
+      renderMouse();
+    }, duration || 4000);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    renderMouse();
+    typewriter(defaultMessages[0]);
+    try { localStorage.setItem('terminal-pet-closed', 'false'); } catch(e){}
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+    try { localStorage.setItem('terminal-pet-closed', 'true'); } catch(e){}
+  }
+
+  // Check initial state from localStorage
+  try {
+    if (localStorage.getItem('terminal-pet-closed') === 'true') {
+      closePet();
+    } else {
+      openPet();
+    }
+  } catch(e) {
+    openPet();
+  }
+
+  // Event Listeners
+  toggleBtn.addEventListener('click', openPet);
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+  if (closeDot) {
+    closeDot.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closePet();
+    });
+  }
+
+  // Action Buttons
+  var btnPat = document.getElementById('btn-pat');
+  var btnFeed = document.getElementById('btn-feed');
+  var btnSleep = document.getElementById('btn-sleep');
+
+  if (btnPat) {
+    btnPat.addEventListener('click', function() {
+      setTemporaryState('happy', '吱吱~ 被摸摸头很舒服！开心值+100', '❤️', 4000);
+    });
+  }
+  if (btnFeed) {
+    btnFeed.addEventListener('click', function() {
+      setTemporaryState('feed', '美味的奶酪！鼠鼠能量满格 🧀', '🧀', 4000);
+    });
+  }
+  if (btnSleep) {
+    btnSleep.addEventListener('click', function() {
+      setTemporaryState('sleep', '呼呼... 鼠鼠进入小憩模式 zZ', '💤', 5000);
+    });
+  }
+
+  // Click directly on ASCII Mouse
+  petEl.addEventListener('click', function() {
+    setTemporaryState('happy', '吱！你戳了戳鼠鼠~ 🐾', '✨', 3000);
+  });
+
+  // Animation Loop (Update mouse frame every 1.2s)
+  setInterval(renderMouse, 1200);
+
+  // Message Loop (Rotate default quotes every 6s if idle)
+  setInterval(function() {
+    if (!isOpen || currentState !== 'idle') return;
+    msgIndex = (msgIndex + 1) % defaultMessages.length;
+    typewriter(defaultMessages[msgIndex]);
+  }, 6000);
+
+  // Drag functionality for Terminal Header
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target === closeBtn || e.target === closeDot) return;
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  });
+})();
+</script>
+
+</body>
+</html>
