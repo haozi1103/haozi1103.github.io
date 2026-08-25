@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Windows 11 的 C 盘清理指南：先诊断后清理，覆盖存储感知、DISM 组件存储、休眠与页面文件、软件缓存、Docker vhdx 压缩和目录迁移，附维护节奏与避坑清单。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一份关于 Windows 11 电脑的 C 盘清理指南">
+<meta property="og:url" content="http://haozi.space/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E6%B1%87%E6%80%BB%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="Windows 11 的 C 盘清理指南：先诊断后清理，覆盖存储感知、DISM 组件存储、休眠与页面文件、软件缓存、Docker vhdx 压缩和目录迁移，附维护节奏与避坑清单。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824134503458.jpg">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824142908941.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260821133942227.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260821171026539.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121233957.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121300529.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260822234056527.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823172743262.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121354131.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121456215.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121334030.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121342077.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121407510.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121432434.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121445408.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121514584.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221414213.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221436241.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121612858.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221518887.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121726146.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121738201.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170220036.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094124908.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094133958.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094119322.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094143266.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094149992.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170237771.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823122129887.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823122153668.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823122140713.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823122205078.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170303036.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170313999.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170322835.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170328152.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221939804.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170420894.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824141953644.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824142125021.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823222141010.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823222149628.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121456215.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170621961.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170436120.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170535521.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170544492.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170558164.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170558163.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170558162.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170740759.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824132117603.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824132229992.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170344694.png">
+<meta property="article:published_time" content="2026-08-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-25T01:57:11.196Z">
+<meta property="article:author" content="haozi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824134503458.jpg">
+
+<link rel="canonical" href="http://haozi.space/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E6%B1%87%E6%80%BB%E6%8C%87%E5%8D%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
+
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
+  }
+});
+</script>
+
+  <title>一份关于 Windows 11 电脑的 C 盘清理指南 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="far fa-window-maximize fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="far fa-calendar-alt fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="far fa-folder-open fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="far fa-keyboard fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E6%B1%87%E6%80%BB%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一份关于 Windows 11 电脑的 C 盘清理指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-08-21 00:00:00" itemprop="dateCreated datePublished" datetime="2026-08-21T00:00:00+08:00">2026-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-25 09:57:11" itemprop="dateModified" datetime="2026-08-25T09:57:11+08:00">2026-08-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">工程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%B0%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">软件小记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">Windows 11 的 C 盘清理指南：先诊断后清理，覆盖存储感知、DISM 组件存储、休眠与页面文件、软件缓存、Docker vhdx 压缩和目录迁移，附维护节奏与避坑清单。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824134503458.jpg" alt="Gemini_Generated_Image_i0jeiqi0jeiqi0je.jpg|487"></p>
+<blockquote>
+<p>急着动手？直接看速查版：<a href="/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E9%80%9F%E6%9F%A5%E5%8D%A1/" title="电脑C盘清理速查卡">电脑C盘清理速查卡</a>，全部命令一条引用到位。</p>
+</blockquote>
+<blockquote>
+<p><strong>运行方式</strong>：本文所有 <code>PowerShell</code> 代码块均建议<strong>以管理员身份</strong>运行（Win + R 输入 Powershell）。设置类操作为图形界面，无需管理员。</p>
+</blockquote>
+<blockquote>
+<p><strong>难度标签</strong>：🟢 普通（人人可照做）｜🟡 进阶（需理解命令含义）｜🔴 高级（影响系统、谨慎操作）。</p>
+</blockquote>
+<blockquote>
+<p>一些更改同样适用于 D 盘 E 盘的清理</p>
+</blockquote>
+<h2 id="为什么要写这份指南">为什么要写这份指南?</h2>
+<p>网上的 C 盘清理视频和博客很多，但绝大多数是“通用教程”：把磁盘清理、存储感知、删 Temp 讲一遍就完事。它们有几个共同的问题：</p>
+<ul>
+<li><strong>不讲先诊断</strong>：每个人的 C 盘大头不一样，有人是 WinSxS 膨胀，有人是 Docker 虚拟磁盘，有人是微信缓存。不先找出大头就照着通用清单清，可能清了半天只释放几百 MB。</li>
+<li><strong>不敢给进阶操作</strong>：DISM、休眠文件、WSL 磁盘压缩这些真正能释放几个 GB 的操作，要么不讲，要么一笔带过，还经常不给完整的命令。</li>
+</ul>
+<p>针对我这台 Windows 11 + Docker Desktop（WSL2）机器，先诊断、后清理，每个操作给出可复制的命令和风险等级，最后用表格记录每次清理的实际效果，方便以后复查。</p>
+<p>来，我们先看看这次 C 盘清理的效果记录条形图：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824142908941.png" alt="效果记录条形图|573"></p>
+<blockquote>
+<p>注：微信文件迁移、压缩 docker_data.vhdx 的直接收益体现在 D 盘瘦身（微信存储路径本就设置在 D 盘），但对 C 盘而言收益效果一致，故计入图中。</p>
+</blockquote>
+<hr>
+<h2 id="第一步：先诊断，别急着清">第一步：先诊断，别急着清</h2>
+<p>网上教程最大的错误就是上来就清。正确顺序是先知道空间都去哪了。</p>
+<p>用 <a target="_blank" rel="noopener" href="https://diskanalyzer.com/download">WizTree</a>（免费、NTFS 扫描极快）扫一遍 C 盘，WizTree 相比于 Spaceniffer 来说，内存占用和扫描速度更快，我认为更适合作为 C 盘的诊断工具。</p>
+<p>WizTree 的安装：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260821133942227.png" alt="image.png|557"></p>
+<p>WizTree 的扫描结果：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260821171026539.png" alt="cpan2.png|559"></p>
+<p>重点看这几个区域：</p>
+<ul>
+<li>
+<p><code>C:\Windows\WinSxS</code> —— 系统组件存储，可能膨胀到 10~20 GB</p>
+</li>
+<li>
+<p><code>C:\Windows\SoftwareDistribution\Download</code> —— Windows 更新缓存</p>
+</li>
+<li>
+<p><code>C:\Users\&lt;用户名&gt;\AppData\Local</code> —— 各种软件缓存、Docker 的 vhdx 都在这里</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121233957.png" alt="cpan3.png|535"></p>
+<ul>
+<li><code>C:\hiberfil.sys</code>、<code>C:\pagefile.sys</code> —— 休眠文件与页面文件</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121300529.png" alt="cpan4.png|597"></p>
+<hr>
+<h2 id="第二步：系统级清理（官方支持清理区）">第二步：系统级清理（官方支持清理区）</h2>
+<p>这一层的操作全部是微软官方支持的方式，不碰系统关键文件。</p>
+<h3 id="🟢-1-存储感知">🟢 1. 存储感知</h3>
+<p>设置 → 系统 → 存储 → 存储感知，开启自动清理，并点击&quot;配置存储感知或立即运行&quot;，把临时文件保留时限设为 0 天，勾选&quot;删除我的应用未在使用的临时文件&quot;，然后点击&quot;立即清理&quot;。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260822234056527.png" alt="image.png|582"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823172743262.png" alt="cpan5.png|569"></p>
+<h3 id="🟢-2-磁盘清理老面板">🟢 2. 磁盘清理老面板</h3>
+<p>新版&quot;清理建议&quot;覆盖范围比老面板小，<code>windows.old</code>、还原点这些还得用老面板。</p>
+<p>磁盘清理前后对比：</p>
+<div class="mobile-image-row">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121354131.png">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121456215.png">
+</div>
+<p><code>Win + R</code> 输入 <code>cleanmgr</code>，选中 C 盘，点&quot;清理系统文件&quot;，</p>
+<div class="mobile-image-row">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121334030.png">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121342077.png">
+</div>
+<p>勾选：</p>
+<ul>
+<li><strong>Windows 更新清理</strong>（能释放几个 GB）</li>
+<li>以前的 Windows 安装（<code>windows.old</code>，<strong>需要注意的是：清完就退不回旧版本</strong>）</li>
+<li>临时文件、缩略图</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121407510.png" alt="cpan9.png|372"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121432434.png" alt="cpan10.png|528"></p>
+<p>等待磁盘清理完成即可：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121445408.png" alt="cpan11.png"></p>
+<h3 id="🟡-3-DISM-清理组件存储（WinSxS）">🟡 3. DISM 清理组件存储（WinSxS）</h3>
+<p>WinSxS 是系统更新组件的存储库，会保留旧版本以便回滚，长期不清理能膨胀到 10 GB 以上。</p>
+<blockquote>
+<p>注意：<strong>永远不要手动删 WinSxS 里的文件</strong>，必须用官方命令。</p>
+</blockquote>
+<p>先用管理员身份打开 PowerShell，分析能释放多少：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DISM /Online /Cleanup<span class="literal">-Image</span> /AnalyzeComponentStore</span><br></pre></td></tr></table></figure>
+<p>结果因人而异，就拿我的 Powershell 结果来看：如果可回收的程序包数目为 0 ，推荐使用组件存储清理为“否”，其实就没有必要继续清理。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121514584.png" alt="cpan13.png|543"></p>
+<p>但是如果输出里的“可回收的程序包数”不为零以及“推荐使用组件存储清理”，请执行标准清理：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DISM /Online /Cleanup<span class="literal">-Image</span> /StartComponentCleanup</span><br></pre></td></tr></table></figure>
+<p>如果还想更激进，加 <code>/ResetBase</code> 参数（会立即删除所有旧版组件，<strong>清理后将无法卸载已安装的系统更新</strong>）：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DISM /Online /Cleanup<span class="literal">-Image</span> /StartComponentCleanup /ResetBase</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：<code>/ResetBase</code> 适合已经确认系统稳定、希望释放更多空间的用户。它会删除旧版本组件，因此执行后无法卸载当前已经安装的 Windows 更新。在执行前，请你确认自己接受<code>不可卸载更新</code>这个后果。</p>
+</blockquote>
+<h3 id="🟢-4-清-Windows-更新缓存">🟢 4. 清 Windows 更新缓存</h3>
+<p>如果 <code>SoftwareDistribution\Download</code> 积压很多，先停止服务再删，避免文件被占用：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">net stop wuauserv</span><br><span class="line">net stop bits</span><br><span class="line"><span class="built_in">Remove-Item</span> C:\Windows\SoftwareDistribution\Download\* <span class="literal">-Recurse</span> <span class="literal">-Force</span></span><br><span class="line">net <span class="built_in">start</span> wuauserv</span><br><span class="line">net <span class="built_in">start</span> bits</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="第三步：系统文件（慎用区）">第三步：系统文件（慎用区）</h2>
+<p>这些操作会影响系统行为，看自己需求来，明确标注风险。</p>
+<h3 id="🟡-1-休眠文件-hiberfil-sys">🟡 1. 休眠文件 hiberfil.sys</h3>
+<p>关闭休眠的前后对比：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221414213.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221436241.png" alt="image.png"></p>
+<p>启动页面对比（左：未关闭休眠 右：关闭休眠）：</p>
+<div class="mobile-image-row">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121612858.png">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221518887.png">
+</div>
+<p>如果你从来不用&quot;休眠&quot;（注意不是&quot;睡眠&quot;[注1]），可以直接关掉：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powercfg /<span class="built_in">h</span> off</span><br></pre></td></tr></table></figure>
+<p>（修改之后如果想要回滚：）</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powercfg /<span class="built_in">h</span> on</span><br></pre></td></tr></table></figure>
+<p>想保留休眠但要精简（快速启动仍然可用，但是无法在任务栏使用“休眠”功能）：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powercfg /<span class="built_in">h</span> /<span class="built_in">type</span> reduced</span><br></pre></td></tr></table></figure>
+<p>（修改之后如果想要回滚：）</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powercfg /<span class="built_in">h</span> /<span class="built_in">type</span> full</span><br></pre></td></tr></table></figure>
+<h3 id="🟡-2-页面文件-pagefile-sys">🟡 2. 页面文件 pagefile.sys</h3>
+<p>虚拟内存，一般不建议关闭。如果 C 盘实在紧张，可以调整到合适的大小（具体调整道多大多小得看具体的自己设备），如果你的 D 盘是本地硬盘的话，也可以把它迁移到 D 盘：</p>
+<p><code>Win + R</code> 输入 <code>sysdm.cpl</code></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121726146.png" alt="cpan15.png"></p>
+<p>高级系统设置 → 性能&quot;设置&quot; → 高级 → 虚拟内存&quot;更改&quot;<br>
+不推荐完全关闭 C 盘的虚拟内存，可以调整变小（比如 16GB (约16384 MB)-&gt; 8192 MB），但最佳实践依旧是：选择“系统管理的大小”。<br>
+这一部分往往不是 C 盘爆满的大头，如果调整的不好反而让你电脑的运行体验变差，适得其反，得不偿失。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121738201.png" alt="cpan16.png|588"></p>
+<p>这一部分的操作可逆，你可以随时滚回电脑稳定运行时候的 pagefile.sys 的设置。</p>
+<h3 id="🟢-3-Windows-临时目录">🟢 3. Windows 临时目录</h3>
+<p>可以先看看系统级 Temp 占用了多少空间，再决定有没有清理价值：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&#123;0:N2&#125; MB&quot;</span> <span class="operator">-f</span> ((<span class="built_in">Get-ChildItem</span> C:\Windows\Temp <span class="literal">-Recurse</span> <span class="literal">-ErrorAction</span> SilentlyContinue | <span class="built_in">Measure-Object</span> Length <span class="literal">-Sum</span>).Sum / <span class="number">1</span>MB)</span><br></pre></td></tr></table></figure>
+<p>可以分析出：我的系统级 Temp 文件大概是有 1.25 MB左右，如果是这样的话就没有太大清除的必要。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170220036.png" alt="cpan21.png|605"></p>
+<p>如果你的诊断结果显示占用空间很大，使用以下管理员 Powershell 命令清除：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Remove-Item</span> C:\Windows\Temp\* <span class="literal">-Recurse</span> <span class="literal">-Force</span> <span class="literal">-ErrorAction</span> SilentlyContinue</span><br></pre></td></tr></table></figure>
+<h3 id="🟡-4-系统还原点">🟡 4.系统还原点</h3>
+<p>系统还原点主要备份 Windows 系统状态（系统文件、注册表、驱动和设置），不是个人文件或软件数据备份，大多数普通用户平时用不到。</p>
+<p>适合留下系统还原点的人：经常安装软件、驱动、修改系统设置、喜欢折腾电脑，或者没有其他完整备份的人。</p>
+<p>可以关闭的人：电脑使用稳定、不怎么改系统，并且更需要释放磁盘空间的人。</p>
+<p>关闭系统还原点前后对比图：</p>
+<div class="mobile-image-row">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094124908.png">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094133958.png">
+</div>
+<p><code>Win + R</code> 输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systempropertiesprotection.exe</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094119322.png" alt="cpan41.png"></p>
+<p>可以在“系统保护 → 配置”中调整最大使用量。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094143266.png" alt="cpan43.png|580"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260825094149992.png" alt="cpan44.png"></p>
+<hr>
+<h2 id="第四步：用户级与应用级（大头通常在这）">第四步：用户级与应用级（大头通常在这）</h2>
+<h3 id="🟢-1-用户临时文件">🟢 1. 用户临时文件</h3>
+<p>同理，可以先看看用户 Temp 占了多少空间，再决定有没有清理价值：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&#123;0:N2&#125; MB&quot;</span> <span class="operator">-f</span> ((<span class="built_in">Get-ChildItem</span> <span class="variable">$env:TEMP</span> <span class="literal">-Recurse</span> <span class="literal">-ErrorAction</span> SilentlyContinue | <span class="built_in">Measure-Object</span> Length <span class="literal">-Sum</span>).Sum / <span class="number">1</span>MB)</span><br></pre></td></tr></table></figure>
+<p>可以分析出：我的用户临时文件大概是有 2.60 MB左右，如果是这样的话就没有太大清楚的必要。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170237771.png" alt="cpan21.png|597"></p>
+<p>但是如果你的分析结果不同，这一部分占用很多的话，使用以下管理员 Powershell 命令清除用户临时文件：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Remove-Item</span> <span class="variable">$env:TEMP</span>\* <span class="literal">-Recurse</span> <span class="literal">-Force</span> <span class="literal">-ErrorAction</span> SilentlyContinue</span><br></pre></td></tr></table></figure>
+<p>当然，你也可以选择另一种方式清除用户 Temp 文件：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823122129887.png" alt="cpan17.png"></p>
+<p>右键 Temp 文件夹 -&gt; 属性 -&gt; 查看文件占用大小，发现并不小，足足占了 5 GB！</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823122153668.png" alt="cpan20.png"></p>
+<p><code>Ctrl+A</code> 全选文件删除：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823122140713.png" alt="cpan18.png|594"></p>
+<blockquote>
+<p>清除临时目录的过程中，如果遇到软件占用就跳过、非常不建议强杀进程。</p>
+</blockquote>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823122205078.png" alt="cpan19.png"></p>
+<blockquote>
+<p>注意：这里清理的是用户层级的 Temp 文件，在 <code>C:\Users\DEL\AppData\Local\Temp</code> 下；而[[#🟢 3. Windows 临时目录]] 这一步清理的是 Windows 系统层级的 Temp 文件，通常在 <code>C:\Windows\Temp</code> 目录下，这是不一样的。</p>
+</blockquote>
+<h3 id="🟢-2-开发缓存">🟢 2. 开发缓存</h3>
+<p>日常写脚本、装软件攒下的包管理器缓存：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm cache clean <span class="literal">--force</span></span><br><span class="line">pip cache purge</span><br></pre></td></tr></table></figure>
+<p>能清理出多少完全取决于你使用相关包的多少。</p>
+<h3 id="🟡-3-微信-QQ-缓存">🟡 3. 微信/QQ 缓存</h3>
+<p>微信的&quot;文件管理&quot;默认在 <code>C:\Users\&lt;用户名&gt;\Documents\WeChat Files</code>，聊天图片视频缓存动辄 10 GB 以上。设置里把存储位置改到其他存储空间大的硬盘（微信 → 设置 → 文件管理 → 更改）。</p>
+<p>可以看到，我的本地微信存储空间占用了 22.7 GB左右，这是一个很大的存储占用。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170303036.png" alt="cpan25.png|280"></p>
+<p>迁移方式也不难，方式如下：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170313999.png" alt="cpan22.png|520"></p>
+<p>我们耐心等待迁移完成：</p>
+<div class="mobile-image-row">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170322835.png">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170328152.png">
+</div>
+<h3 id="🔴-4-Docker-Desktop">🔴 4. Docker Desktop</h3>
+<p>先输入：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker system df</span><br></pre></td></tr></table></figure>
+<p>检查 Docker 各部分存储占用情况。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221939804.png" alt="image.png|567"></p>
+<p>再看：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+<p>分析有哪些镜像被使用，哪些镜像占用空间大，哪些镜像不再使用。</p>
+<p>然后：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image prune</span><br></pre></td></tr></table></figure>
+<p>只删除悬空镜像。这一步往往可以清除一部分的镜像，腾出一部分的空间。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170420894.png" alt="cpan29.png|598"></p>
+<blockquote>
+<p>这里是分割线 呜呼呼</p>
+</blockquote>
+<blockquote>
+<p>注意：以下操作主要适用于 Docker 使用频繁、vhdx 已明显增大（20 GB为分界）的用户。普通用户如果 Docker 使用较少，可以跳过这部分操作。</p>
+</blockquote>
+<p>压缩前后的效果对比：</p>
+<div class="mobile-image-row">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824141953644.png">
+  <img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824142125021.png">
+</div>
+<p>Docker 的镜像和容器数据都装在：</p>
+<p><code>C:\Users\DEL\AppData\Local\Docker\wsl\disk\docker_data.vhdx</code></p>
+<p>Docker Desktop 的 WSL2 虚拟磁盘 <code>ext4.vhdx</code> 会随着使用自动增长，但删除镜像和容器后，文件通常不会立即缩小，需要手动执行压缩操作才能回收 C 盘空间。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823222141010.png" alt="cpan27.png|585"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823222149628.png" alt="cpan28.png|589"></p>
+<p>就拿我的 Docker Desktop 来说，结合前面的 <code>docker system df</code> （检查 Docker 各部分存储占用情况）。我们可以把现在的情况理解成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Docker 实际数据       ≈ 2.9 GB</span><br><span class="line">docker_data.vhdx      = 6.82 GB</span><br></pre></td></tr></table></figure>
+<p>VHDX 比 Docker 统计的数据大一些是正常的，因为里面还包含虚拟文件系统自身的开销和已经分配的空间。像我这种情况其实是没有清理这部分数据的必要的。但是如果你发现 docker_data.vhdx 远远大于你的 Docker 实际数据，就需要清理压缩操作了。</p>
+<p>先彻底退出 Docker Desktop（托盘图标消失即代表已完全退出），然后压缩。压缩采用只读挂载后 <code>compact</code>，正常退出 Docker 再操作不会损坏数据；动手前确认重要容器/镜像已备份（或确认可丢弃）即可。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br></pre></td></tr></table></figure>
+<p>确认文件以后，再运行：</p>
+<p>进入 DiskPart</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskpart</span><br></pre></td></tr></table></figure>
+<p>选择 Docker 的 VHDX</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">select</span> vdisk file=<span class="string">&quot;C:\Users\&lt;用户名&gt;\AppData\Local\Docker\wsl\disk\docker_data.vhdx&quot;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>将 <code>C:\Users\&lt;用户名&gt;\...</code> 替换为你实际的 <code>docker_data.vhdx</code> 文件路径。</p>
+</blockquote>
+<p>只读挂载并压缩</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">attach vdisk readonly</span><br><span class="line">compact vdisk</span><br></pre></td></tr></table></figure>
+<p>卸载并退出</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">detach vdisk</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+<p>另外，<code>compact vdisk</code> 如果最后提示类似：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DiskPart successfully compacted the virtual disk file.</span><br></pre></td></tr></table></figure>
+<p>就说明压缩成功。</p>
+<p>治本的办法是直接把 Docker 的数据盘挪到本地的 D 盘（注意：最好是本地硬盘）：</p>
+<p>迁移前后的效果对比：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121456215.png" alt="cpan12_kongjianshiyi.png|255"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170621961.png" alt="cpan36.png"></p>
+<p>操作步骤： Settings → Resources → Advanced → Disk image location</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170436120.png" alt="cpan30.png|547"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170535521.png" alt="cpan31.png|604"></p>
+<p>在 D 盘下建立一个新的 Docker 文件夹用于放置 vhdx 数据：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170544492.png" alt="cpan32.png|590"></p>
+<p>将 Disk image location 路径改成 <code>D:\Docker</code> 后 Apply &amp; Restart。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170558164.png" alt="cpan35.png|593"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170558163.png" alt="cpan35.png|541"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170558162.png" alt="cpan35.png|538"></p>
+<h3 id="🟢-5-下载文件夹：清理存量-迁移增量">🟢 5. 下载文件夹：清理存量 + 迁移增量</h3>
+<p><code>下载</code> 文件夹是最容易积灰的地方，每次清理 C 盘都建议先检查。</p>
+<p><strong>① 清理存量</strong></p>
+<p>将重要文件归档到 D/E 盘对应目录，安装包、失效压缩包、重复文件直接删除。</p>
+<p>但清理只能解决“已经有的”，<strong>迁移才能解决“以后还会来的”</strong>。</p>
+<p><strong>② 修改浏览器下载位置</strong></p>
+<p>以 Chrome 为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设置 → 下载内容 → 更改下载位置</span><br></pre></td></tr></table></figure>
+<p>建议修改到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:\Downloads</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170740759.png" alt="cpan37.png|536"></p>
+<p><strong>③ 修改 Windows 默认保存位置</strong></p>
+<p>路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设置 → 系统 → 存储 → 高级存储设置 → 保存新内容的地方</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824132117603.png" alt="image.png|533"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824132229992.png" alt="image.png|554"></p>
+<p>将新的文档、图片、视频、音乐调整到 D/E 盘。</p>
+<p><strong>④ 其他数据规划</strong></p>
+<ul>
+<li><strong>大型软件 / 游戏 / 素材</strong>：优先安装到 SSD 分区（比如我的 D 盘），机械硬盘更适合作为归档和备份。</li>
+<li><strong>工业软件（SolidWorks、CATIA、MATLAB 等）</strong>：建议安装到SSD 分区（比如我的 D 盘），但部分组件仍可能写入 C 盘。</li>
+<li><strong>Python / Node.js</strong>：主程序体积不大，可以默认安装；开发者更需要关注 <code>.venv</code>、pip 缓存、npm 包和 <code>node_modules</code>。</li>
+<li><strong>Obsidian / 博客 / 项目文件</strong>：不要放 C 盘，建议放独立磁盘，并配合 Git、云同步或备份。</li>
+</ul>
+<blockquote>
+<p>⚠️ 删除文件前确认内容。</p>
+</blockquote>
+<p>误删重要文件可以尝试：<a target="_blank" rel="noopener" href="https://www.ccleaner.com/zh-cn/recuva">Recuva</a></p>
+<p>它曾经帮我恢复过一次误删的文章（整理了两三天），避免了一次数据损失。</p>
+<p>如果你问我为什么误删了，都是因为下面这个命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Remove-Item</span> <span class="string">&quot;C:\Users\DEL\Desktop\学习资料&quot;</span> <span class="literal">-Recurse</span> <span class="literal">-Force</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823170344694.png" alt="cpan26_qiangzhiqingli.png|544"></p>
+<p>其实当时，是为了强行删除因为权限不足被锁定的文件夹。但是会永久删除，谨慎使用！</p>
+<hr>
+<h2 id="维护节奏">维护节奏</h2>
+<ul>
+<li>
+<p><strong>每周</strong>：</p>
+<ul>
+<li>[x] 存储感知&quot;立即清理&quot;</li>
+<li>[x] <code>DISM /Online /Cleanup-Image /AnalyzeComponentStore</code> 看一眼</li>
+<li>[x]  Windows 临时文件夹清理</li>
+</ul>
+</li>
+<li>
+<p><strong>每月</strong>：</p>
+<ul>
+<li>[x] WizTree 扫一遍，确认 C 盘大头没有悄悄换人</li>
+<li>[x] 清 Windows 更新缓存</li>
+<li>[x] 清理开发缓存</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="避坑清单">避坑清单</h2>
+<ul>
+<li>[x] <strong>不要手动删 WinSxS</strong> 里的任何文件，会损坏系统</li>
+<li>[x] <strong>不要删恢复分区</strong>，蓝屏时的最后一道保险</li>
+<li>[x] <strong><code>/ResetBase</code> 谨慎用</strong>，清完无法卸载系统更新</li>
+<li>[x] <strong>别装&quot;XX 清理大师&quot;“XX 管家”</strong>，清理效果不如上面这些，还附带全家桶</li>
+<li>[x] 微信/QQ 缓存清理前确认聊天记录已同步或备份</li>
+</ul>
+<hr>
+<h2 id="参考文章">参考文章</h2>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ThD7BXEMZ/?spm_id_from=333.337.search-card.all.click&amp;vd_source=f15209b32029e916ee473fe943d494ca">【全网最完整】C盘清理保姆教学！耗时21天制作，看完你的C盘不可能还红_哔哩哔哩_bilibili</a><br>
+<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Wt4y177Vu/?spm_id_from=333.337.search-card.all.click&amp;vd_source=f15209b32029e916ee473fe943d494ca">【建议收藏】全网最详细C 盘清理指南！！！绝对值得收藏！！！_哔哩哔哩_bilibili</a><br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/590649001">C盘清理指南，清理出30G+起，超详细总结（建议收藏） - 知乎</a><br>
+<a target="_blank" rel="noopener" href="https://club.honor.com/cn/thread-28447933-1-1.html">C盘满了？别慌，这就教你如何清理！-荣耀俱乐部</a><br>
+<a target="_blank" rel="noopener" href="https://www.disktool.cn/content-center/windows-winsxs-clean-method-555.html">WinSxS文件夹太大清理方法及步骤详解，小白向指南</a><br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/2008963176390223435">WizTree下载安装和使用保姆级教程（附安装包，2026最新） - 知乎</a><br>
+<a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-CN/Windows/Experience/Backup-Recovery/system-protection?utm_source=chatgpt.com">“系统保护” | Microsoft Support</a><br>
+<a target="_blank" rel="noopener" href="https://www.ccleaner.com/zh-cn/recuva">下载 Recuva | 免费恢复删除的文件！</a><br>
+<a target="_blank" rel="noopener" href="https://www.cgsecurity.org/Download_and_donate.php/testdisk-7.3-WIP.win64.zip">Dowload and donate - CGSecurity</a><br>
+<a target="_blank" rel="noopener" href="https://docs.docker.com/desktop/features/wsl/?utm_source=chatgpt.com">Docker Desktop WSL 2 backend on Windows | Docker Docs</a></p>
+<hr>
+<p><strong>注1：休眠与睡眠</strong><br>
+休眠状态下的工作状态会保留，而且耗电量比睡眠状态下低，适合需要频繁移动笔记本电脑的工作情况下使用。</p>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 3rem;margin-bottom:3rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="dark"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+        <div class="reward-container">
+  <div>如果这篇文章对你有帮助，请我喝杯咖啡吧 ☕</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="haozi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="haozi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>haozi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://haozi.space/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E6%B1%87%E6%80%BB%E6%8C%87%E5%8D%97/" title="一份关于 Windows 11 电脑的 C 盘清理指南">http://haozi.space/2026/08/21/电脑C盘清理汇总指南/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E9%80%9F%E6%9F%A5%E5%8D%A1/" rel="prev" title="电脑C盘清理速查卡">
+      <i class="fa fa-chevron-left"></i> 电脑C盘清理速查卡
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%86%99%E8%BF%99%E4%BB%BD%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">为什么要写这份指南?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%85%88%E8%AF%8A%E6%96%AD%EF%BC%8C%E5%88%AB%E6%80%A5%E7%9D%80%E6%B8%85"><span class="nav-number">2.</span> <span class="nav-text">第一步：先诊断，别急着清</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%BA%A7%E6%B8%85%E7%90%86%EF%BC%88%E5%AE%98%E6%96%B9%E6%94%AF%E6%8C%81%E6%B8%85%E7%90%86%E5%8C%BA%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">第二步：系统级清理（官方支持清理区）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A2-1-%E5%AD%98%E5%82%A8%E6%84%9F%E7%9F%A5"><span class="nav-number">3.1.</span> <span class="nav-text">🟢 1. 存储感知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A2-2-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86%E8%80%81%E9%9D%A2%E6%9D%BF"><span class="nav-number">3.2.</span> <span class="nav-text">🟢 2. 磁盘清理老面板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A1-3-DISM-%E6%B8%85%E7%90%86%E7%BB%84%E4%BB%B6%E5%AD%98%E5%82%A8%EF%BC%88WinSxS%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">🟡 3. DISM 清理组件存储（WinSxS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A2-4-%E6%B8%85-Windows-%E6%9B%B4%E6%96%B0%E7%BC%93%E5%AD%98"><span class="nav-number">3.4.</span> <span class="nav-text">🟢 4. 清 Windows 更新缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6%EF%BC%88%E6%85%8E%E7%94%A8%E5%8C%BA%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">第三步：系统文件（慎用区）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A1-1-%E4%BC%91%E7%9C%A0%E6%96%87%E4%BB%B6-hiberfil-sys"><span class="nav-number">4.1.</span> <span class="nav-text">🟡 1. 休眠文件 hiberfil.sys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A1-2-%E9%A1%B5%E9%9D%A2%E6%96%87%E4%BB%B6-pagefile-sys"><span class="nav-number">4.2.</span> <span class="nav-text">🟡 2. 页面文件 pagefile.sys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A2-3-Windows-%E4%B8%B4%E6%97%B6%E7%9B%AE%E5%BD%95"><span class="nav-number">4.3.</span> <span class="nav-text">🟢 3. Windows 临时目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A1-4-%E7%B3%BB%E7%BB%9F%E8%BF%98%E5%8E%9F%E7%82%B9"><span class="nav-number">4.4.</span> <span class="nav-text">🟡 4.系统还原点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E7%94%A8%E6%88%B7%E7%BA%A7%E4%B8%8E%E5%BA%94%E7%94%A8%E7%BA%A7%EF%BC%88%E5%A4%A7%E5%A4%B4%E9%80%9A%E5%B8%B8%E5%9C%A8%E8%BF%99%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">第四步：用户级与应用级（大头通常在这）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A2-1-%E7%94%A8%E6%88%B7%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">🟢 1. 用户临时文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A2-2-%E5%BC%80%E5%8F%91%E7%BC%93%E5%AD%98"><span class="nav-number">5.2.</span> <span class="nav-text">🟢 2. 开发缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A1-3-%E5%BE%AE%E4%BF%A1-QQ-%E7%BC%93%E5%AD%98"><span class="nav-number">5.3.</span> <span class="nav-text">🟡 3. 微信&#x2F;QQ 缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%B4-4-Docker-Desktop"><span class="nav-number">5.4.</span> <span class="nav-text">🔴 4. Docker Desktop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A2-5-%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%9A%E6%B8%85%E7%90%86%E5%AD%98%E9%87%8F-%E8%BF%81%E7%A7%BB%E5%A2%9E%E9%87%8F"><span class="nav-number">5.5.</span> <span class="nav-text">🟢 5. 下载文件夹：清理存量 + 迁移增量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E8%8A%82%E5%A5%8F"><span class="nav-number">6.</span> <span class="nav-text">维护节奏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%9D%91%E6%B8%85%E5%8D%95"><span class="nav-number">7.</span> <span class="nav-text">避坑清单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">8.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="haozi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">折腾是理解世界的一种方式</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- Custom Sidebar Widgets -->
+<div class="sidebar-custom-wrap">
+
+  <!-- Category Quick Nav Widget -->
+    <div class="sidebar-custom-section">
+      <div class="sidebar-custom-title">
+        <i class="fas fa-code-branch"></i> 分类导航
+      </div>
+        <ul class="sidebar-category-list">
+      
+      
+        
+      
+      
+            
+      <li class="sidebar-category-item">
+        <a href="/categories/教程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-keyboard cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">18</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/生活/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="fas fa-coffee cat-icon"></i> 生活
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/工程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">12</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/影视/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/阅读/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-bookmark cat-icon"></i> 阅读
+          </span>
+          <span class="cat-count">4</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/软件小记/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-window-restore cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">2</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/软件小记/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-window-restore cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">2</span>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+</div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - Aesthetic Interactive Mouse (鼠鼠) -->
+<div id="pet-toggle" class="pet-toggle" title="点击召唤终端小鼠鼠">
+  <span class="pet-toggle-icon"><i class="fa fa-terminal"></i></span>
+  <span class="pet-toggle-label">PET</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet">
+  <div class="terminal-header">
+    <div class="terminal-dots">
+      <span class="terminal-dot red" id="pet-close-dot" title="关闭宠物"></span>
+      <span class="terminal-dot yellow" title="最小化"></span>
+      <span class="terminal-dot green" title="展开"></span>
+    </div>
+    <span class="terminal-title">haozi@blog:~</span>
+    <span class="terminal-close" id="pet-close" title="收起">&minus;</span>
+  </div>
+
+  <div class="terminal-body">
+    <!-- Heart & Status animation container -->
+    <div id="pet-hearts-container" class="pet-hearts-container"></div>
+
+    <!-- Centered Container for Perfectly Aligned Mouse -->
+    <div class="pet-ascii-wrap">
+      <span id="pet-status-badge" class="pet-status-badge"></span>
+      <pre id="pet-ascii" class="pet-ascii"></pre>
+    </div>
+
+    <!-- Interactive Buttons (Vector Line Icons) -->
+    <div class="pet-actions">
+      <button class="pet-btn" id="btn-pat" title="摸摸鼠鼠"><i class="fa fa-heart-o"></i> 抚摸</button>
+      <button class="pet-btn" id="btn-feed" title="喂食物"><i class="fa fa-coffee"></i> 投喂</button>
+      <button class="pet-btn" id="btn-sleep" title="小憩一会儿"><i class="fa fa-moon-o"></i> 睡觉</button>
+    </div>
+
+    <!-- Terminal Prompt Line -->
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  background: rgba(35, 35, 35, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.pet-toggle:hover {
+  transform: scale(1.12);
+  border-color: #7e8027;
+  box-shadow: 0 0 15px rgba(126, 128, 39, 0.6);
+}
+.pet-toggle-icon {
+  font-size: 16px;
+  line-height: 1;
+  color: #7e8027;
+}
+.pet-toggle-label {
+  color: #a4a638;
+  font-family: 'Consolas', monospace;
+  font-size: 8px;
+  font-weight: bold;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Terminal Window Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  width: 270px;
+  background: rgba(28, 28, 30, 0.94) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2);
+  z-index: 9999;
+  font-family: 'Consolas', 'Cascadia Code', 'Courier New', monospace;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.terminal-header {
+  background: rgba(40, 40, 43, 0.95);
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: move;
+  user-select: none;
+}
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+
+.terminal-title {
+  color: #88888d;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #fff;
+  background: rgba(232, 17, 35, 0.7);
+}
+
+.terminal-body {
+  position: relative;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Mouse ASCII Outer Centered Wrapper */
+.pet-ascii-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 4px 0 10px 0;
+}
+
+/* Fix ASCII Pre element alignment & line-height to connect tail & center feet */
+.pet-ascii {
+  display: inline-block !important;
+  text-align: left !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #b0b439 !important;
+  font-family: 'Consolas', 'Courier New', 'MS Gothic', monospace !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: pre !important;
+  user-select: none;
+  text-shadow: 0 0 8px rgba(126, 128, 39, 0.3);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Floating status emoji badge */
+.pet-status-badge {
+  position: absolute;
+  top: -8px;
+  right: 45px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.pet-status-badge.active {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Interactive Action Buttons */
+.pet-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  justify-content: center;
+}
+.pet-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ddd;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pet-btn:hover {
+  background: rgba(126, 128, 39, 0.3);
+  border-color: #7e8027;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.pet-btn:active {
+  transform: translateY(1px);
+}
+
+/* Terminal Input Prompt */
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #d1d1d6;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Floating Hearts Effect Container */
+.pet-hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.floating-heart {
+  position: absolute;
+  font-size: 14px;
+  animation: floatUp 1.2s ease-out forwards;
+  opacity: 0.9;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(80px) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px) scale(1.2);
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 230px;
+    right: 12px;
+    bottom: 70px;
+  }
+  .pet-toggle {
+    bottom: 15px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+  }
+  .pet-toggle-icon {
+    font-size: 14px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  // Connected tail \(  ) and right-shifted feet " " under belly
+  var petStates = {
+    idle: {
+      frames: [
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: ""
+    },
+    happy: {
+      frames: [
+        ["  C^プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C>プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-heart' style='color:#ff5f56;'></i>"
+    },
+    feed: {
+      frames: [
+        ["  C~プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  Cvプ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-coffee' style='color:#ffbd2e;'></i>"
+    },
+    sleep: {
+      frames: [
+        ["  C-プ°", " \\(uu)", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(..)", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-moon-o' style='color:#27c93f;'></i>"
+    }
+  };
+
+  var defaultMessages = [
+    "欢迎来到 Haozi's Blog！鼠鼠我呀~",
+    "git commit -m '投喂鼠鼠'",
+    "鼠鼠正在认真看博客...",
+    "折腾是理解世界的一种方式！",
+    "404: 奶酪未找到，急需投喂 🧀",
+    "while(true) { nap(); }",
+    "sudo belly_rub --user=visitor",
+    "编译中... 吱吱吱~ 100%"
+  ];
+
+  var currentState = 'idle';
+  var frameIndex = 0;
+  var msgIndex = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var badgeEl = document.getElementById('pet-status-badge');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var closeDot = document.getElementById('pet-close-dot');
+  var header = container.querySelector('.terminal-header');
+  var heartsContainer = document.getElementById('pet-hearts-container');
+  var isOpen = true;
+  var stateTimer = null;
+
+  function renderMouse() {
+    if (!isOpen) return;
+    var stateObj = petStates[currentState] || petStates.idle;
+    var frames = stateObj.frames;
+    petEl.textContent = frames[frameIndex % frames.length];
+    
+    if (stateObj.badge) {
+      badgeEl.innerHTML = stateObj.badge;
+      badgeEl.classList.add('active');
+    } else {
+      badgeEl.classList.remove('active');
+    }
+    frameIndex++;
+  }
+
+  function typewriter(text, speed) {
+    speed = speed || 40;
+    msgEl.textContent = '';
+    var i = 0;
+    var timer = setInterval(function() {
+      if (i < text.length) {
+        msgEl.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+  }
+
+  function spawnHearts(emoji) {
+    emoji = emoji || '❤️';
+    for (var i = 0; i < 3; i++) {
+      (function(delay) {
+        setTimeout(function() {
+          var heart = document.createElement('span');
+          heart.className = 'floating-heart';
+          heart.textContent = emoji;
+          heart.style.left = (35 + Math.random() * 30) + '%';
+          heartsContainer.appendChild(heart);
+          setTimeout(function() {
+            if (heart.parentNode) heart.parentNode.removeChild(heart);
+          }, 1200);
+        }, delay);
+      })(i * 200);
+    }
+  }
+
+  function setTemporaryState(state, message, emoji, duration) {
+    currentState = state;
+    frameIndex = 0;
+    renderMouse();
+    if (message) typewriter(message);
+    if (emoji) spawnHearts(emoji);
+
+    if (stateTimer) clearTimeout(stateTimer);
+    stateTimer = setTimeout(function() {
+      currentState = 'idle';
+      renderMouse();
+    }, duration || 4000);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    renderMouse();
+    typewriter(defaultMessages[0]);
+    try { localStorage.setItem('terminal-pet-closed', 'false'); } catch(e){}
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+    try { localStorage.setItem('terminal-pet-closed', 'true'); } catch(e){}
+  }
+
+  // Check initial state from localStorage
+  try {
+    if (localStorage.getItem('terminal-pet-closed') === 'true') {
+      closePet();
+    } else {
+      openPet();
+    }
+  } catch(e) {
+    openPet();
+  }
+
+  // Event Listeners
+  toggleBtn.addEventListener('click', openPet);
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+  if (closeDot) {
+    closeDot.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closePet();
+    });
+  }
+
+  // Action Buttons
+  var btnPat = document.getElementById('btn-pat');
+  var btnFeed = document.getElementById('btn-feed');
+  var btnSleep = document.getElementById('btn-sleep');
+
+  if (btnPat) {
+    btnPat.addEventListener('click', function() {
+      setTemporaryState('happy', '吱吱~ 被摸摸头很舒服！开心值+100', '❤️', 4000);
+    });
+  }
+  if (btnFeed) {
+    btnFeed.addEventListener('click', function() {
+      setTemporaryState('feed', '美味的奶酪！鼠鼠能量满格 🧀', '🧀', 4000);
+    });
+  }
+  if (btnSleep) {
+    btnSleep.addEventListener('click', function() {
+      setTemporaryState('sleep', '呼呼... 鼠鼠进入小憩模式 zZ', '💤', 5000);
+    });
+  }
+
+  // Click directly on ASCII Mouse
+  petEl.addEventListener('click', function() {
+    setTemporaryState('happy', '吱！你戳了戳鼠鼠~ 🐾', '✨', 3000);
+  });
+
+  // Animation Loop (Update mouse frame every 1.2s)
+  setInterval(renderMouse, 1200);
+
+  // Message Loop (Rotate default quotes every 6s if idle)
+  setInterval(function() {
+    if (!isOpen || currentState !== 'idle') return;
+    msgIndex = (msgIndex + 1) % defaultMessages.length;
+    typewriter(defaultMessages[msgIndex]);
+  }, 6000);
+
+  // Drag functionality for Terminal Header
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target === closeBtn || e.target === closeDot) return;
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  });
+})();
+</script>
+
+</body>
+</html>

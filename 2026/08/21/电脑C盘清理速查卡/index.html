@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="C 盘清理四步速查：先 WizTree 诊断，再按 安全区 → 慎用区 → 大头与迁移 的顺序照做，命令即抄即用，附实测释放 58.6 GB 的记录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电脑C盘清理速查卡">
+<meta property="og:url" content="http://haozi.space/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E9%80%9F%E6%9F%A5%E5%8D%A1/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="C 盘清理四步速查：先 WizTree 诊断，再按 安全区 → 慎用区 → 大头与迁移 的顺序照做，命令即抄即用，附实测释放 58.6 GB 的记录。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260821171026539.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121514584.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221939804.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823222141010.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824142908941.png">
+<meta property="article:published_time" content="2026-08-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-25T01:59:37.768Z">
+<meta property="article:author" content="haozi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260821171026539.png">
+
+<link rel="canonical" href="http://haozi.space/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E9%80%9F%E6%9F%A5%E5%8D%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
+
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
+  }
+});
+</script>
+
+  <title>电脑C盘清理速查卡 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="far fa-window-maximize fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="far fa-calendar-alt fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="far fa-folder-open fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="far fa-keyboard fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E9%80%9F%E6%9F%A5%E5%8D%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          电脑C盘清理速查卡
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-08-21 00:00:00" itemprop="dateCreated datePublished" datetime="2026-08-21T00:00:00+08:00">2026-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-25 09:59:37" itemprop="dateModified" datetime="2026-08-25T09:59:37+08:00">2026-08-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">工程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%B0%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">软件小记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">C 盘清理四步速查：先 WizTree 诊断，再按 安全区 → 慎用区 → 大头与迁移 的顺序照做，命令即抄即用，附实测释放 58.6 GB 的记录。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>完整讲解版见 <a href="/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E6%B1%87%E6%80%BB%E6%8C%87%E5%8D%97/" title="一份关于 Windows 11 电脑的 C 盘清理指南">一份关于 Windows 11 电脑的 C 盘清理指南</a>：每个操作的风险说明、截图演示和原理都在那边，这里只保留&quot;照做&quot;所需的最小信息。</p>
+<p>核心顺序只有四步：<strong>先诊断 → 清安全区 → 碰慎用区 → 大头与迁移</strong>。动手前先把 C 盘&quot;可用空间&quot;记下来，所有收益都跟它对比。</p>
+</blockquote>
+<blockquote>
+<p><strong>运行方式</strong>：本文所有 <code>PowerShell</code> 代码块均建议<strong>以管理员身份</strong>运行（右键开始菜单 → 终端(管理员) / Windows PowerShell(管理员)）。设置类操作为图形界面，无需管理员。</p>
+<p><strong>难度标签</strong>：🟢 普通（人人可照做）｜🟡 进阶（需理解命令含义）｜🔴 高级（影响系统、谨慎操作）。</p>
+</blockquote>
+<h2 id="路线图：我现在该走哪条路？">路线图：我现在该走哪条路？</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    S([C 盘又红了]) --&gt; D[第一步 · 诊断&lt;br&gt;WizTree 扫描找大头]</span><br><span class="line">    D --&gt; Q&#123;空间大头在哪？&#125;</span><br><span class="line">    Q --&gt;|WinSxS / 更新缓存 / Temp| A[第二步 · 安全区 🟢&lt;br&gt;存储感知 / cleanmgr / DISM]</span><br><span class="line">    Q --&gt;|休眠 / 页面文件| B[第三步 · 慎用区 🟡&lt;br&gt;powercfg / pagefile]</span><br><span class="line">    Q --&gt;|Docker / 微信 / 下载堆积| C[第四步 · 大头与迁移&lt;br&gt;应用缓存 + 改默认落点]</span><br><span class="line">    A --&gt; R[(效果记录表)]</span><br><span class="line">    B --&gt; R</span><br><span class="line">    C --&gt; R</span><br><span class="line">    R --&gt; OK&#123;够用了？&#125;</span><br><span class="line">    OK -- 否 --&gt; D</span><br><span class="line">    OK -- 是 --&gt; E([每季度复查])</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="第一步：先诊断，别急着清（5-分钟）">第一步：先诊断，别急着清（5 分钟）</h2>
+<ul>
+<li>用 <a target="_blank" rel="noopener" href="https://diskanalyzer.com/download">WizTree</a>（免费、NTFS 秒扫）扫一遍 C 盘，圈出大头</li>
+<li>盯着这几个常客：
+<ul>
+<li><code>C:\Windows\WinSxS</code> —— 旧版系统组件，能膨胀到 10~20 GB</li>
+<li><code>C:\Windows\SoftwareDistribution\Download</code> —— Windows 更新缓存</li>
+<li><code>C:\Users\&lt;用户名&gt;\AppData\Local</code> —— Docker 的 vhdx、各类软件缓存都在这</li>
+<li><code>C:\hiberfil.sys</code> / <code>C:\pagefile.sys</code> —— 休眠文件与页面文件</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260821171026539.png" alt="cpan2.png|559"></p>
+<hr>
+<h2 id="第二步：安全区——系统级官方清理">第二步：安全区——系统级官方清理</h2>
+<table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>操作</th>
+<th>难度</th>
+<th>入口 / 命令</th>
+<th>预期收益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>存储感知立即清理</td>
+<td>🟢 普通</td>
+<td>设置 → 系统 → 存储 → 存储感知 → 立即清理</td>
+<td>几百 MB</td>
+</tr>
+<tr>
+<td>2</td>
+<td>老面板磁盘清理</td>
+<td>🟢 普通</td>
+<td><code>Win+R</code> → <code>cleanmgr</code> → 清理系统文件，勾选&quot;Windows 更新清理&quot;</td>
+<td>2~5 GB</td>
+</tr>
+<tr>
+<td>3</td>
+<td>DISM 组件清理</td>
+<td>🟡 进阶</td>
+<td>先 Analyze 后 Cleanup（命令见下）</td>
+<td>3~5 GB+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Windows 更新缓存</td>
+<td>🟢 普通</td>
+<td>停服务 → 删目录 → 启服务（命令见下）</td>
+<td>1~3 GB</td>
+</tr>
+</tbody>
+</table>
+<p>DISM 先分析再动手，可回收程序包为 0 就不用清了：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DISM /Online /Cleanup<span class="literal">-Image</span> /AnalyzeComponentStore</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823121514584.png" alt="cpan13.png|543"></p>
+<p>确认值得清后执行标准清理；<code>/ResetBase</code> 属 🔴 高级——清完无法卸载已安装的系统更新，确认系统稳定再加：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DISM /Online /Cleanup<span class="literal">-Image</span> /StartComponentCleanup</span><br><span class="line">DISM /Online /Cleanup<span class="literal">-Image</span> /StartComponentCleanup /ResetBase</span><br></pre></td></tr></table></figure>
+<p>更新缓存（避免文件被占用，先停服务再删）：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">net stop wuauserv</span><br><span class="line">net stop bits</span><br><span class="line"><span class="built_in">Remove-Item</span> C:\Windows\SoftwareDistribution\Download\* <span class="literal">-Recurse</span> <span class="literal">-Force</span></span><br><span class="line">net <span class="built_in">start</span> wuauserv</span><br><span class="line">net <span class="built_in">start</span> bits</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="第三步：慎用区——影响系统行为，想清楚再动">第三步：慎用区——影响系统行为，想清楚再动</h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>难度</th>
+<th>命令 / 路径</th>
+<th>收益</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>关闭休眠</td>
+<td>🟡 进阶</td>
+<td><code>powercfg /h off</code>（回滚 <code>/h on</code>）</td>
+<td>内存的 40%~75%（16 GB 内存 ≈ 6~12 GB）</td>
+<td>失去休眠和快速启动</td>
+</tr>
+<tr>
+<td>精简休眠</td>
+<td>🟡 进阶</td>
+<td><code>powercfg /h /type reduced</code>（回滚 <code>/type full</code>）</td>
+<td>约为完整休眠的一半</td>
+<td>任务栏无法&quot;休眠&quot;，快速启动保留</td>
+</tr>
+<tr>
+<td>页面文件pagefile.sys</td>
+<td>🟡 进阶</td>
+<td>设置 → 系统 → 关于 → 高级系统设置 → 性能&quot;设置&quot; → 高级 → 虚拟内存&quot;更改&quot;，C 盘调小或迁 D 盘</td>
+<td>几个 GB</td>
+<td>不建议完全关闭，推荐选&quot;保持系统管理大小&quot;即可</td>
+</tr>
+<tr>
+<td>清系统临时目录</td>
+<td>🟢 普通</td>
+<td>见下方命令</td>
+<td>因人而异</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>系统临时目录先量大小再决定有没有清理价值：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&#123;0:N2&#125; MB&quot;</span> <span class="operator">-f</span> ((<span class="built_in">Get-ChildItem</span> C:\Windows\Temp <span class="literal">-Recurse</span> <span class="literal">-ErrorAction</span> SilentlyContinue | <span class="built_in">Measure-Object</span> Length <span class="literal">-Sum</span>).Sum / <span class="number">1</span>MB)</span><br><span class="line"><span class="built_in">Remove-Item</span> C:\Windows\Temp\* <span class="literal">-Recurse</span> <span class="literal">-Force</span> <span class="literal">-ErrorAction</span> SilentlyContinue</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="第四步：大头与迁移（收益通常最大）">第四步：大头与迁移（收益通常最大）</h2>
+<h3 id="应用缓存">应用缓存</h3>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用户临时文件：先看大小再删</span></span><br><span class="line"><span class="string">&quot;&#123;0:N2&#125; MB&quot;</span> <span class="operator">-f</span> ((<span class="built_in">Get-ChildItem</span> <span class="variable">$env:TEMP</span> <span class="literal">-Recurse</span> <span class="literal">-ErrorAction</span> SilentlyContinue | <span class="built_in">Measure-Object</span> Length <span class="literal">-Sum</span>).Sum / <span class="number">1</span>MB)</span><br><span class="line"><span class="built_in">Remove-Item</span> <span class="variable">$env:TEMP</span>\* <span class="literal">-Recurse</span> <span class="literal">-Force</span> <span class="literal">-ErrorAction</span> SilentlyContinue</span><br><span class="line"></span><br><span class="line"><span class="comment"># 包管理器缓存</span></span><br><span class="line">npm cache clean <span class="literal">--force</span></span><br><span class="line">pip cache purge</span><br><span class="line">pnpm store prune</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>🟡 微信 / QQ</strong>：聊天缓冲动辄 10 GB+。微信 → 设置 → 文件管理 → 把存储位置改到空间大的硬盘（改前确认聊天记录已同步/备份）。我的存储路径本来就在 D 盘，迁移后直接瘦了 22.6 GB。</li>
+<li><strong>🔴 Docker 虚拟磁盘（最容易忽略的大头）</strong>：镜像和容器都装在 vhdx 里，删镜像后文件不会自动变小，要手动压缩。先看占用：</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker system df</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823221939804.png" alt="image.png|567"></p>
+<p>再看 Docker 统计的数据：</p>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260823222141010.png" alt="cpan27.png|585"></p>
+<p>Vhdx 明显大于 Docker 统计的实际数据（20 GB 为分界）才值得压缩。彻底退出 Docker Desktop（托盘图标消失即代表完全退出），然后：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">diskpart</span><br><span class="line"><span class="built_in">select</span> vdisk file=<span class="string">&quot;C:\Users\&lt;用户名&gt;\AppData\Local\Docker\wsl\disk\docker_data.vhdx&quot;</span></span><br><span class="line">attach vdisk readonly</span><br><span class="line">compact vdisk</span><br><span class="line">detach vdisk</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这是多行 Powershell 命令，不是一行</p>
+</blockquote>
+<p>最后提示类似 <code>DiskPart successfully compacted the virtual disk file.</code> 即压缩成功。</p>
+<ul>
+<li>Docker Desktop → Settings → Resources → Advanced → <strong>Disk image location</strong> 改到 D 盘（我这一步让 C 盘直接少了 7.1 GB）</li>
+</ul>
+<h3 id="迁移：清理解决存量，迁移解决增量">迁移：清理解决存量，迁移解决增量</h3>
+<ul>
+<li>设置 → 系统 → 存储 → 高级存储设置 → <strong>保存新内容的地方</strong>：新的文档 / 图片 / 视频 / 音乐全部改到 D/E 盘；浏览器下载位置需要单独设置（Chrome：设置 → 下载内容 → 更改）</li>
+<li>新软件优先装 D 盘 SSD；需要写系统路径 Path 的小工具（node.js、python 等）保持默认装 C 盘更省心</li>
+<li>笔记库、下载夹别放 C 盘（我的博客草稿池本来就在 D 盘）</li>
+</ul>
+<hr>
+<h2 id="我的实测效果（2026-08-，共-58-6-GB）">我的实测效果（2026-08 ，共 58.6 GB）</h2>
+<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260824142908941.png" alt="效果记录条形图|556"></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>释放量</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>微信文件迁移</td>
+<td>22.6 GB</td>
+<td>存储位置改到大容量盘</td>
+</tr>
+<tr>
+<td>桌面学习文件 · 冷备份 · 杂项文件夹迁移</td>
+<td>21.2 GB</td>
+<td>归档到 D 盘项目文件夹</td>
+</tr>
+<tr>
+<td>迁移 docker_data.vhdx 到 D 盘</td>
+<td>7.1 GB</td>
+<td>Disk image location 改址</td>
+</tr>
+<tr>
+<td>关闭休眠</td>
+<td>6.3 GB</td>
+<td><code>powercfg /h off</code></td>
+</tr>
+<tr>
+<td>压缩 docker_data.vhdx</td>
+<td>≈1.4 GB</td>
+<td>diskpart compact</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>微信迁移、压缩 vhdx 的直接收益体现在 D 盘瘦身（微信存储路径本就设置在 D 盘），但对 C 盘而言收益效果一致，故计入。</p>
+</blockquote>
+<hr>
+<h2 id="维护节奏">维护节奏</h2>
+<ul>
+<li><strong>每月</strong>：存储感知&quot;立即清理&quot;跑一次 + <code>DISM /Online /Cleanup-Image /AnalyzeComponentStore</code> 看一眼</li>
+<li><strong>每季度</strong>：WizTree 扫一遍，确认 C 盘大头没有悄悄换人</li>
+<li><strong>随手</strong>：npm/pip 缓存顺手清；下载文件夹当月整理</li>
+</ul>
+<hr>
+<h2 id="避坑清单">避坑清单</h2>
+<ul>
+<li>不手动删 <code>WinSxS</code> 里任何文件，会损坏系统</li>
+<li>不删恢复分区，蓝屏时的最后一道保险</li>
+<li><code>/ResetBase</code> 谨慎用——清完无法卸载系统更新</li>
+<li>微信 / QQ 清理前确认聊天记录已同步或备份</li>
+<li>强删被锁定的文件夹会永久删除数据，谨慎使用；万一误删，可用 <a target="_blank" rel="noopener" href="https://www.ccleaner.com/zh-cn/recuva">Recuva</a> 尝试恢复</li>
+<li>不装&quot;XX 清理大师&quot;&quot;XX 管家&quot;全家桶，收益不如上面这些</li>
+</ul>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 3rem;margin-bottom:3rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="dark"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+        <div class="reward-container">
+  <div>如果这篇文章对你有帮助，请我喝杯咖啡吧 ☕</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="haozi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="haozi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>haozi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://haozi.space/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E9%80%9F%E6%9F%A5%E5%8D%A1/" title="电脑C盘清理速查卡">http://haozi.space/2026/08/21/电脑C盘清理速查卡/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/13/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E5%91%BD%E4%BB%A4%E6%B8%85%E5%8D%95/" rel="prev" title="家庭服务器网络诊断命令清单">
+      <i class="fa fa-chevron-left"></i> 家庭服务器网络诊断命令清单
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E6%B1%87%E6%80%BB%E6%8C%87%E5%8D%97/" rel="next" title="一份关于 Windows 11 电脑的 C 盘清理指南">
+      一份关于 Windows 11 电脑的 C 盘清理指南 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%BA%BF%E5%9B%BE%EF%BC%9A%E6%88%91%E7%8E%B0%E5%9C%A8%E8%AF%A5%E8%B5%B0%E5%93%AA%E6%9D%A1%E8%B7%AF%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">路线图：我现在该走哪条路？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%85%88%E8%AF%8A%E6%96%AD%EF%BC%8C%E5%88%AB%E6%80%A5%E7%9D%80%E6%B8%85%EF%BC%885-%E5%88%86%E9%92%9F%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">第一步：先诊断，别急着清（5 分钟）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%AE%89%E5%85%A8%E5%8C%BA%E2%80%94%E2%80%94%E7%B3%BB%E7%BB%9F%E7%BA%A7%E5%AE%98%E6%96%B9%E6%B8%85%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第二步：安全区——系统级官方清理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E6%85%8E%E7%94%A8%E5%8C%BA%E2%80%94%E2%80%94%E5%BD%B1%E5%93%8D%E7%B3%BB%E7%BB%9F%E8%A1%8C%E4%B8%BA%EF%BC%8C%E6%83%B3%E6%B8%85%E6%A5%9A%E5%86%8D%E5%8A%A8"><span class="nav-number">4.</span> <span class="nav-text">第三步：慎用区——影响系统行为，想清楚再动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%A4%A7%E5%A4%B4%E4%B8%8E%E8%BF%81%E7%A7%BB%EF%BC%88%E6%94%B6%E7%9B%8A%E9%80%9A%E5%B8%B8%E6%9C%80%E5%A4%A7%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">第四步：大头与迁移（收益通常最大）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%BC%93%E5%AD%98"><span class="nav-number">5.1.</span> <span class="nav-text">应用缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%EF%BC%9A%E6%B8%85%E7%90%86%E8%A7%A3%E5%86%B3%E5%AD%98%E9%87%8F%EF%BC%8C%E8%BF%81%E7%A7%BB%E8%A7%A3%E5%86%B3%E5%A2%9E%E9%87%8F"><span class="nav-number">5.2.</span> <span class="nav-text">迁移：清理解决存量，迁移解决增量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E5%AE%9E%E6%B5%8B%E6%95%88%E6%9E%9C%EF%BC%882026-08-%EF%BC%8C%E5%85%B1-58-6-GB%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">我的实测效果（2026-08 ，共 58.6 GB）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E8%8A%82%E5%A5%8F"><span class="nav-number">7.</span> <span class="nav-text">维护节奏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%9D%91%E6%B8%85%E5%8D%95"><span class="nav-number">8.</span> <span class="nav-text">避坑清单</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="haozi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">折腾是理解世界的一种方式</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- Custom Sidebar Widgets -->
+<div class="sidebar-custom-wrap">
+
+  <!-- Category Quick Nav Widget -->
+    <div class="sidebar-custom-section">
+      <div class="sidebar-custom-title">
+        <i class="fas fa-code-branch"></i> 分类导航
+      </div>
+        <ul class="sidebar-category-list">
+      
+      
+        
+      
+      
+            
+      <li class="sidebar-category-item">
+        <a href="/categories/教程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-keyboard cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">18</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/生活/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="fas fa-coffee cat-icon"></i> 生活
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/工程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">12</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/影视/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/阅读/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-bookmark cat-icon"></i> 阅读
+          </span>
+          <span class="cat-count">4</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/软件小记/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-window-restore cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">2</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/软件小记/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-window-restore cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">2</span>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+</div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - Aesthetic Interactive Mouse (鼠鼠) -->
+<div id="pet-toggle" class="pet-toggle" title="点击召唤终端小鼠鼠">
+  <span class="pet-toggle-icon"><i class="fa fa-terminal"></i></span>
+  <span class="pet-toggle-label">PET</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet">
+  <div class="terminal-header">
+    <div class="terminal-dots">
+      <span class="terminal-dot red" id="pet-close-dot" title="关闭宠物"></span>
+      <span class="terminal-dot yellow" title="最小化"></span>
+      <span class="terminal-dot green" title="展开"></span>
+    </div>
+    <span class="terminal-title">haozi@blog:~</span>
+    <span class="terminal-close" id="pet-close" title="收起">&minus;</span>
+  </div>
+
+  <div class="terminal-body">
+    <!-- Heart & Status animation container -->
+    <div id="pet-hearts-container" class="pet-hearts-container"></div>
+
+    <!-- Centered Container for Perfectly Aligned Mouse -->
+    <div class="pet-ascii-wrap">
+      <span id="pet-status-badge" class="pet-status-badge"></span>
+      <pre id="pet-ascii" class="pet-ascii"></pre>
+    </div>
+
+    <!-- Interactive Buttons (Vector Line Icons) -->
+    <div class="pet-actions">
+      <button class="pet-btn" id="btn-pat" title="摸摸鼠鼠"><i class="fa fa-heart-o"></i> 抚摸</button>
+      <button class="pet-btn" id="btn-feed" title="喂食物"><i class="fa fa-coffee"></i> 投喂</button>
+      <button class="pet-btn" id="btn-sleep" title="小憩一会儿"><i class="fa fa-moon-o"></i> 睡觉</button>
+    </div>
+
+    <!-- Terminal Prompt Line -->
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  background: rgba(35, 35, 35, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.pet-toggle:hover {
+  transform: scale(1.12);
+  border-color: #7e8027;
+  box-shadow: 0 0 15px rgba(126, 128, 39, 0.6);
+}
+.pet-toggle-icon {
+  font-size: 16px;
+  line-height: 1;
+  color: #7e8027;
+}
+.pet-toggle-label {
+  color: #a4a638;
+  font-family: 'Consolas', monospace;
+  font-size: 8px;
+  font-weight: bold;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Terminal Window Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  width: 270px;
+  background: rgba(28, 28, 30, 0.94) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2);
+  z-index: 9999;
+  font-family: 'Consolas', 'Cascadia Code', 'Courier New', monospace;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.terminal-header {
+  background: rgba(40, 40, 43, 0.95);
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: move;
+  user-select: none;
+}
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+
+.terminal-title {
+  color: #88888d;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #fff;
+  background: rgba(232, 17, 35, 0.7);
+}
+
+.terminal-body {
+  position: relative;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Mouse ASCII Outer Centered Wrapper */
+.pet-ascii-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 4px 0 10px 0;
+}
+
+/* Fix ASCII Pre element alignment & line-height to connect tail & center feet */
+.pet-ascii {
+  display: inline-block !important;
+  text-align: left !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #b0b439 !important;
+  font-family: 'Consolas', 'Courier New', 'MS Gothic', monospace !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: pre !important;
+  user-select: none;
+  text-shadow: 0 0 8px rgba(126, 128, 39, 0.3);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Floating status emoji badge */
+.pet-status-badge {
+  position: absolute;
+  top: -8px;
+  right: 45px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.pet-status-badge.active {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Interactive Action Buttons */
+.pet-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  justify-content: center;
+}
+.pet-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ddd;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pet-btn:hover {
+  background: rgba(126, 128, 39, 0.3);
+  border-color: #7e8027;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.pet-btn:active {
+  transform: translateY(1px);
+}
+
+/* Terminal Input Prompt */
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #d1d1d6;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Floating Hearts Effect Container */
+.pet-hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.floating-heart {
+  position: absolute;
+  font-size: 14px;
+  animation: floatUp 1.2s ease-out forwards;
+  opacity: 0.9;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(80px) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px) scale(1.2);
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 230px;
+    right: 12px;
+    bottom: 70px;
+  }
+  .pet-toggle {
+    bottom: 15px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+  }
+  .pet-toggle-icon {
+    font-size: 14px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  // Connected tail \(  ) and right-shifted feet " " under belly
+  var petStates = {
+    idle: {
+      frames: [
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: ""
+    },
+    happy: {
+      frames: [
+        ["  C^プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C>プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-heart' style='color:#ff5f56;'></i>"
+    },
+    feed: {
+      frames: [
+        ["  C~プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  Cvプ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-coffee' style='color:#ffbd2e;'></i>"
+    },
+    sleep: {
+      frames: [
+        ["  C-プ°", " \\(uu)", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(..)", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-moon-o' style='color:#27c93f;'></i>"
+    }
+  };
+
+  var defaultMessages = [
+    "欢迎来到 Haozi's Blog！鼠鼠我呀~",
+    "git commit -m '投喂鼠鼠'",
+    "鼠鼠正在认真看博客...",
+    "折腾是理解世界的一种方式！",
+    "404: 奶酪未找到，急需投喂 🧀",
+    "while(true) { nap(); }",
+    "sudo belly_rub --user=visitor",
+    "编译中... 吱吱吱~ 100%"
+  ];
+
+  var currentState = 'idle';
+  var frameIndex = 0;
+  var msgIndex = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var badgeEl = document.getElementById('pet-status-badge');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var closeDot = document.getElementById('pet-close-dot');
+  var header = container.querySelector('.terminal-header');
+  var heartsContainer = document.getElementById('pet-hearts-container');
+  var isOpen = true;
+  var stateTimer = null;
+
+  function renderMouse() {
+    if (!isOpen) return;
+    var stateObj = petStates[currentState] || petStates.idle;
+    var frames = stateObj.frames;
+    petEl.textContent = frames[frameIndex % frames.length];
+    
+    if (stateObj.badge) {
+      badgeEl.innerHTML = stateObj.badge;
+      badgeEl.classList.add('active');
+    } else {
+      badgeEl.classList.remove('active');
+    }
+    frameIndex++;
+  }
+
+  function typewriter(text, speed) {
+    speed = speed || 40;
+    msgEl.textContent = '';
+    var i = 0;
+    var timer = setInterval(function() {
+      if (i < text.length) {
+        msgEl.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+  }
+
+  function spawnHearts(emoji) {
+    emoji = emoji || '❤️';
+    for (var i = 0; i < 3; i++) {
+      (function(delay) {
+        setTimeout(function() {
+          var heart = document.createElement('span');
+          heart.className = 'floating-heart';
+          heart.textContent = emoji;
+          heart.style.left = (35 + Math.random() * 30) + '%';
+          heartsContainer.appendChild(heart);
+          setTimeout(function() {
+            if (heart.parentNode) heart.parentNode.removeChild(heart);
+          }, 1200);
+        }, delay);
+      })(i * 200);
+    }
+  }
+
+  function setTemporaryState(state, message, emoji, duration) {
+    currentState = state;
+    frameIndex = 0;
+    renderMouse();
+    if (message) typewriter(message);
+    if (emoji) spawnHearts(emoji);
+
+    if (stateTimer) clearTimeout(stateTimer);
+    stateTimer = setTimeout(function() {
+      currentState = 'idle';
+      renderMouse();
+    }, duration || 4000);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    renderMouse();
+    typewriter(defaultMessages[0]);
+    try { localStorage.setItem('terminal-pet-closed', 'false'); } catch(e){}
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+    try { localStorage.setItem('terminal-pet-closed', 'true'); } catch(e){}
+  }
+
+  // Check initial state from localStorage
+  try {
+    if (localStorage.getItem('terminal-pet-closed') === 'true') {
+      closePet();
+    } else {
+      openPet();
+    }
+  } catch(e) {
+    openPet();
+  }
+
+  // Event Listeners
+  toggleBtn.addEventListener('click', openPet);
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+  if (closeDot) {
+    closeDot.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closePet();
+    });
+  }
+
+  // Action Buttons
+  var btnPat = document.getElementById('btn-pat');
+  var btnFeed = document.getElementById('btn-feed');
+  var btnSleep = document.getElementById('btn-sleep');
+
+  if (btnPat) {
+    btnPat.addEventListener('click', function() {
+      setTemporaryState('happy', '吱吱~ 被摸摸头很舒服！开心值+100', '❤️', 4000);
+    });
+  }
+  if (btnFeed) {
+    btnFeed.addEventListener('click', function() {
+      setTemporaryState('feed', '美味的奶酪！鼠鼠能量满格 🧀', '🧀', 4000);
+    });
+  }
+  if (btnSleep) {
+    btnSleep.addEventListener('click', function() {
+      setTemporaryState('sleep', '呼呼... 鼠鼠进入小憩模式 zZ', '💤', 5000);
+    });
+  }
+
+  // Click directly on ASCII Mouse
+  petEl.addEventListener('click', function() {
+    setTemporaryState('happy', '吱！你戳了戳鼠鼠~ 🐾', '✨', 3000);
+  });
+
+  // Animation Loop (Update mouse frame every 1.2s)
+  setInterval(renderMouse, 1200);
+
+  // Message Loop (Rotate default quotes every 6s if idle)
+  setInterval(function() {
+    if (!isOpen || currentState !== 'idle') return;
+    msgIndex = (msgIndex + 1) % defaultMessages.length;
+    typewriter(defaultMessages[msgIndex]);
+  }, 6000);
+
+  // Drag functionality for Terminal Header
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target === closeBtn || e.target === closeDot) return;
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  });
+})();
+</script>
+
+</body>
+</html>
