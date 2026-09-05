@@ -29,25 +29,25 @@
 <meta property="og:site_name" content="Haozi&#39;s Blog">
 <meta property="og:description" content="无光猫超密限制下，老毛子 K2 配置 IPv6 的踩坑过程：实现公网 IPv6 与 Tailscale P2P 直连后，因入站失败与双前缀异常，最终转为 AP 模式并用 Tailscale 兜底远程访问。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143752454.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142457841.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142517378.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813161542593.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143124696.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142714657.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813172115230.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142752747.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813160750675.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142854749.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142911811.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143124696.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260815173551495.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260815175357538.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813143752454.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813142457841.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813142517378.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813161542593.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813143124696.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813142714657.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813172115230.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813142752747.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813160750675.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813142854749.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813142911811.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260813143124696.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260815173551495.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260815175357538.png">
 <meta property="article:published_time" content="2026-08-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-16T08:32:58.954Z">
+<meta property="article:modified_time" content="2026-09-05T01:37:47.759Z">
 <meta property="article:author" content="haozi">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143752454.png">
+<meta name="twitter:image" content="https://img.haozi.space/img2026/20260813143752454.png">
 
 <link rel="canonical" href="http://haozi.space/2026/08/13/%E8%80%81%E6%AF%9B%E5%AD%90%20Padavan%20%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%20IPv6%20%E8%B8%A9%E5%9D%91%E5%85%A8%E8%AE%B0%E5%BD%95%E4%B8%8E%20Tailscale%20%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96/">
 
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-08-16 16:32:58" itemprop="dateModified" datetime="2026-08-16T16:32:58+08:00">2026-08-16</time>
+                <time title="修改时间：2026-09-05 09:37:47" itemprop="dateModified" datetime="2026-09-05T09:37:47+08:00">2026-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </blockquote>
 <p>首先将老毛子 Padavan 固件更新至较新版本（替换掉了 2017 年的遗留老固件）。<br>
 前往老毛子Padavan固件的下载地址：<a target="_blank" rel="noopener" href="https://opt.cn2qq.com/padavan/">Padavan</a>，找到斐讯K2路由器可以使用的最新固件版本进行更新</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143752454.png" alt="13IPv6.png|569"></p>
+<p><img src="https://img.haozi.space/img2026/20260813143752454.png" alt="13IPv6.png|569"></p>
 <p>进入老毛子后台（<code>192.168.123.1</code>），在 <strong>高级设置 → 外部网络 (WAN) → IPv6 设置</strong>中做如下调整：</p>
 <ol>
 <li>IPv6 服务连接类型：选择 <strong>Stateless Native / DHCPv6</strong> 模式。</li>
@@ -345,17 +345,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>左边是第一次尝试的路由配置，右边是第二次尝试的路由配置（均为二级路由实验阶段截图）。<br>
 相比之下，第二次配置将路由器 WAN/LAN 的 DNS 均指引至阿里云公共 DNS（<code>2400:3200:baba::1</code> 和 <code>2400:3200::1</code>），并将 <code>启用 LAN DHCPv6 服务器</code> 切换为 Stateless 模式，成功让下级设备打通了 IPv6。<br>
 结果是：第一次的路由配置无法正常使用 IPv6 进行上网，第二次的路由配置可以获得公网的 IPv6。</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142457841.png" alt="1IPv6.png|530"></p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142517378.png" alt="3IPv6.png|525"></p>
+<p><img src="https://img.haozi.space/img2026/20260813142457841.png" alt="1IPv6.png|530"></p>
+<p><img src="https://img.haozi.space/img2026/20260813142517378.png" alt="3IPv6.png|525"></p>
 <p>这里还踩过一个典型的坑：曾尝试开启 <strong>NAPT66</strong>，结果它把公网 IPv6 强行转换成了内网私有 IPv6。IPv6 的本质是端到端直连，开启 NAPT66 属于典型的“画蛇添足”。（在最终 AP 模式下，K2 不再承担 IPv6 出口职责，因此 NAPT66、防火墙转发等功能也不再成为关键因素。）</p>
 <h2 id="Windows-网卡排查">Windows 网卡排查</h2>
 <p>在完成路由器设置后，Windows 依然打不通 <code>curl.exe -6 https://api64.ipify.org</code>。在 PowerShell 中运行以下诊断命令查看网卡状态：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-NetIPInterface</span> <span class="literal">-AddressFamily</span> IPv6</span><br></pre></td></tr></table></figure>
 <p>终端回显结果如下：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813161542593.png" alt="14IPv6.png|580"></p>
+<p><img src="https://img.haozi.space/img2026/20260813161542593.png" alt="14IPv6.png|580"></p>
 <p>再使用 <code>ipconfig</code> 查看网卡的具体配置：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143124696.png" alt="4IPv6.png|578"></p>
+<p><img src="https://img.haozi.space/img2026/20260813143124696.png" alt="4IPv6.png|578"></p>
 <blockquote>
 <p><strong>延伸阅读</strong>：本文主要针对 IPv6 与 Tailscale 相关的特定诊断命令进行排查。如果你需要更全面地排查 Windows / Linux 环境下的网卡路由、DNS 污染及端口连通性，可以参考单独整理的：<a href="/2026/08/13/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E5%91%BD%E4%BB%A4%E6%B8%85%E5%8D%95/" title="家庭服务器网络诊断命令清单">家庭服务器网络诊断命令清单</a> 。</p>
 </blockquote>
@@ -363,26 +363,26 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>即使改了路由器 DNS，如果 Windows 本地网卡先前<strong>手动指定过 IPv6 DNS</strong>，依然会因为配置冲突或保留无效 DNS 而导致域名 AAAA 解析全部超时。在 PowerShell 中测试解析：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup <span class="literal">-type</span>=AAAA api64.ipify.org</span><br></pre></td></tr></table></figure>
 <p>终端输出超时异常：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142714657.png" alt="6IPv6.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260813142714657.png" alt="6IPv6.png"></p>
 <p>排查时发现，我此前的确在 Windows 网卡属性中手动指定过固定 DNS 地址，与老毛子路由器通过 RA/DHCPv6 下发给网卡的 DNS 发生了冲突。将 Windows 本地的 IPv6 DNS 修改为 <strong>DHCP 自动获取</strong>：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813172115230.png" alt="5IPv6.png|561"></p>
+<p><img src="https://img.haozi.space/img2026/20260813172115230.png" alt="5IPv6.png|561"></p>
 <p>并清理缓存：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /flushdns</span><br></pre></td></tr></table></figure>
 <p>确认 Windows 改为自动获取并生效后，执行公网路由追踪命令：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tracert <span class="literal">-6</span> <span class="number">2606</span>:<span class="number">4700</span>:<span class="number">4700</span>::<span class="number">1111</span></span><br></pre></td></tr></table></figure>
 <p>发现打通外网，终端回显完整的跳跃路径：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142752747.png" alt="7IPv6.png|585"></p>
+<p><img src="https://img.haozi.space/img2026/20260813142752747.png" alt="7IPv6.png|585"></p>
 <h2 id="验证-IPv6-出站">验证 IPv6 出站</h2>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl.exe <span class="literal">-6</span> https://api64.ipify.org</span><br></pre></td></tr></table></figure>
 <p>可以正常返回公网 IPv6 地址，说明设备具备公网 IPv6 出口：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813160750675.png" alt="10IPv6.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260813160750675.png" alt="10IPv6.png"></p>
 <h2 id="Tailscale-P2P-验证成功">Tailscale P2P 验证成功</h2>
 <p>实验初期运行 <code>tailscale netcheck</code> 时一直提示 <code>IPv6: no, but OS has support</code>——网卡拿到了地址，却无法真正连接外网 IPv6。修复之后，用以下命令做验证：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tailscale netcheck</span><br><span class="line">tailscale ping iphone<span class="literal">-14-pro-max</span></span><br></pre></td></tr></table></figure>
 <p><code>tailscale netcheck</code> 的输出里，<code>IPv6: no</code> 终于变成了 <code>IPv6: yes</code>：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142854749.png" alt="11IPv6.png|566"></p>
+<p><img src="https://img.haozi.space/img2026/20260813142854749.png" alt="11IPv6.png|566"></p>
 <p>再用手机（切换为中国电信 5G 移动网络，关闭 Wi-Fi）做打洞测试，成功实现了电信 5G ↔ 移动宽带下的 <strong>原生 IPv6 端到端 P2P 直连</strong>，摆脱了原本高达 400~500ms 的美国 <code>sfo</code> DERP 转发节点 [注1]：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813142911811.png" alt="12IPv6.png|588"></p>
+<p><img src="https://img.haozi.space/img2026/20260813142911811.png" alt="12IPv6.png|588"></p>
 <p>以上流程打通了 IPv6 出站与 P2P 直连——但正如时间线所示，这只是故事的上半场：长期使用中打洞频繁失败，稳定性存疑。接下来是成功之后暴露的问题。</p>
 <hr>
 <h1>第二阶段：成功之后暴露的问题</h1>
@@ -406,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul>
 <h2 id="双前缀异常">双前缀异常</h2>
 <p>在 Windows 排查阶段还记录到一个当时无法解释的现象：WLAN 无线网卡处于 Connected 激活状态，而在第一阶段的实验记录中曾经出现过两个不同的 IPv6 前缀：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260813143124696.png" alt="4IPv6.png|578"></p>
+<p><img src="https://img.haozi.space/img2026/20260813143124696.png" alt="4IPv6.png|578"></p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2409:8a38:8430:xxxx</span><br><span class="line">2409:8a38:8431:xxxx</span><br></pre></td></tr></table></figure>
 <p>但在当时的测试阶段，我并没有意识到这两个前缀分别对应什么网络环境，也无法确定具体来源，只能先列出几个猜想：</p>
 <ul>
@@ -427,9 +427,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <h1>第四阶段：降低架构复杂度</h1>
 <h2 id="选择-AP-模式">选择 AP 模式</h2>
 <p>在理清双前缀的来源、重新理解家庭 IPv6 结构后，我决定不再继续优化二级 IPv6 路由，而是把老毛子 K2 转为 AP 模式：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260815173551495.png" alt="image.png|585"></p>
+<p><img src="https://img.haozi.space/img2026/20260815173551495.png" alt="image.png|585"></p>
 <p>切换到 AP 模式后，需要先为老毛子设置一个固定的内网 IP——否则地址由光猫动态分配，后台管理入口随时可能漂移。</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260815175357538.png" alt="image.png|598"></p>
+<p><img src="https://img.haozi.space/img2026/20260815175357538.png" alt="image.png|598"></p>
 <blockquote>
 <p>需要注意的是：如果老毛子的 NAT、防火墙、UPnP、DHCP 服务你是必须需要使用的话，不建议更改为 AP 模式。</p>
 </blockquote>
@@ -584,8 +584,8 @@ DERP (Designated Encrypted Relay for Packets) 是 Tailscale 的中继节点。�
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/08/09/win11-ipv6-npm/" rel="prev" title="基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露">
-      <i class="fa fa-chevron-left"></i> 基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露
+    <a href="/2026/08/09/%E4%BB%8E%E9%9B%B6%E6%89%93%E9%80%A0%E4%BD%8E%E5%BB%B6%E8%BF%9F%20Windows%20HomeLab/" rel="prev" title="从零打造低延迟 Windows HomeLab：公网 IPv6 + DDNS-GO + NPM 反向代理">
+      <i class="fa fa-chevron-left"></i> 从零打造低延迟 Windows HomeLab：公网 IPv6 + DDNS-GO + NPM 反向代理
     </a></div>
       <div class="post-nav-item">
     <a href="/2026/08/13/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E5%91%BD%E4%BB%A4%E6%B8%85%E5%8D%95/" rel="next" title="家庭服务器网络诊断命令清单">
@@ -665,14 +665,14 @@ DERP (Designated Encrypted Relay for Packets) 是 Tailscale 的中继节点。�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -722,7 +722,7 @@ DERP (Designated Encrypted Relay for Packets) 是 Tailscale 的中继节点。�
                         
             <i class="far fa-keyboard cat-icon"></i> 教程
           </span>
-          <span class="cat-count">18</span>
+          <span class="cat-count">17</span>
         </a>
       </li>
       
@@ -740,7 +740,7 @@ DERP (Designated Encrypted Relay for Packets) 是 Tailscale 的中继节点。�
                         
             <i class="fas fa-coffee cat-icon"></i> 生活
           </span>
-          <span class="cat-count">14</span>
+          <span class="cat-count">12</span>
         </a>
       </li>
       
@@ -795,6 +795,42 @@ DERP (Designated Encrypted Relay for Packets) 是 Tailscale 的中继节点。�
             <i class="far fa-bookmark cat-icon"></i> 阅读
           </span>
           <span class="cat-count">4</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/HomeLab/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-folder-open cat-icon"></i> HomeLab
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/网络配置/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-folder-open cat-icon"></i> 网络配置
+          </span>
+          <span class="cat-count">1</span>
         </a>
       </li>
       

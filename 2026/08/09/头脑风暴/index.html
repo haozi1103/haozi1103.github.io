@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="从《软技能：代码之外的生存之道》得到了一个很不错的做法，在博客写作没有什么想法的时候，可以用上：“解决这个问题的最好方法是提前头脑风暴出各种不同的想法，随时更新可能的博客主题的清单，这样你总是保持一堆话题可供选择”，当然，也不局限于创作，也适用于一切需要我们去输出的场景。 博客文章灵感库   [ ] 弘一法师真的是干什么什么都精？达芬奇呢？这是真的吗？ 找弘一法师的记录文章，达芬奇的记录文章 论文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="头脑风暴">
+<meta property="og:url" content="http://haozi.space/2026/08/09/%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="从《软技能：代码之外的生存之道》得到了一个很不错的做法，在博客写作没有什么想法的时候，可以用上：“解决这个问题的最好方法是提前头脑风暴出各种不同的想法，随时更新可能的博客主题的清单，这样你总是保持一堆话题可供选择”，当然，也不局限于创作，也适用于一切需要我们去输出的场景。 博客文章灵感库   [ ] 弘一法师真的是干什么什么都精？达芬奇呢？这是真的吗？ 找弘一法师的记录文章，达芬奇的记录文章 论文">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-09T02:27:30.000Z">
+<meta property="article:modified_time" content="2026-08-30T11:26:43.395Z">
+<meta property="article:author" content="haozi">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://haozi.space/2026/08/09/%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
+
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
+  }
+});
+</script>
+
+  <title>头脑风暴 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="far fa-window-maximize fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="far fa-calendar-alt fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="far fa-folder-open fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="far fa-keyboard fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/08/09/%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          头脑风暴
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-08-09 10:27:30" itemprop="dateCreated datePublished" datetime="2026-08-09T10:27:30+08:00">2026-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-30 19:26:43" itemprop="dateModified" datetime="2026-08-30T19:26:43+08:00">2026-08-30</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>从《软技能：代码之外的生存之道》得到了一个很不错的做法，在博客写作没有什么想法的时候，可以用上：“解决这个问题的最好方法是提前头脑风暴出各种不同的想法，随时更新可能的博客主题的清单，这样你总是保持一堆话题可供选择”，当然，也不局限于创作，也适用于一切需要我们去输出的场景。</p>
+<h1>博客文章灵感库</h1>
+<ul>
+<li>
+<p>[ ] 弘一法师真的是干什么什么都精？达芬奇呢？这是真的吗？<br>
+找弘一法师的记录文章，达芬奇的记录文章 论文最好，营销号文章少找<br>
+弘一法师是干什么的？<br>
+他精通哪些方面？<br>
+干什么都是精通的，谁最先提出这个说法的？<br>
+达芬奇呢?同样说是一个通才，和弘一法师有什么异同点？<br>
+我们被误导了什么？<br>
+信息真的完全可靠吗？</p>
+</li>
+<li>
+<p>[ ] 没有鼠标的一天，我是怎么度过的？<br>
+不同工作场景的无键盘工作流记录<br>
+obsidian工作流<br>
+系统操作工作流<br>
+浏览器vim工作流<br>
+还没有解决的方面<br>
+未来的学习改善探索方向</p>
+</li>
+<li>
+<p>[ ] 如何找到属于我的复利副业?<br>
+读书日记类型<br>
+为什么写这一篇文章，由于阅读那本书<br>
+找到真实复利副业案例，评估真实性<br>
+复利副业真的可行吗？<br>
+我怎么知道那些复利副业是可行的？<br>
+哪些因素一直阻挡我只是观望观望？<br>
+怎么才能让自己开始一定的行动而不是单纯观望？</p>
+</li>
+</ul>
+<p>b站制作视频，当一个 up 主。<br>
+赚取一定的收入</p>
+<ul>
+<li>
+<p>[x] 创作的时候找到的信息源如何进行长期管理？<br>
+偏软件日记类型<br>
+为了长期保存管理论文pdf（本地文件）、收藏的网页<br>
+长期保存（因为我非常喜欢整理和规划）<br>
+5篇教程文章/视频<br>
+自己的实操过程<br>
+过程踩的雷<br>
+分析最终的工作流好在哪里？有什么不好的地方呢？<br>
+如何让读者也看到参考链接的文章（本地下载的论文文章之类的）？本地下载的论文也不太可能让读者读到，其实原因和下面的一点是类似的。<br>
+一些学术论文可以上传到网络吗？会不会有风险？显然不行，有极高的法律风险</p>
+</li>
+<li>
+<p>[ ] autohotkey的实际案例<br>
+如何定义热键，和系统不会冲突？<br>
+自动化续火花 可能存在稳定性问题<br>
+自动化pt站点签到 已经完成<br>
+打开网页<br>
+拾取像素点<br>
+我想要的是按一下脚本复位到起点，而不只是暂停<br>
+如何在obsidian配置进入i自动切换输入法到中文？按esc自动切换到英文输入法？有没有相关的插件？</p>
+</li>
+<li>
+<p>[ ] 我为什么很难和朋友保持长期关系？<br>
+分析为什么？<br>
+可以和人情社会话题合并一下<br>
+都是社会关系的论题</p>
+</li>
+<li>
+<p>[ ] 如何存钱？<br>
+获取信息源<br>
+书籍<br>
+让我说服你存钱吧<br>
+信息处理<br>
+有什么手段可以存、存到哪里？<br>
+信用卡？<br>
+支付宝？<br>
+微信？<br>
+存钱的目标怎么去设定！</p>
+</li>
+<li>
+<p>[ ] 什么是妈宝男?<br>
+由头：家里有人说起这个名词和话题<br>
+为什么会造就妈宝男?<br>
+你是妈宝男吗?</p>
+</li>
+<li>
+<p>[ ] 中国的人情社会话题<br>
+信息源 书籍 视频 论文<br>
+为什么中国人总想要走关系 走捷径<br>
+这是具有什么方面上的合理性<br>
+我为什么不想要这样做<br>
+反思自己的缺点<br>
+反思自己哪里做得不太好<br>
+有哪些可以改进的点</p>
+</li>
+</ul>
+<p>如何进行随机应变的沟通</p>
+<p>如何在有技术的前提下，还有为人处世的能力和随机应变的通用能力。</p>
+<ul>
+<li>
+<p>[x] 电脑的 C 盘清理汇总指南 自己以后会看 保证 个人定制<br>
+和网络的视频博客有什么不同？<br>
+怎么做？<br>
+什么效果？</p>
+</li>
+<li>
+<p>[ ] 如何做到不丢三落四<br>
+收集素材 写作素材 文章 视频 书籍 谈话 论文等<br>
+如何建立一个舒适的防丢失系统<br>
+如何物归处 有审查机制<br>
+哪些东西一定不能丢<br>
+其实 所有东西都是不能丢失的</p>
+</li>
+<li>
+<p>[ ] 如何在博客仿照那个优秀的案例进行一个自我系统的构建和介绍<br>
+什么配置<br>
+用了什么<br>
+干了什么<br>
+什么背景<br>
+什么人生哲理<br>
+什么样的人生态度<br>
+喜欢什么<br>
+极其讨厌什么</p>
+</li>
+</ul>
+<p>影视资源 800gb<br>
+做种 500gb<br>
+音乐资源 300gb<br>
+其他部分 备份资料等 200gb</p>
+<p>电子设备生命周期管理</p>
+<ul>
+<li>[ ] 我的电子设备生命周期管理方法</li>
+<li>[ ] 为什么我不追求频繁换电子产品？</li>
+<li>[ ] 一台电子设备应该使用多久？</li>
+<li>[ ] 如何判断设备是否值得继续维护？</li>
+<li>[ ] 我的设备退役规划：主力设备 → 备用设备 → 专用设备</li>
+<li>[ ] 设备维护比购买更重要吗？</li>
+<li>[ ] 如何建立个人设备档案</li>
+</ul>
+<p>iPhone 长期使用记录</p>
+<ul>
+<li>[ ] iPhone 14 Pro Max 长期使用体验</li>
+<li>[ ] 一台手机使用四年的真实成本</li>
+<li>[ ] 手机保护方案：钢化膜、手机壳、清洁维护</li>
+<li>[ ] 如何延长手机使用寿命</li>
+<li>[ ] 手机存储空间长期管理方法</li>
+<li>[ ] iPhone 电池健康管理记录</li>
+<li>[ ] 手机从主力机到备用机的生命周期规划</li>
+</ul>
+<p>台式机未来十年规划</p>
+<ul>
+<li>[ ] 我的台式机硬件生命周期规划</li>
+<li>[ ] GTX1660还能战几年？</li>
+<li>[ ] 一台电脑如何从游戏设备变成生产力设备</li>
+<li>[ ] 我的电脑升级路线规划</li>
+<li>[ ] CPU、显卡、内存升级优先级分析</li>
+<li>[ ] 老电脑还有哪些价值？</li>
+<li>[ ] 如何降低设备闲置率</li>
+</ul>
+<p>家庭服务器资产规划</p>
+<ul>
+<li>[ ] 我的家庭服务器建设路线</li>
+<li>[ ] 台式机转家庭服务器的可能性</li>
+<li>[ ] Jellyfin/Navidrome带来的数字生活变化</li>
+<li>[ ] 家庭服务器硬件生命周期管理</li>
+<li>[ ] 家庭服务器存储扩容规划</li>
+<li>[ ] 数据备份和容灾方案</li>
+<li>[ ] 家庭服务器功耗优化记录</li>
+<li>[ ] 我的个人云系统演进过程</li>
+</ul>
+<p>数字资产备份体系</p>
+<ul>
+<li>[ ] 为什么数据比设备更加重要</li>
+<li>[ ] 我的数字资产分类方法</li>
+<li>[ ] Git管理博客源码的意义</li>
+<li>[ ] 云端备份、本地备份、异地备份</li>
+<li>[ ] 3-2-1备份原则实践</li>
+<li>[ ] 我的照片、音乐、文章长期保存方案</li>
+<li>[ ] 如何避免数字资产随着平台消失</li>
+</ul>
+<p>我的购买决策模型</p>
+<ul>
+<li>[ ] 买东西之前我会考虑什么？</li>
+<li>[ ] 从“想买”到“值得买”的思考过程</li>
+<li>[ ] 一个物品真正的成本是什么？</li>
+<li>[ ] 贵的东西一定更耐用吗？</li>
+<li>[ ] 如何判断一个产品是否值得长期拥有</li>
+<li>[ ] 购买前的五个问题</li>
+<li>[ ] 如何减少冲动消费</li>
+<li>[ ] 如何计算物品每天使用成本</li>
+</ul>
+<p>个人物品档案模板</p>
+<ul>
+<li>[ ] 我的个人资产管理模板</li>
+<li>[ ] 如何记录一件物品的一生</li>
+<li>[ ] 设备购买记录模板</li>
+<li>[ ] 设备维护记录模板</li>
+<li>[ ] 设备问题排查记录模板</li>
+<li>[ ] 设备退役记录模板</li>
+<li>[ ] Obsidian搭建个人资产管理系统</li>
+</ul>
+<h1>博客改造</h1>
+<ul>
+<li>
+<p>[ ] 去除/改造一些质量差的博客文章</p>
+</li>
+<li>
+<p>[ ] 提升网页的访问体验 访问速度快 不能加载很久 这样不好</p>
+</li>
+<li>
+<p>[ ] 定时删除不需要的模块的改变 比如侧面的那一块 就很丑</p>
+</li>
+<li>
+<p>[x] 加入博客rss订阅系统</p>
+</li>
+<li>
+<p>[ ] 在许多个人主页里面加入博客链接（比如微信主页/qq主页）</p>
+</li>
+<li>
+<p>[x] 加入微信、支付宝收款码</p>
+</li>
+<li>
+<p>[x] 优化一下网站的logo，自己设计？？？哈哈哈</p>
+</li>
+<li>
+<p>[x] 优化一下博客的代码块显示，代码块太丑啦，很尖锐，没有什么圆角。而且都是白底的，好丑啊。</p>
+</li>
+<li>
+<p>[x] 增加一下页面ui设计的呼吸感觉，有点太拥挤了 ui元素</p>
+</li>
+<li>
+<p>[x] 更好的字体</p>
+</li>
+<li>
+<p>[x] <strong>更舒服的行距</strong></p>
+</li>
+<li>
+<p>[x] <strong>更好的代码块</strong></p>
+</li>
+<li>
+<p>[x] <strong>更漂亮的 Logo</strong></p>
+</li>
+<li>
+<p>[ ] <strong>深浅色切换</strong></p>
+</li>
+<li>
+<p>[x] <strong>适度圆角</strong></p>
+</li>
+<li>
+<p>[x] 底部导航栏修复奇奇怪怪</p>
+</li>
+<li>
+<p>[x] <strong>适度留白</strong></p>
+</li>
+<li>
+<p>[x] <strong>统一青绿色品牌色</strong></p>
+</li>
+<li>
+<p>[x] 链接不要是底下有一条直线 好丑，而是主题色显示！</p>
+</li>
+<li>
+<p>[ ] 移动端优化</p>
+</li>
+<li>
+<p>[ ] 首行缩进 2 个字符</p>
+</li>
+<li>
+<p>[ ] 总结260810的工作 梳理文件更改了什么，消除冗余参数，可以写文章的</p>
+</li>
+<li>
+<p>[ ] 正文标题字体大小修改 和后续组件的距离修改</p>
+</li>
+<li>
+<p>[ ] 去除不必要的冗余文字</p>
+</li>
+<li>
+<p>[ ] 那么 haozi.space 完全可以慢慢形成：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">About</span><br><span class="line"> </span><br><span class="line">/我是谁</span><br><span class="line">/我在学习什么</span><br><span class="line">/我使用什么工具</span><br><span class="line">/我喜欢什么</span><br><span class="line">/我做过什么</span><br><span class="line">/我相信什么</span><br><span class="line">/我在思考什么</span><br><span class="line">/我的作品</span><br><span class="line">/我的数字生活</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这里的关键不是“写得多”</p>
+<h1>无聊时做什么</h1>
+<ul>
+<li>[x] 不带手机，漫无目的的散步半个小时（但是记得回来的路哈，别把自己搞迷路了）</li>
+<li>[x] 把bilibili的网页页面推荐+广告全部删掉，太干扰注意力</li>
+<li>[x] win11的系统字体优化，因为有毛边不好看</li>
+<li>[x] 知乎页面简化，</li>
+<li>[x] 更改一下鼠标指针，简化一下鼠标指针</li>
+<li>[x] 学习一下autohotkey对于自动化无键盘操作的作用</li>
+<li>[x] 研究一下电脑win11如何在没有鼠标的情况下完美操作<br>
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/guzb/p/win11-keyboard-shortcuts-and-create-app-shortcut-manully.html" title="发布于 2023-03-29 12:40">Windows11快捷键大集合+手动给程序添加快捷键</a><br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/JR521314/article/details/142241765">不用鼠标怎么操作电脑?(win11快捷键)</a></li>
+<li>[x] 研究一下win11 win10如何做到输入法状态实时大展示，而不是在右下角需要我去寻找</li>
+<li>[x] 研究一下win11 win10当前使用的快捷键，包括所有热键定义，从而不会和系统的快捷键进行冲突，因为冲突就不好了。</li>
+</ul>
+<p>看看棒球比赛，了解一下棒球本垒打 全垒打是啥意思。</p>
+<p>插入模式下输入 a o O A i I 不能切换输入法的</p>
+<p>研究一下edgetunnel如何做到稳定链接，感觉延迟还有点大，都是200ms左右，上网体验也一般。<br>
+v2ray设置优化？策略组？怎么去设置，什么模式会更好一点？<br>
+edgetunnel如何和cloudflared tunnel共存<br>
+tun模式开启是不是意味着我自己的网络连接就没有什么用了？<br>
+启用了sub2api是不是一定要开tun模式才能访问国外的gemini模型？</p>
+<p>去除所有标题里面的 1. 2. 3.类似的东西</p>
+<p>文字和图片之间空一行，营造呼吸感</p>
+<p>研究一下电脑的键盘为什么键位分布是这样的，更好的帮助理解键位分布。</p>
+<p>研究一下speedtest是干什么的。</p>
+<p>看看自己无聊时候下载下来的电视剧或者电影。</p>
+<p>欣赏自己的博客网站。</p>
+<p>命令行是干什么的？能否用它来替代一系列的软件，不用安装这么多的软件。<br>
+把电脑的内存和存储空间用在刀刃上，而不是一堆后台的软件在占用内存的，<br>
+很不舒服，也很不好。</p>
+<p>电脑连接 手机热点连接的 发现 有公网 ipv6 但是还是不行，ddns-go解析不成功，显示：<br>
+2026/08/23 22:01:32 查询域名信息发生异常! Get “<a target="_blank" rel="noopener" href="https://api.cloudflare.com/client/v4/zones?name=haozi.space&amp;per_page=50&amp;status=active">https://api.cloudflare.com/client/v4/zones?name=haozi.space&amp;per_page=50&amp;status=active</a>”: dial tcp: lookup <a target="_blank" rel="noopener" href="http://api.cloudflare.com">api.cloudflare.com</a> on 172.20.10.1:53: read udp 172.20.10.3:59473-&gt;1.1.1.1:53: i/o timeout</p>
+<p>外卖饮料拿到的防水袋不要丢，可以改造为一个装袜子和内裤的小容器（机智如我）</p>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 3rem;margin-bottom:3rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="dark"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+        <div class="reward-container">
+  <div>如果这篇文章对你有帮助，请我喝杯咖啡吧 ☕</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="haozi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="haozi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>haozi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://haozi.space/2026/08/09/%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4/" title="头脑风暴">http://haozi.space/2026/08/09/头脑风暴/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/09/win11-ipv6-npm/" rel="prev" title="基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露">
+      <i class="fa fa-chevron-left"></i> 基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/09/%E4%BB%8E%E9%9B%B6%E6%89%93%E9%80%A0%E4%BD%8E%E5%BB%B6%E8%BF%9F%20Windows%20HomeLab/" rel="next" title="从零打造低延迟 Windows HomeLab：公网 IPv6 + DDNS-GO + NPM 反向代理">
+      从零打造低延迟 Windows HomeLab：公网 IPv6 + DDNS-GO + NPM 反向代理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">博客文章灵感库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">博客改造</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">无聊时做什么</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="haozi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">折腾是理解世界的一种方式</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- Custom Sidebar Widgets -->
+<div class="sidebar-custom-wrap">
+
+  <!-- Category Quick Nav Widget -->
+    <div class="sidebar-custom-section">
+      <div class="sidebar-custom-title">
+        <i class="fas fa-code-branch"></i> 分类导航
+      </div>
+        <ul class="sidebar-category-list">
+      
+      
+        
+      
+      
+            
+      <li class="sidebar-category-item">
+        <a href="/categories/教程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-keyboard cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">17</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/生活/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="fas fa-coffee cat-icon"></i> 生活
+          </span>
+          <span class="cat-count">12</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/工程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">12</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/影视/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/阅读/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-bookmark cat-icon"></i> 阅读
+          </span>
+          <span class="cat-count">4</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/HomeLab/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-folder-open cat-icon"></i> HomeLab
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/网络配置/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-folder-open cat-icon"></i> 网络配置
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/软件小记/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-window-restore cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">2</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/软件小记/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-window-restore cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">2</span>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+</div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - Aesthetic Interactive Mouse (鼠鼠) -->
+<div id="pet-toggle" class="pet-toggle" title="点击召唤终端小鼠鼠">
+  <span class="pet-toggle-icon"><i class="fa fa-terminal"></i></span>
+  <span class="pet-toggle-label">PET</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet">
+  <div class="terminal-header">
+    <div class="terminal-dots">
+      <span class="terminal-dot red" id="pet-close-dot" title="关闭宠物"></span>
+      <span class="terminal-dot yellow" title="最小化"></span>
+      <span class="terminal-dot green" title="展开"></span>
+    </div>
+    <span class="terminal-title">haozi@blog:~</span>
+    <span class="terminal-close" id="pet-close" title="收起">&minus;</span>
+  </div>
+
+  <div class="terminal-body">
+    <!-- Heart & Status animation container -->
+    <div id="pet-hearts-container" class="pet-hearts-container"></div>
+
+    <!-- Centered Container for Perfectly Aligned Mouse -->
+    <div class="pet-ascii-wrap">
+      <span id="pet-status-badge" class="pet-status-badge"></span>
+      <pre id="pet-ascii" class="pet-ascii"></pre>
+    </div>
+
+    <!-- Interactive Buttons (Vector Line Icons) -->
+    <div class="pet-actions">
+      <button class="pet-btn" id="btn-pat" title="摸摸鼠鼠"><i class="fa fa-heart-o"></i> 抚摸</button>
+      <button class="pet-btn" id="btn-feed" title="喂食物"><i class="fa fa-coffee"></i> 投喂</button>
+      <button class="pet-btn" id="btn-sleep" title="小憩一会儿"><i class="fa fa-moon-o"></i> 睡觉</button>
+    </div>
+
+    <!-- Terminal Prompt Line -->
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  background: rgba(35, 35, 35, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.pet-toggle:hover {
+  transform: scale(1.12);
+  border-color: #7e8027;
+  box-shadow: 0 0 15px rgba(126, 128, 39, 0.6);
+}
+.pet-toggle-icon {
+  font-size: 16px;
+  line-height: 1;
+  color: #7e8027;
+}
+.pet-toggle-label {
+  color: #a4a638;
+  font-family: 'Consolas', monospace;
+  font-size: 8px;
+  font-weight: bold;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Terminal Window Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  width: 270px;
+  background: rgba(28, 28, 30, 0.94) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2);
+  z-index: 9999;
+  font-family: 'Consolas', 'Cascadia Code', 'Courier New', monospace;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.terminal-header {
+  background: rgba(40, 40, 43, 0.95);
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: move;
+  user-select: none;
+}
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+
+.terminal-title {
+  color: #88888d;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #fff;
+  background: rgba(232, 17, 35, 0.7);
+}
+
+.terminal-body {
+  position: relative;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Mouse ASCII Outer Centered Wrapper */
+.pet-ascii-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 4px 0 10px 0;
+}
+
+/* Fix ASCII Pre element alignment & line-height to connect tail & center feet */
+.pet-ascii {
+  display: inline-block !important;
+  text-align: left !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #b0b439 !important;
+  font-family: 'Consolas', 'Courier New', 'MS Gothic', monospace !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: pre !important;
+  user-select: none;
+  text-shadow: 0 0 8px rgba(126, 128, 39, 0.3);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Floating status emoji badge */
+.pet-status-badge {
+  position: absolute;
+  top: -8px;
+  right: 45px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.pet-status-badge.active {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Interactive Action Buttons */
+.pet-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  justify-content: center;
+}
+.pet-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ddd;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pet-btn:hover {
+  background: rgba(126, 128, 39, 0.3);
+  border-color: #7e8027;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.pet-btn:active {
+  transform: translateY(1px);
+}
+
+/* Terminal Input Prompt */
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #d1d1d6;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Floating Hearts Effect Container */
+.pet-hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.floating-heart {
+  position: absolute;
+  font-size: 14px;
+  animation: floatUp 1.2s ease-out forwards;
+  opacity: 0.9;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(80px) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px) scale(1.2);
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 230px;
+    right: 12px;
+    bottom: 70px;
+  }
+  .pet-toggle {
+    bottom: 15px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+  }
+  .pet-toggle-icon {
+    font-size: 14px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  // Connected tail \(  ) and right-shifted feet " " under belly
+  var petStates = {
+    idle: {
+      frames: [
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: ""
+    },
+    happy: {
+      frames: [
+        ["  C^プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C>プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-heart' style='color:#ff5f56;'></i>"
+    },
+    feed: {
+      frames: [
+        ["  C~プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  Cvプ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-coffee' style='color:#ffbd2e;'></i>"
+    },
+    sleep: {
+      frames: [
+        ["  C-プ°", " \\(uu)", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(..)", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-moon-o' style='color:#27c93f;'></i>"
+    }
+  };
+
+  var defaultMessages = [
+    "欢迎来到 Haozi's Blog！鼠鼠我呀~",
+    "git commit -m '投喂鼠鼠'",
+    "鼠鼠正在认真看博客...",
+    "折腾是理解世界的一种方式！",
+    "404: 奶酪未找到，急需投喂 🧀",
+    "while(true) { nap(); }",
+    "sudo belly_rub --user=visitor",
+    "编译中... 吱吱吱~ 100%"
+  ];
+
+  var currentState = 'idle';
+  var frameIndex = 0;
+  var msgIndex = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var badgeEl = document.getElementById('pet-status-badge');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var closeDot = document.getElementById('pet-close-dot');
+  var header = container.querySelector('.terminal-header');
+  var heartsContainer = document.getElementById('pet-hearts-container');
+  var isOpen = true;
+  var stateTimer = null;
+
+  function renderMouse() {
+    if (!isOpen) return;
+    var stateObj = petStates[currentState] || petStates.idle;
+    var frames = stateObj.frames;
+    petEl.textContent = frames[frameIndex % frames.length];
+    
+    if (stateObj.badge) {
+      badgeEl.innerHTML = stateObj.badge;
+      badgeEl.classList.add('active');
+    } else {
+      badgeEl.classList.remove('active');
+    }
+    frameIndex++;
+  }
+
+  function typewriter(text, speed) {
+    speed = speed || 40;
+    msgEl.textContent = '';
+    var i = 0;
+    var timer = setInterval(function() {
+      if (i < text.length) {
+        msgEl.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+  }
+
+  function spawnHearts(emoji) {
+    emoji = emoji || '❤️';
+    for (var i = 0; i < 3; i++) {
+      (function(delay) {
+        setTimeout(function() {
+          var heart = document.createElement('span');
+          heart.className = 'floating-heart';
+          heart.textContent = emoji;
+          heart.style.left = (35 + Math.random() * 30) + '%';
+          heartsContainer.appendChild(heart);
+          setTimeout(function() {
+            if (heart.parentNode) heart.parentNode.removeChild(heart);
+          }, 1200);
+        }, delay);
+      })(i * 200);
+    }
+  }
+
+  function setTemporaryState(state, message, emoji, duration) {
+    currentState = state;
+    frameIndex = 0;
+    renderMouse();
+    if (message) typewriter(message);
+    if (emoji) spawnHearts(emoji);
+
+    if (stateTimer) clearTimeout(stateTimer);
+    stateTimer = setTimeout(function() {
+      currentState = 'idle';
+      renderMouse();
+    }, duration || 4000);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    renderMouse();
+    typewriter(defaultMessages[0]);
+    try { localStorage.setItem('terminal-pet-closed', 'false'); } catch(e){}
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+    try { localStorage.setItem('terminal-pet-closed', 'true'); } catch(e){}
+  }
+
+  // Check initial state from localStorage
+  try {
+    if (localStorage.getItem('terminal-pet-closed') === 'true') {
+      closePet();
+    } else {
+      openPet();
+    }
+  } catch(e) {
+    openPet();
+  }
+
+  // Event Listeners
+  toggleBtn.addEventListener('click', openPet);
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+  if (closeDot) {
+    closeDot.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closePet();
+    });
+  }
+
+  // Action Buttons
+  var btnPat = document.getElementById('btn-pat');
+  var btnFeed = document.getElementById('btn-feed');
+  var btnSleep = document.getElementById('btn-sleep');
+
+  if (btnPat) {
+    btnPat.addEventListener('click', function() {
+      setTemporaryState('happy', '吱吱~ 被摸摸头很舒服！开心值+100', '❤️', 4000);
+    });
+  }
+  if (btnFeed) {
+    btnFeed.addEventListener('click', function() {
+      setTemporaryState('feed', '美味的奶酪！鼠鼠能量满格 🧀', '🧀', 4000);
+    });
+  }
+  if (btnSleep) {
+    btnSleep.addEventListener('click', function() {
+      setTemporaryState('sleep', '呼呼... 鼠鼠进入小憩模式 zZ', '💤', 5000);
+    });
+  }
+
+  // Click directly on ASCII Mouse
+  petEl.addEventListener('click', function() {
+    setTemporaryState('happy', '吱！你戳了戳鼠鼠~ 🐾', '✨', 3000);
+  });
+
+  // Animation Loop (Update mouse frame every 1.2s)
+  setInterval(renderMouse, 1200);
+
+  // Message Loop (Rotate default quotes every 6s if idle)
+  setInterval(function() {
+    if (!isOpen || currentState !== 'idle') return;
+    msgIndex = (msgIndex + 1) % defaultMessages.length;
+    typewriter(defaultMessages[msgIndex]);
+  }, 6000);
+
+  // Drag functionality for Terminal Header
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target === closeBtn || e.target === closeDot) return;
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  });
+})();
+</script>
+
+</body>
+</html>

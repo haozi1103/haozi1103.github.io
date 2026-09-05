@@ -29,22 +29,22 @@
 <meta property="og:site_name" content="Haozi&#39;s Blog">
 <meta property="og:description" content="本文详细介绍了使用 Cloudflare Tunnel 实现本地 AList 服务公网远程访问的完整步骤。涵盖 cloudflared 客户端配置、DNS 域名解析绑定、常见问题排查以及通过 VBS 脚本实现服务开机后台自启的实用技巧。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308101314643.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308140747806.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141535776.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141752734.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141719378.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141903486.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310145620762.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306134649623.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135343494.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260308101314643.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260308140747806.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260308141535776.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260308141752734.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260308141719378.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260308141903486.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260310145620762.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/image-20260306134649623.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/image-20260306135006792.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/image-20260306135343494.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/image-20260306135006792.png">
 <meta property="article:published_time" content="2026-03-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-30T14:34:47.265Z">
+<meta property="article:modified_time" content="2026-09-05T01:37:47.472Z">
 <meta property="article:author" content="haozi">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308101314643.png">
+<meta name="twitter:image" content="https://img.haozi.space/img2026/20260308101314643.png">
 
 <link rel="canonical" href="http://haozi.space/2026/03/07/Cloudfare+Tunnel%E9%85%8D%E7%BD%AE/">
 
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-08-30 22:34:47" itemprop="dateModified" datetime="2026-08-30T22:34:47+08:00">2026-08-30</time>
+                <time title="修改时间：2026-09-05 09:37:47" itemprop="dateModified" datetime="2026-09-05T09:37:47+08:00">2026-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -293,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       
         <p>最开始只是想让自己的电脑能够被远程访问，后来逐渐开始把一些服务放在本地运行，比如下载工具、文件管理工具等。其中一个很好用的工具就是 AList，它可以把本地磁盘或者各种网盘统一挂载，通过网页来管理文件。<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308101314643.png" alt="image-20260307204327371"></p>
+<img src="https://img.haozi.space/img2026/20260308101314643.png" alt="image-20260307204327371"></p>
 <h1>解决的问题</h1>
 <p>问题是 AList 默认只运行在本地</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:5244</span><br></pre></td></tr></table></figure>
@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Cloudflare Tunnel 需要通过 cloudflared 程序来运行。<br>
 可以从 Cloudflare 官方下载 Windows 版本<br>
 <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/">https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/</a><br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308140747806.png" alt="image-20260306125950289"></p>
+<img src="https://img.haozi.space/img2026/20260308140747806.png" alt="image-20260306125950289"></p>
 <p>下载完成后，将程序放在一个固定目录，例如</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F:\cloudflared</span><br></pre></td></tr></table></figure>
 <p>然后在终端中运行</p>
@@ -331,11 +331,11 @@ document.addEventListener('DOMContentLoaded', function() {
 执行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel login</span><br></pre></td></tr></table></figure>
 <p>记得在哪个盘里面，就要在哪里开始cmd操作（如果你之前跟我一样下载在F盘，就要在F盘进行cmd操作，以此类推）<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141535776.png" alt="image-20260308141535725"></p>
+<img src="https://img.haozi.space/img2026/20260308141535776.png" alt="image-20260308141535725"></p>
 <p>浏览器会自动打开 Cloudflare 登录页面。登录后选择需要绑定的域名。完成后本地会生成一个认证文件：<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141752734.png" alt="image-20260306131456755"></p>
+<img src="https://img.haozi.space/img2026/20260308141752734.png" alt="image-20260306131456755"></p>
 <p>网页会显示以下界面：</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141719378.png" alt="image-20260306131132603"></p>
+<p><img src="https://img.haozi.space/img2026/20260308141719378.png" alt="image-20260306131132603"></p>
 <h2 id="创建-Tunnel">创建 Tunnel</h2>
 <p>接下来创建一个新的 Tunnel。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel create alist-tunnel</span><br></pre></td></tr></table></figure>
@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>接下来需要创建配置文件 config.yml。<br>
 示例配置</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tunnel: Tunnel_ID</span><br><span class="line">credentials-file: C:\Users\用户名\.cloudflared\Tunnel_ID.json</span><br><span class="line"></span><br><span class="line">ingress:</span><br><span class="line">  - hostname: alist.yourdomain</span><br><span class="line">    service: http://localhost:5244</span><br><span class="line">  - service: http_status:404</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260308141903486.png" alt="image-20260308141903442"></p>
+<p><img src="https://img.haozi.space/img2026/20260308141903486.png" alt="image-20260308141903442"></p>
 <p>Tunnel_ID是 C:\Users\用户名.cloudflared 文件夹里面json文件的名称<br>
 访问 alist.yourdomain 时转发到本地 localhost:5244，如果访问其他地址,返回 404</p>
 <h2 id="DNS">DNS</h2>
@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>如下，终端输入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /d F:\cloudflare</span><br><span class="line">cloudflared tunnel list</span><br></pre></td></tr></table></figure>
 <p>显示有connections就是有效的<br>
-<img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/20260310145620762.png" alt="image-20260306142146235"></p>
+<img src="https://img.haozi.space/img2026/20260310145620762.png" alt="image-20260306142146235"></p>
 </li>
 <li>
 <p>确认 Cloudflare DNS 是否正确，这一步需要去cloudflare管理界面排查</p>
@@ -381,24 +381,24 @@ document.addEventListener('DOMContentLoaded', function() {
 <h1>后续扩展</h1>
 <h2 id="Alist-开机启动">Alist 开机启动</h2>
 <p>在桌面建一个VBS文件</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306134649623.png" alt="image-20260306134649623"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260306134649623.png" alt="image-20260306134649623"></p>
 <p>在里面添加</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.run &quot;F:\alist-windows-amd64\alist.exe server&quot;, vbHide</span><br></pre></td></tr></table></figure>
 <p>把这个vbs文件拖到alist.exe所在的文件夹里面<br>
 并且右键创建快捷方式<br>
 win+R输入 shell:startup</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
 <p>把快捷指令拖进去就可以了</p>
 <h2 id="Cloudflare开机启动">Cloudflare开机启动</h2>
 <p>手动启动</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135343494.png" alt="image-20260306135343494"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260306135343494.png" alt="image-20260306135343494"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloudflared tunnel run alist</span><br></pre></td></tr></table></figure>
 <p><strong>自动启动设置</strong><br>
 在桌面建一个VBS文件，命名为 start-alist-tunnel.vbs<br>
 在里面添加</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.Run &quot;cmd /c F:\cloudflare\cloudflared tunnel run alist&quot;,0</span><br></pre></td></tr></table></figure>
 <p>win+R输入 shell:startup</p>
-<p><img src="https://cdn.jsdmirror.com/gh/haozi1103/img-bed@main/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
 <p>把vbs拖进去就可以了</p>
 <h2 id="更多域名">更多域名</h2>
 <p>例如：</p>
@@ -564,14 +564,14 @@ win+R输入 shell:startup</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -621,7 +621,7 @@ win+R输入 shell:startup</p>
                         
             <i class="far fa-keyboard cat-icon"></i> 教程
           </span>
-          <span class="cat-count">18</span>
+          <span class="cat-count">17</span>
         </a>
       </li>
       
@@ -639,7 +639,7 @@ win+R输入 shell:startup</p>
                         
             <i class="fas fa-coffee cat-icon"></i> 生活
           </span>
-          <span class="cat-count">14</span>
+          <span class="cat-count">12</span>
         </a>
       </li>
       
@@ -694,6 +694,42 @@ win+R输入 shell:startup</p>
             <i class="far fa-bookmark cat-icon"></i> 阅读
           </span>
           <span class="cat-count">4</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/HomeLab/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-folder-open cat-icon"></i> HomeLab
+          </span>
+          <span class="cat-count">1</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/网络配置/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-folder-open cat-icon"></i> 网络配置
+          </span>
+          <span class="cat-count">1</span>
         </a>
       </li>
       
