@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/haozi-blog-logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/haozi-blog-logo-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=LXGW WenKai SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="从 YouTube Music 资源下载、beets 自动标准化整理刮削，到 Navidrome 个人流媒体服务的全流程实践与解耦架构心得。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从 YouTube Music 到 Navidrome：我搭建了一套属于自己的音乐库">
+<meta property="og:url" content="http://haozi.space/2026/09/05/260905_yt_navid_music/index.html">
+<meta property="og:site_name" content="Haozi&#39;s Blog">
+<meta property="og:description" content="从 YouTube Music 资源下载、beets 自动标准化整理刮削，到 Navidrome 个人流媒体服务的全流程实践与解耦架构心得。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905125348196.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905125428462.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905125445714.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905112612006.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905112645560.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905130634127.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905130643172.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260906083714908.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905144332059.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905144351470.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905144359470.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905161740044.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905163505811.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905165944540.png">
+<meta property="og:image" content="https://img.haozi.space/img2026/20260905125202757.png">
+<meta property="article:published_time" content="2026-09-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-06T01:25:20.694Z">
+<meta property="article:author" content="haozi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.haozi.space/img2026/20260905125348196.png">
+
+<link rel="canonical" href="http://haozi.space/2026/09/05/260905_yt_navid_music/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<!-- Noto Sans SC (Source Han Sans) - Primary Chinese font -->
+<link rel=preconnect href=https://fonts.googleapis.com crossorigin>
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap />
+
+<!-- JetBrains Mono - Code font -->
+<link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
+
+
+<!-- Google-style Multi-color Site Title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
+  var titleEl = document.querySelector('.site-title');
+  if (titleEl) {
+    var text = titleEl.textContent;
+    titleEl.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i];
+      if (text[i] !== ' ') {
+        span.style.color = colors[i % colors.length];
+      }
+      titleEl.appendChild(span);
+    }
+  }
+});
+</script>
+
+  <title>从 YouTube Music 到 Navidrome：我搭建了一套属于自己的音乐库 | Haozi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Haozi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Haozi's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="far fa-window-maximize fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="far fa-calendar-alt fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="far fa-folder-open fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="far fa-keyboard fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/09/05/260905_yt_navid_music/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="haozi">
+      <meta itemprop="description" content="折腾是理解世界的一种方式">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haozi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从 YouTube Music 到 Navidrome：我搭建了一套属于自己的音乐库
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-05 00:00:00" itemprop="dateCreated datePublished" datetime="2026-09-05T00:00:00+08:00">2026-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-09-06 09:25:20" itemprop="dateModified" datetime="2026-09-06T09:25:20+08:00">2026-09-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">工程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">从 YouTube Music 资源下载、beets 自动标准化整理刮削，到 Navidrome 个人流媒体服务的全流程实践与解耦架构心得。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>从 YouTube Music 到 Navidrome：我搭建了一套属于自己的音乐库</h1>
+<blockquote>
+<p>免责声明：本文涉及的技术方案（如使用 yt-dlp 等工具下载网络资源）仅用于个人学习、技术研究与个人音源备份，请勿用于任何商业用途或侵权传播。尊重版权，请支持正版音乐。</p>
+</blockquote>
+<p>这次折腾下来，我最大的收获反而不是记住了多少命令，而是逐渐理解了一件事情：<mark style="background: #ADCCFFA6;">一个真正好用的个人音乐库，不应该追求绝对完美，而应该追求能够长期、低成本地维护。</mark></p>
+<hr>
+<h1>为什么要搭建</h1>
+<p>最开始的原因其实特别直接：我不想再一直为各个平台的音乐会员买单了。</p>
+<p>能少花钱，同时又能通过折腾这套系统提升自己解决问题的能力，何乐而不为呢？而且我之前用 Apple Music 养成了按“专辑”听歌的习惯，很喜欢从一张完整专辑里去发现歌曲，而不是听算法推荐的单曲碎片。</p>
+<p>但这又带来了一个很棘手的问题：<mark style="background: #ADCCFFA6;">去哪里找一个靠谱、稳定、内容又全的音源？</mark></p>
+<p>我实际使用下来发现，不同音乐平台的覆盖完全不同。比如 HiFiTi 的资源确实很丰富，很多经典 CD Rip 和无损都能找到，但它依赖社区用户上传，并不是“要啥有啥”。</p>
+<p>比如之前看韩剧《机智医生生活》，我超级超级喜欢里面的一首插曲 《Let’s Forget It》。曹政奭那种带着一丝沧桑感的嗓音一出来，一下子就把我拉回到了金隽婠和李翼纯那段让人上头的甜蜜爱情里。当时我兴冲冲地跑去 HiFiTi 搜，结果整部剧的 OST 居然一首都没有！而且这种第三方分享网站随时可能关停跑路，作为长期依靠的音源，心里终究不踏实。</p>
+<p><img src="https://img.haozi.space/img2026/20260905125348196.png" alt="navid1.png|587"></p>
+<p>那种急着想听歌却找不到资源（而且是长期稳定资源）的挫败感，让我开始寻找替代方案——最后发现 YouTube Music 上几乎一应俱全。</p>
+<p>这是当时在 YouTube Music 上搜索《机智医生生活OST》，得到的一系列结果：</p>
+<p><img src="https://img.haozi.space/img2026/20260905125428462.png" alt="navid2.png|585"></p>
+<p>点进插曲 《Let’s Forget It》的详细界面，发现音乐的 Title、Artist、Album、Release Date 等元数据非常完整，甚至还附带封面缩略图。</p>
+<p><img src="https://img.haozi.space/img2026/20260905125445714.png" alt="navid3.png|603"></p>
+<p>这让我意识到：<mark style="background: #ADCCFFA6;">YouTube Music 是一个很不错的长期音源储备。</mark></p>
+<p>我不再执着于找到一个“万能”的音乐网站，而是开始搭一个可以接受不同来源的音乐库，最后统一交给 Navidrome 来播放。我需要的不是另一个“音乐商店”，而是一个能把自己的音乐文件变成个人流媒体服务的服务器。</p>
+<p>除了 YouTube Music ，我的 Navidrome 音乐库还可以接受不同的音乐来源：</p>
+<p><img src="https://img.haozi.space/img2026/20260905112612006.png" alt="navidraw1.png"></p>
+<hr>
+<h1>怎么搭建系统</h1>
+<p>搭着搭着，我发现一个很重要的原则：<mark style="background: #ADCCFFA6;">不要找一个软件包办所有事情，而是让每个工具只负责它最擅长的事情。</mark></p>
+<h2 id="整体架构">整体架构</h2>
+<p>先看整套系统的运作流程：</p>
+<p><code>yt-dlp</code> 负责下载音频 -&gt; <code>beets</code> 负责匹配 MusicBrainz 整理、刮削封面、拉取同步歌词 -&gt; 下载整理好的歌曲文件存入 Navidrome 音乐文件夹 -&gt; 客户端通过 IPv6 / tailscale 访问服务器对应端口，进行播放音乐<br>
+<img src="https://img.haozi.space/img2026/20260905112645560.png" alt="navidraw2.png"></p>
+<p>真正让我觉得这套架构舒服的地方，是每个环节可以独立出问题、独立排查。</p>
+<hr>
+<h2 id="前置准备：工具依赖与代理配置">前置准备：工具依赖与代理配置</h2>
+<p>在正式开始搭建前，先说明一下整套系统依赖的核心工具与安装方法。</p>
+<p>强烈推荐使用 Windows 官方包管理器 <strong>winget</strong>，Win11 自带，Win10 不一定自带，但可以很方便地装上。它可以极大地简化命令行工具的安装与更新，避免手忙脚乱地去官网寻找解压包和手动配置环境变量。如果你的系统还没有安装 winget，可以通过 Microsoft Store 快速获取，非常值得安装的一款小工具！</p>
+<p>通过 winget，只需在终端中运行以下命令即可完成 <code>yt-dlp</code> 的安装：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget install yt<span class="literal">-dlp</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>关于 FFmpeg 的说明：<code>yt-dlp</code> 进行音频提取和转码需要依赖 <code>FFmpeg</code>。好消息是，通过 <code>winget install yt-dlp</code> 安装时，会自动将 <code>ffmpeg</code>、<code>ffprobe</code> 等依赖一并安装到位，无需额外操作。</p>
+</blockquote>
+<p>此外，整套方案还有一个很现实的前提：<mark style="background: #ADCCFFA6;">网络必须能够正常访问 YouTube。</mark> 整个获取链路的入口是 <code>yt-dlp</code>，如果 YouTube 无法访问，后面的 beets、MusicBrainz、封面和歌词都没有意义。</p>
+<p>我在 Windows 上使用 v2rayN，本地代理监听在 <code>10808</code> 端口（注意：不同软件的端口不同，需按实际情况修改）。为了避免每次下载都输入代理参数，首先找到 <code>yt-dlp</code> 的 config 文件的位置：</p>
+<p>在文件资源管理器输入以下命令：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%APPDATA%\yt-dlp\</span><br></pre></td></tr></table></figure>
+<p>把代理写进了配置文件：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--proxy http://127.0.0.1:10808</span><br></pre></td></tr></table></figure>
+<p>这样以后只需要运行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yt<span class="literal">-dlp</span> <span class="string">&quot;YouTube Music URL&quot;</span></span><br></pre></td></tr></table></figure>
+<p>就可以自动走代理下载。</p>
+<p>关于代理的问题，在这里不多说。</p>
+<hr>
+<h2 id="yt-dlp：负责“拿到音乐”">yt-dlp：负责“拿到音乐”</h2>
+<p>我常用的下载命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yt<span class="literal">-dlp</span> `</span><br><span class="line">  <span class="literal">--no-playlist</span> `</span><br><span class="line">  <span class="literal">-x</span> `</span><br><span class="line">  <span class="literal">--audio-format</span> opus `</span><br><span class="line">  <span class="literal">--embed-metadata</span> `</span><br><span class="line">  <span class="literal">--embed-thumbnail</span> `</span><br><span class="line">  <span class="literal">-o</span> <span class="string">&quot;E:\yt-dlp\%(artist)s - %(title)s.%(ext)s&quot;</span> `</span><br><span class="line">  <span class="string">&quot;YouTube Music URL&quot;</span></span><br></pre></td></tr></table></figure>
+<p>这里有一个很有价值的技巧：<code>--no-playlist</code> 参数控制的是只下载当前单曲。如果想下载整个歌单或专辑，只要去掉 <code>--no-playlist</code> 即可。</p>
+<p>单曲适合“发现一首收一首”，Playlist 和专辑适合“发现一个喜欢的集合，就一次性处理”。把 Playlist 的 URL 交给 yt-dlp，原本需要重复几十次的操作就变成了一次批处理。</p>
+<p>日志输出示例：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[info] Downloading 1 format(s): 251</span><br><span class="line">[info] Downloading video thumbnail ...</span><br><span class="line">[download] Destination: E:\yt-dlp\鳳凰傳奇 - 全是愛.webm</span><br><span class="line">[ExtractAudio] Destination: E:\yt-dlp\鳳凰傳奇 - 全是愛.opus</span><br><span class="line">[Metadata] Adding metadata</span><br><span class="line">[EmbedThumbnail] mutagen: Adding thumbnail</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="beets：负责“整理与补全”的核心大脑">beets：负责“整理与补全”的核心大脑</h2>
+<p>beets 是整个系统里最像“大脑”的部分。需要说明的是，<code>fetchart</code> 和 <code>lyrics</code> 并不是独立的第三方软件，它们全都是 beets 官方自带的强大扩展插件。</p>
+<h3 id="安装与验证">安装与验证</h3>
+<p>在 Windows 环境下，通过 pip 安装 beets：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python <span class="literal">-m</span> pip install <span class="literal">--user</span> beets</span><br></pre></td></tr></table></figure>
+<p>安装完成后，在 PowerShell 中验证版本及默认插件加载情况：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Users\DEL&gt; beet version</span><br><span class="line">beets version <span class="number">2.13</span>.<span class="number">1</span></span><br><span class="line">Python version <span class="number">3.12</span>.<span class="number">7</span></span><br><span class="line">plugins: embedart, fetchart, lyrics, musicbrainz</span><br></pre></td></tr></table></figure>
+<p>beets 的数据库文件位于 <code>%APPDATA%\beets\library.db</code><br>
+配置文件位于 <code>%APPDATA%\beets\config.yaml</code></p>
+<blockquote>
+<p>需要注意的是：数据库本身体积非常小，因为它保存的是索引和音轨元数据，而不是复制一份真实的音频文件。</p>
+</blockquote>
+<h3 id="我的-beets-配置">我的 beets 配置</h3>
+<p>需要注意的是，首次安装 beets 后，配置文件默认并不存在。如果文件夹或文件不存在，可以通过以下 PowerShell 命令安全创建（若文件已存在则跳过，不会覆盖现有配置）：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="operator">-not</span> (<span class="built_in">Test-Path</span> <span class="string">&quot;<span class="variable">$env:APPDATA</span>\beets\config.yaml&quot;</span>)) &#123; <span class="built_in">New-Item</span> <span class="literal">-ItemType</span> File <span class="literal">-Path</span> <span class="string">&quot;<span class="variable">$env:APPDATA</span>\beets\config.yaml&quot;</span> <span class="literal">-Force</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>下面是我整理后的 <code>config.yaml</code> 配置文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="comment"># Beets / Navidrome 基础设置</span></span><br><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="attr">directory:</span> <span class="string">E:/navidrome/music</span></span><br><span class="line"><span class="attr">library:</span> <span class="string">C:/Users/DEL/AppData/Roaming/beets/library.db</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始发行日期优先</span></span><br><span class="line"><span class="attr">original_date:</span> <span class="literal">yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="comment"># 导入与匹配策略 (Import)</span></span><br><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="attr">import:</span></span><br><span class="line">  <span class="comment"># 把 beets 处理后的标签写回文件</span></span><br><span class="line">  <span class="attr">write:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="comment"># 导入成功后自动移动文件到正式音乐库</span></span><br><span class="line">  <span class="attr">move:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="attr">copy:</span> <span class="literal">no</span></span><br><span class="line">  <span class="comment"># 自动尝试 MusicBrainz 匹配</span></span><br><span class="line">  <span class="attr">autotag:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="comment"># 同一个目录里允许按单曲分组</span></span><br><span class="line">  <span class="attr">group_albums:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="comment"># 保留已有标签作为匹配基础</span></span><br><span class="line">  <span class="attr">from_scratch:</span> <span class="literal">no</span></span><br><span class="line">  <span class="comment"># 发生无法高置信度匹配时不要自动乱套</span></span><br><span class="line">  <span class="attr">quiet_fallback:</span> <span class="literal">no</span></span><br><span class="line">  <span class="comment"># 导入时显示详细的匹配对比</span></span><br><span class="line">  <span class="attr">detail:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="comment"># 继续之前中断的导入</span></span><br><span class="line">  <span class="attr">resume:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="comment"># 只有一个候选时不要盲目自动选中</span></span><br><span class="line">  <span class="attr">singletons:</span> <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="comment"># 路径结构 (Paths)</span></span><br><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="attr">paths:</span></span><br><span class="line">  <span class="attr">default:</span> <span class="string">$albumartist/$album/$track</span> <span class="bullet">-</span> <span class="string">$title</span></span><br><span class="line">  <span class="attr">singleton:</span> <span class="string">$albumartist/$album/$title</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="comment"># 插件启用 (Plugins)</span></span><br><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="attr">plugins:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">musicbrainz</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">fetchart</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">embedart</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">lyrics</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="comment"># 插件详细配置</span></span><br><span class="line"><span class="comment"># =========================</span></span><br><span class="line"><span class="attr">musicbrainz:</span></span><br><span class="line">  <span class="attr">search_limit:</span> <span class="number">5</span></span><br><span class="line">  <span class="attr">search_query_ascii:</span> <span class="literal">no</span></span><br><span class="line">  <span class="attr">genres:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="attr">genres_tag:</span> <span class="string">genre</span></span><br><span class="line">  <span class="attr">external_ids:</span></span><br><span class="line">    <span class="attr">discogs:</span> <span class="literal">no</span></span><br><span class="line">    <span class="attr">bandcamp:</span> <span class="literal">no</span></span><br><span class="line">    <span class="attr">spotify:</span> <span class="literal">no</span></span><br><span class="line">    <span class="attr">deezer:</span> <span class="literal">no</span></span><br><span class="line">    <span class="attr">tidal:</span> <span class="literal">no</span></span><br><span class="line">  <span class="attr">aliases_as_credits:</span> <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="attr">fetchart:</span></span><br><span class="line">  <span class="attr">auto:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="attr">minwidth:</span> <span class="number">500</span></span><br><span class="line">  <span class="attr">maxwidth:</span> <span class="number">1200</span></span><br><span class="line">  <span class="attr">sources:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">filesystem</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">coverart</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">itunes</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">albumart</span></span><br><span class="line">  <span class="attr">art_filename:</span> <span class="string">cover.jpg</span></span><br><span class="line"></span><br><span class="line"><span class="attr">embedart:</span></span><br><span class="line">  <span class="attr">auto:</span> <span class="literal">yes</span></span><br><span class="line"></span><br><span class="line"><span class="attr">lyrics:</span></span><br><span class="line">  <span class="attr">auto:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="attr">synced:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="attr">keep_synced:</span> <span class="literal">yes</span></span><br><span class="line">  <span class="attr">dist_thresh:</span> <span class="number">0.11</span></span><br><span class="line">  <span class="attr">sources:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">lrclib</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">lrcmux</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">genius</span></span><br><span class="line">  <span class="attr">force:</span> <span class="literal">no</span></span><br></pre></td></tr></table></figure>
+<h3 id="插件协同">插件协同</h3>
+<p>在配置 <code>config.yaml</code> 开启插件后，beets 便化身为全能中枢：</p>
+<ul>
+<li>
+<p><strong>MusicBrainz</strong>（辅助识别）：<br>
+负责识别歌曲、确认身份与标准命名。最开始我以为：MusicBrainz 既然是权威数据库，那匹配之后照着改就行了。后来发现完全不是这样。<br>
+例如 YouTube Music 上的艺人名和歌名是英文 <code>Mido and Falasol - Me to You, You to Me</code>，而 MusicBrainz 匹配到的全韩文 <code>미도와 파라솔 - 너에게 난, 나에게 넌</code>，虽然是同一首歌，但全韩文不符合我的检索习惯；又比如戴佩妮与 GAI 周延合唱的《明知山》，MusicBrainz 甚至可能给出一个完全不相关的候选。</p>
+<p>所以我形成了自己的原则：<mark style="background: #ADCCFFA6;">MusicBrainz 负责确认“这是什么”，但不一定决定“我应该怎么显示它”。</mark></p>
+<ol>
+<li>匹配明显正确：执行 <code>Apply</code></li>
+<li>明显错误或语言不合习惯：执行 <code>Use as-is</code>（保持原样）</li>
+<li>模棱两可：人工看一眼对比结果再决定</li>
+</ol>
+</li>
+<li>
+<p><strong><code>fetchart</code></strong> &amp; <strong><code>embedart</code></strong> 插件（正方形封面补全与嵌入）：<br>
+自动解决封面问题。yt-dlp 抓到的 YouTube 封面往往是 16:9 的视频缩略图，在播放器里很不美观。<code>fetchart</code> 会根据 Artist / Album 自动拉取高质量正方形专辑封面，并由 <code>embedart</code> 嵌进音频文件本身中。</p>
+</li>
+</ul>
+<p>YouTube 封面和 fetchart 封面的对比：</p>
+<div class="mobile-image-row">
+  <img src="https://img.haozi.space/img2026/20260905130634127.png">
+  <img src="https://img.haozi.space/img2026/20260905130643172.png">
+</div>
+<ul>
+<li><strong><code>lyrics</code></strong> 插件（同步歌词拉取）：<br>
+自动通过 lrclib、lrcmux 等源拉取 LRC 同步歌词并嵌入绑定。</li>
+</ul>
+<h3 id="一次单曲导入流程">一次单曲导入流程</h3>
+<p>当通过 <code>yt-dlp</code> 下载好一首单曲后，我们运行 <code>beet import</code> 命令将其打标并归档。下面是一次真实的终端导入演示：</p>
+<p>一般通过以下命令导入单曲：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">beet import &quot;音乐文件所在的路径&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Users\DEL&gt; beet import <span class="string">&quot;E:\yt-dlp\伍佰 &amp; China Blue - 挪威的森林.opus&quot;</span></span><br><span class="line"></span><br><span class="line">E:\yt<span class="literal">-dlp</span>\伍佰 &amp; China Blue - 挪威的森林.opus (<span class="number">1</span> items)</span><br><span class="line"></span><br><span class="line">Finding tags <span class="keyword">for</span> album <span class="string">&quot;伍佰 &amp; China Blue - 愛情的盡頭&quot;</span>.</span><br><span class="line">  Candidates:</span><br><span class="line">  <span class="number">1</span>. <span class="number">46.8</span>% 伍佰 &amp; China Blue - 愛情的盡頭</span><br><span class="line">             ≠ year, missing tracks</span><br><span class="line">             MusicBrainz, <span class="built_in">CD</span>, <span class="number">1996</span>, TW, 魔岩唱片, None, None</span><br><span class="line">  <span class="number">2</span>. <span class="number">43.2</span>% 伍佰 &amp; China Blue - 愛情的盡頭</span><br><span class="line">             ≠ year, tracks, missing tracks</span><br><span class="line">             MusicBrainz, <span class="built_in">CD</span>, <span class="number">1996</span>, TW, 魔岩唱片股份有限公司, MSD<span class="literal">-018</span>, None</span><br><span class="line">  <span class="number">3</span>. <span class="number">34.4</span>% 伍佰 - 愛情的盡頭</span><br><span class="line">             ≠ artist, year, missing tracks</span><br><span class="line">             MusicBrainz, None, <span class="number">1996</span>, TW, None, None, None</span><br><span class="line">  <span class="number">4</span>. <span class="number">25.9</span>% 伍佰 &amp; China Blue - 无尽闪亮的哀愁</span><br><span class="line">             ≠ album, year, tracks, ...</span><br><span class="line">             MusicBrainz, <span class="built_in">CD</span>, <span class="number">2013</span>, TW, Universal Music, <span class="number">889</span> <span class="number">676</span><span class="literal">-9</span>, None</span><br><span class="line">  <span class="number">5</span>. <span class="number">24.9</span>% 伍佰 &amp; China Blue - 无尽闪亮的哀愁</span><br><span class="line">             ≠ album, year, tracks, ...</span><br><span class="line">             MusicBrainz, Digital Media, <span class="number">2013</span>, CN, 環球音樂, None, None</span><br><span class="line">➜ <span class="comment"># selection (default 1), Skip, Use as-is, as Tracks, Group albums,</span></span><br><span class="line">Enter search, enter Id, aBort? <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  Match (<span class="number">46.8</span>%):</span><br><span class="line">  伍佰 &amp; China Blue - 愛情的盡頭</span><br><span class="line">  ≠ year, missing tracks</span><br><span class="line">  MusicBrainz, <span class="built_in">CD</span>, <span class="number">1996</span>, TW, 魔岩唱片, None, None</span><br><span class="line">  https://musicbrainz.org/release/f8eaef16<span class="literal">-383a-415d-ac9d-a4795c9e0cd2</span></span><br><span class="line">  * Artist: 伍佰 &amp; China Blue</span><br><span class="line">  * Album: 愛情的盡頭</span><br><span class="line">     ≠ (<span class="comment">#0) 挪威的森林 (6:31) -&gt; (#9) 挪威的森林 (6:31)</span></span><br><span class="line">Missing tracks (<span class="number">9</span>/<span class="number">10</span> - <span class="number">90.0</span>%):</span><br><span class="line"> ! 夏夜晚風 (<span class="comment">#1) (3:34)</span></span><br><span class="line"> ! 愛情的盡頭 (<span class="comment">#2) (6:15)</span></span><br><span class="line"> ! 親愛的，你喝醉了 (<span class="comment">#3) (3:48)</span></span><br><span class="line"> ! 變 (<span class="comment">#4) (3:31)</span></span><br><span class="line"> ! 七彩燈光 (<span class="comment">#5) (5:53)</span></span><br><span class="line"> ! Last Dance (<span class="comment">#6) (4:31)</span></span><br><span class="line"> ! 青春 (<span class="comment">#7) (3:30)</span></span><br><span class="line"> ! 人生一場夢 (<span class="comment">#8) (4:00)</span></span><br><span class="line"> ! 隨風而去 (<span class="comment">#10) (3:12)</span></span><br><span class="line">➜ Apply, More candidates, Skip, Use as<span class="operator">-is</span>, as Tracks, <span class="built_in">Group</span> albums,</span><br><span class="line">Enter search, enter Id, aBort? a</span><br></pre></td></tr></table></figure>
+<p>在这段交互中，非常形象地展示了 beets 工作的细节与坑点应对：</p>
+<ol>
+<li>匹配机制与报警：<code>beets</code> 默认会优先把单曲当成完整专辑来匹配，因此列出了候选专辑并警报 <code>Missing tracks (9/10 - 90.0%)</code>。</li>
+<li>正确应对选项：面对提示 <code>➜ Apply, More candidates, Skip, Use as-is, as Tracks...</code> 时，按下键盘 <code>a</code>（即 <code>Apply</code>），确认接受当前专辑匹配结果，选定后，<code>beets</code> 就会以此为准抓取封面歌词并归入专辑档案，自动整理归档入 <code>E:\\\\navidrome\\\\music</code> 正式音乐库：</li>
+</ol>
+<p><img src="https://img.haozi.space/img2026/20260906083714908.png" alt="574"></p>
+<p>不过这里的选择因人而异：如果你本来就想按专辑归档管理，选 <code>Apply</code> 没问题；但如果你只是想收藏某一首单曲（甚至这首歌压根没有所属专辑），那更合适的做法是在导入时加上 <code>-s</code> 参数，直接以单曲模式导入，跳过专辑匹配。具体用法见后文「补充技巧-单曲的识别」部分。</p>
+<h3 id="专辑导入流程补充">专辑导入流程补充</h3>
+<p>专辑可以从 YouTube music 下载获取，也可以从其他渠道获得，在这里以网络上下载的 wav 未分轨的专辑文件为例子说明：</p>
+<p>首先，需要下载一个分轨工具：<a target="_blank" rel="noopener" href="https://cue.tools/wiki/CUETools_Download#Download">CUETools</a></p>
+<p>至于你问为什么要分轨，因为如果不分轨，一张专辑都在一个 wav 里面，beets是无法识别的。</p>
+<p><img src="https://img.haozi.space/img2026/20260905144332059.png" alt="navid9.png|588"></p>
+<p>进入 CUETools 进行整轨文件的分轨：</p>
+<p><img src="https://img.haozi.space/img2026/20260905144351470.png" alt="navid7.png|536"></p>
+<p>可以看到，歌曲分轨成功，就是这么舒服，就是这么简单！</p>
+<p><img src="https://img.haozi.space/img2026/20260905144359470.png" alt="navid8.png|596"></p>
+<p>剩下的导入流程和单曲导入大差不差，唯一的差别在于 <code>beet import</code> 后面接的路径需要是整张专辑歌曲所在的路径，注意一下这一点应该就没有什么问题了。</p>
+<hr>
+<h2 id="Navidrome：负责向外展示音乐">Navidrome：负责向外展示音乐</h2>
+<p>Navidrome 的部署可以在 Windows 本地部署，也可以通过 Docker 部署（适合后续迁移）。在 Windows 下，Navidrome 原生支持通过自身命令将其注册为 Windows 后台服务（<code>Navidrome.exe service execute</code> 机制），实现开机自启与后台无感运行。</p>
+<p>修改主文件库配置时没有图形交互界面，需要直接修改安装路径下的 ini 配置文件。</p>
+<p>首先进入安装目录：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Navidrome</span><br></pre></td></tr></table></figure>
+<p>打开 <code>navidrome.ini</code>，通过更改 <code>MusicFolder</code> 的值来指定 Navidrome 的主音乐文件库：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[default]</span></span><br><span class="line"><span class="attr">Port</span>=<span class="string">&#x27;4533&#x27;</span></span><br><span class="line"><span class="attr">MusicFolder</span>=<span class="string">&#x27;E:\navidrome\music&#x27;</span></span><br><span class="line"><span class="attr">DataFolder</span>=<span class="string">&#x27;C:\ProgramData\Navidrome\&#x27;</span></span><br><span class="line"><span class="string">FFmpegPath=&#x27;</span>C:\Program Files\Navidrome\ffmpeg.exe<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>更改完成后，通过 PowerShell 以管理员权限重启 Navidrome 服务即可生效：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Restart-Service</span> Navidrome</span><br></pre></td></tr></table></figure>
+<p>或者使用服务控制命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net stop Navidrome</span><br><span class="line">net <span class="built_in">start</span> Navidrome</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>日常管理小技巧：</p>
+<ul>
+<li>查看服务状态：<code>Get-Service Navidrome</code></li>
+<li>实时查看运行日志：<code>Get-Content &quot;C:\ProgramData\Navidrome\navidrome.log&quot; -Wait</code></li>
+</ul>
+</blockquote>
+<p>重启服务后，进入后台管理界面 <a target="_blank" rel="noopener" href="http://localhost:4533">http://localhost:4533</a>，观察音乐库路径更改是否生效：</p>
+<p><img src="https://img.haozi.space/img2026/20260905161740044.png" alt="navid10.png|597"></p>
+<hr>
+<h2 id="客户端访问">客户端访问</h2>
+<p>关于客户端的选用，可以看看官方的网站：<a target="_blank" rel="noopener" href="https://www.Navidrome.org/apps/?platform=windows">Client Apps | Navidrome</a>。</p>
+<p>我日常使用的比较多的是 iOS 端的 Amcfy Music，选择它的理由有很多，比如有实时的息屏歌词显示，而且有小组件可以使用，缺点是界面和 Apple Music 相比不够苹果化，界面没有那么圆润流畅。</p>
+<div class="mobile-image-row">
+  <img src="https://img.haozi.space/img2026/20260905163505811.png">
+</div>
+<p>服务搭建好后，在局域网内直接访问 服务端 IP 就能听歌。但如果出门在外，手机客户端该如何连接后端的 Navidrome 呢？</p>
+<p>目前我有两种成熟的连接策略：</p>
+<ol>
+<li><strong>IPv6</strong> 直连访问：如果家里宽带带有公网 IPv6 地址，配置好 DDNS 动态域名解析与端口转发，就能以极低延迟直连家里的音乐服务。具体配置流程可以参考我之前写的这篇文章：<a href="/2026/08/09/win11-iPv6-npm/" title="基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露">基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露</a> 。</li>
+<li><strong>Tailscale</strong> 虚拟局域网：如果不具备公网 IP 环境，或者不想将服务暴露在公网上，直接开启 Tailscale 构建异地虚拟局域网是最方便的安全选择。详细走通与实战流程可以看我的另一篇记录：<a href="/2026/08/13/260813_IPv6_Padavan_Tailscale/" title="老毛子 Padavan 路由器 IPv6 踩坑全记录与 Tailscale 直连优化">老毛子 Padavan 路由器 IPv6 踩坑全记录与 Tailscale 直连优化</a>，这种方法延迟可能会比较大，但是如果客户端和服务器连接在同一个网络的情况下，通常可以做到 direct 直连。</li>
+</ol>
+<hr>
+<h1>长期维护</h1>
+<p>有人可能会问：Navidrome 本身或其它第三方客户端难道不能直接自动刮削封面和歌词吗？为什么还要费劲用 beets 在本地处理好再导入？</p>
+<p>对我来说，这种<mark style="background: #ADCCFFA6;">数据与服务解耦</mark>的做法有着极其关键的意义：</p>
+<ol>
+<li>封面与歌词质量完全可控：不用忍受服务端刮削错乱的低清图片或匹配失败的歌词；</li>
+<li>元数据直接写入音频文件，随时自由迁移：所有 Metadata、封面和 LRC 歌词全部内嵌在文件本身中。以后哪怕我换掉 Navidrome，换成 Plex、Jellyfin 甚至移动到云端，所有音乐数据依然完好无损，绝不会因为服务器迁移而丢失；</li>
+</ol>
+<p><img src="https://img.haozi.space/img2026/20260905165944540.png" alt="navidraw4.png"></p>
+<ol start="3">
+<li>“前置自动化整理”的架构：我将“下载区”与“正式库”彻底分离：
+<ul>
+<li>下载区：<code>E:\yt-dlp</code>（临时暂存）</li>
+<li>正式库：<code>E:\navidrome\music</code>（只存放经过 beets 筛选整理后的音乐）</li>
+</ul>
+</li>
+</ol>
+<p>这样的架构让各个模块彻底解耦：换下载工具不影响 Navidrome，换歌词/封面插件不影响音频存储，换播放服务器不影响数据资产。</p>
+<hr>
+<h1>补充技巧</h1>
+<ul>
+<li>
+<p>下载报 <code>HTTP Error 403: Forbidden</code> 异常的避坑经验：<br>
+如果运行 <code>yt-dlp</code> 下载时提示 403 错误或被 YouTube 识别为“未登录机器人流量拦截”，往往是因为手动下载的可执行文件版本过老，触发了 YouTube 接口的风控机制。此时最快最省心的解决方法不是繁琐地配置 Cookie，而是直接使用包管理器重新覆盖安装最新版：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget install yt<span class="literal">-dlp</span> <span class="literal">--force</span></span><br></pre></td></tr></table></figure>
+<p>或者通过 <code>yt-dlp -U</code> 强制更新到最新版本，问题即可迎刃而解！</p>
+</li>
+<li>
+<p>如果想强制重新获取某一首歌的歌词，可以执行：</p>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">beet lyrics <span class="operator">-f</span> title:<span class="string">&quot;月亮&quot;</span></span><br></pre></td></tr></table></figure>
+<p>对于已有同步歌词的歌曲，提示 <code>Keeping synced lyrics</code> 说明原有的歌词已被妥善保留。</p>
+<ul>
+<li>单曲的识别，只需要在命令里加一个小小的 <code>-s</code> 参数：</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">beet import <span class="literal">-s</span> <span class="string">&quot;E:\test\2015-清风徐来[单曲]&quot;</span></span><br></pre></td></tr></table></figure>
+<p>这是为了明确告诉 beets：“这是一首独立的单曲，不需要去找整张专辑”。</p>
+<hr>
+<h1>未来展望</h1>
+<p>目前这套系统保存在我Windows 11 系统的笔记本电脑里，受限于内网环境，虽然有 IPv6 和 Tailscale 加持，但面对一些复杂网络场景（比如网络波动或主机未开机），依然无法做到 100% 随时随地瞬间响应。</p>
+<p>因此，我后续有两个很明确的升级和探索小计划：</p>
+<ol>
+<li>
+<p>迁移至公网云服务器：购买一个带有固定公网 IP 的云服务器，直接把 Navidrome 部署到云端。得益于此前做好的“数据解耦”设计，到时候我只需要把 <code>E:\navidrome\music</code> 整个音乐库打包同步上传，就能以极低的成本完成迁移，实现毫无顾虑的“随时随地无缝听歌”；</p>
+</li>
+<li>
+<p>开发并开源“一键自动化导入工具”：我打算把整套流程封装，作为我在 GitHub 上的第一个个人项目发布！它将提供傻瓜式环境一键配置（自动处理代理环境），用户只需要输入歌名或 URL，系统便全自动完成获取、匹配、正方形封面刮削、歌词拉取并写入目录。</p>
+</li>
+</ol>
+<p>工具的流程图如下：</p>
+<p><img src="https://img.haozi.space/img2026/20260905125202757.png" alt="navidraw3.png"></p>
+<p>我最终想建立的，不是一个“全世界最高音质”的展示柜，而是一套属于我自己、可以不断积累、可以随时访问、可以逐步升级，而且多年以后依然愿意维护的音乐系统。</p>
+
+    </div>
+
+    
+    
+    <!-- Giscus Comments -->
+<div id="giscus-container" style="margin-top: 3rem;margin-bottom:3rem;">
+  <script src="https://giscus.app/client.js"
+    data-repo="haozi1103/giscus-comments"
+    data-repo-id="R_kgDOS3IYYw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOS3IYY84C-7d9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="dark"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+        <div class="reward-container">
+  <div>如果这篇文章对你有帮助，请我喝杯咖啡吧 ☕</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="haozi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="haozi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>haozi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://haozi.space/2026/09/05/260905_yt_navid_music/" title="从 YouTube Music 到 Navidrome：我搭建了一套属于自己的音乐库">http://haozi.space/2026/09/05/260905_yt_navid_music/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/29/%E7%99%BD%E6%8F%8F%E6%B5%81%E6%B0%B4/" rel="prev" title="白描流水">
+      <i class="fa fa-chevron-left"></i> 白描流水
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">从 YouTube Music 到 Navidrome：我搭建了一套属于自己的音乐库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">为什么要搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">怎么搭建系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">整体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87%EF%BC%9A%E5%B7%A5%E5%85%B7%E4%BE%9D%E8%B5%96%E4%B8%8E%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">前置准备：工具依赖与代理配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yt-dlp%EF%BC%9A%E8%B4%9F%E8%B4%A3%E2%80%9C%E6%8B%BF%E5%88%B0%E9%9F%B3%E4%B9%90%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">yt-dlp：负责“拿到音乐”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#beets%EF%BC%9A%E8%B4%9F%E8%B4%A3%E2%80%9C%E6%95%B4%E7%90%86%E4%B8%8E%E8%A1%A5%E5%85%A8%E2%80%9D%E7%9A%84%E6%A0%B8%E5%BF%83%E5%A4%A7%E8%84%91"><span class="nav-number">3.4.</span> <span class="nav-text">beets：负责“整理与补全”的核心大脑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%AA%8C%E8%AF%81"><span class="nav-number">3.4.1.</span> <span class="nav-text">安装与验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E7%9A%84-beets-%E9%85%8D%E7%BD%AE"><span class="nav-number">3.4.2.</span> <span class="nav-text">我的 beets 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%8D%8F%E5%90%8C"><span class="nav-number">3.4.3.</span> <span class="nav-text">插件协同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E6%AC%A1%E5%8D%95%E6%9B%B2%E5%AF%BC%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="nav-number">3.4.4.</span> <span class="nav-text">一次单曲导入流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E8%BE%91%E5%AF%BC%E5%85%A5%E6%B5%81%E7%A8%8B%E8%A1%A5%E5%85%85"><span class="nav-number">3.4.5.</span> <span class="nav-text">专辑导入流程补充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Navidrome%EF%BC%9A%E8%B4%9F%E8%B4%A3%E5%90%91%E5%A4%96%E5%B1%95%E7%A4%BA%E9%9F%B3%E4%B9%90"><span class="nav-number">3.5.</span> <span class="nav-text">Navidrome：负责向外展示音乐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE"><span class="nav-number">3.6.</span> <span class="nav-text">客户端访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">长期维护</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">补充技巧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">未来展望</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="haozi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">haozi</p>
+  <div class="site-description" itemprop="description">折腾是理解世界的一种方式</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haozi1103" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haozi1103" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.google.com/mail/?view=cm&to=haozicurry@gmail.com" title="E-Mail → https:&#x2F;&#x2F;mail.google.com&#x2F;mail&#x2F;?view&#x3D;cm&amp;to&#x3D;haozicurry@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fas fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- Custom Sidebar Widgets -->
+<div class="sidebar-custom-wrap">
+
+  <!-- Category Quick Nav Widget -->
+    <div class="sidebar-custom-section">
+      <div class="sidebar-custom-title">
+        <i class="fas fa-code-branch"></i> 分类导航
+      </div>
+        <ul class="sidebar-category-list">
+      
+      
+        
+      
+      
+            
+      <li class="sidebar-category-item">
+        <a href="/categories/生活/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="fas fa-coffee cat-icon"></i> 生活
+          </span>
+          <span class="cat-count">12</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/工程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-lightbulb cat-icon"></i> 工程
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/教程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-keyboard cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">16</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/影视/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-play-circle cat-icon"></i> 影视
+          </span>
+          <span class="cat-count">13</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/阅读/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-bookmark cat-icon"></i> 阅读
+          </span>
+          <span class="cat-count">4</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/软件小记/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-window-restore cat-icon"></i> 软件小记
+          </span>
+          <span class="cat-count">2</span>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+</div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haozi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<!-- Terminal Pet - Aesthetic Interactive Mouse (鼠鼠) -->
+<div id="pet-toggle" class="pet-toggle" title="点击召唤终端小鼠鼠">
+  <span class="pet-toggle-icon"><i class="fa fa-terminal"></i></span>
+  <span class="pet-toggle-label">PET</span>
+</div>
+
+<div id="terminal-pet" class="terminal-pet">
+  <div class="terminal-header">
+    <div class="terminal-dots">
+      <span class="terminal-dot red" id="pet-close-dot" title="关闭宠物"></span>
+      <span class="terminal-dot yellow" title="最小化"></span>
+      <span class="terminal-dot green" title="展开"></span>
+    </div>
+    <span class="terminal-title">haozi@blog:~</span>
+    <span class="terminal-close" id="pet-close" title="收起">&minus;</span>
+  </div>
+
+  <div class="terminal-body">
+    <!-- Heart & Status animation container -->
+    <div id="pet-hearts-container" class="pet-hearts-container"></div>
+
+    <!-- Centered Container for Perfectly Aligned Mouse -->
+    <div class="pet-ascii-wrap">
+      <span id="pet-status-badge" class="pet-status-badge"></span>
+      <pre id="pet-ascii" class="pet-ascii"></pre>
+    </div>
+
+    <!-- Interactive Buttons (Vector Line Icons) -->
+    <div class="pet-actions">
+      <button class="pet-btn" id="btn-pat" title="摸摸鼠鼠"><i class="fa fa-heart-o"></i> 抚摸</button>
+      <button class="pet-btn" id="btn-feed" title="喂食物"><i class="fa fa-coffee"></i> 投喂</button>
+      <button class="pet-btn" id="btn-sleep" title="小憩一会儿"><i class="fa fa-moon-o"></i> 睡觉</button>
+    </div>
+
+    <!-- Terminal Prompt Line -->
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">$</span>
+      <span id="pet-message" class="pet-message"></span>
+      <span class="terminal-cursor">█</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Pet Toggle Button */
+.pet-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  background: rgba(35, 35, 35, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.pet-toggle:hover {
+  transform: scale(1.12);
+  border-color: #7e8027;
+  box-shadow: 0 0 15px rgba(126, 128, 39, 0.6);
+}
+.pet-toggle-icon {
+  font-size: 16px;
+  line-height: 1;
+  color: #7e8027;
+}
+.pet-toggle-label {
+  color: #a4a638;
+  font-family: 'Consolas', monospace;
+  font-size: 8px;
+  font-weight: bold;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Terminal Window Styles */
+.terminal-pet {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  width: 270px;
+  background: rgba(28, 28, 30, 0.94) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2);
+  z-index: 9999;
+  font-family: 'Consolas', 'Cascadia Code', 'Courier New', monospace;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.terminal-header {
+  background: rgba(40, 40, 43, 0.95);
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: move;
+  user-select: none;
+}
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+
+.terminal-title {
+  color: #88888d;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.terminal-close {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.terminal-close:hover {
+  color: #fff;
+  background: rgba(232, 17, 35, 0.7);
+}
+
+.terminal-body {
+  position: relative;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Mouse ASCII Outer Centered Wrapper */
+.pet-ascii-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 4px 0 10px 0;
+}
+
+/* Fix ASCII Pre element alignment & line-height to connect tail & center feet */
+.pet-ascii {
+  display: inline-block !important;
+  text-align: left !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #b0b439 !important;
+  font-family: 'Consolas', 'Courier New', 'MS Gothic', monospace !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: pre !important;
+  user-select: none;
+  text-shadow: 0 0 8px rgba(126, 128, 39, 0.3);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Floating status emoji badge */
+.pet-status-badge {
+  position: absolute;
+  top: -8px;
+  right: 45px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.pet-status-badge.active {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Interactive Action Buttons */
+.pet-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  justify-content: center;
+}
+.pet-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ddd;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pet-btn:hover {
+  background: rgba(126, 128, 39, 0.3);
+  border-color: #7e8027;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.pet-btn:active {
+  transform: translateY(1px);
+}
+
+/* Terminal Input Prompt */
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.terminal-prompt {
+  color: #7e8027;
+  font-weight: bold;
+  font-size: 12px;
+}
+.pet-message {
+  color: #d1d1d6;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.terminal-cursor {
+  color: #7e8027;
+  font-size: 12px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Floating Hearts Effect Container */
+.pet-hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.floating-heart {
+  position: absolute;
+  font-size: 14px;
+  animation: floatUp 1.2s ease-out forwards;
+  opacity: 0.9;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(80px) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px) scale(1.2);
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terminal-pet {
+    width: 230px;
+    right: 12px;
+    bottom: 70px;
+  }
+  .pet-toggle {
+    bottom: 15px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+  }
+  .pet-toggle-icon {
+    font-size: 14px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  // Connected tail \(  ) and right-shifted feet " " under belly
+  var petStates = {
+    idle: {
+      frames: [
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C･プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: ""
+    },
+    happy: {
+      frames: [
+        ["  C^プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  C>プ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-heart' style='color:#ff5f56;'></i>"
+    },
+    feed: {
+      frames: [
+        ["  C~プ°", " \\(  )", "   \" \""].join("\n"),
+        ["  Cvプ°", " \\(  )", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-coffee' style='color:#ffbd2e;'></i>"
+    },
+    sleep: {
+      frames: [
+        ["  C-プ°", " \\(uu)", "   \" \""].join("\n"),
+        ["  C-プ°", " \\(..)", "   \" \""].join("\n")
+      ],
+      badge: "<i class='fa fa-moon-o' style='color:#27c93f;'></i>"
+    }
+  };
+
+  var defaultMessages = [
+    "欢迎来到 Haozi's Blog！鼠鼠我呀~",
+    "git commit -m '投喂鼠鼠'",
+    "鼠鼠正在认真看博客...",
+    "折腾是理解世界的一种方式！",
+    "404: 奶酪未找到，急需投喂 🧀",
+    "while(true) { nap(); }",
+    "sudo belly_rub --user=visitor",
+    "编译中... 吱吱吱~ 100%"
+  ];
+
+  var currentState = 'idle';
+  var frameIndex = 0;
+  var msgIndex = 0;
+  var petEl = document.getElementById('pet-ascii');
+  var badgeEl = document.getElementById('pet-status-badge');
+  var msgEl = document.getElementById('pet-message');
+  var container = document.getElementById('terminal-pet');
+  var toggleBtn = document.getElementById('pet-toggle');
+  var closeBtn = document.getElementById('pet-close');
+  var closeDot = document.getElementById('pet-close-dot');
+  var header = container.querySelector('.terminal-header');
+  var heartsContainer = document.getElementById('pet-hearts-container');
+  var isOpen = true;
+  var stateTimer = null;
+
+  function renderMouse() {
+    if (!isOpen) return;
+    var stateObj = petStates[currentState] || petStates.idle;
+    var frames = stateObj.frames;
+    petEl.textContent = frames[frameIndex % frames.length];
+    
+    if (stateObj.badge) {
+      badgeEl.innerHTML = stateObj.badge;
+      badgeEl.classList.add('active');
+    } else {
+      badgeEl.classList.remove('active');
+    }
+    frameIndex++;
+  }
+
+  function typewriter(text, speed) {
+    speed = speed || 40;
+    msgEl.textContent = '';
+    var i = 0;
+    var timer = setInterval(function() {
+      if (i < text.length) {
+        msgEl.textContent += text[i];
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+  }
+
+  function spawnHearts(emoji) {
+    emoji = emoji || '❤️';
+    for (var i = 0; i < 3; i++) {
+      (function(delay) {
+        setTimeout(function() {
+          var heart = document.createElement('span');
+          heart.className = 'floating-heart';
+          heart.textContent = emoji;
+          heart.style.left = (35 + Math.random() * 30) + '%';
+          heartsContainer.appendChild(heart);
+          setTimeout(function() {
+            if (heart.parentNode) heart.parentNode.removeChild(heart);
+          }, 1200);
+        }, delay);
+      })(i * 200);
+    }
+  }
+
+  function setTemporaryState(state, message, emoji, duration) {
+    currentState = state;
+    frameIndex = 0;
+    renderMouse();
+    if (message) typewriter(message);
+    if (emoji) spawnHearts(emoji);
+
+    if (stateTimer) clearTimeout(stateTimer);
+    stateTimer = setTimeout(function() {
+      currentState = 'idle';
+      renderMouse();
+    }, duration || 4000);
+  }
+
+  function openPet() {
+    isOpen = true;
+    container.style.display = 'block';
+    toggleBtn.style.display = 'none';
+    renderMouse();
+    typewriter(defaultMessages[0]);
+    try { localStorage.setItem('terminal-pet-closed', 'false'); } catch(e){}
+  }
+
+  function closePet() {
+    isOpen = false;
+    container.style.display = 'none';
+    toggleBtn.style.display = 'flex';
+    try { localStorage.setItem('terminal-pet-closed', 'true'); } catch(e){}
+  }
+
+  // Check initial state from localStorage
+  try {
+    if (localStorage.getItem('terminal-pet-closed') === 'true') {
+      closePet();
+    } else {
+      openPet();
+    }
+  } catch(e) {
+    openPet();
+  }
+
+  // Event Listeners
+  toggleBtn.addEventListener('click', openPet);
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closePet();
+  });
+  if (closeDot) {
+    closeDot.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closePet();
+    });
+  }
+
+  // Action Buttons
+  var btnPat = document.getElementById('btn-pat');
+  var btnFeed = document.getElementById('btn-feed');
+  var btnSleep = document.getElementById('btn-sleep');
+
+  if (btnPat) {
+    btnPat.addEventListener('click', function() {
+      setTemporaryState('happy', '吱吱~ 被摸摸头很舒服！开心值+100', '❤️', 4000);
+    });
+  }
+  if (btnFeed) {
+    btnFeed.addEventListener('click', function() {
+      setTemporaryState('feed', '美味的奶酪！鼠鼠能量满格 🧀', '🧀', 4000);
+    });
+  }
+  if (btnSleep) {
+    btnSleep.addEventListener('click', function() {
+      setTemporaryState('sleep', '呼呼... 鼠鼠进入小憩模式 zZ', '💤', 5000);
+    });
+  }
+
+  // Click directly on ASCII Mouse
+  petEl.addEventListener('click', function() {
+    setTemporaryState('happy', '吱！你戳了戳鼠鼠~ 🐾', '✨', 3000);
+  });
+
+  // Animation Loop (Update mouse frame every 1.2s)
+  setInterval(renderMouse, 1200);
+
+  // Message Loop (Rotate default quotes every 6s if idle)
+  setInterval(function() {
+    if (!isOpen || currentState !== 'idle') return;
+    msgIndex = (msgIndex + 1) % defaultMessages.length;
+    typewriter(defaultMessages[msgIndex]);
+  }, 6000);
+
+  // Drag functionality for Terminal Header
+  var isDragging = false;
+  var dragOffsetX, dragOffsetY;
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target === closeBtn || e.target === closeDot) return;
+    isDragging = true;
+    dragOffsetX = e.clientX - container.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = 'none';
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var x = e.clientX - dragOffsetX;
+    var y = e.clientY - dragOffsetY;
+    container.style.left = x + 'px';
+    container.style.top = y + 'px';
+    container.style.right = 'auto';
+    container.style.bottom = 'auto';
+  });
+
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    container.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  });
+})();
+</script>
+
+</body>
+</html>
