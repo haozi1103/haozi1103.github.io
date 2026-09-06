@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #86c649;
+  background: #de45f9;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2921,17 +2921,31 @@ nav.pagination {
   color: #28d4a0 !important;
   transform: translateY(-2px); /* 增加一点悬浮的轻盈感 */
 }
-/* 10. Site Title (Logo Area) Customization */
+/* 10. Site Title (Logo Area) Customization - 蓝绿渐变品牌设计规范 */
 .site-title {
-  font-size: 1.5em !important; /* 字体大小 */
-  font-weight: 600 !important; /* 加粗字重 */
-  letter-spacing: 0.5px !important; /* 增加字母间距，提升级感 */
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 1.2em !important;
+  font-weight: 1600 !important; /* 900 Extra Black 超重笔画 */
+  letter-spacing: 0.3px !important; /* 经典微紧间距，强化力量感 */
+  background: linear-gradient(135deg, #28cc99 0%, #34d4cb 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  display: inline-block !important;
   transition: all 0.3s ease-in-out !important; /* 平滑过渡动画 */
 }
-/* 鼠标悬浮时变为薄荷绿 */
+/* 鼠标悬浮时微光提亮效果 */
 .brand:hover .site-title,
 .site-title:hover {
-  color: #28d4a0 !important;
+  filter: brightness(1.15) drop-shadow(0 0 10px rgba(52,212,203,0.45)) !important;
+}
+/* 顶部与底部修饰线条也统一采用绿蓝渐变 */
+.logo-line-before i,
+.logo-line-after i {
+  background: linear-gradient(to right, #28cc99, #34d4cb) !important;
+  height: 2px !important;
+  border-radius: 1px !important;
 }
 /* 11. Limit Image Height for Mobile Screenshots (Auto Scale) */
 .post-body img {

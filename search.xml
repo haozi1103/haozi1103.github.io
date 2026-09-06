@@ -229,6 +229,66 @@ DERP (Designated Encrypted Relay for Packets) 是 Tailscale 的中继节点。�
       </categories>
   </entry>
   <entry>
+    <title>C51使用技巧与注意事项</title>
+    <url>/2025/09/23/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>C51的使用技巧</p>
+<h1>键位</h1>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>键位</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>键盘</td>
+<td>tab</td>
+<td>缩进，使得代码可读性增强</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+home</td>
+<td>跳转到开头</td>
+</tr>
+<tr>
+<td>键盘</td>
+<td>ctrl+end</td>
+<td>跳转到结尾</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>configuration</td>
+<td>调整字体样式</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>build translate rebuild</td>
+<td>类似于编译（？）</td>
+</tr>
+<tr>
+<td>KEIL</td>
+<td>output</td>
+<td>需要输出isp可以编译的文件，需要调整这个</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1>注意事项</h1>
+<p>while循环后面的括号不能为空，要让他循环可以在里面写上&quot;1&quot;</p>
+<p>#include &lt;intrins.h&gt;	//“nop” need this</p>
+<p>对于发光二极管，1111 1110而不是0000 0001的时候，一个灯亮，只有当输入数字为0的时候，灯才会亮，你可以理解为只有为0的时候才有电位差，二极管才会发光</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
     <title>从 YouTube Music 到 Navidrome：我搭建了一套属于自己的音乐库</title>
     <url>/2026/09/05/260905_yt_navid_music/</url>
     <content><![CDATA[<blockquote>
@@ -510,196 +570,6 @@ DERP (Designated Encrypted Relay for Packets) 是 Tailscale 的中继节点。�
       </categories>
   </entry>
   <entry>
-    <title>使用 Cloudflare Tunnel 实现 AList 远程访问</title>
-    <url>/2026/03/07/Cloudfare+Tunnel%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>最开始只是想让自己的电脑能够被远程访问，后来逐渐开始把一些服务放在本地运行，比如下载工具、文件管理工具等。其中一个很好用的工具就是 AList，它可以把本地磁盘或者各种网盘统一挂载，通过网页来管理文件。<br>
-<img src="https://img.haozi.space/img2026/20260308101314643.png" alt="image-20260307204327371"></p>
-<h1>解决的问题</h1>
-<p>问题是 AList 默认只运行在本地</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://localhost:5244</span><br></pre></td></tr></table></figure>
-<p>如果不在电脑旁边，就无法访问。发现可以用 Cloudflare Tunnel 来实现远程访问 AList，怕自己忘了怎么配置的了，就记录下整个配置过程。</p>
-<h1>整体架构</h1>
-<p>整体结构如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">本地电脑</span><br><span class="line">AList 服务</span><br><span class="line">localhost:5244</span><br><span class="line">↓</span><br><span class="line">cloudflared</span><br><span class="line">↓</span><br><span class="line">Cloudflare Tunnel</span><br><span class="line">↓</span><br><span class="line">域名访问</span><br><span class="line">alist.haozi.space</span><br></pre></td></tr></table></figure>
-<p>访问 alist.haozi.space 时，Cloudflare 会通过 Tunnel 转发请求到本地电脑的 5244 端口。这样就实现了远程访问。</p>
-<h1>准备工作</h1>
-<p>在开始之前需要准备以下内容：</p>
-<ol>
-<li>一个 Cloudflare 账号</li>
-<li>一个已经接入 Cloudflare 的域名</li>
-<li>一台电脑</li>
-<li>已经运行的 AList 服务</li>
-</ol>
-<p>AList 默认端口是</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5244</span><br></pre></td></tr></table></figure>
-<p>本地访问地址为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://localhost:5244</span><br></pre></td></tr></table></figure>
-<p>在配置 Tunnel 之前，需要确保本地访问是正常的。<br>
-<strong>可以通过登陆127.0.0.1:5244来检验本地访问是否正常</strong>。</p>
-<h1>开始搭建</h1>
-<p>Cloudflare Tunnel 需要通过 cloudflared 程序来运行。<br>
-可以从 Cloudflare 官方下载 Windows 版本<br>
-<a href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/">https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/</a><br>
-<img src="https://img.haozi.space/img2026/20260308140747806.png" alt="image-20260306125950289"></p>
-<p>下载完成后，将程序放在一个固定目录，例如</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">F:\cloudflared</span><br></pre></td></tr></table></figure>
-<p>然后在终端中运行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared --version</span><br></pre></td></tr></table></figure>
-<p>如果可以看到版本号，说明安装成功。</p>
-<h2 id="登录-Cloudflare">登录 Cloudflare</h2>
-<p>为了让本地程序能够创建 Tunnel，需要先登录 Cloudflare。<br>
-执行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel login</span><br></pre></td></tr></table></figure>
-<p>记得在哪个盘里面，就要在哪里开始cmd操作（如果你之前跟我一样下载在F盘，就要在F盘进行cmd操作，以此类推）<br>
-<img src="https://img.haozi.space/img2026/20260308141535776.png" alt="image-20260308141535725"></p>
-<p>浏览器会自动打开 Cloudflare 登录页面。登录后选择需要绑定的域名。完成后本地会生成一个认证文件：<br>
-<img src="https://img.haozi.space/img2026/20260308141752734.png" alt="image-20260306131456755"></p>
-<p>网页会显示以下界面：</p>
-<p><img src="https://img.haozi.space/img2026/20260308141719378.png" alt="image-20260306131132603"></p>
-<h2 id="创建-Tunnel">创建 Tunnel</h2>
-<p>接下来创建一个新的 Tunnel。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel create alist-tunnel</span><br></pre></td></tr></table></figure>
-<p>其中 alist-tunnel 是 Tunnel 名称，可以自己修改。<br>
-执行成功后会生成Tunnel ID,credentials 文件。</p>
-<h2 id="创建配置文件">创建配置文件</h2>
-<p>接下来需要创建配置文件 config.yml。<br>
-示例配置</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tunnel: Tunnel_ID</span><br><span class="line">credentials-file: C:\Users\用户名\.cloudflared\Tunnel_ID.json</span><br><span class="line"></span><br><span class="line">ingress:</span><br><span class="line">  - hostname: alist.yourdomain</span><br><span class="line">    service: http://localhost:5244</span><br><span class="line">  - service: http_status:404</span><br></pre></td></tr></table></figure>
-<p><img src="https://img.haozi.space/img2026/20260308141903486.png" alt="image-20260308141903442"></p>
-<p>Tunnel_ID是 C:\Users\用户名.cloudflared 文件夹里面json文件的名称<br>
-访问 alist.yourdomain 时转发到本地 localhost:5244，如果访问其他地址,返回 404</p>
-<h2 id="DNS">DNS</h2>
-<p>进入 Cloudflare 的 DNS 管理页面。添加一条记录</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">类型 CNAME</span><br><span class="line">名称 alist</span><br><span class="line">目标 Tunnel_ID.cfargotunnel.com</span><br></pre></td></tr></table></figure>
-<p>这样配置的话，访问 alist.yourdomain,就会进入 Cloudflare Tunnel。</p>
-<h2 id="启动-Tunnel">启动 Tunnel</h2>
-<p>配置完成后启动 Tunnel</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel run alist-tunnel</span><br></pre></td></tr></table></figure>
-<p>如果一切正常，就可以在浏览器中访问</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://alist.yourdomain</span><br></pre></td></tr></table></figure>
-<p>页面会直接打开 AList</p>
-<h1>问题记录</h1>
-<p>在配置过程中可能遇到一些问题。<br>
-排查顺序一般是：</p>
-<ol>
-<li>
-<p>先确认 AList 本地是否可以访问</p>
-</li>
-<li>
-<p>再确认 cloudflared 是否在运行，如何检验是否生效？</p>
-<p>如下，终端输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /d F:\cloudflare</span><br><span class="line">cloudflared tunnel list</span><br></pre></td></tr></table></figure>
-<p>显示有connections就是有效的<br>
-<img src="https://img.haozi.space/img2026/20260310145620762.png" alt="image-20260306142146235"></p>
-</li>
-<li>
-<p>确认 Cloudflare DNS 是否正确，这一步需要去cloudflare管理界面排查</p>
-</li>
-</ol>
-<p>alist如果挂载的是天翼云盘，发现上传可能出现显示 invalid session key<br>
-解决方法：去alist界面设置一下上传方式为 旧版，解决问题</p>
-<h1>后续扩展</h1>
-<h2 id="Alist-开机启动">Alist 开机启动</h2>
-<p>在桌面建一个VBS文件</p>
-<p><img src="https://img.haozi.space/img2026/image-20260306134649623.png" alt="image-20260306134649623"></p>
-<p>在里面添加</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.run &quot;F:\alist-windows-amd64\alist.exe server&quot;, vbHide</span><br></pre></td></tr></table></figure>
-<p>把这个vbs文件拖到alist.exe所在的文件夹里面<br>
-并且右键创建快捷方式<br>
-win+R输入 shell:startup</p>
-<p><img src="https://img.haozi.space/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
-<p>把快捷指令拖进去就可以了</p>
-<h2 id="Cloudflare开机启动">Cloudflare开机启动</h2>
-<p>手动启动</p>
-<p><img src="https://img.haozi.space/img2026/image-20260306135343494.png" alt="image-20260306135343494"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel run alist</span><br></pre></td></tr></table></figure>
-<p><strong>自动启动设置</strong><br>
-在桌面建一个VBS文件，命名为 start-alist-tunnel.vbs<br>
-在里面添加</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.Run &quot;cmd /c F:\cloudflare\cloudflared tunnel run alist&quot;,0</span><br></pre></td></tr></table></figure>
-<p>win+R输入 shell:startup</p>
-<p><img src="https://img.haozi.space/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
-<p>把vbs拖进去就可以了</p>
-<h2 id="更多域名">更多域名</h2>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alist.haozi.space</span><br><span class="line">img.haozi.space</span><br><span class="line">qb.haozi.space</span><br></pre></td></tr></table></figure>
-<p>每个子域名对应不同的本地服务。这样一台普通电脑就可以逐渐变成一个小型家庭服务器。<br>
-操作很简单，在配置文件里面加上：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- hostname: qb.haozi.space</span><br><span class="line">  service: http://localhost:8081</span><br></pre></td></tr></table></figure>
-<p>config.yml变成：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tunnel: 你的tunnel-id</span><br><span class="line">credentials-file: C:\Users\你的用户名\.cloudflared\你的tunnel-id.json</span><br><span class="line"></span><br><span class="line">ingress:</span><br><span class="line">  - hostname: qb.haozi.space</span><br><span class="line">    service: http://localhost:8081</span><br><span class="line">  - hostname: alist.haozi.space</span><br><span class="line">    service: http://localhost:5244</span><br><span class="line">  - service: http_status:404</span><br></pre></td></tr></table></figure>
-<p>之后进行DNS配置即可：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Type: CNAME</span><br><span class="line">Name: qb</span><br><span class="line">Target: &lt;你的tunnel-id&gt;.cfargotunnel.com</span><br><span class="line">Proxy: 开启（橙色云）</span><br></pre></td></tr></table></figure>
-<h1>回顾</h1>
-<p>回顾整个过程，其实一开始只是想解决一个很小的问题，如何远程访问自己的电脑。但在解决问题的过程中，又接触到了Cloudflare Tunnel、AList、域名管理、内网服务暴露<br>
-技术学习往往就是这样，从一个实际需求出发，一步一步扩展。<br>
-也许过一段时间再回来看，会发现自己已经学会了很多当时觉得复杂的东西。</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>C51使用技巧与注意事项</title>
-    <url>/2025/09/23/C51-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<p>C51的使用技巧</p>
-<h1>键位</h1>
-<table>
-<thead>
-<tr>
-<th>位置</th>
-<th>键位</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>键盘</td>
-<td>tab</td>
-<td>缩进，使得代码可读性增强</td>
-</tr>
-<tr>
-<td>键盘</td>
-<td>ctrl+home</td>
-<td>跳转到开头</td>
-</tr>
-<tr>
-<td>键盘</td>
-<td>ctrl+end</td>
-<td>跳转到结尾</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>configuration</td>
-<td>调整字体样式</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>build translate rebuild</td>
-<td>类似于编译（？）</td>
-</tr>
-<tr>
-<td>KEIL</td>
-<td>output</td>
-<td>需要输出isp可以编译的文件，需要调整这个</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h1>注意事项</h1>
-<p>while循环后面的括号不能为空，要让他循环可以在里面写上&quot;1&quot;</p>
-<p>#include &lt;intrins.h&gt;	//“nop” need this</p>
-<p>对于发光二极管，1111 1110而不是0000 0001的时候，一个灯亮，只有当输入数字为0的时候，灯才会亮，你可以理解为只有为0的时候才有电位差，二极管才会发光</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Git常用命令备忘清单</title>
     <url>/2026/06/17/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%8C%87%E5%8D%97/</url>
     <content><![CDATA[<p>用多了就记住了，不用就会忘，所以写下来</p>
@@ -855,37 +725,136 @@ Cookie（可选）：如果遇到验证码问题，可以复制浏览器 Cookie<
       </categories>
   </entry>
   <entry>
-    <title>利用 GitHub Issue 免费托管本地视频教程</title>
-    <url>/2026/07/21/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260409204348853.png" alt="image-20260409204348853"></p>
-<h1>怎么做</h1>
-<h2 id="建立一个github仓库">建立一个github仓库</h2>
-<p>访问github，点击个人头像，点击<strong>github仓库</strong>repository</p>
-<p><img src="https://img.haozi.space/img2026/image-20260409200339144.png" alt="image-20260409200339144"></p>
-<p>到达以下界面，建立一个新仓库</p>
-<p><img src="https://img.haozi.space/img2026/image-20260409200644852.png" alt="image-20260409200644852"></p>
-<p>命名为video</p>
-<p><img src="https://img.haozi.space/img2026/image-20260409200719165.png" alt="image-20260409200719165"></p>
-<h2 id="上传本地视频">上传本地视频</h2>
-<p>点击仓库video，进入issue界面，建立一个新的issue</p>
-<p><img src="https://img.haozi.space/img2026/image-20260409200827074.png" alt="image-20260409200827074"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260409200910129.png" alt="image-20260409200910129"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260409201024688.png" alt="image-20260409201024688"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260409201116160.png" alt="image-20260409201116160"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260409201232932.png" alt="image-20260409201232932"></p>
-<p>得到这样的一串地址</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://private-user-images.githubusercontent.com/227099768/575928803-456bb596-5621-403f-8e68-17ec1299d1a6.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU3MzczOTcsIm5iZiI6MTc3NTczNzA5NywicGF0aCI6Ii8yMjcwOTk3NjgvNTc1OTI4ODAzLTQ1NmJiNTk2LTU2MjEtNDAzZi04ZTY4LTE3ZWMxMjk5ZDFhNi5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDA5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQwOVQxMjE4MTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04OTk0MDMzOTUzOGY0OTI4ZTI3NDUzZTI4ZTYxZjc0ZTU0OTBjY2QyZDc2ZjNjYTMwYTFkNjQ0Y2QyMzBkNDRkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.QUr0Cq4XrYwu_qXE4GdpRAipzGY_6afpNHRRz-i7Kfc</span><br></pre></td></tr></table></figure>
-<h2 id="嵌入到Typora">嵌入到Typora</h2>
-<p>打开B站随便一个视频，复制嵌入代码</p>
-<p><img src="https://img.haozi.space/img2026/image-20260409201346819.png" alt="image-20260409201346819"></p>
-<p>复制得到的应该是这样一串 东东</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;iframe src=&quot;//player.bilibili.com/player.html?isOutside=true&amp;aid=116368313679961&amp;bvid=BV1y3DjB2E9d&amp;cid=37334352602&amp;p=1&quot;</span><br><span class="line">scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img.haozi.space/img2026/image-20260409201951907.png" alt="image-20260409201951907"></p>
-<p>以下是实际效果，还是很不错的啦！适合平时上传10mb左右的小视频，视频太大就不是很行啦</p>
-<iframe src="https://private-user-images.githubusercontent.com/227099768/575922934-9a27e4a4-2ad5-43ce-8c09-d5c3a4ac46c9.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU5OTQ5MDQsIm5iZiI6MTc3NTk5NDYwNCwicGF0aCI6Ii8yMjcwOTk3NjgvNTc1OTIyOTM0LTlhMjdlNGE0LTJhZDUtNDNjZS04YzA5LWQ1YzNhNGFjNDZjOS5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMlQxMTUwMDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yMzNjOTU4YTUyNmE4MTZlNGJiNTQwYjBmZjE0MDk1OWRiM2M4NmIzYjczN2U3M2M0NTRhMjA3OTFjMzQ5NmQ5JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9dmlkZW8lMkZtcDQifQ.AJA9C2DGs6aczbBmussoqQI2RDpc05DCJZw8MTAazU0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-<h1>参考文章</h1>
-<p><a href="https://blog.csdn.net/qq_45830323/article/details/134758982">关于Typora如何插入自己的云端视频的方法</a></p>
-<p><a href="https://blog.csdn.net/weixin_45940369/article/details/130551018">GitHub 仓库的 README 直接播放视频</a></p>
+    <title>北洋园PT电影发布自查指南</title>
+    <url>/2026/03/22/PT%E7%AB%99%E7%82%B9%E8%BD%AC%E7%A7%8D%E5%8F%91%E5%B8%83/</url>
+    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260315152503944.png" alt="image-20260315152503944"></p>
+<h2 id="北洋园pt自查">北洋园pt自查</h2>
+<h3 id="电影">电影</h3>
+<ul>
+<li>
+<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
+</li>
+<li>
+<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
+</li>
+</ul>
+<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
+<p><img src="https://img.haozi.space/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
+<ul>
+<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
+</ul>
+<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
+<p><img src="https://img.haozi.space/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
+<ul>
+<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
+</ul>
+<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
+<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
+<ul>
+<li>
+<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
+<p><img src="https://img.haozi.space/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
+</li>
+<li>
+<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
+</li>
+<li>
+<p>[ ] 我确定站内没有更好的源</p>
+<p><img src="https://img.haozi.space/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
+</li>
+</ul>
+<h2 id="btschool自查">btschool自查</h2>
+<ul>
+<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
+<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
+</ul>
+<h1>发种</h1>
+<h2 id="手动发种">手动发种</h2>
+<h3 id="代码操作">代码操作</h3>
+<p><strong>引用内容</strong></p>
+<p>[quote]我是引用内容[/quote]</p>
+<p><strong>媒体信息隐藏显示</strong></p>
+<p>[hide=Mediainfo/媒体信息]</p>
+<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
+<p>[/hide]</p>
+<p><strong>图片显示</strong></p>
+<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
+<h3 id="不同站点">不同站点</h3>
+<h4 id="北洋园pt">北洋园pt</h4>
+<p><strong>基本步骤是：</strong></p>
+<ol>
+<li>从其他站点下载你想要转的资源</li>
+<li>填写发布页面（用引用id简单一点）</li>
+<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
+</ol>
+<p><strong>填写发布页面：</strong></p>
+<p>在上面那一行里面，点击候选</p>
+<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
+<p>如果要用引用种子id的话，这样去找：</p>
+<img src="https://img.haozi.space/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
+<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
+<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
+<p>提交成功以后你会跳转到一个界面，显示：</p>
+<img src="https://img.haozi.space/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
+<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
+<p>进入utorrent，选择添加种子文件</p>
+<p><img src="https://img.haozi.space/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
+<p>显示这样就是做种成功了</p>
+<img src="https://img.haozi.space/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
+<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
+<h4 id="btschool-52pt">btschool/52pt</h4>
+<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
+<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
+<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
+<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
+<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
+<p><img src="https://img.haozi.space/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
+<h4 id="mt-ttg">mt/ttg</h4>
+<p>这两个都是大站，估摸着发种不会那么简单</p>
+<h2 id="自动发种">自动发种</h2>
+<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
+<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
+<h3 id="安装步骤">安装步骤</h3>
+<ol>
+<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
+<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
+</ol>
+<h3 id="使用流程">使用流程</h3>
+<ol>
+<li>
+<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
+<p><img src="https://img.haozi.space/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
+</li>
+<li>
+<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
+<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
+<p><img src="https://img.haozi.space/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
+<p><img src="https://img.haozi.space/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+</li>
+<li>
+<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
+</li>
+</ol>
+<h3 id="遇到的问题">遇到的问题</h3>
+<ol>
+<li>
+<p>如果发现转过去的图片无法显示怎么办？</p>
+<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
+<p><img src="https://img.haozi.space/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
+</li>
+</ol>
+<h3 id="写在最后">写在最后</h3>
+<ul>
+<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
+<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
+<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
+<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
+</ul>
 ]]></content>
       <categories>
         <category>教程</category>
@@ -1090,136 +1059,187 @@ pornography 的东西，我认为是百害无一益。masturbation 不一样，�
       </categories>
   </entry>
   <entry>
-    <title>北洋园PT电影发布自查指南</title>
-    <url>/2026/03/22/PT%E7%AB%99%E7%82%B9%E8%BD%AC%E7%A7%8D%E5%8F%91%E5%B8%83/</url>
-    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260315152503944.png" alt="image-20260315152503944"></p>
-<h2 id="北洋园pt自查">北洋园pt自查</h2>
-<h3 id="电影">电影</h3>
-<ul>
-<li>
-<p>[ ] <strong>我确认不是禁转的种子，可以转种</strong></p>
-</li>
-<li>
-<p>[ ] <strong>我确定种子文件如果是蓝光原盘的话，一定是有中文字幕的版本</strong></p>
-</li>
-</ul>
-<p>很简单，看种子简介里面subtitles有没有chinese就可以了，没有中文字幕的蓝光原盘一定要上传到北洋园pt，不然你差一点就要上传成功了</p>
-<p><img src="https://img.haozi.space/img2026/image-20260315103958483.png" alt="image-20260315103958483"></p>
-<ul>
-<li>[ ] <strong>我确定蓝光原盘/remux资源如果在同等分辨率下没有版本</strong></li>
-</ul>
-<p>比如如果已经有1080p remux资源，你就不要在上传其他站点搬来的1080p remux资源，但是如果没有2160p remux资源你是可以搬来的</p>
-<p><img src="https://img.haozi.space/img2026/image-20260315104253388.png" alt="image-20260315104253388"></p>
-<ul>
-<li>[ ] <strong>我确认remux作品视频码率不低，1080p不低于4000kb/s，2160p不低于8000kb/s</strong></li>
-</ul>
-<p>种子的简介里面是有的，如果不是remux作品要求就没有这么严格啦</p>
-<p><img src="C:/Users/haozi/AppData/Roaming/Typora/typora-user-images/image-20260315104145973.png" alt="image-20260315104145973"></p>
-<ul>
-<li>
-<p>[ ] 我确定我上传的文件不是同一系列但未确定完结的电影合集，以及以某导演、演员等打包的电影合集（按套装售卖的电影合集除外）</p>
-<p><img src="https://img.haozi.space/img2026/image-20260315185246639.png" alt="image-20260315185246639"></p>
-</li>
-<li>
-<p>[ ] 我确定mediainfo是放在截图的前面，简介后面而不是在海报前面</p>
-</li>
-<li>
-<p>[ ] 我确定站内没有更好的源</p>
-<p><img src="https://img.haozi.space/img2026/image-20260326074642997.png" alt="image-20260326074642997"></p>
-</li>
-</ul>
-<h2 id="btschool自查">btschool自查</h2>
-<ul>
-<li>[ ] <strong>我确认不是禁转的种子，可以转种</strong></li>
-<li>[ ] 我保证我的候选简介写的不简单，写得很详细</li>
-</ul>
-<h1>发种</h1>
-<h2 id="手动发种">手动发种</h2>
-<h3 id="代码操作">代码操作</h3>
-<p><strong>引用内容</strong></p>
-<p>[quote]我是引用内容[/quote]</p>
-<p><strong>媒体信息隐藏显示</strong></p>
-<p>[hide=Mediainfo/媒体信息]</p>
-<p>这里贴完整的 Mediainfo 文本（可以带换行）</p>
-<p>[/hide]</p>
-<p><strong>图片显示</strong></p>
-<p>点击img,插入你想插入的图片链接，会自动把相关的代码嵌入进去</p>
-<h3 id="不同站点">不同站点</h3>
-<h4 id="北洋园pt">北洋园pt</h4>
-<p><strong>基本步骤是：</strong></p>
+    <title>利用 GitHub Issue 免费托管本地视频教程</title>
+    <url>/2026/07/21/Typora%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%91%E7%AB%AF%E8%A7%86%E9%A2%91%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260409204348853.png" alt="image-20260409204348853"></p>
+<h1>怎么做</h1>
+<h2 id="建立一个github仓库">建立一个github仓库</h2>
+<p>访问github，点击个人头像，点击<strong>github仓库</strong>repository</p>
+<p><img src="https://img.haozi.space/img2026/image-20260409200339144.png" alt="image-20260409200339144"></p>
+<p>到达以下界面，建立一个新仓库</p>
+<p><img src="https://img.haozi.space/img2026/image-20260409200644852.png" alt="image-20260409200644852"></p>
+<p>命名为video</p>
+<p><img src="https://img.haozi.space/img2026/image-20260409200719165.png" alt="image-20260409200719165"></p>
+<h2 id="上传本地视频">上传本地视频</h2>
+<p>点击仓库video，进入issue界面，建立一个新的issue</p>
+<p><img src="https://img.haozi.space/img2026/image-20260409200827074.png" alt="image-20260409200827074"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260409200910129.png" alt="image-20260409200910129"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260409201024688.png" alt="image-20260409201024688"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260409201116160.png" alt="image-20260409201116160"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260409201232932.png" alt="image-20260409201232932"></p>
+<p>得到这样的一串地址</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://private-user-images.githubusercontent.com/227099768/575928803-456bb596-5621-403f-8e68-17ec1299d1a6.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU3MzczOTcsIm5iZiI6MTc3NTczNzA5NywicGF0aCI6Ii8yMjcwOTk3NjgvNTc1OTI4ODAzLTQ1NmJiNTk2LTU2MjEtNDAzZi04ZTY4LTE3ZWMxMjk5ZDFhNi5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDA5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQwOVQxMjE4MTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04OTk0MDMzOTUzOGY0OTI4ZTI3NDUzZTI4ZTYxZjc0ZTU0OTBjY2QyZDc2ZjNjYTMwYTFkNjQ0Y2QyMzBkNDRkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.QUr0Cq4XrYwu_qXE4GdpRAipzGY_6afpNHRRz-i7Kfc</span><br></pre></td></tr></table></figure>
+<h2 id="嵌入到Typora">嵌入到Typora</h2>
+<p>打开B站随便一个视频，复制嵌入代码</p>
+<p><img src="https://img.haozi.space/img2026/image-20260409201346819.png" alt="image-20260409201346819"></p>
+<p>复制得到的应该是这样一串 东东</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;iframe src=&quot;//player.bilibili.com/player.html?isOutside=true&amp;aid=116368313679961&amp;bvid=BV1y3DjB2E9d&amp;cid=37334352602&amp;p=1&quot;</span><br><span class="line">scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.haozi.space/img2026/image-20260409201951907.png" alt="image-20260409201951907"></p>
+<p>以下是实际效果，还是很不错的啦！适合平时上传10mb左右的小视频，视频太大就不是很行啦</p>
+<iframe src="https://private-user-images.githubusercontent.com/227099768/575922934-9a27e4a4-2ad5-43ce-8c09-d5c3a4ac46c9.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU5OTQ5MDQsIm5iZiI6MTc3NTk5NDYwNCwicGF0aCI6Ii8yMjcwOTk3NjgvNTc1OTIyOTM0LTlhMjdlNGE0LTJhZDUtNDNjZS04YzA5LWQ1YzNhNGFjNDZjOS5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMlQxMTUwMDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yMzNjOTU4YTUyNmE4MTZlNGJiNTQwYjBmZjE0MDk1OWRiM2M4NmIzYjczN2U3M2M0NTRhMjA3OTFjMzQ5NmQ5JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9dmlkZW8lMkZtcDQifQ.AJA9C2DGs6aczbBmussoqQI2RDpc05DCJZw8MTAazU0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<h1>参考文章</h1>
+<p><a href="https://blog.csdn.net/qq_45830323/article/details/134758982">关于Typora如何插入自己的云端视频的方法</a></p>
+<p><a href="https://blog.csdn.net/weixin_45940369/article/details/130551018">GitHub 仓库的 README 直接播放视频</a></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UG NX 12.0 软件下载与安装教程（含图文及视频）</title>
+    <url>/2026/03/22/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260318140642944.png" alt="image-20260318140642944"></p>
+<h1>需要的文件：</h1>
+<p><a href="https://www.123865.com/s/bBy8vd-gYwXv">123网盘UG12.0链接</a></p>
+<p>[天翼云盘UG12.0链接](<a href="https://cloud.189.cn/t/ArMFziyqmEre">https://cloud.189.cn/t/ArMFziyqmEre</a> （访问码：gn1q）)</p>
+<h1>安装步骤图文：</h1>
+<p><img src="https://img.haozi.space/img2026/%E5%86%85%E5%AE%B9.png" alt="preview image"></p>
+<p><img src="https://img.haozi.space/img2026/1.png" alt="preview image"></p>
+<p><img src="https://img.haozi.space/img2026/2.png" alt="preview image"></p>
+<p><img src="https://img.haozi.space/img2026/3.png" alt=""></p>
+<p><img src="https://usercontent.tju.pt/4.png?file_id=a234b3cb3b0c209bd76c5c5c46225c3ea540b5b4ccd6565d8d0a2fd42330175a" alt="preview image"></p>
+<h1>视频教程</h1>
+<p><a href="https://www.bilibili.com/video/BV1rh411m7u6/?vd_source=be5a0b6c58eb0ef9b1da5603d170bc44">UG-NX12.0软件安装</a></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>使用 Cloudflare Tunnel 实现 AList 远程访问</title>
+    <url>/2026/03/07/Cloudfare+Tunnel%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>最开始只是想让自己的电脑能够被远程访问，后来逐渐开始把一些服务放在本地运行，比如下载工具、文件管理工具等。其中一个很好用的工具就是 AList，它可以把本地磁盘或者各种网盘统一挂载，通过网页来管理文件。<br>
+<img src="https://img.haozi.space/img2026/20260308101314643.png" alt="image-20260307204327371"></p>
+<h1>解决的问题</h1>
+<p>问题是 AList 默认只运行在本地</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://localhost:5244</span><br></pre></td></tr></table></figure>
+<p>如果不在电脑旁边，就无法访问。发现可以用 Cloudflare Tunnel 来实现远程访问 AList，怕自己忘了怎么配置的了，就记录下整个配置过程。</p>
+<h1>整体架构</h1>
+<p>整体结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">本地电脑</span><br><span class="line">AList 服务</span><br><span class="line">localhost:5244</span><br><span class="line">↓</span><br><span class="line">cloudflared</span><br><span class="line">↓</span><br><span class="line">Cloudflare Tunnel</span><br><span class="line">↓</span><br><span class="line">域名访问</span><br><span class="line">alist.haozi.space</span><br></pre></td></tr></table></figure>
+<p>访问 alist.haozi.space 时，Cloudflare 会通过 Tunnel 转发请求到本地电脑的 5244 端口。这样就实现了远程访问。</p>
+<h1>准备工作</h1>
+<p>在开始之前需要准备以下内容：</p>
 <ol>
-<li>从其他站点下载你想要转的资源</li>
-<li>填写发布页面（用引用id简单一点）</li>
-<li>如果种子通过审核以后，从你发布种子的pt站点下载种子进行本地作种</li>
+<li>一个 Cloudflare 账号</li>
+<li>一个已经接入 Cloudflare 的域名</li>
+<li>一台电脑</li>
+<li>已经运行的 AList 服务</li>
 </ol>
-<p><strong>填写发布页面：</strong></p>
-<p>在上面那一行里面，点击候选</p>
-<p>点击“<strong>阅读候选须知后，点此发布候选</strong>”</p>
-<p>如果要用引用种子id的话，这样去找：</p>
-<img src="https://img.haozi.space/img2026/image-20260315144513536.png" alt="image-20260315144513536" style="zoom:150%;" />
-<p>简介的话一般从其他站点搬运即可，一般不做改动，需要注明转自xxx</p>
-<p>全部填写完成后，可以点击预览看一看实际效果进行微调</p>
-<p>提交成功以后你会跳转到一个界面，显示：</p>
-<img src="https://img.haozi.space/img2026/image-20260315144813865.png" alt="image-20260315144813865" style="zoom:200%;" />
-<p>发布资源后会自动重新下载一个带有[TJUPT]前缀的种子文件，如果没有自动下载请手动下载该资源的种子</p>
-<p>进入utorrent，选择添加种子文件</p>
-<p><img src="https://img.haozi.space/img2026/image-20260315142513101.png" alt="image-20260315142513101"></p>
-<p>显示这样就是做种成功了</p>
-<img src="https://img.haozi.space/img2026/image-20260315142650052.png" alt="image-20260315142650052" style="zoom: 67%;" />
-<p>当然，你也可以进入web候选界面查看，如果这里显示有一个上传者就是做种成功了</p>
-<h4 id="btschool-52pt">btschool/52pt</h4>
-<p>btschool的发种有点水，发种最大的特点是要有一个<strong>投票环节</strong>（elite user以下需要，elite user以上可以直接发种），我发了几个种子，似乎很难不被通过，发种的步骤大差不差，可惜的一点是自动发种体验不好，因为用户等级不够似乎无法直接跳转到发种界面，只能曲线救国，在其他站点的发布界面复制内容去填写候选环节的一些信息了</p>
-<p>新发现的<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>这个脚本可以直接给你跳转到btschool候选界面的，这个脚本还是可以的哈哈</p>
-<p>52pt也是要通过候选的，但是等你等级升上去了就可以不用候选</p>
-<h4 id="1ptba-soulvoice">1ptba/soulvoice</h4>
-<p>发种更是水，<strong>似乎不需要经过审核环节</strong>，个人觉得是因为站点的种子数比较少，鼓励大家积极上传种子的，自然对于资源的品质要求就没有那么高了</p>
-<p><img src="https://img.haozi.space/img2026/image-20260315144330038.png" alt="image-20260315144330038"></p>
-<h4 id="mt-ttg">mt/ttg</h4>
-<p>这两个都是大站，估摸着发种不会那么简单</p>
-<h2 id="自动发种">自动发种</h2>
-<p>pt站点的自动转种推荐使用<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>，它能实现“从源站一键跳转到目标站，并自动填充表单”，极大加速发种流程</p>
-<p>由于在探索转种的过程中发现mteam上面这个脚本居然不支持，所以找到了一个<strong>支持mteam转种</strong>的脚本<a href="https://greasyfork.org/zh-CN/scripts/424132-auto-feed">auto_feed PT一键转种脚本</a>，这个似乎也不错</p>
-<h3 id="安装步骤">安装步骤</h3>
+<p>AList 默认端口是</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5244</span><br></pre></td></tr></table></figure>
+<p>本地访问地址为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://localhost:5244</span><br></pre></td></tr></table></figure>
+<p>在配置 Tunnel 之前，需要确保本地访问是正常的。<br>
+<strong>可以通过登陆127.0.0.1:5244来检验本地访问是否正常</strong>。</p>
+<h1>开始搭建</h1>
+<p>Cloudflare Tunnel 需要通过 cloudflared 程序来运行。<br>
+可以从 Cloudflare 官方下载 Windows 版本<br>
+<a href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/">https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/</a><br>
+<img src="https://img.haozi.space/img2026/20260308140747806.png" alt="image-20260306125950289"></p>
+<p>下载完成后，将程序放在一个固定目录，例如</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">F:\cloudflared</span><br></pre></td></tr></table></figure>
+<p>然后在终端中运行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared --version</span><br></pre></td></tr></table></figure>
+<p>如果可以看到版本号，说明安装成功。</p>
+<h2 id="登录-Cloudflare">登录 Cloudflare</h2>
+<p>为了让本地程序能够创建 Tunnel，需要先登录 Cloudflare。<br>
+执行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel login</span><br></pre></td></tr></table></figure>
+<p>记得在哪个盘里面，就要在哪里开始cmd操作（如果你之前跟我一样下载在F盘，就要在F盘进行cmd操作，以此类推）<br>
+<img src="https://img.haozi.space/img2026/20260308141535776.png" alt="image-20260308141535725"></p>
+<p>浏览器会自动打开 Cloudflare 登录页面。登录后选择需要绑定的域名。完成后本地会生成一个认证文件：<br>
+<img src="https://img.haozi.space/img2026/20260308141752734.png" alt="image-20260306131456755"></p>
+<p>网页会显示以下界面：</p>
+<p><img src="https://img.haozi.space/img2026/20260308141719378.png" alt="image-20260306131132603"></p>
+<h2 id="创建-Tunnel">创建 Tunnel</h2>
+<p>接下来创建一个新的 Tunnel。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel create alist-tunnel</span><br></pre></td></tr></table></figure>
+<p>其中 alist-tunnel 是 Tunnel 名称，可以自己修改。<br>
+执行成功后会生成Tunnel ID,credentials 文件。</p>
+<h2 id="创建配置文件">创建配置文件</h2>
+<p>接下来需要创建配置文件 config.yml。<br>
+示例配置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tunnel: Tunnel_ID</span><br><span class="line">credentials-file: C:\Users\用户名\.cloudflared\Tunnel_ID.json</span><br><span class="line"></span><br><span class="line">ingress:</span><br><span class="line">  - hostname: alist.yourdomain</span><br><span class="line">    service: http://localhost:5244</span><br><span class="line">  - service: http_status:404</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.haozi.space/img2026/20260308141903486.png" alt="image-20260308141903442"></p>
+<p>Tunnel_ID是 C:\Users\用户名.cloudflared 文件夹里面json文件的名称<br>
+访问 alist.yourdomain 时转发到本地 localhost:5244，如果访问其他地址,返回 404</p>
+<h2 id="DNS">DNS</h2>
+<p>进入 Cloudflare 的 DNS 管理页面。添加一条记录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">类型 CNAME</span><br><span class="line">名称 alist</span><br><span class="line">目标 Tunnel_ID.cfargotunnel.com</span><br></pre></td></tr></table></figure>
+<p>这样配置的话，访问 alist.yourdomain,就会进入 Cloudflare Tunnel。</p>
+<h2 id="启动-Tunnel">启动 Tunnel</h2>
+<p>配置完成后启动 Tunnel</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel run alist-tunnel</span><br></pre></td></tr></table></figure>
+<p>如果一切正常，就可以在浏览器中访问</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://alist.yourdomain</span><br></pre></td></tr></table></figure>
+<p>页面会直接打开 AList</p>
+<h1>问题记录</h1>
+<p>在配置过程中可能遇到一些问题。<br>
+排查顺序一般是：</p>
 <ol>
-<li>安装用户脚本管理器：Chrome/Edge 用 <strong>Tampermonkey</strong>（篡改猴），Firefox 用 Tampermonkey 或 Violentmonkey</li>
-<li>访问脚本页面<a href="https://greasyfork.org/zh-CN/scripts/423199-easyupload-pt%E4%B8%80%E9%94%AE%E8%BD%AC%E7%A7%8D">EasyUpload PT一键转种油猴脚本</a>：点击“安装此脚本” → 确认安装（这一步可能需要科学上网的）</li>
-</ol>
-<h3 id="使用流程">使用流程</h3>
-<ol>
 <li>
-<p>打开源站的 <strong>torrent 详情页</strong>，会出现一个这样的小白花在转，点击小白花打开设置面板</p>
-<p><img src="https://img.haozi.space/img2026/image-20260315145031287.png" alt="image-20260315145031287"></p>
+<p>先确认 AList 本地是否可以访问</p>
 </li>
 <li>
-<p>转种站点启用: 定义需要在页面显示的转种站点列表</p>
-<p><strong>点击单个的站点链接是实现单个站点转种</strong>，记住，点一次就行了，点太多会出一大堆的</p>
-<p><img src="https://img.haozi.space/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
+<p>再确认 cloudflared 是否在运行，如何检验是否生效？</p>
+<p>如下，终端输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /d F:\cloudflare</span><br><span class="line">cloudflared tunnel list</span><br></pre></td></tr></table></figure>
+<p>显示有connections就是有效的<br>
+<img src="https://img.haozi.space/img2026/20260310145620762.png" alt="image-20260306142146235"></p>
 </li>
 <li>
-<p>批量转种启用: 点击页面的<strong>一键群转</strong>按钮将同时打开选中的站点转发</p>
-<p><img src="https://img.haozi.space/img2026/image-20260315145602211.png" alt="image-20260315145602211"></p>
-</li>
-<li>
-<p>站点搜索启用: 定义需要在页面显示的<strong>快速搜索列表</strong>，搜索似乎是通过imdb编号来实现的，我在想，如果有一些站点没有这些编号的咋办</p>
+<p>确认 Cloudflare DNS 是否正确，这一步需要去cloudflare管理界面排查</p>
 </li>
 </ol>
-<h3 id="遇到的问题">遇到的问题</h3>
-<ol>
-<li>
-<p>如果发现转过去的图片无法显示怎么办？</p>
-<p>可以通过手动上传图片实现，复制无法显示的图片-&gt;<a href="https://iili.io/">https://iili.io/</a> -&gt;把复制的图片上传-&gt;得到链接-&gt;链接就是红框那一段-&gt;bbcode使用[img]…[img]代码嵌入即可</p>
-<p><img src="https://img.haozi.space/img2026/image-20260325150034467.png" alt="image-20260325150034467"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260325150250027.png" alt="image-20260325150250027"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260325150307031.png" alt="image-20260325150307031"></p>
-</li>
-</ol>
-<h3 id="写在最后">写在最后</h3>
-<ul>
-<li><strong>任何情况下都不要完全依赖脚本，脚本不可能做到对每个站点都完美适配，发布前需要自己认真检查是否有填写错误或者不符合站点规则的地方</strong>，始终遵守目标站的发种规范</li>
-<li>插件目前对音乐、MV、动漫的种子转载不支持(分类可能不会自动填写)，需要自己手动填一下</li>
-<li>由于TTG的图片加载策略，需要等页面完全加载完整后再点击转载到其他站，否则种子信息会获取不完整</li>
-<li>转的种子不要乱转，最好是free的，如果计算了你的下载量的，你很亏的</li>
-</ul>
+<p>alist如果挂载的是天翼云盘，发现上传可能出现显示 invalid session key<br>
+解决方法：去alist界面设置一下上传方式为 旧版，解决问题</p>
+<h1>后续扩展</h1>
+<h2 id="Alist-开机启动">Alist 开机启动</h2>
+<p>在桌面建一个VBS文件</p>
+<p><img src="https://img.haozi.space/img2026/image-20260306134649623.png" alt="image-20260306134649623"></p>
+<p>在里面添加</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.run &quot;F:\alist-windows-amd64\alist.exe server&quot;, vbHide</span><br></pre></td></tr></table></figure>
+<p>把这个vbs文件拖到alist.exe所在的文件夹里面<br>
+并且右键创建快捷方式<br>
+win+R输入 shell:startup</p>
+<p><img src="https://img.haozi.space/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
+<p>把快捷指令拖进去就可以了</p>
+<h2 id="Cloudflare开机启动">Cloudflare开机启动</h2>
+<p>手动启动</p>
+<p><img src="https://img.haozi.space/img2026/image-20260306135343494.png" alt="image-20260306135343494"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel run alist</span><br></pre></td></tr></table></figure>
+<p><strong>自动启动设置</strong><br>
+在桌面建一个VBS文件，命名为 start-alist-tunnel.vbs<br>
+在里面添加</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">ws.Run &quot;cmd /c F:\cloudflare\cloudflared tunnel run alist&quot;,0</span><br></pre></td></tr></table></figure>
+<p>win+R输入 shell:startup</p>
+<p><img src="https://img.haozi.space/img2026/image-20260306135006792.png" alt="image-20260306135006792"></p>
+<p>把vbs拖进去就可以了</p>
+<h2 id="更多域名">更多域名</h2>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alist.haozi.space</span><br><span class="line">img.haozi.space</span><br><span class="line">qb.haozi.space</span><br></pre></td></tr></table></figure>
+<p>每个子域名对应不同的本地服务。这样一台普通电脑就可以逐渐变成一个小型家庭服务器。<br>
+操作很简单，在配置文件里面加上：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- hostname: qb.haozi.space</span><br><span class="line">  service: http://localhost:8081</span><br></pre></td></tr></table></figure>
+<p>config.yml变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tunnel: 你的tunnel-id</span><br><span class="line">credentials-file: C:\Users\你的用户名\.cloudflared\你的tunnel-id.json</span><br><span class="line"></span><br><span class="line">ingress:</span><br><span class="line">  - hostname: qb.haozi.space</span><br><span class="line">    service: http://localhost:8081</span><br><span class="line">  - hostname: alist.haozi.space</span><br><span class="line">    service: http://localhost:5244</span><br><span class="line">  - service: http_status:404</span><br></pre></td></tr></table></figure>
+<p>之后进行DNS配置即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Type: CNAME</span><br><span class="line">Name: qb</span><br><span class="line">Target: &lt;你的tunnel-id&gt;.cfargotunnel.com</span><br><span class="line">Proxy: 开启（橙色云）</span><br></pre></td></tr></table></figure>
+<h1>回顾</h1>
+<p>回顾整个过程，其实一开始只是想解决一个很小的问题，如何远程访问自己的电脑。但在解决问题的过程中，又接触到了Cloudflare Tunnel、AList、域名管理、内网服务暴露<br>
+技术学习往往就是这样，从一个实际需求出发，一步一步扩展。<br>
+也许过一段时间再回来看，会发现自己已经学会了很多当时觉得复杂的东西。</p>
 ]]></content>
       <categories>
         <category>教程</category>
@@ -1247,6 +1267,22 @@ UG NX12如何进行数控仿真？<br>
 <p>如何在车完以后的turning workpiece上接着进行铣的操作？</p>
 <p>如何实现铣操作继承车操作之后的毛坯workpiece</p>
 <p>永远不要把问题囤积到时间快到了做，解决问题的方法需要时间去寻找，而不是一下就能够得到的</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C盘空间清理指南</title>
+    <url>/2026/03/22/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/</url>
+    <content><![CDATA[<p>c盘怎么去清理？<br>
+<img src="https://img.haozi.space/img2026/20260327173351384.png" alt="image-20260327173351162"></p>
+<h1>清理缓存文件</h1>
+<p>这一步网上有很多教程，可以去搜搜</p>
+<h1>wx文件管理</h1>
+<p>可以转移一下微信文件位置，不要放在c盘目录下</p>
+<h1>spaceniffer</h1>
+<p>使用spaceniffer看电脑文件分布，决定删除什么文件。在尽量不要删除系统文件的前提下，删掉我们自己下载的东西</p>
 ]]></content>
       <categories>
         <category>教程</category>
@@ -1312,39 +1348,591 @@ UG NX12如何进行数控仿真？<br>
       </categories>
   </entry>
   <entry>
-    <title>UG NX 12.0 软件下载与安装教程（含图文及视频）</title>
-    <url>/2026/03/22/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260318140642944.png" alt="image-20260318140642944"></p>
-<h1>需要的文件：</h1>
-<p><a href="https://www.123865.com/s/bBy8vd-gYwXv">123网盘UG12.0链接</a></p>
-<p>[天翼云盘UG12.0链接](<a href="https://cloud.189.cn/t/ArMFziyqmEre">https://cloud.189.cn/t/ArMFziyqmEre</a> （访问码：gn1q）)</p>
-<h1>安装步骤图文：</h1>
-<p><img src="https://img.haozi.space/img2026/%E5%86%85%E5%AE%B9.png" alt="preview image"></p>
-<p><img src="https://img.haozi.space/img2026/1.png" alt="preview image"></p>
-<p><img src="https://img.haozi.space/img2026/2.png" alt="preview image"></p>
-<p><img src="https://img.haozi.space/img2026/3.png" alt=""></p>
-<p><img src="https://usercontent.tju.pt/4.png?file_id=a234b3cb3b0c209bd76c5c5c46225c3ea540b5b4ccd6565d8d0a2fd42330175a" alt="preview image"></p>
-<h1>视频教程</h1>
-<p><a href="https://www.bilibili.com/video/BV1rh411m7u6/?vd_source=be5a0b6c58eb0ef9b1da5603d170bc44">UG-NX12.0软件安装</a></p>
+    <title>Windows磁盘管理拓展卷教程</title>
+    <url>/2026/07/21/win10%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E6%8B%86%E5%88%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%A1%AC%E7%9B%98/</url>
+    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260408171339123.png" alt="image-20260408171339123"></p>
+<h1>怎么办？</h1>
+<p>win+R，输入diskmgmt.msc，进入磁盘管理界面</p>
+<p><img src="https://img.haozi.space/img2026/image-20260408165624850.png" alt="image-20260408165624850"></p>
+<p>会看到一个类似于这样的界面</p>
+<p><img src="https://img.haozi.space/img2026/image-20260408165709297.png" alt="image-20260408165709297"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408165951747.png" alt="image-20260408165951747"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170141660.png" alt="image-20260408170141660"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170217038.png" alt="image-20260408170217038"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170235741.png" alt="image-20260408170235741"></p>
+<p>在拓展卷步骤可能看到类似的界面，像这里我的磁盘由于是机械硬盘，不安装操作系统所以我就可以选择“是”，<strong>如果对于c盘不可以进行这样的操作的，因为里面是有操作系统的</strong></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170313892.png" alt="image-20260408170313892"></p>
+<h1>遇到的问题</h1>
+<p>遇到了这个很抓马的问题，会卡在磁盘管理这个界面，没有什么反应</p>
+<p><img src="https://img.haozi.space/img2026/image-20260408164813261.png" alt="image-20260408164813261"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408165434164.png" alt="image-20260408165434164"></p>
+<p>解决方法：</p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170546391.png" alt="image-20260408170546391"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170608484.png" alt="image-20260408170608484"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170621233.png" alt="image-20260408170621233"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170640560.png" alt="image-20260408170640560"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170653725.png" alt="image-20260408170653725"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170711736.png" alt="image-20260408170711736"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170733276.png" alt="image-20260408170733276"></p>
+<p>服务显示“正在运行”应该就行啦哈哈</p>
+<p><img src="https://img.haozi.space/img2026/image-20260408170942130.png" alt="image-20260408170942130"></p>
+<h1>参考教程</h1>
+<p><a href="https://jingyan.baidu.com/article/574c5219d91cde2d8d9dc18f.html">win10遇到无法连接虚拟磁盘服务解决方法</a><br>
+<a href="https://www.bilibili.com/video/BV1Uj411f7wj/?spm_id_from=333.1391.0.0&amp;vd_source=f15209b32029e916ee473fe943d494ca">如何给已分区的磁盘进行扩容/拆分/合并的操作？新装硬盘如何显示在我的电脑内？</a><br>
+<a href="https://www.bilibili.com/video/BV1tG411v7of/?vd_source=f15209b32029e916ee473fe943d494ca">电脑磁盘管理无法连接虚拟磁盘服务？教你怎么解决</a></p>
 ]]></content>
       <categories>
         <category>教程</category>
       </categories>
   </entry>
   <entry>
-    <title>C盘空间清理指南</title>
-    <url>/2026/03/22/c%E7%9B%98%E6%80%8E%E4%B9%88%E5%8E%BB%E6%B8%85%E7%90%86%EF%BC%9F/</url>
-    <content><![CDATA[<p>c盘怎么去清理？<br>
-<img src="https://img.haozi.space/img2026/20260327173351384.png" alt="image-20260327173351162"></p>
-<h1>清理缓存文件</h1>
-<p>这一步网上有很多教程，可以去搜搜</p>
-<h1>wx文件管理</h1>
-<p>可以转移一下微信文件位置，不要放在c盘目录下</p>
-<h1>spaceniffer</h1>
-<p>使用spaceniffer看电脑文件分布，决定删除什么文件。在尽量不要删除系统文件的前提下，删掉我们自己下载的东西</p>
+    <title>基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露</title>
+    <url>/2026/08/09/win11-iPv6-npm/</url>
+    <content><![CDATA[<p>在以往的 HomeLab 搭建中，本地服务的公网暴露往往依赖 Cloudflare Tunnel 或各类内网穿透工具。然而，由于中转服务器大多位于海外，这种方案普遍存在<strong>高延迟、带宽受限以及连接不稳定</strong>等痛点。<br>
+随着国内运营商家庭宽带普遍普及原生 IPv6，光猫改桥接后由路由器进行 PPPoE 拨号，设备即可获取到直连公网的 IPv6 地址。本文将详细介绍如何在 Windows 11 环境下，利用公网 IPv6、ddns-go 以及 Docker 版 Nginx Proxy Manager (NPM)，实现低延迟、安全且带 HTTPS 证书的本地服务外网暴露。</p>
+<blockquote>
+<p><strong>前提条件</strong>：本文方案建立在拥有<strong>原生公网 IPv6</strong> 的基础之上。在开始前，请先前往 <a href="https://test-ipv6.com">test-ipv6.com</a> 检测你的网络环境是否符合要求。</p>
+</blockquote>
+<hr>
+<h1>背景与痛点</h1>
+<ul>
+<li><strong>原始方案</strong>：使用 Cloudflare Tunnel，导致高延迟、连接不稳定。</li>
+<li>具备一个个人域名：拥有一个个人域名（本文以 <code>haozi.space</code> 为例）。</li>
+<li><strong>网络条件</strong>：宽带提供原生公网 IPv6，光猫已桥接，路由器负责 PPPoE 拨号。</li>
+<li><strong>目标</strong>：利用真实 IPv6 直接把 Windows 上的 Jellyfin、Sunshine（Moonlight）等服务暴露到外网，保持最小的网络转发层数，从而获得几乎零延迟的体验。<br>
+再次强调，本文的一切前提都在于拥有一个公网IPv6，如果你不知道你自己有没有，可以前往 <a href="https://test-ipv6.com">test-ipv6.com</a> 检测一下你的网络环境。</li>
+</ul>
+<hr>
+<h1>架构总览</h1>
+<p>适配睿易 (Ruiyi) EW1300 路由器环境的整体架构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Internet</span><br><span class="line">   │</span><br><span class="line">   └─ IPv6 AAAA DNS (Cloudflare) ──► Ruiyi EW1300 (OpenWrt)</span><br><span class="line">                                             │</span><br><span class="line">                       ┌─────────────────────┴─────────────────────┐</span><br><span class="line">                       │                                            │</span><br><span class="line">		  IPv6 转发     │                                            │</span><br><span class="line">                       ▼                                            ▼</span><br><span class="line">Docker 主机 (Windows 11) — Nginx Proxy Manager (Docker) —► Windows 本机服务</span><br><span class="line">   (Docker Desktop)          (端口 8080/8443)                 (Jellyfin 8096, Sunshine ...)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>DDNS‑GO（Windows 原生）</strong>：每 5 分钟将本机的公网 IPv6 写入 Cloudflare 的 <code>*.haozi.space</code> AAAA 记录。</li>
+<li><strong>Nginx Proxy Manager (NPM)</strong>：运行在 Docker 中，负责 HTTPS 终止、域名匹配、Let’s Encrypt 泛域名证书。</li>
+<li><strong>Ruiyi EW1300</strong>：直接放行需要的 IPv6 端口，并把外部流量转发到 Windows 主机的局域网 IP。</li>
+<li><strong>Windows 防火墙</strong>：同样放行对应端口，避免本机对 Docker 虚拟网卡的流量拦截。</li>
+</ul>
+<hr>
+<h1>部署步骤</h1>
+<h2 id="在-Windows-上部署-ddns-go（-exe）">在 Windows 上部署 ddns-go（ exe）</h2>
+<p>ddns-go（exe）的下载链接：<a href="https://github.com/jeessy2/ddns-go/releases/download/v6.17.5/ddns-go_6.17.5_windows_x86_64.zip">ddns-go</a><br>
+ddns-go的GitHub releases界面：<a href="https://github.com/jeessy2/ddns-go/releases/tag/v6.17.5">GitHub releases</a>，下载界面截图：</p>
+<p><img src="https://img.haozi.space/img2026/20260809112059746.png" alt="image.png|591"></p>
+<p>之后，我们需要在 Windows 中将 <code>ddns-go</code> 注册为系统服务开机自启，只需以管理员身份打开PowerShell，在ddns-go.exe所在目录下，执行 <code>.\ddns-go.exe -s install</code> 命令即可。<br>
+ddns-go.exe所在目录：<code>D:\ddns-go_6.17.4_windows_x86_64\ddns-go_6.17.4_windows_x86_64</code>（可自行下载并置于你想要的路径）。<br>
+Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
+<p><img src="https://img.haozi.space/img2026/20260809120707014.png" alt="1lab6.png|608"></p>
+<p>输入命令安装为系统服务：</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">.\ddns<span class="literal">-go</span>.exe <span class="literal">-s</span> install</span><br></pre></td></tr></table></figure>
+<p>通过以下指令验证安装为系统服务是否成功：</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Get-Service</span> ddns<span class="literal">-go</span></span><br></pre></td></tr></table></figure>
+<p>如果Status显示为Running，说明ddns-go系统服务安装成功！</p>
+<p><img src="https://img.haozi.space/img2026/20260809120728618.png" alt="1lab10.png|605"></p>
+<p>但是如果遇到了Stopped的情况，通过以下方式解决：</p>
+<p><img src="https://img.haozi.space/img2026/20260809120933184.png" alt="1lab8.png|603"></p>
+<p><img src="https://img.haozi.space/img2026/20260809120728620.png" alt="1lab10.png|434"></p>
+<p><img src="https://img.haozi.space/img2026/20260809120728614.png" alt="1lab10.png|537"></p>
+<p><img src="https://img.haozi.space/img2026/20260809120728615.png" alt="1lab10.png|455"></p>
+<p><img src="https://img.haozi.space/img2026/20260809120728616.png" alt="1lab10.png|455"></p>
+<p>再次输入：</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Get-Service</span> ddns<span class="literal">-go</span></span><br></pre></td></tr></table></figure>
+<p>验证启动是否生效。发现：Status显示为Running，说明ddns-go系统服务手动启动成功！</p>
+<p><img src="https://img.haozi.space/img2026/20260809120728617.png" alt="1lab10.png|560"></p>
+<p>之后，我们登录 <a href="http://localhost:9876">http://localhost:9876</a> 访问ddns-go的Web UI（初次登录似乎密码自行配置即可？）</p>
+<p><img src="https://img.haozi.space/img2026/20260809105811616.png" alt="1lab1.png|579"></p>
+<p>在配置ddns-go之前，需要先获取一个Cloudflare的API Token。</p>
+<p><img src="https://img.haozi.space/img2026/20260809105901952.png" alt="3lab2.png|594"></p>
+<p><img src="https://img.haozi.space/img2026/20260809105922140.png" alt="3lab3.png|594"></p>
+<p><img src="https://img.haozi.space/img2026/20260809105922141.png" alt="3lab3.png|595"></p>
+<p><img src="https://img.haozi.space/img2026/20260809105922142.png" alt="3lab3.png|598"></p>
+<p><img src="https://img.haozi.space/img2026/20260809105942558.png" alt="1lab2.png|578"></p>
+<p>匹配正则表达式这样写：<code>^([0-9a-fA-F]&#123;1,4&#125;:)&#123;7&#125;[0-9a-fA-F]&#123;1,4&#125;$</code> [注1]。</p>
+<p><img src="https://img.haozi.space/img2026/20260809105952935.png" alt="1lab3.png|573"></p>
+<p>查看日志，显示域名解析成功即可：</p>
+<p><img src="https://img.haozi.space/img2026/20260809110013436.png" alt="1lab4.png|605"></p>
+<p>也可以前往Cloudflare的dashboard查看DNS配置是否生效：</p>
+<p><img src="https://img.haozi.space/img2026/20260809110023352.png" alt="1lab5.png|604"></p>
+<h2 id="Docker‑Compose-部署-Nginx-Proxy-Manager">Docker‑Compose 部署 Nginx Proxy Manager</h2>
+<p>中国大陆用户记得去 Docker Engine 里面修改镜像：<br>
+<img src="https://img.haozi.space/img2026/20260809110046985.png" alt="2lab4.png|626"></p>
+<p>更改的配置文件如下:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;gc&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;defaultKeepStorage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;20GB&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;experimental&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;https://docker.1ms.run&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;https://dockerproxy.net&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;https://proxy.vvvv.ee&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;https://dockerproxy.link&quot;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>在路径<code>D:\docker\homelab</code> 下建立 <code>docker-compose.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">npm:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;jc21/nginx-proxy-manager:latest&#x27;</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">npm</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;8080:80&#x27;</span>    <span class="comment"># 避开内部 80 冲突</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;8443:443&#x27;</span>   <span class="comment"># 外部用 8443，内部对应 NPM 的 443</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;81:81&#x27;</span>      <span class="comment"># 管理后台</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./npm/data:/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./npm/letsencrypt:/etc/letsencrypt</span></span><br></pre></td></tr></table></figure>
+<p>（<code>8443:443</code>和<code>8080：80</code>这两行是因为电脑上的80和443已经被占用，所以进行了端口映射）<br>
+在<code>docker-compose.yml</code>目录下，运行cmd，运行 <code>docker compose up -d</code> 命令：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+<p>静静等待一段时间（可能较长），拉取镜像完成后，打开 <a href="http://localhost:8080">http://localhost:8080</a> ，显示以下界面说明NPM的配置和拉取已经成功啦：</p>
+<p><img src="https://img.haozi.space/img2026/20260809110210514.png" alt="2lab3.png|599"></p>
+<p>也可以通过cmd命令行，输入：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p>终端输出，确保容器名称 <code>npm</code>、端口映射 <code>0.0.0.0:8080-&gt;80/tcp</code>、<code>0.0.0.0:8443-&gt;443/tcp</code></p>
+<p><img src="https://img.haozi.space/img2026/20260809110227660.png" alt="2lab5.png|608"></p>
+<h2 id="Let’s-Encrypt-泛域名证书">Let’s Encrypt 泛域名证书</h2>
+<p>先要获取API Token，操作和部署ddns-go时，获取Cloudflare的API Tokens的步骤一致：</p>
+<p><img src="https://img.haozi.space/img2026/20260809105901952.png" alt="3lab2.png|550"></p>
+<p><img src="https://img.haozi.space/img2026/20260809105922142.png" alt="3lab3.png|544"></p>
+<p><img src="https://img.haozi.space/img2026/20260809105922140.png" alt="3lab3.png|556"></p>
+<p>进入 <a href="http://localhost:81">http://localhost:81</a>（NPM UI）→ 证书列表 → 添加证书 → 添加 Let’s Encrypt DNS 验证</p>
+<p><img src="https://img.haozi.space/img2026/20260809132326392.png" alt="3lab6.png"></p>
+<p>类型选 <code>DNS Challenge</code> → Provider 选 <code>Cloudflare</code> → 填入 <strong>API Token</strong></p>
+<p><img src="https://img.haozi.space/img2026/20260809110413625.png" alt="3lab1.png|369"></p>
+<p>域名填写泛域名 <code>*.haozi.space</code>，保存。<br>
+证书显示生效就可以进行后续的步骤了。</p>
+<h2 id="在-NPM-中添加反向代理-Host（示例：Jellyfin）">在 NPM 中添加反向代理 Host（示例：Jellyfin）</h2>
+<p>主机列表→ 代理服务列表 → 添加 代理服务：</p>
+<p><img src="https://img.haozi.space/img2026/20260809110642220.png" alt="3lab7.png|600"></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>取值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Domain Names</strong></td>
+<td><code>vd.haozi.space</code></td>
+</tr>
+<tr>
+<td><strong>Scheme</strong></td>
+<td><code>http</code></td>
+</tr>
+<tr>
+<td><strong>Forward Hostname / IP</strong></td>
+<td><code>host.docker.internal</code>(Windows 主机在局域网的固定 IP)</td>
+</tr>
+<tr>
+<td><strong>Forward Port</strong></td>
+<td><code>8096</code></td>
+</tr>
+<tr>
+<td><strong>WebSocket Support</strong></td>
+<td>勾选（Jellyfin 需要）</td>
+</tr>
+<tr>
+<td><strong>SSL</strong></td>
+<td>“Force SSL” 并选用上一步创建的 <em>Wildcard Haozi</em> 证书</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://img.haozi.space/img2026/20260809110642221.png" alt="3lab7.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260809110642222.png" alt="3lab7.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260809110642223.png" alt="3lab7.png"></p>
+<h2 id="Ruiyi-EW1300防火墙放行-IPv6-端口">Ruiyi EW1300防火墙放行 IPv6 端口</h2>
+<p><a href="http://192.168.110.1">http://192.168.110.1</a> → 更多位置 → 高级管理 → 其他设置 → 关闭 开启高级防火墙+关闭 禁止ICMPv6发包。</p>
+<p><img src="https://img.haozi.space/img2026/20260809110716213.png" alt="4lab1.png"></p>
+<h2 id="Windows-Defender-防火墙放行对应端口">Windows Defender 防火墙放行对应端口</h2>
+<p>PowerShell 脚本<code>setup-fw.ps1</code>（一次性放行 NPM、Jellyfin、Sunshine 所需端口）：</p>
+<blockquote>
+<p>值得注意的是，在连接新的网络环境之后，防火墙规则会重置，需要再次执行 PowerShell 脚本<code>setup-fw.ps1</code></p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 放行 NPM HTTPS 端口</span></span><br><span class="line"><span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;NPM HTTPS&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> TCP <span class="literal">-LocalPort</span> <span class="number">8443</span> <span class="literal">-Action</span> Allow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放行 Jellyfin</span></span><br><span class="line"><span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Jellyfin&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> TCP <span class="literal">-LocalPort</span> <span class="number">8096</span> <span class="literal">-Action</span> Allow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放行 Sunshine（TCP 端口示例）</span></span><br><span class="line"><span class="variable">$sunshineTcp</span> = <span class="selector-tag">@</span>(<span class="number">47984</span>,<span class="number">47989</span>,<span class="number">48010</span>)</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$p</span> <span class="keyword">in</span> <span class="variable">$sunshineTcp</span>) &#123;</span><br><span class="line">    <span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Sunshine TCP <span class="variable">$p</span>&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> TCP <span class="literal">-LocalPort</span> <span class="variable">$p</span> <span class="literal">-Action</span> Allow</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放行 Sunshine UDP 端口</span></span><br><span class="line"><span class="variable">$sunshineUdp</span> = <span class="selector-tag">@</span>(<span class="number">47998</span>,<span class="number">47999</span>,<span class="number">48000</span>,<span class="number">48002</span>,<span class="number">48010</span>)</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$p</span> <span class="keyword">in</span> <span class="variable">$sunshineUdp</span>) &#123;</span><br><span class="line">    <span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Sunshine UDP <span class="variable">$p</span>&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> UDP <span class="literal">-LocalPort</span> <span class="variable">$p</span> <span class="literal">-Action</span> Allow</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.haozi.space/img2026/20260809110751523.png" alt="5lab1.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260809110751524.png" alt="5lab1.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260809110751525.png" alt="5lab1.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260809110751526.png" alt="5lab1.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260809110751527.png" alt="5lab1.png"></p>
+<p>win+R，输入<code>wf.msc</code>，查看防火墙规则是否设置生效：</p>
+<p><img src="https://img.haozi.space/img2026/20260815102940453.png" alt="image.png"></p>
+<p>查看 -&gt; 入站规则 -&gt; 显示 Jellyfin NPM HTTPS Sunshine 等规则均已设置成功。</p>
+<p><img src="https://img.haozi.space/img2026/20260815103045515.png" alt="image.png|622"></p>
+<h2 id="验证外网访问">验证外网访问</h2>
+<p>使用中国电信5G流量进行外网访问的测试：<br>
+关闭手机 Wi-Fi，切换至蜂窝网络（5G）：</p>
+<ol>
+<li><strong>Jellyfin 影音访问</strong>：
+<ul>
+<li>在手机浏览器打开 <code>https://vd.haozi.space:8443</code>。</li>
+<li>确认 SSL 证书绿锁生效，成功加载 Jellyfin 登录界面并实现流畅播放。</li>
+</ul>
+</li>
+</ol>
+<div class="mobile-image-row">
+  <img src="https://img.haozi.space/img2026/20260809110953406.png">
+  <img src="https://img.haozi.space/img2026/20260810164319523.png">
+</div>
+<ol start="2">
+<li><strong>Moonlight 串流游戏</strong>：
+<ul>
+<li>打开 Moonlight 客户端，点击“手动添加主机”。</li>
+<li>主机地址填写纯域名：<code>sunshine.haozi.space</code>（注意：<strong>切勿带</strong> <code>http://</code> 或端口号）[注2]。</li>
+<li>配对成功后，即可在公网下获得延迟低的远程桌面与游戏串流体验。</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://img.haozi.space/img2026/20260809110916519.png" alt="7lab1.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260809110927411.png" alt="7lab2.png"></p>
+<p><img src="https://img.haozi.space/img2026/20260809110937383.png" alt="7lab3.png"></p>
+<hr>
+<h1>架构维护清单</h1>
+<ul>
+<li>[x] 公网 IPv6（服务器端和客户端均需要有公网IPv6）</li>
+<li>[x] 客户端 / 服务端 VPN 关闭</li>
+<li>[x] 公网 IPv6 的出入站打通
+<ul>
+<li>客户端</li>
+<li>服务器端</li>
+<li>路由器（光猫）</li>
+</ul>
+</li>
+<li>[x] ddns-go windows 服务启动成功（前往 <a href="http://localhost:9876">http://localhost:9876</a> 维护）</li>
+<li>[x] Docker NPM 服务启动成功（前往 <a href="http://localhost:81">http://localhost:81</a> 维护）</li>
+<li>[x] Let’s Encrypt 泛域名证书未到期 （前往 <a href="http://localhost:81">http://localhost:81</a> 维护）</li>
+<li>[x] Windows Defender 防火墙指定端口开放：
+<ul>
+<li>[x] Jellyfin(8096)</li>
+<li>[x] Sunshine(TCP:47984,47989,48010、UDP:47998,47999,48000,48002,48010)</li>
+<li>[x] NPM(8443)</li>
+</ul>
+</li>
+<li>[x] 公网IPv6连通性测试
+<ul>
+<li>可以通过 <a href="https://test-ipv6.com">https://test-ipv6.com</a> 进行检验</li>
+<li>可以通过 Powershell 输入 <code>curl.exe -6 https://api64.ipify.org</code> 看是否返回 IPv6 地址</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1>适用场景与拓展</h1>
+<h2 id="方案适用场景">方案适用场景</h2>
+<ul>
+<li><strong>4K 原画家庭影音</strong>：无需经过中转服务器，直接以全速宽带上行播放 Jellyfin / Emby / Plex 中的高清视频。</li>
+<li><strong>超低延迟云游戏</strong>：结合 Sunshine + Moonlight 实现随地远程串流 Windows 3A 大作。</li>
+<li><strong>私有云存储与同步</strong>：搭配 Nextcloud、Obsidian (CouchDB / Remotely Save) 等服务实现全端快速同步。</li>
+<li><strong>远程运维与桌面</strong>：借助已有的公网 IPv6 + DDNS 解析，可直接通过 RDP（Windows 远程桌面协议）实现低延迟的远程桌面控制，无需中继服务器。对于同时管理多台设备的场景，也可部署 RustDesk 自建Server（需要一台具有公网 IP 的 VPS），统一管理家庭网络内所有无公网 IP 的设备。</li>
+</ul>
+<h2 id="后续拓展方向">后续拓展方向</h2>
+<ul>
+<li><strong>安全防护强化</strong>：在 NPM 中为敏感服务（如管理后台）开启 <strong>Access List</strong>（ HTTP 基本认证 / IP 白名单），防止公网暴力破解。</li>
+<li><strong>动态 IP 变动熔断与通知</strong>：利用 ddns-go 内置的 Webhook 功能，在 IPv6 地址变更时推送到 Server 酱、Telegram 机器人或 Server 酱。</li>
+<li><strong>全局 Fallback 备用方案</strong>：
+<ol>
+<li>如果遇到有些情况下光猫的 IPv6 防火墙无法更改、导致无法入站的情况，我们在拿到公网 IPv6 的前提下，可以使用 Tailscale 进行 P2P 打洞，具体操作请看<a href="%E8%80%81%E6%AF%9B%E5%AD%90%20Padavan%20%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%20IPv6%20%E8%B8%A9%E5%9D%91%E5%85%A8%E8%AE%B0%E5%BD%95%E4%B8%8E%20Tailscale%20%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96">老毛子 Padavan 路由器配置 IPv6 踩坑全记录与 Tailscale 直连优化</a></li>
+<li>由于部分公司网或公共场所 Wi-Fi 可能未开启 IPv6，建议搭配 <strong>Tailscale</strong> 自建 DERP 中继作为纯 IPv4 环境下的备用通道。</li>
+</ol>
+</li>
+</ul>
+<h1>参考文章</h1>
+<p><a href="https://hub.docker.com/r/jeessy/ddns-go#%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%BD%BF%E7%94%A8">jeessy/ddns-go - Docker Image</a><br>
+<a href="https://github.com/NginxProxyManager/nginx-proxy-manager">NginxProxyManager/nginx-proxy-manager</a><br>
+<a href="https://www.wangdu.site/course/2109.html">国内可用Docker镜像源加速器/DockerHub镜像汇总(2026年6月13日) - 文武科技柜</a><br>
+<a href="https://www.zhihu.com/question/5770756070">为什么Windows上会有很多IPv6地址？ - 知乎</a></p>
+<hr>
+<p><strong>注1：正则表达式的解释</strong><br>
+<code>^([0-9a-fA-F]&#123;1,4&#125;:)&#123;7&#125;[0-9a-fA-F]&#123;1,4&#125;$</code>，这个正则表达式的意思是：“<em>严格匹配一个由 8 段、用冒号隔开的、每段包含 1 到 4 位十六进制数字的完整 IPv6 地址</em>”。</p>
+<ol>
+<li>边界锚定：<code>^</code> 和 <code>$</code></li>
+</ol>
+<ul>
+<li><code>^</code>：匹配字符串的开始位置。</li>
+<li><code>$</code>：匹配字符串的结束位置。</li>
+<li>作用：确保整个字符串只能包含符合条件的 IPv6 地址，前后不能有任何其他多余的字符。</li>
+</ul>
+<ol start="2">
+<li>核心段落：<code>[a-fA-F0-9]&#123;1,4&#125;</code></li>
+</ol>
+<ul>
+<li><code>[...]</code>：字符集，表示允许出现的字符。</li>
+<li><code>a-fA-F0-9</code>：表示允许出现小写字母 <code>a-f</code>、大写字母 <code>A-F</code>、以及数字 <code>0-9</code>（即合法的十六进制字符）。</li>
+<li><code>&#123;1,4&#125;</code>：量词，表示前面的字符集必须出现 1 到 4 次。</li>
+<li>作用：匹配 IPv6 地址中的单个数群（例如：<code>2001</code>、<code>0db8</code>、<code>85a3</code> 甚至简写的 <code>1</code>）。</li>
+</ul>
+<ol start="3">
+<li>前 7 段的循环：<code>([a-fA-F0-9]&#123;1,4&#125;:)&#123;7&#125;</code></li>
+</ol>
+<ul>
+<li><code>(...)</code>：分组，把里面包含的内容看作一个整体。</li>
+<li><code>:</code>：普通的冒号，表示段与段之间的分隔符。</li>
+<li><code>&#123;7&#125;</code>：量词，表示括号内的整体（即“1-4位十六进制数+冒号”）必须恰好重复出现 7 次。</li>
+<li>作用：匹配前 7 段地址。形如：<code>2001:0db8:85a3:0000:0000:8a2e:0370:</code></li>
+</ul>
+<ol start="4">
+<li>最后一段：<code>[a-fA-F0-9]&#123;1,4&#125;</code></li>
+</ol>
+<ul>
+<li>作用：匹配最后一段不带冒号的十六进制数（第 8 段）。形如：<code>7334</code></li>
+</ul>
+<p><strong>匹配成功示例</strong></p>
+<ul>
+<li><code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code> （完美匹配）</li>
+<li><code>2001:db8:85a3:0:0:8a2e:370:7334</code> （成功，因为每段 1 到 4 位都算合规）</li>
+</ul>
+<p><strong>匹配失败示例</strong></p>
+<ul>
+<li><code>2001:db8::1</code> （失败，因为使用了 <code>::</code> 缩写，总段数不足 8 段，无法通过 <code>&#123;7&#125;</code> 的硬性计数）</li>
+<li><code>2001:0db8:85a3:0000:0000:8a2e:0370:7334/64</code> （失败，因为末尾带有 <code>$</code>, 无法匹配 <code>/64</code> 子网掩码）</li>
+</ul>
+<hr>
+<p><strong>注2：关于填写 Moonlight客户端的注意事项</strong></p>
+<ol>
+<li>为什么 Web 界面和串流是两码事？</li>
+</ol>
+<ul>
+<li><strong>Sunshine 的 Web UI (配置页面)</strong>：这是一个纯网页服务（HTTP）。所以你可以把它挂在 NPM（Nginx Proxy Manager）后面，通过 <code>https://sunshine.haozi.space:8443</code> 访问。它的作用仅仅是让你在外面能打开页面，进行“配对(PIN)”或者修改分辨率等设置。</li>
+<li><strong>Moonlight 实际串流 (打游戏)</strong>：游戏画面传输使用的是一套非常底层的私有协议，主要依赖 <strong>UDP 端口 (如 47998)</strong> 来保证超低延迟。NPM 默认只代理 HTTP/TCP 流量，<strong>NPM 根本无法也不应该去代理游戏串流的 UDP 流量</strong>（如果强行用 Nginx 代理 UDP，延迟会激增，失去串流的意义）。</li>
+</ul>
+<ol start="2">
+<li>
+<p>那么 Moonlight 客户端到底怎么填？<br>
+因为 Moonlight 必须<strong>直连</strong>你的 Windows 电脑，所以它的逻辑是：<br>
+输入一个地址 → Moonlight 通过 DNS 查到你电脑的真实 IPv6 → 直接向这个 IPv6 的 47998 等端口发起连接。<br>
+所以：<br>
+<strong>错误填法</strong>：<code>http://vpn.haozi.space</code> 或者 <code>https://sunshine.haozi.space:8443</code><br>
+（Moonlight 客户端的“添加主机”框里<strong>不能带 <code>http://</code> 或端口号</strong>，它不是浏览器，它不认识网址格式）。<br>
+<strong>正确填法</strong>：<code>vpn.haozi.space</code> 或者 <code>sunshine.haozi.space</code><br>
+（只需填<strong>纯域名</strong>。只要这个域名在 DDNS 里绑定了你 Windows 的公网 IPv6 即可）。</p>
+</li>
+<li>
+<p>你的疑问解答</p>
+</li>
+</ol>
+<blockquote>
+<p>“这对吗？我之前认为只要输入 <a href="http://vpn.haozi.space">http://vpn.haozi.space</a> 获取了主机的 IPv6 地址就可以串流了”</p>
+</blockquote>
+<p><strong>你的核心思路是对的</strong>：确实是靠域名获取主机的 IPv6 地址来进行串流。<br>
+不管是叫 <code>sunshine.haozi.space</code> 还是 <code>vpn.haozi.space</code>，只要这个域名在 Cloudflare 的 DNS 记录里（通过 ddns-go）指向了你电脑当前的真实 IPv6 地址，Moonlight 就能顺藤摸瓜找到你的电脑。</p>
+<ol start="4">
+<li>串流成功的绝对前提（敲黑板）<br>
+既然 Moonlight 是<strong>直连</strong>你的电脑，绕过了 Nginx (NPM)，那么：<br>
+你必须在 <strong>路由器防火墙 (ip6tables)</strong> 和 <strong>Windows Defender 防火墙</strong> 中，<strong>真实地放行 Sunshine 所需的所有端口</strong>。仅仅在 NPM 里配置反代是没用的。<br>
+你需要放行的端口列表：</li>
+</ol>
+<ul>
+<li><strong>TCP</strong>: <code>47984, 47989, 48010</code></li>
+<li><strong>UDP</strong>: <code>47998, 47999, 48000, 48002, 48010</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>工程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Jellyfin MetaShark插件安装与配置指南</title>
+    <url>/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260403145425463.png" alt="image-20260403145425463"></p>
+<h1>MetaShark</h1>
+<p>需要的工具：</p>
+<p><a href="https://github.com/cxfksword/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库1</a></p>
+<p><a href="http://gitee.com/cwhzy/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库2</a></p>
+<p>添加存储库</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329123438052.png" alt="image-20260329123438052"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260329123458168.png" alt="image-20260329123458168"></p>
+<p>安装metashark插件</p>
+<p><img src="https://img.haozi.space/img2026/image-20260327223744061.png" alt="image-20260327223744061"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260327223812350.png" alt="image-20260327223812350"></p>
+<p>选择一个资料库，点击管理媒体库</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329123548948.png" alt="image-20260329123548948"></p>
+<p>更改元数据加载器、图片下载器为metashark</p>
+<p><img src="https://img.haozi.space/img2026/image-20260327224115477.png" alt="image-20260327224115477"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260327224128867.png" alt="image-20260327224128867"></p>
+<p>如果之前已经有元数据，我们需要刷新一下元数据，覆盖掉原来的元数据</p>
+<p><img src="https://img.haozi.space/img2026/image-20260327224440699.png" alt="image-20260327224440699"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260327224500621.png" alt="image-20260327224500621"></p>
+<p>对于不满意的封面和元数据，还可以手动去调整，找到刮削不满意的电影，选择刮削元数据</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329123936663.png" alt="image-20260329123936663"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260329124012225.png" alt="image-20260329124012225"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260329124032265.png" alt="image-20260329124032265"></p>
+<p><strong>插件效果还是不错的</strong></p>
+<p>会显示简介、演员头像、中文标题的，比原来的好了不少</p>
+<p><img src="https://img.haozi.space/img2026/image-20260327224647909.png" alt="image-20260327224647909"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260328114650032.png" alt="image-20260328114650032"></p>
+<h1>Metatube</h1>
+<p>这个刮削插件主要是针对一些番号类资源的</p>
+<p>在安装的过程中，发现无法通过url安装，但是我们还可以通过手动拖dll进行安装</p>
+<p>先从github下载</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329122734246.png" alt="image-20260329122734246"></p>
+<p>解压出ddl文件</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329122756076.png" alt="image-20260329122756076"></p>
+<p>打开everything，搜索jellyfin，找到jellyfin的插件plugins文件夹，并且右键，打开路径</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329122918477.png" alt="image-20260329122918477"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260329123055978.png" alt="image-20260329123055978"></p>
+<p>重启jellyfin，发现插件是安装上了的</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329124611492.png" alt="image-20260329124611492"></p>
+<p>到这里还没有结束配置，刮削源有地域限制，而且还得部署服务器后端，官网有很多教程，很多<a href="https://metatube-community.github.io/wiki/server-deployment/">后端部署方案</a>可以去参考</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329125831393.png" alt="image-20260329125831393"></p>
+<p><strong>我采取的后端配置：</strong></p>
+<p><img src="https://img.haozi.space/img2026/image-20260329142154958.png" alt="image-20260329142154958"></p>
+<p>exe名称要更改一下，从metatube-server-windows-amd64.exe改为metatube-server.exe</p>
+<p>不然会出现这个问题</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">PS</span> F:\metatube&gt; .\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db</span><br><span class="line">./metatube<span class="literal">-server</span> : 无法将“./metatube<span class="literal">-server</span>”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如</span><br><span class="line">果包括路径，请确保路径正确，然后再试一次。</span><br><span class="line">所在位置 行:<span class="number">1</span> 字符: <span class="number">1</span></span><br><span class="line">./metatube<span class="literal">-server</span></span><br><span class="line">    + CategoryInfo : ObjectNotFound: (./metatube<span class="literal">-server</span>:String) [], CommandNotFoundException</span><br><span class="line">    + FullyQualifiedErrorId : CommandNotFoundException出现了这个问题</span><br></pre></td></tr></table></figure>
+<p>这样更改以后，浏览器打开127.0.0.1:8080，如果显示404，说明端口大概率是被占用了，可以通过以下命令更改端口</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">.\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db <span class="literal">--port</span> <span class="number">8100</span></span><br></pre></td></tr></table></figure>
+<p>然后访问127.0.0.1:8100，显示这样说明后端服务器就搭建好了</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329144330787.png" alt="image-20260329144330787"></p>
+<p>如果想要翻译标题和概要，去插件设计里面修改即可</p>
+<p><img src="https://img.haozi.space/img2026/image-20260329151505248.png" alt="image-20260329151505248"></p>
+<h1>JavSP</h1>
+<p>发现会出现 要求出口ip为日本节点，怎么去解决呢？</p>
+<p><strong>找到配置文件中的这一段</strong></p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[CrawlerSelect]</span></span><br><span class="line"><span class="attr">normal</span> = airav,avsox,javbus,javdb,javlib,jav321,mgstage,prestige</span><br><span class="line"><span class="attr">fc2</span> = fc2,avsox,javdb,javmenu,fc2ppvdb</span><br><span class="line"><span class="attr">cid</span> = fanza</span><br><span class="line"><span class="attr">getchu</span> = dl_getchu</span><br><span class="line"><span class="attr">gyutto</span> = gyutto</span><br></pre></td></tr></table></figure>
+<p>删除 <code>mgstage</code> 和 <code>prestige</code>，改成</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">normal</span> = avsox,javbus,javdb,javlib,jav321</span><br></pre></td></tr></table></figure>
+<p>因为<code>mgstage</code> 和 <code>prestige</code> 是日本官方或半官方源，强制要求日本 IP，我的网络节点无法满足，所以必须移除</p>
+<p>除此之外，还需要一个国外的节点（使用的是v2ray）</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 是否启用代理</span></span><br><span class="line"><span class="attr">use_proxy</span> = <span class="literal">yes</span>（这里改为<span class="literal">yes</span>）</span><br><span class="line"><span class="comment"># 设置代理服务器地址，支持 http, socks5/socks5h 代理。示例格式如下：</span></span><br><span class="line"><span class="attr">proxy</span> = socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br></pre></td></tr></table></figure>
+<p>修改后，JavSP 应该能正常工作了</p>
+<h1>一些问题和解决方法</h1>
+<h2 id="metashark刮削演员图片不显示">metashark刮削演员图片不显示</h2>
+<p>日志是这样写的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[ERR] [28] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request. URL &quot;GET&quot; &quot;/Items/0d08a913c95b0996ba7aed19ec5a405d/Images/Primary&quot;.</span><br><span class="line">System.Net.Http.HttpRequestException: 由于目标计算机积极拒绝，无法连接。 (127.0.0.1:8096)</span><br></pre></td></tr></table></figure>
+<p>解决方法：Dashboard → Networking-&gt;清空 network address</p>
+<p><img src="https://img.haozi.space/img2026/image-20260405210415758.png" alt="image-20260405210415758"></p>
+<p>插件通过url无法安装怎么办？</p>
+<p>可能需要我们把代理给关闭了，采取直连策略即可</p>
+<h2 id="Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据">Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据</h2>
+<p>打开config.ini，具体修改了以下几处发现就已经可以啦</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">enable_file_move = no</span><br><span class="line">...</span><br><span class="line">media_servers = jellyfin</span><br><span class="line">...</span><br><span class="line">save_dir = $censor/$actress/[$num]</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>《心灵奇旅》观感：活在当下</title>
+    <url>/2025/09/07/%E3%80%8ASoul%E3%80%8B/</url>
+    <content><![CDATA[<p>创作的灵感有点枯竭，得去豆瓣上看一看别人是怎么看的。</p>
+<h2 id="22">22</h2>
+<p>22，教会了gardner怎么去爱，怎么去悲，怎么去活。</p>
+<h2 id="活在当下">活在当下</h2>
+<p>抚摸每一阵风的轻盈，驻足每一片沿途的风景，珍惜眼前的人和事情，为树叶飘落而悲，为世间冷暖而泣…</p>
+<p>正如苏轼的《赤壁赋》：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">惟江上之清风，与山间之明月</span><br><span class="line">耳得之而为声，目遇之而成色</span><br><span class="line">取之无禁，用之不竭</span><br><span class="line">是造物者之无尽藏也。</span><br><span class="line">而吾与子之所共适</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>影视</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>借《倩女幽魂》，说出心中的善良与勇气</title>
+    <url>/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/</url>
+    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/qnyh1.png" alt=""><br>
+当小倩一溜烟钻进金罐，当采臣迎着彩虹骑马远去，当屏幕上跳出“剧终”两个字，我的心忽然咯噔了一下。电影戛然而止，想象却汹涌而来：她会投向怎样的人间？他是否还能在某个街角认出她？彩虹停在那里，故事停在那里，可我的思绪没有停。那一刻我才明白，有些结尾不是结束，而是一种留白。</p>
+<p>跳出电影再看，里面的人物其实都复杂得像真实的人。“我不管，我就要带你离开这里。”宁采臣明明胆小，在荒山听到狼叫都会吓得念诗壮胆，可当危险真正来临，他却选择向前。那一刻我忽然意识到，真正的勇敢不是不害怕，而是明明害怕，却仍然不退。或许我一直以为自己是个理性的人，习惯权衡利弊、计算后果，可有些选择不需要逻辑，甚至也来不及逻辑。</p>
+<p>“其实有些鬼，比人还善良得多。”聂小倩是鬼，却比许多人更温柔、更真诚；“有时候，人害人比鬼还残忍。”燕赤霞粗鲁却通透。原来最像鬼的，从来不是鬼。善恶从来不是身份决定的，鬼未必冷，人未必暖。褪去身份与外壳，真正站得住的，只有人心。</p>
+<p>我后来想明白，我写下这些，并不是为了分析镜头、光影或叙事技巧。我不是在写电影，我是在借电影确认自己的价值观。在这个有些混乱的世界里，我依然愿意相信善良、相信勇气、相信有人会在明知危险时说一句“我不管”。</p>
+<p>也许导演故意把故事停在彩虹那里。重要的不是他们后来是否重逢，而是在那一刻，他们把彼此当作全部。彩虹短暂，但它存在过；人心复杂，但光也真实。</p>
+<p>故事停在彩虹，宁采臣最后满脸惆怅，带着哭腔说出的这句“小倩，你要好好的做人”，给了我们最好的留白…</p>
+<p><img src="https://img.haozi.space/img2026/qnyh3.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>影视</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>经典老电影《控方证人》观后感</title>
+    <url>/2025/08/20/%E3%80%8A%E6%8E%A7%E6%96%B9%E8%AF%81%E4%BA%BA%E3%80%8B/</url>
+    <content><![CDATA[<p>闲的没事，找个电影看看。诶，控方证人这部1957的老电影，在某瓣上排名挺高的，好了，就你了，**《控方证人》**😃😃😃</p>
+<h2 id="个人感受">个人感受</h2>
+<h3 id="画面">画面</h3>
+<p>1957年的，<strong>巨老巨老的电影</strong>，画面是黑白的，Torrent Kitty下载的资源，尽管是720P，但画质还看得过去😏</p>
+<h3 id="剧情">剧情</h3>
+<p>故事发生在<strong>英国</strong>，开篇是英国当地的一个法庭开庭的镜头，也就是后面大部分精彩环节发生的地点</p>
+<p>故事一开始，映入眼帘的是一个胖胖的老头儿和一个女人，老头儿叫威佛列，因为治疗心脏病住院，现在出院，他愁容不展，从后面的情节我们得知，他是一名英国出了名的刑事律师（注意，不是初级律师，初级律师是没有本事可以打刑事案件的）；女人名为普林索，是威佛列爵士的私人医生，这个女人满脸笑容，可以看出是一个很乐观的人😃</p>
+<p>情节很紧凑，紧接着就有一个男子为了解决自己身上的嫌疑慕名而来，男子名叫连那德.Vol（外国人名真tm难记，看了一整部电影居然没记下来名字），Vol的案子不是那么好处理，他的嫌疑是杀害了French女士，10月15号那天晚上，Vol和French女士是在一起，Vol无法提供不在场证明</p>
+<p>从动机来问，威佛列像审问犯人一样，用光照着Vol，来检验他有没有说慌，事实证明，他通过了威佛列的考验。但这时，一个不利的消息传来，有八万英镑的遗嘱留给了Vol，这很难不让人怀疑Vol</p>
+<p>至于不在场证明，唯一的证明，是他的妻子——克里斯蒂.Vol，她向警察声称：当天21:25分看到Vol在家。但威佛列提出，妻子的作证在法庭上难成呈堂证供。除此之外，从克里斯蒂的陈述我们可以得知，Vol有很好的女人缘，和French有密切关系并不奇怪。克里斯蒂性格极其刚烈，极其坚强，甚至透露自己的丈夫不是Vol（惊天大瓜啊）</p>
+<p><strong>所以，威佛列就更不能让她来作证了</strong></p>
+<p>威佛列作为久经沙场的刑事律师，自然得想办法为自己的客户洗脱嫌疑，他提出来有没有可能可以找到路上的行人来为他做证，在Vol进入看守所看守的时间里，老头儿就一直在做这个事情</p>
+<p>时间很快来到庭审的阶段，老头儿威佛列冒着心脏病的危险，出席了自己职业生涯可能最后一场官司，法庭上的检方逐一出招，但都被经验老道的威佛列击破，检方将证人带入预设陷阱，老头儿就向法官大人告状；当证人出现了语言逻辑上的纰漏，老头儿就充分利用这个弱点；看起来这张官司，威佛列没有输的道理</p>
+<p>你以为这个过程有这么简单，那你就错了。常规的证人审问阶段结束，王炸出现，检方打了一张出奇意料的牌，似乎要置老头于死地——是Vol的妻子克里斯蒂</p>
+<p>克里斯蒂的作证让老头心儿一惊，老头儿可能心想：这娘们打的是什么牌，之前还给自己的丈夫作清白证明，现在怎么反水了？</p>
+<p>克里斯蒂的指控很出人意料：Vol一直要挟她欺骗警察，其实事实是：Vol 10月15日晚上21:25分不在家，10点10分他才回到家，外套上还沾满血啊啥的。总之，balabala了一大堆，就是说：老娘之前跟你一起骗警察是因为你之前带老娘来英国，老娘有点感激你，现在老娘回心转意了，改邪归正了，不能再让你这个杀人犯祸害世界了</p>
+<p><strong>检方这张牌打的妙啊，打的辩方那是措手不及</strong></p>
+<p>老头儿看着心里很慌，其实依旧稳如老狗：老头儿质问，大概是这个意思：当初在婚礼上白头偕老的是你，口口声声说爱你的也是你，结婚证领了的也是你。你个死婊子，你这娘们的话也能信？？？</p>
+<p>这一仗，不算胜利，只能算是个鱼死网破，还不能影响整个案件的判决走向</p>
+<p>正当老头儿这边一筹莫展的时候，一个电话来了，一个声称有着克里斯蒂那个臭婊子的黑料的女人打来的。有什么办法呢，死马当活马医呗</p>
+<p>来到约定的休斯顿车站，那个女人拿出厚厚的一沓信，信的内容无非说是：臭婊子吃里扒外，准备甩掉老公，拿走八万，远走高飞</p>
+<p>时间很快来到最后一天庭审，在案件马上结案的时候，老头儿闪出杀手锏——一沓信，不对，大招不能这么早放。老头儿堪称老狐狸，他先诈了克里斯蒂一招，读着自己的药处方，质问克里斯蒂在外面是不是有情人了，有鼻子有眼的陈述，结果克里斯蒂急了，赶忙说：你这个这个证据假的要死，老娘当时写信用的是蓝色的德国信纸，你搁这骗人呢？</p>
+<p>老狐狸邪魅一笑，把刚刚藏在书以下一沓蓝色的信纸抽了出来，露出了胜利者的笑容</p>
+<p><strong>辩论的艺术，让证人自证有罪，高，实在是高</strong></p>
+<p>庭审的结果很显而易见了，Vol是无罪的，克里斯蒂估计要因为伪证罪入狱</p>
+<p>很快，Vol就被释放，克里斯蒂被当庭人员咒骂、殴打</p>
+<p>当你还在惊叹于老狐狸的辩论艺术时，然而，故事远远还没有那么简单</p>
+<p>老头儿显然是高兴的，但他的经验告诉他，这个结果的反转来的太简单了。老头儿郁闷啊，到底是为啥啊？</p>
+<p>还是那句话，反派死于话多。正当老头儿思忖的时候，克里斯蒂走进只有威佛列一人的法庭，露出了胜利者的微笑：嘿嘿，你以为自己在大气层，其实老娘的操作在平流层</p>
+<p>反派开始自爆：哈哈想不到吧，在车站的那个其实是老娘扮的（嘿嘿，没想到吧）</p>
+<p><strong>你以为你很厉害，其实老娘更厉害，老娘是个演员，会演戏！</strong></p>
+<p>Vol猫在庭院偷听，笑眯眯走了过来，耀武扬威，一副小人得志的样子：我的wife可真不错</p>
+<p>克里斯蒂高兴着呢：等老娘找个好律师，早点出来，老娘跟你白头偕老！</p>
+<p>不等克里斯蒂高兴多久，突然窜出来一个面容姣好的女子，和Vol搂搂抱抱</p>
+<p>震惊，克里斯蒂气的脸都青咯</p>
+<p>气急败坏之下，克里斯蒂拿出一把刀，呲溜，刀子直窜到Vol的要害</p>
+<p><strong>原地，Vol领盒饭~</strong></p>
+<p>故事接近尾声，威佛列笑着说：又有案子来咯，去外面度假的计划又泡汤了（女医生被老头儿耍的第N次 嘿嘿）</p>
+<h3 id="复盘">复盘</h3>
+<ol>
+<li>
+<p>电影中多次给了面容姣好的女子镜头，而且在审被告人Vol的时候，有Vol和一个陌生女子去询问出国旅行的事实，陌生女子就是她！</p>
+<p><img src="/images/kfzr4.png" alt=""></p>
+<p><img src="/images/kfzr5.png" alt=""></p>
+<p><img src="/images/kfzr6.png" alt=""></p>
+</li>
+<li>
+<p>这两个人，真的是一个人吗？</p>
+<p><img src="/images/kfzr7.png" alt=""></p>
+<p><img src="/images/kfzr8.png" alt=""></p>
+</li>
+</ol>
+<h3 id="故事背后">故事背后</h3>
+<ol>
+<li>
+<p>审讯的艺术</p>
+<p><strong>通过攻击证人的人格，来降低对方的可信度</strong></p>
+<p>1997年的辛普森案，辩方使用了本电影很类似的方法：辩护梦之队先是通过攻击证人的人格问题，让证人的公信力大大降低，自然一定程度上增加了胜辩的机会。和中国不同，在英美法系中，一直有“品格证据”的传统。在审判时，检辩双方律师都可能在证人的人格上大作文章</p>
+<p><strong>辩护的最高境界，是让对方自证为伪</strong></p>
+<p>辛普森案中，辩方话里话外之间，都指摘警方不可信，有栽赃陷害的意图，手套与辛普森无关，控方怒了，要求辛普森带上手套，结果却很惊人，连控方律师都承认：这个手套有点太小了，控方再一次落了下风</p>
+<p>辛普森的经纪人在接受采访时才透漏：辛普森患有关节炎，但当时已经停了两周药，致使手指关节肿大，难以戴入手套。<strong>这完全是辩方律师的激将计，早就挖好圈套等着控方跳进来</strong></p>
+<p><strong>辩护应该注重细节，细节决定成败</strong></p>
+<p>本电影中，威佛列对French女士家女佣的诘问中，就敏锐的捕捉了女佣听力很差的事实，加上助听器事实的佐证，推翻了“听见过被告人那时在房间里说话”的证词。辛普森案也是同样如此，在此不赘述罢</p>
+<p><a href="https://zhuanlan.zhihu.com/p/616432919">美国司法史世纪大案：杀妻的辛普森，凭什么无罪？ - 知乎</a></p>
+</li>
+<li>
+<p>一罪不二审</p>
+<p>一罪不二审其实是大陆法系的说法，英美法院一般称之为<strong>禁止双重危险</strong>，基本含义是一个人不能因同一行为或同一罪名受到两次或多次审判或处罚。主要功能是<strong>防止国家滥用追诉权</strong>，从而保障公民合法权益</p>
+<p><a href="https://www.zhihu.com/question/22081648">如何评价“一罪不二审”这一司法原则？ - 知乎</a></p>
+</li>
+<li>
+<p>不同国家的案件审理制度</p>
+<p>总的来说，世界上在法庭上进行案件的审理可以分成<strong>两大类</strong>：一种是<strong>抗辩制</strong>，那就是通过正方和反方的辩论来厘清事实；另一种则是<strong>纠问制</strong>，那就是由专家型的法官，通过不断地追问来寻求事实的真相。<strong>本电影中故事的发生点——英国，采取的是抗辩制，嫌疑犯有没有罪，陪审团投票决定；我国实行的是纠问制</strong></p>
+<p>1997年，著名的辛普森案分别由一个刑事法庭和一个民事法庭来审理，案件的结果是：辛普森被宣判无罪，这是美国抗辩制的结果。重中之重的陪审团有12名普通市民组成，10女2男，其中有9名黑人，2名白人和1名西班牙裔白人</p>
+<p><a href="https://zhuanlan.zhihu.com/p/99108009">英美的陪审团制度，带不来真相和公正 - 知乎</a><br>
+<a href="https://zhuanlan.zhihu.com/p/616432919">美国司法史世纪大案：杀妻的辛普森，凭什么无罪？ - 知乎</a></p>
+</li>
+</ol>
+<h3 id="其他">其他</h3>
+<p>对辩论相关有兴趣的话，可以试试《逆转裁判》这款游戏</p>
+<p>[北洋园PT :: 种子详情 &quot;<a href="https://www.tjupt.org/details.php?id=366089&amp;hit=1">PC][AVG][逆转裁判123：成步堂合辑][Phoenix Wright Ace Attorney Trilogy][压缩包][v20230710 游侠破解版]&quot; - Powered by NexusPHP</a></p>
+<p>[北洋园PT :: 种子详情 &quot;<a href="https://www.tjupt.org/details.php?id=435241&amp;hit=1">PC][AVG][逆转裁判456：王泥喜精选集][Apollo.Justice.Ace.Attorney.Trilogy-RUNE][压缩包]&quot; - Powered by NexusPHP</a></p>
+]]></content>
+      <categories>
+        <category>影视</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>揭露细菌战暴行与人性困局：剧集分集观影随感</title>
+    <url>/2026/03/08/%E3%80%8A%E5%8F%8D%E4%BA%BA%E7%B1%BB%E6%9A%B4%E8%A1%8C%E3%80%8B/</url>
+    <content><![CDATA[<h1>第一集</h1>
+<p>第一集给我的最大感受是，这个电视剧的镜头很有质感，光影很细节。</p>
+<p>佟长富真的是常宇演的吗？感觉神似但是又不像，很神奇</p>
+<p>反人类暴行，到底怎么去表现呢？第一集感觉只是一个引子，二条的死只是开端。二条身上带着的，一定是某种致命的病毒，日本人干了什么好事？</p>
+<p>还有一个疑问，长富的妹妹是什么身份？</p>
+<p>“他们把二条挖出来吃了”，这句话一出来，真是，人在那时候，活得不像一条狗。</p>
+<p>片尾的历史真实录音让人听起来很难受：他们把注射了细菌的瓜给中国人吃，中国人吃了怎么样了？</p>
+<p>“全部感染！”</p>
+<h1>第二集</h1>
+<p>这集把荒川良平引出来了，和前面长富的剧情接上了，从荒川良平的眼中，我看到的只有恐惧和慌乱，似乎体力还不太行，做着做着实验就到过去了，他和那群作恶多端的日本军官格格不入。</p>
+<p>印象很深的一句话：“比敌人更可怕的，也许只是一个得不到治疗的伤口”</p>
+<h1>第八集</h1>
+<p>川口聪这是黑化了啊，之前还觉得他是个有良知的日本人，这集咋还去抢银行了呢。</p>
+<p>感觉是被舞子的死逼疯了。</p>
+<p>王道乐土 五族协和这句口号之下的牺牲品。</p>
+<p>我想要逃，却怎么也逃不出监牢的环抱。荒川良平</p>
+<h1>第九集</h1>
+<p>进入探秘篇，这集活体解剖很是血腥</p>
+]]></content>
+      <categories>
+        <category>影视</category>
       </categories>
   </entry>
   <entry>
@@ -1728,472 +2316,66 @@ UG NX12如何进行数控仿真？<br>
       </categories>
   </entry>
   <entry>
-    <title>Jellyfin MetaShark插件安装与配置指南</title>
-    <url>/2026/04/03/jellyfin%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BC%98%E9%9B%85%E7%9A%84%E5%88%AE%E5%89%8A%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260403145425463.png" alt="image-20260403145425463"></p>
-<h1>MetaShark</h1>
-<p>需要的工具：</p>
-<p><a href="https://github.com/cxfksword/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库1</a></p>
-<p><a href="http://gitee.com/cwhzy/jellyfin-plugin-metashark/releases/download/manifest/manifest_cn.json">插件存储库2</a></p>
-<p>添加存储库</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329123438052.png" alt="image-20260329123438052"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260329123458168.png" alt="image-20260329123458168"></p>
-<p>安装metashark插件</p>
-<p><img src="https://img.haozi.space/img2026/image-20260327223744061.png" alt="image-20260327223744061"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260327223812350.png" alt="image-20260327223812350"></p>
-<p>选择一个资料库，点击管理媒体库</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329123548948.png" alt="image-20260329123548948"></p>
-<p>更改元数据加载器、图片下载器为metashark</p>
-<p><img src="https://img.haozi.space/img2026/image-20260327224115477.png" alt="image-20260327224115477"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260327224128867.png" alt="image-20260327224128867"></p>
-<p>如果之前已经有元数据，我们需要刷新一下元数据，覆盖掉原来的元数据</p>
-<p><img src="https://img.haozi.space/img2026/image-20260327224440699.png" alt="image-20260327224440699"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260327224500621.png" alt="image-20260327224500621"></p>
-<p>对于不满意的封面和元数据，还可以手动去调整，找到刮削不满意的电影，选择刮削元数据</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329123936663.png" alt="image-20260329123936663"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260329124012225.png" alt="image-20260329124012225"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260329124032265.png" alt="image-20260329124032265"></p>
-<p><strong>插件效果还是不错的</strong></p>
-<p>会显示简介、演员头像、中文标题的，比原来的好了不少</p>
-<p><img src="https://img.haozi.space/img2026/image-20260327224647909.png" alt="image-20260327224647909"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260328114650032.png" alt="image-20260328114650032"></p>
-<h1>Metatube</h1>
-<p>这个刮削插件主要是针对一些番号类资源的</p>
-<p>在安装的过程中，发现无法通过url安装，但是我们还可以通过手动拖dll进行安装</p>
-<p>先从github下载</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329122734246.png" alt="image-20260329122734246"></p>
-<p>解压出ddl文件</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329122756076.png" alt="image-20260329122756076"></p>
-<p>打开everything，搜索jellyfin，找到jellyfin的插件plugins文件夹，并且右键，打开路径</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329122918477.png" alt="image-20260329122918477"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260329123055978.png" alt="image-20260329123055978"></p>
-<p>重启jellyfin，发现插件是安装上了的</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329124611492.png" alt="image-20260329124611492"></p>
-<p>到这里还没有结束配置，刮削源有地域限制，而且还得部署服务器后端，官网有很多教程，很多<a href="https://metatube-community.github.io/wiki/server-deployment/">后端部署方案</a>可以去参考</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329125831393.png" alt="image-20260329125831393"></p>
-<p><strong>我采取的后端配置：</strong></p>
-<p><img src="https://img.haozi.space/img2026/image-20260329142154958.png" alt="image-20260329142154958"></p>
-<p>exe名称要更改一下，从metatube-server-windows-amd64.exe改为metatube-server.exe</p>
-<p>不然会出现这个问题</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">PS</span> F:\metatube&gt; .\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db</span><br><span class="line">./metatube<span class="literal">-server</span> : 无法将“./metatube<span class="literal">-server</span>”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如</span><br><span class="line">果包括路径，请确保路径正确，然后再试一次。</span><br><span class="line">所在位置 行:<span class="number">1</span> 字符: <span class="number">1</span></span><br><span class="line">./metatube<span class="literal">-server</span></span><br><span class="line">    + CategoryInfo : ObjectNotFound: (./metatube<span class="literal">-server</span>:String) [], CommandNotFoundException</span><br><span class="line">    + FullyQualifiedErrorId : CommandNotFoundException出现了这个问题</span><br></pre></td></tr></table></figure>
-<p>这样更改以后，浏览器打开127.0.0.1:8080，如果显示404，说明端口大概率是被占用了，可以通过以下命令更改端口</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">.\metatube<span class="literal">-server</span>.exe <span class="literal">-dsn</span> metatube.db <span class="literal">--port</span> <span class="number">8100</span></span><br></pre></td></tr></table></figure>
-<p>然后访问127.0.0.1:8100，显示这样说明后端服务器就搭建好了</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329144330787.png" alt="image-20260329144330787"></p>
-<p>如果想要翻译标题和概要，去插件设计里面修改即可</p>
-<p><img src="https://img.haozi.space/img2026/image-20260329151505248.png" alt="image-20260329151505248"></p>
-<h1>JavSP</h1>
-<p>发现会出现 要求出口ip为日本节点，怎么去解决呢？</p>
-<p><strong>找到配置文件中的这一段</strong></p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[CrawlerSelect]</span></span><br><span class="line"><span class="attr">normal</span> = airav,avsox,javbus,javdb,javlib,jav321,mgstage,prestige</span><br><span class="line"><span class="attr">fc2</span> = fc2,avsox,javdb,javmenu,fc2ppvdb</span><br><span class="line"><span class="attr">cid</span> = fanza</span><br><span class="line"><span class="attr">getchu</span> = dl_getchu</span><br><span class="line"><span class="attr">gyutto</span> = gyutto</span><br></pre></td></tr></table></figure>
-<p>删除 <code>mgstage</code> 和 <code>prestige</code>，改成</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">normal</span> = avsox,javbus,javdb,javlib,jav321</span><br></pre></td></tr></table></figure>
-<p>因为<code>mgstage</code> 和 <code>prestige</code> 是日本官方或半官方源，强制要求日本 IP，我的网络节点无法满足，所以必须移除</p>
-<p>除此之外，还需要一个国外的节点（使用的是v2ray）</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 是否启用代理</span></span><br><span class="line"><span class="attr">use_proxy</span> = <span class="literal">yes</span>（这里改为<span class="literal">yes</span>）</span><br><span class="line"><span class="comment"># 设置代理服务器地址，支持 http, socks5/socks5h 代理。示例格式如下：</span></span><br><span class="line"><span class="attr">proxy</span> = socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br></pre></td></tr></table></figure>
-<p>修改后，JavSP 应该能正常工作了</p>
-<h1>一些问题和解决方法</h1>
-<h2 id="metashark刮削演员图片不显示">metashark刮削演员图片不显示</h2>
-<p>日志是这样写的</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[ERR] [28] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request. URL &quot;GET&quot; &quot;/Items/0d08a913c95b0996ba7aed19ec5a405d/Images/Primary&quot;.</span><br><span class="line">System.Net.Http.HttpRequestException: 由于目标计算机积极拒绝，无法连接。 (127.0.0.1:8096)</span><br></pre></td></tr></table></figure>
-<p>解决方法：Dashboard → Networking-&gt;清空 network address</p>
-<p><img src="https://img.haozi.space/img2026/image-20260405210415758.png" alt="image-20260405210415758"></p>
-<p>插件通过url无法安装怎么办？</p>
-<p>可能需要我们把代理给关闭了，采取直连策略即可</p>
-<h2 id="Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据">Javbus不移动原文件的情况下，下载元数据而不覆盖原元数据</h2>
-<p>打开config.ini，具体修改了以下几处发现就已经可以啦</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">enable_file_move = no</span><br><span class="line">...</span><br><span class="line">media_servers = jellyfin</span><br><span class="line">...</span><br><span class="line">save_dir = $censor/$actress/[$num]</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Windows磁盘管理拓展卷教程</title>
-    <url>/2026/07/21/win10%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E6%8B%86%E5%88%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%A1%AC%E7%9B%98/</url>
-    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260408171339123.png" alt="image-20260408171339123"></p>
-<h1>怎么办？</h1>
-<p>win+R，输入diskmgmt.msc，进入磁盘管理界面</p>
-<p><img src="https://img.haozi.space/img2026/image-20260408165624850.png" alt="image-20260408165624850"></p>
-<p>会看到一个类似于这样的界面</p>
-<p><img src="https://img.haozi.space/img2026/image-20260408165709297.png" alt="image-20260408165709297"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408165951747.png" alt="image-20260408165951747"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170141660.png" alt="image-20260408170141660"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170217038.png" alt="image-20260408170217038"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170235741.png" alt="image-20260408170235741"></p>
-<p>在拓展卷步骤可能看到类似的界面，像这里我的磁盘由于是机械硬盘，不安装操作系统所以我就可以选择“是”，<strong>如果对于c盘不可以进行这样的操作的，因为里面是有操作系统的</strong></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170313892.png" alt="image-20260408170313892"></p>
-<h1>遇到的问题</h1>
-<p>遇到了这个很抓马的问题，会卡在磁盘管理这个界面，没有什么反应</p>
-<p><img src="https://img.haozi.space/img2026/image-20260408164813261.png" alt="image-20260408164813261"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408165434164.png" alt="image-20260408165434164"></p>
-<p>解决方法：</p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170546391.png" alt="image-20260408170546391"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170608484.png" alt="image-20260408170608484"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170621233.png" alt="image-20260408170621233"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170640560.png" alt="image-20260408170640560"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170653725.png" alt="image-20260408170653725"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170711736.png" alt="image-20260408170711736"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170733276.png" alt="image-20260408170733276"></p>
-<p>服务显示“正在运行”应该就行啦哈哈</p>
-<p><img src="https://img.haozi.space/img2026/image-20260408170942130.png" alt="image-20260408170942130"></p>
-<h1>参考教程</h1>
-<p><a href="https://jingyan.baidu.com/article/574c5219d91cde2d8d9dc18f.html">win10遇到无法连接虚拟磁盘服务解决方法</a><br>
-<a href="https://www.bilibili.com/video/BV1Uj411f7wj/?spm_id_from=333.1391.0.0&amp;vd_source=f15209b32029e916ee473fe943d494ca">如何给已分区的磁盘进行扩容/拆分/合并的操作？新装硬盘如何显示在我的电脑内？</a><br>
-<a href="https://www.bilibili.com/video/BV1tG411v7of/?vd_source=f15209b32029e916ee473fe943d494ca">电脑磁盘管理无法连接虚拟磁盘服务？教你怎么解决</a></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>基于原生 IPv6 与 NPM 实现 Win11 本地服务低延迟公网暴露</title>
-    <url>/2026/08/09/win11-iPv6-npm/</url>
-    <content><![CDATA[<p>在以往的 HomeLab 搭建中，本地服务的公网暴露往往依赖 Cloudflare Tunnel 或各类内网穿透工具。然而，由于中转服务器大多位于海外，这种方案普遍存在<strong>高延迟、带宽受限以及连接不稳定</strong>等痛点。<br>
-随着国内运营商家庭宽带普遍普及原生 IPv6，光猫改桥接后由路由器进行 PPPoE 拨号，设备即可获取到直连公网的 IPv6 地址。本文将详细介绍如何在 Windows 11 环境下，利用公网 IPv6、ddns-go 以及 Docker 版 Nginx Proxy Manager (NPM)，实现低延迟、安全且带 HTTPS 证书的本地服务外网暴露。</p>
-<blockquote>
-<p><strong>前提条件</strong>：本文方案建立在拥有<strong>原生公网 IPv6</strong> 的基础之上。在开始前，请先前往 <a href="https://test-ipv6.com">test-ipv6.com</a> 检测你的网络环境是否符合要求。</p>
-</blockquote>
-<hr>
-<h1>背景与痛点</h1>
-<ul>
-<li><strong>原始方案</strong>：使用 Cloudflare Tunnel，导致高延迟、连接不稳定。</li>
-<li>具备一个个人域名：拥有一个个人域名（本文以 <code>haozi.space</code> 为例）。</li>
-<li><strong>网络条件</strong>：宽带提供原生公网 IPv6，光猫已桥接，路由器负责 PPPoE 拨号。</li>
-<li><strong>目标</strong>：利用真实 IPv6 直接把 Windows 上的 Jellyfin、Sunshine（Moonlight）等服务暴露到外网，保持最小的网络转发层数，从而获得几乎零延迟的体验。<br>
-再次强调，本文的一切前提都在于拥有一个公网IPv6，如果你不知道你自己有没有，可以前往 <a href="https://test-ipv6.com">test-ipv6.com</a> 检测一下你的网络环境。</li>
-</ul>
-<hr>
-<h1>架构总览</h1>
-<p>适配睿易 (Ruiyi) EW1300 路由器环境的整体架构如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Internet</span><br><span class="line">   │</span><br><span class="line">   └─ IPv6 AAAA DNS (Cloudflare) ──► Ruiyi EW1300 (OpenWrt)</span><br><span class="line">                                             │</span><br><span class="line">                       ┌─────────────────────┴─────────────────────┐</span><br><span class="line">                       │                                            │</span><br><span class="line">		  IPv6 转发     │                                            │</span><br><span class="line">                       ▼                                            ▼</span><br><span class="line">Docker 主机 (Windows 11) — Nginx Proxy Manager (Docker) —► Windows 本机服务</span><br><span class="line">   (Docker Desktop)          (端口 8080/8443)                 (Jellyfin 8096, Sunshine ...)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>DDNS‑GO（Windows 原生）</strong>：每 5 分钟将本机的公网 IPv6 写入 Cloudflare 的 <code>*.haozi.space</code> AAAA 记录。</li>
-<li><strong>Nginx Proxy Manager (NPM)</strong>：运行在 Docker 中，负责 HTTPS 终止、域名匹配、Let’s Encrypt 泛域名证书。</li>
-<li><strong>Ruiyi EW1300</strong>：直接放行需要的 IPv6 端口，并把外部流量转发到 Windows 主机的局域网 IP。</li>
-<li><strong>Windows 防火墙</strong>：同样放行对应端口，避免本机对 Docker 虚拟网卡的流量拦截。</li>
-</ul>
-<hr>
-<h1>部署步骤</h1>
-<h2 id="在-Windows-上部署-ddns-go（-exe）">在 Windows 上部署 ddns-go（ exe）</h2>
-<p>ddns-go（exe）的下载链接：<a href="https://github.com/jeessy2/ddns-go/releases/download/v6.17.5/ddns-go_6.17.5_windows_x86_64.zip">ddns-go</a><br>
-ddns-go的GitHub releases界面：<a href="https://github.com/jeessy2/ddns-go/releases/tag/v6.17.5">GitHub releases</a>，下载界面截图：</p>
-<p><img src="https://img.haozi.space/img2026/20260809112059746.png" alt="image.png|591"></p>
-<p>之后，我们需要在 Windows 中将 <code>ddns-go</code> 注册为系统服务开机自启，只需以管理员身份打开PowerShell，在ddns-go.exe所在目录下，执行 <code>.\ddns-go.exe -s install</code> 命令即可。<br>
-ddns-go.exe所在目录：<code>D:\ddns-go_6.17.4_windows_x86_64\ddns-go_6.17.4_windows_x86_64</code>（可自行下载并置于你想要的路径）。<br>
-Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
-<p><img src="https://img.haozi.space/img2026/20260809120707014.png" alt="1lab6.png|608"></p>
-<p>输入命令安装为系统服务：</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">.\ddns<span class="literal">-go</span>.exe <span class="literal">-s</span> install</span><br></pre></td></tr></table></figure>
-<p>通过以下指令验证安装为系统服务是否成功：</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Get-Service</span> ddns<span class="literal">-go</span></span><br></pre></td></tr></table></figure>
-<p>如果Status显示为Running，说明ddns-go系统服务安装成功！</p>
-<p><img src="https://img.haozi.space/img2026/20260809120728618.png" alt="1lab10.png|605"></p>
-<p>但是如果遇到了Stopped的情况，通过以下方式解决：</p>
-<p><img src="https://img.haozi.space/img2026/20260809120933184.png" alt="1lab8.png|603"></p>
-<p><img src="https://img.haozi.space/img2026/20260809120728620.png" alt="1lab10.png|434"></p>
-<p><img src="https://img.haozi.space/img2026/20260809120728614.png" alt="1lab10.png|537"></p>
-<p><img src="https://img.haozi.space/img2026/20260809120728615.png" alt="1lab10.png|455"></p>
-<p><img src="https://img.haozi.space/img2026/20260809120728616.png" alt="1lab10.png|455"></p>
-<p>再次输入：</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Get-Service</span> ddns<span class="literal">-go</span></span><br></pre></td></tr></table></figure>
-<p>验证启动是否生效。发现：Status显示为Running，说明ddns-go系统服务手动启动成功！</p>
-<p><img src="https://img.haozi.space/img2026/20260809120728617.png" alt="1lab10.png|560"></p>
-<p>之后，我们登录 <a href="http://localhost:9876">http://localhost:9876</a> 访问ddns-go的Web UI（初次登录似乎密码自行配置即可？）</p>
-<p><img src="https://img.haozi.space/img2026/20260809105811616.png" alt="1lab1.png|579"></p>
-<p>在配置ddns-go之前，需要先获取一个Cloudflare的API Token。</p>
-<p><img src="https://img.haozi.space/img2026/20260809105901952.png" alt="3lab2.png|594"></p>
-<p><img src="https://img.haozi.space/img2026/20260809105922140.png" alt="3lab3.png|594"></p>
-<p><img src="https://img.haozi.space/img2026/20260809105922141.png" alt="3lab3.png|595"></p>
-<p><img src="https://img.haozi.space/img2026/20260809105922142.png" alt="3lab3.png|598"></p>
-<p><img src="https://img.haozi.space/img2026/20260809105942558.png" alt="1lab2.png|578"></p>
-<p>匹配正则表达式这样写：<code>^([0-9a-fA-F]&#123;1,4&#125;:)&#123;7&#125;[0-9a-fA-F]&#123;1,4&#125;$</code> [注1]。</p>
-<p><img src="https://img.haozi.space/img2026/20260809105952935.png" alt="1lab3.png|573"></p>
-<p>查看日志，显示域名解析成功即可：</p>
-<p><img src="https://img.haozi.space/img2026/20260809110013436.png" alt="1lab4.png|605"></p>
-<p>也可以前往Cloudflare的dashboard查看DNS配置是否生效：</p>
-<p><img src="https://img.haozi.space/img2026/20260809110023352.png" alt="1lab5.png|604"></p>
-<h2 id="Docker‑Compose-部署-Nginx-Proxy-Manager">Docker‑Compose 部署 Nginx Proxy Manager</h2>
-<p>中国大陆用户记得去 Docker Engine 里面修改镜像：<br>
-<img src="https://img.haozi.space/img2026/20260809110046985.png" alt="2lab4.png|626"></p>
-<p>更改的配置文件如下:</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;gc&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;defaultKeepStorage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;20GB&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;experimental&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;https://docker.1ms.run&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;https://dockerproxy.net&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;https://proxy.vvvv.ee&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;https://dockerproxy.link&quot;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>在路径<code>D:\docker\homelab</code> 下建立 <code>docker-compose.yml</code>：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">npm:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;jc21/nginx-proxy-manager:latest&#x27;</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">npm</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;8080:80&#x27;</span>    <span class="comment"># 避开内部 80 冲突</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;8443:443&#x27;</span>   <span class="comment"># 外部用 8443，内部对应 NPM 的 443</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;81:81&#x27;</span>      <span class="comment"># 管理后台</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./npm/data:/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./npm/letsencrypt:/etc/letsencrypt</span></span><br></pre></td></tr></table></figure>
-<p>（<code>8443:443</code>和<code>8080：80</code>这两行是因为电脑上的80和443已经被占用，所以进行了端口映射）<br>
-在<code>docker-compose.yml</code>目录下，运行cmd，运行 <code>docker compose up -d</code> 命令：</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
-<p>静静等待一段时间（可能较长），拉取镜像完成后，打开 <a href="http://localhost:8080">http://localhost:8080</a> ，显示以下界面说明NPM的配置和拉取已经成功啦：</p>
-<p><img src="https://img.haozi.space/img2026/20260809110210514.png" alt="2lab3.png|599"></p>
-<p>也可以通过cmd命令行，输入：</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p>终端输出，确保容器名称 <code>npm</code>、端口映射 <code>0.0.0.0:8080-&gt;80/tcp</code>、<code>0.0.0.0:8443-&gt;443/tcp</code></p>
-<p><img src="https://img.haozi.space/img2026/20260809110227660.png" alt="2lab5.png|608"></p>
-<h2 id="Let’s-Encrypt-泛域名证书">Let’s Encrypt 泛域名证书</h2>
-<p>先要获取API Token，操作和部署ddns-go时，获取Cloudflare的API Tokens的步骤一致：</p>
-<p><img src="https://img.haozi.space/img2026/20260809105901952.png" alt="3lab2.png|550"></p>
-<p><img src="https://img.haozi.space/img2026/20260809105922142.png" alt="3lab3.png|544"></p>
-<p><img src="https://img.haozi.space/img2026/20260809105922140.png" alt="3lab3.png|556"></p>
-<p>进入 <a href="http://localhost:81">http://localhost:81</a>（NPM UI）→ 证书列表 → 添加证书 → 添加 Let’s Encrypt DNS 验证</p>
-<p><img src="https://img.haozi.space/img2026/20260809132326392.png" alt="3lab6.png"></p>
-<p>类型选 <code>DNS Challenge</code> → Provider 选 <code>Cloudflare</code> → 填入 <strong>API Token</strong></p>
-<p><img src="https://img.haozi.space/img2026/20260809110413625.png" alt="3lab1.png|369"></p>
-<p>域名填写泛域名 <code>*.haozi.space</code>，保存。<br>
-证书显示生效就可以进行后续的步骤了。</p>
-<h2 id="在-NPM-中添加反向代理-Host（示例：Jellyfin）">在 NPM 中添加反向代理 Host（示例：Jellyfin）</h2>
-<p>主机列表→ 代理服务列表 → 添加 代理服务：</p>
-<p><img src="https://img.haozi.space/img2026/20260809110642220.png" alt="3lab7.png|600"></p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>取值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Domain Names</strong></td>
-<td><code>vd.haozi.space</code></td>
-</tr>
-<tr>
-<td><strong>Scheme</strong></td>
-<td><code>http</code></td>
-</tr>
-<tr>
-<td><strong>Forward Hostname / IP</strong></td>
-<td><code>host.docker.internal</code>(Windows 主机在局域网的固定 IP)</td>
-</tr>
-<tr>
-<td><strong>Forward Port</strong></td>
-<td><code>8096</code></td>
-</tr>
-<tr>
-<td><strong>WebSocket Support</strong></td>
-<td>勾选（Jellyfin 需要）</td>
-</tr>
-<tr>
-<td><strong>SSL</strong></td>
-<td>“Force SSL” 并选用上一步创建的 <em>Wildcard Haozi</em> 证书</td>
-</tr>
-</tbody>
-</table>
-<p><img src="https://img.haozi.space/img2026/20260809110642221.png" alt="3lab7.png"></p>
-<p><img src="https://img.haozi.space/img2026/20260809110642222.png" alt="3lab7.png"></p>
-<p><img src="https://img.haozi.space/img2026/20260809110642223.png" alt="3lab7.png"></p>
-<h2 id="Ruiyi-EW1300防火墙放行-IPv6-端口">Ruiyi EW1300防火墙放行 IPv6 端口</h2>
-<p><a href="http://192.168.110.1">http://192.168.110.1</a> → 更多位置 → 高级管理 → 其他设置 → 关闭 开启高级防火墙+关闭 禁止ICMPv6发包。</p>
-<p><img src="https://img.haozi.space/img2026/20260809110716213.png" alt="4lab1.png"></p>
-<h2 id="Windows-Defender-防火墙放行对应端口">Windows Defender 防火墙放行对应端口</h2>
-<p>PowerShell 脚本<code>setup-fw.ps1</code>（一次性放行 NPM、Jellyfin、Sunshine 所需端口）：</p>
-<blockquote>
-<p>值得注意的是，在连接新的网络环境之后，防火墙规则会重置，需要再次执行 PowerShell 脚本<code>setup-fw.ps1</code></p>
-</blockquote>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 放行 NPM HTTPS 端口</span></span><br><span class="line"><span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;NPM HTTPS&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> TCP <span class="literal">-LocalPort</span> <span class="number">8443</span> <span class="literal">-Action</span> Allow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放行 Jellyfin</span></span><br><span class="line"><span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Jellyfin&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> TCP <span class="literal">-LocalPort</span> <span class="number">8096</span> <span class="literal">-Action</span> Allow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放行 Sunshine（TCP 端口示例）</span></span><br><span class="line"><span class="variable">$sunshineTcp</span> = <span class="selector-tag">@</span>(<span class="number">47984</span>,<span class="number">47989</span>,<span class="number">48010</span>)</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$p</span> <span class="keyword">in</span> <span class="variable">$sunshineTcp</span>) &#123;</span><br><span class="line">    <span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Sunshine TCP <span class="variable">$p</span>&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> TCP <span class="literal">-LocalPort</span> <span class="variable">$p</span> <span class="literal">-Action</span> Allow</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放行 Sunshine UDP 端口</span></span><br><span class="line"><span class="variable">$sunshineUdp</span> = <span class="selector-tag">@</span>(<span class="number">47998</span>,<span class="number">47999</span>,<span class="number">48000</span>,<span class="number">48002</span>,<span class="number">48010</span>)</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$p</span> <span class="keyword">in</span> <span class="variable">$sunshineUdp</span>) &#123;</span><br><span class="line">    <span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Sunshine UDP <span class="variable">$p</span>&quot;</span> <span class="literal">-Direction</span> Inbound <span class="literal">-Protocol</span> UDP <span class="literal">-LocalPort</span> <span class="variable">$p</span> <span class="literal">-Action</span> Allow</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img.haozi.space/img2026/20260809110751523.png" alt="5lab1.png"></p>
-<p><img src="https://img.haozi.space/img2026/20260809110751524.png" alt="5lab1.png"></p>
-<p><img src="https://img.haozi.space/img2026/20260809110751525.png" alt="5lab1.png"></p>
-<p><img src="https://img.haozi.space/img2026/20260809110751526.png" alt="5lab1.png"></p>
-<p><img src="https://img.haozi.space/img2026/20260809110751527.png" alt="5lab1.png"></p>
-<p>win+R，输入<code>wf.msc</code>，查看防火墙规则是否设置生效：</p>
-<p><img src="https://img.haozi.space/img2026/20260815102940453.png" alt="image.png"></p>
-<p>查看 -&gt; 入站规则 -&gt; 显示 Jellyfin NPM HTTPS Sunshine 等规则均已设置成功。</p>
-<p><img src="https://img.haozi.space/img2026/20260815103045515.png" alt="image.png|622"></p>
-<h2 id="验证外网访问">验证外网访问</h2>
-<p>使用中国电信5G流量进行外网访问的测试：<br>
-关闭手机 Wi-Fi，切换至蜂窝网络（5G）：</p>
-<ol>
-<li><strong>Jellyfin 影音访问</strong>：
-<ul>
-<li>在手机浏览器打开 <code>https://vd.haozi.space:8443</code>。</li>
-<li>确认 SSL 证书绿锁生效，成功加载 Jellyfin 登录界面并实现流畅播放。</li>
-</ul>
-</li>
-</ol>
-<div class="mobile-image-row">
-  <img src="https://img.haozi.space/img2026/20260809110953406.png">
-  <img src="https://img.haozi.space/img2026/20260810164319523.png">
-</div>
-<ol start="2">
-<li><strong>Moonlight 串流游戏</strong>：
-<ul>
-<li>打开 Moonlight 客户端，点击“手动添加主机”。</li>
-<li>主机地址填写纯域名：<code>sunshine.haozi.space</code>（注意：<strong>切勿带</strong> <code>http://</code> 或端口号）[注2]。</li>
-<li>配对成功后，即可在公网下获得延迟低的远程桌面与游戏串流体验。</li>
-</ul>
-</li>
-</ol>
-<p><img src="https://img.haozi.space/img2026/20260809110916519.png" alt="7lab1.png"></p>
-<p><img src="https://img.haozi.space/img2026/20260809110927411.png" alt="7lab2.png"></p>
-<p><img src="https://img.haozi.space/img2026/20260809110937383.png" alt="7lab3.png"></p>
-<hr>
-<h1>架构维护清单</h1>
-<ul>
-<li>[x] 公网 IPv6（服务器端和客户端均需要有公网IPv6）</li>
-<li>[x] 客户端 / 服务端 VPN 关闭</li>
-<li>[x] 公网 IPv6 的出入站打通
-<ul>
-<li>客户端</li>
-<li>服务器端</li>
-<li>路由器（光猫）</li>
-</ul>
-</li>
-<li>[x] ddns-go windows 服务启动成功（前往 <a href="http://localhost:9876">http://localhost:9876</a> 维护）</li>
-<li>[x] Docker NPM 服务启动成功（前往 <a href="http://localhost:81">http://localhost:81</a> 维护）</li>
-<li>[x] Let’s Encrypt 泛域名证书未到期 （前往 <a href="http://localhost:81">http://localhost:81</a> 维护）</li>
-<li>[x] Windows Defender 防火墙指定端口开放：
-<ul>
-<li>[x] Jellyfin(8096)</li>
-<li>[x] Sunshine(TCP:47984,47989,48010、UDP:47998,47999,48000,48002,48010)</li>
-<li>[x] NPM(8443)</li>
-</ul>
-</li>
-<li>[x] 公网IPv6连通性测试
-<ul>
-<li>可以通过 <a href="https://test-ipv6.com">https://test-ipv6.com</a> 进行检验</li>
-<li>可以通过 Powershell 输入 <code>curl.exe -6 https://api64.ipify.org</code> 看是否返回 IPv6 地址</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h1>适用场景与拓展</h1>
-<h2 id="方案适用场景">方案适用场景</h2>
-<ul>
-<li><strong>4K 原画家庭影音</strong>：无需经过中转服务器，直接以全速宽带上行播放 Jellyfin / Emby / Plex 中的高清视频。</li>
-<li><strong>超低延迟云游戏</strong>：结合 Sunshine + Moonlight 实现随地远程串流 Windows 3A 大作。</li>
-<li><strong>私有云存储与同步</strong>：搭配 Nextcloud、Obsidian (CouchDB / Remotely Save) 等服务实现全端快速同步。</li>
-<li><strong>远程运维与桌面</strong>：借助已有的公网 IPv6 + DDNS 解析，可直接通过 RDP（Windows 远程桌面协议）实现低延迟的远程桌面控制，无需中继服务器。对于同时管理多台设备的场景，也可部署 RustDesk 自建Server（需要一台具有公网 IP 的 VPS），统一管理家庭网络内所有无公网 IP 的设备。</li>
-</ul>
-<h2 id="后续拓展方向">后续拓展方向</h2>
-<ul>
-<li><strong>安全防护强化</strong>：在 NPM 中为敏感服务（如管理后台）开启 <strong>Access List</strong>（ HTTP 基本认证 / IP 白名单），防止公网暴力破解。</li>
-<li><strong>动态 IP 变动熔断与通知</strong>：利用 ddns-go 内置的 Webhook 功能，在 IPv6 地址变更时推送到 Server 酱、Telegram 机器人或 Server 酱。</li>
-<li><strong>全局 Fallback 备用方案</strong>：
-<ol>
-<li>如果遇到有些情况下光猫的 IPv6 防火墙无法更改、导致无法入站的情况，我们在拿到公网 IPv6 的前提下，可以使用 Tailscale 进行 P2P 打洞，具体操作请看<a href="%E8%80%81%E6%AF%9B%E5%AD%90%20Padavan%20%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%20IPv6%20%E8%B8%A9%E5%9D%91%E5%85%A8%E8%AE%B0%E5%BD%95%E4%B8%8E%20Tailscale%20%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96">老毛子 Padavan 路由器配置 IPv6 踩坑全记录与 Tailscale 直连优化</a></li>
-<li>由于部分公司网或公共场所 Wi-Fi 可能未开启 IPv6，建议搭配 <strong>Tailscale</strong> 自建 DERP 中继作为纯 IPv4 环境下的备用通道。</li>
-</ol>
-</li>
-</ul>
-<h1>参考文章</h1>
-<p><a href="https://hub.docker.com/r/jeessy/ddns-go#%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%BD%BF%E7%94%A8">jeessy/ddns-go - Docker Image</a><br>
-<a href="https://github.com/NginxProxyManager/nginx-proxy-manager">NginxProxyManager/nginx-proxy-manager</a><br>
-<a href="https://www.wangdu.site/course/2109.html">国内可用Docker镜像源加速器/DockerHub镜像汇总(2026年6月13日) - 文武科技柜</a><br>
-<a href="https://www.zhihu.com/question/5770756070">为什么Windows上会有很多IPv6地址？ - 知乎</a></p>
-<hr>
-<p><strong>注1：正则表达式的解释</strong><br>
-<code>^([0-9a-fA-F]&#123;1,4&#125;:)&#123;7&#125;[0-9a-fA-F]&#123;1,4&#125;$</code>，这个正则表达式的意思是：“<em>严格匹配一个由 8 段、用冒号隔开的、每段包含 1 到 4 位十六进制数字的完整 IPv6 地址</em>”。</p>
-<ol>
-<li>边界锚定：<code>^</code> 和 <code>$</code></li>
-</ol>
-<ul>
-<li><code>^</code>：匹配字符串的开始位置。</li>
-<li><code>$</code>：匹配字符串的结束位置。</li>
-<li>作用：确保整个字符串只能包含符合条件的 IPv6 地址，前后不能有任何其他多余的字符。</li>
-</ul>
-<ol start="2">
-<li>核心段落：<code>[a-fA-F0-9]&#123;1,4&#125;</code></li>
-</ol>
-<ul>
-<li><code>[...]</code>：字符集，表示允许出现的字符。</li>
-<li><code>a-fA-F0-9</code>：表示允许出现小写字母 <code>a-f</code>、大写字母 <code>A-F</code>、以及数字 <code>0-9</code>（即合法的十六进制字符）。</li>
-<li><code>&#123;1,4&#125;</code>：量词，表示前面的字符集必须出现 1 到 4 次。</li>
-<li>作用：匹配 IPv6 地址中的单个数群（例如：<code>2001</code>、<code>0db8</code>、<code>85a3</code> 甚至简写的 <code>1</code>）。</li>
-</ul>
-<ol start="3">
-<li>前 7 段的循环：<code>([a-fA-F0-9]&#123;1,4&#125;:)&#123;7&#125;</code></li>
-</ol>
-<ul>
-<li><code>(...)</code>：分组，把里面包含的内容看作一个整体。</li>
-<li><code>:</code>：普通的冒号，表示段与段之间的分隔符。</li>
-<li><code>&#123;7&#125;</code>：量词，表示括号内的整体（即“1-4位十六进制数+冒号”）必须恰好重复出现 7 次。</li>
-<li>作用：匹配前 7 段地址。形如：<code>2001:0db8:85a3:0000:0000:8a2e:0370:</code></li>
-</ul>
-<ol start="4">
-<li>最后一段：<code>[a-fA-F0-9]&#123;1,4&#125;</code></li>
-</ol>
-<ul>
-<li>作用：匹配最后一段不带冒号的十六进制数（第 8 段）。形如：<code>7334</code></li>
-</ul>
-<p><strong>匹配成功示例</strong></p>
-<ul>
-<li><code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code> （完美匹配）</li>
-<li><code>2001:db8:85a3:0:0:8a2e:370:7334</code> （成功，因为每段 1 到 4 位都算合规）</li>
-</ul>
-<p><strong>匹配失败示例</strong></p>
-<ul>
-<li><code>2001:db8::1</code> （失败，因为使用了 <code>::</code> 缩写，总段数不足 8 段，无法通过 <code>&#123;7&#125;</code> 的硬性计数）</li>
-<li><code>2001:0db8:85a3:0000:0000:8a2e:0370:7334/64</code> （失败，因为末尾带有 <code>$</code>, 无法匹配 <code>/64</code> 子网掩码）</li>
-</ul>
-<hr>
-<p><strong>注2：关于填写 Moonlight客户端的注意事项</strong></p>
-<ol>
-<li>为什么 Web 界面和串流是两码事？</li>
-</ol>
-<ul>
-<li><strong>Sunshine 的 Web UI (配置页面)</strong>：这是一个纯网页服务（HTTP）。所以你可以把它挂在 NPM（Nginx Proxy Manager）后面，通过 <code>https://sunshine.haozi.space:8443</code> 访问。它的作用仅仅是让你在外面能打开页面，进行“配对(PIN)”或者修改分辨率等设置。</li>
-<li><strong>Moonlight 实际串流 (打游戏)</strong>：游戏画面传输使用的是一套非常底层的私有协议，主要依赖 <strong>UDP 端口 (如 47998)</strong> 来保证超低延迟。NPM 默认只代理 HTTP/TCP 流量，<strong>NPM 根本无法也不应该去代理游戏串流的 UDP 流量</strong>（如果强行用 Nginx 代理 UDP，延迟会激增，失去串流的意义）。</li>
-</ul>
-<ol start="2">
-<li>
-<p>那么 Moonlight 客户端到底怎么填？<br>
-因为 Moonlight 必须<strong>直连</strong>你的 Windows 电脑，所以它的逻辑是：<br>
-输入一个地址 → Moonlight 通过 DNS 查到你电脑的真实 IPv6 → 直接向这个 IPv6 的 47998 等端口发起连接。<br>
-所以：<br>
-<strong>错误填法</strong>：<code>http://vpn.haozi.space</code> 或者 <code>https://sunshine.haozi.space:8443</code><br>
-（Moonlight 客户端的“添加主机”框里<strong>不能带 <code>http://</code> 或端口号</strong>，它不是浏览器，它不认识网址格式）。<br>
-<strong>正确填法</strong>：<code>vpn.haozi.space</code> 或者 <code>sunshine.haozi.space</code><br>
-（只需填<strong>纯域名</strong>。只要这个域名在 DDNS 里绑定了你 Windows 的公网 IPv6 即可）。</p>
-</li>
-<li>
-<p>你的疑问解答</p>
-</li>
-</ol>
-<blockquote>
-<p>“这对吗？我之前认为只要输入 <a href="http://vpn.haozi.space">http://vpn.haozi.space</a> 获取了主机的 IPv6 地址就可以串流了”</p>
-</blockquote>
-<p><strong>你的核心思路是对的</strong>：确实是靠域名获取主机的 IPv6 地址来进行串流。<br>
-不管是叫 <code>sunshine.haozi.space</code> 还是 <code>vpn.haozi.space</code>，只要这个域名在 Cloudflare 的 DNS 记录里（通过 ddns-go）指向了你电脑当前的真实 IPv6 地址，Moonlight 就能顺藤摸瓜找到你的电脑。</p>
-<ol start="4">
-<li>串流成功的绝对前提（敲黑板）<br>
-既然 Moonlight 是<strong>直连</strong>你的电脑，绕过了 Nginx (NPM)，那么：<br>
-你必须在 <strong>路由器防火墙 (ip6tables)</strong> 和 <strong>Windows Defender 防火墙</strong> 中，<strong>真实地放行 Sunshine 所需的所有端口</strong>。仅仅在 NPM 里配置反代是没用的。<br>
-你需要放行的端口列表：</li>
-</ol>
-<ul>
-<li><strong>TCP</strong>: <code>47984, 47989, 48010</code></li>
-<li><strong>UDP</strong>: <code>47998, 47999, 48000, 48002, 48010</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>工程</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>《心灵奇旅》观感：活在当下</title>
-    <url>/2025/09/07/%E3%80%8ASoul%E3%80%8B/</url>
-    <content><![CDATA[<p>创作的灵感有点枯竭，得去豆瓣上看一看别人是怎么看的。</p>
-<h2 id="22">22</h2>
-<p>22，教会了gardner怎么去爱，怎么去悲，怎么去活。</p>
-<h2 id="活在当下">活在当下</h2>
-<p>抚摸每一阵风的轻盈，驻足每一片沿途的风景，珍惜眼前的人和事情，为树叶飘落而悲，为世间冷暖而泣…</p>
-<p>正如苏轼的《赤壁赋》：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">惟江上之清风，与山间之明月</span><br><span class="line">耳得之而为声，目遇之而成色</span><br><span class="line">取之无禁，用之不竭</span><br><span class="line">是造物者之无尽藏也。</span><br><span class="line">而吾与子之所共适</span><br></pre></td></tr></table></figure>
+    <title>《消失的爱人》：极致控制欲下的恐怖婚姻</title>
+    <url>/2025/08/21/%E3%80%8A%E6%B6%88%E5%A4%B1%E7%9A%84%E5%A5%B3%E5%AD%A9%E3%80%8B/</url>
+    <content><![CDATA[<p>不要忘记，Amazing Amy其实从来都没有真实存在过</p>
+<h2 id="感受">感受</h2>
+<p>看完这部电影，最大的感受就是恐怖，如果我是Nick,我会和他一样抓狂，会和他一样去问质问：你为什么要死缠着我？</p>
+<p><strong>恐怖的地方不在于最后死了谁，而在于最后谁也没死。</strong></p>
+<p>Nick最后的反问：我们互相折磨，互相控制，有什么意义？</p>
+<p>Amy是这样回答的：这就是婚姻。</p>
+<p><strong>最后，Nick对于这段婚姻没有任何办法，在聚光灯下，在媒体塑造的国民爱神——Amy面前，他必须维持这种虚伪的关系，他，别无选择。</strong></p>
+<p>Amy，其实她动了很多次“自杀”的念头，但是都没有执行，就是因为她不想死，控制欲极强的她，还是想看到自己的丈夫变成自己理想的模样，她不愿意接受自己婚姻失败的现实。影片中她在看到Nick接受电视台采访的时候，眼神发了光，改变了主意:动了杀心，想要干掉眼前呆傻的富二代（Desi挺惨的，惹谁了呜呜呜）。<strong>说Amy是世界上最精明的女人也不为过，但其实也是最愚蠢的女人。</strong></p>
+<h2 id="猫">猫</h2>
+<p>影片中多次给了一只橘猫镜头，下面这个博主的解读很有意思:</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">就在观影前一天我看了一个帖，大意是说为什么你养的猫没有把你吃掉，主要是因为你对她来说有点太大了，吃起来不是很方便。</span><br><span class="line"></span><br><span class="line">你看Amy的眼神就知道为什么会提到猫。</span><br><span class="line"></span><br><span class="line">关于猫的另外一点事实是，人类总是认为自己豢养了猫，但在猫心中，她才是这段关系的主人，被驯服且豢养的那个人是你。</span><br><span class="line"></span><br><span class="line">只因为她以乖巧的样子示人，看上去精致柔弱美丽可爱，就忘记她是只猫，忘记她要做一段关系的主人，忘记她有操控一切的欲望与实力。</span><br><span class="line"></span><br><span class="line">男人就是这么愚蠢，永远也学不会。</span><br></pre></td></tr></table></figure>
+<p><a href="https://movie.douban.com/review/7305838/">从未真正存在过的Amazing Amy（消失的爱人）影评</a></p>
+<h2 id="病蔷薇">病蔷薇</h2>
+<p>Amy是一个很有才华、学历很高、聪明绝顶的作家，她很爱玩解谜游戏，她塑造了一个故事中的“完美的她”，“她”无论做什么都先自己一步，比自己先打上排球校队，比自己先“虚拟结婚”等等。<strong>在Amy的眼中，Nick不过是自己小说中的一个主演，至于你怎么演，得全听我这个编剧。</strong></p>
+<p><strong>至于Desi的死，也根本不意外</strong>，Desi的严密布防的监控，触碰到了Amy的逆鳞，让控制欲爆棚的她感到了被他人控制的窒息。Desi的死，虽然有点可惜，但是既然碰到了Amy，也是必然的结果。</p>
+<p><strong>Amy的这种人格缺陷和变态倾向，不是没有原因，最大的原因就是父母</strong>，父母从小就榨取剽窃Amy的童年，把女儿没有当做是一个独立的、有精神属性的人，而是把她当成了一个具有社会影响力的物品。在女儿失踪以后的第一次新闻发布会上，父母依然端着童书的书架子，做着体面而不失煽情的演讲：神奇的Amy伴随着数以万计的美国孩子一起长大，我们大家需要帮助，帮助我没找到她。就连信息发布的网址都含有“Amazing-Amy”的元素。</p>
+<p><strong>Amy的控制欲，是极度完美主义下的产物。</strong></p>
+<p><a href="https://movie.douban.com/review/7246889/">病蔷薇（消失的爱人）影评</a></p>
+<h2 id="社会舆论">社会舆论</h2>
+<p>Amy很坏，懂得利用社会舆论来转移矛盾，本来这只是一个丈夫的出轨，但Amy的强烈控制欲和破坏欲可不会善罢甘休。她很机灵，伪造了自己怀孕的故事，伪造了丈夫杀害自己现场，伪造了自己弱者的身份，博得了社会大众的同情，而社会大众，往往更倾向于相信弱者所阐述即为事实。</p>
+<p><strong>千夫所指，皆为Nick。</strong></p>
+<p>而Nick的律师很有头脑，认为他应该主动去澄清自己出轨的事实，塑造自己“好丈夫”，浪子回头的社会形象。</p>
+<p><strong>也正是舆论，让Nick的风评有了好转。</strong></p>
+<p>舆论这个东西啊，既能覆舟，亦能载舟。</p>
+<h2 id="袍和虱子">袍和虱子</h2>
+<p>影片的最后是和开头一样的镜头（很像一只猫有没有？）：</p>
+<p><img src="/images/xsdnh2.png" alt=""></p>
+<p><img src="/images/xsdnh3.png" alt=""></p>
+<p><img src="/images/xsdnh4.png" alt=""></p>
+<p><img src="/images/xsdnh5.png" alt=""></p>
+<p>婚姻里最重要的问题：“你在想什么”、“你感觉如何”、“我们都对彼此做了些什么”。</p>
+<p><strong>能搞清楚这三个问题，婚姻便不至于此</strong>。影片中的Amy就是因为看到了Nick外出幽会，心里埋藏的怨恨便一下子爆发，邪恶的计划在心里萌生。Nick也是从自己的视角去看待Amy，认为是她一直不想要孩子。</p>
+<p>婚姻啊，各执一词，对伴侣心里想的、对对方做的妄加揣测，是很难延续的。</p>
+<p><strong>有什么事，往开了说嘛。</strong></p>
+<p>张爱玲说过“生命是一袭华美的袍，里面爬满了虱子”，这句话其实并不是说婚姻的，出自于张爱玲18岁的散文作品（真厉害，十八岁说得出这么有深意的话），但用来形容婚姻也不错：婚姻是一袭华美的袍，这是面子；爬满了虱子，这是里子。</p>
+<p><strong>婚姻的过程中少不了矛盾和纠纷，完美的伴侣是绝对不存在的</strong>,Amy在电影中的这句话“人在经济状况很糟糕的时候，往往会暴露出最脆弱的软肋”就概括的很精炼，Amy和Nick之间的矛盾就是在他们双双失业、婆婆乳腺癌四期那时激发的。</p>
+<p><strong>婚姻，是不可能没有虱子的，有虱子，我们就把它抓掉嘛。</strong></p>
+<p>总的来说，《消失的爱人》是一部很深刻的反映了婚姻问题的电影，很好的刻画了控制欲过强的变态人格。当然，这些问题不是恐婚不婚的借口，婚姻没有错，有错的是人，正如我上面说的那样：<strong>婚姻是不可能没有虱子的，有虱子，我们就把他抓掉嘛。</strong></p>
 ]]></content>
       <categories>
         <category>影视</category>
       </categories>
   </entry>
   <entry>
-    <title>借《倩女幽魂》，说出心中的善良与勇气</title>
-    <url>/2026/03/05/%E3%80%8A%E5%80%A9%E5%A5%B3%E5%B9%BD%E9%AD%82%E3%80%8B/</url>
-    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/qnyh1.png" alt=""><br>
-当小倩一溜烟钻进金罐，当采臣迎着彩虹骑马远去，当屏幕上跳出“剧终”两个字，我的心忽然咯噔了一下。电影戛然而止，想象却汹涌而来：她会投向怎样的人间？他是否还能在某个街角认出她？彩虹停在那里，故事停在那里，可我的思绪没有停。那一刻我才明白，有些结尾不是结束，而是一种留白。</p>
-<p>跳出电影再看，里面的人物其实都复杂得像真实的人。“我不管，我就要带你离开这里。”宁采臣明明胆小，在荒山听到狼叫都会吓得念诗壮胆，可当危险真正来临，他却选择向前。那一刻我忽然意识到，真正的勇敢不是不害怕，而是明明害怕，却仍然不退。或许我一直以为自己是个理性的人，习惯权衡利弊、计算后果，可有些选择不需要逻辑，甚至也来不及逻辑。</p>
-<p>“其实有些鬼，比人还善良得多。”聂小倩是鬼，却比许多人更温柔、更真诚；“有时候，人害人比鬼还残忍。”燕赤霞粗鲁却通透。原来最像鬼的，从来不是鬼。善恶从来不是身份决定的，鬼未必冷，人未必暖。褪去身份与外壳，真正站得住的，只有人心。</p>
-<p>我后来想明白，我写下这些，并不是为了分析镜头、光影或叙事技巧。我不是在写电影，我是在借电影确认自己的价值观。在这个有些混乱的世界里，我依然愿意相信善良、相信勇气、相信有人会在明知危险时说一句“我不管”。</p>
-<p>也许导演故意把故事停在彩虹那里。重要的不是他们后来是否重逢，而是在那一刻，他们把彼此当作全部。彩虹短暂，但它存在过；人心复杂，但光也真实。</p>
-<p>故事停在彩虹，宁采臣最后满脸惆怅，带着哭腔说出的这句“小倩，你要好好的做人”，给了我们最好的留白…</p>
-<p><img src="https://img.haozi.space/img2026/qnyh3.png" alt=""></p>
+    <title>《禁闭岛》观后感：值得用显微镜二刷的悬疑电影</title>
+    <url>/2025/09/07/%E3%80%8A%E7%A6%81%E9%97%AD%E5%B2%9B%E3%80%8B/</url>
+    <content><![CDATA[<p>你禁闭了吗？反正我是懵了</p>
+<h2 id="懵逼">懵逼</h2>
+<p>第一遍我看完的最大感受，就是懵逼。</p>
+<p>懵逼的是，到底是什么鬼，Teddy到底是不是疯子？我是不是疯子？</p>
+<p>一开始看的时候丝毫没有觉得Teddy是个精神病，我甚至怀疑院长和其他人是坏的，这个想法根深蒂固，直到最后也没有改观。</p>
+<p>所以这部影片给我的第一印象是没太看懂。</p>
+<h2 id="解释">解释</h2>
+<p>豆瓣这个牛人老哥解释的非常清楚，可以去仔细的看看哈。</p>
+<p><a href="https://movie.douban.com/review/4189148/">还原故事的真相，《禁闭岛》剧情全解析。（禁闭岛）影评</a></p>
+<p>贴吧上居然有一个“关门岛吧”，专门来讨论这部电影的细节的，其中关于“RUN”的解释就有很多。</p>
+<p><a href="https://tieba.baidu.com/p/2558349844?share=9105&amp;fr=sharewise&amp;is_video=false&amp;unique=D92D4D3D566FEFB36574672D31407766&amp;st=1757211710&amp;client_type=1&amp;client_version=12.88.1.1&amp;sfc=weixin&amp;share_from=post">重整&quot;RUN&quot;字帖，RUN究竟是谁写的？（图文）_关门岛吧_百度贴吧</a></p>
+<p>这是一部值得二刷三刷，用显微镜去观察的悬疑电影！</p>
 ]]></content>
       <categories>
         <category>影视</category>
@@ -2254,168 +2436,6 @@ Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
       </categories>
   </entry>
   <entry>
-    <title>揭露细菌战暴行与人性困局：剧集分集观影随感</title>
-    <url>/2026/03/08/%E3%80%8A%E5%8F%8D%E4%BA%BA%E7%B1%BB%E6%9A%B4%E8%A1%8C%E3%80%8B/</url>
-    <content><![CDATA[<h1>第一集</h1>
-<p>第一集给我的最大感受是，这个电视剧的镜头很有质感，光影很细节。</p>
-<p>佟长富真的是常宇演的吗？感觉神似但是又不像，很神奇</p>
-<p>反人类暴行，到底怎么去表现呢？第一集感觉只是一个引子，二条的死只是开端。二条身上带着的，一定是某种致命的病毒，日本人干了什么好事？</p>
-<p>还有一个疑问，长富的妹妹是什么身份？</p>
-<p>“他们把二条挖出来吃了”，这句话一出来，真是，人在那时候，活得不像一条狗。</p>
-<p>片尾的历史真实录音让人听起来很难受：他们把注射了细菌的瓜给中国人吃，中国人吃了怎么样了？</p>
-<p>“全部感染！”</p>
-<h1>第二集</h1>
-<p>这集把荒川良平引出来了，和前面长富的剧情接上了，从荒川良平的眼中，我看到的只有恐惧和慌乱，似乎体力还不太行，做着做着实验就到过去了，他和那群作恶多端的日本军官格格不入。</p>
-<p>印象很深的一句话：“比敌人更可怕的，也许只是一个得不到治疗的伤口”</p>
-<h1>第八集</h1>
-<p>川口聪这是黑化了啊，之前还觉得他是个有良知的日本人，这集咋还去抢银行了呢。</p>
-<p>感觉是被舞子的死逼疯了。</p>
-<p>王道乐土 五族协和这句口号之下的牺牲品。</p>
-<p>我想要逃，却怎么也逃不出监牢的环抱。荒川良平</p>
-<h1>第九集</h1>
-<p>进入探秘篇，这集活体解剖很是血腥</p>
-]]></content>
-      <categories>
-        <category>影视</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>《消失的爱人》：极致控制欲下的恐怖婚姻</title>
-    <url>/2025/08/21/%E3%80%8A%E6%B6%88%E5%A4%B1%E7%9A%84%E5%A5%B3%E5%AD%A9%E3%80%8B/</url>
-    <content><![CDATA[<p>不要忘记，Amazing Amy其实从来都没有真实存在过</p>
-<h2 id="感受">感受</h2>
-<p>看完这部电影，最大的感受就是恐怖，如果我是Nick,我会和他一样抓狂，会和他一样去问质问：你为什么要死缠着我？</p>
-<p><strong>恐怖的地方不在于最后死了谁，而在于最后谁也没死。</strong></p>
-<p>Nick最后的反问：我们互相折磨，互相控制，有什么意义？</p>
-<p>Amy是这样回答的：这就是婚姻。</p>
-<p><strong>最后，Nick对于这段婚姻没有任何办法，在聚光灯下，在媒体塑造的国民爱神——Amy面前，他必须维持这种虚伪的关系，他，别无选择。</strong></p>
-<p>Amy，其实她动了很多次“自杀”的念头，但是都没有执行，就是因为她不想死，控制欲极强的她，还是想看到自己的丈夫变成自己理想的模样，她不愿意接受自己婚姻失败的现实。影片中她在看到Nick接受电视台采访的时候，眼神发了光，改变了主意:动了杀心，想要干掉眼前呆傻的富二代（Desi挺惨的，惹谁了呜呜呜）。<strong>说Amy是世界上最精明的女人也不为过，但其实也是最愚蠢的女人。</strong></p>
-<h2 id="猫">猫</h2>
-<p>影片中多次给了一只橘猫镜头，下面这个博主的解读很有意思:</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">就在观影前一天我看了一个帖，大意是说为什么你养的猫没有把你吃掉，主要是因为你对她来说有点太大了，吃起来不是很方便。</span><br><span class="line"></span><br><span class="line">你看Amy的眼神就知道为什么会提到猫。</span><br><span class="line"></span><br><span class="line">关于猫的另外一点事实是，人类总是认为自己豢养了猫，但在猫心中，她才是这段关系的主人，被驯服且豢养的那个人是你。</span><br><span class="line"></span><br><span class="line">只因为她以乖巧的样子示人，看上去精致柔弱美丽可爱，就忘记她是只猫，忘记她要做一段关系的主人，忘记她有操控一切的欲望与实力。</span><br><span class="line"></span><br><span class="line">男人就是这么愚蠢，永远也学不会。</span><br></pre></td></tr></table></figure>
-<p><a href="https://movie.douban.com/review/7305838/">从未真正存在过的Amazing Amy（消失的爱人）影评</a></p>
-<h2 id="病蔷薇">病蔷薇</h2>
-<p>Amy是一个很有才华、学历很高、聪明绝顶的作家，她很爱玩解谜游戏，她塑造了一个故事中的“完美的她”，“她”无论做什么都先自己一步，比自己先打上排球校队，比自己先“虚拟结婚”等等。<strong>在Amy的眼中，Nick不过是自己小说中的一个主演，至于你怎么演，得全听我这个编剧。</strong></p>
-<p><strong>至于Desi的死，也根本不意外</strong>，Desi的严密布防的监控，触碰到了Amy的逆鳞，让控制欲爆棚的她感到了被他人控制的窒息。Desi的死，虽然有点可惜，但是既然碰到了Amy，也是必然的结果。</p>
-<p><strong>Amy的这种人格缺陷和变态倾向，不是没有原因，最大的原因就是父母</strong>，父母从小就榨取剽窃Amy的童年，把女儿没有当做是一个独立的、有精神属性的人，而是把她当成了一个具有社会影响力的物品。在女儿失踪以后的第一次新闻发布会上，父母依然端着童书的书架子，做着体面而不失煽情的演讲：神奇的Amy伴随着数以万计的美国孩子一起长大，我们大家需要帮助，帮助我没找到她。就连信息发布的网址都含有“Amazing-Amy”的元素。</p>
-<p><strong>Amy的控制欲，是极度完美主义下的产物。</strong></p>
-<p><a href="https://movie.douban.com/review/7246889/">病蔷薇（消失的爱人）影评</a></p>
-<h2 id="社会舆论">社会舆论</h2>
-<p>Amy很坏，懂得利用社会舆论来转移矛盾，本来这只是一个丈夫的出轨，但Amy的强烈控制欲和破坏欲可不会善罢甘休。她很机灵，伪造了自己怀孕的故事，伪造了丈夫杀害自己现场，伪造了自己弱者的身份，博得了社会大众的同情，而社会大众，往往更倾向于相信弱者所阐述即为事实。</p>
-<p><strong>千夫所指，皆为Nick。</strong></p>
-<p>而Nick的律师很有头脑，认为他应该主动去澄清自己出轨的事实，塑造自己“好丈夫”，浪子回头的社会形象。</p>
-<p><strong>也正是舆论，让Nick的风评有了好转。</strong></p>
-<p>舆论这个东西啊，既能覆舟，亦能载舟。</p>
-<h2 id="袍和虱子">袍和虱子</h2>
-<p>影片的最后是和开头一样的镜头（很像一只猫有没有？）：</p>
-<p><img src="/images/xsdnh2.png" alt=""></p>
-<p><img src="/images/xsdnh3.png" alt=""></p>
-<p><img src="/images/xsdnh4.png" alt=""></p>
-<p><img src="/images/xsdnh5.png" alt=""></p>
-<p>婚姻里最重要的问题：“你在想什么”、“你感觉如何”、“我们都对彼此做了些什么”。</p>
-<p><strong>能搞清楚这三个问题，婚姻便不至于此</strong>。影片中的Amy就是因为看到了Nick外出幽会，心里埋藏的怨恨便一下子爆发，邪恶的计划在心里萌生。Nick也是从自己的视角去看待Amy，认为是她一直不想要孩子。</p>
-<p>婚姻啊，各执一词，对伴侣心里想的、对对方做的妄加揣测，是很难延续的。</p>
-<p><strong>有什么事，往开了说嘛。</strong></p>
-<p>张爱玲说过“生命是一袭华美的袍，里面爬满了虱子”，这句话其实并不是说婚姻的，出自于张爱玲18岁的散文作品（真厉害，十八岁说得出这么有深意的话），但用来形容婚姻也不错：婚姻是一袭华美的袍，这是面子；爬满了虱子，这是里子。</p>
-<p><strong>婚姻的过程中少不了矛盾和纠纷，完美的伴侣是绝对不存在的</strong>,Amy在电影中的这句话“人在经济状况很糟糕的时候，往往会暴露出最脆弱的软肋”就概括的很精炼，Amy和Nick之间的矛盾就是在他们双双失业、婆婆乳腺癌四期那时激发的。</p>
-<p><strong>婚姻，是不可能没有虱子的，有虱子，我们就把它抓掉嘛。</strong></p>
-<p>总的来说，《消失的爱人》是一部很深刻的反映了婚姻问题的电影，很好的刻画了控制欲过强的变态人格。当然，这些问题不是恐婚不婚的借口，婚姻没有错，有错的是人，正如我上面说的那样：<strong>婚姻是不可能没有虱子的，有虱子，我们就把他抓掉嘛。</strong></p>
-]]></content>
-      <categories>
-        <category>影视</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>经典老电影《控方证人》观后感</title>
-    <url>/2025/08/20/%E3%80%8A%E6%8E%A7%E6%96%B9%E8%AF%81%E4%BA%BA%E3%80%8B/</url>
-    <content><![CDATA[<p>闲的没事，找个电影看看。诶，控方证人这部1957的老电影，在某瓣上排名挺高的，好了，就你了，**《控方证人》**😃😃😃</p>
-<h2 id="个人感受">个人感受</h2>
-<h3 id="画面">画面</h3>
-<p>1957年的，<strong>巨老巨老的电影</strong>，画面是黑白的，Torrent Kitty下载的资源，尽管是720P，但画质还看得过去😏</p>
-<h3 id="剧情">剧情</h3>
-<p>故事发生在<strong>英国</strong>，开篇是英国当地的一个法庭开庭的镜头，也就是后面大部分精彩环节发生的地点</p>
-<p>故事一开始，映入眼帘的是一个胖胖的老头儿和一个女人，老头儿叫威佛列，因为治疗心脏病住院，现在出院，他愁容不展，从后面的情节我们得知，他是一名英国出了名的刑事律师（注意，不是初级律师，初级律师是没有本事可以打刑事案件的）；女人名为普林索，是威佛列爵士的私人医生，这个女人满脸笑容，可以看出是一个很乐观的人😃</p>
-<p>情节很紧凑，紧接着就有一个男子为了解决自己身上的嫌疑慕名而来，男子名叫连那德.Vol（外国人名真tm难记，看了一整部电影居然没记下来名字），Vol的案子不是那么好处理，他的嫌疑是杀害了French女士，10月15号那天晚上，Vol和French女士是在一起，Vol无法提供不在场证明</p>
-<p>从动机来问，威佛列像审问犯人一样，用光照着Vol，来检验他有没有说慌，事实证明，他通过了威佛列的考验。但这时，一个不利的消息传来，有八万英镑的遗嘱留给了Vol，这很难不让人怀疑Vol</p>
-<p>至于不在场证明，唯一的证明，是他的妻子——克里斯蒂.Vol，她向警察声称：当天21:25分看到Vol在家。但威佛列提出，妻子的作证在法庭上难成呈堂证供。除此之外，从克里斯蒂的陈述我们可以得知，Vol有很好的女人缘，和French有密切关系并不奇怪。克里斯蒂性格极其刚烈，极其坚强，甚至透露自己的丈夫不是Vol（惊天大瓜啊）</p>
-<p><strong>所以，威佛列就更不能让她来作证了</strong></p>
-<p>威佛列作为久经沙场的刑事律师，自然得想办法为自己的客户洗脱嫌疑，他提出来有没有可能可以找到路上的行人来为他做证，在Vol进入看守所看守的时间里，老头儿就一直在做这个事情</p>
-<p>时间很快来到庭审的阶段，老头儿威佛列冒着心脏病的危险，出席了自己职业生涯可能最后一场官司，法庭上的检方逐一出招，但都被经验老道的威佛列击破，检方将证人带入预设陷阱，老头儿就向法官大人告状；当证人出现了语言逻辑上的纰漏，老头儿就充分利用这个弱点；看起来这张官司，威佛列没有输的道理</p>
-<p>你以为这个过程有这么简单，那你就错了。常规的证人审问阶段结束，王炸出现，检方打了一张出奇意料的牌，似乎要置老头于死地——是Vol的妻子克里斯蒂</p>
-<p>克里斯蒂的作证让老头心儿一惊，老头儿可能心想：这娘们打的是什么牌，之前还给自己的丈夫作清白证明，现在怎么反水了？</p>
-<p>克里斯蒂的指控很出人意料：Vol一直要挟她欺骗警察，其实事实是：Vol 10月15日晚上21:25分不在家，10点10分他才回到家，外套上还沾满血啊啥的。总之，balabala了一大堆，就是说：老娘之前跟你一起骗警察是因为你之前带老娘来英国，老娘有点感激你，现在老娘回心转意了，改邪归正了，不能再让你这个杀人犯祸害世界了</p>
-<p><strong>检方这张牌打的妙啊，打的辩方那是措手不及</strong></p>
-<p>老头儿看着心里很慌，其实依旧稳如老狗：老头儿质问，大概是这个意思：当初在婚礼上白头偕老的是你，口口声声说爱你的也是你，结婚证领了的也是你。你个死婊子，你这娘们的话也能信？？？</p>
-<p>这一仗，不算胜利，只能算是个鱼死网破，还不能影响整个案件的判决走向</p>
-<p>正当老头儿这边一筹莫展的时候，一个电话来了，一个声称有着克里斯蒂那个臭婊子的黑料的女人打来的。有什么办法呢，死马当活马医呗</p>
-<p>来到约定的休斯顿车站，那个女人拿出厚厚的一沓信，信的内容无非说是：臭婊子吃里扒外，准备甩掉老公，拿走八万，远走高飞</p>
-<p>时间很快来到最后一天庭审，在案件马上结案的时候，老头儿闪出杀手锏——一沓信，不对，大招不能这么早放。老头儿堪称老狐狸，他先诈了克里斯蒂一招，读着自己的药处方，质问克里斯蒂在外面是不是有情人了，有鼻子有眼的陈述，结果克里斯蒂急了，赶忙说：你这个这个证据假的要死，老娘当时写信用的是蓝色的德国信纸，你搁这骗人呢？</p>
-<p>老狐狸邪魅一笑，把刚刚藏在书以下一沓蓝色的信纸抽了出来，露出了胜利者的笑容</p>
-<p><strong>辩论的艺术，让证人自证有罪，高，实在是高</strong></p>
-<p>庭审的结果很显而易见了，Vol是无罪的，克里斯蒂估计要因为伪证罪入狱</p>
-<p>很快，Vol就被释放，克里斯蒂被当庭人员咒骂、殴打</p>
-<p>当你还在惊叹于老狐狸的辩论艺术时，然而，故事远远还没有那么简单</p>
-<p>老头儿显然是高兴的，但他的经验告诉他，这个结果的反转来的太简单了。老头儿郁闷啊，到底是为啥啊？</p>
-<p>还是那句话，反派死于话多。正当老头儿思忖的时候，克里斯蒂走进只有威佛列一人的法庭，露出了胜利者的微笑：嘿嘿，你以为自己在大气层，其实老娘的操作在平流层</p>
-<p>反派开始自爆：哈哈想不到吧，在车站的那个其实是老娘扮的（嘿嘿，没想到吧）</p>
-<p><strong>你以为你很厉害，其实老娘更厉害，老娘是个演员，会演戏！</strong></p>
-<p>Vol猫在庭院偷听，笑眯眯走了过来，耀武扬威，一副小人得志的样子：我的wife可真不错</p>
-<p>克里斯蒂高兴着呢：等老娘找个好律师，早点出来，老娘跟你白头偕老！</p>
-<p>不等克里斯蒂高兴多久，突然窜出来一个面容姣好的女子，和Vol搂搂抱抱</p>
-<p>震惊，克里斯蒂气的脸都青咯</p>
-<p>气急败坏之下，克里斯蒂拿出一把刀，呲溜，刀子直窜到Vol的要害</p>
-<p><strong>原地，Vol领盒饭~</strong></p>
-<p>故事接近尾声，威佛列笑着说：又有案子来咯，去外面度假的计划又泡汤了（女医生被老头儿耍的第N次 嘿嘿）</p>
-<h3 id="复盘">复盘</h3>
-<ol>
-<li>
-<p>电影中多次给了面容姣好的女子镜头，而且在审被告人Vol的时候，有Vol和一个陌生女子去询问出国旅行的事实，陌生女子就是她！</p>
-<p><img src="/images/kfzr4.png" alt=""></p>
-<p><img src="/images/kfzr5.png" alt=""></p>
-<p><img src="/images/kfzr6.png" alt=""></p>
-</li>
-<li>
-<p>这两个人，真的是一个人吗？</p>
-<p><img src="/images/kfzr7.png" alt=""></p>
-<p><img src="/images/kfzr8.png" alt=""></p>
-</li>
-</ol>
-<h3 id="故事背后">故事背后</h3>
-<ol>
-<li>
-<p>审讯的艺术</p>
-<p><strong>通过攻击证人的人格，来降低对方的可信度</strong></p>
-<p>1997年的辛普森案，辩方使用了本电影很类似的方法：辩护梦之队先是通过攻击证人的人格问题，让证人的公信力大大降低，自然一定程度上增加了胜辩的机会。和中国不同，在英美法系中，一直有“品格证据”的传统。在审判时，检辩双方律师都可能在证人的人格上大作文章</p>
-<p><strong>辩护的最高境界，是让对方自证为伪</strong></p>
-<p>辛普森案中，辩方话里话外之间，都指摘警方不可信，有栽赃陷害的意图，手套与辛普森无关，控方怒了，要求辛普森带上手套，结果却很惊人，连控方律师都承认：这个手套有点太小了，控方再一次落了下风</p>
-<p>辛普森的经纪人在接受采访时才透漏：辛普森患有关节炎，但当时已经停了两周药，致使手指关节肿大，难以戴入手套。<strong>这完全是辩方律师的激将计，早就挖好圈套等着控方跳进来</strong></p>
-<p><strong>辩护应该注重细节，细节决定成败</strong></p>
-<p>本电影中，威佛列对French女士家女佣的诘问中，就敏锐的捕捉了女佣听力很差的事实，加上助听器事实的佐证，推翻了“听见过被告人那时在房间里说话”的证词。辛普森案也是同样如此，在此不赘述罢</p>
-<p><a href="https://zhuanlan.zhihu.com/p/616432919">美国司法史世纪大案：杀妻的辛普森，凭什么无罪？ - 知乎</a></p>
-</li>
-<li>
-<p>一罪不二审</p>
-<p>一罪不二审其实是大陆法系的说法，英美法院一般称之为<strong>禁止双重危险</strong>，基本含义是一个人不能因同一行为或同一罪名受到两次或多次审判或处罚。主要功能是<strong>防止国家滥用追诉权</strong>，从而保障公民合法权益</p>
-<p><a href="https://www.zhihu.com/question/22081648">如何评价“一罪不二审”这一司法原则？ - 知乎</a></p>
-</li>
-<li>
-<p>不同国家的案件审理制度</p>
-<p>总的来说，世界上在法庭上进行案件的审理可以分成<strong>两大类</strong>：一种是<strong>抗辩制</strong>，那就是通过正方和反方的辩论来厘清事实；另一种则是<strong>纠问制</strong>，那就是由专家型的法官，通过不断地追问来寻求事实的真相。<strong>本电影中故事的发生点——英国，采取的是抗辩制，嫌疑犯有没有罪，陪审团投票决定；我国实行的是纠问制</strong></p>
-<p>1997年，著名的辛普森案分别由一个刑事法庭和一个民事法庭来审理，案件的结果是：辛普森被宣判无罪，这是美国抗辩制的结果。重中之重的陪审团有12名普通市民组成，10女2男，其中有9名黑人，2名白人和1名西班牙裔白人</p>
-<p><a href="https://zhuanlan.zhihu.com/p/99108009">英美的陪审团制度，带不来真相和公正 - 知乎</a><br>
-<a href="https://zhuanlan.zhihu.com/p/616432919">美国司法史世纪大案：杀妻的辛普森，凭什么无罪？ - 知乎</a></p>
-</li>
-</ol>
-<h3 id="其他">其他</h3>
-<p>对辩论相关有兴趣的话，可以试试《逆转裁判》这款游戏</p>
-<p>[北洋园PT :: 种子详情 &quot;<a href="https://www.tjupt.org/details.php?id=366089&amp;hit=1">PC][AVG][逆转裁判123：成步堂合辑][Phoenix Wright Ace Attorney Trilogy][压缩包][v20230710 游侠破解版]&quot; - Powered by NexusPHP</a></p>
-<p>[北洋园PT :: 种子详情 &quot;<a href="https://www.tjupt.org/details.php?id=435241&amp;hit=1">PC][AVG][逆转裁判456：王泥喜精选集][Apollo.Justice.Ace.Attorney.Trilogy-RUNE][压缩包]&quot; - Powered by NexusPHP</a></p>
-]]></content>
-      <categories>
-        <category>影视</category>
-      </categories>
-  </entry>
-  <entry>
     <title>完美的闭环：莫言《生死疲劳》读后感</title>
     <url>/2025/09/01/%E3%80%8A%E7%94%9F%E6%AD%BB%E7%96%B2%E5%8A%B3%E3%80%8B/</url>
     <content><![CDATA[<p>看完这本《生死疲劳》，前前后后花了大几个月的时间，一直在拖延，一直没有时间看完这本著作。<br>
@@ -2435,20 +2455,18 @@ Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
       </categories>
   </entry>
   <entry>
-    <title>《禁闭岛》观后感：值得用显微镜二刷的悬疑电影</title>
-    <url>/2025/09/07/%E3%80%8A%E7%A6%81%E9%97%AD%E5%B2%9B%E3%80%8B/</url>
-    <content><![CDATA[<p>你禁闭了吗？反正我是懵了</p>
-<h2 id="懵逼">懵逼</h2>
-<p>第一遍我看完的最大感受，就是懵逼。</p>
-<p>懵逼的是，到底是什么鬼，Teddy到底是不是疯子？我是不是疯子？</p>
-<p>一开始看的时候丝毫没有觉得Teddy是个精神病，我甚至怀疑院长和其他人是坏的，这个想法根深蒂固，直到最后也没有改观。</p>
-<p>所以这部影片给我的第一印象是没太看懂。</p>
-<h2 id="解释">解释</h2>
-<p>豆瓣这个牛人老哥解释的非常清楚，可以去仔细的看看哈。</p>
-<p><a href="https://movie.douban.com/review/4189148/">还原故事的真相，《禁闭岛》剧情全解析。（禁闭岛）影评</a></p>
-<p>贴吧上居然有一个“关门岛吧”，专门来讨论这部电影的细节的，其中关于“RUN”的解释就有很多。</p>
-<p><a href="https://tieba.baidu.com/p/2558349844?share=9105&amp;fr=sharewise&amp;is_video=false&amp;unique=D92D4D3D566FEFB36574672D31407766&amp;st=1757211710&amp;client_type=1&amp;client_version=12.88.1.1&amp;sfc=weixin&amp;share_from=post">重整&quot;RUN&quot;字帖，RUN究竟是谁写的？（图文）_关门岛吧_百度贴吧</a></p>
-<p>这是一部值得二刷三刷，用显微镜去观察的悬疑电影！</p>
+    <title>不拿枪的真正战士</title>
+    <url>/2025/09/07/%E3%80%8A%E8%A1%80%E6%88%98%E9%92%A2%E9%94%AF%E5%B2%AD%E3%80%8B/</url>
+    <content><![CDATA[<p>谁说不拿抢，不是好战士</p>
+<h2 id="懦夫">懦夫</h2>
+<p>一个懦夫，连枪都不敢拿，上什么战场。</p>
+<p>我也是这样想的。</p>
+<p>最后看来，我和glover军官，都看走眼了。</p>
+<h2 id="soldier">soldier</h2>
+<p>glover军官对于doss的称呼，从原本的竹节虫变成“soldier”</p>
+<p>doss无愧于这个称呼，他是真正的战士，不，他更像是个斗士。</p>
+<h3 id="信仰">信仰</h3>
+<p>上帝啊，让我再多救一个人吧…</p>
 ]]></content>
       <categories>
         <category>影视</category>
@@ -2472,24 +2490,6 @@ Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
 <p>但是，游戏是可以修改的，是可以通过时间回溯来解决问题的，《蝴蝶效应》就告诉了我们：如果你拥有人生回溯的超能力，这也未尝不是一件好事。</p>
 <p>人生不比游戏，他不会有“增加和某某好感度”的提示，也不会有“前往某某地”的提示。人生是旷野，有太多未知等待你自己去探索。你不知道，可能你今天随手扔的一个易拉罐，哪天绊倒了一个七八十岁的老大爷，让他们一命呜呼。</p>
 <p><strong>很好玩很有趣、后劲很足的一部电影。</strong></p>
-]]></content>
-      <categories>
-        <category>影视</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>不拿枪的真正战士</title>
-    <url>/2025/09/07/%E3%80%8A%E8%A1%80%E6%88%98%E9%92%A2%E9%94%AF%E5%B2%AD%E3%80%8B/</url>
-    <content><![CDATA[<p>谁说不拿抢，不是好战士</p>
-<h2 id="懦夫">懦夫</h2>
-<p>一个懦夫，连枪都不敢拿，上什么战场。</p>
-<p>我也是这样想的。</p>
-<p>最后看来，我和glover军官，都看走眼了。</p>
-<h2 id="soldier">soldier</h2>
-<p>glover军官对于doss的称呼，从原本的竹节虫变成“soldier”</p>
-<p>doss无愧于这个称呼，他是真正的战士，不，他更像是个斗士。</p>
-<h3 id="信仰">信仰</h3>
-<p>上帝啊，让我再多救一个人吧…</p>
 ]]></content>
       <categories>
         <category>影视</category>
@@ -2760,6 +2760,21 @@ Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
 ]]></content>
       <categories>
         <category>影视</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>放下手机，认真吃一顿饭</title>
+    <url>/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/</url>
+    <content><![CDATA[<p>手机等电子产品非常喜欢多管闲事，什么活动他都会插一嘴，踢一脚<br>
+今天吃饭尝试彻底丢掉手机，发现一个很大的变化：就是吃饭的时间缩短了一大堆，平常刷电子产品吃顿饭要半个小时，丢掉手机吃顿饭，只要十分钟，很吓人。</p>
+<p>除此之外，丢掉手机以后，我发现脑子似乎更加清醒，脑子里面似乎会有说不完的问题和想法等着去解答，有数不完的领域可以去探索，回想之前刷着手机吃着饭，似乎脑子根本不会想那么多，就连吃的饭是具体什么味道都不清楚。</p>
+<p>但今天不同，细细品味了吃的排骨玉米饭，注意到了里面的枸杞和葱花，注意到了入嘴的生姜，还在心里感触：小时候那个不吃葱不吃香料的孩子，现在长大了，不知道为什么想到这个，心里还有点酸酸的。</p>
+<p>丢掉电子产品，好好吃饭睡觉，说的轻巧，做起来好难的。</p>
+<p>不带手机吃饭，你怎么付钱？</p>
+<p>不带手机上床睡觉，你明天迟到了怎么办？谁来叫醒你？</p>
+]]></content>
+      <categories>
+        <category>生活</category>
       </categories>
   </entry>
   <entry>
@@ -3075,21 +3090,6 @@ Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
       </categories>
   </entry>
   <entry>
-    <title>放下手机，认真吃一顿饭</title>
-    <url>/2026/06/15/%E4%B8%A2%E6%8E%89%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A5%BD%E5%A5%BD%E5%90%83%E9%A5%AD%E7%9D%A1%E8%A7%89%EF%BC%81/</url>
-    <content><![CDATA[<p>手机等电子产品非常喜欢多管闲事，什么活动他都会插一嘴，踢一脚<br>
-今天吃饭尝试彻底丢掉手机，发现一个很大的变化：就是吃饭的时间缩短了一大堆，平常刷电子产品吃顿饭要半个小时，丢掉手机吃顿饭，只要十分钟，很吓人。</p>
-<p>除此之外，丢掉手机以后，我发现脑子似乎更加清醒，脑子里面似乎会有说不完的问题和想法等着去解答，有数不完的领域可以去探索，回想之前刷着手机吃着饭，似乎脑子根本不会想那么多，就连吃的饭是具体什么味道都不清楚。</p>
-<p>但今天不同，细细品味了吃的排骨玉米饭，注意到了里面的枸杞和葱花，注意到了入嘴的生姜，还在心里感触：小时候那个不吃葱不吃香料的孩子，现在长大了，不知道为什么想到这个，心里还有点酸酸的。</p>
-<p>丢掉电子产品，好好吃饭睡觉，说的轻巧，做起来好难的。</p>
-<p>不带手机吃饭，你怎么付钱？</p>
-<p>不带手机上床睡觉，你明天迟到了怎么办？谁来叫醒你？</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
     <title>香蕉芒果西梅奶昔</title>
     <url>/2026/04/03/%E5%81%9A%E5%A5%B6%E6%98%94/</url>
     <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260328224552025.png" alt="image-20260328224552025"></p>
@@ -3114,28 +3114,6 @@ Shift+鼠标右键操作后，点击“在此处打开PowerShell窗口”。</p>
       <categories>
         <category>生活</category>
       </categories>
-  </entry>
-  <entry>
-    <title>其他软件杂记录</title>
-    <url>/2026/08/05/%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6%E6%9D%82%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="momeiryoui">momeiryoui</h2>
-<p>用来更改win11的系统字体的工具：<strong><a href="https://github.com/Tatsu-syo/noMeiryoUI">noMeiryoUI</a></strong></p>
-<h2 id="autohoykey">autohoykey</h2>
-<p>ahk代码编写需要注意，两次click、click和send操作之间需要有一个sleep延时，不然会出问题<br>
-<img src="https://img.haozi.space/img2026/20260731094012511.png" alt="image.png"></p>
-<h2 id="yt-dlp">yt-dlp</h2>
-<p>我通过创建它的全局配置文件（位于 <code>C:\Users\DEL\AppData\Roaming\yt-dlp\config</code>）并添加了以下配置项来实现：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">-o &quot;E:\yt-dlp\%(title)s.%(ext)s&quot;</span><br></pre></td></tr></table></figure>
-<p>现在，当您直接使用 <code>yt-dlp &lt;URL&gt;</code> 下载视频时，它会自动保存到 <code>E:\yt-dlp</code> 文件夹下，并且文件名会默认使用“视频标题.扩展名”的格式。</p>
-<h2 id="qbittorrent">qbittorrent</h2>
-<p>记录一下这喜人的下载速度，家里的宽带真的不错，在学校的校园网的环境下是很难达到这种速度的。<br>
-<img src="https://img.haozi.space/img2026/20260727120300541.png" alt="image.png|697"></p>
-<h2 id="路由器">路由器</h2>
-<p>上饶阳光花城的路由器刷机以后，通过192.168.123.1进行老毛桃界面的访问。<br>
-用户是admin，密码也是admin。</p>
-<h1>Recuva</h1>
-<p>是个好东西，甚至可以恢复永久删除后的数据哈哈哈哈哈。</p>
-]]></content>
   </entry>
   <entry>
     <title>基于Obsidian的本地资料归档与知识管理工作流</title>
@@ -3251,6 +3229,28 @@ deno的下载：<a href="https://github.com/denoland/deno/releases/tag/v2.9.4">d
       <categories>
         <category>软件小记</category>
       </categories>
+  </entry>
+  <entry>
+    <title>其他软件杂记录</title>
+    <url>/2026/08/05/%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6%E6%9D%82%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="momeiryoui">momeiryoui</h2>
+<p>用来更改win11的系统字体的工具：<strong><a href="https://github.com/Tatsu-syo/noMeiryoUI">noMeiryoUI</a></strong></p>
+<h2 id="autohoykey">autohoykey</h2>
+<p>ahk代码编写需要注意，两次click、click和send操作之间需要有一个sleep延时，不然会出问题<br>
+<img src="https://img.haozi.space/img2026/20260731094012511.png" alt="image.png"></p>
+<h2 id="yt-dlp">yt-dlp</h2>
+<p>我通过创建它的全局配置文件（位于 <code>C:\Users\DEL\AppData\Roaming\yt-dlp\config</code>）并添加了以下配置项来实现：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">-o &quot;E:\yt-dlp\%(title)s.%(ext)s&quot;</span><br></pre></td></tr></table></figure>
+<p>现在，当您直接使用 <code>yt-dlp &lt;URL&gt;</code> 下载视频时，它会自动保存到 <code>E:\yt-dlp</code> 文件夹下，并且文件名会默认使用“视频标题.扩展名”的格式。</p>
+<h2 id="qbittorrent">qbittorrent</h2>
+<p>记录一下这喜人的下载速度，家里的宽带真的不错，在学校的校园网的环境下是很难达到这种速度的。<br>
+<img src="https://img.haozi.space/img2026/20260727120300541.png" alt="image.png|697"></p>
+<h2 id="路由器">路由器</h2>
+<p>上饶阳光花城的路由器刷机以后，通过192.168.123.1进行老毛桃界面的访问。<br>
+用户是admin，密码也是admin。</p>
+<h1>Recuva</h1>
+<p>是个好东西，甚至可以恢复永久删除后的数据哈哈哈哈哈。</p>
+]]></content>
   </entry>
   <entry>
     <title>欧卡2画质调优与帧率卡顿排查记录</title>
@@ -4083,39 +4083,6 @@ tun模式开启是不是意味着我自己的网络连接就没有什么用了�
       </categories>
   </entry>
   <entry>
-    <title>Python Qt 简介与 PySide6 安装指南</title>
-    <url>/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/</url>
-    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/20260403151904697.png" alt="image-20260403151904606"></p>
-<h1>Python qt简介</h1>
-<p>pyside2包装的是Qt5库，pyside6包装的是Qt6库</p>
-<p>PyQt5包装的是Qt5库，PyQt6包装的是Qt6库</p>
-<p>pyside2/pyside6是Qt的亲儿子，而pyqt5/pyqt6是义子</p>
-<p>Qt库是用C++语言开发的，是因为python使用的人实在是太多了，所以python就从C++搬过来这个库了</p>
-<h1>一个好玩的案例</h1>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">app = QApplication()</span><br></pre></td></tr></table></figure>
-<p>放在主窗口的控件，要能全部显示在界面上，必须加上下面这行代码，不然你会看不到自己的控件去哪儿了</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">window.show()</span><br></pre></td></tr></table></figure>
-<p>最后一定有一句这个，让程序进入死循环（可以试试去掉这一句会有什么变化）</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">app.<span class="built_in">exec</span>() <span class="comment"># 这是pyside6的代码； pyside2 是 app.exec_()</span></span><br></pre></td></tr></table></figure>
-<h1>遇到的问题和解决方法</h1>
-<p>我的Python 3.12 无法正常安装 PySide2（至少在2026.3.28号是不可行的），<strong>所以我选择 PySide6</strong></p>
-<p>一般来说，在python终端输入以下命令就可以安装库</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install pyside6</span><br></pre></td></tr></table></figure>
-<p>但是国内下载速度很慢，如果上述指令不行，我们可以采用镜像源下载</p>
-<p>（-i表示从后面的镜像源下载安装pyside6）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install pyside6 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
-<p><strong>一些常用的镜像源</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">清华大学TUNA镜像源： https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">阿里云镜像源： http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">中国科学技术大学镜像源： https://mirrors.ustc.edu.cn/pypi/simple/</span><br><span class="line">华为云镜像源： https://repo.huaweicloud.com/repository/pypi/simple/</span><br><span class="line">腾讯云镜像源：https://mirrors.cloud.tencent.com/pypi/simple/</span><br></pre></td></tr></table></figure>
-<p>显示以下内容就是安装好了</p>
-<p><img src="https://img.haozi.space/img2026/20260328173851329.png" alt="image-20260328173851246"></p>
-<h1>参考文章</h1>
-<p><a href="https://www.runoob.com/w3cnote/pip-cn-mirror.html">pip常用镜像源-博客园</a></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
     <title>如何搭建属于自己的个人知识库</title>
     <url>/2026/03/22/%E6%80%8E%E4%B9%88%E5%8E%BB%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9F/</url>
     <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260310144243809.png" alt="image-20260310144243809"></p>
@@ -4196,26 +4163,36 @@ tun模式开启是不是意味着我自己的网络连接就没有什么用了�
       </categories>
   </entry>
   <entry>
-    <title>24小时延迟满足购物清单</title>
-    <url>/2026/06/16/%E6%83%B3%E4%B9%B0%E4%B8%9C%E8%A5%BF%E4%BA%86%EF%BC%9F%E8%AE%B0%E5%BE%97%E5%86%99%E5%9C%A8%E8%BF%99/</url>
-    <content><![CDATA[<p>制定一个规则：写下来想要买的东西24h之后再买。延迟满足</p>
-<h2 id="26-06-16">26.06.16</h2>
-<ul>
-<li>洗发水一瓶（实在是没了）</li>
-<li>滴露消毒水——洗内裤内衣袜子没有的话就太臭了</li>
-<li>买本书《硬汉技能手册》</li>
-</ul>
-<p><img src="https://img.haozi.space/img2026/IMG_9642.png" alt="IMG_9642"></p>
-<p><img src="https://img.haozi.space/img2026/IMG_9641.png" alt="IMG_9641"></p>
-<p>Claude Code 实战指南</p>
-<p><img src="https://img.haozi.space/img2026/IMG_9643.png" alt="IMG_9643"></p>
-<p>Vibe Coding 实战教程</p>
-<p><img src="https://img.haozi.space/img2026/IMG_9644.png" alt="IMG_9644"></p>
-<p>下面这本书看起来也挺有意思</p>
-<p><img src="https://img.haozi.space/img2026/IMG_9645.png" alt="IMG_9645"></p>
+    <title>Python Qt 简介与 PySide6 安装指南</title>
+    <url>/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/</url>
+    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/20260403151904697.png" alt="image-20260403151904606"></p>
+<h1>Python qt简介</h1>
+<p>pyside2包装的是Qt5库，pyside6包装的是Qt6库</p>
+<p>PyQt5包装的是Qt5库，PyQt6包装的是Qt6库</p>
+<p>pyside2/pyside6是Qt的亲儿子，而pyqt5/pyqt6是义子</p>
+<p>Qt库是用C++语言开发的，是因为python使用的人实在是太多了，所以python就从C++搬过来这个库了</p>
+<h1>一个好玩的案例</h1>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">app = QApplication()</span><br></pre></td></tr></table></figure>
+<p>放在主窗口的控件，要能全部显示在界面上，必须加上下面这行代码，不然你会看不到自己的控件去哪儿了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">window.show()</span><br></pre></td></tr></table></figure>
+<p>最后一定有一句这个，让程序进入死循环（可以试试去掉这一句会有什么变化）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">app.<span class="built_in">exec</span>() <span class="comment"># 这是pyside6的代码； pyside2 是 app.exec_()</span></span><br></pre></td></tr></table></figure>
+<h1>遇到的问题和解决方法</h1>
+<p>我的Python 3.12 无法正常安装 PySide2（至少在2026.3.28号是不可行的），<strong>所以我选择 PySide6</strong></p>
+<p>一般来说，在python终端输入以下命令就可以安装库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install pyside6</span><br></pre></td></tr></table></figure>
+<p>但是国内下载速度很慢，如果上述指令不行，我们可以采用镜像源下载</p>
+<p>（-i表示从后面的镜像源下载安装pyside6）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install pyside6 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<p><strong>一些常用的镜像源</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">清华大学TUNA镜像源： https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">阿里云镜像源： http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">中国科学技术大学镜像源： https://mirrors.ustc.edu.cn/pypi/simple/</span><br><span class="line">华为云镜像源： https://repo.huaweicloud.com/repository/pypi/simple/</span><br><span class="line">腾讯云镜像源：https://mirrors.cloud.tencent.com/pypi/simple/</span><br></pre></td></tr></table></figure>
+<p>显示以下内容就是安装好了</p>
+<p><img src="https://img.haozi.space/img2026/20260328173851329.png" alt="image-20260328173851246"></p>
+<h1>参考文章</h1>
+<p><a href="https://www.runoob.com/w3cnote/pip-cn-mirror.html">pip常用镜像源-博客园</a></p>
 ]]></content>
       <categories>
-        <category>生活</category>
+        <category>教程</category>
       </categories>
   </entry>
   <entry>
@@ -4297,6 +4274,29 @@ tun模式开启是不是意味着我自己的网络连接就没有什么用了�
 ]]></content>
       <categories>
         <category>阅读</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>24小时延迟满足购物清单</title>
+    <url>/2026/06/16/%E6%83%B3%E4%B9%B0%E4%B8%9C%E8%A5%BF%E4%BA%86%EF%BC%9F%E8%AE%B0%E5%BE%97%E5%86%99%E5%9C%A8%E8%BF%99/</url>
+    <content><![CDATA[<p>制定一个规则：写下来想要买的东西24h之后再买。延迟满足</p>
+<h2 id="26-06-16">26.06.16</h2>
+<ul>
+<li>洗发水一瓶（实在是没了）</li>
+<li>滴露消毒水——洗内裤内衣袜子没有的话就太臭了</li>
+<li>买本书《硬汉技能手册》</li>
+</ul>
+<p><img src="https://img.haozi.space/img2026/IMG_9642.png" alt="IMG_9642"></p>
+<p><img src="https://img.haozi.space/img2026/IMG_9641.png" alt="IMG_9641"></p>
+<p>Claude Code 实战指南</p>
+<p><img src="https://img.haozi.space/img2026/IMG_9643.png" alt="IMG_9643"></p>
+<p>Vibe Coding 实战教程</p>
+<p><img src="https://img.haozi.space/img2026/IMG_9644.png" alt="IMG_9644"></p>
+<p>下面这本书看起来也挺有意思</p>
+<p><img src="https://img.haozi.space/img2026/IMG_9645.png" alt="IMG_9645"></p>
+]]></content>
+      <categories>
+        <category>生活</category>
       </categories>
   </entry>
   <entry>
@@ -7623,6 +7623,120 @@ Happy Vimming<br>
 ]]></content>
   </entry>
   <entry>
+    <title>基于 GitHub + PicGo + CDN 搭建个人博客图床</title>
+    <url>/2026/03/22/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/</url>
+    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260305212844692.png" alt="image-20260305212844692"></p>
+<h2 id="引言">引言</h2>
+<p>在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理上传，再通过 CDN 服务加速访问，搭建了一个长期可用、方便管理的个人博客图床。</p>
+<h2 id="需要的工具">需要的工具</h2>
+<p>需要准备的工具和资源如下</p>
+<ol>
+<li>GitHub 账号以及一个新的仓库，例如 img-bed</li>
+<li>PicGo</li>
+<li>CDN 服务，例如 jsDelivr 或其他支持 GitHub 仓库加速的服务</li>
+<li>Typora(日常写博客使用的软件，用于检验图床是否生效)</li>
+</ol>
+<h2 id="GitHub-仓库搭建">GitHub 仓库搭建</h2>
+<ol>
+<li>
+<p>登录 GitHub，创建一个新仓库，建议名称为 img-bed</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305200944050.png" alt="image-20260305200944050"></p>
+</li>
+<li>
+<p>将仓库设置为 Public，仓库建议使用公开仓库，方便 CDN 访问</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305201149616.png" alt="image-20260305201149616"></p>
+<p>这样就是创建成功，就可以了</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305201409082.png" alt="image-20260305201409082"></p>
+</li>
+</ol>
+<h2 id="PicGo-下载与配置">PicGo 下载与配置</h2>
+<h3 id="前置操作">前置操作</h3>
+<ol>
+<li>
+<p>安装 PicGo 应用并启动</p>
+<p><a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
+<p><img src="https://img.haozi.space/img2026/image-20260305201552890.png" alt="image-20260305201552890"></p>
+<p>可能遇到的问题：</p>
+<p><img src="https://img.haozi.space/img2026/image-20260307095315759.png" alt="image-20260307095315759"></p>
+</li>
+<li>
+<p>配置仓库信息：仓库名、分支、上传路径</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305201654797.png" alt="image-20260305201654797"></p>
+<p>点击添加图床</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305201748322.png" alt="image-20260305201748322"></p>
+</li>
+</ol>
+<p><img src="https://img.haozi.space/img2026/image-20260305202156876.png" alt="image-20260305202156876"></p>
+<h3 id="设定存储路径">设定存储路径</h3>
+<p>建议在仓库中创建 img 文件夹专门存放图片（可以用年份来区分，比如我是2026年上传的，就可以命名为img2026）</p>
+<p>仓库结构示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img-bed</span><br><span class="line"> └ img2026</span><br><span class="line">     ├ example1.png</span><br><span class="line">     ├ example2.jpg</span><br></pre></td></tr></table></figure>
+<h3 id="token的获取">token的获取</h3>
+<p>打开以下链接：</p>
+<p><a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
+<p>进行以下操作</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305202811377.png" alt="image-20260305202811377"></p>
+<p><img src="https://img.haozi.space/img2026/image-20260305202942889.png" alt="image-20260305202942889"></p>
+<p>记得打开repo</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305203033192.png" alt="image-20260305203033192"></p>
+<p>之后会生成一个token，复制进PicGo配置即可</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305203223281.png" alt="image-20260305203223281"></p>
+<h3 id="自定义域名（CDN服务）">自定义域名（CDN服务）</h3>
+<p>如果不使用CDN服务的话，你就可能这样</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305203624484.png" alt="image-20260305203624484"></p>
+<p>为了加速访问和解决跨域问题，可以使用 jsDelivr 这样的服务,操作很简单</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">把一坨 https://cdn.jsdmirror.com/gh/用户名/仓库名@分支 复制进PicGo即可</span><br></pre></td></tr></table></figure>
+<h3 id="上传">上传</h3>
+<p>上传操作超级简单，不难</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305204522411.png" alt="image-20260305204522411"></p>
+<p>例如你上传了 pic1.png，你的剪贴板会有这一串信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://img.haozi.space/img2026/pic1.png</span><br></pre></td></tr></table></figure>
+<p>用这个url链接复制进浏览器，看看能不能打开访问你上传的图片，能的话就说明配置成功了。恭喜你已经快成功了</p>
+<h2 id="集成到Typora">集成到Typora</h2>
+<h3 id="Typora的下载">Typora的下载</h3>
+<p><a href="https://cloud.189.cn/t/fqE3Af6nq6vi">https://cloud.189.cn/t/fqE3Af6nq6vi</a> （访问码：jkk9）</p>
+<p>分享了链接，不用自己去破解</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305205655868.png" alt="image-20260305205655868"></p>
+<h3 id="Typora配置图床服务">Typora配置图床服务</h3>
+<p>进去设置-偏好设置-图像-进行以下操作：</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305205944672.png" alt="image-20260305205944672"></p>
+<p>显示以下画面就是成功啦！</p>
+<p><img src="https://img.haozi.space/img2026/tc7.png" alt="tc7"></p>
+<p>使用截图软件先截图，ctrl+c进入你的博客文章里面去，直接上传的感觉，太爽！</p>
+<p>好啦，可以去玩了，这个功能好好玩的，嘿嘿</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305210510004.png" alt="image-20260305210510004"></p>
+<h2 id="头脑风暴">头脑风暴</h2>
+<h3 id="自定义子域名">自定义子域名</h3>
+<ul>
+<li>将自己的域名，例如 <a href="http://img.mydomain.com">img.mydomain.com</a>，直接绑定到 CDN 地址，</li>
+</ul>
+<h3 id="博客的相册功能">博客的相册功能</h3>
+<ul>
+<li>很久没用的博客相册功能可以用上了</li>
+</ul>
+<h3 id="多设备上传到github图床">多设备上传到github图床</h3>
+<p>比如你有一个笔记本电脑，也想要通过picgo来上传图片，只需要按照教程来（仓库如果已经建了img-bed就不需要建一个新的），在笔记本电脑上下载PicGo，按照步骤进行PicGo配置，获取一个新的token授权，typora的设置也如出一辙。</p>
+<h2 id="总结">总结</h2>
+<p>本文介绍了一个稳定可控的个人博客图床搭建方案，使用 GitHub 仓库存储图片，PicGo 管理上传，CDN 加速访问，实现跨域友好、快速加载、长期可维护。</p>
+<p>笔者在使用ai的过程中，一开始ai告诉我的方案是picgo+github+cloudfare方案，但是捣鼓了很久都没有搞出来，其中有一步我按照他说的来配置，是这样的：</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305210400758.png" alt="image-20260305210400758"></p>
+<p>搞了很久，我都怀疑是这里出了问题，可是ai是这样的，你不去怀疑他，他死活不知道自己错了这里，直到我指出他这里可能有问题，他跟我说，这是不能用的！</p>
+<p><img src="https://img.haozi.space/img2026/image-20260305210837538.png" alt="image-20260305210837538"></p>
+<p>算是把这一步推倒重来了，气死我了！</p>
+<p>AI 可以帮你生成脚本和优化步骤，但是会出现很致命的错误，不能代替的，是你的思考。操作细节仍需我们去把控。</p>
+<p>以后可以去做的：</p>
+<p>1.让ai互相挑刺，这样可以保证不要被ai的一面之词蒙蔽，要做一个擦亮眼睛的皇上，ai只不过是帮你出谋划策的太监。</p>
+<p>2.ai要用，但是不要滥用，像这样技术类的方案，google可以搜到很成熟的案例，这样可以少走很多弯路。</p>
+<p>3.不要高估ai的分析判断能力，有时候它自己都不知道自己在说什么，不要盲目相信ai</p>
+<p>4.对ai的提问要具体，当问题描述清楚时，AI 往往可以成为一个效率很高的技术助手</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.提供完整背景</span><br><span class="line">如何配置图床-&gt;我正在使用 GitHub 仓库作为图床，仓库名为 img-bed，使用 PicGo 上传图片，通过 jsDelivr 作为 CDN，现在访问图片时返回 404，这种情况可能是什么原因</span><br><span class="line"></span><br><span class="line">2.提供具体的路径或代码</span><br><span class="line">网页404-&gt;我访问的地址是</span><br><span class="line">https://img.haozi.space/img/tc2.png</span><br><span class="line">但是浏览器返回 404 GitHub 仓库路径是img-bed/img/tc2.png</span><br><span class="line"></span><br><span class="line">3.描述已经尝试过的步骤</span><br><span class="line"></span><br><span class="line">4.一次只问一个核心问题</span><br></pre></td></tr></table></figure>
+<p>使用ai是一门学问，用的好是好，用的不好，却是无益的</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
     <title>个人理性消费模型</title>
     <url>/2026/07/21/%E8%80%97%E5%AD%90%E7%9A%84%E7%94%9F%E6%B4%BB%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<p>突发奇想的一期，也想学着大佬给自己生活来点模型</p>
@@ -8223,120 +8337,6 @@ Happy Vimming<br>
 ]]></content>
       <categories>
         <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>基于 GitHub + PicGo + CDN 搭建个人博客图床</title>
-    <url>/2026/03/22/%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A+cloudfare+picgo/</url>
-    <content><![CDATA[<p><img src="https://img.haozi.space/img2026/image-20260305212844692.png" alt="image-20260305212844692"></p>
-<h2 id="引言">引言</h2>
-<p>在个人博客中，图片的存储和访问一直是一个需要解决的问题。外链图床（比如我之前使用的imgse.com路过图床，需要开会员，不然每日限额很严重）可能失效或者加载慢，有时还会遇到跨域问题，对于想要在博客里面嵌入大量照片是不可行的。所以，参考网络教程以及AI辅助，我使用 GitHub 仓库存储图片，配合 PicGo 管理上传，再通过 CDN 服务加速访问，搭建了一个长期可用、方便管理的个人博客图床。</p>
-<h2 id="需要的工具">需要的工具</h2>
-<p>需要准备的工具和资源如下</p>
-<ol>
-<li>GitHub 账号以及一个新的仓库，例如 img-bed</li>
-<li>PicGo</li>
-<li>CDN 服务，例如 jsDelivr 或其他支持 GitHub 仓库加速的服务</li>
-<li>Typora(日常写博客使用的软件，用于检验图床是否生效)</li>
-</ol>
-<h2 id="GitHub-仓库搭建">GitHub 仓库搭建</h2>
-<ol>
-<li>
-<p>登录 GitHub，创建一个新仓库，建议名称为 img-bed</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305200944050.png" alt="image-20260305200944050"></p>
-</li>
-<li>
-<p>将仓库设置为 Public，仓库建议使用公开仓库，方便 CDN 访问</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305201149616.png" alt="image-20260305201149616"></p>
-<p>这样就是创建成功，就可以了</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305201409082.png" alt="image-20260305201409082"></p>
-</li>
-</ol>
-<h2 id="PicGo-下载与配置">PicGo 下载与配置</h2>
-<h3 id="前置操作">前置操作</h3>
-<ol>
-<li>
-<p>安装 PicGo 应用并启动</p>
-<p><a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
-<p><img src="https://img.haozi.space/img2026/image-20260305201552890.png" alt="image-20260305201552890"></p>
-<p>可能遇到的问题：</p>
-<p><img src="https://img.haozi.space/img2026/image-20260307095315759.png" alt="image-20260307095315759"></p>
-</li>
-<li>
-<p>配置仓库信息：仓库名、分支、上传路径</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305201654797.png" alt="image-20260305201654797"></p>
-<p>点击添加图床</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305201748322.png" alt="image-20260305201748322"></p>
-</li>
-</ol>
-<p><img src="https://img.haozi.space/img2026/image-20260305202156876.png" alt="image-20260305202156876"></p>
-<h3 id="设定存储路径">设定存储路径</h3>
-<p>建议在仓库中创建 img 文件夹专门存放图片（可以用年份来区分，比如我是2026年上传的，就可以命名为img2026）</p>
-<p>仓库结构示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img-bed</span><br><span class="line"> └ img2026</span><br><span class="line">     ├ example1.png</span><br><span class="line">     ├ example2.jpg</span><br></pre></td></tr></table></figure>
-<h3 id="token的获取">token的获取</h3>
-<p>打开以下链接：</p>
-<p><a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
-<p>进行以下操作</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305202811377.png" alt="image-20260305202811377"></p>
-<p><img src="https://img.haozi.space/img2026/image-20260305202942889.png" alt="image-20260305202942889"></p>
-<p>记得打开repo</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305203033192.png" alt="image-20260305203033192"></p>
-<p>之后会生成一个token，复制进PicGo配置即可</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305203223281.png" alt="image-20260305203223281"></p>
-<h3 id="自定义域名（CDN服务）">自定义域名（CDN服务）</h3>
-<p>如果不使用CDN服务的话，你就可能这样</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305203624484.png" alt="image-20260305203624484"></p>
-<p>为了加速访问和解决跨域问题，可以使用 jsDelivr 这样的服务,操作很简单</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">把一坨 https://cdn.jsdmirror.com/gh/用户名/仓库名@分支 复制进PicGo即可</span><br></pre></td></tr></table></figure>
-<h3 id="上传">上传</h3>
-<p>上传操作超级简单，不难</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305204522411.png" alt="image-20260305204522411"></p>
-<p>例如你上传了 pic1.png，你的剪贴板会有这一串信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://img.haozi.space/img2026/pic1.png</span><br></pre></td></tr></table></figure>
-<p>用这个url链接复制进浏览器，看看能不能打开访问你上传的图片，能的话就说明配置成功了。恭喜你已经快成功了</p>
-<h2 id="集成到Typora">集成到Typora</h2>
-<h3 id="Typora的下载">Typora的下载</h3>
-<p><a href="https://cloud.189.cn/t/fqE3Af6nq6vi">https://cloud.189.cn/t/fqE3Af6nq6vi</a> （访问码：jkk9）</p>
-<p>分享了链接，不用自己去破解</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305205655868.png" alt="image-20260305205655868"></p>
-<h3 id="Typora配置图床服务">Typora配置图床服务</h3>
-<p>进去设置-偏好设置-图像-进行以下操作：</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305205944672.png" alt="image-20260305205944672"></p>
-<p>显示以下画面就是成功啦！</p>
-<p><img src="https://img.haozi.space/img2026/tc7.png" alt="tc7"></p>
-<p>使用截图软件先截图，ctrl+c进入你的博客文章里面去，直接上传的感觉，太爽！</p>
-<p>好啦，可以去玩了，这个功能好好玩的，嘿嘿</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305210510004.png" alt="image-20260305210510004"></p>
-<h2 id="头脑风暴">头脑风暴</h2>
-<h3 id="自定义子域名">自定义子域名</h3>
-<ul>
-<li>将自己的域名，例如 <a href="http://img.mydomain.com">img.mydomain.com</a>，直接绑定到 CDN 地址，</li>
-</ul>
-<h3 id="博客的相册功能">博客的相册功能</h3>
-<ul>
-<li>很久没用的博客相册功能可以用上了</li>
-</ul>
-<h3 id="多设备上传到github图床">多设备上传到github图床</h3>
-<p>比如你有一个笔记本电脑，也想要通过picgo来上传图片，只需要按照教程来（仓库如果已经建了img-bed就不需要建一个新的），在笔记本电脑上下载PicGo，按照步骤进行PicGo配置，获取一个新的token授权，typora的设置也如出一辙。</p>
-<h2 id="总结">总结</h2>
-<p>本文介绍了一个稳定可控的个人博客图床搭建方案，使用 GitHub 仓库存储图片，PicGo 管理上传，CDN 加速访问，实现跨域友好、快速加载、长期可维护。</p>
-<p>笔者在使用ai的过程中，一开始ai告诉我的方案是picgo+github+cloudfare方案，但是捣鼓了很久都没有搞出来，其中有一步我按照他说的来配置，是这样的：</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305210400758.png" alt="image-20260305210400758"></p>
-<p>搞了很久，我都怀疑是这里出了问题，可是ai是这样的，你不去怀疑他，他死活不知道自己错了这里，直到我指出他这里可能有问题，他跟我说，这是不能用的！</p>
-<p><img src="https://img.haozi.space/img2026/image-20260305210837538.png" alt="image-20260305210837538"></p>
-<p>算是把这一步推倒重来了，气死我了！</p>
-<p>AI 可以帮你生成脚本和优化步骤，但是会出现很致命的错误，不能代替的，是你的思考。操作细节仍需我们去把控。</p>
-<p>以后可以去做的：</p>
-<p>1.让ai互相挑刺，这样可以保证不要被ai的一面之词蒙蔽，要做一个擦亮眼睛的皇上，ai只不过是帮你出谋划策的太监。</p>
-<p>2.ai要用，但是不要滥用，像这样技术类的方案，google可以搜到很成熟的案例，这样可以少走很多弯路。</p>
-<p>3.不要高估ai的分析判断能力，有时候它自己都不知道自己在说什么，不要盲目相信ai</p>
-<p>4.对ai的提问要具体，当问题描述清楚时，AI 往往可以成为一个效率很高的技术助手</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.提供完整背景</span><br><span class="line">如何配置图床-&gt;我正在使用 GitHub 仓库作为图床，仓库名为 img-bed，使用 PicGo 上传图片，通过 jsDelivr 作为 CDN，现在访问图片时返回 404，这种情况可能是什么原因</span><br><span class="line"></span><br><span class="line">2.提供具体的路径或代码</span><br><span class="line">网页404-&gt;我访问的地址是</span><br><span class="line">https://img.haozi.space/img/tc2.png</span><br><span class="line">但是浏览器返回 404 GitHub 仓库路径是img-bed/img/tc2.png</span><br><span class="line"></span><br><span class="line">3.描述已经尝试过的步骤</span><br><span class="line"></span><br><span class="line">4.一次只问一个核心问题</span><br></pre></td></tr></table></figure>
-<p>使用ai是一门学问，用的好是好，用的不好，却是无益的</p>
-]]></content>
-      <categories>
-        <category>教程</category>
       </categories>
   </entry>
 </search>

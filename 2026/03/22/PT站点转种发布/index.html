@@ -19,7 +19,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本文详细梳理北洋园PT及BTSchool等多站点的电影发布自查规则，系统讲解手动发种操作流程与代码规范，并介绍如何运用EasyUpload等油猴脚本实现高效一键自动转种。">
@@ -71,26 +71,8 @@
 <!-- JetBrains Mono - Code font -->
 <link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" />
 
-<!-- Google-style Multi-color Site Title -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
-  var titleEl = document.querySelector('.site-title');
-  if (titleEl) {
-    var text = titleEl.textContent;
-    titleEl.innerHTML = '';
-    for (var i = 0; i < text.length; i++) {
-      var span = document.createElement('span');
-      span.textContent = text[i];
-      if (text[i] !== ' ') {
-        span.style.color = colors[i % colors.length];
-      }
-      titleEl.appendChild(span);
-    }
-  }
-});
-</script>
 
   <title>北洋园PT电影发布自查指南 | Haozi's Blog</title>
   
@@ -240,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/22/PT%E7%AB%99%E7%82%B9%E8%BD%AC%E7%A7%8D%E5%8F%91%E5%B8%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar_haozilogo.png">
       <meta itemprop="name" content="haozi">
       <meta itemprop="description" content="折腾是理解世界的一种方式">
     </span>
@@ -495,8 +477,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/03/22/iPhone14promax%E6%9C%89%E5%BF%85%E8%A6%81%E5%8D%87%E5%88%B0ios26%E5%90%97%EF%BC%9F/" rel="prev" title="iPhone要不要升级到iOS 26？iOS 18与iOS 26对比体验">
-      <i class="fa fa-chevron-left"></i> iPhone要不要升级到iOS 26？iOS 18与iOS 26对比体验
+    <a href="/2026/03/22/UG%20NX12%E7%9A%84%E5%AE%89%E8%A3%85/" rel="prev" title="UG NX 12.0 软件下载与安装教程（含图文及视频）">
+      <i class="fa fa-chevron-left"></i> UG NX 12.0 软件下载与安装教程（含图文及视频）
     </a></div>
       <div class="post-nav-item">
     <a href="/2026/03/28/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8ptqt%E8%BF%9B%E8%A1%8Cui%E7%95%8C%E9%9D%A2%E7%9A%84%E5%BC%80%E5%8F%91%EF%BC%9F/" rel="next" title="Python Qt 简介与 PySide6 安装指南">
@@ -567,7 +549,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="haozi"
-      src="/images/avatar.jpg">
+      src="/images/avatar_haozilogo.png">
   <p class="site-author-name" itemprop="name">haozi</p>
   <div class="site-description" itemprop="description">折腾是理解世界的一种方式</div>
 </div>
@@ -638,24 +620,6 @@ document.addEventListener('DOMContentLoaded', function() {
       </li>
       
       <li class="sidebar-category-item">
-        <a href="/categories/生活/">
-          <span class="cat-name">
-            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-            <i class="fas fa-coffee cat-icon"></i> 生活
-          </span>
-          <span class="cat-count">12</span>
-        </a>
-      </li>
-      
-      <li class="sidebar-category-item">
         <a href="/categories/教程/">
           <span class="cat-name">
             
@@ -670,6 +634,24 @@ document.addEventListener('DOMContentLoaded', function() {
             <i class="far fa-keyboard cat-icon"></i> 教程
           </span>
           <span class="cat-count">16</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/生活/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="fas fa-coffee cat-icon"></i> 生活
+          </span>
+          <span class="cat-count">12</span>
         </a>
       </li>
       

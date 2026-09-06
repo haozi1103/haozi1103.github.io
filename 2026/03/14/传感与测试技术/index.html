@@ -19,7 +19,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本文以信号为主线系统梳理传感与测试技术课程脉络，涵盖信号描述与分析、测试系统特性，以及电阻、压电等常用传感器的分类选型与信号调理，带你快速厘清各章节内在逻辑，构建清晰的复习框架。">
@@ -79,26 +79,8 @@
 <!-- JetBrains Mono - Code font -->
 <link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" />
 
-<!-- Google-style Multi-color Site Title -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
-  var titleEl = document.querySelector('.site-title');
-  if (titleEl) {
-    var text = titleEl.textContent;
-    titleEl.innerHTML = '';
-    for (var i = 0; i < text.length; i++) {
-      var span = document.createElement('span');
-      span.textContent = text[i];
-      if (text[i] !== ' ') {
-        span.style.color = colors[i % colors.length];
-      }
-      titleEl.appendChild(span);
-    }
-  }
-});
-</script>
 
   <title>传感与测试技术课程逻辑与章节脉络梳理 | Haozi's Blog</title>
   
@@ -248,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/03/14/%E4%BC%A0%E6%84%9F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar_haozilogo.png">
       <meta itemprop="name" content="haozi">
       <meta itemprop="description" content="折腾是理解世界的一种方式">
     </span>
@@ -677,7 +659,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="haozi"
-      src="/images/avatar.jpg">
+      src="/images/avatar_haozilogo.png">
   <p class="site-author-name" itemprop="name">haozi</p>
   <div class="site-description" itemprop="description">折腾是理解世界的一种方式</div>
 </div>
@@ -748,24 +730,6 @@ document.addEventListener('DOMContentLoaded', function() {
       </li>
       
       <li class="sidebar-category-item">
-        <a href="/categories/生活/">
-          <span class="cat-name">
-            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-            <i class="fas fa-coffee cat-icon"></i> 生活
-          </span>
-          <span class="cat-count">12</span>
-        </a>
-      </li>
-      
-      <li class="sidebar-category-item">
         <a href="/categories/教程/">
           <span class="cat-name">
             
@@ -780,6 +744,24 @@ document.addEventListener('DOMContentLoaded', function() {
             <i class="far fa-keyboard cat-icon"></i> 教程
           </span>
           <span class="cat-count">16</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/生活/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="fas fa-coffee cat-icon"></i> 生活
+          </span>
+          <span class="cat-count">12</span>
         </a>
       </li>
       

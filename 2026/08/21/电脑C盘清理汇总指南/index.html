@@ -19,7 +19,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Windows 11 的 C 盘清理指南：先诊断后清理，覆盖存储感知、DISM 组件存储、休眠与页面文件、软件缓存、Docker vhdx 压缩和目录迁移，附维护节奏与避坑清单。">
@@ -109,26 +109,8 @@
 <!-- JetBrains Mono - Code font -->
 <link rel=stylesheet href=https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap />
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" />
 
-<!-- Google-style Multi-color Site Title -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var colors = ['#4285F4', '#EA4335', '#FBBC05', '#4285F4', '#34A853', '#EA4335'];
-  var titleEl = document.querySelector('.site-title');
-  if (titleEl) {
-    var text = titleEl.textContent;
-    titleEl.innerHTML = '';
-    for (var i = 0; i < text.length; i++) {
-      var span = document.createElement('span');
-      span.textContent = text[i];
-      if (text[i] !== ' ') {
-        span.style.color = colors[i % colors.length];
-      }
-      titleEl.appendChild(span);
-    }
-  }
-});
-</script>
 
   <title>一份关于 Windows 11 电脑的 C 盘清理指南 | Haozi's Blog</title>
   
@@ -278,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <link itemprop="mainEntityOfPage" href="http://haozi.space/2026/08/21/%E7%94%B5%E8%84%91C%E7%9B%98%E6%B8%85%E7%90%86%E6%B1%87%E6%80%BB%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar_haozilogo.png">
       <meta itemprop="name" content="haozi">
       <meta itemprop="description" content="折腾是理解世界的一种方式">
     </span>
@@ -802,7 +784,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="haozi"
-      src="/images/avatar.jpg">
+      src="/images/avatar_haozilogo.png">
   <p class="site-author-name" itemprop="name">haozi</p>
   <div class="site-description" itemprop="description">折腾是理解世界的一种方式</div>
 </div>
@@ -873,24 +855,6 @@ document.addEventListener('DOMContentLoaded', function() {
       </li>
       
       <li class="sidebar-category-item">
-        <a href="/categories/生活/">
-          <span class="cat-name">
-            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-            <i class="fas fa-coffee cat-icon"></i> 生活
-          </span>
-          <span class="cat-count">12</span>
-        </a>
-      </li>
-      
-      <li class="sidebar-category-item">
         <a href="/categories/教程/">
           <span class="cat-name">
             
@@ -905,6 +869,24 @@ document.addEventListener('DOMContentLoaded', function() {
             <i class="far fa-keyboard cat-icon"></i> 教程
           </span>
           <span class="cat-count">16</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/生活/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="fas fa-coffee cat-icon"></i> 生活
+          </span>
+          <span class="cat-count">12</span>
         </a>
       </li>
       
