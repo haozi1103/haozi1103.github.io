@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #de45f9;
+  background: #b67416;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2841,24 +2841,24 @@ figure.highlight,
 }
 /* 5. Typography Scale (Title & Headings) */
 .post-title {
-  font-size: 1.9em !important;
-  font-weight: 550 !important;
+  font-size: 1.6em !important;
+  font-weight: 1000 !important;
 }
 .post-body h1 {
-  font-size: 1.75em !important;
-  font-weight: 500 !important;
+  font-size: 1.6em !important;
+  font-weight: 600 !important;
 }
 .post-body h2 {
-  font-size: 1.5em !important;
-  font-weight: 500 !important;
+  font-size: 1.3em !important;
+  font-weight: 900 !important;
 }
 .post-body h3 {
-  font-size: 1.25em !important;
-  font-weight: 500 !important;
+  font-size: 1.1em !important;
+  font-weight: 300 !important;
 }
 .post-body h4 {
-  font-size: 1.1em !important;
-  font-weight: 500 !important;
+  font-size: 1em !important;
+  font-weight: 300 !important;
 }
 /* 6. Remove Underlines and Use Theme Color for Links */
 .post-body p a,
@@ -2924,8 +2924,8 @@ nav.pagination {
 /* 10. Site Title (Logo Area) Customization - 蓝绿渐变品牌设计规范 */
 .site-title {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 1.2em !important;
-  font-weight: 1600 !important; /* 900 Extra Black 超重笔画 */
+  font-size: 1.4em !important;
+  font-weight: 900 !important; /* 900 Extra Black 超重笔画 */
   letter-spacing: 0.3px !important; /* 经典微紧间距，强化力量感 */
   background: linear-gradient(135deg, #28cc99 0%, #34d4cb 100%) !important;
   -webkit-background-clip: text !important;
@@ -2933,12 +2933,12 @@ nav.pagination {
   background-clip: text !important;
   color: transparent !important;
   display: inline-block !important;
-  transition: all 0.3s ease-in-out !important; /* 平滑过渡动画 */
+  transition: all 0.5s ease-in-out !important; /* 平滑过渡动画 */
 }
 /* 鼠标悬浮时微光提亮效果 */
 .brand:hover .site-title,
 .site-title:hover {
-  filter: brightness(1.15) drop-shadow(0 0 10px rgba(52,212,203,0.45)) !important;
+  filter: brightness(1.15) drop-shadow(0 0 15px rgba(52,212,203,0.45)) !important;
 }
 /* 顶部与底部修饰线条也统一采用绿蓝渐变 */
 .logo-line-before i,
@@ -2977,5 +2977,98 @@ nav.pagination {
   .mobile-image-row img {
     max-width: 90%;
     margin-bottom: 20px !important;
+  }
+}
+/* 调整导航栏整体高度与上下呼吸感 */
+.header-inner {
+  padding: 20px 0 !important; /* 默认是 20px，数值越大留白越多 */
+}
+/* ===================================================
+   13. Modern Digital Garden Homepage Layout & Typography
+   极简现代独立博客主页布局规范
+   =================================================== */
+/* 1. 主页文章标题：薄荷绿主题色、厚重字重（700-800）与平滑动效 */
+.index .post-title {
+  margin-bottom: 0 !important;
+}
+.index .post-title-link {
+  color: #2fd1b5 !important;
+  font-size: 1em !important;
+  font-weight: 1000 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.2px !important;
+  border-bottom: none !important;
+  display: inline-block !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.index .post-title-link:hover {
+  color: #2dcfaf !important;
+  transform: translateX(4px);
+}
+/* 去除文章标题悬浮时的下划白线动画 */
+.posts-expand .post-title-link::before,
+.posts-expand .post-title-link:hover::before,
+.post-title-link::before,
+.post-title-link:hover::before {
+  display: none !important;
+  content: none !important;
+}
+/* 2. 主页元数据极简：隐藏所有文字、图标与次要信息，仅保留一个浅灰色纯净日期 */
+.index .post-meta {
+  margin-top: 6px !important;
+  margin-bottom: 10px !important;
+  opacity: 1 !important;
+  text-align: left !important;
+}
+.index .post-meta .post-meta-item-icon,
+.index .post-meta .post-meta-item-text,
+.index .post-meta .post-meta-divider,
+.index .post-meta .post-meta-item:not(:first-child) {
+  display: none !important;
+}
+.index .post-meta time {
+  color: #8a929e !important;
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  border-bottom: none !important;
+  text-decoration: none !important;
+  letter-spacing: 0.3px !important;
+}
+/* 3. 主页文章导读简介：现代质感灰白、舒适行高 */
+.index .post-body {
+  margin-top: 0 !important;
+}
+.index .post-body p {
+  color: #cfcfd1 !important;
+  font-size: 18px !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+}
+/* 4. 主页文章区块垂直节奏：紧凑内聚、篇与篇大呼吸留白 */
+.index.posts-expand .post-block {
+  margin-top: 0 !important;
+  margin-bottom: 55px !important;
+  padding-bottom: 35px !important;
+  border-bottom: 2px solid rgba(255,255,255,0.05) !important;
+}
+.index.posts-expand .post-block:last-child {
+  border-bottom: none !important;
+}
+/* ===================================================
+   14. Clean Solid Horizontal Rule (正文分割线统一规范)
+   =================================================== */
+hr,
+.post-body hr {
+  background-image: none !important;
+  border: none !important;
+  height: 2px !important;
+  margin: 58px 0 !important;
+  border-radius: 1px !important;
+  opacity: 0.9 !important;
+}
+@media (prefers-color-scheme: dark) {
+  hr,
+  .post-body hr {
+    box-shadow: 0 2px 0 rgba(255,255,255,0.04) !important;
   }
 }
