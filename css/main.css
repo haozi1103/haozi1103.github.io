@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #b67416;
+  background: #24de70;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1896,6 +1896,9 @@ pre .javascript .function {
   .post-meta-item-icon {
     display: inline-block;
   }
+}
+.post-meta-item-text {
+  display: none;
 }
 @media (max-width: 991px) {
   .post-meta-item-text {
@@ -2807,12 +2810,89 @@ nav.pagination a.extend:active {
   padding-top: 20px !important;
   padding-bottom: 25px !important;
 }
-.menu-item {
-  margin: 0 1.25em !important;
+.site-nav .menu {
+  margin: 0 !important;
 }
-.site-nav .menu .menu-item a,
-.site-nav .menu .menu-item a i {
+.menu-item {
+  margin: 0 2.25em !important;
+}
+/* Remove navigation icons completely */
+.site-nav .menu .menu-item a i,
+.site-nav .menu .menu-item i {
+  display: none !important;
+}
+/* Base navigation links: pure typography, transparent background, no box */
+.site-nav .menu .menu-item a {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
   font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #c9d1d9 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 2px 4px 5px 4px !important;
+  border-bottom: 1px solid transparent !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: color 0.2s ease, border-color 0.2s ease !important;
+}
+/* Bilingual Micro-Typography English Subtitle */
+.site-nav .menu .menu-item a::after {
+  display: block;
+  font-size: 8px;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 1.3px;
+  text-indent: 1.3px;
+  color: rgba(201,209,217,0.42);
+  margin-top: 3px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+.site-nav .menu .menu-item-home a::after {
+  content: "HOME";
+}
+.site-nav .menu .menu-item-archives a::after {
+  content: "ARCHIVES";
+}
+.site-nav .menu .menu-item-categories a::after {
+  content: "CATEGORIES";
+}
+.site-nav .menu .menu-item-tools a::after {
+  content: "TOOLS";
+}
+.site-nav .menu .menu-item-search a::after {
+  content: "SEARCH";
+}
+/* Hover state: delicate color transition without gray pill */
+.site-nav .menu .menu-item a:hover {
+  background: transparent !important;
+  color: #32d3c5 !important;
+  border-bottom-color: rgba(50,211,197,0.45) !important;
+}
+.site-nav .menu .menu-item a:hover::after {
+  color: rgba(50,211,197,0.75) !important;
+}
+/* Active page: emerald green text + subtle thin underline (no gray box) */
+.site-nav .menu .menu-item-active a {
+  background: transparent !important;
+  color: #2ac1b5 !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid #2ac1b5 !important;
+}
+.site-nav .menu .menu-item-active a::after {
+  color: rgba(42,193,181,0.8) !important;
+}
+.site-nav .menu .menu-item-active a:hover {
+  background: transparent !important;
+  color: #32d3c5 !important;
+  border-bottom-color: #32d3c5 !important;
+}
+.site-nav .menu .menu-item-active a:hover::after {
+  color: rgba(50,211,197,0.9) !important;
 }
 /* 2. Typography Rhythm (Line-height, Paragraphs, Headings) */
 .post-body {
@@ -2829,8 +2909,33 @@ nav.pagination a.extend:active {
 }
 /* 3. Visual Noise Reduction (Meta Info) */
 .post-meta {
-  opacity: 0.55 !important;
-  margin-bottom: 25px !important;
+  opacity: 0.6 !important;
+  margin-bottom: 28px !important;
+  font-size: 13.5px !important;
+}
+/* Hide verbose prefixes like '发表于', '更新于', '分类于' */
+.post-meta-item-text {
+  display: none !important;
+}
+/* Remove dashed underline under time */
+.posts-expand .post-meta time {
+  border-bottom: none !important;
+  cursor: default !important;
+  text-decoration: none !important;
+}
+/* Clean icon style */
+.posts-expand .post-meta .post-meta-item-icon {
+  margin-right: 4px !important;
+  opacity: 0.85 !important;
+}
+/* Category link in meta */
+.posts-expand .post-meta .post-meta-item a {
+  border-bottom: none !important;
+  color: inherit !important;
+  transition: color 0.2s ease !important;
+}
+.posts-expand .post-meta .post-meta-item a:hover {
+  color: #2ac1b5 !important;
 }
 /* 4. Soft Boundaries for Media & Code */
 figure.highlight,
@@ -3040,19 +3145,28 @@ nav.pagination {
 }
 .index .post-body p {
   color: #cfcfd1 !important;
-  font-size: 18px !important;
+  font-size: 16.5px !important;
   line-height: 1.65 !important;
   margin: 0 !important;
 }
-/* 4. 主页文章区块垂直节奏：紧凑内聚、篇与篇大呼吸留白 */
+/* 4. 主页文章区块垂直节奏：极简空气感留白与轻量居中细分割线 (75% 宽度，1px 极细微透) */
 .index.posts-expand .post-block {
+  position: relative;
   margin-top: 0 !important;
-  margin-bottom: 55px !important;
-  padding-bottom: 35px !important;
-  border-bottom: 2px solid rgba(255,255,255,0.05) !important;
-}
-.index.posts-expand .post-block:last-child {
+  margin-bottom: 50px !important;
+  padding-bottom: 0 !important;
   border-bottom: none !important;
+}
+.index.posts-expand .post-block::after {
+  content: "";
+  display: block;
+  width: 75%;
+  height: 1px;
+  margin: 45px auto 0 auto;
+  background: rgba(255,255,255,0.035);
+}
+.index.posts-expand .post-block:last-child::after {
+  display: none !important;
 }
 /* ===================================================
    14. Clean Solid Horizontal Rule (正文分割线统一规范)
