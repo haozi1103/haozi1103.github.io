@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff0d3e;
+  background: #ff69d6;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3185,4 +3185,50 @@ hr,
   .post-body hr {
     box-shadow: 0 2px 0 rgba(255,255,255,0.04) !important;
   }
+}
+/* ===================================================
+   15. Chinese Typography: First-line Indent (正文首行缩进规范)
+   =================================================== */
+/* 1. 仅针对文章与单页详情正文生效（严格排除主页导读卡片流） */
+.posts-expand:not(.index) .post-body > p {
+  text-indent: 2em;
+/* 搭配中文标准两端对齐，消除右侧参差不齐的毛边 */
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+/* 2. 豁免名单：多媒体段落（防止 Hexo 将图片包裹在 <p> 中导致图片向右偏心 2em） */
+.post-body > p:has(img),
+.post-body > p:has(video),
+.post-body > p:has(iframe),
+.post-body > p:has(audio),
+.post-body > p:has(canvas) {
+  text-indent: 0 !important;
+}
+/* 3. 豁免名单：引用块、列表项、表格、代码块及行内说明 */
+.post-body blockquote,
+.post-body blockquote p,
+.post-body li,
+.post-body li p,
+.post-body table,
+.post-body table p,
+.post-body figure.highlight,
+.post-body pre,
+.post-body code,
+.post-body .note,
+.post-body .note p {
+  text-indent: 0 !important;
+}
+/* 4. 豁免名单：居中段落、图注说明、双图并排组件与脚注 */
+.post-body p[align="center"],
+.post-body p.image-caption,
+.post-body figcaption,
+.post-body .mobile-image-row,
+.post-body .mobile-image-row p,
+.post-body .footnotes,
+.post-body .footnotes p {
+  text-indent: 0 !important;
+}
+/* 5. 确保主页卡片简介保持纯净左对齐，不受任何正文缩进干扰 */
+.index .post-body p {
+  text-indent: 0 !important;
 }
