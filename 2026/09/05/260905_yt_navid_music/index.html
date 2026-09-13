@@ -45,7 +45,7 @@
 <meta property="og:image" content="https://img.haozi.space/img2026/20260905165944540.png">
 <meta property="og:image" content="https://img.haozi.space/img2026/20260905125202757.png">
 <meta property="article:published_time" content="2026-09-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-09-06T01:34:30.180Z">
+<meta property="article:modified_time" content="2026-09-13T03:16:14.366Z">
 <meta property="article:author" content="haozi">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img.haozi.space/img2026/20260905125348196.png">
@@ -247,7 +247,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026.09.06 09:34:30" itemprop="dateModified" datetime="2026-09-06T09:34:30+08:00">2026.09.06</time>
+                <time title="修改时间：2026.09.13 11:16:14" itemprop="dateModified" datetime="2026-09-13T11:16:14+08:00">2026.09.13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,15 +278,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
+        <h1>从 YouTube Music 到 Navidrome：我搭建了一套属于自己的音乐库</h1>
+<blockquote>
 <p>免责声明：本文涉及的技术方案（如使用 yt-dlp 等工具下载网络资源）仅用于个人学习、技术研究与个人音源备份，请勿用于任何商业用途或侵权传播。尊重版权，请支持正版音乐。</p>
 </blockquote>
-<p>这次折腾下来，我最大的收获反而不是记住了多少命令，而是逐渐理解了一件事情：<mark style="background: #ADCCFFA6;">一个真正好用的个人音乐库，不应该追求绝对完美，而应该追求能够长期、低成本地维护。</mark></p>
+<p>这次折腾下来，我最大的收获反而不是记住了多少命令，而是逐渐理解了一件事情：<mark style="background: #2dcfaf;">一个真正好用的个人音乐库，不应该追求绝对完美，而应该追求能够长期、低成本地维护。</mark></p>
 <hr>
 <h1>为什么要搭建</h1>
 <p>最开始的原因其实特别直接：我不想再一直为各个平台的音乐会员买单了。</p>
 <p>能少花钱，同时又能通过折腾这套系统提升自己解决问题的能力，何乐而不为呢？而且我之前用 Apple Music 养成了按“专辑”听歌的习惯，很喜欢从一张完整专辑里去发现歌曲，而不是听算法推荐的单曲碎片。</p>
-<p>但这又带来了一个很棘手的问题：<mark style="background: #ADCCFFA6;">去哪里找一个靠谱、稳定、内容又全的音源？</mark></p>
+<p>但这又带来了一个很棘手的问题：<mark style="background: #2dcfaf;">去哪里找一个靠谱、稳定、内容又全的音源？</mark></p>
 <p>我实际使用下来发现，不同音乐平台的覆盖完全不同。比如 HiFiTi 的资源确实很丰富，很多经典 CD Rip 和无损都能找到，但它依赖社区用户上传，并不是“要啥有啥”。</p>
 <p>比如之前看韩剧《机智医生生活》，我超级超级喜欢里面的一首插曲 《Let’s Forget It》。曹政奭那种带着一丝沧桑感的嗓音一出来，一下子就把我拉回到了金隽婠和李翼纯那段让人上头的甜蜜爱情里。当时我兴冲冲地跑去 HiFiTi 搜，结果整部剧的 OST 居然一首都没有！而且这种第三方分享网站随时可能关停跑路，作为长期依靠的音源，心里终究不踏实。</p>
 <p><img src="https://img.haozi.space/img2026/20260905125348196.png" alt="navid1.png|587"></p>
@@ -295,13 +296,13 @@
 <p><img src="https://img.haozi.space/img2026/20260905125428462.png" alt="navid2.png|585"></p>
 <p>点进插曲 《Let’s Forget It》的详细界面，发现音乐的 Title、Artist、Album、Release Date 等元数据非常完整，甚至还附带封面缩略图。</p>
 <p><img src="https://img.haozi.space/img2026/20260905125445714.png" alt="navid3.png|603"></p>
-<p>这让我意识到：<mark style="background: #ADCCFFA6;">YouTube Music 是一个很不错的长期音源储备。</mark></p>
+<p>这让我意识到：<mark style="background: #2dcfaf;">YouTube Music 是一个很不错的长期音源储备。</mark></p>
 <p>我不再执着于找到一个“万能”的音乐网站，而是开始搭一个可以接受不同来源的音乐库，最后统一交给 Navidrome 来播放。我需要的不是另一个“音乐商店”，而是一个能把自己的音乐文件变成个人流媒体服务的服务器。</p>
 <p>除了 YouTube Music ，我的 Navidrome 音乐库还可以接受不同的音乐来源：</p>
 <p><img src="https://img.haozi.space/img2026/20260905112612006.png" alt="navidraw1.png"></p>
 <hr>
 <h1>怎么搭建系统</h1>
-<p>搭着搭着，我发现一个很重要的原则：<mark style="background: #ADCCFFA6;">不要找一个软件包办所有事情，而是让每个工具只负责它最擅长的事情。</mark></p>
+<p>搭着搭着，我发现一个很重要的原则：<mark style="background: #2dcfaf;">不要找一个软件包办所有事情，而是让每个工具只负责它最擅长的事情。</mark></p>
 <h2 id="整体架构">整体架构</h2>
 <p>先看整套系统的运作流程：</p>
 <p><code>yt-dlp</code> 负责下载音频 -&gt; <code>beets</code> 负责匹配 MusicBrainz 整理、刮削封面、拉取同步歌词 -&gt; 下载整理好的歌曲文件存入 Navidrome 音乐文件夹 -&gt; 客户端通过 IPv6 / tailscale 访问服务器对应端口，进行播放音乐<br>
@@ -316,7 +317,7 @@
 <blockquote>
 <p>关于 FFmpeg 的说明：<code>yt-dlp</code> 进行音频提取和转码需要依赖 <code>FFmpeg</code>。好消息是，通过 <code>winget install yt-dlp</code> 安装时，会自动将 <code>ffmpeg</code>、<code>ffprobe</code> 等依赖一并安装到位，无需额外操作。</p>
 </blockquote>
-<p>此外，整套方案还有一个很现实的前提：<mark style="background: #ADCCFFA6;">网络必须能够正常访问 YouTube。</mark> 整个获取链路的入口是 <code>yt-dlp</code>，如果 YouTube 无法访问，后面的 beets、MusicBrainz、封面和歌词都没有意义。</p>
+<p>此外，整套方案还有一个很现实的前提：<mark style="background: #2dcfaf;">网络必须能够正常访问 YouTube。</mark> 整个获取链路的入口是 <code>yt-dlp</code>，如果 YouTube 无法访问，后面的 beets、MusicBrainz、封面和歌词都没有意义。</p>
 <p>我在 Windows 上使用 v2rayN，本地代理监听在 <code>10808</code> 端口（注意：不同软件的端口不同，需按实际情况修改）。为了避免每次下载都输入代理参数，首先找到 <code>yt-dlp</code> 的 config 文件的位置：</p>
 <p>在文件资源管理器输入以下命令：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%APPDATA%\yt-dlp\</span><br></pre></td></tr></table></figure>
@@ -359,7 +360,7 @@
 <p><strong>MusicBrainz</strong>（辅助识别）：<br>
 负责识别歌曲、确认身份与标准命名。最开始我以为：MusicBrainz 既然是权威数据库，那匹配之后照着改就行了。后来发现完全不是这样。<br>
 例如 YouTube Music 上的艺人名和歌名是英文 <code>Mido and Falasol - Me to You, You to Me</code>，而 MusicBrainz 匹配到的全韩文 <code>미도와 파라솔 - 너에게 난, 나에게 넌</code>，虽然是同一首歌，但全韩文不符合我的检索习惯；又比如戴佩妮与 GAI 周延合唱的《明知山》，MusicBrainz 甚至可能给出一个完全不相关的候选。</p>
-<p>所以我形成了自己的原则：<mark style="background: #ADCCFFA6;">MusicBrainz 负责确认“这是什么”，但不一定决定“我应该怎么显示它”。</mark></p>
+<p>所以我形成了自己的原则：<mark style="background: #2dcfaf;">MusicBrainz 负责确认“这是什么”，但不一定决定“我应该怎么显示它”。</mark></p>
 <ol>
 <li>匹配明显正确：执行 <code>Apply</code></li>
 <li>明显错误或语言不合习惯：执行 <code>Use as-is</code>（保持原样）</li>
@@ -439,7 +440,7 @@
 <hr>
 <h1>长期维护</h1>
 <p>有人可能会问：Navidrome 本身或其它第三方客户端难道不能直接自动刮削封面和歌词吗？为什么还要费劲用 beets 在本地处理好再导入？</p>
-<p>对我来说，这种<mark style="background: #ADCCFFA6;">数据与服务解耦</mark>的做法有着极其关键的意义：</p>
+<p>对我来说，这种<mark style="background: #2dcfaf;">数据与服务解耦</mark>的做法有着极其关键的意义：</p>
 <ol>
 <li>封面与歌词质量完全可控：不用忍受服务端刮削错乱的低清图片或匹配失败的歌词；</li>
 <li>元数据直接写入音频文件，随时自由迁移：所有 Metadata、封面和 LRC 歌词全部内嵌在文件本身中。以后哪怕我换掉 Navidrome，换成 Plex、Jellyfin 甚至移动到云端，所有音乐数据依然完好无损，绝不会因为服务器迁移而丢失；</li>
@@ -561,7 +562,10 @@
     <a href="/2026/08/29/%E7%99%BD%E6%8F%8F%E6%B5%81%E6%B0%B4/" rel="prev" title="白描流水">
       <i class="fa fa-chevron-left"></i> 白描流水
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/12/260913_grade3_sum/" rel="next" title="大三这一年：我究竟做了什么？">
+      大三这一年：我究竟做了什么？ <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -620,7 +624,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">为什么要搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">怎么搭建系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">整体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87%EF%BC%9A%E5%B7%A5%E5%85%B7%E4%BE%9D%E8%B5%96%E4%B8%8E%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">前置准备：工具依赖与代理配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yt-dlp%EF%BC%9A%E8%B4%9F%E8%B4%A3%E2%80%9C%E6%8B%BF%E5%88%B0%E9%9F%B3%E4%B9%90%E2%80%9D"><span class="nav-number">2.3.</span> <span class="nav-text">yt-dlp：负责“拿到音乐”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#beets%EF%BC%9A%E8%B4%9F%E8%B4%A3%E2%80%9C%E6%95%B4%E7%90%86%E4%B8%8E%E8%A1%A5%E5%85%A8%E2%80%9D%E7%9A%84%E6%A0%B8%E5%BF%83%E5%A4%A7%E8%84%91"><span class="nav-number">2.4.</span> <span class="nav-text">beets：负责“整理与补全”的核心大脑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%AA%8C%E8%AF%81"><span class="nav-number">2.4.1.</span> <span class="nav-text">安装与验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E7%9A%84-beets-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.4.2.</span> <span class="nav-text">我的 beets 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%8D%8F%E5%90%8C"><span class="nav-number">2.4.3.</span> <span class="nav-text">插件协同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E6%AC%A1%E5%8D%95%E6%9B%B2%E5%AF%BC%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="nav-number">2.4.4.</span> <span class="nav-text">一次单曲导入流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E8%BE%91%E5%AF%BC%E5%85%A5%E6%B5%81%E7%A8%8B%E8%A1%A5%E5%85%85"><span class="nav-number">2.4.5.</span> <span class="nav-text">专辑导入流程补充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Navidrome%EF%BC%9A%E8%B4%9F%E8%B4%A3%E5%90%91%E5%A4%96%E5%B1%95%E7%A4%BA%E9%9F%B3%E4%B9%90"><span class="nav-number">2.5.</span> <span class="nav-text">Navidrome：负责向外展示音乐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE"><span class="nav-number">2.6.</span> <span class="nav-text">客户端访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">长期维护</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">补充技巧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">未来展望</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">从 YouTube Music 到 Navidrome：我搭建了一套属于自己的音乐库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">为什么要搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">怎么搭建系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">整体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87%EF%BC%9A%E5%B7%A5%E5%85%B7%E4%BE%9D%E8%B5%96%E4%B8%8E%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">前置准备：工具依赖与代理配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yt-dlp%EF%BC%9A%E8%B4%9F%E8%B4%A3%E2%80%9C%E6%8B%BF%E5%88%B0%E9%9F%B3%E4%B9%90%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">yt-dlp：负责“拿到音乐”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#beets%EF%BC%9A%E8%B4%9F%E8%B4%A3%E2%80%9C%E6%95%B4%E7%90%86%E4%B8%8E%E8%A1%A5%E5%85%A8%E2%80%9D%E7%9A%84%E6%A0%B8%E5%BF%83%E5%A4%A7%E8%84%91"><span class="nav-number">3.4.</span> <span class="nav-text">beets：负责“整理与补全”的核心大脑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%AA%8C%E8%AF%81"><span class="nav-number">3.4.1.</span> <span class="nav-text">安装与验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E7%9A%84-beets-%E9%85%8D%E7%BD%AE"><span class="nav-number">3.4.2.</span> <span class="nav-text">我的 beets 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%8D%8F%E5%90%8C"><span class="nav-number">3.4.3.</span> <span class="nav-text">插件协同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E6%AC%A1%E5%8D%95%E6%9B%B2%E5%AF%BC%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="nav-number">3.4.4.</span> <span class="nav-text">一次单曲导入流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E8%BE%91%E5%AF%BC%E5%85%A5%E6%B5%81%E7%A8%8B%E8%A1%A5%E5%85%85"><span class="nav-number">3.4.5.</span> <span class="nav-text">专辑导入流程补充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Navidrome%EF%BC%9A%E8%B4%9F%E8%B4%A3%E5%90%91%E5%A4%96%E5%B1%95%E7%A4%BA%E9%9F%B3%E4%B9%90"><span class="nav-number">3.5.</span> <span class="nav-text">Navidrome：负责向外展示音乐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE"><span class="nav-number">3.6.</span> <span class="nav-text">客户端访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">长期维护</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">补充技巧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">未来展望</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -636,7 +640,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -711,7 +715,7 @@
                         
             <i class="fas fa-coffee cat-icon"></i> 生活
           </span>
-          <span class="cat-count">11</span>
+          <span class="cat-count">12</span>
         </a>
       </li>
       
