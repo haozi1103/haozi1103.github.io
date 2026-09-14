@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"haozi.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"WGCGH0O3U2","apiKey":"636b89ad13837e5ead8f8e28f3ba984f","indexName":"hexo","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文梳理CAD&#x2F;CAE&#x2F;CAPP核心概念，重点剖析几何建模中参数化曲面（直纹面、Bezier曲面）的表达原理，并详细讲解二维与三维图形在齐次坐标下的几何变换矩阵与计算方法。">
+  <meta name="description" content="梳理 CAD&#x2F;CAE&#x2F;CAPP 概念，讲解曲面与变换矩阵">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CAD&#x2F;CAE&#x2F;CAPP概念与几何建模基础">
+<meta property="og:title" content="CAD&#x2F;CAE&#x2F;CAPP 概念与几何建模基础">
 <meta property="og:url" content="http://haozi.space/2026/03/14/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="haozi&#39;s blog">
-<meta property="og:description" content="本文梳理CAD&#x2F;CAE&#x2F;CAPP核心概念，重点剖析几何建模中参数化曲面（直纹面、Bezier曲面）的表达原理，并详细讲解二维与三维图形在齐次坐标下的几何变换矩阵与计算方法。">
+<meta property="og:description" content="梳理 CAD&#x2F;CAE&#x2F;CAPP 概念，讲解曲面与变换矩阵">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.haozi.space/img2026/image-20260314194845629.png">
 <meta property="og:image" content="https://img.haozi.space/img2026/image-20260316174337182.png">
@@ -54,7 +54,7 @@
 <meta property="og:image" content="https://img.haozi.space/img2026/image-20260326214339177.png">
 <meta property="og:image" content="https://img.haozi.space/img2026/image-20260326214441498.png">
 <meta property="article:published_time" content="2026-03-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-09-05T01:37:47.703Z">
+<meta property="article:modified_time" content="2026-09-14T02:27:35.682Z">
 <meta property="article:author" content="haozi">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img.haozi.space/img2026/image-20260314194845629.png">
@@ -81,7 +81,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" />
 
 
-  <title>CAD/CAE/CAPP概念与几何建模基础 | haozi's blog</title>
+  <title>CAD/CAE/CAPP 概念与几何建模基础 | haozi's blog</title>
   
 
 
@@ -239,7 +239,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CAD/CAE/CAPP概念与几何建模基础
+          CAD/CAE/CAPP 概念与几何建模基础
         </h1>
 
         <div class="post-meta">
@@ -256,7 +256,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026.09.05 09:37:47" itemprop="dateModified" datetime="2026-09-05T09:37:47+08:00">2026.09.05</time>
+                <time title="修改时间：2026.09.14 10:27:35" itemprop="dateModified" datetime="2026-09-14T10:27:35+08:00">2026.09.14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,7 +276,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">本文梳理CAD/CAE/CAPP核心概念，重点剖析几何建模中参数化曲面（直纹面、Bezier曲面）的表达原理，并详细讲解二维与三维图形在齐次坐标下的几何变换矩阵与计算方法。</div>
+            <div class="post-description">梳理 CAD/CAE/CAPP 概念，讲解曲面与变换矩阵</div>
 
         </div>
       </header>
@@ -678,7 +678,7 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://haozi.space/2026/03/14/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" title="CAD&#x2F;CAE&#x2F;CAPP概念与几何建模基础">http://haozi.space/2026/03/14/数字化设计/</a>
+    <a href="http://haozi.space/2026/03/14/%E6%95%B0%E5%AD%97%E5%8C%96%E8%AE%BE%E8%AE%A1/" title="CAD&#x2F;CAE&#x2F;CAPP 概念与几何建模基础">http://haozi.space/2026/03/14/数字化设计/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -776,7 +776,7 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -838,24 +838,6 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
       </li>
       
       <li class="sidebar-category-item">
-        <a href="/categories/教程/">
-          <span class="cat-name">
-            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-            <i class="far fa-keyboard cat-icon"></i> 教程
-          </span>
-          <span class="cat-count">16</span>
-        </a>
-      </li>
-      
-      <li class="sidebar-category-item">
         <a href="/categories/生活/">
           <span class="cat-name">
             
@@ -870,6 +852,24 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
             <i class="fas fa-coffee cat-icon"></i> 生活
           </span>
           <span class="cat-count">12</span>
+        </a>
+      </li>
+      
+      <li class="sidebar-category-item">
+        <a href="/categories/教程/">
+          <span class="cat-name">
+            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            <i class="far fa-keyboard cat-icon"></i> 教程
+          </span>
+          <span class="cat-count">15</span>
         </a>
       </li>
       
