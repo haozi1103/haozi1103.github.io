@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #7cffff;
+  background: #993b9e;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1526,49 +1526,6 @@ pre .javascript .function {
   50%, 70% {
     transform: scale(1.1);
   }
-}
-.back-to-top {
-  font-size: 12px;
-  text-align: center;
-  transition-delay: 0s;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
-}
-.back-to-top {
-  background: #222;
-  bottom: -100px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  left: 30px;
-  opacity: 1;
-  padding: 0 6px;
-  position: fixed;
-  transition-property: bottom;
-  z-index: 1300;
-  width: initial;
-}
-.back-to-top:hover {
-  color: #87daff;
-}
-.back-to-top.back-to-top-on {
-  bottom: 19px;
-}
-@media (max-width: 991px) {
-  .back-to-top {
-    left: 20px;
-    opacity: 0.8;
-  }
-}
-.reading-progress-bar {
-  background: #28d4a0;
-  display: block;
-  height: 3px;
-  left: 0;
-  position: fixed;
-  width: 0;
-  z-index: 1500;
-  top: 0;
 }
 .post-body {
   font-family: 'LXGW WenKai SC', 'LXGW WenKai SC', "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -2558,9 +2515,85 @@ hr {
 .sub-menu .menu-item {
   display: inline-block;
 }
-/* Font Override */
+/* =========================================
+   Typography & Font Rules (Modern Editorial & Literary Magazine)
+   - 网站 UI (Logo/导航/英文微标)  → Montserrat
+   - 页面标题 (主标题/正文各级小标题) → Montserrat (西文) + Noto Serif SC (中文 600)
+   - 文章正文 (段落/列表/引用/摘要)  → Source Serif 4 (西文) + Noto Serif SC (中文 400)
+   - 简介导语 (Post Description)   → Source Serif 4 + Noto Serif SC (微缩 400)
+   - 日期时间 (Time & Meta)        → Source Serif 4 + Noto Serif SC (半粗 600)
+   - 代码块   (Code & Highlight)   → JetBrains Mono (常规 400)
+   ========================================= */
 body {
-  font-family: 'Noto Sans SC', 'HarmonyOS Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  font-family: 'Source Serif 4', 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif CN', 'Songti SC', 'STSong', Georgia, serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+/* Article Body (正文) & Home Page Post Excerpts (主页摘要) */
+.post-body,
+.post-body p,
+.post-body li,
+.post-body blockquote,
+.post-body table,
+.post-body td,
+.post-body th,
+.index .post-body,
+.index .post-body p {
+  font-family: 'Source Serif 4', 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif CN', 'Songti SC', 'STSong', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-size: 16.5px !important;
+  line-height: 1.82 !important;
+  letter-spacing: 0.015em !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+/* Article & Site Descriptions (文章简介、导语及站点描述) */
+.post-description,
+.post-header .post-description,
+.page-description,
+.site-description,
+.site-subtitle {
+  font-family: 'Source Serif 4', 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif CN', 'Songti SC', 'STSong', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-size: 14.5px !important;
+  line-height: 1.68 !important;
+  letter-spacing: 0.015em !important;
+  color: rgba(255,255,255,0.68) !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+/* 1. 首页文章标题预览及归档列表：Montserrat (西文) + HarmonyOS Sans (鸿蒙黑体中文) */
+.index .post-title,
+.index .post-title-link,
+.posts-collapse .post-title,
+.posts-collapse .post-title a {
+  font-family: 'Montserrat', 'HarmonyOS Sans SC', 'HarmonyOS Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  letter-spacing: 0.015em !important;
+  font-weight: 900 !important;
+}
+/* 2. 文章详情页主标题及正文各级小标题：Source Serif 4 (西文 600) + Noto Serif SC (思源宋体 600 中文) */
+.post .post-title,
+.posts-expand:not(.index) .post-title,
+.posts-expand:not(.index) .post-title-link,
+.post-body h1,
+.post-body h2,
+.post-body h3,
+.post-body h4 {
+  font-family: 'Source Serif 4', 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif CN', 'Songti SC', 'STSong', Georgia, serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  font-size-adjust: cap-height 0.72; /* 强制中西文大写视觉等高对齐 */
+}
+time,
+.post-meta time,
+.index .post-meta time,
+.posts-collapse .collection-header time,
+.posts-collapse .post-header .post-meta time {
+  font-family: 'Source Serif 4', 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif CN', Georgia, serif !important;
+  font-weight: 600 !important;
 }
 code,
 pre,
@@ -2569,16 +2602,27 @@ pre,
 kbd,
 .hljs {
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-weight: 400 !important;
 }
-/* Hover highlight for left-bottom controls: back-to-top + sidebar toggle */
-.back-to-top:hover,
-.back-to-top span:hover,
-.sidebar-toggle:hover {
-  color: #28d4a0 !important;
+/* ============================================================
+   De-Templating: Clean up obsolete floating widgets & bars
+   ============================================================ */
+/* 1. Remove 2015-era top headband line */
+.headband {
+  display: none !important;
+  height: 0 !important;
 }
-.sidebar-toggle:hover .toggle-line,
-.toggle:hover .toggle-line {
-  background: #28d4a0 !important;
+/* 2. Remove bottom-left archaic hamburger toggle square */
+.sidebar-toggle {
+  display: none !important;
+}
+/* 3. Remove bottom-right plastic circular PCT floating badge */
+.back-to-top {
+  display: none !important;
+}
+/* Reading progress bar disabled completely */
+.reading-progress-bar {
+  display: none !important;
 }
 /* Hide footer bottom divider */
 .footer .post-meta-divider {
@@ -2593,10 +2637,7 @@ kbd,
 .tag-cloud-tags a {
   background: transparent !important;
 }
-/* Top headband bar color */
-.headband {
-  background: #28d4a0 !important;
-}
+/* Top headband disabled */
 /* Sidebar TOC active item text and underline color */
 .post-toc .nav .active > a,
 .post-toc .nav .active-current > a {
@@ -2616,10 +2657,6 @@ kbd,
 /* Hover text color for inactive sidebar navigation tabs */
 .sidebar-nav li:hover {
   color: #28d4a0 !important;
-}
-/* 2) Reading progress bar color override */
-.reading-progress-bar {
-  background: #28d4a0 !important;
 }
 /* 3) Hide footer post-meta (contains vertical divider) */
 .footer .post-meta {
@@ -2715,36 +2752,74 @@ kbd,
   font-size: 11px;
   font-weight: 500;
 }
-/* Force override inline code block colors with !important */
+/* ===================================================
+   Code Blocks & Inline Code: Compact Typography & Subtle Micro-Radius
+   代码块与行内代码：精致紧凑字号、舒适行高、克制微圆角规范
+   =================================================== */
+/* 1. 行内代码：字号设为 0.85em（约 14px），圆角 4px，轻盈精致不突兀 */
 p code,
 li code,
-td code {
+td code,
+blockquote code,
+.post-body p code,
+.post-body li code,
+.post-body blockquote code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 0.85em !important;
   color: #2d2d2d !important;
-  background: #ccc !important;
-  border-radius: 6px !important;
-  padding: 2px 4px !important;
+  background: #e6e8eb !important;
+  border-radius: 4px !important;
+  padding: 2px 5px !important;
+  margin: 0 2px !important;
+  letter-spacing: 0 !important;
+  vertical-align: baseline !important;
 }
-/* 260810 Dark mode override for inline code blocks */
 @media (prefers-color-scheme: dark) {
   p code,
   li code,
-  td code {
-    color: #ccc !important;
-    background: rgba(65,65,65,0.631) !important;
-    border-radius: 12px !important;
-    padding: 2px 4px !important;
+  td code,
+  blockquote code,
+  .post-body p code,
+  .post-body li code,
+  .post-body blockquote code {
+    color: #d1d5db !important;
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+    border-radius: 4px !important;
+    padding: 1px 5px !important;
   }
 }
-/* Multi-line code block border radius setting */
+/* 2. 多行代码块容器规范：圆角 6px，边框微光，上下留白合理 */
 figure.highlight {
-  border-radius: 8px !important;
+  border-radius: 6px !important;
   overflow: hidden !important;
-  border: 1px solid #e1e4e8;
+  border: 1px solid #e1e4e8 !important;
 }
 @media (prefers-color-scheme: dark) {
   figure.highlight {
-    border-color: #333;
+    border-color: rgba(255,255,255,0.08) !important;
   }
+}
+/* 3. 多行代码块内部字体与字号深度覆盖：严格设为 13.5px，行高 1.65，消除庞大粗重感 */
+.post-body figure.highlight,
+.post-body figure.highlight table,
+.post-body figure.highlight tr,
+.post-body figure.highlight td,
+.post-body figure.highlight pre,
+.post-body figure.highlight code,
+.post-body figure.highlight .code,
+.post-body figure.highlight .gutter,
+.post-body pre,
+.post-body pre code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 13.5px !important;
+  line-height: 1.65 !important;
+  letter-spacing: 0 !important;
+}
+/* 行号栏专属微调 */
+.post-body figure.highlight .gutter pre {
+  font-size: 12.5px !important;
+  opacity: 0.55 !important;
 }
 /* 260810 Pagination: remove focus outline and fix active page style */
 .pagination .prev,
@@ -2805,16 +2880,125 @@ nav.pagination a.extend:active {
 /* =========================================
    UI Breathing Room & Rhythm Adjustments
    ========================================= */
-/* 1. Header & Navigation Spacing */
-.header-inner {
-  padding-top: 20px !important;
-  padding-bottom: 25px !important;
+/* 1. Modern Frosted Glass Full-Width Sticky Header & Navigation */
+.header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: linear-gradient(180deg, rgba(20,20,24,0.7) 0%, rgba(26,26,32,0.45) 55%, rgba(32,32,38,0.22) 100%) !important;
+  backdrop-filter: blur(20px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease !important;
+  will-change: transform;
 }
-.site-nav .menu {
+/* Smart Auto-Collapse: Hide header when scrolling down, reveal when scrolling up */
+.header.header-hidden {
+  transform: translateY(-105%) !important;
+}
+.header-inner {
+  width: 700px !important;
+  margin: 0 auto !important;
+  padding: 14px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+@media (min-width: 1200px) {
+  .header-inner {
+    width: 800px !important;
+  }
+}
+@media (min-width: 1600px) {
+  .header-inner {
+    width: 900px !important;
+  }
+}
+.site-brand-container {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
   margin: 0 !important;
 }
+.site-meta {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.site-meta .brand {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+.site-meta .site-title {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.4px !important;
+  color: #28d4a0 !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* Remove 2015-era decoration lines around site title */
+.logo-line-before,
+.logo-line-after {
+  display: none !important;
+}
+.site-nav {
+  margin: 0 !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+.site-nav .menu {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
 .menu-item {
-  margin: 0 2.25em !important;
+  margin: 0 1.2em !important;
+}
+.menu-item:first-child {
+  margin-left: 0 !important;
+}
+.menu-item:last-child {
+  margin-right: 0 !important;
+}
+.menu-item:last-child a {
+  padding-right: 0 !important;
+}
+/* Hide categories and tools menu tabs */
+.menu-item-categories,
+.menu-item-tools {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .header-inner {
+    display: block !important;
+    padding: 12px 20px !important;
+    width: 100% !important;
+  }
+  .site-brand-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  .site-nav {
+    margin-left: 0 !important;
+  }
+  .site-nav .menu {
+    display: block !important;
+    margin: 10px 0 !important;
+  }
+  .menu-item {
+    margin: 8px 0 !important;
+  }
 }
 /* Remove navigation icons completely */
 .site-nav .menu .menu-item a i,
@@ -2827,6 +3011,7 @@ nav.pagination a.extend:active {
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-size: 15px !important;
   font-weight: 500 !important;
   color: #c9d1d9 !important;
@@ -2843,8 +3028,8 @@ nav.pagination a.extend:active {
 .site-nav .menu .menu-item a::after {
   display: block;
   font-size: 8px;
-  font-weight: 400;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 500;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
   letter-spacing: 1.3px;
   text-indent: 1.3px;
   color: rgba(201,209,217,0.42);
@@ -2866,6 +3051,18 @@ nav.pagination a.extend:active {
 }
 .site-nav .menu .menu-item-search a::after {
   content: "SEARCH";
+}
+/* Strict Right Edge Alignment for the last menu item (Search) to align collinearly with main container */
+.site-nav .menu .menu-item:last-child {
+  margin-right: 0 !important;
+}
+.site-nav .menu .menu-item:last-child a {
+  padding-right: 0 !important;
+  align-items: flex-end !important;
+}
+.site-nav .menu .menu-item:last-child a::after {
+  text-indent: 0 !important;
+  margin-right: -1.3px !important;
 }
 /* Hover state: delicate color transition without gray pill */
 .site-nav .menu .menu-item a:hover {
@@ -2896,16 +3093,25 @@ nav.pagination a.extend:active {
 }
 /* 2. Typography Rhythm (Line-height, Paragraphs, Headings) */
 .post-body {
-  line-height: 1.7 !important;
+  line-height: 1.82 !important;
 }
 .post-body p {
-  margin-bottom: 1.2em !important;
+  margin-bottom: 1.35em !important;
+}
+@media (prefers-color-scheme: dark) {
+  .post-body {
+    color: #dcdcdc !important;
+  }
 }
 .post-body h2,
 .post-body h3,
 .post-body h4 {
-  margin-top: 1.2em !important;
+  margin-top: 1.4em !important;
   margin-bottom: 1.2em !important;
+}
+/* Defensive: Hide accidental duplicate first H1 inside post-body if author re-typed title in Markdown */
+.posts-expand:not(.index) .post-body > h1:first-child {
+  display: none !important;
 }
 /* 3. Visual Noise Reduction (Meta Info) */
 .post-meta {
@@ -2937,33 +3143,32 @@ nav.pagination a.extend:active {
 .posts-expand .post-meta .post-meta-item a:hover {
   color: #2ac1b5 !important;
 }
-/* 4. Soft Boundaries for Media & Code */
-figure.highlight,
-.post-body img {
+/* 4. Soft Boundaries for Code Blocks */
+figure.highlight {
   margin: 25px 0 !important;
-  border-radius: 12px !important;
+  border-radius: 6px !important;
   box-shadow: 0 4px 20px rgba(0,0,0,0.02) !important;
 }
 /* 5. Typography Scale (Title & Headings) */
-.post-title {
-  font-size: 1.6em !important;
-  font-weight: 1000 !important;
+.posts-expand:not(.index) .post-title {
+  font-size: 1.65em !important;
+  font-weight: 600 !important;
 }
 .post-body h1 {
-  font-size: 1.6em !important;
+  font-size: 1.5em !important;
   font-weight: 600 !important;
 }
 .post-body h2 {
   font-size: 1.3em !important;
-  font-weight: 900 !important;
+  font-weight: 600 !important;
 }
 .post-body h3 {
-  font-size: 1.1em !important;
-  font-weight: 300 !important;
+  font-size: 1.15em !important;
+  font-weight: 600 !important;
 }
 .post-body h4 {
-  font-size: 1em !important;
-  font-weight: 300 !important;
+  font-size: 1.05em !important;
+  font-weight: 600 !important;
 }
 /* 6. Remove Underlines and Use Theme Color for Links */
 .post-body p a,
@@ -3052,41 +3257,76 @@ nav.pagination {
   height: 2px !important;
   border-radius: 1px !important;
 }
-/* 11. Limit Image Height for Mobile Screenshots (Auto Scale) */
+/* 11. Modern Refined Image Cards & Medium-zoom Lightbox (现代精致图片卡片与灯箱规范) */
 .post-body img {
-  max-height: 600px !important; /* 限制最大高度，防止手机截图霸屏 */
-  width: auto !important; /* 强制等比例缩放，防止图片变形 */
-  object-fit: contain !important;
+  display: block !important;
+  margin: 32px auto !important; /* 统一绝对居中，留出自然呼吸感间距 */
+  max-width: 100% !important;
+  max-height: min(540px, 68vh) !important; /* 优雅视口高度限制：宽图与竖图均不霸屏 */
+  width: auto !important;
+  height: auto !important;
+/* 精致悬浮卡片质感：细腻圆角、微透边缘轮廓线、多层微光暗调弥散投影 */
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.16) !important;
+  cursor: zoom-in !important;
+  transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.28s cubic-bezier(0.2, 0, 0, 1), border-color 0.28s ease !important;
 }
-/* 12. Side-by-side Mobile Images */
+/* 悬浮微光提亮与轻微上浮：外扩 16px 柔和薄荷绿光晕，白底/黑底均清晰优雅 */
+.post-body img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45), 0 0 16px rgba(45,207,175,0.45) !important;
+  border-color: rgba(45,207,175,0.55) !important;
+}
+/* 12. Side-by-side Mobile Images (专属手机截图容器：支持多图并排与单图精致居中) */
 .mobile-image-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 20px; /* 两张图片中间的留白距离 */
-  margin: 30px 0;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 20px !important;
+  margin: 32px auto !important;
 }
 .mobile-image-row img {
-  margin: 0 !important; /* 清除默认的上下边距 */
-  flex: 1 1 0%;
-  max-width: calc(50% - 10px); /* 如果放两张，自动占一半；放三张也会自动压缩 */
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.05); /* 增加一点立体悬浮感 */
+  display: block !important;
+  margin: 0 !important;
+  flex: 0 1 auto !important; /* 严禁 flex: 1 强行拉伸 DOM 导致左右大面积黑边 */
+  width: auto !important;
+  height: auto !important;
+  max-width: calc(50% - 10px) !important;
+  max-height: min(520px, 68vh) !important;
+}
+/* 当容器内仅有 1 张竖屏手机图时，解除 50% 宽度限制，自动紧贴图片真实长宽比居中展示 */
+.mobile-image-row img:only-child {
+  max-width: 100% !important;
 }
 @media (max-width: 767px) {
+  .post-body img {
+    max-height: 460px !important;
+    margin: 22px auto !important;
+    border-radius: 8px !important;
+  }
   .mobile-image-row {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column !important;
+    align-items: center !important;
   }
   .mobile-image-row img {
-    max-width: 90%;
+    max-width: 92% !important;
     margin-bottom: 20px !important;
   }
 }
-/* 调整导航栏整体高度与上下呼吸感 */
-.header-inner {
-  padding: 20px 0 !important; /* 默认是 20px，数值越大留白越多 */
+/* Medium-zoom 现代高级深色毛玻璃灯箱遮罩 */
+.medium-zoom-overlay {
+  background: rgba(18,18,22,0.88) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  z-index: 10000 !important;
+}
+.medium-zoom-image--opened {
+  z-index: 10001 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.65) !important;
+  cursor: zoom-out !important;
 }
 /* ===================================================
    13. Modern Digital Garden Homepage Layout & Typography
@@ -3099,7 +3339,7 @@ nav.pagination {
 .index .post-title-link {
   color: #2fd1b5 !important;
   font-size: 1em !important;
-  font-weight: 1000 !important;
+  font-weight: 900 !important;
   line-height: 1.2 !important;
   letter-spacing: -0.2px !important;
   border-bottom: none !important;
@@ -3134,7 +3374,7 @@ nav.pagination {
 .index .post-meta time {
   color: #8a929e !important;
   font-size: 13.5px !important;
-  font-weight: 400 !important;
+  font-weight: 600 !important;
   border-bottom: none !important;
   text-decoration: none !important;
   letter-spacing: 0.3px !important;
@@ -3169,22 +3409,156 @@ nav.pagination {
   display: none !important;
 }
 /* ===================================================
-   14. Clean Solid Horizontal Rule (正文分割线统一规范)
+   14. Clean Solid Horizontal Rule (正文章节精致实线分割线规范)
    =================================================== */
 hr,
 .post-body hr {
+  display: block !important;
+  background: rgba(255,255,255,0.12) !important;
   background-image: none !important;
   border: none !important;
-  height: 2px !important;
-  margin: 58px 0 !important;
-  border-radius: 1px !important;
-  opacity: 0.9 !important;
+  height: 1px !important;
+  margin: 28px 0 !important;
+  padding: 0 !important;
+  opacity: 1 !important;
 }
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   hr,
   .post-body hr {
-    box-shadow: 0 2px 0 rgba(255,255,255,0.04) !important;
+    background: rgba(0,0,0,0.08) !important;
   }
+}
+/* ===================================================
+   14. Modern Global Search Modal (现代全局居中搜索弹窗规范)
+   =================================================== */
+.search-pop-overlay {
+  display: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0,0,0,0.72) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  z-index: 10000 !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding-top: 12vh !important;
+  box-sizing: border-box !important;
+}
+.search-pop-overlay.search-active {
+  display: flex !important;
+}
+.search-popup {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 720px !important;
+  max-width: 92vw !important;
+  max-height: 80vh !important;
+  background: #1c1c1e !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  z-index: 10001 !important;
+}
+.search-popup .search-header {
+  background: rgba(255,255,255,0.04) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  padding: 14px 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  border-radius: 14px 14px 0 0 !important;
+}
+.search-popup .search-icon {
+  color: #28d4a0 !important;
+  font-size: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+.search-popup .search-input-container {
+  flex-grow: 1 !important;
+  padding: 0 !important;
+}
+.search-popup input.search-input {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-family: inherit !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+.search-popup input.search-input::placeholder {
+  color: rgba(255,255,255,0.35) !important;
+}
+.search-popup .popup-btn-close {
+  color: rgba(255,255,255,0.4) !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  transition: color 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.search-popup .popup-btn-close:hover {
+  color: #28d4a0 !important;
+}
+.search-popup #search-result {
+  max-height: calc(80vh - 70px) !important;
+  overflow-y: auto !important;
+  padding: 16px 22px !important;
+  flex-grow: 1 !important;
+  display: block !important;
+}
+.search-popup ul.search-result-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+.search-popup ul.search-result-list li {
+  margin-bottom: 14px !important;
+  padding-bottom: 14px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+.search-popup ul.search-result-list li:last-child {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
+.search-popup a.search-result-title {
+  color: #28d4a0 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  margin-bottom: 6px !important;
+  transition: color 0.2s ease !important;
+}
+.search-popup a.search-result-title:hover {
+  color: #38efbe !important;
+}
+.search-popup p.search-result {
+  color: rgba(255,255,255,0.65) !important;
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-bottom: none !important;
+}
+.search-popup .search-keyword {
+  color: #28d4a0 !important;
+  background: rgba(40,212,160,0.16) !important;
+  padding: 1px 5px !important;
+  border-radius: 4px !important;
+  border-bottom: none !important;
+  font-weight: 600 !important;
 }
 /* ===================================================
    15. Chinese Typography: First-line Indent (正文首行缩进规范)
@@ -3196,8 +3570,11 @@ hr,
   text-align: justify;
   text-justify: inter-ideograph;
 }
-/* 2. 豁免名单：多媒体段落（防止 Hexo 将图片包裹在 <p> 中导致图片向右偏心 2em） */
-.post-body > p:has(img),
+/* 2. 豁免名单：多媒体段落（防止 Hexo 将图片包裹在 <p> 中导致图片向右偏心 2em，并实现水平居中） */
+.post-body > p:has(img) {
+  text-indent: 0 !important;
+  text-align: center !important;
+}
 .post-body > p:has(video),
 .post-body > p:has(iframe),
 .post-body > p:has(audio),
