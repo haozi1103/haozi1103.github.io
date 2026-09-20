@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #993b9e;
+  background: #6ebbd1;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2898,22 +2898,43 @@ nav.pagination a.extend:active {
 .header.header-hidden {
   transform: translateY(-105%) !important;
 }
+/* =========================================
+   Golden Reading Ratio: 1/3 Viewport Width Container Layout
+   横向 1/3 黄金阅读视宽布局规范（首页、文章页、顶栏导航及底栏统一对齐）
+   ========================================= */
 .header-inner {
-  width: 700px !important;
   margin: 0 auto !important;
   padding: 14px 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
 }
-@media (min-width: 1200px) {
-  .header-inner {
-    width: 800px !important;
+@media (min-width: 992px) {
+  .header-inner,
+  .main-inner,
+  .footer-inner {
+    width: 36vw !important;
+    min-width: 580px !important;
+    max-width: 720px !important;
+    margin: 0 auto !important;
   }
 }
-@media (min-width: 1600px) {
-  .header-inner {
-    width: 900px !important;
+@media (min-width: 768px) and (max-width: 991px) {
+  .header-inner,
+  .main-inner,
+  .footer-inner {
+    width: 75% !important;
+    max-width: 680px !important;
+    margin: 0 auto !important;
+  }
+}
+@media (max-width: 767px) {
+  .header-inner,
+  .main-inner,
+  .footer-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: unset !important;
   }
 }
 .site-brand-container {
@@ -3260,11 +3281,13 @@ nav.pagination {
 /* 11. Modern Refined Image Cards & Medium-zoom Lightbox (现代精致图片卡片与灯箱规范) */
 .post-body img {
   display: block !important;
-  margin: 32px auto !important; /* 统一绝对居中，留出自然呼吸感间距 */
+  margin: 28px auto !important; /* 统一绝对居中，留出自然呼吸感间距 */
   max-width: 100% !important;
-  max-height: min(540px, 68vh) !important; /* 优雅视口高度限制：宽图与竖图均不霸屏 */
+  max-height: min(500px, 62vh) !important; /* 优雅视口高度限制：宽图与竖图均不霸屏 */
   width: auto !important;
   height: auto !important;
+  object-fit: contain !important;
+  box-sizing: border-box !important;
 /* 精致悬浮卡片质感：细腻圆角、微透边缘轮廓线、多层微光暗调弥散投影 */
   border-radius: 12px !important;
   border: 1px solid rgba(255,255,255,0.08) !important;
